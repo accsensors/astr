@@ -1,0 +1,69 @@
+PARAMETER,VALUE,UNITS/NOTES
+UPASserial,0166,(UPAS serial identification-numerical)
+UPASfirmware,UPAS_v2_0-rev0125-L152RE_20210925_mbed116.bin compiledSep 25 2021_17:35:48UTC,(installed firmware version)
+LifetimeSampleCount,3,(count-total lifetime sample runs)
+LifetimeSampleRuntime,0.00,(hrs-total lifetime cumulative sample runtime)
+
+
+
+
+SAMPLE IDENTIFICATION
+
+UPASlogFilename,/sd/PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt,(log file filename-automatically defined)
+SampleName,test___________,(Sample Name-user entered into app)
+CartridgeID,---,(Cartridge Identification-user entered into app)
+
+
+
+
+SETUP SUMMARY
+
+GPSUTCOffset,-6.00,(hours offset from UTC date time)
+StartOnNextPowerUp,0,(0=no 1=yes)
+ProgrammedStartDelay,0,(s)
+ProgrammedRuntime,172800,(s) (360000000 means 'indefinite')
+VolumetricFlowRate,1.000,(L*min^-1)
+FlowOffset,0.000000,(%)
+DutyCycle,100,(%)
+DutyCycleWindow,30,(s)
+GPSEnabled,1,(0=no 1=yes)
+LogFileMode,0,(0=normal 1=debug)
+LogInterval,30,(s)
+AppLock,0,(0=unlocked 1=locked -1=not set)
+AppVersion,i2.2.2,(i=iOS A=Android)
+
+
+
+
+SAMPLE SUMMARY
+
+StartDateTimeUTC,2021-09-29T17:37:09,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+StartDateTimeLocal,2021-09-29T11:37:09,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+StartBatteryCharge,054,(%)
+StartBatteryVoltage,3.58,(V)
+EndDateTimeUTC,2021-09-29T17:41:30,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+EndDateTimeLocal,2021-09-29T11:41:30,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+EndBatteryCharge,054,(%)
+EndBatteryVoltage,3.54,(V)
+ShutdownMode,1,(0=unknown error 1=user pushbutton stop 2=depleted battery [<2.8v] 3=completed preset sample duration 4=thermal protection shutdown 5=max power at initialization 6=max power during sample 7=blocked flow during sample)
+SampledVolume,    4.28,(L)
+SampledRuntime,  0.070,(Hr)
+LoggedRuntime,  0.069,(Hr)
+AverageVolumetricFlowRate,1.022,(L*min^-1)
+
+
+
+
+SAMPLE LOG
+
+(HH:MM:SS),(s),(YYYY-MM-DDTHH:MM:SS) (UTC date time format),(YYYY-MM-DDTHH:MM:SS) (Local date time format),(L*min^-1),(L),(C),(C),(C),(hPa),(hPa),(Pa),(%),(g*L^-1),(integer),(integer),(V),(g*min^-1),(V),(integer),(decimalDegree),(decimalDegree),(m),(integer),(m*s^-1),(-)
+SampleTime,UnixTime,DateTimeUTC,DateTimeLocal,VolumetricFlowRate,SampledVolume,PumpT,PCBT,FdpT,PumpP,PCBP,FdPdP,PumpRH,AtmoRho,PumpPow1,PumpPow2,PumpV,MassFlow,BFGvolt,BFGenergy,GPSlat,GPSlon,GPSalt,GPSsat,GPSspeed,GPShdop
+0:00:10,1632937050,2021-09-29T17:37:30,2021-09-29T11:37:30,1.041,0.19,23.26,23.22,23.26,839.16,842.44,248.500000,38.17,0.9853,334,0,14.416,0.97621,3.55,33335,40.563569,-105.112552,1552.0,11,0.105884,1.0
+0:00:40,1632937080,2021-09-29T17:38:00,2021-09-29T11:38:00,1.032,0.71,24.03,23.35,24.22,839.10,843.46,251.166672,36.09,0.9840,334,0,14.467,0.97907,3.55,33323,40.563579,-105.112568,1558.0,12,0.029298,0.8
+0:01:10,1632937110,2021-09-29T17:38:30,2021-09-29T11:38:30,0.996,1.21,24.62,23.49,24.98,839.09,844.02,253.500000,34.79,0.9827,334,0,14.494,0.97968,3.55,33312,40.563612,-105.112552,1556.6,12,0.039578,0.8
+0:01:40,1632937140,2021-09-29T17:39:00,2021-09-29T11:39:00,1.036,1.72,25.12,23.62,25.60,839.11,844.60,254.949997,33.81,0.9817,334,0,14.507,0.97989,3.55,33300,40.563624,-105.112549,1557.5,12,0.051914,0.8
+0:02:10,1632937170,2021-09-29T17:39:30,2021-09-29T11:39:30,1.018,2.23,25.57,23.74,26.14,839.15,845.14,255.883331,32.92,0.9808,334,0,14.526,0.98009,3.55,33288,40.563625,-105.112549,1555.2,12,0.111538,0.8
+0:02:40,1632937200,2021-09-29T17:40:00,2021-09-29T11:40:00,1.020,2.74,25.98,23.87,26.61,839.11,845.46,256.566681,32.19,0.9799,334,0,14.532,0.98091,3.55,33277,40.563611,-105.112529,1550.3,12,0.062194,0.9
+0:03:10,1632937230,2021-09-29T17:40:30,2021-09-29T11:40:30,1.021,3.25,26.34,23.99,27.02,839.07,845.86,257.716675,31.55,0.9792,334,0,14.556,0.98111,3.55,33265,40.563609,-105.112513,1546.8,12,0.015420,0.8
+0:03:40,1632937260,2021-09-29T17:41:00,2021-09-29T11:41:00,1.022,3.76,26.66,24.10,27.40,839.15,846.16,259.116669,30.96,0.9785,334,0,14.562,0.98132,3.54,33253,40.563593,-105.112539,1548.9,11,0.143920,1.0
+0:04:10,1632937290,2021-09-29T17:41:30,2021-09-29T11:41:30,1.023,4.28,26.94,24.25,27.75,839.12,846.35,259.583344,30.48,0.9778,334,0,14.566,0.98152,3.54,33241,40.563579,-105.112569,1550.5,12,0.041634,0.8
