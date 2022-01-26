@@ -1,17 +1,14 @@
 Package: astr
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
-Authors@R: 
-    person("Casey", "Quinn", email = "cquinn@accsensors.com", role = c("aut", "cre"), 
-    comment = c(ORCID = "0000-0002-6802-5250"))
 Authors@R: c(
      person("Casey", "Quinn", email = "cquinn@accsensors.com", role = c("aut", "cre"), 
     comment = c(ORCID = "0000-0002-6802-5250")),
-    person("Jessica", "Tryner", email = "jtryner@accsensors.com", role = c("aut", "cre"), 
+    person("Jessica", "Tryner", email = "jtryner@accsensors.com", role = c("aut"), 
     comment = c(ORCID = "0000-0002-0522-4551")),
-    person("Ander", "Wilson", email = "ander.wilson@colostate.edu", role = c("aut", "cre"), 
+    person("Ander", "Wilson", email = "ander.wilson@colostate.edu", role = c("aut"), 
     comment = c(ORCID = "0000-0003-4774-3883")),
-    person("Access Sensor Technologies", role = c("cph", "fnd"))),
+    person("Access Sensor Technologies", role = c("cph", "fnd")),
     person("National Institutes of Health", role = c("fnd")))
 Description: What the package does (one paragraph).
 License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
