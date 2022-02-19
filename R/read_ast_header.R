@@ -12,6 +12,8 @@
 #' file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
 #' data_header <- read_ast_header(file)
 
+# save(count, age, circumference, file = "mydata.rda")
+
 read_ast_header = function(file) {
 
   my_cols <- c('V1','V2')

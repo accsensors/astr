@@ -12,8 +12,6 @@
 
 read_upasv2x_header = function(df) {
 
-
-
   df <- df %>%
     dplyr::mutate(ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite",
                                              NA,.data$ProgrammedRuntime)) %>%
@@ -70,7 +68,7 @@ read_upasv2x_header = function(df) {
                     .data$ShutdownMode == 7 ~ "blocked flow",
                     .data$ShutdownMode == 8 ~ "SD card removed",
                     dplyr::between(.data$ShutdownMode, 64, 79) ~ "code freeze",
-                                              TRUE ~ "RTOS crash"),
+                    TRUE ~ "RTOS crash"),
                   PMSensorOperation = dplyr::case_when(
                     .data$PMSensorInterval == "0" ~ "Sensor Disabled",
                     .data$PMSensorInterval == "1" ~ "Continuous Measurement",
@@ -118,8 +116,6 @@ read_upasv2x_header = function(df) {
                   CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
   # %>%
   #   dplyr::rename(`Sample Duration (hr)` = .data$OverallDuration)
-
-
 
   return(df)
 
