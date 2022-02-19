@@ -10,7 +10,7 @@
 #' @examples
 #' filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 #' file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-#' read_ast_header(file)
+#' data_header <- read_ast_header(file)
 
 read_ast_header = function(file) {
 
@@ -39,17 +39,16 @@ read_ast_header = function(file) {
   df <- df[-1, ]
   rownames(df) <- c(1)
 
-  # browser()
-
   df <- df %>%
-    # dplyr::mutate_at(c("UPASserial","ShutdownMode"), as.numeric) %>%
     dplyr::mutate_at(c("UPASserial"), as.numeric) %>%
     dplyr::mutate(n_header_rows = n_row_header,
-                  UPASversion = sub("-rev.*", "", .data$UPASfirmware),
-                  UPASfirmware    = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
-                  UPASfirmware    = as.numeric(gsub("rev_", "", .data$UPASfirmware)))
+                  ast_sampler = sub("-rev.*", "", .data$UPASfirmware),
+                  firmware_rev    = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
+                  firmware_rev    = as.numeric(gsub("rev_", "", .data$firmware_rev)))
 
-  df <- read_upasv2x_header(df)
+  if(df$ast_sampler == 'UPAS_v2_x'){
+      df <- read_upasv2x_header(df)
+  }
 
   return(df)
 }

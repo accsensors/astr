@@ -20,5 +20,5 @@ log file
 \examples{
 filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-read_ast_header(file)
+data_header <- read_ast_header(file)
 }

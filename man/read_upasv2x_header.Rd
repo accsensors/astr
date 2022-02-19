@@ -28,5 +28,5 @@ log file
 filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
 read_ast_header(file)
-read_upasv2x_header(upasv2x_header)
+data_header <- read_upasv2x_header(upasv2x_header)
 }
