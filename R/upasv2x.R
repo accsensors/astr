@@ -8,7 +8,7 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' data_header <- read_upasv2x_header(upasv2x_header)
+#' upasv2x_header <- read_upasv2x_header(upasv2x_header)
 
 read_upasv2x_header = function(df) {
 
@@ -116,6 +116,27 @@ read_upasv2x_header = function(df) {
                   CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
   # %>%
   #   dplyr::rename(`Sample Duration (hr)` = .data$OverallDuration)
+
+  return(df)
+
+}
+
+#'Read the log data from an Access Sensor Technologies (AST) air sampler
+#'log file
+#'
+#' @param df Pass a upasv2x dataframe from read_ast_header function.
+#'
+#' @return A modified data frame with all log data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2x_log <- read_upasv2x_log(upasv2x_header)
+
+read_upasv2x_log = function(df) {
+
+  df <- df %>%
+    dplyr::mutate(test = "test")
 
   return(df)
 

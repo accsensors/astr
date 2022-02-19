@@ -1,7 +1,7 @@
 #'Read the header data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
-#' @param file Any AST air sampler  log file name. Test change.
+#' @param file Any AST air sampler  log file name.
 #'
 #' @return A data frame with header data in wide format.
 #' @export
@@ -10,9 +10,7 @@
 #' @examples
 #' filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 #' file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-#' data_header <- read_ast_header(file)
-
-# save(count, age, circumference, file = "mydata.rda")
+#' data_ast_header <- read_ast_header(file)
 
 read_ast_header = function(file) {
 
@@ -49,8 +47,31 @@ read_ast_header = function(file) {
                   firmware_rev    = as.numeric(gsub("rev_", "", .data$firmware_rev)))
 
   if(df$ast_sampler == 'UPAS_v2_x'){
-      df <- read_upasv2x_header(df)
+      df <- astr::read_upasv2x_header(df)
   }
 
   return(df)
+}
+
+
+#'Read the full log data from an Access Sensor Technologies (AST) air sampler
+#'log file
+#'
+#' @param file Any AST air sampler  log file name.
+#'
+#' @return A data frame with all log data plus some header data appended.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+#' data_ast_log <- read_ast_log(file)
+
+read_ast_log = function(file) {
+
+  df = astr::read_ast_header(file=file)
+
+  df = astr::read_upasv2x_log(df)
+
 }
