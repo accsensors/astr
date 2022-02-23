@@ -5,9 +5,11 @@
 \title{Read the log data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-format_upasv2x_log(df)
+format_upasv2x_log(df_h, df)
 }
 \arguments{
+\item{df_h}{Pass a upasv2x header dataframe from read_ast_header function.}
+
 \item{df}{Pass a upasv2x dataframe from read_ast_header function.}
 }
 \value{
@@ -18,5 +20,5 @@ Read the log data from an Access Sensor Technologies (AST) air sampler
 log file
 }
 \examples{
-upasv2x_log <- format_upasv2x_log(upasv2x_log_raw)
+upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 }

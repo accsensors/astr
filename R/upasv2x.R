@@ -124,6 +124,7 @@ format_upasv2x_header = function(df_h) {
 #'Read the log data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
+#' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
 #' @param df Pass a upasv2x dataframe from read_ast_header function.
 #'
 #' @return A modified data frame with all log data.
@@ -131,30 +132,43 @@ format_upasv2x_header = function(df_h) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_log <- format_upasv2x_log(upasv2x_log_raw)
+#' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 
-format_upasv2x_log = function(df) {
+format_upasv2x_log = function(df_h, df) {
 
+  df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ast_sampler",
+                                                     "LogFilename",
+                                                      "UPASserial",
+                                                      "VolumetricFlowRateSet",
+                                                      "StartDateTimeUTC",
+                                                      "GPSUTCOffset")))
 
-  # # header <- read_csv(file, col_names=TRUE, skip=df_h$n_header_rows,  n_max=1)
-  # # df   <- read_csv(file, col_names=FALSE, skip=nskip+2)
-  # colnames(df) <- colnames(header)
-  #
-  # if(nrow(df) > 0){
-  #
-  #   df <- cbind(df_h, df) %>%
-  #     dplyr::mutate(SampleTime=as.character(SampleTime),
-  #                   SampleTime = ifelse(SampleTime == "99:99:99", NA, SampleTime),
-  #                   SampleTime = ifelse(!is.na(SampleTime), strsplit(SampleTime,":"), SampleTime),
-  #                   SampleTime = as.difftime(3600*as.numeric(sapply(SampleTime, `[`, 1)) +
-  #                                              60*as.numeric(sapply(SampleTime, `[`, 2)) +
-  #                                              as.numeric(sapply(SampleTime, `[`, 3)), units="secs"))
-  #
-  #
-  #   df <- df %>% dplyr::mutate(DateTimeUTC = as.POSIXct(DateTimeUTC, format="%Y-%m-%dT%H:%M:%S", tz="UTC")) %>%
-  #     dplyr::mutate(across(c(UnixTime:UnixTimeMCU, PumpingFlowRate:gasPercAcc), ~ as.numeric(.x)))
-  #
-  # }
+  tz_name <- paste0("Etc/GMT",
+                    ifelse(df_h_sel$GPSUTCOffset<=0,'+','-'),
+                    abs(df_h_sel$GPSUTCOffset))
+
+  df_h_sel <- df_h_sel %>%
+    dplyr::select(-.data$GPSUTCOffset)
+
+  df <- df %>%
+    dplyr::mutate(SampleTime = ifelse(.data$SampleTime == "99:99:99",
+                                      NA,
+                                      .data$SampleTime),
+                  SampleTime = ifelse(!is.na(.data$SampleTime),
+                                      strsplit(.data$SampleTime,":"),
+                                      .data$SampleTime),
+                  SampleTime = as.difftime(
+                    3600*as.numeric(sapply(.data$SampleTime, `[`, 1)) +
+                    60*as.numeric(sapply(.data$SampleTime, `[`, 2)) +
+                    as.numeric(sapply(.data$SampleTime, `[`, 3)), units="secs"),
+                  DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
+                                           format="%Y-%m-%dT%H:%M:%S",
+                                           tz="UTC"),
+                  DateTimeLocal = lubridate::ymd_hms(
+                    as.POSIXct(format(.data$DateTimeUTC,usetz=T,tz=tz_name)))) %>%
+      cbind(df_h_sel)
+
+  browser()
 
   return(df)
 

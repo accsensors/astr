@@ -68,7 +68,7 @@ format_ast_header = function(df_h_raw) {
                   firmware_rev    = as.numeric(gsub("rev_", "", .data$firmware_rev)))
 
   if(df_h$ast_sampler == 'UPAS_v2_x'){
-    df_h <- astr::read_upasv2x_header(df_h)
+    df_h <- astr::format_upasv2x_header(df_h)
   }
 
   return(df_h)
@@ -96,7 +96,8 @@ read_ast_log = function(file) {
 
   df_h <- astr::format_ast_header(df_raw)
 
-  df <- astr::format_ast_log(df=df_raw)
+
+  df <- astr::format_ast_log(df_h=df_h, df=df_raw)
 
   return(df)
 
@@ -106,6 +107,7 @@ read_ast_log = function(file) {
 #'Extract only the log data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
+#' @param df_h An AST air sampler formatted log file header dataframe.
 #' @param df_raw Any AST air sampler unformatted log file dataframe.
 #'
 #' @return A data frame with all log data.
@@ -113,9 +115,9 @@ read_ast_log = function(file) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' data_ast_log <- format_ast_log(data_ast_raw)
+#' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
-format_ast_log = function(df_raw) {
+format_ast_log = function(df_h, df_raw) {
 
   df_cols <- df_raw %>%
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+2) %>%
@@ -125,6 +127,10 @@ format_ast_log = function(df_raw) {
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+4:dplyr::n())
 
   colnames(df) <- df_cols
+
+  if(df_h$ast_sampler == 'UPAS_v2_x'){
+    df <- astr::format_upasv2x_log(df_h, df)
+  }
 
   return(df)
 

@@ -5,9 +5,11 @@
 \title{Extract only the log data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-format_ast_log(df_raw)
+format_ast_log(df_h, df_raw)
 }
 \arguments{
+\item{df_h}{An AST air sampler formatted log file header dataframe.}
+
 \item{df_raw}{Any AST air sampler unformatted log file dataframe.}
 }
 \value{
@@ -18,5 +20,5 @@ Extract only the log data from an Access Sensor Technologies (AST) air sampler
 log file
 }
 \examples{
-data_ast_log <- format_ast_log(data_ast_raw)
+data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 }
