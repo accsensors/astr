@@ -1,18 +1,18 @@
 #'Read the header data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
-#' @param df Pass a upasv2x dataframe from read_ast_header function.
+#' @param df_h Pass a upasv2x dataframe from read_ast_header function.
 #'
 #' @return A modified data frame with header data in wide format.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header <- read_upasv2x_header(upasv2x_header)
+#' upasv2x_header <- format_upasv2x_header(upasv2x_header_raw)
 
-read_upasv2x_header = function(df) {
+format_upasv2x_header = function(df_h) {
 
-  df <- df %>%
+  df_h <- df_h %>%
     dplyr::mutate(ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite",
                                              NA,.data$ProgrammedRuntime)) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c("LifetimeSampleCount",
@@ -91,19 +91,19 @@ read_upasv2x_header = function(df) {
                     .data$PMSensorInterval == "18" ~ "20s Warmup 10s Measurement 30s Sleep",
                     TRUE ~ "NA" ))
 
-  df  <- df %>%
-    dplyr::select(.data$ast_sampler,match("UPASserial",colnames(df)):ncol(df))
+  df_h  <- df_h %>%
+    dplyr::select(.data$ast_sampler,match("UPASserial",colnames(df_h)):ncol(df_h))
 
-  df  <- df %>%
-    dplyr::select(1:match("UPASfirmware",colnames(df)), .data$firmware_rev,
-                  (match("UPASfirmware",colnames(df))+1):ncol(df))
+  df_h  <- df_h %>%
+    dplyr::select(1:match("UPASfirmware",colnames(df_h)), .data$firmware_rev,
+                  (match("UPASfirmware",colnames(df_h))+1):ncol(df_h))
 
-  df  <- df %>%
-    dplyr::select(1:match("ShutdownMode",colnames(df)), .data$ShutdownReason,
-                  (match("ShutdownMode",colnames(df))+1):ncol(df))
-  df  <- df %>%
-    dplyr::select(1:match("PMSensorInterval",colnames(df)), .data$PMSensorOperation,
-                  (match("PMSensorInterval",colnames(df))+1):ncol(df)) %>%
+  df_h  <- df_h %>%
+    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
+                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
+  df_h  <- df_h %>%
+    dplyr::select(1:match("PMSensorInterval",colnames(df_h)), .data$PMSensorOperation,
+                  (match("PMSensorInterval",colnames(df_h))+1):ncol(df_h)) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c("StartDateTimeUTC",
                                                 "EndDateTimeUTC",
                                                 "MFSCalDate")),
@@ -117,7 +117,7 @@ read_upasv2x_header = function(df) {
   # %>%
   #   dplyr::rename(`Sample Duration (hr)` = .data$OverallDuration)
 
-  return(df)
+  return(df_h)
 
 }
 
@@ -131,12 +131,30 @@ read_upasv2x_header = function(df) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_log <- read_upasv2x_log(upasv2x_header)
+#' upasv2x_log <- format_upasv2x_log(upasv2x_log_raw)
 
-read_upasv2x_log = function(df) {
+format_upasv2x_log = function(df) {
 
-  df <- df %>%
-    dplyr::mutate(test = "test")
+
+  # # header <- read_csv(file, col_names=TRUE, skip=df_h$n_header_rows,  n_max=1)
+  # # df   <- read_csv(file, col_names=FALSE, skip=nskip+2)
+  # colnames(df) <- colnames(header)
+  #
+  # if(nrow(df) > 0){
+  #
+  #   df <- cbind(df_h, df) %>%
+  #     dplyr::mutate(SampleTime=as.character(SampleTime),
+  #                   SampleTime = ifelse(SampleTime == "99:99:99", NA, SampleTime),
+  #                   SampleTime = ifelse(!is.na(SampleTime), strsplit(SampleTime,":"), SampleTime),
+  #                   SampleTime = as.difftime(3600*as.numeric(sapply(SampleTime, `[`, 1)) +
+  #                                              60*as.numeric(sapply(SampleTime, `[`, 2)) +
+  #                                              as.numeric(sapply(SampleTime, `[`, 3)), units="secs"))
+  #
+  #
+  #   df <- df %>% dplyr::mutate(DateTimeUTC = as.POSIXct(DateTimeUTC, format="%Y-%m-%dT%H:%M:%S", tz="UTC")) %>%
+  #     dplyr::mutate(across(c(UnixTime:UnixTimeMCU, PumpingFlowRate:gasPercAcc), ~ as.numeric(.x)))
+  #
+  # }
 
   return(df)
 
