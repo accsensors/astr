@@ -151,6 +151,17 @@ format_upasv2x_log = function(df_h, df) {
     dplyr::select(-.data$GPSUTCOffset)
 
   df <- df %>%
+    dplyr::mutate(dplyr::across(-dplyr::one_of(c("DateTimeUTC",
+                                                 "DateTimeLocal")),
+                                as.numeric)) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("DateTimeUTC",
+                                                 "DateTimeLocal",
+                                                 "PumpsON",
+                                                 "Dead",
+                                                 "BCS1",
+                                                 "BCS2",
+                                                 "BC_NPG")),
+                                as.logical)) %>%
     dplyr::mutate(SampleTime = ifelse(.data$SampleTime == "99:99:99",
                                       NA,
                                       .data$SampleTime),
@@ -167,8 +178,6 @@ format_upasv2x_log = function(df_h, df) {
                   DateTimeLocal = lubridate::ymd_hms(
                     as.POSIXct(format(.data$DateTimeUTC,usetz=T,tz=tz_name)))) %>%
       cbind(df_h_sel)
-
-  browser()
 
   return(df)
 
