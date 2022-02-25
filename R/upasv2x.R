@@ -150,17 +150,17 @@ format_upasv2x_log = function(df_h, df) {
   df_h_sel <- df_h_sel %>%
     dplyr::select(-.data$GPSUTCOffset)
 
+  df[df == 'NULL'] <- NA
+
   df <- df %>%
     dplyr::mutate(dplyr::across(-dplyr::one_of(c("SampleTime","DateTimeUTC",
                                                  "DateTimeLocal")),
                                 as.numeric)) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c("DateTimeUTC",
-                                                 "DateTimeLocal",
-                                                 "PumpsON",
-                                                 "Dead",
-                                                 "BCS1",
-                                                 "BCS2",
-                                                 "BC_NPG")),
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("PumpsON",
+                                                "Dead",
+                                                "BCS1",
+                                                "BCS2",
+                                                "BC_NPG")),
                                 as.logical)) %>%
     dplyr::mutate(SampleTime = ifelse(.data$SampleTime == "99:99:99",
                                       NA,

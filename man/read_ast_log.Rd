@@ -19,6 +19,10 @@ log file
 }
 \examples{
 filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+filename2 <- 'PSP00055_LOG_2022-02-24T19_26_03UTC_test1___________----------.txt'
+filename <- 'SH00007_LOG_2021-12-13T13_28_41UTC_---------------_-----.txt'
 file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
 data_ast_log <- read_ast_log(file)
+file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
+data_ast_log <- read_ast_log(file2)
 }

@@ -69,6 +69,8 @@ format_ast_header = function(df_h_raw) {
 
   if(df_h$ast_sampler == 'UPAS_v2_x'){
     df_h <- astr::format_upasv2x_header(df_h)
+  }else if(df_h$ast_sampler == "SHEARv2_7_2"){
+
   }
 
   return(df_h)
@@ -86,8 +88,12 @@ format_ast_header = function(df_h_raw) {
 #'
 #' @examples
 #' filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' filename2 <- 'PSP00055_LOG_2022-02-24T19_26_03UTC_test1___________----------.txt'
+#' filename <- 'SH00007_LOG_2021-12-13T13_28_41UTC_---------------_-----.txt'
 #' file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
 #' data_ast_log <- read_ast_log(file)
+#' file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
+#' data_ast_log <- read_ast_log(file2)
 
 read_ast_log = function(file) {
 
@@ -130,6 +136,8 @@ format_ast_log = function(df_h, df_raw) {
 
   if(df_h$ast_sampler == 'UPAS_v2_x'){
     df <- astr::format_upasv2x_log(df_h, df)
+  }else if(df_h$ast_sampler == "SHEARv2_7_2"){
+
   }
 
   return(df)
