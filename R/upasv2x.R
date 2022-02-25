@@ -137,8 +137,10 @@ format_upasv2x_header = function(df_h) {
 format_upasv2x_log = function(df_h, df) {
 
   df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ast_sampler",
+                                                     "UPASserial",
                                                      "LogFilename",
-                                                      "UPASserial",
+                                                      "SampleName",
+                                                      "CartridgeID",
                                                       "VolumetricFlowRateSet",
                                                       "StartDateTimeUTC",
                                                       "GPSUTCOffset")))
