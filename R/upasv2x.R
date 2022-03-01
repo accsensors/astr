@@ -112,7 +112,6 @@ format_upasv2x_header = function(df_h) {
     dplyr::mutate(SampleName  = gsub("_+$", "", .data$SampleName),
                   SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
                   CartridgeID = gsub("_+$", "", .data$CartridgeID),
-                  CartridgeID = gsub("-+$", "", .data$CartridgeID),
                   CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
   # %>%
   #   dplyr::rename(`Sample Duration (hr)` = .data$OverallDuration)
