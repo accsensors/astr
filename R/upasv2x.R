@@ -18,6 +18,7 @@ format_upasv2x_header = function(df_h) {
     dplyr::mutate(dplyr::across(dplyr::any_of(c("LifetimeSampleCount",
                                                 "LifetimeSampleRuntime",
                                                 "GPSUTCOffset",
+                                                "StartOnNextPowerUp",
                                                 "ProgrammedStartTime",
                                                 "ProgrammedRuntime",
                                                 "FlowRateSetpoint",
@@ -26,7 +27,12 @@ format_upasv2x_header = function(df_h) {
                                                 "FlowCheckMeterReadingPostSample",
                                                 "FlowDutyCycle",
                                                 "DutyCycleWindow",
+                                                "GPSEnabled",
+                                                "PMSensorInterval",
+                                                "RTGasSampleState",
                                                 "LogInterval",
+                                                "PowerSaveMode",
+                                                "AppLock",
                                                 "OverallDuration",
                                                 "PumpingDuration",
                                                 "OverallFlowRateAverage",
@@ -51,8 +57,7 @@ format_upasv2x_header = function(df_h) {
                                                 "MF2",
                                                 "MF1",
                                                 "MF0")), as.numeric)) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
-                                                "GPSEnabled",
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("GPSEnabled",
                                                 "RTGasSampleState",
                                                 "PowerSaveMode",
                                                 "AppLock")), as.logical)) %>%
@@ -110,8 +115,10 @@ format_upasv2x_header = function(df_h) {
                                 as.POSIXct, format="%Y-%m-%dT%H:%M:%S",
                                 tz="UTC")) %>%
     dplyr::mutate(SampleName  = gsub("_+$", "", .data$SampleName),
+                  SampleName  = gsub("-+$", "", .data$SampleName),
                   SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
                   CartridgeID = gsub("_+$", "", .data$CartridgeID),
+                  CartridgeID  = gsub("-+$", "", .data$CartridgeID),
                   CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
   # %>%
   #   dplyr::rename(`Sample Duration (hr)` = .data$OverallDuration)
