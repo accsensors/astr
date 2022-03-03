@@ -12,7 +12,7 @@
 
 format_upasv2x_header = function(df_h) {
 
-  browser()
+
   df_h <- df_h %>%
     dplyr::mutate(ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite",
                                              NA,.data$ProgrammedRuntime)) %>%
@@ -58,10 +58,10 @@ format_upasv2x_header = function(df_h) {
                                                 "MF2",
                                                 "MF1",
                                                 "MF0")), as.numeric)) %>%
-    # dplyr::mutate(dplyr::across(dplyr::any_of(c("GPSEnabled",
-    #                                             "RTGasSampleState",
-    #                                             "PowerSaveMode",
-    #                                             "AppLock")), as.logical)) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("GPSEnabled",
+                                                "RTGasSampleState",
+                                                "PowerSaveMode",
+                                                "AppLock")), as.logical)) %>%
     dplyr::mutate(LogFilename = gsub("/sd/", "", .data$LogFilename),
                   ShutdownReason  = dplyr::case_when(
                     .data$ShutdownMode == 0 ~ "unknown error",
