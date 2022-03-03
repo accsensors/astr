@@ -12,6 +12,7 @@
 
 format_upasv2x_header = function(df_h) {
 
+  browser()
   df_h <- df_h %>%
     dplyr::mutate(ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite",
                                              NA,.data$ProgrammedRuntime)) %>%
