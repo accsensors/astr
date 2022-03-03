@@ -68,7 +68,7 @@ format_ast_header = function(df_h_raw) {
                   firmware_rev    = as.numeric(gsub("rev_", "", .data$firmware_rev)))
 
   if(df_h$ast_sampler == 'UPAS_v2_x'){
-    df_h <- astr::format_upasv2x_header(df_h)
+    #df_h <- astr::format_upasv2x_header(df_h)
   }else if(df_h$ast_sampler == "SHEARv2_7_2"){
 
   }
@@ -135,7 +135,7 @@ format_ast_log = function(df_h, df_raw) {
   colnames(df) <- df_cols
 
   if(df_h$ast_sampler == 'UPAS_v2_x'){
-    #df <- astr::format_upasv2x_log(df_h, df)
+    df <- astr::format_upasv2x_log(df_h, df)
   }else if(df_h$ast_sampler == "SHEARv2_7_2"){
 
   }
