@@ -15,7 +15,9 @@
 read_ast_header = function(file) {
 
   df_h_raw <- data.table::fread(file=file, skip = 0, nrows=100, sep=',',
-                          header = FALSE, fill = TRUE, blank.lines.skip = TRUE)
+                          header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
+                          data.table = FALSE, stringsAsFactors = FALSE)
+
 
   df_h <- astr::format_ast_header(df_h_raw)
 
@@ -64,11 +66,11 @@ format_ast_header = function(df_h_raw) {
   df_h <- df_h %>%
     dplyr::mutate_at(c("UPASserial"), as.numeric) %>%
     dplyr::mutate(ast_sampler = sub("-rev.*", "", .data$UPASfirmware),
-                  firmware_rev    = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
-                  firmware_rev    = as.numeric(gsub("rev_", "", .data$firmware_rev)))
+                  firmware_rev = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
+                  firmware_rev = as.numeric(gsub("rev_", "", .data$firmware_rev)))
 
   if(df_h$ast_sampler == 'UPAS_v2_x'){
-    #df_h <- astr::format_upasv2x_header(df_h)
+    df_h <- astr::format_upasv2x_header(df_h)
   }else if(df_h$ast_sampler == "SHEARv2_7_2"){
 
   }
@@ -98,7 +100,8 @@ format_ast_header = function(df_h_raw) {
 read_ast_log = function(file) {
 
   df_raw <- data.table::fread(file=file, sep=',',
-                          header = FALSE, fill = TRUE, blank.lines.skip = TRUE)
+                          header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
+                          data.table = FALSE, stringsAsFactors = FALSE)
 
   df_h <- astr::format_ast_header(df_raw)
 
