@@ -16,7 +16,7 @@ read_ast_header = function(file) {
 
   df_h_raw <- data.table::fread(file=file, skip = 0, nrows=100, sep=',',
                           header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
-                          data.table = FALSE, stringsAsFactors = FALSE)
+                          stringsAsFactors = FALSE)
 
 
   df_h <- astr::format_ast_header(df_h_raw)
@@ -101,7 +101,7 @@ read_ast_log = function(file) {
 
   df_raw <- data.table::fread(file=file, sep=',',
                           header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
-                          data.table = FALSE, stringsAsFactors = FALSE)
+                          stringsAsFactors = FALSE)
 
   df_h <- astr::format_ast_header(df_raw)
 
