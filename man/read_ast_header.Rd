@@ -5,7 +5,7 @@
 \title{Read the header data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-read_ast_header(file)
+read_ast_header(file, update_names = FALSE)
 }
 \arguments{
 \item{file}{Any AST air sampler  log file name.}
@@ -18,7 +18,10 @@ Read the header data from an Access Sensor Technologies (AST) air sampler
 log file
 }
 \examples{
-filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
-file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-data_ast_header <- read_ast_header(file)
+upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+data_ast_header <- read_ast_header(upasv2_x_file, update_names=FALSE)
+upasv2_x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+upasv2_x_file <- system.file("extdata", upasv2_x_filename, package = "astr", mustWork = TRUE)
+data_ast_header <- read_ast_header(upasv2_x_file, update_names=FALSE)
 }
