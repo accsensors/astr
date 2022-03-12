@@ -19,5 +19,5 @@ A data frame.
 Read the header data from a UPASv2 log file
 }
 \examples{
-upasv2x_header <- format_upasv2_header(upasv2x_header_raw, update_names=FALSE)
+upasv2_header <- format_upasv2_header(upasv2_header_raw, update_names=FALSE)
 }

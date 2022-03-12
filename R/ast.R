@@ -87,9 +87,13 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
     df_h <- astr::format_upasv2_header(df_h, update_names=FALSE)
 
   }else if(stringr::str_detect(df_h$UPASfirmware, 'SHEARv2_7_2')){
-
-
+    df_h <- df_h %>%
+      dplyr::mutate_at(c("UPASserial"), as.numeric) %>%
+      dplyr::mutate(ast_sampler = sub("-rev.*", "", .data$UPASfirmware),
+                    firmware_rev = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
+                    firmware_rev = as.numeric(gsub("rev_", "", .data$firmware_rev)))
   }
+
 
   return(df_h)
 }
@@ -119,7 +123,6 @@ read_ast_log = function(file) {
                           stringsAsFactors = FALSE)
 
   df_h <- astr::format_ast_header(df_raw)
-
 
   df <- astr::format_ast_log(df_h=df_h, df=df_raw)
 

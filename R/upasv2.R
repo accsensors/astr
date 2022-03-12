@@ -31,7 +31,7 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header <- format_upasv2_header(upasv2x_header_raw, update_names=FALSE)
+#' upasv2_header <- format_upasv2_header(upasv2_header_raw, update_names=FALSE)
 
 format_upasv2_header <- function(df_h, update_names=FALSE){
 
