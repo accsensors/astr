@@ -9,6 +9,8 @@ read_ast_header(file, update_names = FALSE)
 }
 \arguments{
 \item{file}{Any AST air sampler  log file name.}
+
+\item{update_names}{Option to update old sampler names to latest version.}
 }
 \value{
 A data frame with header data in wide format.

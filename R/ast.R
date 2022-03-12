@@ -2,6 +2,7 @@
 #'log file
 #'
 #' @param file Any AST air sampler  log file name.
+#' @param update_names Option to update old sampler names to latest version.
 #'
 #' @return A data frame with header data in wide format.
 #' @export
@@ -32,6 +33,7 @@ read_ast_header = function(file, update_names=FALSE) {
 #'log file
 #'
 #' @param df_h_raw Any AST air sampler unformatted header dataframe.
+#' @param update_names Option to update old sampler names to latest version.
 #'
 #' @return A data frame with header data in wide format.
 #' @export

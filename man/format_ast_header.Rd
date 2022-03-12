@@ -9,6 +9,8 @@ format_ast_header(df_h_raw, update_names = FALSE)
 }
 \arguments{
 \item{df_h_raw}{Any AST air sampler unformatted header dataframe.}
+
+\item{update_names}{Option to update old sampler names to latest version.}
 }
 \value{
 A data frame with header data in wide format.
