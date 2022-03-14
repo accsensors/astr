@@ -153,7 +153,8 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA) {
                                                       "StartDateTimeUTC",
                                                       "GPSUTCOffset")))
 
-  tz_offset <- ifelse(is.na(tz_offset),df_h_sel$GPSUTCOffset, tz_offset)
+  tz_off <- ifelse(is.na(tz_offset),df_h_sel$GPSUTCOffset, tz_offset)
+
 
   df_h_sel <- df_h_sel %>%
     dplyr::select(-.data$GPSUTCOffset)
@@ -183,13 +184,21 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA) {
                   DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
                                            format="%Y-%m-%dT%H:%M:%S",
                                            tz="UTC"),
-                  DateTimeLocal = as.POSIXct(df$DateTimeLocal, format="%Y-%m-%dT%H:%M:%S", tz='UTC'),
-                  TZOffset = tz_offset)
+                  tz_value = ifelse(is.na(tz_offset),TRUE,FALSE),
+                  DateTimeLocal = dplyr::if_else(tz_value,
+                                         as.POSIXct(.data$DateTimeLocal,
+                                                    format="%Y-%m-%dT%H:%M:%S",
+                                                    tz='UTC'),
+                                                    .data$DateTimeUTC+tz_off*3600),
+                  TZOffset = tz_off)
+
 
   df <- df %>%
     dplyr::select(1:match("DateTimeLocal",colnames(df)), .data$TZOffset,
                                   (match("DateTimeLocal",colnames(df))+1):ncol(df)) %>%
       cbind(df_h_sel)
+
+
 
   return(df)
 
