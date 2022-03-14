@@ -105,7 +105,8 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #'log file
 #'
 #' @param file Any AST air sampler  log file name.
-#'
+#' @param tz_name OlsonNames() timezone to be used for DateTimeLocal column
+
 #' @return A data frame with all log data plus some header data appended.
 #' @export
 #' @importFrom rlang .data
@@ -118,7 +119,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #' file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
 #' data_ast_log <- read_ast_log(file2)
 
-read_ast_log = function(file) {
+read_ast_log = function(file, tz_name = NA) {
 
   df_raw <- data.table::fread(file=file, sep=',',
                           header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
@@ -126,7 +127,7 @@ read_ast_log = function(file) {
 
   df_h <- astr::format_ast_header(df_raw)
 
-  df <- astr::format_ast_log(df_h=df_h, df=df_raw)
+  df <- astr::format_ast_log(df_h=df_h, df=df_raw, tz_name = tz_name)
 
   return(df)
 
@@ -138,6 +139,7 @@ read_ast_log = function(file) {
 #'
 #' @param df_h An AST air sampler formatted log file header dataframe.
 #' @param df_raw Any AST air sampler unformatted log file dataframe.
+#' @param tz_name OlsonNames() timezone to be used for DateTimeLocal column
 #'
 #' @return A data frame with all log data.
 #' @export
@@ -146,7 +148,7 @@ read_ast_log = function(file) {
 #' @examples
 #' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
-format_ast_log = function(df_h, df_raw) {
+format_ast_log = function(df_h, df_raw, tz_name = NA) {
 
   df_cols <- df_raw %>%
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+2) %>%
@@ -158,7 +160,7 @@ format_ast_log = function(df_h, df_raw) {
   colnames(df) <- df_cols
 
   if(df_h$ast_sampler == 'UPAS_v2_x'){
-    df <- astr::format_upasv2x_log(df_h, df)
+    df <- astr::format_upasv2x_log(df_h, df, tz_name)
   }else if(df_h$ast_sampler == "SHEARv2_7_2"){
 
   }

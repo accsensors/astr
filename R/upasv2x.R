@@ -141,7 +141,7 @@ format_upasv2x_header = function(df_h) {
 #' @examples
 #' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 
-format_upasv2x_log = function(df_h, df) {
+format_upasv2x_log = function(df_h, df, tz_name = NA) {
 
   df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ast_sampler",
                                                      "UPASserial",
@@ -152,12 +152,12 @@ format_upasv2x_log = function(df_h, df) {
                                                       "StartDateTimeUTC",
                                                       "GPSUTCOffset")))
 
-  tz_name <- paste0("Etc/GMT",
-                    ifelse(df_h_sel$GPSUTCOffset<=0,'+','-'),
-                    abs(df_h_sel$GPSUTCOffset))
-
-  df_h_sel <- df_h_sel %>%
-    dplyr::select(-.data$GPSUTCOffset)
+  tz_name <- ifelse(is.na(tz_name),
+  ifelse(!is.null(which(23==unique_tz_list$utc_offset_h)),
+                   unique_tz_list$tz_name[
+                     which(df_h_sel$GPSUTCOffset==unique_tz_list$utc_offset_h)],
+                   'UTC'),
+  tz_name)
 
   df[df == 'NULL'] <- NA
 
@@ -184,8 +184,7 @@ format_upasv2x_log = function(df_h, df) {
                   DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
                                            format="%Y-%m-%dT%H:%M:%S",
                                            tz="UTC"),
-                  DateTimeLocal = lubridate::ymd_hms(
-                    as.POSIXct(format(.data$DateTimeUTC,usetz=T,tz=tz_name)))) %>%
+                  DateTimeLocal = as.POSIXct(df$DateTimeLocal, format="%Y-%m-%dT%H:%M:%S", tz=tz_name)) %>%
       cbind(df_h_sel)
 
   return(df)
