@@ -5,12 +5,14 @@
 \title{Extract only the log data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-format_ast_log(df_h, df_raw)
+format_ast_log(df_h, df_raw, tz_offset = NA)
 }
 \arguments{
 \item{df_h}{An AST air sampler formatted log file header dataframe.}
 
 \item{df_raw}{Any AST air sampler unformatted log file dataframe.}
+
+\item{tz_offset}{Pass an option timezone offset}
 }
 \value{
 A data frame with all log data.

@@ -5,10 +5,12 @@
 \title{Read the full log data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-read_ast_log(file)
+read_ast_log(file, tz_offset = NA)
 }
 \arguments{
 \item{file}{Any AST air sampler  log file name.}
+
+\item{tz_offset}{Pass an option timezone offset}
 }
 \value{
 A data frame with all log data plus some header data appended.

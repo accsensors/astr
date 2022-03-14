@@ -133,6 +133,7 @@ format_upasv2x_header = function(df_h) {
 #'
 #' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
 #' @param df Pass a upasv2x dataframe from read_ast_header function.
+#' @param tz_offset Pass an optional timezone offset value
 #'
 #' @return A modified data frame with all log data.
 #' @export
@@ -141,7 +142,7 @@ format_upasv2x_header = function(df_h) {
 #' @examples
 #' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 
-format_upasv2x_log = function(df_h, df, tz_name = NA) {
+format_upasv2x_log = function(df_h, df, tz_offset = NA) {
 
   df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ast_sampler",
                                                      "UPASserial",
@@ -152,12 +153,10 @@ format_upasv2x_log = function(df_h, df, tz_name = NA) {
                                                       "StartDateTimeUTC",
                                                       "GPSUTCOffset")))
 
-  tz_name <- ifelse(is.na(tz_name),
-  ifelse(!is.null(which(23==unique_tz_list$utc_offset_h)),
-                   unique_tz_list$tz_name[
-                     which(df_h_sel$GPSUTCOffset==unique_tz_list$utc_offset_h)],
-                   'UTC'),
-  tz_name)
+  tz_offset <- ifelse(is.na(tz_offset),df_h_sel$GPSUTCOffset, tz_offset)
+
+  df_h_sel <- df_h_sel %>%
+    dplyr::select(-.data$GPSUTCOffset)
 
   df[df == 'NULL'] <- NA
 
@@ -184,7 +183,12 @@ format_upasv2x_log = function(df_h, df, tz_name = NA) {
                   DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
                                            format="%Y-%m-%dT%H:%M:%S",
                                            tz="UTC"),
-                  DateTimeLocal = as.POSIXct(df$DateTimeLocal, format="%Y-%m-%dT%H:%M:%S", tz=tz_name)) %>%
+                  DateTimeLocal = as.POSIXct(df$DateTimeLocal, format="%Y-%m-%dT%H:%M:%S", tz='UTC'),
+                  TZOffset = tz_offset)
+
+  df <- df %>%
+    dplyr::select(1:match("DateTimeLocal",colnames(df)), .data$TZOffset,
+                                  (match("DateTimeLocal",colnames(df))+1):ncol(df)) %>%
       cbind(df_h_sel)
 
   return(df)
