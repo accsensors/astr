@@ -11,10 +11,10 @@
 #' @examples
 #' upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 #' upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-#' data_ast_header <- read_ast_header(upasv2_file, update_names=FALSE)
-#' upasv2_x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
-#' upasv2_x_file <- system.file("extdata", upasv2_x_filename, package = "astr", mustWork = TRUE)
-#' data_ast_header <- read_ast_header(upasv2_x_file, update_names=FALSE)
+#' upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
+#' upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
 
 read_ast_header = function(file, update_names=FALSE) {
 
@@ -23,7 +23,7 @@ read_ast_header = function(file, update_names=FALSE) {
                           stringsAsFactors = FALSE)
 
 
-  df_h <- astr::format_ast_header(df_h_raw, update_names=FALSE)
+  df_h <- astr::format_ast_header(df_h_raw, update_names)
 
   return(df_h)
 }
@@ -68,35 +68,23 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
   df_h <- df_h[-1, ]
   rownames(df_h) <- c(1)
 
-  if(stringr::str_detect(df_h$UPASfirmware, 'UPAS_v2_x')){
-
+  if(sum(stringr::str_detect(names(df_h),'firmware'))==1){
     df_h <- df_h %>%
-      dplyr::mutate_at(c("UPASserial"), as.numeric) %>%
-      dplyr::mutate(ast_sampler = sub("-rev.*", "", .data$UPASfirmware),
-                    firmware_rev = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
-                    firmware_rev = as.numeric(gsub("rev_", "", .data$firmware_rev)))
+      dplyr::rename('Firmware' = names(df_h[stringr::str_detect(names(df_h), 'firmware')]) )
 
-    df_h <- astr::format_upasv2x_header(df_h)
+      if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
 
-  }else if(stringr::str_detect(df_h$UPASfirmware, 'UPAS_v2_0')){
+        df_h <- astr::format_upasv2x_header(df_h)
 
-    df_h <- df_h %>%
-      dplyr::mutate_at(c("UPASserial"), as.numeric) %>%
-      dplyr::mutate(ast_sampler = sub("-rev.*", "", .data$UPASfirmware),
-                    firmware_rev = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
-                    firmware_rev = as.numeric(gsub("rev", "", .data$firmware_rev)))
+      }else if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_0')){
 
-    df_h <- astr::format_upasv2_header(df_h, update_names=FALSE)
+        df_h <- astr::format_upasv2_header(df_h, update_names)
 
-  }else if(stringr::str_detect(df_h$UPASfirmware, 'SHEARv2_7_2')){
-    df_h <- df_h %>%
-      dplyr::mutate_at(c("UPASserial"), as.numeric) %>%
-      dplyr::mutate(ast_sampler = sub("-rev.*", "", .data$UPASfirmware),
-                    firmware_rev = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
-                    firmware_rev = as.numeric(gsub("rev_", "", .data$firmware_rev)))
+      }else if(stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
+
+      }
+
   }
-
-
   return(df_h)
 }
 
@@ -112,14 +100,17 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+#' upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+#' upasv2_log <- read_ast_log(upasv2_file)
+#' upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_log <- read_ast_log(upasv2x_file)
 #' filename2 <- 'SH00007_LOG_2021-12-13T13_28_41UTC_---------------_-----.txt'
-#' file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-#' data_ast_log <- read_ast_log(file)
 #' file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
 #' data_ast_log <- read_ast_log(file2)
 
-read_ast_log = function(file, tz_offset = NA) {
+read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
 
   df_raw <- data.table::fread(file=file, sep=',',
                           header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
@@ -127,7 +118,7 @@ read_ast_log = function(file, tz_offset = NA) {
 
   df_h <- astr::format_ast_header(df_raw)
 
-  df <- astr::format_ast_log(df_h=df_h, df=df_raw, tz_offset = tz_offset)
+  df <- astr::format_ast_log(df_h, df_raw, tz_offset, update_names)
 
   return(df)
 
@@ -148,8 +139,7 @@ read_ast_log = function(file, tz_offset = NA) {
 #' @examples
 #' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
-format_ast_log = function(df_h, df_raw, tz_offset = NA) {
-
+format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE) {
   df_cols <- df_raw %>%
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+2) %>%
     unlist(use.names = FALSE)
@@ -159,9 +149,13 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA) {
 
   colnames(df) <- df_cols
 
-  if(df_h$ast_sampler == 'UPAS_v2_x'){
+  if(df_h$Sampler == 'UPAS_v2_x'){
     df <- astr::format_upasv2x_log(df_h, df, tz_offset)
-  }else if(df_h$ast_sampler == "SHEARv2_7_2"){
+
+  }else if(df_h$Sampler == "UPAS_v2_0"){
+    df <- astr::format_upasv2_log(df_h, df, update_names = update_names)
+
+  }else if(df_h$Sampler == "SHEARv2_7_2"){
 
   }
 

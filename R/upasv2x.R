@@ -14,9 +14,14 @@ format_upasv2x_header = function(df_h) {
 
 
   df_h <- df_h %>%
+    dplyr::mutate(Sampler = sub("-rev.*", "", .data$Firmware),
+                  FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
+                  FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)))
+  df_h <- df_h %>%
     dplyr::mutate(ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite",
                                              NA,.data$ProgrammedRuntime)) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c("LifetimeSampleCount",
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("UPASSerial",
+                                                "LifetimeSampleCount",
                                                 "LifetimeSampleRuntime",
                                                 "GPSUTCOffset",
                                                 "StartOnNextPowerUp",
@@ -58,7 +63,9 @@ format_upasv2x_header = function(df_h) {
                                                 "MF2",
                                                 "MF1",
                                                 "MF0")), as.numeric)) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c("GPSEnabled",
+    dplyr::rename(Serial = .data$UPASserial) %>%
+    dplyr::mutate(Serial = as.numeric(.data$Serial),
+                  dplyr::across(dplyr::any_of(c("GPSEnabled",
                                                 "RTGasSampleState",
                                                 "PowerSaveMode",
                                                 "AppLock")), as.logical)) %>%
@@ -98,11 +105,11 @@ format_upasv2x_header = function(df_h) {
                     TRUE ~ "NA" ))
 
   df_h  <- df_h %>%
-    dplyr::select(.data$ast_sampler,match("UPASserial",colnames(df_h)):ncol(df_h))
+    dplyr::select(.data$Sampler,match("Serial",colnames(df_h)):ncol(df_h))
 
   df_h  <- df_h %>%
-    dplyr::select(1:match("UPASfirmware",colnames(df_h)), .data$firmware_rev,
-                  (match("UPASfirmware",colnames(df_h))+1):ncol(df_h))
+    dplyr::select(1:match("Firmware",colnames(df_h)), .data$FirmwareRev,
+                  (match("Firmware",colnames(df_h))+1):ncol(df_h))
 
   df_h  <- df_h %>%
     dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
@@ -144,8 +151,8 @@ format_upasv2x_header = function(df_h) {
 
 format_upasv2x_log = function(df_h, df, tz_offset = NA) {
 
-  df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ast_sampler",
-                                                     "UPASserial",
+  df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("Sampler",
+                                                     "Serial",
                                                      "LogFilename",
                                                       "SampleName",
                                                       "CartridgeID",
@@ -185,7 +192,7 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA) {
                                            format="%Y-%m-%dT%H:%M:%S",
                                            tz="UTC"),
                   tz_value = ifelse(is.na(tz_offset),TRUE,FALSE),
-                  DateTimeLocal = dplyr::if_else(tz_value,
+                  DateTimeLocal = dplyr::if_else(.data$tz_value,
                                          as.POSIXct(.data$DateTimeLocal,
                                                     format="%Y-%m-%dT%H:%M:%S",
                                                     tz='UTC'),

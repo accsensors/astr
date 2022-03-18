@@ -22,8 +22,8 @@ log file
 \examples{
 upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-data_ast_header <- read_ast_header(upasv2_file, update_names=FALSE)
-upasv2_x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
-upasv2_x_file <- system.file("extdata", upasv2_x_filename, package = "astr", mustWork = TRUE)
-data_ast_header <- read_ast_header(upasv2_x_file, update_names=FALSE)
+upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
+upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
 }
