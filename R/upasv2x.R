@@ -12,9 +12,8 @@
 
 format_upasv2x_header = function(df_h) {
 
-
   df_h <- df_h %>%
-    dplyr::mutate(Sampler = sub("-rev.*", "", .data$Firmware),
+    dplyr::mutate(ASTSampler = sub("-rev.*", "", .data$Firmware),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)))
   df_h <- df_h %>%
@@ -63,9 +62,7 @@ format_upasv2x_header = function(df_h) {
                                                 "MF2",
                                                 "MF1",
                                                 "MF0")), as.numeric)) %>%
-    dplyr::rename(Serial = .data$UPASserial) %>%
-    dplyr::mutate(Serial = as.numeric(.data$Serial),
-                  dplyr::across(dplyr::any_of(c("GPSEnabled",
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("GPSEnabled",
                                                 "RTGasSampleState",
                                                 "PowerSaveMode",
                                                 "AppLock")), as.logical)) %>%
@@ -105,7 +102,7 @@ format_upasv2x_header = function(df_h) {
                     TRUE ~ "NA" ))
 
   df_h  <- df_h %>%
-    dplyr::select(.data$Sampler,match("Serial",colnames(df_h)):ncol(df_h))
+    dplyr::select(.data$ASTSampler,match("UPASserial",colnames(df_h)):ncol(df_h))
 
   df_h  <- df_h %>%
     dplyr::select(1:match("Firmware",colnames(df_h)), .data$FirmwareRev,
@@ -151,8 +148,8 @@ format_upasv2x_header = function(df_h) {
 
 format_upasv2x_log = function(df_h, df, tz_offset = NA) {
 
-  df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("Sampler",
-                                                     "Serial",
+  df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ASTSampler",
+                                                     "UPASserial",
                                                      "LogFilename",
                                                       "SampleName",
                                                       "CartridgeID",

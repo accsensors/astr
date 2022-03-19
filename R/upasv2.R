@@ -37,7 +37,7 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 
 
   df_h <- df_h %>%
-    dplyr::mutate(Sampler = sub("-rev.*", "", .data$Firmware),
+    dplyr::mutate(ASTSampler = sub("-rev.*", "", .data$Firmware),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)))
 
@@ -63,12 +63,10 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
                                                 "SampledRuntime",
                                                 "LoggedRuntime")),
                          as.numeric)) %>%
-    dplyr::rename(Serial = .data$UPASserial,
-                  LogFilename = .data$UPASlogFilename) %>%
+    dplyr::rename(LogFilename = .data$UPASlogFilename) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
                                                 "GPSEnabled")), as.logical)) %>%
-    dplyr::mutate(Serial = as.numeric(.data$Serial),
-                  LogFilename = gsub("/sd/", "", .data$LogFilename),
+    dplyr::mutate(LogFilename = gsub("/sd/", "", .data$LogFilename),
                   LogFileMode     = ifelse(.data$LogFileMode == 0, "normal", "debug"),
                   ShutdownReason  = dplyr::case_when(ShutdownMode == 0 ~ "unknown error",
                                               ShutdownMode == 1 ~ "user pushbutton stop",
@@ -77,7 +75,13 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
                                               ShutdownMode == 4 ~ "thermal protection",
                                               ShutdownMode == 5 ~ "max power at initialization",
                                               ShutdownMode == 6 ~ "max power during sample",
-                                              ShutdownMode == 7 ~ "blocked flow")) %>%
+                                              ShutdownMode == 7 ~ "blocked flow"))
+
+  df_h  <- df_h %>%
+    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
+                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
+
+  df_h  <- df_h %>%
     dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason, (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
 
   if(df_h$FirmwareRev == 100){
@@ -127,14 +131,14 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2_log <- format_upasv2_header(upasv2_header, upasv2_log_raw)
+#' upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)
 
 format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
 
   # Get header data
   df_h_sel <- df_h %>%
-    dplyr::select(dplyr::any_of(c("Sampler",
-                           "Serial",
+    dplyr::select(dplyr::any_of(c("ASTSampler",
+                           "UPASserial",
                            "UPASlogFilename",
                            "SampleName",
                            "CartridgeID",

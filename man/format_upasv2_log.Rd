@@ -19,5 +19,5 @@ A data frame.
 Read the log data from a UPASv2 log file
 }
 \examples{
-upasv2_log <- format_upasv2_header(upasv2_header, upasv2_log_raw)
+upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)
 }

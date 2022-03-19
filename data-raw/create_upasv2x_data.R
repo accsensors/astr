@@ -48,11 +48,9 @@ colnames(df_h) <- df_h[1, ]
 df_h <- df_h[-1, ]
 rownames(df_h) <- c(1)
 
-df_h <- df_h %>%
-  dplyr::mutate_at(c("UPASserial"), as.numeric) %>%
-  dplyr::mutate(ast_sampler = sub("-rev.*", "", .data$UPASfirmware),
-                firmware_rev = sapply(strsplit(.data$UPASfirmware,"-"), `[`, 2),
-                firmware_rev = as.numeric(gsub("rev_", "", .data$firmware_rev)))
+upasv2x_header_raw <- df_h %>%
+  dplyr::rename('Firmware' = names(df_h[stringr::str_detect(names(df_h), 'firmware')]) )
+
 
 usethis::use_data(upasv2x_header_raw, overwrite = TRUE)
 

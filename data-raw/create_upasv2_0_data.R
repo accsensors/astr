@@ -43,3 +43,35 @@ if(sum(stringr::str_detect(names(upasv2_header_raw),'firmware'))==1){
   }
 
 usethis::use_data(upasv2_header_raw, overwrite = TRUE)
+
+
+###########
+# upasv2_header
+###########
+upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
+
+usethis::use_data(upasv2_header, overwrite = TRUE)
+
+###########
+# upasv2_log_raw
+###########
+
+filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+
+df_raw <- data.table::fread(file=file, sep=',',
+                            header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
+                            stringsAsFactors = FALSE)
+
+df_cols <- df_raw %>%
+  dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+2) %>%
+  unlist(use.names = FALSE)
+
+upasv2_log_raw <- df_raw %>%
+  dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+4:dplyr::n())
+
+colnames(upasv2_log_raw) <- df_cols
+
+usethis::use_data(upasv2_log_raw, overwrite = TRUE)

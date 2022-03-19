@@ -149,14 +149,16 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE) {
 
   colnames(df) <- df_cols
 
-  if(df_h$Sampler == 'UPAS_v2_x'){
-    df <- astr::format_upasv2x_log(df_h, df, tz_offset)
+  if(any(stringr::str_detect(names(df_h),'ASTSampler'))){
+    if(df_h$ASTSampler == 'UPAS_v2_x'){
+      df <- astr::format_upasv2x_log(df_h, df, tz_offset)
 
-  }else if(df_h$Sampler == "UPAS_v2_0"){
-    df <- astr::format_upasv2_log(df_h, df, update_names = update_names)
+    }else if(df_h$ASTSampler == "UPAS_v2_0"){
+      df <- astr::format_upasv2_log(df_h, df, update_names = update_names)
 
-  }else if(df_h$Sampler == "SHEARv2_7_2"){
+    }else if(df_h$ASTSampler == "SHEARv2_7_2"){
 
+    }
   }
 
   return(df)
