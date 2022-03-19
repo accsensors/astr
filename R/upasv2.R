@@ -84,6 +84,15 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
   df_h  <- df_h %>%
     dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason, (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
 
+  df_h  <- df_h %>%
+    dplyr::select(1:match("Firmware",colnames(df_h)), .data$FirmwareRev,
+                  (match("Firmware",colnames(df_h))+1):ncol(df_h))
+
+  df_h  <- df_h %>%
+    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
+                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
+
+
   if(df_h$FirmwareRev == 100){
 
     df_h <- df_h %>%
@@ -229,7 +238,7 @@ format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
                     AtmoRH = .data$PumpRH,
                     PCB1T = .data$PCBT,
                     PCB2P = .data$PumpP,
-                    AtmoP = .data$PumpP,
+                    AtmoP = .data$PCBP,
                     GPShDOP = .data$GPShdop,
                     BattVolt = .data$BFGvolt)
   }

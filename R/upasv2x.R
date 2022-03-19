@@ -19,7 +19,7 @@ format_upasv2x_header = function(df_h) {
   df_h <- df_h %>%
     dplyr::mutate(ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite",
                                              NA,.data$ProgrammedRuntime)) %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c("UPASSerial",
+    dplyr::mutate(dplyr::across(dplyr::any_of(c("UPASserial",
                                                 "LifetimeSampleCount",
                                                 "LifetimeSampleRuntime",
                                                 "GPSUTCOffset",
@@ -111,6 +111,7 @@ format_upasv2x_header = function(df_h) {
   df_h  <- df_h %>%
     dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
                   (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
+
   df_h  <- df_h %>%
     dplyr::select(1:match("PMSensorInterval",colnames(df_h)), .data$PMSensorOperation,
                   (match("PMSensorInterval",colnames(df_h))+1):ncol(df_h)) %>%
