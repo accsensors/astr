@@ -1,0 +1,121 @@
+PARAMETER,VALUE,UNITS/NOTES
+
+UPASserial,00055,(UPAS serial identification-numerical)
+PMserial,B7D1537B9ADF2439_2.3_7_2.0,(SPS30 serial identification_FWver_HWrev_SHDLCver)
+UPASfirmware,UPAS_v2_x-rev_00110-L476RE_20220323_mbedOS-6_15_1.bin compiled Mar 23 2022_22:33:23 UTC,(installed firmware version)
+LifetimeSampleCount,2,(count-total lifetime sample runs)
+LifetimeSampleRuntime,0.17,(hrs-total lifetime cumulative sample runtime)
+
+
+
+
+SAMPLE IDENTIFICATION
+
+LogFilename,/sd/20220324/PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt,(log file filename-automatically defined)
+SampleName,DIAGNOSTIC_____,(Sample Name-user entered into app)
+CartridgeID,__________,(Cartridge Identification-user entered into app)
+
+
+
+
+SETUP SUMMARY
+
+GPSUTCOffset,-6.00,(hours offset from UTC date time)
+StartOnNextPowerUp,0,(0=no 1=yes 2=system reset)
+ProgrammedStartTime,0,(0 = Now or Start On Next or seconds since 1/1/1970)
+ProgrammedRuntime,0.33,(Hr)
+SizeSelectiveInlet,NA,(inlet particle size fraction)
+FlowRateSetpoint,0.000,(L*min^-1)
+FlowOffset,0.000000,(%)
+FlowDutyCycle,50,(%)
+DutyCycleWindow,30,(s)
+GPSEnabled,1,(0=no 1=yes)
+PMSensorInterval,1,(0=sensor disabled 1=continuous measurement 2-15=intermittent measurement interval in minutes 16=15s warmup-5s measurement-10s sleep 17=15s warmup-5s measurement-40s sleep 18=20s warmup-10s measurement-30s sleep)
+RTGasSampleState,0,(0=off 1=on)
+LogInterval,1,(s)
+PowerSaveMode,0,(0=off 1=on)
+AppLock,0,(0=unlocked 1=locked -1=not set)
+AppVersion,i1.0.0,(i=iOS A=Android)
+
+
+
+
+SAMPLE SUMMARY
+
+StartDateTimeUTC,2022-03-24T18:05:32,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+StartDateTimeLocal,2022-03-24T12:05:32,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+EndDateTimeUTC,2022-03-24T18:08:32,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+EndDateTimeLocal,2022-03-24T12:08:32,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+FlowCheckMeterReadingPreSample,NA,(L*min^-1)
+FlowCheckMeterReadingPostSample,NA,(L*min^-1)
+OverallDuration,  0.051,(Hr)
+PumpingDuration,  0.025,(Hr)
+OverallFlowRateAverage,0.003,(L*min^-1)
+PumpingFlowRateAverage,0.007,(L*min^-1)
+SampledVolume,    0.01,(L)
+StartBatteryCharge,031,(%)
+EndBatteryCharge,031,(%)
+StartBatteryVoltage,3.59,(V)
+EndBatteryVoltage,3.56,(V)
+ShutdownMode,94,(0=unknown error shutdown 1=user pushbutton sample stop 2=depleted battery shutdown [<2.6v] 3=successfully completed preset sample duration 4=thermal protection shutdown 5=max power at initialization error 6=max pump voltage during sample shutdown 7=blocked flow during sample shutdown 8=SD card removed during sample 64+=freeze 80+=RTOS crash)
+
+
+
+
+MASS FLOW SENSOR CALIBRATION
+
+MFSCalDate,2022-03-22T17:10:24,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+MFSCalPerson,,(name of person running and approving calibration)
+MFSCalVoutBlocked,,(V)
+MFSCalVoutMin,0.520000,(V)
+MFSCalVoutMax,1.976750,(V)
+MFSCalMFBlocked,,(g*min^-1)
+MFSCalMFMin,0.011037,(g*min^-1)
+MFSCalMFMax,3.404300,(g*min^-1)
+MFSCalPumpVBoostMin,,(V)
+MFSCalPumpVBoostMax,,(V)
+MFSCalPDeadhead,,(Pa)
+MF4,1.191545,(coefficient)
+MF3,-4.507419,(coefficient)
+MF2,6.382635,(coefficient)
+MF1,-2.589087,(coefficient)
+MF0,0.178156,(coefficient)
+
+
+
+
+DIAGNOSTIC TEST
+
+NO FLOW PRESSURES AND TEMPERATURES
+(hPa),(hPa),(Pa),(C),(C),(C),(C),(C)
+AtmoP,PCB2P,FilterDP,AtmoT,PCB1T,PCB2T,FdpT,AccelT
+846.460205,846.549988,0.000000,26.53,26.09,26.18,26.44,22.91
+
+MAXIMUM DEADHEAD PRESSURE - FULL POWER AND BLOCKED INLET
+(hPa),(hPa),(Pa),(C),(C),(C),(C),(C),(V),(integer),(integer),(V),(g*min^-1),(g*L^-1),(L*min^-1)
+AtmoP,PCB2P,FilterDP,AtmoT,PCB1T,PCB2T,FdpT,AccelT,MFSVout,PumpPow1,PumpPow2,PumpV,MassFlow,AtmoDensity,PumpingFlowRate
+846.458496,846.549988,1638.349976,27.94,26.10,26.18,27.44,23.32,0.745500,14,0,28.451982,0.295771,0.976861,0.302777
+
+MAXIMUM FLOW - FULL POWER AND OPEN INLET
+(hPa),(hPa),(Pa),(C),(C),(C),(C),(C),(V),(integer),(integer),(V),(g*min^-1),(g*L^-1),(L*min^-1)
+AtmoP,PCB2P,FilterDP,AtmoT,PCB1T,PCB2T,FdpT,AccelT,MFSVout,PumpPow1,PumpPow2,PumpV,MassFlow,AtmoDensity,PumpingFlowRate
+846.459167,846.549988,1145.849976,26.81,26.11,26.18,28.34,24.17,1.872625,14,0,28.453079,2.765242,0.980714,2.819620
+
+MINIMUM FLOW - MINIMUM (IDLE) POWER AND OPEN INLET
+(hPa),(hPa),(Pa),(C),(C),(C),(C),(C),(V),(integer),(integer),(V),(g*min^-1),(g*L^-1),(L*min^-1)
+AtmoP,PCB2P,FilterDP,AtmoT,PCB1T,PCB2T,FdpT,AccelT,MFSVout,PumpPow1,PumpPow2,PumpV,MassFlow,AtmoDensity,PumpingFlowRate
+846.459473,846.549988,67.949997,27.31,26.13,26.18,28.54,24.29,0.916625,1023,1023,7.633833,0.537403,0.979000,0.548931
+
+
+
+
+SAMPLE LOG
+
+DateTime,DateTime,DateTime,DateTime,DateTime,FilterSample,FilterSample,FilterSample,FilterSample,Battery,Atmo,Atmo,Atmo,Atmo,Atmo,GPS,GPS,GPS,GPS,GPS,GPS,GPS,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Light,Light,Light,Light,Light,Light,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,GasExperi,GasExperi,GasExperi,GasExperi,GasExperi
+SampleTime,UnixTime,UnixTimeMCU,DateTimeUTC,DateTimeLocal,PumpingFlowRate,OverallFlowRate,SampledVolume,FilterDP,BatteryCharge,AtmoT,AtmoP,AtmoRH,AtmoDensity,AtmoAlt,GPSQual,GPSlat,GPSlon,GPSalt,GPSsat,GPSspeed,GPShDOP,AccelX,AccelXVar,AccelXMin,AccelXMax,AccelY,AccelYVar,AccelYMin,AccelYMax,AccelZ,AccelZVar,AccelZMin,AccelZMax,RotX,RotXVar,RotXMin,RotXMax,RotY,RotYVar,RotYMin,RotYMax,RotZ,RotZVar,RotZMin,RotZMax,Xup,XDown,Yup,Ydown,Zup,Zdown,StepCount,LUX,UVindex,HighVisRaw,LowVisRaw,IRRaw,UVRaw,PMMeasCnt,PM1MC,PM1MCVar,PM2_5MC,PM2_5MCVar,PM4MC,PM4MCVar,PM10MC,PM10MCVar,PM0_5NC,PM0_5NCVar,PM1NC,PM1NCVar,PM2_5NC,PM2_5NCVar,PM4NC,PM4NCVar,PM10NC,PM10NCVar,PMtypicalParticleSize,PMtypicalParticleSizeVar,PM2_5SampledMass,PCB1T,PCB2T,FdpT,AccelT,PT100R,PCB2P,PumpPow1,PumpPow2,PumpV,MassFlow,MFSVout,BFGenergy,BattVolt,v3_3,v5,PumpsON,Dead,BCS1,BCS2,BC_NPG,FLOWCTL,GPSRT,SD_DATAW,SD_HEADW,TPumpsOFF,TPumpsON,CO2,SCDT,SCDRH,VOCRaw,NOXRaw
+(HH:MM:SS),(s),(s),(YYYY-MM-DDTHH:MM:SS) (UTC date time format),(YYYY-MM-DDTHH:MM:SS) (Local date time format),(L*min^-1),(L*min^-1),(L),(Pa),(%),(C),(hPa),(%RH),(g*L^-1),(m ASL),(-),(decimalDegree),(decimalDegree),(m),(integer),(m*s^-1),(-),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(%),(%),(%),(%),(%),(%),(#),(lux),(-),(-),(-),(-),(-),(#),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(um),(um),(ug),(C),(C),(C),(C),(ohm),(hPa),(integer),(integer),(V),(g*min^-1),(V),(integer),(V),(V),(V),(bool),(bool),(bool),(bool),(bool),(s),(s),(s),(s),(s),(s),(ppm),(C),(%),(-),(-)
+0:01:02,1648145191,1648145191,2022-03-24T18:06:31,2022-03-24T12:06:31,0.000,nan,0.000,67.95,031,28.01,846.46,15.23,0.9766,1491.6,0,-9999.000000,-9999.000000,-9999.0,0,-9999.000000,-9999.0,0.0,0.0,     0,     0,-28.0,0.0,   -28,   -28,-973.0,0.0,  -973,  -973,131.0,0.0,   131,   131,-638.0,0.0,  -638,  -638,-210.0,0.0,  -210,  -210,0.0,0.0,0.0,0.0,100.0,0.0,0,161.1,0.02,953.0,962.0,681.0,-3.0,1,0.31,0.00,0.74,0.00,1.07,0.00,1.25,0.00,1.06,0.00,1.98,0.00,2.41,0.00,2.49,0.00,2.49,0.00,1.18,0.00,0.0000,26.16,26.65,28.54,24.24,110.90,846.6,1023,1023,0.000,0.00000,0.916625,23480,3.59,0.00,0.00,0,0,1,1,1,0.000000,0.044892,0.000000,0.000000,0.000000,30.000000,,,,,,,,,,,,,,,,
+0:01:03,1648145192,1648145192,2022-03-24T18:06:32,2022-03-24T12:06:32,0.000,nan,0.000,67.95,031,28.01,846.46,15.23,0.9766,1491.6,0,-9999.000000,-9999.000000,-9999.0,0,-9999.000000,-9999.0,-1.0,0.0,    -1,    -1,-30.0,0.0,   -30,   -30,-973.0,0.0,  -973,  -973,105.0,0.0,   105,   105,-595.0,0.0,  -595,  -595,-253.0,0.0,  -253,  -253,0.0,0.0,0.0,0.0,100.0,0.0,0,161.3,0.01,962.0,962.0,677.0,1.0,1,0.29,0.00,0.70,0.00,1.01,0.00,1.18,0.00,1.00,0.00,1.88,0.00,2.28,0.00,2.36,0.00,2.36,0.00,1.18,0.00,0.0000,26.19,26.65,28.54,24.20,110.90,846.6,1023,1023,0.000,0.00000,0.916625,23480,3.59,0.00,0.00,0,0,1,1,1,0.395638,0.104355,0.051242,0.078341,0.000000,30.000000,,,,,,,,,,,,,,,,
+0:01:04,1648145193,1648145193,2022-03-24T18:06:33,2022-03-24T12:06:33,0.000,nan,0.000,67.95,031,27.98,846.46,15.23,0.9767,1491.6,0,-9999.000000,-9999.000000,-9999.0,0,-9999.000000,-9999.0,-1.0,0.0,    -1,    -1,-23.0,0.0,   -23,   -23,-973.0,0.0,  -973,  -973,87.0,0.0,    87,    87,-595.0,0.0,  -595,  -595,-253.0,0.0,  -253,  -253,0.0,0.0,0.0,0.0,100.0,0.0,0,162.4,0.49,958.0,968.0,678.0,61.0,1,0.29,0.00,0.63,0.00,0.89,0.00,1.04,0.00,1.13,0.00,1.91,0.00,2.25,0.00,2.31,0.00,2.31,0.00,1.06,0.00,0.0000,26.21,26.65,28.54,24.21,110.89,846.6,1023,1023,0.000,0.00000,0.916625,23480,3.59,0.00,0.00,0,0,1,1,1,0.404132,0.130983,0.051785,0.078967,0.000000,30.000000,,,,,,,,,,,,,,,,
+0:01:05,1648145194,1648145194,2022-03-24T18:06:34,2022-03-24T12:06:34,0.000,nan,0.000,67.95,031,27.98,846.46,15.25,0.9767,1491.6,0,-9999.000000,-9999.000000,-9999.0,0,-9999.000000,-9999.0,-1.0,0.0,    -1,    -1,-29.0,0.0,   -29,   -29,-973.0,0.0,  -973,  -973,131.0,0.0,   131,   131,-621.0,0.0,  -621,  -621,-236.0,0.0,  -236,  -236,0.0,0.0,0.0,0.0,100.0,0.0,0,165.5,0.19,993.0,988.0,696.0,24.0,1,0.29,0.00,0.64,0.00,0.90,0.00,1.05,0.00,1.14,0.00,1.92,0.00,2.27,0.00,2.33,0.00,2.33,0.00,1.06,0.00,0.0000,26.24,26.65,28.54,24.18,110.89,846.5,1023,1023,0.000,0.00000,0.916625,23479,3.59,0.00,0.00,0,0,1,1,1,0.446130,0.137156,0.066887,0.078205,0.000000,30.000000,,,,,,,,,,,,,,,,
+0:01:06,1648145195,1648145195,2022-03-24T18:06:35,2022-03-24T12:06:35,0.000,nan,0.000,67.95,031,27.98,846.46,15.25,0.9767,1491.6,0,-9999.000000,-9999.000000,-9999.0,0,-9999.000000,-9999.0,0.0,0.0,     0,     0,-28.0,0.0,   -28,   -28,-973.0,0.0,  -973,  -973,131.0,0.0,   131,   131,-586.0,0.0,  -586,  -586,-227.0,0.0,  -227,  -227,0.0,0.0,0.0,0.0,100.0,0.0,0,167.2,0.07,987.0,999.0,705.0,-9.0,1,0.29,0.00,0.63,0.00,0.90,0.00,1.04,0.00,1.14,0.00,1.91,0.00,2.26,0.00,2.32,0.00,2.32,0.00,1.06,0.00,0.0000,26.26,26.65,28.54,24.11,110.89,846.5,1023,1023,0.000,0.00000,0.916625,23479,3.59,0.00,0.00,0,0,1,1,1,0.488577,0.114660,0.052078,0.079356,0.000000,30.000000,,,,,,,,,,,,,,,,

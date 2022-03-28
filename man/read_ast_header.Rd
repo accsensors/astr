@@ -26,4 +26,7 @@ upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
+upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 }

@@ -15,6 +15,9 @@
 #' upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 #' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
+#' upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 
 read_ast_header = function(file, update_names=FALSE) {
 
@@ -51,7 +54,12 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 
   # df_h <- df_h[df_h$V1 != "",]
 
-  df_h <- df_h[2:(which(df_h$V1=="SAMPLE LOG")-1),]
+  if(sum(df_h$V1=='DIAGNOSTIC TEST')>0){ #
+    df_h <- df_h[2:(which(df_h$V1=="DIAGNOSTIC TEST")-1),]
+
+  }else{
+    df_h <- df_h[2:(which(df_h$V1=="SAMPLE LOG")-1),]
+  }
 
   remove_names <- c("SAMPLE IDENTIFICATION","SETUP SUMMARY",
                     "SAMPLE IDENTIFICATION","SAMPLE SUMMARY",
@@ -73,6 +81,30 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
       dplyr::rename('Firmware' = names(df_h[stringr::str_detect(names(df_h), 'firmware')]) )
 
       if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
+
+        if(sum(df_h_raw$V1=='DIAGNOSTIC TEST')>0){
+          df_h_diag <- as.data.frame(df_h_raw[(which(df_h_raw$V1=="DIAGNOSTIC TEST")+2):(which(df_h_raw$V1=="SAMPLE LOG")-1),]) %>%
+            dplyr::distinct(V1,V9, .keep_all = TRUE)
+
+
+          colnames(df_h_diag) <- df_h_diag[7,]
+
+          df_h_diag <- df_h_diag[c(3,7,9,11),c(1:15)] %>%
+            dplyr::mutate(across(everything(), ~ as.numeric(.x)))
+
+          rownames(df_h_diag) <- c('noFlow','maxDeadhead','minFlow','maxFlow')
+
+          df_h <- df_h %>%
+            dplyr::mutate(MFSCalVoutBlocked = df_h_diag$MFSVout[2],
+                          MFSCalVoutMin = df_h_diag$MFSVout[3],
+                          MFSCalVoutMax = df_h_diag$MFSVout[4],
+                          MFSCalMFBlocked = df_h_diag$MassFlow[2],
+                          MFSCalMFMin = df_h_diag$MassFlow[3],
+                          MFSCalMFMax = df_h_diag$MassFlow[4],
+                          MFSCalPumpVBoostMin = df_h_diag$PumpV[3],
+                          MFSCalPumpVBoostMax = df_h_diag$PumpV[4],
+                          MFSCalPDeadhead = df_h_diag$FilterDP[2])
+        }
 
         df_h <- astr::format_upasv2x_header(df_h)
 
@@ -112,9 +144,29 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 
 read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
 
-  df_raw <- data.table::fread(file=file, sep=',',
-                          header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
-                          stringsAsFactors = FALSE)
+  df_raw <- data.table::fread(file=file,
+                              sep=',',
+                              header = FALSE,
+                              fill = TRUE,
+                              blank.lines.skip = TRUE,
+                              stringsAsFactors = FALSE)
+
+  if(stringr::str_detect(file,'DIAGNOSTIC')){
+
+    df_raw_log <- data.table::fread(file=file,
+                                    sep=',',
+                                    skip = nrow(df_raw),
+                                    header = FALSE,
+                                    fill = TRUE,
+                                    blank.lines.skip = TRUE,
+                                    stringsAsFactors = FALSE)
+
+    df_raw <- df_raw %>%
+      dplyr::bind_rows(df_raw_log) %>%
+      dplyr::distinct(V1,V9, .keep_all = TRUE)
+
+
+  }
 
   df_h <- astr::format_ast_header(df_raw)
 
