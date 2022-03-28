@@ -87,7 +87,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
             dplyr::distinct(V1,V9, .keep_all = TRUE)
 
 
-          colnames(df_h_diag) <- df_h_diag[7,]
+          colnames(df_h_diag) <- df_h_diag[6,]
 
           df_h_diag <- df_h_diag[c(3,7,9,11),c(1:15)] %>%
             dplyr::mutate(across(everything(), ~ as.numeric(.x)))
@@ -95,15 +95,15 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
           rownames(df_h_diag) <- c('noFlow','maxDeadhead','minFlow','maxFlow')
 
           df_h <- df_h %>%
-            dplyr::mutate(MFSCalVoutBlocked = df_h_diag$MFSVout[2],
-                          MFSCalVoutMin = df_h_diag$MFSVout[3],
-                          MFSCalVoutMax = df_h_diag$MFSVout[4],
-                          MFSCalMFBlocked = df_h_diag$MassFlow[2],
-                          MFSCalMFMin = df_h_diag$MassFlow[3],
-                          MFSCalMFMax = df_h_diag$MassFlow[4],
-                          MFSCalPumpVBoostMin = df_h_diag$PumpV[3],
-                          MFSCalPumpVBoostMax = df_h_diag$PumpV[4],
-                          MFSCalPDeadhead = df_h_diag$FilterDP[2])
+            dplyr::mutate(MFSDIAGVoutBlocked = df_h_diag$MFSVout[2],
+                          MFSDIAGVoutMin = df_h_diag$MFSVout[3],
+                          MFSDIAGVoutMax = df_h_diag$MFSVout[4],
+                          MFSDIAGMFBlocked = df_h_diag$MassFlow[2],
+                          MFSDIAGMFMin = df_h_diag$MassFlow[3],
+                          MFSDIAGMFMax = df_h_diag$MassFlow[4],
+                          MFSDIAGPumpVBoostMin = df_h_diag$PumpV[3],
+                          MFSDIAGPumpVBoostMax = df_h_diag$PumpV[4],
+                          MFSDIAGPDeadhead = df_h_diag$FilterDP[2])
         }
 
         df_h <- astr::format_upasv2x_header(df_h)
@@ -192,14 +192,18 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
 #' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
 format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE) {
+
   df_cols <- df_raw %>%
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+2) %>%
     unlist(use.names = FALSE)
+
 
   df <- df_raw %>%
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+4:dplyr::n())
 
   colnames(df) <- df_cols
+
+  df <- df[ , colSums(is.na(df)) < nrow(df)]
 
   if(any(stringr::str_detect(names(df_h),'ASTSampler'))){
     if(df_h$ASTSampler == 'UPAS_v2_x'){
