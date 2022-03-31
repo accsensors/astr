@@ -208,3 +208,97 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA) {
   return(df)
 
 }
+
+
+#'Create sample summary dataframe from an Access Sensor Technologies (AST)
+#'air sampler header dataframe
+#'
+#' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
+#'
+#' @return A modified data frame with only the sample summary data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2x_sample_summary <- upas2x_sample_summary(upasv2x_header, upasv2x_log)
+#' upasv2x_sample_summary <- upas2x_sample_summary(upasv2x_header)
+
+upas2x_sample_summary = function(df_h, df = NULL) {
+
+  sample_summary_df <- df_h %>%
+    dplyr::select(dplyr::any_of(c('UPASserial','SampleName','CartridgeID',
+                                  'SampledRuntime',
+                                'OverallFlowRateAverage','PM25SampledMass',
+                                'SampledVolume','ShutdownMode'))) %>%
+    dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('SampledRuntime',
+                                                        'AverageVolumetricFlowRate',
+                                   'PM25SampledMass',
+                                   'SampledVolume')), .fns = as.numeric))
+
+    if(!is.null(df)){
+      if(any(grepl('PM2_5SampledMass', names(df)))){
+        sample_summary_df$PM2_5SampledMass <- max(df$PM2_5SampledMass)
+      }
+    }
+
+    if(any(grepl('PM25SampledMass', names(sample_summary_df)))){
+      sample_summary_df <- sample_summary_df %>%
+      dplyr::mutate(PM25Concentration = .data$PM25SampledMass/(.data$SampledVolume/1000),
+                    dplyr::across(where(is.numeric), ~ round(., digits = 3)))
+    }
+
+  return(sample_summary_df)
+}
+
+#'Create sample settings dataframe from an Access Sensor Technologies (AST)
+#'air sampler header dataframe
+#'
+#' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
+#'
+#' @return A modified data frame with only the sample settings data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2x_sample_settings <- upas2x_sample_settings(upasv2x_header)
+
+upas2x_sample_settings = function(df_h) {
+
+  #Need to update the colnames.
+
+  # sample_settings_df <- df_h %>%
+  #   dplyr::select(UPASserial, SampleName, CartridgeID,StartOnNextPowerUp,
+  #                 ProgrammedStartDelay, ProgrammedStartTime, ProgrammedRuntime,
+  #                 SizeSelectiveInlet, VolumetricFlowRateSet, FlowRateSetpoint,
+  #                 DutyCycle, FlowDutyCycle, GPSEnabled,
+  #                 PMSensorOperation, RTGasSampleState,
+  #                 ShutdownReason, LogInterval, PowerSaveMode,
+  #                 AppVersion)
+
+  return(sample_settings_df)
+}
+
+#'Create sample metadata dataframe from an Access Sensor Technologies (AST)
+#'air sampler header dataframe
+#'
+#' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
+#'
+#' @return A modified data frame with only the sample settings data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2x_sample_meta <- upas2x_sample_meta(upasv2x_header)
+
+upas2x_sample_meta = function(df_h) {
+
+  sample_meta_df <- df_h %>%
+    dplyr::select(dplyr::any_of(c('UPASserial','PMSerial','SampleName',
+                                'CartridgeID','StartDateTimeUTC',
+                  'EndDateTimeUTC','StartBatteryVoltage','EndBatteryVoltage',
+                  'StartBatteryCharge','EndBatteryCharge','ShutdownReason',
+                  'GPSUTCOffset','FirmwareRev','ShutdownMode')))
+
+
+  return(sample_meta_df)
+}

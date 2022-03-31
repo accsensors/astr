@@ -69,3 +69,9 @@ colnames(upasv2x_log_raw) <- df_cols
 
 usethis::use_data(upasv2x_log_raw, overwrite = TRUE)
 
+###########
+# upasv2x_log
+###########
+
+upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
+usethis::use_data(upasv2x_log, overwrite = TRUE)
