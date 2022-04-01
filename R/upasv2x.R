@@ -264,16 +264,16 @@ upas2x_sample_summary = function(df_h, df = NULL) {
 
 upas2x_sample_settings = function(df_h) {
 
-  #Need to update the colnames.
-
-  # sample_settings_df <- df_h %>%
-  #   dplyr::select(UPASserial, SampleName, CartridgeID,StartOnNextPowerUp,
-  #                 ProgrammedStartDelay, ProgrammedStartTime, ProgrammedRuntime,
-  #                 SizeSelectiveInlet, VolumetricFlowRateSet, FlowRateSetpoint,
-  #                 DutyCycle, FlowDutyCycle, GPSEnabled,
-  #                 PMSensorOperation, RTGasSampleState,
-  #                 ShutdownReason, LogInterval, PowerSaveMode,
-  #                 AppVersion)
+  sample_settings_df <- df_h %>%
+    dplyr::select(dplyr::any_of(c('UPASserial', 'SampleName', 'CartridgeID',
+                                  'StartOnNextPowerUp','ProgrammedStartDelay',
+                                  'ProgrammedStartTime','ProgrammedRuntime',
+                                  'SizeSelectiveInlet','VolumetricFlowRateSet',
+                                  'FlowRateSetpoint','DutyCycle',
+                                  'FlowDutyCycle','GPSEnabled',
+                                  'PMSensorOperation','RTGasSampleState',
+                                  'ShutdownReason','LogInterval',
+                                  'PowerSaveMode','AppVersion')))
 
   return(sample_settings_df)
 }
