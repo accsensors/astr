@@ -12,12 +12,27 @@ jtcp <- c("#FF6633", #orange
 
 jvcp <- c("#CC689A", #purple1
           "#0099CC", #blue
-          "#FE3366", #pink
+          "#FF3366", #pink
           "#33CC99", #green
           "#FF6633", #orange
-          "#FFCCOO", #yellow
+          "#FFCC00", #yellow
           "#CC0066", #maroon
-          "#175€46") #green2
+          "#175E46", #green2
+          "#339999",
+          "#FF9900",
+          "#330099",
+          "#70AFC4",
+          "#664d99",
+          "#CC6633",
+          "#801832",
+          "#FFE380")
+
+
+
+
+
+
+
 
 
 #scale_fill_manual(values = jtcp)
