@@ -206,7 +206,8 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE) {
   df <- df[ , colSums(is.na(df)) < nrow(df)]
 
   if(any(stringr::str_detect(names(df_h),'ASTSampler'))){
-    if(df_h$ASTSampler == 'UPAS_v2_x'){
+    #if(df_h$ASTSampler == 'UPAS_v2_x'){
+    if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
       df <- astr::format_upasv2x_log(df_h, df, tz_offset)
 
     }else if(df_h$ASTSampler == "UPAS_v2_0"){
