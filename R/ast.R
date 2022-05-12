@@ -14,6 +14,7 @@
 #' upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 #' upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 #' upasv2x_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+#' upasv2x_filename <- 'PSP00000_LOG_2022-05-12T22_02_48UTC_box24___________----------.txt'
 #' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
 #' upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
@@ -166,8 +167,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
       dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
 
     df_raw_log <- df_raw_log %>%
-      mutate(V2 = as.character(V2),
-             V3 = as.character(V3))
+      dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
 
     df_raw <- df_raw %>%
       dplyr::bind_rows(df_raw_log) %>%
