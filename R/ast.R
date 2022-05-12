@@ -166,7 +166,8 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
       dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
 
     df_raw_log <- df_raw_log %>%
-      mutate(V2 = as.character(V2))
+      mutate(V2 = as.character(V2),
+             V3 = as.character(V3))
 
     df_raw <- df_raw %>%
       dplyr::bind_rows(df_raw_log) %>%
