@@ -56,7 +56,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 
   # df_h <- df_h[df_h$V1 != "",]
 
-  if(dplyr::any(df_h$V1=='DIAGNOSTIC TEST')){ #
+  if(any(df_h$V1=='DIAGNOSTIC TEST')){ #
     df_h <- df_h[2:(which(df_h$V1=="DIAGNOSTIC TEST")-1),]
 
   }else{
