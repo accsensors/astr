@@ -14,7 +14,7 @@
 #' upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 #' upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 #' upasv2x_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
-#' upasv2x_filename <- 'PSP00000_LOG_2022-05-12T22_02_48UTC_box24___________----------.txt'
+#' upasv2x_filename <- 'PSP00010_LOG_2022-05-13T17_29_29UTC_DIAG#___________----------.txt'
 #' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
 #' upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
@@ -27,6 +27,34 @@ read_ast_header = function(file, update_names=FALSE) {
                           header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
                           stringsAsFactors = FALSE)
 
+
+  if(stringr::str_detect(file,'DIAG') | any(grepl("CO2", df_h_raw$V1))){
+
+    df_raw_log <- data.table::fread(file=file,
+                                    sep=',',
+                                    skip = nrow(df_h_raw),
+                                    header = FALSE,
+                                    fill = TRUE,
+                                    blank.lines.skip = TRUE,
+                                    stringsAsFactors = FALSE)
+
+    if(stringr::str_detect(file,'DIAG')){
+      df_raw_log <- df_raw_log %>%
+        dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+2:dplyr::n())
+    }else{
+      df_raw_log <- df_raw_log %>%
+        dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
+    }
+
+    df_raw_log <- df_raw_log %>%
+      dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
+
+    df_h_raw <- df_h_raw %>%
+      dplyr::bind_rows(df_raw_log) %>%
+      dplyr::distinct(V1,V9, .keep_all = TRUE)
+
+
+  }
 
   df_h <- astr::format_ast_header(df_h_raw, update_names)
 
@@ -84,7 +112,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 
       if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
 
-        if(sum(df_h_raw$V1=='DIAGNOSTIC TEST')>0){
+        if(any(df_h_raw$V1=='DIAGNOSTIC TEST')){
           df_h_diag <- as.data.frame(df_h_raw[(which(df_h_raw$V1=="DIAGNOSTIC TEST")+2):(which(df_h_raw$V1=="SAMPLE LOG")-1),]) %>%
             dplyr::distinct(V1,V9, .keep_all = TRUE)
 
@@ -163,8 +191,13 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
                                     blank.lines.skip = TRUE,
                                     stringsAsFactors = FALSE)
 
-    df_raw_log <- df_raw_log %>%
-      dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
+    if(stringr::str_detect(file,'DIAG')){
+      df_raw_log <- df_raw_log %>%
+        dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+1:dplyr::n())
+    }else{
+      df_raw_log <- df_raw_log %>%
+        dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
+    }
 
     df_raw_log <- df_raw_log %>%
       dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
