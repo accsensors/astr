@@ -56,7 +56,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 
   # df_h <- df_h[df_h$V1 != "",]
 
-  if(sum(df_h$V1=='DIAGNOSTIC TEST')>0){ #
+  if(dplyr::any(df_h$V1=='DIAGNOSTIC TEST')){ #
     df_h <- df_h[2:(which(df_h$V1=="DIAGNOSTIC TEST")-1),]
 
   }else{
@@ -153,7 +153,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
                               blank.lines.skip = TRUE,
                               stringsAsFactors = FALSE)
 
-  if(stringr::str_detect(file,'DIAGNOSTIC') | any(grepl("CO2", df_raw$V1))){
+  if(stringr::str_detect(file,'DIAG') | any(grepl("CO2", df_raw$V1))){
 
     df_raw_log <- data.table::fread(file=file,
                                     sep=',',
