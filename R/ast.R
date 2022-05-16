@@ -28,7 +28,7 @@ read_ast_header = function(file, update_names=FALSE) {
                           stringsAsFactors = FALSE)
 
 
-  if(stringr::str_detect(file,'DIAG') | any(grepl("CO2", df_h_raw$V1))){
+  if(any(grepl("DIAGNOSTIC", df_h_raw$V1)) | any(grepl("CO2", df_h_raw$V1))){
 
     df_raw_log <- data.table::fread(file=file,
                                     sep=',',
@@ -38,7 +38,7 @@ read_ast_header = function(file, update_names=FALSE) {
                                     blank.lines.skip = TRUE,
                                     stringsAsFactors = FALSE)
 
-    if(stringr::str_detect(file,'DIAG')){
+    if(any(grepl("DIAGNOSTIC", df_h_raw$V1))){
       df_raw_log <- df_raw_log %>%
         dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+2:dplyr::n())
     }else{
@@ -191,7 +191,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
                                     blank.lines.skip = TRUE,
                                     stringsAsFactors = FALSE)
 
-    if(stringr::str_detect(file,'DIAG')){
+    if(any(grepl("DIAGNOSTIC", df_log_raw$V1))){
       df_raw_log <- df_raw_log %>%
         dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+1:dplyr::n())
     }else{
