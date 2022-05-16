@@ -191,7 +191,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
                                     blank.lines.skip = TRUE,
                                     stringsAsFactors = FALSE)
 
-    if(any(grepl("DIAGNOSTIC TEST", df_log_raw$V1))){
+    if(any(grepl("DIAGNOSTIC TEST", df_raw_log$V1))){
       df_raw_log <- df_raw_log %>%
         dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+1:dplyr::n())
     }else{
