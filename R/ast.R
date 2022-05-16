@@ -38,7 +38,7 @@ read_ast_header = function(file, update_names=FALSE) {
                                     blank.lines.skip = TRUE,
                                     stringsAsFactors = FALSE)
 
-    if(any(grepl("DIAGNOSTIC TEST", df_h_raw$V1))){
+    if(any(grepl("DIAGNOSTIC TEST", df_raw_log$V1))){
       df_raw_log <- df_raw_log %>%
         dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+2:dplyr::n())
     }else{
