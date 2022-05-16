@@ -181,7 +181,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
                               blank.lines.skip = TRUE,
                               stringsAsFactors = FALSE)
 
-  if(any(grepl("DIAGNOSTIC TEST", df_log_raw$V1)) | any(grepl("CO2", df_raw$V1))){
+  if(any(grepl("DIAGNOSTIC TEST", df_raw$V1)) | any(grepl("CO2", df_raw$V1))){
 
     df_raw_log <- data.table::fread(file=file,
                                     sep=',',
