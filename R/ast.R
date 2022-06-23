@@ -110,7 +110,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
     df_h <- df_h %>%
       dplyr::rename('Firmware' = names(df_h[stringr::str_detect(names(df_h), 'firmware')]) )
 
-      if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
+      if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x') | stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
 
         if(any(df_h_raw$V1=='DIAGNOSTIC TEST')){
           df_h_diag <- as.data.frame(df_h_raw[(which(df_h_raw$V1=="DIAGNOSTIC TEST")+2):(which(df_h_raw$V1=="SAMPLE LOG")-1),]) %>%
@@ -142,9 +142,10 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 
         df_h <- astr::format_upasv2_header(df_h, update_names)
 
-      }else if(stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
-
       }
+    # else if(stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
+    #
+    #   }
 
   }
   return(df_h)
@@ -172,7 +173,11 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #' file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
 #' data_ast_log <- read_ast_log(file2)
 
-read_ast_log = function(file, tz_offset = NA, update_names = FALSE) {
+read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c()) {
+
+  if(is.null(cols_drop)){
+
+  }
 
   df_raw <- data.table::fread(file=file,
                               sep=',',
@@ -239,8 +244,14 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE) {
     unlist(use.names = FALSE)
 
 
-  df <- df_raw %>%
-    dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+4:dplyr::n())
+  if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
+    df <- df_raw %>%
+      dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+4:dplyr::n())
+  }else if(stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
+    df <- df_raw %>%
+      dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+3:dplyr::n())
+  }
+
 
   colnames(df) <- df_cols
 
@@ -248,15 +259,18 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE) {
 
   if(any(stringr::str_detect(names(df_h),'ASTSampler'))){
     #if(df_h$ASTSampler == 'UPAS_v2_x'){
-    if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
+    if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x') | stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
       df <- astr::format_upasv2x_log(df_h, df, tz_offset)
 
     }else if(df_h$ASTSampler == "UPAS_v2_0"){
       df <- astr::format_upasv2_log(df_h, df, update_names = update_names)
 
-    }else if(df_h$ASTSampler == "SHEARv2_7_2"){
+    }else{
 
     }
+    # else if(df_h$ASTSampler == "SHEARv2_7_2"){
+    #
+    # }
   }
 
   return(df)
