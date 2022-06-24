@@ -250,24 +250,23 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, co
   }
 
 
-  colnames(df) <- df_cols
+  if(nrow(df)>0){
+    colnames(df) <- df_cols
 
-  df <- df[ , colSums(is.na(df)) < nrow(df)]
+    df <- df[ , colSums(is.na(df)) < nrow(df)]
 
-  if(any(stringr::str_detect(names(df_h),'ASTSampler'))){
-    #if(df_h$ASTSampler == 'UPAS_v2_x'){
-    if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x') | stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
-      df <- astr::format_upasv2x_log(df_h, df, tz_offset, cols_keep, cols_drop)
+    if(any(stringr::str_detect(names(df_h),'ASTSampler'))){
+      #if(df_h$ASTSampler == 'UPAS_v2_x'){
+      if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x') | stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
+        df <- astr::format_upasv2x_log(df_h, df, tz_offset, cols_keep, cols_drop)
 
-    }else if(df_h$ASTSampler == "UPAS_v2_0"){
-      df <- astr::format_upasv2_log(df_h, df, update_names = update_names)
+      }else if(df_h$ASTSampler == "UPAS_v2_0"){
+        df <- astr::format_upasv2_log(df_h, df, update_names = update_names)
 
-    }else{
+      }else{
 
+      }
     }
-    # else if(df_h$ASTSampler == "SHEARv2_7_2"){
-    #
-    # }
   }
 
   return(df)
