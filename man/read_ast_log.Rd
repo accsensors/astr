@@ -5,7 +5,13 @@
 \title{Read the full log data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-read_ast_log(file, tz_offset = NA, update_names = FALSE)
+read_ast_log(
+  file,
+  tz_offset = NA,
+  update_names = FALSE,
+  cols_keep = c(),
+  cols_drop = c()
+)
 }
 \arguments{
 \item{file}{Any AST air sampler  log file name.}

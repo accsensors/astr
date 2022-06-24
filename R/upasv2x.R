@@ -147,7 +147,7 @@ format_upasv2x_header = function(df_h) {
 #' @examples
 #' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 
-format_upasv2x_log = function(df_h, df, tz_offset = NA) {
+format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_drop = c()) {
 
   df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ASTSampler",
                                                      "UPASserial",
@@ -203,6 +203,13 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA) {
                                   (match("DateTimeLocal",colnames(df))+1):ncol(df)) %>%
       cbind(df_h_sel)
 
+  if(!is.null(cols_keep)){
+    df <- df %>%
+      dplyr::select(cols_keep)
+  }else if(!is.null(cols_drop)){
+    df <- df %>%
+      dplyr::select(-cols_keep)
+  }
 
 
   return(df)
