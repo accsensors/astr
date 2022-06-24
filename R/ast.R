@@ -172,6 +172,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #' filename2 <- 'SH00007_LOG_2021-12-13T13_28_41UTC_---------------_-----.txt'
 #' file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
 #' data_ast_log <- read_ast_log(file2)
+#' data_ast_log <- read_ast_log(file2, cols_keep = c("SampleTime","UnixTime","DateTimeUTC","DateTimeLocal","PM2_5MC"))
 
 read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c()) {
 
