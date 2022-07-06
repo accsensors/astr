@@ -234,9 +234,9 @@ upas2x_sample_summary = function(df_h, df = NULL) {
 
   sample_summary_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('UPASserial','SampleName','CartridgeID',
-                                  'SampledRuntime',
+                                  'SampledRuntime', 'OverallDuration', 'PumpingDuration',
                                 'OverallFlowRateAverage','PM25SampledMass',
-                                'SampledVolume','ShutdownMode'))) %>%
+                                'SampledVolume','ShutdownReason'))) %>%
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('SampledRuntime',
                                                         'AverageVolumetricFlowRate',
                                    'PM25SampledMass',
