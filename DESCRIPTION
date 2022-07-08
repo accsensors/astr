@@ -1,5 +1,5 @@
 Package: astr
-Title: What the Package Does (One Line, Title Case)
+Title: Process UPASv2 and UPASv2X Log Files
 Version: 0.0.0.9018
 Authors@R: c(
      person("Casey", "Quinn", email = "cquinn@accsensors.com", role = c("aut", "cre"), 
@@ -12,7 +12,8 @@ Authors@R: c(
     comment = c(ORCID = "")),
     person("Access Sensor Technologies", role = c("cph", "fnd")),
     person("National Institutes of Health", role = c("fnd")))
-Description: What the package does (one paragraph).
+Description: Reads in log files from UPASv2 or UPASv2X air samplers. Formats log files
+    in data frame for easier analysis and plotting.
 License: MPL-2.0 | file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
