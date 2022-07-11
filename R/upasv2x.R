@@ -279,7 +279,7 @@ upas2x_sample_settings = function(df_h) {
                                   'FlowRateSetpoint','DutyCycle',
                                   'FlowDutyCycle','GPSEnabled',
                                   'PMSensorOperation','RTGasSampleState',
-                                  'ShutdownReason','LogInterval',
+                                  'LogInterval',
                                   'PowerSaveMode','AppVersion')))
 
   return(sample_settings_df)
@@ -303,7 +303,7 @@ upas2x_sample_meta = function(df_h) {
     dplyr::select(dplyr::any_of(c('UPASserial','PMSerial','SampleName',
                                 'CartridgeID','StartDateTimeUTC',
                   'EndDateTimeUTC','StartBatteryVoltage','EndBatteryVoltage',
-                  'StartBatteryCharge','EndBatteryCharge','ShutdownReason',
+                  'StartBatteryCharge','EndBatteryCharge',
                   'GPSUTCOffset','FirmwareRev','ShutdownMode')))
 
 

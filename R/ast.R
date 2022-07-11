@@ -21,6 +21,9 @@
 #' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 
+#TODO find a better spot for this utils code line
+#utils::globalVariables(c("V1", "V9", "across", "everything", "where")) # declares as global variables to get rid of note in check()
+
 read_ast_header = function(file, update_names=FALSE) {
 
   df_h_raw <- data.table::fread(file=file, skip = 0, nrows=100, sep=',',
@@ -155,7 +158,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #'Read the full log data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
-#' @param file Any AST air sampler  log file name.
+#' @param file Any AST air sampler log file name.
 #' @param tz_offset Pass an option timezone offset
 
 #' @return A data frame with all log data plus some header data appended.
@@ -219,6 +222,21 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
 }
 
+#'Format an already existing data frame from 'read_ast_log' for user friendly output
+#'in the 'ShinyAST' app
+#'
+#' @param df Data frame returned from 'read_ast_log'
+
+#' @return A data frame with units on variable names for 'ShinyAST' app
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
+
+shiny_ast_log = function(df) {
+  return(df)
+}
 
 #'Extract only the log data from an Access Sensor Technologies (AST) air sampler
 #'log file
