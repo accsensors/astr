@@ -10,11 +10,12 @@ read_ast_log(
   tz_offset = NA,
   update_names = FALSE,
   cols_keep = c(),
-  cols_drop = c()
+  cols_drop = c(),
+  units = FALSE
 )
 }
 \arguments{
-\item{file}{Any AST air sampler  log file name.}
+\item{file}{Any AST air sampler log file name.}
 
 \item{tz_offset}{Pass an option timezone offset}
 }

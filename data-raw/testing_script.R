@@ -39,9 +39,9 @@ ast_log_updated_names <- upasv2x_log %>%
 ast_log_units <- upasv2x_log_units %>%
   dplyr::bind_rows(upasv2_log_units)
 
-ast_shiny_summary <- upas2x_sample_summary(ast_header)
-ast_shiny_meta <- upas2x_sample_meta(ast_header)
-ast_shiny_settings <- upas2x_sample_settings(ast_header)
+ast_shiny_summary <- upasv2x_sample_summary(ast_header)
+ast_shiny_meta <- upasv2x_sample_meta(ast_header)
+ast_shiny_settings <- upasv2x_sample_settings(ast_header)
 
 setdiff(names(upasv2_header),names(upasv2x_header))
 setdiff(names(upasv2_header_updated_names),names(upasv2x_header))

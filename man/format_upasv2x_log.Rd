@@ -5,7 +5,14 @@
 \title{Read the log data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-format_upasv2x_log(df_h, df, tz_offset = NA, cols_keep = c(), cols_drop = c())
+format_upasv2x_log(
+  df_h,
+  df,
+  tz_offset = NA,
+  cols_keep = c(),
+  cols_drop = c(),
+  units = FALSE
+)
 }
 \arguments{
 \item{df_h}{Pass a upasv2x header dataframe from read_ast_header function.}

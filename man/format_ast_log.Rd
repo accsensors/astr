@@ -11,7 +11,8 @@ format_ast_log(
   tz_offset = NA,
   update_names = FALSE,
   cols_keep = c(),
-  cols_drop = c()
+  cols_drop = c(),
+  units = FALSE
 )
 }
 \arguments{
