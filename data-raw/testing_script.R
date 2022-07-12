@@ -17,7 +17,7 @@ upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
 upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
 upasv2_log <- read_ast_log(upasv2_file)
 upasv2_log_updated_names <- read_ast_log(upasv2_file,update_names = TRUE)
-upasv2_log_units <- read_ast_log(upasv2_file, units = TRUE)
+upasv2_log_units <- read_ast_log(upasv2_file, update_names = TRUE, units = TRUE)
 
 upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)

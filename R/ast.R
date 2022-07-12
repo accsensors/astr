@@ -222,22 +222,6 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
 }
 
-#'Format an already existing data frame from 'read_ast_log' for user friendly output
-#'in the 'ShinyAST' app
-#'
-#' @param df Data frame returned from 'read_ast_log'
-
-#' @return A data frame with units on variable names for 'ShinyAST' app
-#' @export
-#' @importFrom rlang .data
-#'
-#' @examples
-#' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
-
-shiny_ast_log = function(df) {
-  return(df)
-}
-
 #'Extract only the log data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
