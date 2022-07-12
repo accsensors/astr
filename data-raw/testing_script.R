@@ -17,10 +17,12 @@ upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
 upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
 upasv2_log <- read_ast_log(upasv2_file)
 upasv2_log_updated_names <- read_ast_log(upasv2_file,update_names = TRUE)
+upasv2_log_units <- read_ast_log(upasv2_file, units = TRUE)
 
 upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_log <- read_ast_log(upasv2x_file)
+upasv2x_log_units <-  read_ast_log(upasv2x_file, units=TRUE)
 
 ast_header <- upasv2x_header %>%
   dplyr::bind_rows(upasv2_header)
@@ -33,6 +35,9 @@ ast_header_updated_names <- upasv2x_header %>%
 
 ast_log_updated_names <- upasv2x_log %>%
   dplyr::bind_rows(upasv2_log_updated_names)
+
+ast_log_units <- upasv2x_log_units %>%
+  dplyr::bind_rows(upasv2_log_units)
 
 ast_shiny_summary <- upas2x_sample_summary(ast_header)
 ast_shiny_meta <- upas2x_sample_meta(ast_header)

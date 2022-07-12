@@ -142,7 +142,7 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 #' @examples
 #' upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)
 
-format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
+format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE, units=FALSE) {
 
   # Get header data
   df_h_sel <- df_h %>%

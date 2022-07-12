@@ -147,7 +147,7 @@ format_upasv2x_header = function(df_h) {
 #' @examples
 #' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 
-format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_drop = c()) {
+format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_drop = c(), units=FALSE) {
 
   df_h_sel <- df_h %>% dplyr::select(dplyr::any_of(c("ASTSampler",
                                                      "UPASserial",
@@ -211,6 +211,27 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
       dplyr::select(-cols_keep)
   }
 
+  if(units) {
+    units <- c("(HH:MM:SS)","(s)","(s)","(YYYY-MM-DDTHH:MM:SS)","(YYYY-MM-DDTHH:MM:SS)",
+               "(L*min^-1)","(L*min^-1)","(L)",
+               "(Pa)","(%)","(C)","(hPa)","(%RH)",
+               "(g*L^-1)","(m ASL)","(-)","(decimalDegree)","(decimalDegree)",
+               "(m)","(integer)","(m*s^-1)","(-)",
+               "(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)",
+               "(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)",
+               "(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)",
+               "(%)","(%)","(%)","(%)","(%)","(%)","(#)","(lux)","(-)","(-)","(-)","(-)","(-)","(#)",
+               "(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)",
+               "(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)",
+               "(#*cm^-3)","(#*cm^-3)",
+               "(um)","(um)","(ug)","(C)","(C)","(C)","(C)","(ohm)","(hPa)",
+               "(integer)","(integer)","(V)","(g*min^-1)","(V)","(integer)","(V)","(V)","(V)",
+               "(bool)","(bool)","(bool)","(bool)","(bool)",
+               "(s)","(s)","(s)","(s)","(s)","(s)","(ppm)","(C)","(%)","(-)","(-)")
+    #df <- df %>%
+      #dplyr::rename(`OverallFlowRate (LPM)` = .data$OverallFlowRate)
+    colnames(df) <- paste(colnames(df), units, sep="_")
+  }
 
   return(df)
 
