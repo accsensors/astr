@@ -177,7 +177,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #' data_ast_log <- read_ast_log(file2)
 #' data_ast_log <- read_ast_log(file2, cols_keep = c("SampleTime","UnixTime","DateTimeUTC","DateTimeLocal","PM2_5MC"))
 
-read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), units=FALSE) {
+read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), units=FALSE, shiny=FALSE) {
 
   df_raw <- data.table::fread(file=file,
                               sep=',',
@@ -216,7 +216,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
   df_h <- astr::format_ast_header(df_raw)
 
-  df <- astr::format_ast_log(df_h, df_raw, tz_offset, update_names, cols_keep, cols_drop, units)
+  df <- astr::format_ast_log(df_h, df_raw, tz_offset, update_names, cols_keep, cols_drop, units, shiny)
 
   return(df)
 
@@ -236,7 +236,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 #' @examples
 #' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
-format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), units=FALSE) {
+format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), units=FALSE, shiny=FALSE) {
 
   df_cols <- df_raw %>%
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+2) %>%
@@ -263,12 +263,14 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, co
         df <- astr::format_upasv2x_log(df_h, df, tz_offset, cols_keep, cols_drop, units = units)
 
       }else if(df_h$ASTSampler == "UPAS_v2_0"){
+        if(shiny) {update_names=TRUE}
         df <- astr::format_upasv2_log(df_h, df, update_names = update_names, units = units)
 
       }else{
 
       }
     }
+    if(shiny){df <- astr::shiny_log(df, df_h)}
   }
 
   return(df)

@@ -11,7 +11,8 @@ read_ast_log(
   update_names = FALSE,
   cols_keep = c(),
   cols_drop = c(),
-  units = FALSE
+  units = FALSE,
+  shiny = FALSE
 )
 }
 \arguments{
