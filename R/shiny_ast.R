@@ -55,7 +55,7 @@ shiny_log = function(df, df_h) {
 
   if(df_h$ASTSampler=='UPAS_v2_x'){
     df <- df %>%
-    dplyr::rename(`Unix Time MCU (s)` = .data$UnixTimeMCU,
+      dplyr::rename(`Unix Time MCU (s)` = .data$UnixTimeMCU,
                   `Overall Flow Rate (LPM)` = .data$OverallFlowRate,
                   `Battery Charge (%)` = .data$BatteryCharge,
                   `GPS Signal Quality (NMEA Standard)` = .data$GPSQual,
@@ -144,13 +144,18 @@ shiny_log = function(df, df_h) {
                   `Time to Write SD Card Log File Line (s)` = .data$SD_DATAW,
                   `Time to Update SD Card Log File Header (s)` = .data$SD_HEADW,
                   `Time Pumps OFF Per Log Interval (s)` = .data$TPumpsOFF,
-                  `Time Pumps ON Per Log Interval (s)` = .data$TPumpsON,
-                  `CO2 Concentration (ppm)` = .data$CO2,
-                  `CO2 Sensor Temperature (C)` = .data$SCDT,
-                  `CO2 Sensor RH (%RH)` = .data$SCDRH,
-                  `VOC Sensor Raw Output` = .data$VOCRaw,
-                  `NOx Sensor Raw Output` = .data$NOXRaw
-    )
+                  `Time Pumps ON Per Log Interval (s)` = .data$TPumpsON)
+
+    if(df_h$FirmwareRev>=110) {
+      df <- df %>%
+        dplyr::rename(`CO2 Concentration (ppm)` = .data$CO2,
+                    `CO2 Sensor Temperature (C)` = .data$SCDT,
+                    `CO2 Sensor RH (%RH)` = .data$SCDRH,
+                    `VOC Sensor Raw Output` = .data$VOCRaw,
+                    `NOx Sensor Raw Output` = .data$NOXRaw
+
+      )
+    }
   }
 
   return(df)
