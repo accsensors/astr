@@ -231,7 +231,7 @@ format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
 
   if(update_names){
     df <- df %>%
-      dplyr::rename(OverallFlowRate = .data$VolumetricFlowRate,
+      dplyr::rename(PumpingFlowRate = .data$VolumetricFlowRate,
                     AtmoDensity = .data$AtmoRho,
                     FilterDP = .data$FdPdP,
                     AtmoT = .data$PumpT,

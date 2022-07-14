@@ -38,8 +38,7 @@ shiny_log = function(df, df_h) {
                   `Date Time UTC (YYYY-MM-DDTHH:MM:SS)` = .data$DateTimeUTC,
                   `Date Time Local (YYYY-MM-DDTHH:MM:SS)` = .data$DateTimeLocal,
                   `Time Zone Offset (hrs)` = .data$TZOffset,
-                  #`Pumping Flow Rate (LPM)` = .data$PumpingFlowRate,
-                  `Overall Flow Rate (LPM)` = .data$OverallFlowRate,
+                  `Pumping Flow Rate (LPM)` = .data$PumpingFlowRate,
                   `Sampled Volume (L)` = .data$SampledVolume,
                   `Filter Differential Pressure (Pa)` = .data$FilterDP,
                   `Atmospheric T (C)` = .data$AtmoT,
@@ -57,7 +56,7 @@ shiny_log = function(df, df_h) {
   if(df_h$ASTSampler=='UPAS_v2_x'){
     df <- df %>%
     dplyr::rename(`Unix Time MCU (s)` = .data$UnixTimeMCU,
-                  `Pumping Flow Rate (LPM)` = .data$PumpingFlowRate,
+                  `Overall Flow Rate (LPM)` = .data$OverallFlowRate,
                   `Battery Charge (%)` = .data$BatteryCharge,
                   `GPS Signal Quality (NMEA Standard)` = .data$GPSQual,
                   `Altitude Above Sea Level (m)` = .data$AtmoAlt,
