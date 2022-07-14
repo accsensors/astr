@@ -146,28 +146,11 @@ shiny_log = function(df, df_h) {
                   `Time to Update SD Card Log File Header (s)` = .data$SD_HEADW,
                   `Time Pumps OFF Per Log Interval (s)` = .data$TPumpsOFF,
                   `Time Pumps ON Per Log Interval (s)` = .data$TPumpsON,
-                  # `IAQStabStat` = .data$IAQStabStat,
-                  # `IAQRunIn` = .data$IAQRunIn,
-                  # `IAQRes(ohms)` = .data$IAQRes,
-                  # `IAQ` = .data$IAQ,
-                  # `IAQAcc` = .data$IAQAcc,
-                  # `StaticIAQ` = .data$StaticIAQ,
-                  # `StaticIAQAcc` = .data$StaticIAQAcc,
-                  # `CO2e(ppm)` = .data$CO2e,
-                  # `CO2eAcc` = .data$CO2eAcc,
-                  # `bVOC(ppm)` = .data$bVOC,
-                  # `bVOCAcc` = .data$bVOCAcc,
-                  # `gasComp` = .data$gasComp,
-                  # `gasCompAcc` = .data$gasCompAcc,
-                  # `gasPerc(%)` = .data$gasPerc,
-                  # `gasPercAcc` = .data$gasPercAcc,
-                  # `tz_value` = .data$tz_value,
-                  #`ASTSampler` = .data$ASTSampler,
-                  # `UPASserial` = .data$UPASserial,
-                  # `SampleName` = .data$SampleName,
-                  # `CartridgeID` = .data$CartridgeID,
-                  `StartDateTimeUTC(YYYY-MM-DDTHH:MM:SS)` = .data$StartDateTimeUTC
-                  # `LogFileMode` = .data$LogFileMode
+                  `CO2 Concentration (ppm)` = .data$CO2,
+                  `CO2 Sensor Temperature (C)` = .data$SCDT,
+                  `CO2 Sensor RH (%RH)` = .data$SCDRH,
+                  `VOC Sensor Raw Output` = .data$VOCRaw,
+                  `NOx Sensor Raw Output` = .data$NOXRaw
     )
   }
 
