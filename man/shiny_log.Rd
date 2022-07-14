@@ -5,7 +5,7 @@
 \title{Rename UPAS log file data frame columns
 to be more user friendly for the Shiny app}
 \usage{
-shiny_log(df)
+shiny_log(df, df_h)
 }
 \arguments{
 \item{df}{Pass a upasv2x dataframe from read_ast_header function.}
@@ -18,5 +18,6 @@ Rename UPAS log file data frame columns
 to be more user friendly for the Shiny app
 }
 \examples{
-upasv2x_log_units <- units_upasv2x_log(upasv2x_log)
+upasv2x_log_shiny <- shiny_log(upasv2x_log)
+upasv2_log_shiny <- shiny_log(upasv2_log)
 }

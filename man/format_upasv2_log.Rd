@@ -4,13 +4,7 @@
 \alias{format_upasv2_log}
 \title{Read the log data from a UPASv2 log file}
 \usage{
-format_upasv2_log(
-  df_h,
-  df_raw,
-  tz_offset = NA,
-  update_names = FALSE,
-  units = FALSE
-)
+format_upasv2_log(df_h, df_raw, tz_offset = NA, update_names = FALSE)
 }
 \arguments{
 \item{update_names}{Convert old log file column names to match current log
