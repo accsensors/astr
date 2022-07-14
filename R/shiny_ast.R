@@ -33,7 +33,7 @@ shiny_log = function(df, df_h) {
   df <- df %>%
     #TODO figure out how to add degree sign in front of degrees C
     #TODO figure out how to make ^3 into superscript
-    dplyr::rename(`Sample Time (HH:MM:SS)` = .data$SampleTime,
+    dplyr::rename(`Sample Time (s)` = .data$SampleTime,
                   `Unix Time (s)` = .data$UnixTime,
                   `Date Time UTC (YYYY-MM-DDTHH:MM:SS)` = .data$DateTimeUTC,
                   `Date Time Local (YYYY-MM-DDTHH:MM:SS)` = .data$DateTimeLocal,
