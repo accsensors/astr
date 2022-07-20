@@ -68,8 +68,8 @@ shiny_header = function(df_h) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_log_shiny <- shiny_log(upasv2x_log)
-#' upasv2_log_shiny <- shiny_log(upasv2_log)
+#' upasv2x_log_shiny <- shiny_log(upasv2x_log, upasv2x_header)
+#' upasv2_log_shiny <- shiny_log(upasv2_log, upasv2_header)
 
 shiny_log = function(df, df_h) {
   # units <- c("(HH:MM:SS)","(s)","(s)","(YYYY-MM-DDTHH:MM:SS)","(YYYY-MM-DDTHH:MM:SS)", "",
@@ -220,4 +220,22 @@ shiny_log = function(df, df_h) {
   # }
 
   return(df)
+}
+
+#'Rename UPAS log file single column name
+#'to be more user friendly for the Shiny app plot
+#'
+#' @param df Pass a UPAS v2 or v2+ log column name from a formatted data frame.
+#' @param df_h Pass a UPAS v2 or v2+ header data frame from 'read_ast_log' function.
+#'
+#' @return A modified column name for plot axis label in shinyAST app.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' plot_label <- shiny_axis(column_name)
+
+shiny_axis = function(clm_name){
+  names(clm_name) <- "New name from function"
+  return(clm_name)
 }
