@@ -20,6 +20,6 @@ Rename UPAS log file data frame columns
 to be more user friendly for the Shiny app
 }
 \examples{
-upasv2x_log_shiny <- shiny_log(upasv2x_log)
-upasv2_log_shiny <- shiny_log(upasv2_log)
+upasv2x_log_shiny <- shiny_log(upasv2x_log, upasv2x_header)
+upasv2_log_shiny <- shiny_log(upasv2_log, upasv2_header)
 }
