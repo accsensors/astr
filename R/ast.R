@@ -24,7 +24,7 @@
 #TODO find a better spot for this utils code line
 #utils::globalVariables(c("V1", "V9", "across", "everything", "where")) # declares as global variables to get rid of note in check()
 
-read_ast_header = function(file, update_names=FALSE) {
+read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
   df_h_raw <- data.table::fread(file=file, skip = 0, nrows=100, sep=',',
                           header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
@@ -59,7 +59,7 @@ read_ast_header = function(file, update_names=FALSE) {
 
   }
 
-  df_h <- astr::format_ast_header(df_h_raw, update_names)
+  df_h <- astr::format_ast_header(df_h_raw, update_names, shiny)
 
   return(df_h)
 }
@@ -78,7 +78,7 @@ read_ast_header = function(file, update_names=FALSE) {
 #' @examples
 #' data_ast_header <- format_ast_header(data_ast_raw, update_names=FALSE)
 
-format_ast_header = function(df_h_raw, update_names=FALSE) {
+format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 
   my_cols <- c('V1','V2')
 
@@ -142,15 +142,16 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
         df_h <- astr::format_upasv2x_header(df_h)
 
       }else if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_0')){
-
-        df_h <- astr::format_upasv2_header(df_h, update_names)
-
+        if(shiny) {update_names=TRUE}
+        df_h <- astr::format_upasv2_header(df_h, update_names=update_names)
       }
     # else if(stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
     #
     #   }
 
   }
+  if(shiny){df_h <- astr::shiny_header(df_h)}
+
   return(df_h)
 }
 

@@ -5,7 +5,7 @@
 \title{Read the header data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-read_ast_header(file, update_names = FALSE)
+read_ast_header(file, update_names = FALSE, shiny = FALSE)
 }
 \arguments{
 \item{file}{Any AST air sampler  log file name.}

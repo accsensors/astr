@@ -8,10 +8,12 @@ to be more user friendly for the Shiny app}
 shiny_log(df, df_h)
 }
 \arguments{
-\item{df}{Pass a upasv2x dataframe from read_ast_header function.}
+\item{df}{Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.}
+
+\item{df_h}{Pass a UPAS v2 or v2+ header data frame from 'read_ast_log' function.}
 }
 \value{
-A modified data frame with units added to column names of log data.
+A modified data frame with units and user friendly column names for log data.
 }
 \description{
 Rename UPAS log file data frame columns

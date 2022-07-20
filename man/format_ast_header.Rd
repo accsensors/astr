@@ -5,7 +5,7 @@
 \title{Format the header data from an Access Sensor Technologies (AST) air sampler
 log file}
 \usage{
-format_ast_header(df_h_raw, update_names = FALSE)
+format_ast_header(df_h_raw, update_names = FALSE, shiny = FALSE)
 }
 \arguments{
 \item{df_h_raw}{Any AST air sampler unformatted header dataframe.}

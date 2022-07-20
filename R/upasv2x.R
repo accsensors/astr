@@ -234,7 +234,7 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
 upasv2x_sample_summary = function(df_h, df = NULL) {
 
   sample_summary_df <- df_h %>%
-    dplyr::select(dplyr::any_of(c('UPASserial','SampleName','CartridgeID',
+    dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','SampleName','CartridgeID',
                                   'SampledRuntime', 'OverallDuration', 'PumpingDuration',
                                 'OverallFlowRateAverage','PM25SampledMass',
                                 'SampledVolume','ShutdownReason'))) %>%
@@ -273,7 +273,7 @@ upasv2x_sample_summary = function(df_h, df = NULL) {
 upasv2x_sample_settings = function(df_h) {
 
   sample_settings_df <- df_h %>%
-    dplyr::select(dplyr::any_of(c('UPASserial', 'SampleName', 'CartridgeID',
+    dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
                                   'StartOnNextPowerUp','ProgrammedStartDelay',
                                   'ProgrammedStartTime','ProgrammedRuntime',
                                   'SizeSelectiveInlet','VolumetricFlowRateSet',
@@ -301,7 +301,7 @@ upasv2x_sample_settings = function(df_h) {
 upasv2x_sample_meta = function(df_h) {
 
   sample_meta_df <- df_h %>%
-    dplyr::select(dplyr::any_of(c('UPASserial','PMSerial','SampleName',
+    dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','PMSerial','SampleName',
                                 'CartridgeID','StartDateTimeUTC',
                   'EndDateTimeUTC','StartBatteryVoltage','EndBatteryVoltage',
                   'StartBatteryCharge','EndBatteryCharge',

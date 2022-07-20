@@ -122,7 +122,7 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
         dplyr::rename(FlowRateSetpoint = .data$VolumetricFlowRate,
                       FlowDutyCycle = .data$DutyCycle,
                       OverallDuration = .data$SampledRuntime,
-                      OverallFlowRateAverage = .data$AverageVolumetricFlowRate)
+                      PumpingFlowRateAverage = .data$AverageVolumetricFlowRate)
     }
 
   return(df_h)
