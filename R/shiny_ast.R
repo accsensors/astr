@@ -236,6 +236,6 @@ shiny_log = function(df, df_h) {
 #' plot_label <- shiny_axis(column_name)
 
 shiny_axis = function(clm_name){
-  names(clm_name) <- "New name from function"
+  names(clm_name)[1] <- "New name from function"
   return(clm_name)
 }
