@@ -497,7 +497,7 @@ shiny_axis = function(clm_name){
                   )
 
     df_sel <- df %>%
-      select(all_of(clm_name))
+      dplyr::select(dplyr::all_of(clm_name))
 
     clm_name <- paste(df_sel["var",], df_sel["unit1",], sep=" ")
 
