@@ -369,7 +369,7 @@ shiny_axis = function(clm_name, fract_units = FALSE){
     if(fract_units){
       df_long <- df_long %>%
         dplyr::mutate(unit =
-                        case_when(unit == "(L min^-1)" ~ "(LPM)",
+                        dplyr::case_when(unit == "(L min^-1)" ~ "(LPM)",
                                   unit == "(g L^-1)" ~ "(g/L)",
                                   unit == "(m s^-1)" ~ "(m/s)",
                                   unit == "(mdeg s^-1)" ~ "(mdeg/s)",
