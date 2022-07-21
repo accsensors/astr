@@ -225,8 +225,8 @@ shiny_log = function(df, df_h) {
 #'Rename UPAS log file single column name
 #'to be more user friendly for the Shiny app plot
 #'
-#' @param df Pass a UPAS v2 or v2+ log column name from a formatted data frame.
-#' @param df_h Pass a UPAS v2 or v2+ header data frame from 'read_ast_log' function.
+#' @param clm_name Pass a UPAS v2 or v2+ log column name from a formatted data frame.
+#' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
 #' @return A modified column name for plot axis label in shinyAST app.
 #' @export
@@ -235,171 +235,30 @@ shiny_log = function(df, df_h) {
 #' @examples
 #' plot_label <- shiny_axis(column_name)
 
-shiny_axis = function(clm_name){
-   # log_vars <- c("SampleTime",
-   #              "UnixTime",
-   #              "UnixTimeMCU",
-   #              "DateTimeUTC",
-   #              "DateTimeLocal",
-   #              "TZOffset",
-   #              "PumpingFlowRate",
-   #              "OverallFlowRate",
-   #              "SampledVolume",
-   #              "FilterDP",
-   #              "BatteryCharge",
-   #              "AtmoT",
-   #              "AtmoP",
-   #              "AtmoRH",
-   #              "AtmoDensity",
-   #              "AtmoAlt",
-   #              "GPSQual",
-   #              "GPSlat",
-   #              "GPSlon",
-   #              "GPSalt",
-   #              "GPSsat",
-   #              "GPSspeed",
-   #              "GPShDOP",
-   #              "AccelX",
-   #              "AccelXVar",
-   #              "AccelXMin",
-   #              "AccelXMax",
-   #              "AccelY",
-   #              "AccelYVar",
-   #              "AccelYMin",
-   #              "AccelYMax",
-   #              "AccelZ",
-   #              "AccelZVar",
-   #              "AccelZMin",
-   #              "AccelZMax",
-   #              "RotX",
-   #              "RotXVar",
-   #              "RotXMin",
-   #              "RotXMax",
-   #              "RotY",
-   #              "RotYVar",
-   #              "RotYMin",
-   #              "RotYMax",
-   #              "RotZ",
-   #              "RotZVar",
-   #              "RotZMin",
-   #              "RotZMax",
-   #              "Xup",
-   #              "XDown",
-   #              "Yup",
-   #              "Ydown",
-   #              "Zup",
-   #              "Zdown",
-   #              "StepCount",
-   #              "LUX",
-   #              "UVindex",
-   #              "HighVisRaw",
-   #              "LowVisRaw",
-   #              "IRRaw",
-   #              "UVRaw",
-   #              "PMMeasCnt",
-   #              "PM1MC",
-   #              "PM1MCVar",
-   #              "PM2_5MC",
-   #              "PM2_5MCVar",
-   #              "PM4MC",
-   #              "PM4MCVar",
-   #              "PM10MC",
-   #              "PM10MCVar",
-   #              "PM0_5NC",
-   #              "PM0_5NCVar",
-   #              "PM1NC",
-   #              "PM1NCVar",
-   #              "PM2_5NC",
-   #              "PM2_5NCVar",
-   #              "PM4NC",
-   #              "PM4NCVar",
-   #              "PM10NC",
-   #              "PM10NCVar",
-   #              "PMtypicalParticleSize",
-   #              "PMtypicalParticleSizeVar",
-   #              "PM2_5SampledMass",
-   #              "PCB1T",
-   #              "PCB2T",
-   #              "FdpT",
-   #              "AccelT",
-   #              "PT100R",
-   #              "PCB2P",
-   #              "PumpPow1",
-   #              "PumpPow2",
-   #              "PumpV",
-   #              "MassFlow",
-   #              "MFSVout",
-   #              "BFGenergy",
-   #              "BattVolt",
-   #              "v3_3",
-   #              "v5",
-   #              "PumpsON",
-   #              "Dead",
-   #              "BCS1",
-   #              "BCS2",
-   #              "BC_NPG",
-   #              "FLOWCTL",
-   #              "GPSRT",
-   #              "SD_DATAW",
-   #              "SD_HEADW",
-   #              "TPumpsOFF",
-   #              "TPumpsON",
-   #              "IAQStabStat",
-   #              "IAQRunIn",
-   #              "IAQRes",
-   #              "IAQ",
-   #              "IAQAcc",
-   #              "StaticIAQ",
-   #              "StaticIAQAcc",
-   #              "CO2e",
-   #              "CO2eAcc",
-   #              "bVOC",
-   #              "bVOCAcc",
-   #              "gasComp",
-   #              "gasCompAcc",
-   #              "gasPerc",
-   #              "gasPercAcc",
-   #              "SCDT",
-   #              "SCDRH",
-   #              "VOCRaw",
-   #              "NOXRaw",
-   #              "tz_value",
-   #              "ASTSampler",
-   #              "UPASserial",
-   #              "LogFilename",
-   #              "SampleName",
-   #              "CartridgeID",
-   #              "StartDateTimeUTC",
-   #              "LogFileMode" )
-   #
-   # var_num <- c("Sample Time", 2:135)
-   # df <- data.frame(log_vars, var_num)
-   # df_sel <- df %>%
-   #   dplyr::filter(clm_name == log_vars)
-   # new_clm_name <- df_sel$var_num
+shiny_axis = function(clm_name, fract_units = FALSE){
 
   df <- data.frame(SampleTime = c("Sample Time", "(s)"),
                    UnixTime = c("Unix Time", "(s)"),
                    DateTimeUTC = c("Date Time UTC", "(YYYY-MM-DDTHH:MM:SS)"),
                    DateTimeLocal = c("Date Time Local", "(YYYY-MM-DDTHH:MM:SS)"),
                    TZOffset = c("Time Zone Offset", "(hrs)"),
-                   PumpingFlowRate = c("Pumping Flow Rate", "(L*min^-1)"),
+                   PumpingFlowRate = c("Pumping Flow Rate", "(L min^-1)"),
                    SampledVolume = c("Sampled Volume", "(L)"),
                    FilterDP = c("Filter Differential Pressure", "(Pa)"),
                    AtmoT = c("Atmospheric T", "(C)"),
                    AtmoP = c("Atmospheric P", "(hPa)"),
                    AtmoRH = c("Atmospheric RH", "(%RH)"),
-                   AtmoDensity = c("Atmospheric Density", "(g*L^-1)"),
+                   AtmoDensity = c("Atmospheric Density", "(g L^-1)"),
                    GPSQual = c("GPS Signal Quality", "(NMEA Standard)"),
                   GPSlat = c("GPS Latitude", "(decimalDegrees)"),
                   GPSlon = c("GPS Longitude", "(decimalDegrees)"),
                   GPSalt = c("GPS Altitude", "(m)"),
                   GPSsat = c("GPS Satellite Signals Received", "(#)"),
-                  GPSspeed = c("GPS Measured Speed", "(m*s^-1)"),
+                  GPSspeed = c("GPS Measured Speed", "(m s^-1)"),
                   GPShDOP = c("GPS Horizontal Dilution of Precision", ""),
 
                   UnixTimeMCU = c("Unix Time MCU", "(s)"),
-                  OverallFlowRate = c("Overall Flow Rate", "(L*min^-1)"),
+                  OverallFlowRate = c("Overall Flow Rate", "(L min^-1)"),
                   BatteryCharge = c("Battery Charge", "(%)"),
                   AtmoAlt = c("Altitude Above Sea Level", "(m)"),
                   AccelX = c("X Acceleration", "(mg)"),
@@ -414,18 +273,18 @@ shiny_axis = function(clm_name){
                   AccelZVar = c("Z Acceleration Variance", "(mg)"),
                   AccelZMin = c("Z Acceleration Minimum", "(mg)"),
                   AccelZMax = c("Z Acceleration Maximum", "(mg)"),
-                  RotX = c("Rotational X Acceleration", "(mdeg*s^-1)"),
-                  RotXVar = c("Rotational X Acceleration Variance", "(mdeg*s^-1)"),
-                  RotXMin = c("Rotational X Acceleration Minimum", "(mdeg*s^-1)"),
-                  RotXMax = c("Rotational X Acceleration Maximum", "(mdeg*s^-1)"),
-                  RotY = c("Rotational Y Acceleration", "(mdeg*s^-1)"),
-                  RotYVar = c("Rotational Y Acceleration Variance", "(mdeg*s^-1)"),
-                  RotYMin = c("Rotational Y Acceleration Minimum", "(mdeg*s^-1)"),
-                  RotYMax = c("Rotational Y Acceleration Maximum", "(mdeg*s^-1)"),
-                  RotZ = c("Rotational Z Acceleration", "(mdeg*s^-1)"),
-                  RotZVar = c("Rotational Z Acceleration Variance", "(mdeg*s^-1)"),
-                  RotZMin = c("Rotational Z Acceleration Minimum", "(mdeg*s^-1)"),
-                  RotZMax = c("Rotational Z Acceleration Maximum", "(mdeg*s^-1)"),
+                  RotX = c("Rotational X Acceleration", "(mdeg s^-1)"),
+                  RotXVar = c("Rotational X Acceleration Variance", "(mdeg s^-1)"),
+                  RotXMin = c("Rotational X Acceleration Minimum", "(mdeg s^-1)"),
+                  RotXMax = c("Rotational X Acceleration Maximum", "(mdeg s^-1)"),
+                  RotY = c("Rotational Y Acceleration", "(mdeg s^-1)"),
+                  RotYVar = c("Rotational Y Acceleration Variance", "(mdeg s^-1)"),
+                  RotYMin = c("Rotational Y Acceleration Minimum", "(mdeg s^-1)"),
+                  RotYMax = c("Rotational Y Acceleration Maximum", "(mdeg s^-1)"),
+                  RotZ = c("Rotational Z Acceleration", "(mdeg s^-1)"),
+                  RotZVar = c("Rotational Z Acceleration Variance", "(mdeg s^-1)"),
+                  RotZMin = c("Rotational Z Acceleration Minimum", "(mdeg s^-1)"),
+                  RotZMax = c("Rotational Z Acceleration Maximum", "(mdeg s^-1)"),
                   Xup = c("Percentage of Time X Up", "(%)"),
                   XDown = c("Percentage of Time X Down", "(%)"),
                   Yup = c("Percentage of Time Y Up", "(%)"),
@@ -440,24 +299,24 @@ shiny_axis = function(clm_name){
                   IRRaw = c("Infrared Light Sensor Raw Output"),
                   UVRaw = c("UV Light Sensor Raw Output"),
                   PMMeasCnt = c("PM Measurement Count", "(# per log interval)"),
-                  PM1MC = c("PM1.0 Mass Concentration", "(ug*m^-3)"),
-                  PM1MCVar = c("PM1.0 Mass Concentration Variance", "(ug*m^-3)"),
-                  PM2_5MC = c("PM2.5 Mass Concentration", "(ug*m^-3)"),
-                  PM2_5MCVar = c("PM2.5 Mass Concentration Variance", "(ug*m^-3)"),
-                  PM4MC = c("PM4.0 Mass Concentration", "(ug*m^-3)"),
-                  PM4MCVar = c("PM4.0 Mass Concentration Variance", "(ug*m^-3)"),
-                  PM10MC = c("PM10 Mass Concentration", "(ug*m^-3)"),
-                  PM10MCVar = c("PM10 Mass Concentration Variance", "(ug*m^-3)"),
-                  PM0_5NC = c("PM0.5 Particle Concentration", "(#*cm^-3)"),
-                  PM0_5NCVar = c("PM0.5 Particle Concentration Variance", "(#*cm^-3)"),
-                  PM1NC = c("PM1.0 Particle Concentration", "(#*cm^-3)"),
-                  PM1NCVar = c("PM1.0 Particle Concentration Variance", "(#*cm^-3)"),
-                  PM2_5NC = c("PM2.5 Particle Concentration", "(#*cm^-3)"),
-                  PM2_5NCVar = c("PM2.5 Particle Concentration Variance", "(#*cm^-3)"),
-                  PM4NC = c("PM4.0 Particle Concentration", "(#*cm^-3)"),
-                  PM4NCVar = c("PM4.0 Particle Concentration Variance", "(#*cm^-3)"),
-                  PM10NC = c("PM10 Particle Concentration", "(#*cm^-3)"),
-                  PM10NCVar = c("PM10 Particle Concentration Variance", "(#*cm^-3)"),
+                  PM1MC = c("PM1.0 Mass Concentration", "(ug m^-3)"),
+                  PM1MCVar = c("PM1.0 Mass Concentration Variance", "(ug m^-3)"),
+                  PM2_5MC = c("PM2.5 Mass Concentration", "(ug m^-3)"),
+                  PM2_5MCVar = c("PM2.5 Mass Concentration Variance", "(ug m^-3)"),
+                  PM4MC = c("PM4.0 Mass Concentration", "(ug m^-3)"),
+                  PM4MCVar = c("PM4.0 Mass Concentration Variance", "(ug m^-3)"),
+                  PM10MC = c("PM10 Mass Concentration", "(ug m^-3)"),
+                  PM10MCVar = c("PM10 Mass Concentration Variance", "(ug m^-3)"),
+                  PM0_5NC = c("PM0.5 Particle Concentration", "(# cm^-3)"),
+                  PM0_5NCVar = c("PM0.5 Particle Concentration Variance", "(#cm^-3)"),
+                  PM1NC = c("PM1.0 Particle Concentration", "(# cm^-3)"),
+                  PM1NCVar = c("PM1.0 Particle Concentration Variance", "(# cm^-3)"),
+                  PM2_5NC = c("PM2.5 Particle Concentration", "(# cm^-3)"),
+                  PM2_5NCVar = c("PM2.5 Particle Concentration Variance", "(# cm^-3)"),
+                  PM4NC = c("PM4.0 Particle Concentration", "(# cm^-3)"),
+                  PM4NCVar = c("PM4.0 Particle Concentration Variance", "(# cm^-3)"),
+                  PM10NC = c("PM10 Particle Concentration", "(# cm^-3)"),
+                  PM10NCVar = c("PM10 Particle Concentration Variance", "(# cm^-3)"),
                   PMtypicalParticleSize = c("PM Typical Particle Size", "(um)"),
                   PMtypicalParticleSizeVar = c("PM Typical Particle Size Variance", "(um)"),
                   PM2_5SampledMass = c("PM2.5 Sampled Mass", "(ug)"),
@@ -470,7 +329,7 @@ shiny_axis = function(clm_name){
                   PumpPow1 = c("Main Pump Power Level", "(integer)"),
                   PumpPow2 = c("Secondary Pump Power Level", "(integer)"),
                   PumpV = c("Pump Voltage Input", "(V)"),
-                  MassFlow = c("Mass Flow Rate", "(g/min)"),
+                  MassFlow = c("Mass Flow Rate", "(g min^-1)"),
                   MFSVout = c("Mass Flow Sensor Output", "(V)"),
                   BFGenergy = c("Battery Fuel Gauge Output", "(16-bit integer)"),
                   BattVolt = c("Battery Voltage", "(V)"),
@@ -493,19 +352,37 @@ shiny_axis = function(clm_name){
                   SCDRH = c("CO2 Sensor RH", "(%RH)"),
                   VOCRaw = c("VOC Sensor Raw Output", ""),
                   NOXRaw = c("NOx Sensor Raw Output", ""),
-                  row.names = c("var", "unit1")
+                  row.names = c("axis_name", "unit")
                   )
 
-    df_sel <- df %>%
-      dplyr::select(dplyr::all_of(clm_name))
+    # df_sel <- df %>%
+    #   dplyr::select(dplyr::all_of(clm_name))
+    #
+    # clm_name <- paste(df_sel["var",], df_sel["unit",], sep=" ")
 
-    clm_name <- paste(df_sel["var",], df_sel["unit1",], sep=" ")
+    df_long <- df %>%
+      t()
 
+    df_long <- cbind(rownames(df_long), data.frame(df_long, row.names=NULL)) %>%
+      dplyr::rename(`var` = `rownames(df_long)`)
 
-  # search_for_these <- clm_name
-  # replace_with_these <- "Date Time UTC"
-  # found <- match(colnames(df), search_for_these, nomatch  0)
-  # clm_name <- colnames(df)[colnames(df) %in% search_for_these] <- replace_with_these[found]
-  # #names(clm_name) <- "New name from function"
+    if(fract_units){
+      df_long <- df_long %>%
+        dplyr::mutate(unit =
+                        case_when(unit == "(L min^-1)" ~ "(LPM)",
+                                  unit == "(g L^-1)" ~ "(g/L)",
+                                  unit == "(m s^-1)" ~ "(m/s)",
+                                  unit == "(mdeg s^-1)" ~ "(mdeg/s)",
+                                  unit == "(ug m^-3)" ~ "(ug/m^3)",
+                                  unit == "(# cm^-3)" ~ "(#/cm^3)",
+                                  TRUE ~ unit)
+        )
+    }
+
+    clm_name <- df_long %>%
+      dplyr::filter(var == clm_name)
+
+    clm_name <- paste(clm_name$axis_name, clm_name$unit, sep=" ")
+
   return(clm_name)
 }
