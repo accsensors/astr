@@ -5,12 +5,12 @@
 \title{Rename UPAS log file single column name
 to be more user friendly for the Shiny app plot}
 \usage{
-shiny_axis(clm_name)
+shiny_axis(clm_name, fract_units = FALSE)
 }
 \arguments{
-\item{df}{Pass a UPAS v2 or v2+ log column name from a formatted data frame.}
+\item{clm_name}{Pass a UPAS v2 or v2+ log column name from a formatted data frame.}
 
-\item{df_h}{Pass a UPAS v2 or v2+ header data frame from 'read_ast_log' function.}
+\item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}
 }
 \value{
 A modified column name for plot axis label in shinyAST app.

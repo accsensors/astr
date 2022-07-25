@@ -241,7 +241,8 @@ upasv2x_sample_summary = function(df_h, df = NULL) {
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('SampledRuntime',
                                                         'AverageVolumetricFlowRate',
                                    'PM25SampledMass',
-                                   'SampledVolume')), .fns = as.numeric))
+                                   'SampledVolume')), .fns = as.numeric),
+                  dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
     if(!is.null(df)){
       if(any(grepl('PM2_5SampledMass', names(df)))){

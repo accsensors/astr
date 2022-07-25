@@ -12,6 +12,8 @@
 #' upasv2_header_shiny <- shiny_header(upasv2_header)
 
 shiny_header = function(df_h) {
+
+
   # df_h <- df_h %>%
   #   dplyr::rename(`AST Sampler` = .data$ASTSampler,
   #                  `UPAS Serial` = .data$UPASserial,
@@ -237,6 +239,7 @@ shiny_log = function(df, df_h) {
 
 shiny_axis = function(clm_name, fract_units = FALSE){
 
+  #TODO Check that this covers all possible log file variables (might be nice to add standard v2 log file titles so this can be used with standard v2 file)
   df <- data.frame(SampleTime = c("Sample Time", "(s)"),
                    UnixTime = c("Unix Time", "(s)"),
                    DateTimeUTC = c("Date Time UTC", "(YYYY-MM-DDTHH:MM:SS)"),
