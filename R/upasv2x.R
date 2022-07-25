@@ -282,7 +282,8 @@ upasv2x_sample_settings = function(df_h) {
                                   'FlowDutyCycle','GPSEnabled',
                                   'PMSensorOperation','RTGasSampleState',
                                   'LogInterval',
-                                  'PowerSaveMode','AppVersion')))
+                                  'PowerSaveMode','AppVersion'))) %>%
+    dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   return(sample_settings_df)
 }
@@ -306,7 +307,8 @@ upasv2x_sample_meta = function(df_h) {
                                 'CartridgeID','StartDateTimeUTC',
                   'EndDateTimeUTC','StartBatteryVoltage','EndBatteryVoltage',
                   'StartBatteryCharge','EndBatteryCharge',
-                  'GPSUTCOffset','FirmwareRev','ShutdownMode')))
+                  'GPSUTCOffset','FirmwareRev','ShutdownMode'))) %>%
+    dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
 
   return(sample_meta_df)
