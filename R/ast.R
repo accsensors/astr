@@ -150,7 +150,6 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
     #   }
 
   }
-  if(shiny){df_h <- astr::shiny_header(df_h)}
 
   return(df_h)
 }
