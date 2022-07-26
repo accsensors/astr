@@ -18,7 +18,8 @@ shiny_units = function(vect){
                   gsub("mdeg s^-1)", "(mdeg/s)", fixed=TRUE,
                   gsub("(ug m^-3)", "(ug/m^3)", fixed=TRUE,
                   gsub("(# cm^-3)", "(#/cm^3)", fixed=TRUE,
-                       x=vect))))))
+                  gsub("(g min^-1)", "(g/min)", fixed=TRUE,
+                       x=vect)))))))
 
   return(vect)
 }
@@ -41,23 +42,64 @@ shiny_header = function(df_h, fract_units = FALSE) {
   df_h <- df_h %>%
     dplyr::rename_with(
       ~ dplyr::case_when(
-        . == "OverallDuration" ~ "OverallDuration (Hr)",
-        . == "OverallFlowRateAverage" ~ "OverallFlowRateAverage (L min^-1)",
-        . == "SampledVolume" ~ "SampledVolume (L)",
-        . == "SampledRuntime" ~ "SampledRuntime (Hr)",
-        . == "PumpingDuration" ~ "PumpingDuration (Hr)",
-        . == "ProgrammedStartDelay" ~ "ProgrammedStartDelay (Hr)",
-        . == "ProgrammedStartTime" ~ "ProgrammedStartTime",
+        . == "LifetimeSampleCount" ~ "LifetimeSampleCount (#)",
+        . == "LifetimeSampleRuntime" ~ "LifetimeSampleRuntime (Hr)",
+
+        #SETUP SUMMARY
+        . == "GPSUTCOffset" ~ "GPSUTCOffset (Hr)",
+        # . == "StartOnNextPowerUp" ~ "StartOnNextPowerUp (0=no 1=yes)",
+        . == "ProgrammedStartTime" ~ "ProgrammedStartTime (sec since 1/1/1970)",
         . == "ProgrammedRuntime" ~ "ProgrammedRuntime (Hr)",
-        . == "FlowRateSetpoint" ~ "FlowRateSetpoint (L)",
-        . == "DutyCycle" ~ "DutyCycle (%)",
+        . == "FlowRateSetpoint" ~ "FlowRateSetpoint (L min^-1)",
+        . == "FlowOffset" ~ "FlowOffset (%)",
+        . == "FlowCheckMeterReadingPreSample" ~ "FlowCheckMeterReadingPreSample (L min^-1)",
+        . == "FlowCheckMeterReadingPostSample" ~ "FlowCheckMeterReadingPostSample (L min^-1)",
         . == "FlowDutyCycle" ~ "FlowDutyCycle (%)",
+        . == "DutyCycleWindow" ~ "DutyCycleWindow (s)",
+        # . == "PMSensorInterval" ~ "PMSensorInterval",
         . == "LogInterval" ~ "LogInterval (s)",
-        . == "StartDateTimeUTC" ~ "StartDateTimeUTC",
-        . == "EndDateTimeUTC" ~ "EndDateTimeUTC",
+
+        #SAMPLE SUMMARY
+        . == "StartDateTimeUTC" ~ "StartDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
+        . == "EndDateTimeUTC" ~ "EndDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
+        . == "StartDateTimeLocal" ~ "StartDateTimeLocal (YYYY-MM-DDTHH:MM:SS)",
+        . == "EndDateTimeLocal"  ~ "EndDateTimeLocal (YYYY-MM-DDTHH:MM:SS)" ,
+        . == "OverallDuration" ~ "OverallDuration (Hr)",
+        . == "PumpingDuration" ~ "PumpingDuration (Hr)",
+        . == "OverallFlowRateAverage" ~ "OverallFlowRateAverage (L min^-1)",
+        . == "PumpingFlowRateAverage" ~ "PumpingFlowRateAverage (L min^-1)",
+        . == "SampledVolume" ~ "SampledVolume (L)",
+        . == "StartBatteryCharge" ~ "StartBatteryCharge (%)",
+        . == "EndBatteryCharge" ~ "EndBatteryCharge (%)",
         . == "StartBatteryVoltage" ~ "StartBatteryVoltage (V)",
         . == "EndBatteryVoltage" ~ "EndBatteryVoltage (V)",
-        . == "GPSUTCOffset" ~ "GPSUTCOffset (Hr)",
+
+        #MASS FLOW SENSOR CALIBRATION
+        . == "MFSCalDate" ~ "MFSCalDate (YYYY-MM-DDTHH:MM:SS)",
+        . == "MFSCalVoutBlocked" ~ "MFSCalVoutBlocked (V)",
+        . == "MFSCalVoutMin" ~ "MFSCalVoutMin (V)",
+        . == "MFSCalVoutMax" ~ "MFSCalVoutMax (V)",
+        . == "MFSCalMFBlocked" ~ "MFSCalMFBlocked (g min^-1)",
+        . == "MFSCalMFMin" ~ "MFSCalMFMin (g min^-1)",
+        . == "MFSCalMFMax" ~ "MFSCalMFMax (g min^-1)",
+        . == "MFSCalPumpVBoostMin" ~ "MFSCalPumpVBoostMin (V)",
+        . == "MFSCalPumpVBoostMax" ~ "MFSCalPumpVBoostMax (V)",
+        . == "MFSCalPDeadhead" ~ "MFSCalPDeadhead (Pa)" ,
+        . == "MF4" ~ "MF4 (coefficient)",
+        . == "MF3" ~ "MF3 (coefficient)",
+        . == "MF2" ~ "MF2 (coefficient)",
+        . == "MF1"  ~ "MF1 (coefficient)" ,
+        . == "MF0" ~ "MF0 (coefficient)",
+
+        #v2 Specific when update_names = FALSE
+        . == "ProgrammedStartDelay" ~ "ProgrammedStartDelay (s)",
+        . == "VolumetricFlowRate" ~ "VolumetricFlowRate",
+        . == "DutyCycle" ~ "DutyCycle (%)",
+        . == "LogFileMode" ~ "LogFileMode (0=normal 1=debug)",
+        . == "SampledRuntime" ~ "SampledRuntime (Hr)",
+        . == "LoggedRuntime" ~ "LoggedRuntime (Hr)",
+        . == "AverageVolumetricFlowRate" ~ "AverageVolumetricFlowRate (L min^-1)",
+
         TRUE ~ .))
 
   if(fract_units) {
@@ -82,23 +124,6 @@ shiny_header = function(df_h, fract_units = FALSE) {
 #' upasv2_log_shiny <- shiny_log(upasv2_log, upasv2_header)
 
 shiny_log = function(df, df_h) {
-  # units <- c("(HH:MM:SS)","(s)","(s)","(YYYY-MM-DDTHH:MM:SS)","(YYYY-MM-DDTHH:MM:SS)", "",
-  #            "(L/min^-1)","(L*min^-1)","(L)",
-  #            "(Pa)","(%)","(C)","(hPa)","(%RH)",
-  #            "(g*L^-1)","(m ASL)","(-)","(decimalDegree)","(decimalDegree)",
-  #            "(m)","(integer)","(m*s^-1)","(-)",
-  #            "(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)","(mg)",
-  #            "(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)",
-  #            "(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)","(mdeg*s^-1)",
-  #            "(%)","(%)","(%)","(%)","(%)","(%)","(#)","(lux)","(-)","(-)","(-)","(-)","(-)","(#)",
-  #            "(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)","(ug*m^-3)",
-  #            "(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)","(#*cm^-3)",
-  #            "(#*cm^-3)","(#*cm^-3)",
-  #            "(um)","(um)","(ug)","(C)","(C)","(C)","(C)","(ohm)","(hPa)",
-  #            "(integer)","(integer)","(V)","(g*min^-1)","(V)","(integer)","(V)","(V)","(V)",
-  #            "(bool)","(bool)","(bool)","(bool)","(bool)",
-  #            "(s)","(s)","(s)","(s)","(s)","(s)","(ppm)","(C)","(%)","(-)","(-)")
-  #colnames(df) <- paste(colnames(df), units, sep="")
 
   # df <- df %>%
   #   #TODO figure out how to micro sign in in ug units
