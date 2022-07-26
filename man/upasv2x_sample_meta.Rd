@@ -5,7 +5,7 @@
 \title{Create sample metadata dataframe from an Access Sensor Technologies (AST)
 air sampler header dataframe}
 \usage{
-upasv2x_sample_meta(df_h, shiny = FALSE)
+upasv2x_sample_meta(df_h, shiny = FALSE, fract_units = FALSE)
 }
 \arguments{
 \item{df_h}{Pass a upasv2x header dataframe from read_ast_header function.}
