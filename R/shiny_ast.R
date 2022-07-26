@@ -41,8 +41,8 @@ shiny_units = function(df){
 shiny_header = function(df_h, fract_units = FALSE) {
 
   df_h <- df_h %>%
-    rename_with(
-      ~ case_when(
+    dplyr::rename_with(
+      ~ dplyr::case_when(
         . == "OverallDuration" ~ "OverallDuration (Hr)",
         . == "SampledVolume" ~ "SampledVolume (L)",
         . == "SampledRuntime" ~ "SampledRuntime (Hr)",
