@@ -44,6 +44,7 @@ shiny_header = function(df_h, fract_units = FALSE) {
     dplyr::rename_with(
       ~ dplyr::case_when(
         . == "OverallDuration" ~ "OverallDuration (Hr)",
+        . == "OverallFlowRateAverage" ~ "OverallFlowRateAverage (L min^-1)",
         . == "SampledVolume" ~ "SampledVolume (L)",
         . == "SampledRuntime" ~ "SampledRuntime (Hr)",
         . == "PumpingDuration" ~ "PumpingDuration (Hr)",
