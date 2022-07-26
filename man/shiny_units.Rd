@@ -2,22 +2,21 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_units}
 \alias{shiny_units}
-\title{Reformat units
-to be more user friendly for the Shiny app}
+\title{Reformat units for shinyAST app}
 \usage{
-shiny_units(df_h)
+shiny_units(vect)
 }
 \arguments{
-\item{df_h}{Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.}
+\item{vect}{Pass a vector.}
 }
 \value{
-A modified data frame with units and user friendly column names for header data.
+A vector with fractional units instead of the
+standard UPASv2 and UPASv2+ log file unit format
 }
 \description{
-Reformat units
-to be more user friendly for the Shiny app
+Reformat units for shinyAST app
 }
 \examples{
-upasv2x_header_shiny <- shiny_header(upasv2x_header)
-upasv2_header_shiny <- shiny_header(upasv2_header)
+colnames(upasv2x_header_shiny) <- shiny_units(colnames(upasv2x_header_shiny)
+clm_name <- shiny_units(clm_name)
 }

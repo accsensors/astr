@@ -1,15 +1,15 @@
-#'Reformat units
-#'to be more user friendly for the Shiny app
+#'Reformat units for shinyAST app
 #'
-#' @param df_h Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.
+#' @param vect Pass a vector.
 #'
-#' @return A modified data frame with units and user friendly column names for header data.
+#' @return A vector with fractional units instead of the
+#' standard UPASv2 and UPASv2+ log file unit format
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header_shiny <- shiny_header(upasv2x_header)
-#' upasv2_header_shiny <- shiny_header(upasv2_header)
+#' colnames(upasv2x_header_shiny) <- shiny_units(colnames(upasv2x_header_shiny)
+#' clm_name <- shiny_units(clm_name)
 
 shiny_units = function(vect){
   vect <- gsub("L min^-1", "L/min", fixed=TRUE,
@@ -26,6 +26,7 @@ shiny_units = function(vect){
 #'to be more user friendly for the Shiny app
 #'
 #' @param df_h Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.
+#' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
 #' @return A modified data frame with units and user friendly column names for header data.
 #' @export
@@ -63,48 +64,6 @@ shiny_header = function(df_h, fract_units = FALSE) {
     colnames(df_h) <- shiny_units(colnames(df_h))
   }
 
-  # df_h <- df_h %>%
-  #   dplyr::rename(`AST Sampler` = .data$ASTSampler,
-  #                  `UPAS Serial` = .data$UPASserial,
-  #                  `Sample Name` = .data$SampleName,
-  #                  `Cartridge ID` = .data$CartridgeID,
-  #                  `Overall Duration` = .data$OverallDuration,
-  #                  `Firmware Rev` = .data$FirmwareRev,
-  #                  `Shutdown Mode` = .data$ShutdownMode
-  #                  )
-  #
-  # if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')) {
-  #   df_h <- df_h
-  #     dplyr::rename( `Overall Flow Rate Average` = .data$OverallFlowRateAverage,
-  #                  `Sampled Volume` = .data$SampledVolume,
-  #                  `Sampled Runtime` = .data$SampledRuntime,
-  #                  `Pumping Duration` = .data$PumpingDuration,
-  #                  `Shutdown Reason` = .data$ShutdownReason,
-  #                  #Settings
-  #                  `Start On Next Power Up` = .data$StartOnNextPowerUp,
-  #                  `Programmed Start Delay` = .data$ProgrammedStartDelay,
-  #                  `Programmed Start Time` = .data$ProgrammedStartTime,
-  #                  `Programmed Runtime` = .data$ProgrammedRuntime,
-  #                  `Size Selective Inlet` = .data$SizeSelectiveInlet,
-  #                  `Flow Rate Setpoint` = .data$FlowRateSetpoint,
-  #                  `Duty Cycle` = .data$DutyCycle,
-  #                  `Flow Duty Cycle` = .data$FlowDutyCycle,
-  #                  `GPS Enabled` = .data$GPSEnabled,
-  #                  `PM Sensor Operation` = .data$PMSensorOperation,
-  #                  `RT Gas Sample State` = .data$RTGasSampleState,
-  #                  `Log Interval` = .data$LogInterval,
-  #                  `Power Save Mode` = .data$PowerSaveMode,
-  #                  `App Version` = .data$AppVersion,
-  #                  #Meta
-  #                  `Start Date Time UTC` = .data$StartDateTimeUTC,
-  #                  `End Date Time UTC` = .data$EndDateTimeUTC,
-  #                  `Start Battery Voltage` = .data$StartBatteryVoltage,
-  #                  `End Battery Voltage` = .data$EndBatteryVoltage,
-  #                  `Start Battery Charge` = .data$StartBatteryCharge,
-  #                  `End Battery Charge` = .data$EndBatteryCharge,
-  #                  `GPS UTC Offset` = .data$GPSUTCOffset
-  #                 )
-  # }
   return(df_h)
 }
 
@@ -417,19 +376,6 @@ shiny_axis = function(clm_name, fract_units = FALSE){
     #
     # df_long <- cbind(rownames(df_long), data.frame(df_long, row.names=NULL)) %>%
     #   dplyr::rename(`var` = `rownames(df_long)`)
-
-    # if(fract_units){
-    #   # df_long <- df_long %>%
-    #   #   dplyr::mutate(unit =
-    #   #                   dplyr::case_when(unit == "(L min^-1)" ~ "(LPM)",
-    #   #                             unit == "(g L^-1)" ~ "(g/L)",
-    #   #                             unit == "(m s^-1)" ~ "(m/s)",
-    #   #                             unit == "(mdeg s^-1)" ~ "(mdeg/s)",
-    #   #                             unit == "(ug m^-3)" ~ "(ug/m^3)",
-    #   #                             unit == "(# cm^-3)" ~ "(#/cm^3)",
-    #   #                             TRUE ~ unit)
-    #     # )
-    # }
 
     # clm_name <- df_long %>%
     #   dplyr::filter(var == clm_name)

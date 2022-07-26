@@ -5,7 +5,7 @@
 \title{Create sample summary dataframe from an Access Sensor Technologies (AST)
 air sampler header dataframe}
 \usage{
-upasv2x_sample_summary(df_h, df = NULL)
+upasv2x_sample_summary(df_h, df = NULL, shiny = FALSE)
 }
 \arguments{
 \item{df_h}{Pass a upasv2x header dataframe from read_ast_header function.}

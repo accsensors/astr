@@ -9,6 +9,8 @@ shiny_header(df_h, fract_units = FALSE)
 }
 \arguments{
 \item{df_h}{Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.}
+
+\item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}
 }
 \value{
 A modified data frame with units and user friendly column names for header data.
