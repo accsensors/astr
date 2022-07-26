@@ -1,3 +1,30 @@
+#'Reformat units
+#'to be more user friendly for the Shiny app
+#'
+#' @param df_h Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.
+#'
+#' @return A modified data frame with units and user friendly column names for header data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2x_header_shiny <- shiny_header(upasv2x_header)
+#' upasv2_header_shiny <- shiny_header(upasv2_header)
+
+shiny_units = function(df){
+  colnames(df) <- gsub("L min^-1", "L/min",
+                  gsub("(g L^-1)", "(g/L)",
+                  gsub("(m s^-1)", "(m/s)",
+                  gsub("mdeg s^-1)", "(mdeg/s)",
+                  gsub("(ug m^-3)", "(ug/m^3)"),
+                  gsub("(# cm^-3)", "(#/cm^3)",
+                       colnames(df), fixed=TRUE)))))
+
+  # colnames(df) %>%
+  #   stringr::str_replace_all(
+  #     "L min^-1", "L/min")
+  df
+}
 #'Rename UPAS header file data frame columns
 #'to be more user friendly for the Shiny app
 #'
@@ -11,8 +38,32 @@
 #' upasv2x_header_shiny <- shiny_header(upasv2x_header)
 #' upasv2_header_shiny <- shiny_header(upasv2_header)
 
-shiny_header = function(df_h) {
+shiny_header = function(df_h, fract_units = FALSE) {
 
+  df_h <- df_h %>%
+    rename_with(
+      ~ case_when(
+        . == "OverallDuration" ~ "OverallDuration (Hr)",
+        . == "SampledVolume" ~ "SampledVolume (L)",
+        . == "SampledRuntime" ~ "SampledRuntime (Hr)",
+        . == "PumpingDuration" ~ "PumpingDuration (Hr)",
+        . == "ProgrammedStartDelay" ~ "ProgrammedStartDelay (Hr)",
+        . == "ProgrammedStartTime" ~ "ProgrammedStartTime",
+        . == "ProgrammedRuntime" ~ "ProgrammedRuntime (Hr)",
+        . == "FlowRateSetpoint" ~ "FlowRateSetpoint (L)",
+        . == "DutyCycle" ~ "DutyCycle (%)",
+        . == "FlowDutyCycle" ~ "FlowDutyCycle (%)",
+        . == "LogInterval" ~ "LogInterval (s)",
+        . == "StartDateTimeUTC" ~ "StartDateTimeUTC",
+        . == "EndDateTimeUTC" ~ "EndDateTimeUTC",
+        . == "StartBatteryVoltage" ~ "StartBatteryVoltage (V)",
+        . == "EndBatteryVoltage" ~ "EndBatteryVoltage (V)",
+        . == "GPSUTCOffset" ~ "GPSUTCOffset (Hr)",
+        TRUE ~ .))
+
+  if(fract_units) {
+    df_h <- shiny_units(df_h)
+  }
 
   # df_h <- df_h %>%
   #   dplyr::rename(`AST Sampler` = .data$ASTSampler,
