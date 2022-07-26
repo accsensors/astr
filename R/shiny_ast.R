@@ -11,19 +11,16 @@
 #' upasv2x_header_shiny <- shiny_header(upasv2x_header)
 #' upasv2_header_shiny <- shiny_header(upasv2_header)
 
-shiny_units = function(df){
-  colnames(df) <- gsub("L min^-1", "L/min",
-                  gsub("(g L^-1)", "(g/L)",
-                  gsub("(m s^-1)", "(m/s)",
-                  gsub("mdeg s^-1)", "(mdeg/s)",
-                  gsub("(ug m^-3)", "(ug/m^3)"),
-                  gsub("(# cm^-3)", "(#/cm^3)",
-                       colnames(df), fixed=TRUE)))))
+shiny_units = function(vect){
+  vect <- gsub("L min^-1", "L/min", fixed=TRUE,
+                  gsub("(g L^-1)", "(g/L)", fixed=TRUE,
+                  gsub("(m s^-1)", "(m/s)", fixed=TRUE,
+                  gsub("mdeg s^-1)", "(mdeg/s)", fixed=TRUE,
+                  gsub("(ug m^-3)", "(ug/m^3)", fixed=TRUE,
+                  gsub("(# cm^-3)", "(#/cm^3)", fixed=TRUE,
+                       x=vect))))))
 
-  # colnames(df) %>%
-  #   stringr::str_replace_all(
-  #     "L min^-1", "L/min")
-  df
+  return(vect)
 }
 #'Rename UPAS header file data frame columns
 #'to be more user friendly for the Shiny app
@@ -63,7 +60,7 @@ shiny_header = function(df_h, fract_units = FALSE) {
         TRUE ~ .))
 
   if(fract_units) {
-    df_h <- shiny_units(df_h)
+    colnames(df_h) <- shiny_units(colnames(df_h))
   }
 
   # df_h <- df_h %>%
@@ -421,23 +418,25 @@ shiny_axis = function(clm_name, fract_units = FALSE){
     df_long <- cbind(rownames(df_long), data.frame(df_long, row.names=NULL)) %>%
       dplyr::rename(`var` = `rownames(df_long)`)
 
-    if(fract_units){
-      df_long <- df_long %>%
-        dplyr::mutate(unit =
-                        dplyr::case_when(unit == "(L min^-1)" ~ "(LPM)",
-                                  unit == "(g L^-1)" ~ "(g/L)",
-                                  unit == "(m s^-1)" ~ "(m/s)",
-                                  unit == "(mdeg s^-1)" ~ "(mdeg/s)",
-                                  unit == "(ug m^-3)" ~ "(ug/m^3)",
-                                  unit == "(# cm^-3)" ~ "(#/cm^3)",
-                                  TRUE ~ unit)
-        )
-    }
+    # if(fract_units){
+    #   # df_long <- df_long %>%
+    #   #   dplyr::mutate(unit =
+    #   #                   dplyr::case_when(unit == "(L min^-1)" ~ "(LPM)",
+    #   #                             unit == "(g L^-1)" ~ "(g/L)",
+    #   #                             unit == "(m s^-1)" ~ "(m/s)",
+    #   #                             unit == "(mdeg s^-1)" ~ "(mdeg/s)",
+    #   #                             unit == "(ug m^-3)" ~ "(ug/m^3)",
+    #   #                             unit == "(# cm^-3)" ~ "(#/cm^3)",
+    #   #                             TRUE ~ unit)
+    #     # )
+    # }
 
     clm_name <- df_long %>%
       dplyr::filter(var == clm_name)
 
     clm_name <- paste(clm_name$axis_name, clm_name$unit, sep=" ")
+
+    if(fract_units){clm_name <- shiny_units(clm_name)}
 
   return(clm_name)
 }
