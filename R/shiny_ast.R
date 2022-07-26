@@ -1,28 +1,3 @@
-#'Reformat units for shinyAST app
-#'
-#' @param vect Pass a vector.
-#'
-#' @return A vector with fractional units instead of the
-#' standard UPASv2 and UPASv2+ log file unit format
-#' @export
-#' @importFrom rlang .data
-#'
-#' @examples
-#' colnames(upasv2x_header_shiny) <- shiny_units(colnames(upasv2x_header_shiny)
-#' clm_name <- shiny_units(clm_name)
-
-shiny_units = function(vect){
-  vect <- gsub("L min^-1", "L/min", fixed=TRUE,
-                  gsub("(g L^-1)", "(g/L)", fixed=TRUE,
-                  gsub("(m s^-1)", "(m/s)", fixed=TRUE,
-                  gsub("mdeg s^-1)", "(mdeg/s)", fixed=TRUE,
-                  gsub("(ug m^-3)", "(ug/m^3)", fixed=TRUE,
-                  gsub("(# cm^-3)", "(#/cm^3)", fixed=TRUE,
-                  gsub("(g min^-1)", "(g/min)", fixed=TRUE,
-                       x=vect)))))))
-
-  return(vect)
-}
 #'Rename UPAS header file data frame columns
 #'to be more user friendly for the Shiny app
 #'
@@ -410,4 +385,30 @@ shiny_axis = function(clm_name, fract_units = FALSE){
     if(fract_units){clm_name <- shiny_units(clm_name)}
 
   return(clm_name)
+}
+
+#'Reformat units for shinyAST app
+#'
+#' @param vect Pass a vector.
+#'
+#' @return A vector with fractional units instead of the
+#' standard UPASv2 and UPASv2+ log file unit format
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' colnames(upasv2x_header_shiny) <- shiny_units(colnames(upasv2x_header_shiny)
+#' clm_name <- shiny_units(clm_name)
+
+shiny_units = function(vect){
+  vect <- gsub("L min^-1", "L/min", fixed=TRUE,
+          gsub("(g L^-1)", "(g/L)", fixed=TRUE,
+          gsub("(m s^-1)", "(m/s)", fixed=TRUE,
+          gsub("mdeg s^-1)", "(mdeg/s)", fixed=TRUE,
+          gsub("(ug m^-3)", "(ug/m^3)", fixed=TRUE,
+          gsub("(# cm^-3)", "(#/cm^3)", fixed=TRUE,
+          gsub("(g min^-1)", "(g/min)", fixed=TRUE,
+               x=vect)))))))
+
+  return(vect)
 }

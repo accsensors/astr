@@ -236,7 +236,8 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
   sample_summary_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','SampleName','CartridgeID',
                                   'SampledRuntime', 'OverallDuration', 'PumpingDuration',
-                                'OverallFlowRateAverage','PM25SampledMass',
+                                'PumpingFlowRateAverage', 'OverallFlowRateAverage',
+                                'PM25SampledMass',
                                 'SampledVolume','ShutdownReason'))) %>%
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('SampledRuntime',
                                                         'AverageVolumetricFlowRate',
