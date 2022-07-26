@@ -59,7 +59,7 @@ read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
   }
 
-  df_h <- astr::format_ast_header(df_h_raw, update_names, shiny)
+  df_h <- astr::format_ast_header(df_h_raw, update_names=update_names, shiny=shiny)
 
   return(df_h)
 }
