@@ -407,16 +407,16 @@ shiny_axis = function(clm_name, fract_units = FALSE){
                   row.names = c("axis_name", "unit")
                   )
 
-    # df_sel <- df %>%
-    #   dplyr::select(dplyr::all_of(clm_name))
+    df_sel <- df %>%
+      dplyr::select(dplyr::all_of(clm_name))
+
+    clm_name <- paste(df_sel["axis_name",], df_sel["unit",], sep=" ")
+
+    # df_long <- df %>%
+    #   t()
     #
-    # clm_name <- paste(df_sel["var",], df_sel["unit",], sep=" ")
-
-    df_long <- df %>%
-      t()
-
-    df_long <- cbind(rownames(df_long), data.frame(df_long, row.names=NULL)) %>%
-      dplyr::rename(`var` = `rownames(df_long)`)
+    # df_long <- cbind(rownames(df_long), data.frame(df_long, row.names=NULL)) %>%
+    #   dplyr::rename(`var` = `rownames(df_long)`)
 
     # if(fract_units){
     #   # df_long <- df_long %>%
@@ -431,10 +431,10 @@ shiny_axis = function(clm_name, fract_units = FALSE){
     #     # )
     # }
 
-    clm_name <- df_long %>%
-      dplyr::filter(var == clm_name)
-
-    clm_name <- paste(clm_name$axis_name, clm_name$unit, sep=" ")
+    # clm_name <- df_long %>%
+    #   dplyr::filter(var == clm_name)
+    #
+    # clm_name <- paste(clm_name$axis_name, clm_name$unit, sep=" ")
 
     if(fract_units){clm_name <- shiny_units(clm_name)}
 
