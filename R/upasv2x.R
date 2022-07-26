@@ -231,7 +231,7 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
 #' upasv2x_sample_summary <- upas2x_sample_summary(upasv2x_header, upasv2x_log)
 #' upasv2x_sample_summary <- upas2x_sample_summary(upasv2x_header)
 
-upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE) {
+upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALSE) {
 
   sample_summary_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','SampleName','CartridgeID',
@@ -257,7 +257,7 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE) {
     }
 
   if(shiny){
-    sample_summary_df <- astr::shiny_header(sample_summary_df)
+    sample_summary_df <- astr::shiny_header(sample_summary_df, fract_units=fract_units)
   }
 
   return(sample_summary_df)
@@ -275,7 +275,7 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE) {
 #' @examples
 #' upasv2x_sample_settings <- upas2x_sample_settings(upasv2x_header)
 
-upasv2x_sample_settings = function(df_h, shiny=FALSE) {
+upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
   sample_settings_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
@@ -290,7 +290,7 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE) {
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   if(shiny){
-    sample_settings_df <- astr::shiny_header(sample_settings_df)
+    sample_settings_df <- astr::shiny_header(sample_settings_df, fract_units=fract_units)
   }
 
   return(sample_settings_df)
@@ -308,7 +308,7 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE) {
 #' @examples
 #' upasv2x_sample_meta <- upas2x_sample_meta(upasv2x_header)
 
-upasv2x_sample_meta = function(df_h, shiny=FALSE) {
+upasv2x_sample_meta = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
   sample_meta_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','PMSerial','SampleName',
@@ -319,7 +319,7 @@ upasv2x_sample_meta = function(df_h, shiny=FALSE) {
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   if(shiny){
-    sample_meta_df <- astr::shiny_header(sample_meta_df)
+    sample_meta_df <- astr::shiny_header(sample_meta_df, fract_units=fract_units)
     }
 
 
