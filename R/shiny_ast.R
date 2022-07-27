@@ -35,10 +35,10 @@ shiny_header = function(df_h, fract_units = FALSE) {
         . == "LogInterval" ~ "LogInterval (s)",
 
         #SAMPLE SUMMARY
-        . == "StartDateTimeUTC" ~ "StartDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
-        . == "EndDateTimeUTC" ~ "EndDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
-        . == "StartDateTimeLocal" ~ "StartDateTimeLocal (YYYY-MM-DDTHH:MM:SS)",
-        . == "EndDateTimeLocal"  ~ "EndDateTimeLocal (YYYY-MM-DDTHH:MM:SS)" ,
+        # . == "StartDateTimeUTC" ~ "StartDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
+        # . == "EndDateTimeUTC" ~ "EndDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
+        # . == "StartDateTimeLocal" ~ "StartDateTimeLocal (YYYY-MM-DDTHH:MM:SS)",
+        # . == "EndDateTimeLocal"  ~ "EndDateTimeLocal (YYYY-MM-DDTHH:MM:SS)" ,
         . == "OverallDuration" ~ "OverallDuration (Hr)",
         . == "PumpingDuration" ~ "PumpingDuration (Hr)",
         . == "OverallFlowRateAverage" ~ "OverallFlowRateAverage (L min^-1)",
@@ -250,8 +250,8 @@ shiny_axis = function(clm_name, fract_units = FALSE){
   #TODO Check that this covers all possible log file variables (might be nice to add standard v2 log file titles so this can be used with standard v2 file)
   df <- data.frame(SampleTime = c("Sample Time", "(s)"),
                    UnixTime = c("Unix Time", "(s)"),
-                   DateTimeUTC = c("Date Time UTC", "(YYYY-MM-DDTHH:MM:SS)"),
-                   DateTimeLocal = c("Date Time Local", "(YYYY-MM-DDTHH:MM:SS)"),
+                   DateTimeUTC = c("Date Time UTC", ""),
+                   DateTimeLocal = c("Date Time Local", ""),
                    TZOffset = c("Time Zone Offset", "(hrs)"),
                    PumpingFlowRate = c("Pumping Flow Rate", "(L min^-1)"),
                    SampledVolume = c("Sampled Volume", "(L)"),
