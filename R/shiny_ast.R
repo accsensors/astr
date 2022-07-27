@@ -84,150 +84,36 @@ shiny_header = function(df_h, fract_units = FALSE) {
   return(df_h)
 }
 
-#'Rename UPAS log file data frame columns
+#'Format specific UPAS log file data frame columns
 #'to be more user friendly for the Shiny app
 #'
 #' @param df Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.
-#' @param df_h Pass a UPAS v2 or v2+ header data frame from 'read_ast_log' function.
 #'
-#' @return A modified data frame with units and user friendly column names for log data.
+#' @return A modified data frame with user friendly column names for log data.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_log_shiny <- shiny_log(upasv2x_log, upasv2x_header)
-#' upasv2_log_shiny <- shiny_log(upasv2_log, upasv2_header)
+#' upasv2x_log_shiny <- shiny_log(upasv2x_log)
+#' upasv2_log_shiny <- shiny_log(upasv2_log)
 
-shiny_log = function(df, df_h) {
+shiny_log = function(df) {
 
-  # df <- df %>%
-  #   #TODO figure out how to micro sign in in ug units
-  #   #TODO figure out how to make ^3 into superscript
-  #   dplyr::rename(`Sample Time (s)` = .data$SampleTime,
-  #                 `Unix Time (s)` = .data$UnixTime,
-  #                 `Date Time UTC (YYYY-MM-DDTHH:MM:SS)` = .data$DateTimeUTC,
-  #                 `Date Time Local (YYYY-MM-DDTHH:MM:SS)` = .data$DateTimeLocal,
-  #                 `Time Zone Offset (hrs)` = .data$TZOffset,
-  #                 `Pumping Flow Rate (L*min^-1)` = .data$PumpingFlowRate,
-  #                 `Sampled Volume (L)` = .data$SampledVolume,
-  #                 `Filter Differential Pressure (Pa)` = .data$FilterDP,
-  #                 `Atmospheric T (C)` = .data$AtmoT,
-  #                 `Atmospheric P (hPa)` = .data$AtmoP,
-  #                 `Atmospheric RH (%RH)` = .data$AtmoRH,
-  #                 `Atmospheric Density (g*L^-1)` = .data$AtmoDensity,
-  #                 #`GPSQual` = .data$GPSQual,
-  #                 `GPS Latitude (decimalDegrees)` = .data$GPSlat,
-  #                 `GPS Longitude (decimalDegrees)` = .data$GPSlon,
-  #                 `GPS Altitude (m)` = .data$GPSalt,
-  #                 `GPS Satellite Signals Received (#)`= .data$GPSsat,
-  #                 `GPS Measured Speed (m*s^-1)` = .data$GPSspeed,
-  #                 `GPS Horizontal Dilution of Precision` = .data$GPShDOP,)
-  #
-  # # if(df_h$ASTSampler=='UPAS_v2_x'){
-  # if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')) {
-  #   df <- df %>%
-  #     dplyr::rename(`Unix Time MCU (s)` = .data$UnixTimeMCU,
-  #                 `Overall Flow Rate (L*min^-1)` = .data$OverallFlowRate,
-  #                 `Battery Charge (%)` = .data$BatteryCharge,
-  #                 `GPS Signal Quality (NMEA Standard)` = .data$GPSQual,
-  #                 `Altitude Above Sea Level (m)` = .data$AtmoAlt,
-  #                 `X Acceleration (mg)` = .data$AccelX,
-  #                 `X Acceleration Variance (mg)` = .data$AccelXVar,
-  #                 `X Acceleration Minimum (mg)` = .data$AccelXMin,
-  #                 `X Accleration Maximum (mg)` = .data$AccelXMax,
-  #                 `Y Acceleration (mg)` = .data$AccelY,
-  #                 `Y Acceleration Variance (mg)` = .data$AccelYVar,
-  #                 `Y Acceleration Minimum (mg)` = .data$AccelYMin,
-  #                 `Y Acceleration Maximum (mg)` = .data$AccelYMax,
-  #                 `Z Acceleration (mg)` = .data$AccelZ,
-  #                 `Z Acceleration Variance (mg)` = .data$AccelZVar,
-  #                 `Z Acceleration Minimum (mg)` = .data$AccelZMin,
-  #                 `Z Acceleration Maximum (mg)` = .data$AccelZMax,
-  #                 `Rotational X Acceleration (mdeg*s^-1)` = .data$RotX,
-  #                 `Rotational X Acceleration Variance (mdeg*s^-1)` = .data$RotXVar,
-  #                 `Rotational X Acceleration Minimum (mdeg*s^-1)` = .data$RotXMin,
-  #                 `Rotational X Acceleration Maximum (mdeg*s^-1)` = .data$RotXMax,
-  #                 `Rotational Y Acceleration (mdeg*s^-1)` = .data$RotY,
-  #                 `Rotational Y Acceleration Variance (mdeg*s^-1)` = .data$RotYVar,
-  #                 `Rotational Y Acceleration Minimum (mdeg*s^-1)` = .data$RotYMin,
-  #                 `Rotational Y Acceleration Maximum (mdeg*s^-1)` = .data$RotYMax,
-  #                 `Rotational Z Acceleration (mdeg*s^-1)` = .data$RotZ,
-  #                 `Rotational Z Acceleration Variance (mdeg*s^-1)` = .data$RotZVar,
-  #                 `Rotational Z Acceleration Minimum (mdeg*s^-1)` = .data$RotZMin,
-  #                 `Rotational Z Acceleration Maximum (mdeg*s^-1)` = .data$RotZMax,
-  #                 `Percentage of Time X Up (%)` = .data$Xup,
-  #                 `Percentage of Time X Down (%)` = .data$XDown,
-  #                 `Percentage of Time Y Up (%)` = .data$Yup,
-  #                 `Percentage of Time Y Down (%)` = .data$Ydown,
-  #                 `Percentage of Time Z Up (%)` = .data$Zup,
-  #                 `Percentage of Time Z Down (%)` = .data$Zdown,
-  #                 `Step Count (#)` = .data$StepCount,
-  #                 `Light Sensor Illuminance (lux)` = .data$LUX,
-  #                 `UV Index (0 to 11+)` = .data$UVindex,
-  #                 `High-Wavelength Light Sensor Raw Output` = .data$HighVisRaw,
-  #                 `Low Wavelength Light Sensor Raw Output` = .data$LowVisRaw,
-  #                 `Infrared Light Sensor Raw Output` = .data$IRRaw,
-  #                 `UV Light Sensor Raw Output` = .data$UVRaw,
-  #                 `PM Measurement Count (# per log interval)` = .data$PMMeasCnt,
-  #                 `PM1.0 Mass Concentration (ug*m^-3)` = .data$PM1MC,
-  #                 `PM1.0 Mass Concentration Variance (ug*m^-3)` = .data$PM1MCVar,
-  #                 `PM2.5 Mass Concentration (ug*m^-3)` = .data$PM2_5MC,
-  #                 `PM2.5 Mass Concentration Variance (ug*m^-3)` = .data$PM2_5MCVar,
-  #                 `PM4.0 Mass Concentration (ug*m^-3)` = .data$PM4MC,
-  #                 `PM4.0 Mass Concentration Variance (ug*m^-3)` = .data$PM4MCVar,
-  #                 `PM10 Mass Concentration (ug*m^-3)` = .data$PM10MC,
-  #                 `PM10 Mass Concentration Variance (ug*m^-3)` = .data$PM10MCVar,
-  #                 `PM0.5 Particle Concentration (#*cm^-3)` = .data$PM0_5NC,
-  #                 `PM0.5 Particle Concentration Variance (#*cm^-3)` = .data$PM0_5NCVar,
-  #                 `PM1.0 Particle Concentration (#*cm^-3)` = .data$PM1NC,
-  #                 `PM1.0 Particle Concentration Variance (#*cm^-3)` = .data$PM1NCVar,
-  #                 `PM2.5 Particle Concentration (#*cm^-3)` = .data$PM2_5NC,
-  #                 `PM2.5 Particle Concentration Variance (#*cm^-3)` = .data$PM2_5NCVar,
-  #                 `PM4.0 Particle Concentration (#*cm^-3)` = .data$PM4NC,
-  #                 `PM4.0 Particle Concentration Variance (#*cm^-3)` = .data$PM4NCVar,
-  #                 `PM10 Particle Concentration (#*cm^-3)` = .data$PM10NC,
-  #                 `PM10 Particle Concentration Variance (#*cm^-3)` = .data$PM10NCVar,
-  #                 `PM Typical Particle Size (um)` = .data$PMtypicalParticleSize,
-  #                 `PM Typical Particle Size Variance (um)` = .data$PMtypicalParticleSizeVar,
-  #                 `PM2.5 Sampled Mass (ug)` = .data$PM2_5SampledMass,
-  #                 `PCB1 T (C)` = .data$PCB1T,
-  #                 `PCB2 T (C)` = .data$PCB2T,
-  #                 `Downstream of Filter T (C)` = .data$FdpT,
-  #                 `Accelerometer T (C)` = .data$AccelT,
-  #                 `RTD Sensor Resistance (ohm)` = .data$PT100R,
-  #                 `PCB2 P (hPa)` = .data$PCB2P,
-  #                 `Main Pump Power Level (integer)` = .data$PumpPow1,
-  #                 `Secondary Pump Power Level (integer)` = .data$PumpPow2,
-  #                 `Pump Voltage Input (V)` = .data$PumpV,
-  #                 `Mass Flow Rate (g/min)` = .data$MassFlow,
-  #                 `Mass Flow Sensor Output (V)` = .data$MFSVout,
-  #                 `Battery Fuel Gauge Output (16-bit integer)` = .data$BFGenergy,
-  #                 `Battery Voltage (V)` = .data$BattVolt,
-  #                 `3.3V Rail Voltage (V)` = .data$v3_3,
-  #                 `5V Rail Voltage (V)` = .data$v5,
-  #                 `Pumps Operational State (bool)` = .data$PumpsON,
-  #                 #`Dead(bool)` = .data$Dead,
-  #                 `Battery Charge Indicator 1 (bool)` = .data$BCS1,
-  #                 `Battery Charge Indicator 2 (bool)` = .data$BCS2,
-  #                 `External Power Indicator (bool)` = .data$BC_NPG,
-  #                 `Time to Read/Write Log File Line (s)` = .data$FLOWCTL,
-  #                 `Time to Read GPS Data (s)` = .data$GPSRT,
-  #                 `Time to Write SD Card Log File Line (s)` = .data$SD_DATAW,
-  #                 `Time to Update SD Card Log File Header (s)` = .data$SD_HEADW,
-  #                 `Time Pumps OFF Per Log Interval (s)` = .data$TPumpsOFF,
-  #                 `Time Pumps ON Per Log Interval (s)` = .data$TPumpsON)
-  #
-  #   if(df_h$FirmwareRev>=110) {
-  #     df <- df %>%
-  #       dplyr::rename(`CO2 Concentration (ppm)` = .data$CO2,
-  #                   `CO2 Sensor Temperature (C)` = .data$SCDT,
-  #                   `CO2 Sensor RH (%RH)` = .data$SCDRH,
-  #                   `VOC Sensor Raw Output` = .data$VOCRaw,
-  #                   `NOx Sensor Raw Output` = .data$NOXRaw
-  #
-  #     )
-  #   }
-  # }
+  #Figure out whether to scale the x-axis in minutes or hours
+  if(max(df$SampleTime, na.rm=T) < as.difftime(3, units="hours")){
+    df <- df %>% dplyr::mutate(SampleTime = as.difftime(
+      as.numeric(
+      sapply(.data$SampleTime, `[`, 1)), units="mins"))
+    #x_text  <- "Sample time (minutes)"
+  }else{
+    df <- df %>% dplyr::mutate(SampleTime = as.difftime(
+      as.numeric(
+      sapply(.data$SampleTime, `[`, 1)), units="hours"))
+    #x_text  <-"Sample time (hours)"
+  }
+
+  #x_scale <- set_x_axis(df_plot$SampleTime)
+  #x_text <- "Unix Time (s)"
 
   return(df)
 }
@@ -245,22 +131,22 @@ shiny_log = function(df, df_h) {
 #' @examples
 #' plot_label <- shiny_axis(column_name)
 
-shiny_axis = function(clm_name, fract_units = FALSE){
+shiny_axis = function(clm_name, df_log, fract_units = FALSE){
 
   #TODO Check that this covers all possible log file variables (might be nice to add standard v2 log file titles so this can be used with standard v2 file)
-  df <- data.frame(SampleTime = c("Sample Time", "(s)"),
-                   UnixTime = c("Unix Time", "(s)"),
-                   DateTimeUTC = c("Date Time UTC", ""),
-                   DateTimeLocal = c("Date Time Local", ""),
-                   TZOffset = c("Time Zone Offset", "(hrs)"),
-                   PumpingFlowRate = c("Pumping Flow Rate", "(L min^-1)"),
-                   SampledVolume = c("Sampled Volume", "(L)"),
-                   FilterDP = c("Filter Differential Pressure", "(Pa)"),
-                   AtmoT = c("Atmospheric T", "(C)"),
-                   AtmoP = c("Atmospheric P", "(hPa)"),
-                   AtmoRH = c("Atmospheric RH", "(%RH)"),
-                   AtmoDensity = c("Atmospheric Density", "(g L^-1)"),
-                   GPSQual = c("GPS Signal Quality", "(NMEA Standard)"),
+  df <- data.frame(SampleTime = c("Sample Time", "(Hr)"),
+                  UnixTime = c("Unix Time", "(s)"),
+                  DateTimeUTC = c("Date Time UTC", ""),
+                  DateTimeLocal = c("Date Time Local", ""),
+                  TZOffset = c("Time Zone Offset", "(hrs)"),
+                  PumpingFlowRate = c("Pumping Flow Rate", "(L min^-1)"),
+                  SampledVolume = c("Sampled Volume", "(L)"),
+                  FilterDP = c("Filter Differential Pressure", "(Pa)"),
+                  AtmoT = c("Atmospheric T", "(C)"),
+                  AtmoP = c("Atmospheric P", "(hPa)"),
+                  AtmoRH = c("Atmospheric RH", "(%RH)"),
+                  AtmoDensity = c("Atmospheric Density", "(g L^-1)"),
+                  GPSQual = c("GPS Signal Quality", "(NMEA Standard)"),
                   GPSlat = c("GPS Latitude", "(decimalDegrees)"),
                   GPSlon = c("GPS Longitude", "(decimalDegrees)"),
                   GPSalt = c("GPS Altitude", "(m)"),

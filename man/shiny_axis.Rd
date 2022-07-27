@@ -5,7 +5,7 @@
 \title{Rename UPAS log file single column name
 to be more user friendly for the Shiny app plot}
 \usage{
-shiny_axis(clm_name, fract_units = FALSE)
+shiny_axis(clm_name, df_log, fract_units = FALSE)
 }
 \arguments{
 \item{clm_name}{Pass a UPAS v2 or v2+ log column name from a formatted data frame.}

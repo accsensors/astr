@@ -2,24 +2,22 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_log}
 \alias{shiny_log}
-\title{Rename UPAS log file data frame columns
+\title{Format specific UPAS log file data frame columns
 to be more user friendly for the Shiny app}
 \usage{
-shiny_log(df, df_h)
+shiny_log(df)
 }
 \arguments{
 \item{df}{Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.}
-
-\item{df_h}{Pass a UPAS v2 or v2+ header data frame from 'read_ast_log' function.}
 }
 \value{
-A modified data frame with units and user friendly column names for log data.
+A modified data frame with user friendly column names for log data.
 }
 \description{
-Rename UPAS log file data frame columns
+Format specific UPAS log file data frame columns
 to be more user friendly for the Shiny app
 }
 \examples{
-upasv2x_log_shiny <- shiny_log(upasv2x_log, upasv2x_header)
-upasv2_log_shiny <- shiny_log(upasv2_log, upasv2_header)
+upasv2x_log_shiny <- shiny_log(upasv2x_log)
+upasv2_log_shiny <- shiny_log(upasv2_log)
 }

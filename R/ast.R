@@ -216,7 +216,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
   df_h <- astr::format_ast_header(df_raw)
 
-  df <- astr::format_ast_log(df_h, df_raw, tz_offset, update_names, cols_keep, cols_drop, shiny)
+  df <- astr::format_ast_log(df_h, df_raw, tz_offset, update_names, cols_keep, cols_drop, shiny=shiny)
 
   return(df)
 
@@ -270,7 +270,7 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, co
 
       }
     }
-    if(shiny){df <- astr::shiny_log(df, df_h)}
+    if(shiny){df <- astr::shiny_log(df)}
   }
 
   return(df)
