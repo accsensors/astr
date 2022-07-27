@@ -99,21 +99,29 @@ shiny_header = function(df_h, fract_units = FALSE) {
 
 shiny_log = function(df) {
 
-  #Figure out whether to scale the x-axis in minutes or hours
-  if(max(df$SampleTime, na.rm=T) < as.difftime(3, units="hours")){
-    df <- df %>% dplyr::mutate(SampleTime = as.difftime(
-      as.numeric(
-      sapply(.data$SampleTime, `[`, 1)), units="mins"))
-    #x_text  <- "Sample time (minutes)"
-  }else{
-    df <- df %>% dplyr::mutate(SampleTime = as.difftime(
-      as.numeric(
-      sapply(.data$SampleTime, `[`, 1)), units="hours"))
-    #x_text  <-"Sample time (hours)"
-  }
+  # #Figure out whether to scale the x-axis in minutes or hours
+  # if(max(df$SampleTime, na.rm=T) < as.difftime(3, units="hours")){
+  #   df <- df %>% dplyr::mutate(SampleTime = as.difftime(
+  #     as.numeric(
+  #     sapply(.data$SampleTime, `[`, 1)), units="mins"))
+  #   #x_text  <- "Sample time (minutes)"
+  # }else{
+  #   df <- df %>% dplyr::mutate(SampleTime = as.difftime(
+  #     as.numeric(
+  #     sapply(.data$SampleTime, `[`, 1)), units="hours"))
+  #   #x_text  <-"Sample time (hours)"
+  # }
 
-  #x_scale <- set_x_axis(df_plot$SampleTime)
-  #x_text <- "Unix Time (s)"
+  if("SampleTime" %in% colnames(df)){
+  #Figure out whether to scale the x-axis in minutes or hours
+  # if(max(df_log$SampleTime, na.rm=T) < as.difftime(3, units="hours")){
+  #   df<- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="mins"))
+  #   x_text  <- "Sample time (minutes)"
+  # }else{
+    df <- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="hours"))
+  #   x_text  <-"Sample time (hours)"
+  # }
+  }
 
   return(df)
 }
@@ -131,14 +139,14 @@ shiny_log = function(df) {
 #' @examples
 #' plot_label <- shiny_axis(column_name)
 
-shiny_axis = function(clm_name, df_log, fract_units = FALSE){
+shiny_axis = function(clm_name, fract_units = FALSE){
 
   #TODO Check that this covers all possible log file variables (might be nice to add standard v2 log file titles so this can be used with standard v2 file)
   df <- data.frame(SampleTime = c("Sample Time", "(Hr)"),
                   UnixTime = c("Unix Time", "(s)"),
                   DateTimeUTC = c("Date Time UTC", ""),
                   DateTimeLocal = c("Date Time Local", ""),
-                  TZOffset = c("Time Zone Offset", "(hrs)"),
+                  TZOffset = c("Time Zone Offset", "(Hr)"),
                   PumpingFlowRate = c("Pumping Flow Rate", "(L min^-1)"),
                   SampledVolume = c("Sampled Volume", "(L)"),
                   FilterDP = c("Filter Differential Pressure", "(Pa)"),
