@@ -14,6 +14,14 @@
 
 shiny_header = function(df_h, fract_units = FALSE) {
 
+  if(("ProgrammedRuntime") %in% colnames(df_h)){
+    df_h <- df_h %>%
+      dplyr::mutate(ProgrammedRuntime =
+                      ifelse(ASTSampler=="UPAS_v2_0",
+                             ifelse(ProgrammedRuntime==360000000, "indefinite", ProgrammedRuntime/3600),
+                             ProgrammedRuntime))
+  }
+
   df_h <- df_h %>%
     dplyr::rename_with(
       ~ dplyr::case_when(
@@ -99,28 +107,8 @@ shiny_header = function(df_h, fract_units = FALSE) {
 
 shiny_log = function(df) {
 
-  # #Figure out whether to scale the x-axis in minutes or hours
-  # if(max(df$SampleTime, na.rm=T) < as.difftime(3, units="hours")){
-  #   df <- df %>% dplyr::mutate(SampleTime = as.difftime(
-  #     as.numeric(
-  #     sapply(.data$SampleTime, `[`, 1)), units="mins"))
-  #   #x_text  <- "Sample time (minutes)"
-  # }else{
-  #   df <- df %>% dplyr::mutate(SampleTime = as.difftime(
-  #     as.numeric(
-  #     sapply(.data$SampleTime, `[`, 1)), units="hours"))
-  #   #x_text  <-"Sample time (hours)"
-  # }
-
   if("SampleTime" %in% colnames(df)){
-  #Figure out whether to scale the x-axis in minutes or hours
-  # if(max(df_log$SampleTime, na.rm=T) < as.difftime(3, units="hours")){
-  #   df<- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="mins"))
-  #   x_text  <- "Sample time (minutes)"
-  # }else{
     df <- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="hours"))
-  #   x_text  <-"Sample time (hours)"
-  # }
   }
 
   return(df)
