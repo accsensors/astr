@@ -111,10 +111,6 @@ shiny_log = function(df) {
     df <- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="hours"))
   }
 
-  if("DateTimeUTC" %in% colnames(df)){
-    df <- df %>% dplyr::mutate(DateTimeUTC = as.POSIXct(DateTimeUTC))
-  }
-
   return(df)
 }
 
