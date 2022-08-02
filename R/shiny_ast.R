@@ -108,7 +108,7 @@ shiny_header = function(df_h, fract_units = FALSE) {
 shiny_log = function(df) {
 
   df <- df %>%
-    dplyr::select(-dplyr::any_of(c("tz_value",
+    dplyr::select(!dplyr::any_of(c("tz_value",
                    "ASTsampler",
                    "SampleName",
                    "CartrideID",
