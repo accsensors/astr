@@ -107,6 +107,16 @@ shiny_header = function(df_h, fract_units = FALSE) {
 
 shiny_log = function(df) {
 
+  df <- df %>%
+    select(-any_of("tz_value",
+                   "ASTsampler",
+                   "SampleName",
+                   "CartrideID",
+                   "StartDateTimeUTC",
+                   "LogFileMode",
+                   "LogFilename"))
+
+
   if("SampleTime" %in% colnames(df)){
     df <- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="hours"))
   }
