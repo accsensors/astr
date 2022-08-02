@@ -109,9 +109,9 @@ shiny_log = function(df) {
 
   df <- df %>%
     dplyr::select(!dplyr::any_of(c("tz_value",
-                   "ASTsampler",
+                   "ASTSampler",
                    "SampleName",
-                   "CartrideID",
+                   "CartridgeID",
                    "StartDateTimeUTC",
                    "LogFileMode",
                    "LogFilename")))
