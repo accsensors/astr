@@ -228,8 +228,8 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_sample_summary <- upas2x_sample_summary(upasv2x_header, upasv2x_log)
-#' upasv2x_sample_summary <- upas2x_sample_summary(upasv2x_header)
+#' upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header, upasv2x_log)
+#' upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header)
 
 upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALSE) {
 
@@ -274,7 +274,7 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_sample_settings <- upas2x_sample_settings(upasv2x_header)
+#' upasv2x_sample_settings <- upasv2x_sample_settings(upasv2x_header)
 
 upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
@@ -307,7 +307,7 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_sample_meta <- upas2x_sample_meta(upasv2x_header)
+#' upasv2x_sample_meta <- upasv2x_sample_meta(upasv2x_header)
 
 upasv2x_sample_meta = function(df_h, shiny=FALSE, fract_units=FALSE) {
 

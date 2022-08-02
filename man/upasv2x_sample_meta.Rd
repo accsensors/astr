@@ -18,5 +18,5 @@ Create sample metadata dataframe from an Access Sensor Technologies (AST)
 air sampler header dataframe
 }
 \examples{
-upasv2x_sample_meta <- upas2x_sample_meta(upasv2x_header)
+upasv2x_sample_meta <- upasv2x_sample_meta(upasv2x_header)
 }

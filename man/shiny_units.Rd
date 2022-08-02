@@ -16,7 +16,3 @@ standard UPASv2 and UPASv2+ log file unit format
 \description{
 Reformat units for shinyAST app
 }
-\examples{
-colnames(upasv2x_header_shiny) <- shiny_units(colnames(upasv2x_header_shiny)
-clm_name <- shiny_units(clm_name)
-}

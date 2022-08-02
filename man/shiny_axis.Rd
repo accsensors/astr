@@ -20,5 +20,5 @@ Rename UPAS log file single column name
 to be more user friendly for the Shiny app plot
 }
 \examples{
-plot_label <- shiny_axis(column_name)
+plot_label <- shiny_axis(colnames(upasv2x_log))
 }

@@ -103,7 +103,6 @@ shiny_header = function(df_h, fract_units = FALSE) {
 #'
 #' @examples
 #' upasv2x_log_shiny <- shiny_log(upasv2x_log)
-#' upasv2_log_shiny <- shiny_log(upasv2_log)
 
 shiny_log = function(df) {
 
@@ -135,7 +134,7 @@ shiny_log = function(df) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' plot_label <- shiny_axis(column_name)
+#' plot_label <- shiny_axis(colnames(upasv2x_log))
 
 shiny_axis = function(clm_name, fract_units = FALSE){
 
@@ -259,7 +258,7 @@ shiny_axis = function(clm_name, fract_units = FALSE){
                   )
 
     df_sel <- df %>%
-      dplyr::select(dplyr::all_of(clm_name))
+      dplyr::select(dplyr::any_of(clm_name))
 
     clm_name <- paste(df_sel["axis_name",], df_sel["unit",], sep=" ")
 
@@ -289,8 +288,7 @@ shiny_axis = function(clm_name, fract_units = FALSE){
 #' @importFrom rlang .data
 #'
 #' @examples
-#' colnames(upasv2x_header_shiny) <- shiny_units(colnames(upasv2x_header_shiny)
-#' clm_name <- shiny_units(clm_name)
+
 
 shiny_units = function(vect){
   vect <- gsub("L min^-1", "L/min", fixed=TRUE,
