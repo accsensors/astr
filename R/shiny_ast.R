@@ -108,13 +108,13 @@ shiny_header = function(df_h, fract_units = FALSE) {
 shiny_log = function(df) {
 
   df <- df %>%
-    dplyr::select(-dplyr::any_of("tz_value",
-                   "ASTsampler",
-                   "SampleName",
-                   "CartrideID",
-                   "StartDateTimeUTC",
-                   "LogFileMode",
-                   "LogFilename"))
+    dplyr::select(-(dplyr::any_of(tz_value,
+                   ASTsampler,
+                   SampleName,
+                   CartrideID,
+                   StartDateTimeUTC,
+                   LogFileMode,
+                   LogFilename)))
 
 
   if("SampleTime" %in% colnames(df)){
