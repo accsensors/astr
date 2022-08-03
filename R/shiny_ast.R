@@ -322,9 +322,9 @@ shiny_flag = function(df_h) {
   df_h <- df_h %>%
     dplyr::mutate(SampleSuccess = dplyr::case_when(
                                             ProgrammedRuntime=="indefinite" ~ "PASS",
-                                            OverallDuration!=ProgrammedRuntime ~ "FAIL",
-                                            # ShutdownMode == 1  ~ "PASS",
-                                            # ShutdownMode == 3 ~ "PASS",
+                                            OverallDuration==ProgrammedRuntime ~ "PASS",
+                                            ShutdownMode == 1  ~ "PASS",
+                                            ShutdownMode == 3 ~ "PASS",
                                             TRUE ~ "END"
                                             ))
   return(df_h)
