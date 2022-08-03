@@ -325,6 +325,7 @@ shiny_flag = function(df_h) {
                                             OverallDuration!=ProgrammedRuntime ~ "FAIL",
                                             ShutdownMode == 1  ~ "PASS",
                                             ShutdownMode == 3 ~ "PASS",
-                                            TRUE ~ "FAIL"))
+                                            TRUE ~ "FAIL"
+                                            ))
   return(df_h)
 }
