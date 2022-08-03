@@ -233,12 +233,15 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
 
 upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALSE) {
 
+  df_h <- astr::shiny_flag(df_h)
+
   sample_summary_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','SampleName','CartridgeID',
                                   'SampledRuntime', 'OverallDuration', 'PumpingDuration',
                                 'PumpingFlowRateAverage', 'OverallFlowRateAverage',
                                 'PM25SampledMass',
-                                'SampledVolume','ShutdownReason'))) %>%
+                                'SampledVolume','ShutdownReason',
+                                'SampleSuccess'))) %>%
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('SampledRuntime',
                                                         'AverageVolumetricFlowRate',
                                    'PM25SampledMass',
@@ -278,6 +281,8 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
 
 upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
+  df_h <- astr::shiny_flag(df_h)
+
   sample_settings_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
                                   'StartOnNextPowerUp','ProgrammedStartDelay',
@@ -287,7 +292,8 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
                                   'FlowDutyCycle','GPSEnabled',
                                   'PMSensorOperation','RTGasSampleState',
                                   'LogInterval',
-                                  'PowerSaveMode','AppVersion'))) %>%
+                                  'PowerSaveMode','AppVersion',
+                                  'SampleSuccess'))) %>%
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   if(shiny){
@@ -311,12 +317,15 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
 upasv2x_sample_meta = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
+  df_h <- astr::shiny_flag(df_h)
+
   sample_meta_df <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','PMSerial','SampleName',
                                 'CartridgeID','StartDateTimeUTC',
                   'EndDateTimeUTC','StartBatteryVoltage','EndBatteryVoltage',
                   'StartBatteryCharge','EndBatteryCharge',
-                  'GPSUTCOffset','FirmwareRev','ShutdownMode'))) %>%
+                  'GPSUTCOffset','FirmwareRev','ShutdownMode',
+                  'SampleSuccess'))) %>%
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   if(shiny){

@@ -22,6 +22,7 @@ shiny_header = function(df_h, fract_units = FALSE) {
                              ProgrammedRuntime))
   }
 
+
   df_h <- df_h %>%
     dplyr::rename_with(
       ~ dplyr::case_when(
@@ -301,4 +302,26 @@ shiny_units = function(vect){
                x=vect)))))))
 
   return(vect)
+}
+
+#'Add a flag to the shiny header indicating a failed sample.
+#'Can be used to highlight rows in the shinyAST app
+#'
+#' @param df_h Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.
+#'
+#' @return A modified data frame with a flag indicating a failed sample.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2x_header_flagged <- shiny_flag(upasv2x_header)
+#' upasv2_header_flaggged <- shiny_flag(upasv2_header)
+
+shiny_flag = function(df_h) {
+
+  df_h <- df_h %>%
+    dplyr::mutate(SampleSuccess = case_when(ShutdownMode != (1|3) ~ "FAIL",
+                                            OverallDuration != ProgrammedRuntime ~ "FAIL",
+                                            TRUE ~ "PASS"))
+  return(df_h)
 }
