@@ -235,7 +235,7 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
 
   df_h <- astr::shiny_flag(df_h)
 
-  sample_summary_df <- df_h %>%
+  df_h <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','SampleName','CartridgeID',
                                   'SampledRuntime', 'OverallDuration', 'PumpingDuration',
                                 'PumpingFlowRateAverage', 'OverallFlowRateAverage',
@@ -250,21 +250,21 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
 
     if(!is.null(df)){
       if(any(grepl('PM2_5SampledMass', names(df)))){
-        sample_summary_df$PM2_5SampledMass <- max(df$PM2_5SampledMass)
+        df_h$PM2_5SampledMass <- max(df$PM2_5SampledMass)
       }
     }
 
-    if(any(grepl('PM25SampledMass', names(sample_summary_df)))){
-      sample_summary_df <- sample_summary_df %>%
+    if(any(grepl('PM25SampledMass', names(df_h)))){
+      df_h <- df_h %>%
       dplyr::mutate(PM25Concentration = .data$PM25SampledMass/(.data$SampledVolume/1000),
                     dplyr::across(where(is.numeric), ~ round(., digits = 3)))
     }
 
   if(shiny){
-    sample_summary_df <- astr::shiny_header(sample_summary_df, fract_units=fract_units)
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
   }
 
-  return(sample_summary_df)
+  return(df_h)
 }
 
 #'Create sample settings dataframe from an Access Sensor Technologies (AST)
@@ -283,7 +283,7 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
   df_h <- astr::shiny_flag(df_h)
 
-  sample_settings_df <- df_h %>%
+  df_h <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
                                   'StartOnNextPowerUp','ProgrammedStartDelay',
                                   'ProgrammedStartTime','ProgrammedRuntime',
@@ -297,10 +297,10 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   if(shiny){
-    sample_settings_df <- astr::shiny_header(sample_settings_df, fract_units=fract_units)
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
   }
 
-  return(sample_settings_df)
+  return(df_h)
 }
 
 #'Create sample metadata dataframe from an Access Sensor Technologies (AST)
@@ -319,7 +319,7 @@ upasv2x_sample_meta = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
   df_h <- astr::shiny_flag(df_h)
 
-  sample_meta_df <- df_h %>%
+  df_h <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','PMSerial','SampleName',
                                 'CartridgeID','StartDateTimeUTC',
                   'EndDateTimeUTC','StartBatteryVoltage','EndBatteryVoltage',
@@ -329,9 +329,9 @@ upasv2x_sample_meta = function(df_h, shiny=FALSE, fract_units=FALSE) {
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   if(shiny){
-    sample_meta_df <- astr::shiny_header(sample_meta_df, fract_units=fract_units)
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
     }
 
 
-  return(sample_meta_df)
+  return(df_h)
 }
