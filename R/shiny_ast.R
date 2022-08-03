@@ -320,7 +320,7 @@ shiny_units = function(vect){
 shiny_flag = function(df_h) {
 
   df_h <- df_h %>%
-    dplyr::mutate(SampleSuccess = dplyr::case_when(as.numeric(ShutdownMode) != 3 ~ "FAIL",
+    dplyr::mutate(SampleSuccess = dplyr::case_when(as.numeric(ShutdownMode) != (1|3) ~ "FAIL",
                                             #OverallDuration != ProgrammedRuntime ~ "FAIL",
                                             TRUE ~ "PASS"))
   return(df_h)
