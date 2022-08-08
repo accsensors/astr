@@ -237,11 +237,12 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
 
   df_h <- df_h %>%
     dplyr::select(dplyr::any_of(c('ASTSampler', 'UPASserial','SampleName','CartridgeID',
+                                  'SampleSuccess',
                                   'SampledRuntime', 'OverallDuration', 'PumpingDuration',
                                 'PumpingFlowRateAverage', 'OverallFlowRateAverage',
                                 'PM25SampledMass',
-                                'SampledVolume','ShutdownReason',
-                                'SampleSuccess'))) %>%
+                                'SampledVolume','ShutdownReason'
+                                ))) %>%
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('SampledRuntime',
                                                         'AverageVolumetricFlowRate',
                                    'PM25SampledMass',
@@ -293,7 +294,8 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
                                   'PMSensorOperation','RTGasSampleState',
                                   'LogInterval',
                                   'PowerSaveMode','AppVersion',
-                                  'SampleSuccess'))) %>%
+                                  'SampleSuccess'
+                                  ))) %>%
     dplyr::mutate(dplyr::across(.cols = dplyr::any_of(c('ASTSampler', 'UPASserial')), .fns = as.factor))
 
   if(shiny){
