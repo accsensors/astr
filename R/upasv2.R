@@ -131,9 +131,12 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 
 #' Read the log data from a UPASv2 log file
 #'
-#' @param df A UPASv2 dataframe
+#' @param df_h A UPASv2 header dataframe
+#' @param df_raw A UPASv2 raw dataframe
 #' @param update_names Convert old log file column names to match current log
 #' file names.
+#' @param tz_offset Pass an option timezone offset.
+#' @param update_names Option to update old sampler names to latest version.
 #'
 #' @return A data frame.
 #' @export

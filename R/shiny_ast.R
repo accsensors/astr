@@ -289,7 +289,7 @@ shiny_axis = function(clm_name, fract_units = FALSE){
 #' @importFrom rlang .data
 #'
 #' @examples
-
+#'
 
 shiny_units = function(vect){
   vect <- gsub("L min^-1", "L/min", fixed=TRUE,

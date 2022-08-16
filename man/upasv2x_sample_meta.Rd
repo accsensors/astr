@@ -9,6 +9,10 @@ upasv2x_sample_meta(df_h, shiny = FALSE, fract_units = FALSE)
 }
 \arguments{
 \item{df_h}{Pass a upasv2x header dataframe from read_ast_header function.}
+
+\item{shiny}{Option to make TRUE if using function with AST shiny app.}
+
+\item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}
 }
 \value{
 A modified data frame with only the sample settings data.

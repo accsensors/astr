@@ -3,6 +3,7 @@
 #'
 #' @param file Any AST air sampler  log file name.
 #' @param update_names Option to update old sampler names to latest version.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
 #' @return A data frame with header data in wide format.
 #' @export
@@ -69,6 +70,7 @@ read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 #'
 #' @param df_h_raw Any AST air sampler unformatted header dataframe.
 #' @param update_names Option to update old sampler names to latest version.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
 #' @return A data frame with header data in wide format.
 #' @export
@@ -158,8 +160,12 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 #'log file
 #'
 #' @param file Any AST air sampler log file name.
-#' @param tz_offset Pass an option timezone offset
-
+#' @param tz_offset Pass an option timezone offset.
+#' @param update_names Option to update old sampler names to latest version.
+#' @param cols_keep Specify log file columns to keep.
+#' @param cols_drop Specify log file columns to remove.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
+#'
 #' @return A data frame with all log data plus some header data appended.
 #' @export
 #' @importFrom rlang .data
@@ -226,7 +232,11 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 #'
 #' @param df_h An AST air sampler formatted log file header dataframe.
 #' @param df_raw Any AST air sampler unformatted log file dataframe.
-#' @param tz_offset Pass an option timezone offset
+#' @param tz_offset Pass an option timezone offset.
+#' @param update_names Option to update old sampler names to latest version.
+#' @param cols_keep Specify log file columns to keep.
+#' @param cols_drop Specify log file columns to remove.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
 #' @return A data frame with all log data.
 #' @export

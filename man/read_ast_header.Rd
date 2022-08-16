@@ -11,6 +11,8 @@ read_ast_header(file, update_names = FALSE, shiny = FALSE)
 \item{file}{Any AST air sampler  log file name.}
 
 \item{update_names}{Option to update old sampler names to latest version.}
+
+\item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
 A data frame with header data in wide format.

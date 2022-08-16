@@ -11,6 +11,8 @@ format_ast_header(df_h_raw, update_names = FALSE, shiny = FALSE)
 \item{df_h_raw}{Any AST air sampler unformatted header dataframe.}
 
 \item{update_names}{Option to update old sampler names to latest version.}
+
+\item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
 A data frame with header data in wide format.

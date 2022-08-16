@@ -138,7 +138,9 @@ format_upasv2x_header = function(df_h) {
 #'
 #' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
 #' @param df Pass a upasv2x dataframe from read_ast_header function.
-#' @param tz_offset Pass an optional timezone offset value
+#' @param tz_offset Pass an optional timezone offset value.
+#' @param cols_keep Specify log file columns to keep.
+#' @param cols_drop Specify log file columns to remove.
 #'
 #' @return A modified data frame with all log data.
 #' @export
@@ -210,7 +212,7 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
       dplyr::select(cols_keep)
   }else if(!is.null(cols_drop)){
     df <- df %>%
-      dplyr::select(-cols_keep)
+      dplyr::select(-cols_drop)
   }
 
   return(df)
@@ -222,6 +224,9 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
 #'air sampler header dataframe
 #'
 #' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
+#' @param df Pass a upasv2x dataframe from read_ast_header function.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
+#' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).loa
 #'
 #' @return A modified data frame with only the sample summary data.
 #' @export
@@ -272,6 +277,8 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
 #'air sampler header dataframe
 #'
 #' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
+#' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
 #' @return A modified data frame with only the sample settings data.
 #' @export
@@ -309,6 +316,8 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 #'air sampler header dataframe
 #'
 #' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
+#' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
 #' @return A modified data frame with only the sample settings data.
 #' @export
