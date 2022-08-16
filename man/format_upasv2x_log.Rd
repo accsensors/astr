@@ -12,7 +12,11 @@ format_upasv2x_log(df_h, df, tz_offset = NA, cols_keep = c(), cols_drop = c())
 
 \item{df}{Pass a upasv2x dataframe from read_ast_header function.}
 
-\item{tz_offset}{Pass an optional timezone offset value}
+\item{tz_offset}{Pass an optional timezone offset value.}
+
+\item{cols_keep}{Specify log file columns to keep.}
+
+\item{cols_drop}{Specify log file columns to remove.}
 }
 \value{
 A modified data frame with all log data.

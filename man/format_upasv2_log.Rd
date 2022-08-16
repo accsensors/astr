@@ -7,10 +7,13 @@
 format_upasv2_log(df_h, df_raw, tz_offset = NA, update_names = FALSE)
 }
 \arguments{
-\item{update_names}{Convert old log file column names to match current log
-file names.}
+\item{df_h}{A UPASv2 header dataframe}
 
-\item{df}{A UPASv2 dataframe}
+\item{df_raw}{A UPASv2 raw dataframe}
+
+\item{tz_offset}{Pass an option timezone offset.}
+
+\item{update_names}{Option to update old sampler names to latest version.}
 }
 \value{
 A data frame.

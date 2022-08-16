@@ -15,7 +15,7 @@ Authors:
 \itemize{
   \item Jessica Tryner \email{jtryner@accsensors.com} (\href{https://orcid.org/0000-0002-0522-4551}{ORCID})
   \item Ander Wilson \email{ander.wilson@colostate.edu} (\href{https://orcid.org/0000-0003-4774-3883}{ORCID})
-  \item Gabe Neymark \email{gneymark@accsensors.com}
+  \item Gabe Neymark \email{gneymark@accsensors.com} (\href{https://orcid.org/0000-0003-0720-1908}{ORCID})
 }
 
 Other contributors:

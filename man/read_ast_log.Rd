@@ -10,13 +10,22 @@ read_ast_log(
   tz_offset = NA,
   update_names = FALSE,
   cols_keep = c(),
-  cols_drop = c()
+  cols_drop = c(),
+  shiny = FALSE
 )
 }
 \arguments{
-\item{file}{Any AST air sampler  log file name.}
+\item{file}{Any AST air sampler log file name.}
 
-\item{tz_offset}{Pass an option timezone offset}
+\item{tz_offset}{Pass an option timezone offset.}
+
+\item{update_names}{Option to update old sampler names to latest version.}
+
+\item{cols_keep}{Specify log file columns to keep.}
+
+\item{cols_drop}{Specify log file columns to remove.}
+
+\item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
 A data frame with all log data plus some header data appended.

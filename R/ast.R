@@ -3,6 +3,7 @@
 #'
 #' @param file Any AST air sampler  log file name.
 #' @param update_names Option to update old sampler names to latest version.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
 #' @return A data frame with header data in wide format.
 #' @export
@@ -14,14 +15,16 @@
 #' upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 #' upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 #' upasv2x_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
-#' upasv2x_filename <- 'PSP00010_LOG_2022-05-13T17_29_29UTC_DIAG#___________----------.txt'
 #' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
 #' upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 
-read_ast_header = function(file, update_names=FALSE) {
+#TODO find a better spot for this utils code line
+#utils::globalVariables(c("V1", "V9", "across", "everything", "where")) # declares as global variables to get rid of note in check()
+
+read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
   df_h_raw <- data.table::fread(file=file, skip = 0, nrows=100, sep=',',
                           header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
@@ -56,7 +59,7 @@ read_ast_header = function(file, update_names=FALSE) {
 
   }
 
-  df_h <- astr::format_ast_header(df_h_raw, update_names)
+  df_h <- astr::format_ast_header(df_h_raw, update_names=update_names, shiny=shiny)
 
   return(df_h)
 }
@@ -67,6 +70,7 @@ read_ast_header = function(file, update_names=FALSE) {
 #'
 #' @param df_h_raw Any AST air sampler unformatted header dataframe.
 #' @param update_names Option to update old sampler names to latest version.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
 #' @return A data frame with header data in wide format.
 #' @export
@@ -75,7 +79,7 @@ read_ast_header = function(file, update_names=FALSE) {
 #' @examples
 #' data_ast_header <- format_ast_header(data_ast_raw, update_names=FALSE)
 
-format_ast_header = function(df_h_raw, update_names=FALSE) {
+format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 
   my_cols <- c('V1','V2')
 
@@ -139,15 +143,15 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
         df_h <- astr::format_upasv2x_header(df_h)
 
       }else if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_0')){
-
-        df_h <- astr::format_upasv2_header(df_h, update_names)
-
+        if(shiny) {update_names=TRUE}
+        df_h <- astr::format_upasv2_header(df_h, update_names=update_names)
       }
     # else if(stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
     #
     #   }
 
   }
+
   return(df_h)
 }
 
@@ -155,9 +159,13 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #'Read the full log data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
-#' @param file Any AST air sampler  log file name.
-#' @param tz_offset Pass an option timezone offset
-
+#' @param file Any AST air sampler log file name.
+#' @param tz_offset Pass an option timezone offset.
+#' @param update_names Option to update old sampler names to latest version.
+#' @param cols_keep Specify log file columns to keep.
+#' @param cols_drop Specify log file columns to remove.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
+#'
 #' @return A data frame with all log data plus some header data appended.
 #' @export
 #' @importFrom rlang .data
@@ -174,7 +182,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE) {
 #' data_ast_log <- read_ast_log(file2)
 #' data_ast_log <- read_ast_log(file2, cols_keep = c("SampleTime","UnixTime","DateTimeUTC","DateTimeLocal","PM2_5MC"))
 
-read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c()) {
+read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
 
   df_raw <- data.table::fread(file=file,
                               sep=',',
@@ -213,19 +221,22 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
   df_h <- astr::format_ast_header(df_raw)
 
-  df <- astr::format_ast_log(df_h, df_raw, tz_offset, update_names, cols_keep, cols_drop)
+  df <- astr::format_ast_log(df_h, df_raw, tz_offset, update_names, cols_keep, cols_drop, shiny=shiny)
 
   return(df)
 
 }
-
 
 #'Extract only the log data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
 #' @param df_h An AST air sampler formatted log file header dataframe.
 #' @param df_raw Any AST air sampler unformatted log file dataframe.
-#' @param tz_offset Pass an option timezone offset
+#' @param tz_offset Pass an option timezone offset.
+#' @param update_names Option to update old sampler names to latest version.
+#' @param cols_keep Specify log file columns to keep.
+#' @param cols_drop Specify log file columns to remove.
+#' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
 #' @return A data frame with all log data.
 #' @export
@@ -234,7 +245,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 #' @examples
 #' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
-format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c()) {
+format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
 
   df_cols <- df_raw %>%
     dplyr::slice(which(df_raw$V1=="SAMPLE LOG")+2) %>%
@@ -261,12 +272,14 @@ format_ast_log = function(df_h, df_raw, tz_offset = NA, update_names = FALSE, co
         df <- astr::format_upasv2x_log(df_h, df, tz_offset, cols_keep, cols_drop)
 
       }else if(df_h$ASTSampler == "UPAS_v2_0"){
-        df <- astr::format_upasv2_log(df_h, df, update_names = update_names)
+        if(shiny) {update_names=TRUE}
+        df <- astr::format_upasv2_log(df_h, df, update_names=update_names)
 
       }else{
 
       }
     }
+    if(shiny){df <- astr::shiny_log(df)}
   }
 
   return(df)
