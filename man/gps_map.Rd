@@ -2,7 +2,7 @@
 % Please edit documentation in R/shiny_ast.R
 \name{gps_map}
 \alias{gps_map}
-\title{Calculate 30 second averages for select variables}
+\title{Generate a gps map from a data frame with time-averaged data}
 \usage{
 gps_map(df)
 }
@@ -13,8 +13,5 @@ gps_map(df)
 A leaflet map of 30s averages of the selected variable.
 }
 \description{
-Calculate 30 second averages for select variables
-}
-\examples{
-upasv2x_30s_mean <- df_30s_mean(upasv2x_log)
+Generate a gps map from a data frame with time-averaged data
 }

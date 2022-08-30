@@ -393,7 +393,7 @@ get_30s_mean = function(df) {
   return(df_30s_mean)
 }
 
-#'Calculate 30 second averages for select variables
+#'Generate a gps map from a data frame with time-averaged data
 #'
 #' @param df Pass a UPAS v2+ log data frame from 'get_30s_mean' function.
 #'
@@ -402,7 +402,7 @@ get_30s_mean = function(df) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_30s_mean <- df_30s_mean(upasv2x_log)
+#'
 
 #TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
 gps_map = function(df) {
