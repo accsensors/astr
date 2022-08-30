@@ -367,8 +367,8 @@ get_30s_mean = function(df) {
                   var30AccelY = var(AccelY, na.rm = T),
                   mean30AccelZ = mean(AccelZ, na.rm = T),
                   var30AccelZ = var(AccelZ, na.rm = T),
-                  #mean30CO2 = mean(CO2, na.rm = T),
-                  #var30CO2 = var(CO2, na.rm = T),
+                  mean30CO2 = mean(CO2, na.rm = T),
+                  var30CO2 = var(CO2, na.rm = T),
                   mean30GPSlat = mean(GPSlat, na.rm = T),
                   mean30GPSlon = mean(GPSlon, na.rm = T)) %>%
     dplyr::select(UPASserial, datetime_local_rounded, mean30PM2_5MC:mean30GPSlon) %>%
@@ -407,32 +407,33 @@ get_30s_mean = function(df) {
 #TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
 gps_map = function(df) {
 
+  if("mean30PM2_5" %in% colnames(df)){
   gpsPMPlot_data <- df %>%
     dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
-    dplyr::mutate(aqi = as.factor(ifelse(mean30PM2_5MC<15.5, "Good",
-                                         ifelse(mean30PM2_5MC<40.5, "Moderate",
-                                                ifelse(mean30PM2_5MC<65.5, "USG",
-                                                       ifelse(mean30PM2_5MC<150.5, "Unhealthy",
-                                                              ifelse(mean30PM2_5MC<250.5, "Very Unhealthy",
-                                                                     "Hazardous"))))))) %>%
+    dplyr::mutate(aqi = as.factor(ifelse(mean30PM2_5MC<12.0, "Good",
+                                         ifelse(mean30PM2_5MC<35.4, "Moderate",
+                                         ifelse(mean30PM2_5MC<55.4, "USG",
+                                         ifelse(mean30PM2_5MC<150.4, "Unhealthy",
+                                         ifelse(mean30PM2_5MC<250.4, "Very Unhealthy",
+                                         "Hazardous"))))))) %>%
     dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200, mean30GPSlat<40.7)
 
   pal <- leaflet::colorFactor(palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF3300","#800080","#581D00"),
                      levels = c("Good", "Moderate", "USG", "Unhealthy, Very Unhealthy, Hazardous"))
 
   sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
-  # CRS(gpsPMPlot_data) <- CRS("+init=epsg:4326")
+  # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
 
   pm25_leaflet <- leaflet::leaflet() %>%
     leaflet::addTiles() %>%
     leaflet::addCircleMarkers(
       data=gpsPMPlot_data,color=~pal(aqi),
-      popup=paste("PM2.5:", round(gpsPMPlot_data$mean30PM2_5MC,digits=2),
+      popup=paste("PM2.5(ug/m^3):", round(gpsPMPlot_data$mean30PM2_5MC,digits=2),
                   "<br>","UPAS:", gpsPMPlot_data$UPASserial), stroke = FALSE,
       radius = 7.5, fillOpacity = 0.5,group=as.factor(gpsPMPlot_data$UPASserial)) %>%
-    # addLayersControl(overlayGroups = c(as.factor(gpsPMPlot_data$UPASserial)))
     leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
                      options = leaflet::layersControlOptions(collapsed = FALSE))
+  }
 
   return(pm25_leaflet)
 
