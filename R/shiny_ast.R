@@ -433,9 +433,15 @@ gps_map = function(df) {
       radius = 7.5, fillOpacity = 0.5,group=as.factor(gpsPMPlot_data$UPASserial)) %>%
     leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
                      options = leaflet::layersControlOptions(collapsed = FALSE))
-  }
-
   return(pm25_leaflet)
+  }
+  # Throw error if no 30s averaged PM data to map
+  else{
+    error <- "No PM data in log file"
+
+    return(error)
+
+  }
 
   # mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="40",],zcol="aqi")+
   #   mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="4",],zcol="aqi")+
