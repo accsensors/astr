@@ -411,11 +411,11 @@ gps_map = function(df) {
   gpsPMPlot_data <- df %>%
     dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(case_when(
-      mean30PM2_5MC<1.0 ~ "Good",
-      mean30PM2_5MC<1.1 ~ "Moderate",
-      mean30PM2_5MC<1.2 ~ "USG",
-      mean30PM2_5MC<1.3 ~ "Unhealthy",
-      mean30PM2_5MC<1.4 ~ "Very Unhealthy",
+      mean30PM2_5MC<12.0 ~ "Good",
+      mean30PM2_5MC<35.4 ~ "Moderate",
+      mean30PM2_5MC<55.4 ~ "USG",
+      mean30PM2_5MC<150.4 ~ "Unhealthy",
+      mean30PM2_5MC<250.4 ~ "Very Unhealthy",
       TRUE ~ "Hazardous"))) %>%
     dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200, mean30GPSlat<40.7)
 
@@ -429,9 +429,10 @@ gps_map = function(df) {
   # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
 
   pal <- leaflet::colorBin(
-    palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF3300","#800080","#581D00"),
+    # palette = c("#42c818", "#FFed20", "#FF9020","#FF0000","#9900C9","#7F0038"),
+    palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
     domain = gpsPMPlot_data$mean30PM2_5MC,
-    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, 350.4, 500.0),
+    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, 500.0),
   )
 
   pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
