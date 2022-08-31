@@ -407,7 +407,7 @@ get_30s_mean = function(df) {
 #TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
 gps_map = function(df) {
 
-  if("mean30PM2_5MC" %in% colnames(df)){
+  # if("mean30PM2_5MC" %in% colnames(df)){
   gpsPMPlot_data <- df %>%
     dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(case_when(
@@ -453,14 +453,14 @@ gps_map = function(df) {
 
   # return(gpsPMPlot_data)
   return(pm25_leaflet)
-  }
+  # }
   # Throw error if no 30s averaged PM data to map
-  else{
-    error <- "No PM data in log file"
-
-    return(error)
-
-  }
+  # else{
+  #   error <- "No PM data in log file"
+  #
+  #   return(error)
+  #
+  # }
 
   # mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="40",],zcol="aqi")+
   #   mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="4",],zcol="aqi")+
