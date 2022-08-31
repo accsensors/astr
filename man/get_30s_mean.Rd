@@ -16,5 +16,5 @@ A modified data frame with 30 second mean data for select variables.
 Calculate 30 second averages for select variables
 }
 \examples{
-upasv2x_30s_mean <- df_30s_mean(upasv2x_log)
+upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
 }

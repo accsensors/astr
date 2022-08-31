@@ -340,7 +340,7 @@ shiny_flag = function(df_h) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_30s_mean <- df_30s_mean(upasv2x_log)
+#' upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
 
 get_30s_mean = function(df) {
 
@@ -419,17 +419,10 @@ gps_map = function(df) {
       TRUE ~ "Hazardous"))) %>%
     dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200, mean30GPSlat<40.7)
 
-  # pal <- leaflet::colorFactor(palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF3300","#800080","#581D00"),
-  #                             #domain = gpsPMPlot_data$mean30PM2_5MC,
-  #                    levels = c("Good", "Moderate", "USG", "Unhealthy", "Very Unhealthy", "Hazardous"),
-  #                    # levels = aqi_group,
-  #                    ordered=FALSE)
-
   sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
   # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
 
   pal <- leaflet::colorBin(
-    # palette = c("#42c818", "#FFed20", "#FF9020","#FF0000","#9900C9","#7F0038"),
     palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
     domain = gpsPMPlot_data$mean30PM2_5MC,
     bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, 500.0),
@@ -454,6 +447,7 @@ gps_map = function(df) {
   # return(gpsPMPlot_data)
   return(pm25_leaflet)
   }
+
   # Throw error if no 30s averaged PM data to map
   else{
     error <- "No PM data in log file"
@@ -461,10 +455,6 @@ gps_map = function(df) {
     return(error)
 
   }
-
-  # mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="40",],zcol="aqi")+
-  #   mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="4",],zcol="aqi")+
-  #   mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="6",],zcol="aqi")
 
 }
 
