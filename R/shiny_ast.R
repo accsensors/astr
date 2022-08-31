@@ -419,41 +419,37 @@ gps_map = function(df) {
       TRUE ~ "Hazardous"))) %>%
     dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200, mean30GPSlat<40.7)
 
-  # aqi_group <- factor(
-  #   (gpsPMPlot_data$mean30PM2_5MC > 1.0) +
-  #     (gpsPMPlot_data$mean30PM2_5MC > 1.1) +
-  #     (gpsPMPlot_data$mean30PM2_5MC > 1.2) +
-  #     (gpsPMPlot_data$mean30PM2_5MC > 1.3) +
-  #     (gpsPMPlot_data$mean30PM2_5MC > 1.4),
-  #     #(gpsPMPlot_data$mean30PM2_5MC >= 1.4),
-  #   labels = c("Good", "Moderate", "USG", "Unhealthy", "Very Unhealthy", "Hazardous")
-  # )
-
-
-
-  pal <- leaflet::colorFactor(palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF3300","#800080","#581D00"),
-                              #domain = gpsPMPlot_data$mean30PM2_5MC,
-                     levels = c("Good", "Moderate", "USG", "Unhealthy", "Very Unhealthy", "Hazardous"),
-                     # levels = aqi_group,
-                     ordered=FALSE)
+  # pal <- leaflet::colorFactor(palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF3300","#800080","#581D00"),
+  #                             #domain = gpsPMPlot_data$mean30PM2_5MC,
+  #                    levels = c("Good", "Moderate", "USG", "Unhealthy", "Very Unhealthy", "Hazardous"),
+  #                    # levels = aqi_group,
+  #                    ordered=FALSE)
 
   sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
   # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
 
-  pm25_leaflet <- leaflet::leaflet() %>%
-    leaflet::addTiles() %>%
+  pal <- leaflet::colorBin(
+    palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF3300","#800080","#581D00"),
+    domain = gpsPMPlot_data$mean30PM2_5MC,
+    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, 350.4, 500.0),
+  )
+
+  pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
+
+  pm25_leaflet <- pm25_leaflet %>%
     leaflet::addCircleMarkers(
-      data=gpsPMPlot_data,color=~pal(aqi),
-      popup=paste("PM2.5(ug/m^3):", round(gpsPMPlot_data$mean30PM2_5MC,digits=2),
-                  "<br>","UPAS:", gpsPMPlot_data$UPASserial), stroke = FALSE,
-      radius = 7.5, fillOpacity = 0.7 ,group=as.factor(gpsPMPlot_data$UPASserial)) %>%
-    leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
-                     options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
+      color=~pal(mean30PM2_5MC),
+      popup=~paste("PM2.5(&#181g/m<sup>3</sup>):", round(mean30PM2_5MC, digits=2),
+                  "<br>","UPAS:", UPASserial), stroke = FALSE,
+      radius = 7.5, fillOpacity = 0.7 , group = ~as.factor(UPASserial)) %>%
+    leaflet::addLayersControl(overlayGroups = (~as.factor(UPASserial)),
+                      options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
     leaflet::addLegend("topright",
                        pal = pal,
-                       values = gpsPMPlot_data$aqi,
-                       title = "PM2.5 Concentration",
+                       values = ~mean30PM2_5MC,
+                       title = "PM2.5 (&#181g/m<sup>3</sup>)",
                        opacity = 0.9)
+
   # return(gpsPMPlot_data)
   return(pm25_leaflet)
   }
