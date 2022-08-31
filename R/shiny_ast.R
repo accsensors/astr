@@ -407,7 +407,7 @@ get_30s_mean = function(df) {
 #TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
 gps_map = function(df) {
 
-  # if("mean30PM2_5MC" %in% colnames(df)){
+  if("mean30PM2_5MC" %in% colnames(df)){
   gpsPMPlot_data <- df %>%
     dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(case_when(
@@ -440,27 +440,27 @@ gps_map = function(df) {
   pm25_leaflet <- pm25_leaflet %>%
     leaflet::addCircleMarkers(
       color=~pal(mean30PM2_5MC),
-      popup=~paste("PM2.5(&#181g/m<sup>3</sup>):", round(mean30PM2_5MC, digits=2),
-                  "<br>","UPAS:", UPASserial), stroke = FALSE,
-      radius = 7.5, fillOpacity = 0.7 , group = ~as.factor(UPASserial)) %>%
-    leaflet::addLayersControl(overlayGroups = (~as.factor(UPASserial)),
+      popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gpsPMPlot_data$mean30PM2_5MC, digits=2),
+                  "<br>","UPAS:", gpsPMPlot_data$UPASserial), stroke = FALSE,
+      radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
+    leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
                       options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
     leaflet::addLegend("topright",
                        pal = pal,
-                       values = ~mean30PM2_5MC,
+                       values = gpsPMPlot_data$mean30PM2_5MC,
                        title = "PM2.5 (&#181g/m<sup>3</sup>)",
                        opacity = 0.9)
 
   # return(gpsPMPlot_data)
   return(pm25_leaflet)
-  # }
+  }
   # Throw error if no 30s averaged PM data to map
-  # else{
-  #   error <- "No PM data in log file"
-  #
-  #   return(error)
-  #
-  # }
+  else{
+    error <- "No PM data in log file"
+
+    return(error)
+
+  }
 
   # mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="40",],zcol="aqi")+
   #   mapView(gpsPMPlot_data[gpsPMPlot_data$UPASserial=="4",],zcol="aqi")+
