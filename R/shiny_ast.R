@@ -407,7 +407,7 @@ get_30s_mean = function(df) {
 #TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
 gps_map = function(df) {
 
-  if("mean30PM2_5MC" %in% colnames(df)){
+  if(("mean30PM2_5MC") %in% colnames(df)){
   gpsPMPlot_data <- df %>%
     dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(dplyr::case_when(
