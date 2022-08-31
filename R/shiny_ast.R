@@ -410,7 +410,7 @@ gps_map = function(df) {
   if("mean30PM2_5MC" %in% colnames(df)){
   gpsPMPlot_data <- df %>%
     dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
-    dplyr::mutate(aqi = as.factor(case_when(
+    dplyr::mutate(aqi = as.factor(dplyr::case_when(
       mean30PM2_5MC<12.0 ~ "Good",
       mean30PM2_5MC<35.4 ~ "Moderate",
       mean30PM2_5MC<55.4 ~ "USG",
