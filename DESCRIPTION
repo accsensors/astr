@@ -21,10 +21,14 @@ Depends:
 Imports: 
     data.table,
     dplyr,
+    leaflet,
+    lubridate,
     magrittr,
     rlang,
+    sp,
     stringr,
-    utils
+    utils,
+    zoo
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

@@ -98,7 +98,8 @@ shiny_header = function(df_h, fract_units = FALSE) {
 #'
 #' @param df Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.
 #'
-#' @return A modified data frame with user friendly column names for log data.
+#' @return A modified data frame with extraneous variables removed and
+#' formatted SampleTime for shiny app plots.
 #' @export
 #' @importFrom rlang .data
 #'
@@ -329,3 +330,132 @@ shiny_flag = function(df_h) {
                                             ))
   return(df_h)
 }
+
+#'Calculate 30 second averages for select variables
+#'
+#' @param df Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.
+#'
+#' @return A modified data frame with 30 second mean data for select variables.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
+
+get_30s_mean = function(df) {
+
+  df_30s_mean <- df %>%
+    dplyr::select(
+      dplyr::any_of(c("UPASserial",
+                      "DateTimeLocal",
+                      "PM2_5MC",
+                      "AccelX",
+                      "AccelY",
+                      "AccelZ",
+                      "CO2",
+                      "GPSlat",
+                      "GPSlon")))%>%
+    dplyr::mutate(datetime_local_rounded = lubridate::floor_date(DateTimeLocal, "30 sec")) %>%
+    dplyr::group_by(UPASserial, datetime_local_rounded)%>%
+    #TODO make the mutate check if the variable exists so no errors are thrown
+          # for past firmware versions
+    dplyr::mutate(mean30PM2_5MC = mean(PM2_5MC, na.rm = T),
+                  var30PM2_5MC = var(PM2_5MC, na.rm = T),
+                  mean30AccelX = mean(AccelX, na.rm = T),
+                  var30AccelX = var(AccelX, na.rm = T),
+                  mean30AccelY = mean(AccelY, na.rm = T),
+                  var30AccelY = var(AccelY, na.rm = T),
+                  mean30AccelZ = mean(AccelZ, na.rm = T),
+                  var30AccelZ = var(AccelZ, na.rm = T),
+                  mean30CO2 = mean(CO2, na.rm = T),
+                  var30CO2 = var(CO2, na.rm = T),
+                  mean30GPSlat = mean(GPSlat, na.rm = T),
+                  mean30GPSlon = mean(GPSlon, na.rm = T)) %>%
+    dplyr::select(UPASserial, datetime_local_rounded, mean30PM2_5MC:mean30GPSlon) %>%
+    dplyr::distinct() %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(UPASserial) %>%
+    dplyr::mutate(compliance = ifelse((var30AccelX > 100) | (var30AccelY > 100) | (var30AccelZ > 100), 1, 0),
+                  compliance_rollmean = ifelse(
+                    as.numeric(zoo::rollapply(compliance, width=20,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA)) > 0, 1, 0))
+  # dplyr::mutate(mean30AccelX = zoo::rollapply(AccelX, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
+  #               var30AccelX = zoo::rollapply(AccelX, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA),
+  #               mean30AccelY = zoo::rollapply(AccelY, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
+  #               var30AccelY = zoo::rollapply(AccelY, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA),
+  #               mean30AccelZ = zoo::rollapply(AccelZ, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
+  #               var30AccelZ = zoo::rollapply(AccelZ, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA))
+
+  # df_30s_mean <- df_30s_mean %>%
+  #   dplyr::group_by(UPASserial) %>%
+  #   dplyr::summarise(compliance_hours = sum(compliance_rollmean, na.rm = T)/2/60,
+  #                    compliance_percent = sum(compliance_rollmean, na.rm = T)/n())
+
+  return(df_30s_mean)
+}
+
+#'Generate a gps map from a data frame with time-averaged data
+#'
+#' @param df Pass a UPAS v2+ log data frame from 'get_30s_mean' function.
+#'
+#' @return A leaflet map of 30s averages of the selected variable.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#'
+
+#TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
+gps_map = function(df) {
+
+  if(("mean30PM2_5MC") %in% colnames(df)){
+  gpsPMPlot_data <- df %>%
+    dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
+    dplyr::mutate(aqi = as.factor(dplyr::case_when(
+      mean30PM2_5MC<12.0 ~ "Good",
+      mean30PM2_5MC<35.4 ~ "Moderate",
+      mean30PM2_5MC<55.4 ~ "USG",
+      mean30PM2_5MC<150.4 ~ "Unhealthy",
+      mean30PM2_5MC<250.4 ~ "Very Unhealthy",
+      TRUE ~ "Hazardous"))) %>%
+    dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200, mean30GPSlat<40.7)
+
+  sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
+  # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
+
+  pal <- leaflet::colorBin(
+    palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
+    domain = gpsPMPlot_data$mean30PM2_5MC,
+    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, 500.0),
+  )
+
+  pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
+
+  pm25_leaflet <- pm25_leaflet %>%
+    leaflet::addCircleMarkers(
+      color=~pal(mean30PM2_5MC),
+      popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gpsPMPlot_data$mean30PM2_5MC, digits=2),
+                  "<br>","UPAS:", gpsPMPlot_data$UPASserial), stroke = FALSE,
+      radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
+    leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
+                      options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
+    leaflet::addLegend("topright",
+                       pal = pal,
+                       values = gpsPMPlot_data$mean30PM2_5MC,
+                       title = "PM2.5 (&#181g/m<sup>3</sup>)",
+                       opacity = 0.9)
+
+  # return(gpsPMPlot_data)
+  return(pm25_leaflet)
+  }
+
+  # Throw error if no 30s averaged PM data to map
+  else{
+    error <- "No PM data in log file"
+
+    return(error)
+
+  }
+
+}
+
+
