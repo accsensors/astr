@@ -417,7 +417,7 @@ gps_map = function(df) {
       mean30PM2_5MC<150.4 ~ "Unhealthy",
       mean30PM2_5MC<250.4 ~ "Very Unhealthy",
       TRUE ~ "Hazardous"))) %>%
-    dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200, mean30GPSlat<40.7)
+    dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200)
 
   sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
   # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
