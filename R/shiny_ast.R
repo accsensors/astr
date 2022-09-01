@@ -367,8 +367,8 @@ get_30s_mean = function(df) {
                   var30AccelY = var(AccelY, na.rm = T),
                   mean30AccelZ = mean(AccelZ, na.rm = T),
                   var30AccelZ = var(AccelZ, na.rm = T),
-                  mean30CO2 = mean(CO2, na.rm = T),
-                  var30CO2 = var(CO2, na.rm = T),
+                  # mean30CO2 = mean(CO2, na.rm = T),
+                  # var30CO2 = var(CO2, na.rm = T),
                   mean30GPSlat = mean(GPSlat, na.rm = T),
                   mean30GPSlon = mean(GPSlon, na.rm = T)) %>%
     dplyr::select(UPASserial, datetime_local_rounded, mean30PM2_5MC:mean30GPSlon) %>%
@@ -409,7 +409,7 @@ gps_map = function(df) {
 
   if(("mean30PM2_5MC") %in% colnames(df)){
   gpsPMPlot_data <- df %>%
-    dplyr::select(UPASserial, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
+    dplyr::select(UPASserial, datetime_local_rounded, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(dplyr::case_when(
       mean30PM2_5MC<12.0 ~ "Good",
       mean30PM2_5MC<35.4 ~ "Moderate",
@@ -417,7 +417,7 @@ gps_map = function(df) {
       mean30PM2_5MC<150.4 ~ "Unhealthy",
       mean30PM2_5MC<250.4 ~ "Very Unhealthy",
       TRUE ~ "Hazardous"))) %>%
-    dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200, mean30GPSlat<40.7)
+    dplyr::filter(!is.na(mean30PM2_5MC), mean30GPSlat>-200, mean30GPSlon>-200)
 
   sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
   # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
@@ -434,7 +434,8 @@ gps_map = function(df) {
     leaflet::addCircleMarkers(
       color=~pal(mean30PM2_5MC),
       popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gpsPMPlot_data$mean30PM2_5MC, digits=2),
-                  "<br>","UPAS:", gpsPMPlot_data$UPASserial), stroke = FALSE,
+                  "<br>","UPAS:", gpsPMPlot_data$UPASserial,
+                  "<br>","Local Time:", gpsPMPlot_data$datetime_local_rounded), stroke = FALSE,
       radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
     leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
                       options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
