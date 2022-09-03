@@ -197,7 +197,12 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
                                                     format="%Y-%m-%dT%H:%M:%S",
                                                     tz='UTC'),
                                                     .data$DateTimeUTC+tz_off*3600),
-                  TZOffset = tz_off)
+                  TZOffset = tz_off,
+                  GPSlat   = ifelse(GPSlat   == -9999, NA, GPSlat),
+                  GPSlon   = ifelse(GPSlon   == -9999, NA, GPSlon),
+                  GPSalt   = ifelse(GPSalt   == -9999, NA, GPSalt),
+                  GPSspeed = ifelse(GPSspeed == -9999, NA, GPSspeed),
+                  GPShdop  = ifelse(GPShdop  == -9999, NA, GPShdop))
 
 
 
