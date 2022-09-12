@@ -202,7 +202,7 @@ format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_dr
                   GPSlon   = ifelse(GPSlon   == -9999, NA, GPSlon),
                   GPSalt   = ifelse(GPSalt   == -9999, NA, GPSalt),
                   GPSspeed = ifelse(GPSspeed == -9999, NA, GPSspeed),
-                  GPShdop  = ifelse(GPShdop  == -9999, NA, GPShdop))
+                  GPShDOP  = ifelse(GPShDOP  == -9999, NA, GPShDOP))
 
 
 

@@ -13,7 +13,7 @@ upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 upasv2_header_updated_names <- read_ast_header(upasv2_file, update_names=TRUE)
 upasv2_header_shiny <- read_ast_header(upasv2_file, shiny=TRUE)
 
-upasv2x_filename <- 'PSP00020_LOG_2022-08-28T20_22_10UTC_---------------_----------.txt'
+upasv2x_filename <- 'PSP00066_LOG_2022-09-02T18_03_56UTC_bike_test_1s____----------.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
 upasv2x_header_shiny <- read_ast_header(upasv2x_file, shiny=TRUE)
@@ -25,7 +25,7 @@ upasv2_log <- read_ast_log(upasv2_file)
 upasv2_log_updated_names <- read_ast_log(upasv2_file,update_names = TRUE)
 upasv2_log_shiny <- read_ast_log(upasv2_file, update_names = TRUE, shiny = TRUE)
 
-upasv2x_filename <- 'PSP00020_LOG_2022-08-28T20_22_10UTC_---------------_----------.txt'
+upasv2x_filename <- 'PSP00066_LOG_2022-09-02T18_03_56UTC_bike_test_1s____----------.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_log <- read_ast_log(upasv2x_file)
 upasv2x_log_shiny <-  read_ast_log(upasv2x_file, shiny=TRUE)

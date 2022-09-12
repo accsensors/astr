@@ -425,7 +425,7 @@ gps_map = function(df) {
   pal <- leaflet::colorBin(
     palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
     domain = gpsPMPlot_data$mean30PM2_5MC,
-    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, 500.0),
+    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, Inf)
   )
 
   pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
