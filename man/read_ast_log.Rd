@@ -45,4 +45,7 @@ filename2 <- 'SH00007_LOG_2021-12-13T13_28_41UTC_---------------_-----.txt'
 file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
 data_ast_log <- read_ast_log(file2)
 data_ast_log <- read_ast_log(file2, cols_keep = c("SampleTime","UnixTime","DateTimeUTC","DateTimeLocal","PM2_5MC"))
+upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
+upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev136_log <- read_ast_log(upasv2x_rev136_file, update_names=FALSE)
 }

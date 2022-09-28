@@ -20,6 +20,9 @@
 #' upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
+#' upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
+#' upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev136_header <- read_ast_header(upasv2x_rev136_file, update_names=FALSE)
 
 #TODO find a better spot for this utils code line
 #utils::globalVariables(c("V1", "V9", "across", "everything", "where")) # declares as global variables to get rid of note in check()
@@ -181,6 +184,9 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 #' file2 <- system.file("extdata", filename2, package = "astr", mustWork = TRUE)
 #' data_ast_log <- read_ast_log(file2)
 #' data_ast_log <- read_ast_log(file2, cols_keep = c("SampleTime","UnixTime","DateTimeUTC","DateTimeLocal","PM2_5MC"))
+#' upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
+#' upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev136_log <- read_ast_log(upasv2x_rev136_file, update_names=FALSE)
 
 read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
 
@@ -191,7 +197,23 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
                               blank.lines.skip = TRUE,
                               stringsAsFactors = FALSE)
 
-  if(any(grepl("DIAGNOSTIC TEST", df_raw$V1)) | any(grepl("CO2", df_raw$V1))){
+  firmware <- df_raw[grepl("firmware", df_raw$V1),]
+  firmware <- firmware %>%
+  dplyr::mutate(ASTSampler = sub("-rev.*", "", .data$V2))
+
+  if(firmware$ASTSampler != 'UPAS_v2_0'){
+    firmware <- firmware %>%
+      dplyr::mutate(FirmwareRev = sapply(strsplit(.data$V2,"-"), `[`, 2),
+                    FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)))
+  }else{
+    firmware <- firmware %>%
+      dplyr::mutate(FirmwareRev = sapply(strsplit(.data$V2,"-"), `[`, 2),
+                    FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)))
+  }
+
+  if(any(grepl("DIAGNOSTIC TEST", df_raw$V1)) |
+     any(grepl("CO2", df_raw$V1)) |
+     (firmware$ASTSampler == 'UPAS_v2_x' & firmware$FirmwareRev>=127)){
 
     df_raw_log <- data.table::fread(file=file,
                                     sep=',',
@@ -204,9 +226,11 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
     if(any(grepl("DIAGNOSTIC TEST", df_raw_log$V1))){
       df_raw_log <- df_raw_log %>%
         dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+1:dplyr::n())
+
     }else{
       df_raw_log <- df_raw_log %>%
         dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
+
     }
 
     df_raw_log <- df_raw_log %>%
