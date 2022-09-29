@@ -30,9 +30,11 @@ upasv2x_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_-------
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
 upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+upasv2x_diag_filename <- 'PSP00030_LOG_2022-09-29T17_04_19UTC_DIAGNOSTIC________________.txt'
 upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
 upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
+upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-24T23_08_33UTC_FirmwareTest____8P3_______.txt'
 upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev136_header <- read_ast_header(upasv2x_rev136_file, update_names=FALSE)
 }
