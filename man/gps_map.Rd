@@ -4,10 +4,13 @@
 \alias{gps_map}
 \title{Generate a gps map from a data frame with time-averaged data}
 \usage{
-gps_map(df)
+gps_map(df, mapvar)
 }
 \arguments{
 \item{df}{Pass a UPAS v2+ log data frame from 'get_30s_mean' function.}
+
+\item{mapvar}{The variable from 'get_30s_mean' function to map. Options
+are 'PM1MC', 'PM2_5MC', 'PM4MC', 'PM10MC', 'CO2', 'VOCRaw', and 'NOXRaw'}
 }
 \value{
 A leaflet map of 30s averages of the selected variable.

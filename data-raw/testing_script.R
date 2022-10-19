@@ -59,6 +59,6 @@ setdiff(names(upasv2_log),names(upasv2x_log))
 setdiff(names(upasv2_log_updated_names),names(upasv2x_log))
 
 df_30s <- get_30s_mean(upasv2x_log_shiny)
-heat_map <- gps_map(df_30s)
+heat_map <- gps_map(df_30s, 'PM2_5MC')
 heat_map
 

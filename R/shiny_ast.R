@@ -348,27 +348,42 @@ get_30s_mean = function(df) {
     dplyr::select(
       dplyr::any_of(c("UPASserial",
                       "DateTimeLocal",
+                      "PM1MC",
                       "PM2_5MC",
+                      "PM4MC",
+                      "PM10MC",
                       "AccelX",
                       "AccelY",
                       "AccelZ",
                       "CO2",
+                      "VOCRaw",
+                      "NOXRaw",
                       "GPSlat",
                       "GPSlon")))%>%
     dplyr::mutate(datetime_local_rounded = lubridate::floor_date(DateTimeLocal, "30 sec")) %>%
     dplyr::group_by(UPASserial, datetime_local_rounded)%>%
     #TODO make the mutate check if the variable exists so no errors are thrown
           # for past firmware versions
-    dplyr::mutate(mean30PM2_5MC = mean(PM2_5MC, na.rm = T),
+    dplyr::mutate(mean30PM1MC = mean(PM1MC, na.rm = T),
+                  var30PM1MC = var(PM1MC, na.rm = T),
+                  mean30PM2_5MC = mean(PM2_5MC, na.rm = T),
                   var30PM2_5MC = var(PM2_5MC, na.rm = T),
+                  mean30PM4MC = mean(PM4MC, na.rm = T),
+                  var30PM4MC = var(PM4MC, na.rm = T),
+                  mean30PM10MC = mean(PM10MC, na.rm = T),
+                  var30PM10MC = var(PM10MC, na.rm = T),
                   mean30AccelX = mean(AccelX, na.rm = T),
                   var30AccelX = var(AccelX, na.rm = T),
                   mean30AccelY = mean(AccelY, na.rm = T),
                   var30AccelY = var(AccelY, na.rm = T),
                   mean30AccelZ = mean(AccelZ, na.rm = T),
                   var30AccelZ = var(AccelZ, na.rm = T),
-                  # mean30CO2 = mean(CO2, na.rm = T),
-                  # var30CO2 = var(CO2, na.rm = T),
+                  mean30CO2 = mean(CO2, na.rm = T),
+                  var30CO2 = var(CO2, na.rm = T),
+                  mean30VOCRaw = mean(VOCRaw, na.rm = T),
+                  var30VOCRaw = var(VOCRaw, na.rm = T),
+                  mean30NOXRaw = mean(NOXRaw, na.rm = T),
+                  var30NOXRaw = var(NOXRaw, na.rm = T),
                   mean30GPSlat = mean(GPSlat, na.rm = T),
                   mean30GPSlon = mean(GPSlon, na.rm = T)) %>%
     dplyr::select(UPASserial, datetime_local_rounded, mean30PM2_5MC:mean30GPSlon) %>%
@@ -393,9 +408,13 @@ get_30s_mean = function(df) {
   return(df_30s_mean)
 }
 
+#-----------LEAFLET MAPS----------#
+
 #'Generate a gps map from a data frame with time-averaged data
 #'
 #' @param df Pass a UPAS v2+ log data frame from 'get_30s_mean' function.
+#' @param mapvar The variable from 'get_30s_mean' function to map. Options
+#' are 'PM1MC', 'PM2_5MC', 'PM4MC', 'PM10MC', 'CO2', 'VOCRaw', and 'NOXRaw'
 #'
 #' @return A leaflet map of 30s averages of the selected variable.
 #' @export
@@ -405,9 +424,33 @@ get_30s_mean = function(df) {
 #'
 
 #TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
-gps_map = function(df) {
+gps_map = function(df, mapvar) {
 
-  if(("mean30PM2_5MC") %in% colnames(df)){
+  if((mapvar=="PM2_5MC") & ("mean30PM2_5MC" %in% colnames(df))){
+    return(map_PM2_5MC(df))
+  }
+
+  # Throw error if no 30s averaged PM data to map
+  else{
+    error <- "No PM data in log file"
+
+    return(error)
+
+  }
+
+}
+
+#'Generate a gps map for the time-resolved PM2.5 concentration
+#'
+#' @param df Pass a UPAS v2+ log data frame from 'get_30s_mean' function.
+#'
+#' @return A leaflet map of 30s averages for the time-resolved PM2.5 concentration.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#'
+map_PM2_5MC = function(df) {
   gpsPMPlot_data <- df %>%
     dplyr::select(UPASserial, datetime_local_rounded, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(dplyr::case_when(
@@ -438,7 +481,7 @@ gps_map = function(df) {
                   "<br>","Local Time:", gpsPMPlot_data$datetime_local_rounded), stroke = FALSE,
       radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
     leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
-                      options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
+                              options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
     leaflet::addLegend("topright",
                        pal = pal,
                        values = gpsPMPlot_data$mean30PM2_5MC,
@@ -447,16 +490,6 @@ gps_map = function(df) {
 
   # return(gpsPMPlot_data)
   return(pm25_leaflet)
-  }
-
-  # Throw error if no 30s averaged PM data to map
-  else{
-    error <- "No PM data in log file"
-
-    return(error)
-
-  }
-
 }
 
 
