@@ -31,14 +31,19 @@
 
 read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
-  df_h_raw <- data.table::fread(file=file, skip = 0, nrows=100, sep=',',
-                          header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
-                          stringsAsFactors = FALSE)
+  df_h_raw <- data.table::fread(file,
+                                skip = 0,
+                                nrows=100,
+                                sep=',',
+                                header = FALSE,
+                                fill = TRUE,
+                                blank.lines.skip = TRUE,
+                                stringsAsFactors = FALSE)
 
 
   if(any(grepl("DIAGNOSTIC TEST", df_h_raw$V1))){#} | any(grepl("CO2", df_h_raw$V1))){
 
-    df_raw_log <- data.table::fread(file=file,
+    df_raw_log <- data.table::fread(file,
                                     sep=',',
                                     skip = nrow(df_h_raw),
                                     header = FALSE,
@@ -200,7 +205,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 
 read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
 
-  df_raw <- data.table::fread(file=file,
+  df_raw <- data.table::fread(file,
                               sep=',',
                               header = FALSE,
                               fill = TRUE,
@@ -228,7 +233,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
     if(firmware$ASTSampler == 'UPAS_v2_x' & firmware$FirmwareRev>=127){
 
-      df_raw_log <- data.table::fread(file=file,
+      df_raw_log <- data.table::fread(file,
                                       sep=',',
                                       skip = nrow(df_raw)+10,
                                       header = FALSE,
@@ -238,7 +243,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
     }else{
 
-      df_raw_log <- data.table::fread(file=file,
+      df_raw_log <- data.table::fread(file,
                                       sep=',',
                                       skip = nrow(df_raw),
                                       header = FALSE,
