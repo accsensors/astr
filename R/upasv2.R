@@ -234,18 +234,18 @@ format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
 
   if(update_names){
     df <- df %>%
-      dplyr::rename(any_of(c(PumpingFlowRate = .data$VolumetricFlowRate,
-                    AtmoDensity = .data$AtmoRho,
-                    FilterDP = .data$FdPdP,
-                    AtmoT = .data$PumpT,
-                    AtmoRH = .data$PumpRH,
-                    PCB1T = .data$PCBT,
-                    PCB2P = .data$PumpP,
-                    AtmoP = .data$PCBP,
-                    GPShDOP = .data$GPShdop,
+      dplyr::rename(any_of(c(PumpingFlowRate = "VolumetricFlowRate",
+                    AtmoDensity = "AtmoRho",
+                    FilterDP = "FdPdP",
+                    AtmoT = "PumpT",
+                    AtmoRH = "PumpRH",
+                    PCB1T = "PCBT",
+                    PCB2P = "PumpP",
+                    AtmoP = "PCBP",
+                    GPShDOP = "GPShdop",
                     #GPSQual = .data$GPSquality,
                     #TODO convert BGFvolt to a battery percentage for shiny app output
-                    BattVolt = .data$BFGvolt)))
+                    BattVolt = "BFGvolt")))
   }
 
   df <- df %>%
