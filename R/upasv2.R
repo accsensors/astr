@@ -234,7 +234,7 @@ format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
 
   if(update_names){
     df <- df %>%
-      plyr::rename(PumpingFlowRate = .data$VolumetricFlowRate,
+      dplyr::rename(any_of(c(PumpingFlowRate = .data$VolumetricFlowRate,
                     AtmoDensity = .data$AtmoRho,
                     FilterDP = .data$FdPdP,
                     AtmoT = .data$PumpT,
@@ -245,7 +245,7 @@ format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
                     GPShDOP = .data$GPShdop,
                     #GPSQual = .data$GPSquality,
                     #TODO convert BGFvolt to a battery percentage for shiny app output
-                    BattVolt = .data$BFGvolt)
+                    BattVolt = .data$BFGvolt)))
   }
 
   df <- df %>%
