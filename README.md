@@ -6,7 +6,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of astr is to …
+The goal of astr is to make working with UPAS log files easy. 
 
 ## Installation
 
