@@ -117,7 +117,7 @@ shiny_log = function(df) {
                    "StartDateTimeUTC",
                    "LogFileMode",
                    "LogFilename"))) %>%
-    dplyr::relocate(dplyr::any_of(c"SampleTime",
+    dplyr::relocate(dplyr::any_of(c("SampleTime",
                     "DateTimeUTC",
                     "DateTimeLocal",
                     "PumpingFlowRate",
@@ -132,7 +132,7 @@ shiny_log = function(df) {
                     "AtmoP",
                     "AtmoRH",
                     "AtmoDensity",
-                    "AtmoAlt"))
+                    "AtmoAlt")))
   
 
 
