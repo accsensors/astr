@@ -116,7 +116,24 @@ shiny_log = function(df) {
                    "CartridgeID",
                    "StartDateTimeUTC",
                    "LogFileMode",
-                   "LogFilename")))
+                   "LogFilename"))) %>%
+    dplyr::relocate(dplyr::any_of(c"SampleTime",
+                    "DateTimeUTC",
+                    "DateTimeLocal",
+                    "PumpingFlowRate",
+                    "CO2",
+                    "VOCRaw",
+                    "NOXRaw",
+                    "PM1MC",
+                    "PM2_5MC",
+                    "PM4MC",
+                    "PM10MC",
+                    "AtmoT",
+                    "AtmoP",
+                    "AtmoRH",
+                    "AtmoDensity",
+                    "AtmoAlt"))
+  
 
 
   if("SampleTime" %in% colnames(df)){

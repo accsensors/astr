@@ -1,11 +1,12 @@
 library(data.table)
 library(dplyr)
 library(usethis)
+library(astr)
 
 #TODO update examples to more recent log files and firmware
 #TODO log file averaging and mapping functions from shiny_ast.R
 
-load_all()
+# load_all()
 
 upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
