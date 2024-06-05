@@ -110,6 +110,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 
   remove_names <- c("SAMPLE IDENTIFICATION","SETUP SUMMARY",
                     "SAMPLE IDENTIFICATION","SAMPLE SUMMARY",
+                    "CO2 SENSOR CALIBRATION",
                     "MASS FLOW SENSOR CALIBRATION")
 
   df_h <- df_h[ grep(paste(remove_names,collapse="|"), df_h$V1, invert = TRUE) , ]
