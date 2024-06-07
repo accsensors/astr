@@ -17,9 +17,9 @@ shiny_header = function(df_h, fract_units = FALSE) {
   if(("ProgrammedRuntime") %in% colnames(df_h)){
     df_h <- df_h %>%
       dplyr::mutate(ProgrammedRuntime =
-                      ifelse(ASTSampler=="UPAS_v2_0",
-                             ifelse(ProgrammedRuntime==360000000, "indefinite", ProgrammedRuntime/3600),
-                             ProgrammedRuntime))
+                      ifelse(.data$ASTSampler=="UPAS_v2_0",
+                             ifelse(.data$ProgrammedRuntime==360000000, "indefinite", .data$ProgrammedRuntime/3600),
+                             .data$ProgrammedRuntime))
   }
 
 
@@ -137,7 +137,7 @@ shiny_log = function(df) {
 
 
   if("SampleTime" %in% colnames(df)){
-    df <- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="hours"))
+    df <- df %>% dplyr::mutate(SampleTime = as.numeric(.data$SampleTime, units="hours"))
   }
 
   return(df)
@@ -374,29 +374,29 @@ get_30s_mean = function(df) {
                       "CO2",
                       "GPSlat",
                       "GPSlon")))%>%
-    dplyr::mutate(datetime_local_rounded = lubridate::floor_date(DateTimeLocal, "30 sec")) %>%
-    dplyr::group_by(UPASserial, datetime_local_rounded)%>%
+    dplyr::mutate(datetime_local_rounded = lubridate::floor_date(.data$DateTimeLocal, "30 sec")) %>%
+    dplyr::group_by(.data$UPASserial, .data$datetime_local_rounded)%>%
     #TODO make the mutate check if the variable exists so no errors are thrown
           # for past firmware versions
-    dplyr::mutate(mean30PM2_5MC = mean(PM2_5MC, na.rm = T),
-                  var30PM2_5MC = stats::var(PM2_5MC, na.rm = T),
-                  mean30AccelX = mean(AccelX, na.rm = T),
-                  var30AccelX = stats::var(AccelX, na.rm = T),
-                  mean30AccelY = mean(AccelY, na.rm = T),
-                  var30AccelY = stats::var(AccelY, na.rm = T),
-                  mean30AccelZ = mean(AccelZ, na.rm = T),
-                  var30AccelZ = stats::var(AccelZ, na.rm = T),
-                  # mean30CO2 = base::mean(CO2, na.rm = T),
-                  # var30CO2 = stats::var(CO2, na.rm = T),
-                  mean30GPSlat = base::mean(GPSlat, na.rm = T),
-                  mean30GPSlon = base::mean(GPSlon, na.rm = T)) %>%
-    dplyr::select(UPASserial, datetime_local_rounded, mean30PM2_5MC:mean30GPSlon) %>%
+    dplyr::mutate(mean30PM2_5MC = mean(.data$PM2_5MC, na.rm = T),
+                  var30PM2_5MC = stats::var(.data$PM2_5MC, na.rm = T),
+                  mean30AccelX = mean(.data$AccelX, na.rm = T),
+                  var30AccelX = stats::var(.data$AccelX, na.rm = T),
+                  mean30AccelY = mean(.data$AccelY, na.rm = T),
+                  var30AccelY = stats::var(.data$AccelY, na.rm = T),
+                  mean30AccelZ = mean(.data$AccelZ, na.rm = T),
+                  var30AccelZ = stats::var(.data$AccelZ, na.rm = T),
+                  # mean30CO2 = base::mean(.data$CO2, na.rm = T),
+                  # var30CO2 = stats::var(.data$CO2, na.rm = T),
+                  mean30GPSlat = base::mean(.data$GPSlat, na.rm = T),
+                  mean30GPSlon = base::mean(.data$GPSlon, na.rm = T)) %>%
+    dplyr::select(.data$UPASserial, .data$datetime_local_rounded, .data$mean30PM2_5MC:.data$mean30GPSlon) %>%
     dplyr::distinct() %>%
     dplyr::ungroup() %>%
-    dplyr::group_by(UPASserial) %>%
-    dplyr::mutate(compliance = ifelse((var30AccelX > 100) | (var30AccelY > 100) | (var30AccelZ > 100), 1, 0),
+    dplyr::group_by(.data$UPASserial) %>%
+    dplyr::mutate(compliance = ifelse((.data$var30AccelX > 100) | (.data$var30AccelY > 100) | (.data$var30AccelZ > 100), 1, 0),
                   compliance_rollmean = ifelse(
-                    as.numeric(zoo::rollapply(compliance, width=20,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA)) > 0, 1, 0))
+                    as.numeric(zoo::rollapply(.data$compliance, width=20,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA)) > 0, 1, 0))
   # dplyr::mutate(mean30AccelX = zoo::rollapply(AccelX, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
   #               var30AccelX = zoo::rollapply(AccelX, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA),
   #               mean30AccelY = zoo::rollapply(AccelY, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
@@ -428,15 +428,15 @@ gps_map = function(df) {
 
   if(("mean30PM2_5MC") %in% colnames(df)){
   gpsPMPlot_data <- df %>%
-    dplyr::select(UPASserial, datetime_local_rounded, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
+    dplyr::select(.data$UPASserial, .data$datetime_local_rounded, .data$mean30GPSlat, .data$mean30GPSlon, .data$mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(dplyr::case_when(
-      mean30PM2_5MC<12.0 ~ "Good",
-      mean30PM2_5MC<35.4 ~ "Moderate",
-      mean30PM2_5MC<55.4 ~ "USG",
-      mean30PM2_5MC<150.4 ~ "Unhealthy",
-      mean30PM2_5MC<250.4 ~ "Very Unhealthy",
+      .data$mean30PM2_5MC<12.0 ~ "Good",
+      .data$mean30PM2_5MC<35.4 ~ "Moderate",
+      .data$mean30PM2_5MC<55.4 ~ "USG",
+      .data$mean30PM2_5MC<150.4 ~ "Unhealthy",
+      .data$mean30PM2_5MC<250.4 ~ "Very Unhealthy",
       TRUE ~ "Hazardous"))) %>%
-    dplyr::filter(!is.na(mean30PM2_5MC), !is.na(mean30GPSlat), !is.na(mean30GPSlon))
+    dplyr::filter(!is.na(.data$mean30PM2_5MC), !is.na(.data$mean30GPSlat), !is.na(.data$mean30GPSlon))
 
   sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
   # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")

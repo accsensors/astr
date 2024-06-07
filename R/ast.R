@@ -26,9 +26,6 @@
 #' upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev136_header <- read_ast_header(upasv2x_rev136_file, update_names=FALSE)
 
-#TODO find a better spot for this utils code line
-#utils::globalVariables(c("V1", "V9", "across", "everything", "where")) # declares as global variables to get rid of note in check()
-
 read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
   df_h_raw <- data.table::fread(file,
@@ -64,12 +61,12 @@ read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
     df_h_raw <- df_h_raw %>%
       dplyr::bind_rows(df_raw_log) %>%
-      dplyr::distinct(V1,V9, .keep_all = TRUE)
+      dplyr::distinct(.data$V1, .data$V9, .keep_all = TRUE)
 
   }else{
 
     df_h_raw <- df_h_raw %>%
-      dplyr::distinct(V1, .keep_all = TRUE)
+      dplyr::distinct(.data$V1, .keep_all = TRUE)
   }
 
   df_h <- astr::format_ast_header(df_h_raw, update_names=update_names, shiny=shiny)
@@ -132,7 +129,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 
         if(any(df_h_raw$V1=='DIAGNOSTIC TEST')){
           df_h_diag <- as.data.frame(df_h_raw[(which(df_h_raw$V1=="DIAGNOSTIC TEST")+2):(which(df_h_raw$V1=="SAMPLE LOG")-1),]) %>%
-            dplyr::distinct(V1,V9, .keep_all = TRUE)
+            dplyr::distinct(.data$V1, .data$V9, .keep_all = TRUE)
 
 
           colnames(df_h_diag) <- df_h_diag[6,]
@@ -268,7 +265,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
     df_raw <- df_raw %>%
       dplyr::bind_rows(df_raw_log) %>%
-      dplyr::distinct(V1,V9, .keep_all = TRUE)
+      dplyr::distinct(.data$V1, .data$V9, .keep_all = TRUE)
 
 
   }
