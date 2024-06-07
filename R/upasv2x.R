@@ -268,7 +268,7 @@ upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALS
     if(any(grepl('PM25SampledMass', names(df_h)))){
       df_h <- df_h %>%
       dplyr::mutate(PM25Concentration = .data$PM25SampledMass/(.data$SampledVolume/1000),
-                    dplyr::across(where(is.numeric), ~ round(., digits = 3)))
+                    dplyr::across(dplyr::where(is.numeric), ~ round(., digits = 3)))
     }
 
   if(shiny){

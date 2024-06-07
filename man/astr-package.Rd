@@ -2,8 +2,8 @@
 % Please edit documentation in R/astr-package.R
 \docType{package}
 \name{astr-package}
+\alias{astr}
 \alias{astr-package}
-\alias{_PACKAGE}
 \title{astr}
 \description{
 Package description here

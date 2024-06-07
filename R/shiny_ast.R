@@ -110,7 +110,7 @@ shiny_log = function(df) {
 
   df <- df %>%
     dplyr::select(!dplyr::any_of(c("tz_value",
-                   "TZOffset",                 
+                   "TZOffset",
                    "ASTSampler",
                    "SampleName",
                    "CartridgeID",
@@ -133,7 +133,7 @@ shiny_log = function(df) {
                     "AtmoRH",
                     "AtmoDensity",
                     "AtmoAlt")))
-  
+
 
 
   if("SampleTime" %in% colnames(df)){
@@ -356,6 +356,7 @@ shiny_flag = function(df_h) {
 #' @return A modified data frame with 30 second mean data for select variables.
 #' @export
 #' @importFrom rlang .data
+#' @importFrom stats var
 #'
 #' @examples
 #' upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
@@ -378,17 +379,17 @@ get_30s_mean = function(df) {
     #TODO make the mutate check if the variable exists so no errors are thrown
           # for past firmware versions
     dplyr::mutate(mean30PM2_5MC = mean(PM2_5MC, na.rm = T),
-                  var30PM2_5MC = var(PM2_5MC, na.rm = T),
+                  var30PM2_5MC = stats::var(PM2_5MC, na.rm = T),
                   mean30AccelX = mean(AccelX, na.rm = T),
-                  var30AccelX = var(AccelX, na.rm = T),
+                  var30AccelX = stats::var(AccelX, na.rm = T),
                   mean30AccelY = mean(AccelY, na.rm = T),
-                  var30AccelY = var(AccelY, na.rm = T),
+                  var30AccelY = stats::var(AccelY, na.rm = T),
                   mean30AccelZ = mean(AccelZ, na.rm = T),
-                  var30AccelZ = var(AccelZ, na.rm = T),
-                  # mean30CO2 = mean(CO2, na.rm = T),
-                  # var30CO2 = var(CO2, na.rm = T),
-                  mean30GPSlat = mean(GPSlat, na.rm = T),
-                  mean30GPSlon = mean(GPSlon, na.rm = T)) %>%
+                  var30AccelZ = stats::var(AccelZ, na.rm = T),
+                  # mean30CO2 = base::mean(CO2, na.rm = T),
+                  # var30CO2 = stats::var(CO2, na.rm = T),
+                  mean30GPSlat = base::mean(GPSlat, na.rm = T),
+                  mean30GPSlon = base::mean(GPSlon, na.rm = T)) %>%
     dplyr::select(UPASserial, datetime_local_rounded, mean30PM2_5MC:mean30GPSlon) %>%
     dplyr::distinct() %>%
     dplyr::ungroup() %>%

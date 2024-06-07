@@ -138,7 +138,7 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
           colnames(df_h_diag) <- df_h_diag[6,]
 
           df_h_diag <- df_h_diag[c(3,7,9,11),c(1:15)] %>%
-            dplyr::mutate(across(everything(), ~ as.numeric(.x)))
+            dplyr::mutate(dplyr::across(dplyr::everything(), ~ as.numeric(.x)))
 
           rownames(df_h_diag) <- c('noFlow','maxDeadhead','minFlow','maxFlow')
 
