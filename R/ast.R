@@ -28,10 +28,17 @@
 
 read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
+  # Read in first 200 lines of file and find the number of header rows
+  # with and without blank lines included
+  header_with_blanks <- readLines(file, n = 200)
+  header_no_blanks <- header_with_blanks[which(header_with_blanks!="")]
+  nrow_header_with_blanks <- as.numeric(grep("SAMPLE LOG", header_with_blanks))
+  nrow_header_no_blanks <- as.numeric(grep("SAMPLE LOG", header_no_blanks))
+
   df_h_raw <- data.table::fread(file,
+                                sep = ',',
                                 skip = 0,
-                                nrows=100,
-                                sep=',',
+                                nrows = nrow_header_no_blanks,
                                 header = FALSE,
                                 fill = TRUE,
                                 blank.lines.skip = TRUE,
@@ -203,8 +210,17 @@ format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 
 read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
 
+  # Read in first 200 lines of file and find the number of header rows
+  # with and without blank lines included
+  header_with_blanks <- readLines(file, n = 200)
+  header_no_blanks <- header_with_blanks[which(header_with_blanks!="")]
+  nrow_header_with_blanks <- as.numeric(grep("SAMPLE LOG", header_with_blanks))
+  nrow_header_no_blanks <- as.numeric(grep("SAMPLE LOG", header_no_blanks))
+
   df_raw <- data.table::fread(file,
                               sep=',',
+                              skip = 0,
+                              nrows = nrow_header_no_blanks,
                               header = FALSE,
                               fill = TRUE,
                               blank.lines.skip = TRUE,

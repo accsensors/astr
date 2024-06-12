@@ -27,7 +27,6 @@ Imports:
     rlang,
     sp,
     stringr,
-    utils,
     zoo
 Suggests: 
     testthat (>= 3.0.0)
