@@ -8,7 +8,8 @@ log file}
 format_ast_header(df_h_raw, update_names = FALSE, shiny = FALSE)
 }
 \arguments{
-\item{df_h_raw}{Any AST air sampler unformatted header dataframe.}
+\item{df_h_raw}{Any AST air sampler unformatted header data frame created
+with \code{\link[=make_raw_ast_header]{make_raw_ast_header()}}}
 
 \item{update_names}{Option to update old sampler names to latest version.}
 
@@ -22,5 +23,13 @@ Format the header data from an Access Sensor Technologies (AST) air sampler
 log file
 }
 \examples{
-data_ast_header <- format_ast_header(data_ast_raw, update_names=FALSE)
+data_ast_header <- format_ast_header(data_ast_raw, update_names=FALSE) #TODO replace this example with just header file
+upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_header_raw <- make_raw_ast_header(upasv2x_rev158_file)
+upasv2x_rev158_header <- format_ast_header(upasv2x_rev158_header_raw, update_names=FALSE)
+upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_diag_header_raw <- make_raw_ast_header(upasv2x_rev158_diag_file)
+upasv2x_rev158_diag_header <- format_ast_header(upasv2x_rev158_diag_header_raw, update_names=FALSE)
 }

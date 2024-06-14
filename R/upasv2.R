@@ -82,7 +82,8 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
                   (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
 
   df_h  <- df_h %>%
-    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason, (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
+    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
+                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
 
   df_h  <- df_h %>%
     dplyr::select(1:match("Firmware",colnames(df_h)), .data$FirmwareRev,

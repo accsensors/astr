@@ -1,6 +1,6 @@
 load_all()
 
-filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
 
 ###########

@@ -8,7 +8,7 @@ log file}
 read_ast_header(file, update_names = FALSE, shiny = FALSE)
 }
 \arguments{
-\item{file}{Any AST air sampler  log file name.}
+\item{file}{Any AST air sampler log file name.}
 
 \item{update_names}{Option to update old sampler names to latest version.}
 
@@ -22,19 +22,34 @@ Read the header data from an Access Sensor Technologies (AST) air sampler
 log file
 }
 \examples{
-upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
-upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
-upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
-upasv2x_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
-upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
-upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
-upasv2x_diag_filename <- 'PSP00030_LOG_2022-09-29T17_04_19UTC_DIAGNOSTIC________________.txt'
-upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
-upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
+upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
+upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=FALSE)
+upasv2_rev130_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+upasv2_rev130_file <- system.file("extdata", upasv2_rev130_filename, package = "astr", mustWork = TRUE)
+upasv2_rev130_header <- read_ast_header(upasv2_rev130_file, update_names=FALSE)
+upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
+upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
+upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev81_header <- read_ast_header(upasv2x_rev81_file, update_names=FALSE)
+upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE)
+upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev110_diag_header <- read_ast_header(upasv2x_rev110_diag_file, update_names=FALSE)
+upasv2x_rev136_diag_filename <- 'PSP00030_LOG_2022-09-29T17_04_19UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev136_diag_file <- system.file("extdata", upasv2x_rev136_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev136_diag_header <- read_ast_header(upasv2x_rev136_diag_file, update_names=FALSE)
 upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
-upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-24T23_08_33UTC_FirmwareTest____8P3_______.txt'
 upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev136_header <- read_ast_header(upasv2x_rev136_file, update_names=FALSE)
+upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_header <- read_ast_header(upasv2x_rev158_file, update_names=FALSE)
+upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
 }

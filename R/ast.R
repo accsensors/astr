@@ -1,7 +1,7 @@
 #'Read the header data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
-#' @param file Any AST air sampler  log file name.
+#' @param file Any AST air sampler log file name.
 #' @param update_names Option to update old sampler names to latest version.
 #' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
@@ -10,82 +10,153 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
-#' upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-#' upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
-#' upasv2x_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
-#' upasv2x_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
-#' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-#' upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
-#' upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_filename <- 'PSP00030_LOG_2022-09-29T17_04_19UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
-#' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
+#' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+#' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=FALSE)
+#' upasv2_rev130_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+#' upasv2_rev130_file <- system.file("extdata", upasv2_rev130_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev130_header <- read_ast_header(upasv2_rev130_file, update_names=FALSE)
+#' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+#' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
+#' upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev81_header <- read_ast_header(upasv2x_rev81_file, update_names=FALSE)
+#' upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+#' upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE)
+#' upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev110_diag_header <- read_ast_header(upasv2x_rev110_diag_file, update_names=FALSE)
+#' upasv2x_rev136_diag_filename <- 'PSP00030_LOG_2022-09-29T17_04_19UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev136_diag_file <- system.file("extdata", upasv2x_rev136_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev136_diag_header <- read_ast_header(upasv2x_rev136_diag_file, update_names=FALSE)
 #' upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
-#' upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-24T23_08_33UTC_FirmwareTest____8P3_______.txt'
 #' upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev136_header <- read_ast_header(upasv2x_rev136_file, update_names=FALSE)
+#' upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+#' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_header <- read_ast_header(upasv2x_rev158_file, update_names=FALSE)
+#' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
 
 read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 
-  # Read in first 200 lines of file and find the number of header rows
-  # with and without blank lines included
-  header_with_blanks <- readLines(file, n = 200)
-  header_no_blanks <- header_with_blanks[which(header_with_blanks!="")]
-  nrow_header_with_blanks <- as.numeric(grep("SAMPLE LOG", header_with_blanks))
-  nrow_header_no_blanks <- as.numeric(grep("SAMPLE LOG", header_no_blanks))
-
-  df_h_raw <- data.table::fread(file,
-                                sep = ',',
-                                skip = 0,
-                                nrows = nrow_header_no_blanks,
-                                header = FALSE,
-                                fill = TRUE,
-                                blank.lines.skip = TRUE,
-                                stringsAsFactors = FALSE)
-
-
-  if(any(grepl("DIAGNOSTIC TEST", df_h_raw$V1))){#} | any(grepl("CO2", df_h_raw$V1))){
-
-    df_raw_log <- data.table::fread(file,
-                                    sep=',',
-                                    skip = nrow(df_h_raw),
-                                    header = FALSE,
-                                    fill = TRUE,
-                                    blank.lines.skip = TRUE,
-                                    stringsAsFactors = FALSE)
-
-    if(any(grepl("DIAGNOSTIC TEST", df_raw_log$V1))){
-      df_raw_log <- df_raw_log %>%
-        dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+2:dplyr::n())
-    }else{
-      df_raw_log <- df_raw_log %>%
-        dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
-    }
-
-    df_raw_log <- df_raw_log %>%
-      dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
-
-    df_h_raw <- df_h_raw %>%
-      dplyr::bind_rows(df_raw_log) %>%
-      dplyr::distinct(.data$V1, .data$V9, .keep_all = TRUE)
-
-  }else{
-
-    df_h_raw <- df_h_raw %>%
-      dplyr::distinct(.data$V1, .keep_all = TRUE)
-  }
+  df_h_raw <- astr::make_raw_ast_header(file)
 
   df_h <- astr::format_ast_header(df_h_raw, update_names=update_names, shiny=shiny)
 
   return(df_h)
 }
 
+#'Generate an data frame of  unformatted header data from an Access Sensor
+#'Technologies (AST) air sampler log file
+#'
+#' @param file Any AST air sampler log file name.
+#'
+#' @return A data frame of unformatted header data with blank rows removed.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+#' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev125_header_raw <- make_raw_ast_header(upasv2_rev125_file)
+#' upasv2_rev130_diag_filename_ <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+#' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev130_diag_header_raw <- make_raw_ast_header(upasv2_rev130_diag_file)
+#' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+#' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev138_header_raw <- make_raw_ast_header(upasv2_rev138_file)
+#' upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev81_header_raw <- make_raw_ast_header(upasv2x_rev81_file)
+#' upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+#' upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev117_header_raw <- make_raw_ast_header(upasv2x_rev117_file)
+#' upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev110_diag_header_raw <- make_raw_ast_header(upasv2x_rev110_diag_file)
+#' upasv2x_rev136_diag_filename <- 'PSP00030_LOG_2022-09-29T17_04_19UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev136_diag_file <- system.file("extdata", upasv2x_rev136_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev136_diag_header_raw <- make_raw_ast_header(upasv2x_rev136_diag_file)
+#' upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
+#' upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev136_header_raw <- make_raw_ast_header(upasv2x_rev136_file)
+#' upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+#' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_header_raw <- make_raw_ast_header(upasv2x_rev158_file)
+#' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_diag_header_raw <- make_raw_ast_header(upasv2x_rev158_diag_file)
+
+make_raw_ast_header = function(file) {
+
+  nrows_header <- astr::count_header_rows(file)
+  if(nrows_header$is_diag == TRUE) {
+    # Read only number of non-blank lines to work with blank.line.skip in fread
+    # Must add 1 to also read in first header below "DIAGNOSTIC TEST"
+    nrow_header_read <- nrows_header$nrow_diag_no_blanks+1
+  }else {
+    nrow_header_read <- nrows_header$nrow_no_blanks
+  }
+
+  df_h_raw <- data.table::fread(file,
+                                sep=',',
+                                skip = 0,
+                                nrows = nrow_header_read,
+                                header = FALSE,
+                                fill = TRUE,
+                                blank.lines.skip = TRUE,
+                                stringsAsFactors = FALSE)
+
+  if(nrows_header$is_diag == TRUE){
+
+    # Must add 2 to start on first line of comma delineated diag summary for
+    # fread to work properly
+    nrow_diag_start <- nrows_header$nrow_diag_with_blanks+2
+    # Must subtract 1 from diag length to account for starting on comma
+    # delineated portion of diag summary
+    nrow_diag_read <- nrows_header$length_diag_no_blanks-1
+    df_h_diag <- data.table::fread(file,
+                                   sep=',',
+                                   skip = nrow_diag_start,
+                                   nrows = nrow_diag_read,
+                                   header = FALSE,
+                                   fill = TRUE,
+                                   blank.lines.skip = TRUE,
+                                   stringsAsFactors = FALSE)
+
+    # if(any(grepl("DIAGNOSTIC TEST", df_raw_log$V1))){
+    #   df_raw_log <- df_raw_log %>%
+    #     dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+2:dplyr::n())
+    # }else{
+    #   df_raw_log <- df_raw_log %>%
+    #     dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
+    # }
+    #
+    df_h_diag <- df_h_diag %>%
+      dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
+
+    df_h_raw <- df_h_raw %>%
+      dplyr::bind_rows(df_h_diag)
+      # dplyr::distinct(.data$V1, .data$V9, .keep_all = TRUE) #TODO Maybe eliminate distinct function if not needed
+
+  }else{
+
+    # df_h_raw <- df_h_raw %>%
+    #   dplyr::distinct(.data$V1, .keep_all = TRUE) #TODO Maybe eliminate distinct function if not needed
+  }
+
+  return(df_h_raw)
+}
 
 #'Format the header data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
-#' @param df_h_raw Any AST air sampler unformatted header dataframe.
+#' @param df_h_raw Any AST air sampler unformatted header data frame created
+#' with [make_raw_ast_header()]
 #' @param update_names Option to update old sampler names to latest version.
 #' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
@@ -94,7 +165,15 @@ read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' data_ast_header <- format_ast_header(data_ast_raw, update_names=FALSE)
+#' data_ast_header <- format_ast_header(data_ast_raw, update_names=FALSE) #TODO replace this example with just header file
+#' upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+#' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_header_raw <- make_raw_ast_header(upasv2x_rev158_file)
+#' upasv2x_rev158_header <- format_ast_header(upasv2x_rev158_header_raw, update_names=FALSE)
+#' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_diag_header_raw <- make_raw_ast_header(upasv2x_rev158_diag_file)
+#' upasv2x_rev158_diag_header <- format_ast_header(upasv2x_rev158_diag_header_raw, update_names=FALSE)
 
 format_ast_header = function(df_h_raw, update_names=FALSE, shiny=FALSE) {
 
