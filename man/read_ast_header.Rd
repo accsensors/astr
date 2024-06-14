@@ -40,12 +40,6 @@ upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE
 upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev110_diag_header <- read_ast_header(upasv2x_rev110_diag_file, update_names=FALSE)
-upasv2x_rev136_diag_filename <- 'PSP00030_LOG_2022-09-29T17_04_19UTC_DIAGNOSTIC________________.txt'
-upasv2x_rev136_diag_file <- system.file("extdata", upasv2x_rev136_diag_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev136_diag_header <- read_ast_header(upasv2x_rev136_diag_file, update_names=FALSE)
-upasv2x_rev136_filename <- 'PSP00110_LOG_2022-09-27T23_51_30UTC_BatteryTest_____Test______.txt'
-upasv2x_rev136_file <- system.file("extdata", upasv2x_rev136_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev136_header <- read_ast_header(upasv2x_rev136_file, update_names=FALSE)
 upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
 upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev158_header <- read_ast_header(upasv2x_rev158_file, update_names=FALSE)
