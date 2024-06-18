@@ -2,21 +2,49 @@
 % Please edit documentation in R/upasv2x.R
 \name{format_upasv2x_header}
 \alias{format_upasv2x_header}
-\title{Read the header data from an Access Sensor Technologies (AST) air sampler
-log file}
+\title{Formats UPASv2x header data that has already been transposed to a wide
+data frame}
 \usage{
 format_upasv2x_header(df_h)
 }
 \arguments{
-\item{df_h}{Pass a upasv2x dataframe from read_ast_header function.}
+\item{df_h}{A UPASv2x header data frame transposed to wide format using
+\link{transpose_raw_ast_header}}
 }
 \value{
-A modified data frame with header data in wide format.
+A data frame with formatted UPASv2x header data in wide format that
+is ready for data analysis
 }
 \description{
-Read the header data from an Access Sensor Technologies (AST) air sampler
-log file
+\code{format_upasv2x_header} completes the UPASv2 log file header formatting prior
+to running any data analysis. It sets the proper data types for each variable,
+adds a column to specify the AST sampler type, and adds a column to describe
+the shutdown reason associated with the shutdown mode code.
 }
 \examples{
-upasv2x_header <- format_upasv2x_header(upasv2x_header_raw)
+upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev81_header_raw <- make_raw_ast_header(upasv2x_rev81_file)
+upasv2x_rev81_header_wide <- transpose_raw_ast_header(upasv2x_rev81_header_raw)
+upasv2x_rev81_header <- format_upasv2x_header(upasv2x_rev81_header_wide)
+upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev117_header_raw <- make_raw_ast_header(upasv2x_rev117_file)
+upasv2x_rev117_header_wide <- transpose_raw_ast_header(upasv2x_rev117_header_raw)
+upasv2x_rev117_header <- format_upasv2x_header(upasv2x_rev117_header_wide)
+upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev110_diag_header_raw <- make_raw_ast_header(upasv2x_rev110_diag_file)
+upasv2x_rev110_diag_header_wide <- transpose_raw_ast_header(upasv2x_rev110_diag_header_raw)
+upasv2x_rev110_diag_header <- format_upasv2x_header(upasv2x_rev110_diag_header_wide)
+upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_header_raw <- make_raw_ast_header(upasv2x_rev158_file)
+upasv2x_rev158_header_wide <- transpose_raw_ast_header(upasv2x_rev158_header_raw)
+upasv2x_rev158_header <- format_upasv2x_header(upasv2x_rev158_header_wide)
+upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_diag_header_raw <- make_raw_ast_header(upasv2x_rev158_diag_file)
+upasv2x_rev158_diag_header_wide <- transpose_raw_ast_header(upasv2x_rev158_diag_header_raw)
+upasv2x_rev158_diag_header <- format_upasv2x_header(upasv2x_rev158_diag_header_wide)
 }

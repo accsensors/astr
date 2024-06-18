@@ -1,37 +1,58 @@
-# Purpose: This function reads just the header data from a UPAS log file.
-# If the user just wants to calculate the time-averaged PM concentration
-# measured using the filter sample, all of the sample summary information that
-# is needed to do so is stored in the header and read by this function.
-# This function can be used in conjuction with lapply() or map() to read in
-# sample summary data from any number of log files and create a data frame that
-# contains a line with the summary information for each sample.
 
-# Inputs:
-# (1) The file name
-# (2) update_names: a logical variable indicating whether variable names in
-#                   log files recorded using firmware version 100
-#                   should be updated to match variable names in log files
-#                   recorded using firmware versions > 100 (default = FALSE).
-#                   If TRUE, "CumulativeSamplingTime" will be updated to
-#                   "LifetimeSampleRuntime","StartDateTime" will be updated to
-#                   "StartDateTimeUTC", and "AverageVolumetricFlow" will be
-#                   updated to"AverageVolumetricFlowRate".
-
-# Output: A data frame with one row and 28 to 34 columns (depending on the
-#   firmware version) containing the data in the UPAS sample file header.
-
-#' Read the header data from a UPASv2 log file
+#' Formats UPASv2 header data that has already been transposed to a wide
+#' data frame
 #'
-#' @param df_h A UPASv2 header dataframe
-#' @param update_names Convert old log file column names to match current log
-#' file names.
+#' @description
+#' `format_upasv2_header` completes the UPASv2 log file header formatting prior
+#' to running any data analysis. It sets the proper data types for each variable,
+#' adds a column to specify the AST sampler type, adds a column to describe the
+#' shutdown reason associated with the shutdown mode code, and - if
+#' `update_names=TRUE` - updates old log file variable names
+#' to match current log file names.
 #'
-#' @return A data frame.
+#' @param df_h A UPASv2 header data frame transposed to wide format using
+#' [transpose_raw_ast_header]
+#' @param update_names If `TRUE`, convert old log file column names to match
+#' latest version.
+#' If firmware > rev100:
+#' * VolumetricFlowRate        -> FlowRateSetpoint
+#' * DutyCycle                 -> FlowDutyCycle
+#' * SampledRuntime            -> OverallDuration
+#' * AverageVolumetricFlowRate -> PumpingFlowRateAverage
+#'
+#' If firmware is equal to rev100:
+#' * CumulativeSamplingTime -> LifetimeSampleRuntime
+#' * StartDateTime          -> StartDateTimeUTC
+#' * AverageVolumetricFlow  -> PumpingFlowRateAverage
+#'
+#' Behavior not defined for firmwares < rev100
+#'
+#' @return A data frame with formatted UPASv2 header data in wide format that
+#' is ready for data analysis
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2_header <- format_upasv2_header(upasv2_header_raw, update_names=FALSE)
+#' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+#' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev125_header_raw <- make_raw_ast_header(upasv2_rev125_file)
+#' upasv2_rev125_header_transp <- transpose_raw_ast_header(upasv2_rev125_header_raw)
+#' upasv2_rev125_header <- format_upasv2_header(upasv2_rev125_header_transp, update_names=FALSE)
+#' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+#' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev130_diag_header_raw <- make_raw_ast_header(upasv2_rev130_diag_file)
+#' upasv2_rev130_diag_header_transp <- transpose_raw_ast_header(upasv2_rev130_diag_header_raw)
+#' upasv2_rev130_diag_header <- format_upasv2_header(upasv2_rev130_diag_header_transp, update_names=FALSE)
+#' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+#' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev138_header_raw <- make_raw_ast_header(upasv2_rev138_file)
+#' upasv2_rev138_header_transp <- transpose_raw_ast_header(upasv2_rev138_header_raw)
+#' upasv2_rev138_header <- format_upasv2_header(upasv2_rev138_header_transp, update_names=TRUE)
+#' upasv2_rev138_diag_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
+#' upasv2_rev138_diag_file <- system.file("extdata", upasv2_rev138_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev138_diag_header_raw <- make_raw_ast_header(upasv2_rev138_diag_file)
+#' upasv2_rev138_diag_header_transp <- transpose_raw_ast_header(upasv2_rev138_diag_header_raw)
+#' upasv2_rev138_diag_header <- format_upasv2_header(upasv2_rev138_diag_header_transp, update_names=FALSE)
 
 format_upasv2_header <- function(df_h, update_names=FALSE){
 
@@ -62,36 +83,27 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
                                                 "SampledVolume",
                                                 "SampledRuntime",
                                                 "LoggedRuntime")),
-                         as.numeric)) %>%
-    dplyr::rename(LogFilename = .data$UPASlogFilename) %>%
+                                as.numeric)) %>%
+    dplyr::rename(LogFilename = "UPASlogFilename") %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
                                                 "GPSEnabled")), as.logical)) %>%
     dplyr::mutate(LogFilename = gsub("/sd/", "", .data$LogFilename),
                   LogFileMode     = ifelse(.data$LogFileMode == 0, "normal", "debug"),
-                  ShutdownReason  = dplyr::case_when(ShutdownMode == 0 ~ "unknown error",
-                                              ShutdownMode == 1 ~ "user pushbutton stop",
-                                              ShutdownMode == 2 ~ "depleted battery",
-                                              ShutdownMode == 3 ~ "completed preset sample duration",
-                                              ShutdownMode == 4 ~ "thermal protection",
-                                              ShutdownMode == 5 ~ "max power at initialization",
-                                              ShutdownMode == 6 ~ "max power during sample",
-                                              ShutdownMode == 7 ~ "blocked flow"))
+                  ShutdownReason  = dplyr::case_when(
+                    .data$ShutdownMode == 0 ~ "unknown error",
+                    .data$ShutdownMode == 1 ~ "user pushbutton stop",
+                    .data$ShutdownMode == 2 ~ "depleted battery",
+                    .data$ShutdownMode == 3 ~ "completed preset sample duration",
+                    .data$ShutdownMode == 4 ~ "thermal protection",
+                    .data$ShutdownMode == 5 ~ "max power at initialization",
+                    .data$ShutdownMode == 6 ~ "max power during sample",
+                    .data$ShutdownMode == 7 ~ "blocked flow"))
 
-  df_h  <- df_h %>%
-    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
-                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
+  df_h <- df_h %>%
+    dplyr::relocate("ASTSampler") %>%
+    dplyr::relocate("FirmwareRev", .after = "Firmware") %>%
+    dplyr::relocate("ShutdownReason", .after = "ShutdownMode")
 
-  df_h  <- df_h %>%
-    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
-                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
-
-  df_h  <- df_h %>%
-    dplyr::select(1:match("Firmware",colnames(df_h)), .data$FirmwareRev,
-                  (match("Firmware",colnames(df_h))+1):ncol(df_h))
-
-  df_h  <- df_h %>%
-    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
-                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
 
 
   if(df_h$FirmwareRev == 100){
@@ -102,9 +114,9 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 
     if(update_names){
 
-      df_h <- df_h %>% dplyr::rename(LifetimeSampleRuntime = .data$CumulativeSamplingTime,
-                                 StartDateTimeUTC          = .data$StartDateTime,
-                                 AverageVolumetricFlowRate = .data$AverageVolumetricFlow)}
+      df_h <- df_h %>% dplyr::rename(LifetimeSampleRuntime = "CumulativeSamplingTime",
+                                 StartDateTimeUTC          = "StartDateTime",
+                                 AverageVolumetricFlowRate = "AverageVolumetricFlow")}
   }else{
 
     df_h <- df_h %>%
@@ -120,15 +132,24 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 
     if(update_names){
       df_h <- df_h %>%
-        dplyr::rename(FlowRateSetpoint = .data$VolumetricFlowRate,
-                      FlowDutyCycle = .data$DutyCycle,
-                      OverallDuration = .data$SampledRuntime,
-                      PumpingFlowRateAverage = .data$AverageVolumetricFlowRate)
+        dplyr::rename(FlowRateSetpoint = "VolumetricFlowRate",
+                      FlowDutyCycle = "DutyCycle",
+                      OverallDuration = "LoggedRuntime",
+                      PumpingDuration = "SampledRuntime",
+                      PumpingFlowRateAverage = "AverageVolumetricFlowRate")
+      if(any(df_h$SampleName == 'DIAGNOSTIC')) {
+        df_h <- df_h %>%
+          dplyr::rename(MFSCalVoutMin = "MFSVoltMin",
+                        MFSCalVoutMax = "MFSVoltMax",
+                        MFSCalMFMin = "MFSMFMin",
+                        MFSCalMFMax = "MFSMFMax",
+                        MFSCalDate = "CalDateTime") %>%
+          dplyr::select(!c("MFSVoltMaxEst", "MFSMFMaxEst", "CalUNIXTIME"))
+      }
     }
 
   return(df_h)
 }
-
 
 #' Read the log data from a UPASv2 log file
 #'

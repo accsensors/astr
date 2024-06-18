@@ -1,14 +1,46 @@
-#'Read the header data from an Access Sensor Technologies (AST) air sampler
-#'log file
+#' Formats UPASv2x header data that has already been transposed to a wide
+#' data frame
 #'
-#' @param df_h Pass a upasv2x dataframe from read_ast_header function.
+#' @description
+#' `format_upasv2x_header` completes the UPASv2 log file header formatting prior
+#' to running any data analysis. It sets the proper data types for each variable,
+#' adds a column to specify the AST sampler type, and adds a column to describe
+#' the shutdown reason associated with the shutdown mode code.
 #'
-#' @return A modified data frame with header data in wide format.
+#' @param df_h A UPASv2x header data frame transposed to wide format using
+#' [transpose_raw_ast_header]
+#'
+#' @return A data frame with formatted UPASv2x header data in wide format that
+#' is ready for data analysis
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header <- format_upasv2x_header(upasv2x_header_raw)
+#' upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+#' upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev81_header_raw <- make_raw_ast_header(upasv2x_rev81_file)
+#' upasv2x_rev81_header_wide <- transpose_raw_ast_header(upasv2x_rev81_header_raw)
+#' upasv2x_rev81_header <- format_upasv2x_header(upasv2x_rev81_header_wide)
+#' upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+#' upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev117_header_raw <- make_raw_ast_header(upasv2x_rev117_file)
+#' upasv2x_rev117_header_wide <- transpose_raw_ast_header(upasv2x_rev117_header_raw)
+#' upasv2x_rev117_header <- format_upasv2x_header(upasv2x_rev117_header_wide)
+#' upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev110_diag_header_raw <- make_raw_ast_header(upasv2x_rev110_diag_file)
+#' upasv2x_rev110_diag_header_wide <- transpose_raw_ast_header(upasv2x_rev110_diag_header_raw)
+#' upasv2x_rev110_diag_header <- format_upasv2x_header(upasv2x_rev110_diag_header_wide)
+#' upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+#' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_header_raw <- make_raw_ast_header(upasv2x_rev158_file)
+#' upasv2x_rev158_header_wide <- transpose_raw_ast_header(upasv2x_rev158_header_raw)
+#' upasv2x_rev158_header <- format_upasv2x_header(upasv2x_rev158_header_wide)
+#' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+#' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev158_diag_header_raw <- make_raw_ast_header(upasv2x_rev158_diag_file)
+#' upasv2x_rev158_diag_header_wide <- transpose_raw_ast_header(upasv2x_rev158_diag_header_raw)
+#' upasv2x_rev158_diag_header <- format_upasv2x_header(upasv2x_rev158_diag_header_wide)
 
 format_upasv2x_header = function(df_h) {
 
@@ -16,6 +48,7 @@ format_upasv2x_header = function(df_h) {
     dplyr::mutate(ASTSampler = sub("-rev.*", "", .data$Firmware),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)))
+
   df_h <- df_h %>%
     dplyr::mutate(ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite",
                                              NA,.data$ProgrammedRuntime)) %>%
@@ -61,11 +94,12 @@ format_upasv2x_header = function(df_h) {
                                                 "MF3",
                                                 "MF2",
                                                 "MF1",
-                                                "MF0")), as.numeric)) %>%
+                                                "MF0")), ~ as.numeric(.x))) %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c("GPSEnabled",
                                                 "RTGasSampleState",
                                                 "PowerSaveMode",
-                                                "AppLock")), as.logical)) %>%
+                                                #TODO Add ExternalPowerMode and any other missing booleans
+                                                "AppLock")), ~ as.logical(.x))) %>%
     dplyr::mutate(LogFilename = gsub("/sd/", "", .data$LogFilename),
                   ShutdownReason  = dplyr::case_when(
                     .data$ShutdownMode == 0 ~ "unknown error",
@@ -76,6 +110,7 @@ format_upasv2x_header = function(df_h) {
                     .data$ShutdownMode == 5 ~ "max power at initialization",
                     .data$ShutdownMode == 6 ~ "max power during sample",
                     .data$ShutdownMode == 7 ~ "blocked flow",
+                    #TODO may need to make botton 2 only applicable below rev200
                     .data$ShutdownMode == 8 ~ "SD card removed",
                     dplyr::between(.data$ShutdownMode, 64, 79) ~ "code freeze",
                     TRUE ~ "RTOS crash"),
@@ -101,33 +136,22 @@ format_upasv2x_header = function(df_h) {
                     .data$PMSensorInterval == "18" ~ "20s Warmup 10s Measurement 30s Sleep",
                     TRUE ~ "NA" ))
 
-  df_h  <- df_h %>%
-    dplyr::select(.data$ASTSampler,match("UPASserial",colnames(df_h)):ncol(df_h))
-
-  df_h  <- df_h %>%
-    dplyr::select(1:match("Firmware",colnames(df_h)), .data$FirmwareRev,
-                  (match("Firmware",colnames(df_h))+1):ncol(df_h))
-
-  df_h  <- df_h %>%
-    dplyr::select(1:match("ShutdownMode",colnames(df_h)), .data$ShutdownReason,
-                  (match("ShutdownMode",colnames(df_h))+1):ncol(df_h))
-
-  df_h  <- df_h %>%
-    dplyr::select(1:match("PMSensorInterval",colnames(df_h)), .data$PMSensorOperation,
-                  (match("PMSensorInterval",colnames(df_h))+1):ncol(df_h)) %>%
+  df_h <- df_h %>%
+    dplyr::relocate("ASTSampler") %>%
+    dplyr::relocate("FirmwareRev", .after = "Firmware") %>%
+    dplyr::relocate("ShutdownReason", .after = "ShutdownMode") %>%
+    dplyr::relocate("PMSensorOperation", .after = "PMSensorInterval") %>%
     dplyr::mutate(dplyr::across(dplyr::any_of(c("StartDateTimeUTC",
                                                 "EndDateTimeUTC",
                                                 "MFSCalDate")),
-                                as.POSIXct, format="%Y-%m-%dT%H:%M:%S",
-                                tz="UTC")) %>%
+                                ~ as.POSIXct(.x, format="%Y-%m-%dT%H:%M:%S",
+                                tz="UTC"))) %>%
     dplyr::mutate(SampleName  = gsub("_+$", "", .data$SampleName),
                   SampleName  = gsub("-+$", "", .data$SampleName),
                   SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
                   CartridgeID = gsub("_+$", "", .data$CartridgeID),
                   CartridgeID  = gsub("-+$", "", .data$CartridgeID),
                   CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
-  # %>%
-  #   dplyr::rename(`Sample Duration (hr)` = .data$OverallDuration)
 
   return(df_h)
 

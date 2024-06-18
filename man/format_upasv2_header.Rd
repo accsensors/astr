@@ -2,22 +2,65 @@
 % Please edit documentation in R/upasv2.R
 \name{format_upasv2_header}
 \alias{format_upasv2_header}
-\title{Read the header data from a UPASv2 log file}
+\title{Formats UPASv2 header data that has already been transposed to a wide
+data frame}
 \usage{
 format_upasv2_header(df_h, update_names = FALSE)
 }
 \arguments{
-\item{df_h}{A UPASv2 header dataframe}
+\item{df_h}{A UPASv2 header data frame transposed to wide format using
+\link{transpose_raw_ast_header}}
 
-\item{update_names}{Convert old log file column names to match current log
-file names.}
+\item{update_names}{If \code{TRUE}, convert old log file column names to match
+latest version.
+If firmware > rev100:
+\itemize{
+\item VolumetricFlowRate        -> FlowRateSetpoint
+\item DutyCycle                 -> FlowDutyCycle
+\item SampledRuntime            -> OverallDuration
+\item AverageVolumetricFlowRate -> PumpingFlowRateAverage
+}
+
+If firmware is equal to rev100:
+\itemize{
+\item CumulativeSamplingTime -> LifetimeSampleRuntime
+\item StartDateTime          -> StartDateTimeUTC
+\item AverageVolumetricFlow  -> PumpingFlowRateAverage
+}
+
+Behavior not defined for firmwares < rev100}
 }
 \value{
-A data frame.
+A data frame with formatted UPASv2 header data in wide format that
+is ready for data analysis
 }
 \description{
-Read the header data from a UPASv2 log file
+\code{format_upasv2_header} completes the UPASv2 log file header formatting prior
+to running any data analysis. It sets the proper data types for each variable,
+adds a column to specify the AST sampler type, adds a column to describe the
+shutdown reason associated with the shutdown mode code, and - if
+\code{update_names=TRUE} - updates old log file variable names
+to match current log file names.
 }
 \examples{
-upasv2_header <- format_upasv2_header(upasv2_header_raw, update_names=FALSE)
+upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
+upasv2_rev125_header_raw <- make_raw_ast_header(upasv2_rev125_file)
+upasv2_rev125_header_transp <- transpose_raw_ast_header(upasv2_rev125_header_raw)
+upasv2_rev125_header <- format_upasv2_header(upasv2_rev125_header_transp, update_names=FALSE)
+upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
+upasv2_rev130_diag_header_raw <- make_raw_ast_header(upasv2_rev130_diag_file)
+upasv2_rev130_diag_header_transp <- transpose_raw_ast_header(upasv2_rev130_diag_header_raw)
+upasv2_rev130_diag_header <- format_upasv2_header(upasv2_rev130_diag_header_transp, update_names=FALSE)
+upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
+upasv2_rev138_header_raw <- make_raw_ast_header(upasv2_rev138_file)
+upasv2_rev138_header_transp <- transpose_raw_ast_header(upasv2_rev138_header_raw)
+upasv2_rev138_header <- format_upasv2_header(upasv2_rev138_header_transp, update_names=TRUE)
+upasv2_rev138_diag_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
+upasv2_rev138_diag_file <- system.file("extdata", upasv2_rev138_diag_filename, package = "astr", mustWork = TRUE)
+upasv2_rev138_diag_header_raw <- make_raw_ast_header(upasv2_rev138_diag_file)
+upasv2_rev138_diag_header_transp <- transpose_raw_ast_header(upasv2_rev138_diag_header_raw)
+upasv2_rev138_diag_header <- format_upasv2_header(upasv2_rev138_diag_header_transp, update_names=FALSE)
 }
