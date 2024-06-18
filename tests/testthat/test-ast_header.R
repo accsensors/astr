@@ -34,6 +34,7 @@ test_that("make_raw_ast_header works with DIAGNOSTIC UPASv2x  file", {
   expect_type(sapply(header_raw, class), "character")
 })
 
+
 ###################################
 # transpose_raw_ast_header
 ###################################
