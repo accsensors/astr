@@ -30,28 +30,27 @@
 #' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_log <- read_ast_log(upasv2x_rev158_file, update_names=FALSE)
 
-read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
+read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny = FALSE) {
 
-  df_log_raw <- astr::make_raw_ast_log(file)
+  df_log <- astr::make_raw_ast_log(file)
 
-  df_h <- astr::read_ast_header(file)
+  df_h   <- astr::read_ast_header(file)
 
-  df <- astr::format_ast_log(df_h, df_log_raw, tz_offset, update_names, cols_keep, cols_drop, shiny=shiny)
+  df <- astr::format_ast_log(df_h, df_log, tz_offset, update_names, cols_keep, cols_drop, shiny=shiny)
 
   return(df)
-
 }
 
 #'Generate a data frame of unformatted log column data from an Access Sensor
 #'Technologies (AST) air sampler log file
 #'
 #' @description
-#' `make_raw_ast_log`reads in the log data exactly as it
-#' appears in the raw log file.
+#' `make_raw_ast_log`reads in the sample log data exactly as it appears in the
+#' log file.
 #'
 #' @inheritParams read_ast_log
 #'
-#' @return A data frame of unformatted log data
+#' @return A data frame of unformatted sample log data
 #' @export
 #'
 #' @examples
@@ -83,138 +82,66 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 
 make_raw_ast_log = function(file){
 
-  nrows_header <- count_header_rows(file)
+  nrows_header <- astr::count_header_rows(file) # Determine no. of header rows
+
   # Need to account for blank lines when using skip in fread
-  nrow_header_skip <- nrows_header$nrow_with_blanks+1
+  nrow_header_skip <- nrows_header$nrow_header_with_blanks +
+                      nrows_header$nrow_diag_with_blanks + 2
 
-  df_log_raw <- data.table::fread(file,
-                              sep=',',
-                              skip = nrow_header_skip,
-                              header = FALSE,
-                              fill = TRUE,
-                              blank.lines.skip = TRUE,
-                              stringsAsFactors = FALSE)
+  # Read sample log data
+  df <- data.table::fread(file, sep = ',', header = TRUE, fill = TRUE,
+                          skip = nrow_header_skip,
+                          blank.lines.skip = TRUE, stringsAsFactors = FALSE)
 
-  # firmware <- df_raw[grepl("firmware", df_raw$V1),]
-  # firmware <- firmware %>%
-  #   dplyr::mutate(ASTSampler = sub("-rev.*", "", .data$V2))
-  #
-  # if(firmware$ASTSampler != 'UPAS_v2_0'){
-  #   firmware <- firmware %>%
-  #     dplyr::mutate(FirmwareRev = sapply(strsplit(.data$V2,"-"), `[`, 2),
-  #                   FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)))
-  # }else{
-  #   firmware <- firmware %>%
-  #     dplyr::mutate(FirmwareRev = sapply(strsplit(.data$V2,"-"), `[`, 2),
-  #                   FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)))
-  # }
-  #
-  # if(any(grepl("DIAGNOSTIC TEST", df_raw$V1)) |
-  #    any(grepl("CO2", df_raw$V1)) ){
-  #
-  #   if(firmware$ASTSampler == 'UPAS_v2_x' & firmware$FirmwareRev>=127){
-  #
-  #     df_raw_log <- data.table::fread(file,
-  #                                     sep=',',
-  #                                     skip = nrow(df_raw)+10,
-  #                                     header = FALSE,
-  #                                     fill = TRUE,
-  #                                     blank.lines.skip = TRUE,
-  #                                     stringsAsFactors = FALSE)
-  #
-  #   }else{
-  #
-  #     df_raw_log <- data.table::fread(file,
-  #                                     sep=',',
-  #                                     skip = nrow(df_raw),
-  #                                     header = FALSE,
-  #                                     fill = TRUE,
-  #                                     blank.lines.skip = TRUE,
-  #                                     stringsAsFactors = FALSE)
-  #   }
-  #
-  #   if(any(grepl("DIAGNOSTIC TEST", df_raw_log$V1))){
-  #     df_raw_log <- df_raw_log %>%
-  #       dplyr::slice(which(df_raw_log$V1=="DIAGNOSTIC TEST")+1:dplyr::n())
-  #
-  #   }else{
-  #     df_raw_log <- df_raw_log %>%
-  #       dplyr::slice(which(df_raw_log$V1=="SAMPLE LOG")+1:dplyr::n())
-  #
-  #   }
-  #
-  #   df_raw_log <- df_raw_log %>%
-  #     dplyr::mutate(dplyr::across(dplyr::everything(), as.character))
-  #
-  #   df_raw <- df_raw %>%
-  #     dplyr::bind_rows(df_raw_log) %>%
-  #     dplyr::distinct(.data$V1, .data$V9, .keep_all = TRUE)
-  #
-  #
-  # }
+  if(df$SampleTime[1] == "(HH:MM:SS)"){ # For files with units below header
+    df <- df[-1, ] # Remove row with units
+  }
 
-  return(df_log_raw)
+  return(df)
 }
 
 #'Extract only the log data from an Access Sensor Technologies (AST) air sampler
 #'log file
 #'
-#' @param df_h An AST air sampler formatted log file header dataframe.
-#' @param df_raw Any AST air sampler unformatted log file dataframe.
-#' @param tz_offset Pass an option timezone offset.
-#' @param update_names Option to update old sampler names to latest version.
+#' @param df_h A formatted data frame of AST air sampler log file header data.
+#' @param df_log An unformatted data frame of sample log data.
+#' @param tz_offset Pass an optional timezone offset.
+#' @param update_names Option to update old variable names to current names.
 #' @param cols_keep Specify log file columns to keep.
 #' @param cols_drop Specify log file columns to remove.
-#' @param shiny Option to make TRUE if using function with AST shiny app.
+#' @param shiny Option to make TRUE if using this function with AST shiny app.
 #'
-#' @return A data frame with all log data.
+#' @return A data frame containing formatted sample log data.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
 #' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
-format_ast_log = function(df_h, df_log_raw, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
+format_ast_log = function(df_h, df_log, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
 
-  df_cols <- df_log_raw[2,] %>%
-    # dplyr::slice(which(df_log_raw=="SampleTime")) %>%
-    unlist(use.names = FALSE)
-
-
-  if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x')){
-    df_log <- df_log_raw %>%
-      dplyr::slice(-1:-3)
-    # df_log <- df_log_raw %>%
-    #   dplyr::slice(which(df_log_raw$V1=="SampleTime")+2:dplyr::n())
-  }else if(stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2') | stringr::str_detect(df_h$Firmware, 'UPAS_v2_0')){
-    df_log <- df_log_raw %>%
-      dplyr::slice(-1:-2)
-    # df_log <- df_log_raw %>%
-    #   dplyr::slice(which(df_log_raw$V1=="SampleTime")+1:dplyr::n())
-  }
-
+  firmware <- df_h$Firmware
 
   if(nrow(df_log)>0){
-    colnames(df_log) <- df_cols
 
-    df_log <- df_log[ , colSums(is.na(df_log)) < nrow(df_log)]
+    if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
 
-    if(any(stringr::str_detect(names(df_h),'ASTSampler'))){
-      #if(df_h$ASTSampler == 'UPAS_v2_x'){
-      if(stringr::str_detect(df_h$Firmware, 'UPAS_v2_x') | stringr::str_detect(df_h$Firmware, 'SHEARv2_7_2')){
-        df_log <- astr::format_upasv2x_log(df_h, df_log, tz_offset, cols_keep, cols_drop)
+      df <- astr::format_upasv2x_log(df_h, df_log, tz_offset, cols_keep, cols_drop)
 
-      }else if(df_h$ASTSampler == "UPAS_v2_0"){
-        if(shiny) {update_names=TRUE}
-        df_log <- astr::format_upasv2_log(df_h, df_log, update_names=update_names)
+    }else if(grepl("UPAS_v2_0", firmware)){
 
-      }else{
+      if(shiny){update_names <- TRUE} #TODO move to own function format_shiny_header so that shiny functionality is not present in normal functions
 
-      }
+      df <- astr::format_upasv2_log(df_h, df_log, update_names=update_names)
+
+    }else if(grepl("HHBv2", firmware)){
+
+      df <- astr::format_hhb_log(df_h, df_log, tz_offset, cols_keep, cols_drop)
+
     }
-    if(shiny){df_log <- astr::shiny_log(df_log)} #TODO move to own function format_shiny_log so that shiny functionality is not present in normal functions
+
+    if(shiny){df <- astr::shiny_log(df)} #TODO move to own function format_shiny_log so that shiny functionality is not present in normal functions
   }
 
-  return(df_log)
-
+  return(df)
 }

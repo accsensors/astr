@@ -56,14 +56,13 @@
 
 format_upasv2_header <- function(df_h, update_names=FALSE){
 
+  df_h <- dplyr::rename(df_h, LogFilename = "UPASlogFilename")
 
-  df_h <- df_h %>%
-    dplyr::mutate(ASTSampler = sub("-rev.*", "", .data$Firmware),
+  df_h <- dplyr::mutate(df_h,
+                  ASTSampler = sub("-rev.*", "", .data$Firmware),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
-                  FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)))
-
-  df_h <- df_h %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c("UPASserial",
+                  FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)),
+                  dplyr::across(dplyr::any_of(c("UPASserial",
                                                 "GPSUTCOffset",
                                                 "StartOnNextPowerUp",
                                                 "ProgrammedStartDelay",
@@ -83,12 +82,12 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
                                                 "SampledVolume",
                                                 "SampledRuntime",
                                                 "LoggedRuntime")),
-                                as.numeric)) %>%
-    dplyr::rename(LogFilename = "UPASlogFilename") %>%
-    dplyr::mutate(dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
-                                                "GPSEnabled")), as.logical)) %>%
-    dplyr::mutate(LogFilename = gsub("/sd/", "", .data$LogFilename),
-                  LogFileMode     = ifelse(.data$LogFileMode == 0, "normal", "debug"),
+                                \(x) as.numeric(x)),
+                  dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
+                                                "GPSEnabled")),
+                                \(x) as.logical(x)),
+                  LogFilename = gsub("/sd/", "", .data$LogFilename),
+                  LogFileMode = ifelse(.data$LogFileMode==0, "normal", "debug"),
                   ShutdownReason  = dplyr::case_when(
                     .data$ShutdownMode == 0 ~ "unknown error",
                     .data$ShutdownMode == 1 ~ "user pushbutton stop",
@@ -104,47 +103,57 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
     dplyr::relocate("FirmwareRev", .after = "Firmware") %>%
     dplyr::relocate("ShutdownReason", .after = "ShutdownMode")
 
-
-
   if(df_h$FirmwareRev == 100){
 
-    df_h <- df_h %>%
-      dplyr::mutate_at(c("PowerCycles","CumulativeSamplingTime","AverageVolumetricFlow"), as.numeric) %>%
-      dplyr::mutate(StartDateTime = as.POSIXct(.data$StartDateTime, format="%Y-%m-%dT%H:%M:%SUTC", tz="UTC"))
+    df_h <- dplyr::mutate(df_h,
+                          across(c("PowerCycles","CumulativeSamplingTime",
+                                   "AverageVolumetricFlow"), \(x) as.numeric(x)),
+                          StartDateTime = as.POSIXct(.data$StartDateTime,
+                                                format = "%Y-%m-%dT%H:%M:%SUTC",
+                                                tz = "UTC"))
 
     if(update_names){
 
-      df_h <- df_h %>% dplyr::rename(LifetimeSampleRuntime = "CumulativeSamplingTime",
-                                 StartDateTimeUTC          = "StartDateTime",
-                                 AverageVolumetricFlowRate = "AverageVolumetricFlow")}
+      df_h <- dplyr::rename(df_h,
+                            LifetimeSampleRuntime = "CumulativeSamplingTime",
+                            StartDateTimeUTC = "StartDateTime",
+                            AverageVolumetricFlowRate = "AverageVolumetricFlow")
+    }
+
   }else{
 
-    df_h <- df_h %>%
-      dplyr::mutate_at(c("LifetimeSampleCount","LifetimeSampleRuntime","FlowOffset","AverageVolumetricFlowRate"), as.numeric) %>%
-      dplyr::mutate_at(c("StartDateTimeUTC", "EndDateTimeUTC"), as.POSIXct, format="%Y-%m-%dT%H:%M:%S", tz="UTC") %>%
-      dplyr::mutate(SampleName  = gsub("_+$", "", .data$SampleName),
-                    SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
-                    CartridgeID = gsub("_+$", "", .data$CartridgeID),
-                    CartridgeID = gsub("-+$", "", .data$CartridgeID),
-                    CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
+    df_h <- dplyr::mutate(df_h,
+      across(c("LifetimeSampleCount","LifetimeSampleRuntime","FlowOffset",
+               "AverageVolumetricFlowRate"), \(x) as.numeric(x)),
+      across(c("StartDateTimeUTC", "EndDateTimeUTC"),
+             \(x) as.POSIXct(x, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")),
+      SampleName  = gsub("_+$", "", .data$SampleName),
+      SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
+      CartridgeID = gsub("_+$", "", .data$CartridgeID),
+      CartridgeID = gsub("-+$", "", .data$CartridgeID),
+      CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
     }
 
 
     if(update_names){
-      df_h <- df_h %>%
-        dplyr::rename(FlowRateSetpoint = "VolumetricFlowRate",
-                      FlowDutyCycle = "DutyCycle",
-                      OverallDuration = "LoggedRuntime",
-                      PumpingDuration = "SampledRuntime",
-                      PumpingFlowRateAverage = "AverageVolumetricFlowRate")
+
+      df_h <- dplyr::rename(df_h,
+                          FlowRateSetpoint = "VolumetricFlowRate",
+                          FlowDutyCycle = "DutyCycle",
+                          OverallDuration = "LoggedRuntime",
+                          PumpingDuration = "SampledRuntime",
+                          PumpingFlowRateAverage = "AverageVolumetricFlowRate")
+
       if(any(df_h$SampleName == 'DIAGNOSTIC')) {
-        df_h <- df_h %>%
-          dplyr::rename(MFSCalVoutMin = "MFSVoltMin",
-                        MFSCalVoutMax = "MFSVoltMax",
-                        MFSCalMFMin = "MFSMFMin",
-                        MFSCalMFMax = "MFSMFMax",
-                        MFSCalDate = "CalDateTime") %>%
-          dplyr::select(!c("MFSVoltMaxEst", "MFSMFMaxEst", "CalUNIXTIME"))
+
+        df_h <- dplyr::rename(df_h,
+                              MFSCalVoutMin = "MFSVoltMin",
+                              MFSCalVoutMax = "MFSVoltMax",
+                              MFSCalMFMin = "MFSMFMin",
+                              MFSCalMFMax = "MFSMFMax",
+                              MFSCalDate = "CalDateTime")
+        df_h <- dplyr::select(df_h,
+                              !c("MFSVoltMaxEst", "MFSMFMaxEst", "CalUNIXTIME"))
       }
     }
 
@@ -154,7 +163,7 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 #' Read the log data from a UPASv2 log file
 #'
 #' @param df_h A UPASv2 header dataframe
-#' @param df_raw A UPASv2 raw dataframe
+#' @param df_log A UPASv2 raw dataframe
 #' @param update_names Convert old log file column names to match current log
 #' file names.
 #' @param tz_offset Pass an option timezone offset.
@@ -167,111 +176,97 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 #' @examples
 #' upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)
 
-format_upasv2_log = function(df_h, df_raw, tz_offset = NA, update_names=FALSE) {
+format_upasv2_log = function(df_h, df_log, tz_offset = NA, update_names=FALSE){
+
+  tz_off <- ifelse(is.na(tz_offset), df_h$GPSUTCOffset, tz_offset)
 
   # Get header data
-  df_h_sel <- df_h %>%
-    dplyr::select(dplyr::any_of(c("ASTSampler",
-                           "UPASserial",
-                           "UPASlogFilename",
-                           "SampleName",
-                           "CartridgeID",
-                           "StartDateTimeUTC",
-                           "LogFileMode",
-                           "GPSUTCOffset")))
+  df_h_sel <- dplyr::select(df_h, dplyr::any_of(c("ASTSampler","UPASserial",
+                                                  "UPASlogFilename",
+                                                  "SampleName","CartridgeID",
+                                                  "StartDateTimeUTC",
+                                                  "LogFileMode")))
 
-  tz_off <- ifelse(is.na(tz_offset),df_h_sel$GPSUTCOffset, tz_offset)
+  if(nrow(df_log) > 0){
 
-  df_h_sel <- df_h_sel %>%
-    dplyr::select(-.data$GPSUTCOffset)
-
-  if(nrow(df_raw) > 0){
-
-    df_raw[df_raw == 'NULL'] <- NA
-
-    df <- df_raw %>%
-      dplyr::mutate(SampleTime = ifelse(.data$SampleTime == "99:99:99",
-                                        NA,
-                                        .data$SampleTime),
-                    SampleTime = ifelse(!is.na(.data$SampleTime),
-                                        strsplit(.data$SampleTime,":"),
-                                        .data$SampleTime),
-                    SampleTime = as.difftime(3600*as.numeric(sapply(.data$SampleTime, `[`, 1)) +
-                                               60*as.numeric(sapply(.data$SampleTime, `[`, 2)) +
-                                               as.numeric(sapply(.data$SampleTime, `[`, 3)), units="secs"))
+    df <- dplyr::mutate(df_log,
+            SampleTime = ifelse(.data$SampleTime == "99:99:99", NA,
+                                .data$SampleTime),
+            SampleTime = ifelse(!is.na(.data$SampleTime),
+                                strsplit(.data$SampleTime,":"),
+                                .data$SampleTime),
+            SampleTime = as.difftime(
+                            3600*as.numeric(sapply(.data$SampleTime, `[`, 1)) +
+                              60*as.numeric(sapply(.data$SampleTime, `[`, 2)) +
+                                 as.numeric(sapply(.data$SampleTime, `[`, 3)),
+                                     units="secs"))
 
     if("UTCDateTime" %in% colnames(df)){ # For firmware version 100
 
-      df <- df %>%
-        dplyr::mutate(dplyr::across(-dplyr::one_of(c("SampleTime",
-                                                      "UTCDateTime",
-                                                      "DateTimeLocal")),
-                                                  as.numeric),
-                                    UTCDateTime = as.POSIXct(.data$UTCDateTime,
-                                               format="%Y-%m-%dT%H:%M:%S",
-                                               tz="UTC"))
+      df <- dplyr::mutate(df,
+                          dplyr::across(-dplyr::one_of(c("SampleTime",
+                                                         "UTCDateTime",
+                                                         "DateTimeLocal")),
+                                        \(x) as.numeric(x)),
+                          UTCDateTime = as.POSIXct(.data$UTCDateTime,
+                                                   format = "%Y-%m-%dT%H:%M:%S",
+                                                   tz = "UTC"))
 
       if(update_names){
-        df <- df %>% dplyr::rename(DateTimeUTC = .data$UTCDateTime,
-                                   VolumetricFlowRate = .data$VolFlow,
-                                   LogFilename = .data$UPASLogFilename,
-                                   )}
+
+        df <- dplyr::rename(df, DateTimeUTC        = .data$UTCDateTime,
+                                VolumetricFlowRate = .data$VolFlow,
+                                LogFilename        = .data$UPASLogFilename)
+        }
 
     }else{ # For firmware version > 100
-      df <- df %>%
-        dplyr::mutate(dplyr::across(-dplyr::one_of(c("SampleTime",
-                                                      "DateTimeUTC",
-                                                      "DateTimeLocal")),
-                                                              as.numeric),
-                                     DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
-                                               format="%Y-%m-%dT%H:%M:%S",
-                                               tz="UTC"),
-                      tz_value = ifelse(is.na(tz_offset),TRUE,FALSE),
-                      DateTimeLocal = dplyr::if_else(.data$tz_value,
-                                                     as.POSIXct(.data$DateTimeLocal,
-                                                                format="%Y-%m-%dT%H:%M:%S",
-                                                                tz='UTC'),
-                                                     .data$DateTimeUTC+tz_off*3600),
-                      TZOffset = tz_off)
+      df <- dplyr::mutate(df,
+                          dplyr::across(-dplyr::one_of(c("SampleTime",
+                                                         "DateTimeUTC",
+                                                         "DateTimeLocal")),
+                                        \(x) as.numeric(x)),
+                          DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
+                                                   format = "%Y-%m-%dT%H:%M:%S",
+                                                   tz = "UTC"),
+                          tz_value = ifelse(!is.na(tz_offset), T, F),
+                          DateTimeLocal = .data$DateTimeUTC + (tz_off * 3600),
+                          TZOffset = tz_off)
     }
 
     if(!is.null(df_h$LogFileMode)){
       # For debug files
       if((df_h$LogFileMode == "debug") & ("PumpsON" %in% colnames(df))){
 
-        df <- df %>%
-          dplyr::mutate(dplyr::across(dplyr::any_of(c("PumpsON",
-                             "Dead",
-                             "BCS1",
-                             "BCS2",
-                             "BC_NPG")), as.logical))
+        df <- dplyr::mutate(df,
+                            across(any_of(c("PumpsON","Dead","BCS1","BCS2",
+                                            "BC_NPG")), \(x) as.logical(x)))
 
         if(("gpsspeed" %in% colnames(df)) & update_names){
-          df <- df %>% dplyr::rename(GPSspeed   = .data$gpsspeed,
-                                     GPSquality = .data$gpsquality)}
+          df <-  dplyr::rename(df, GPSspeed   = .data$gpsspeed,
+                                   GPSquality = .data$gpsquality)}
       }
     }
   }
 
 
   if(update_names){
-    df <- df %>%
-      dplyr::rename(dplyr::any_of(c(PumpingFlowRate = "VolumetricFlowRate",
-                    AtmoDensity = "AtmoRho",
-                    FilterDP = "FdPdP",
-                    AtmoT = "PumpT",
-                    AtmoRH = "PumpRH",
-                    PCB1T = "PCBT",
-                    PCB2P = "PumpP",
-                    AtmoP = "PCBP",
-                    GPShDOP = "GPShdop",
-                    #GPSQual = .data$GPSquality,
-                    #TODO convert BGFvolt to a battery percentage for shiny app output
-                    BattVolt = "BFGvolt")))
+
+    df <- dplyr::rename(df,
+                        dplyr::any_of(c(PumpingFlowRate = "VolumetricFlowRate",
+                                        AtmoDensity     = "AtmoRho",
+                                        FilterDP        = "FdPdP",
+                                        AtmoT           = "PumpT",
+                                        AtmoRH          = "PumpRH",
+                                        PCB1T           = "PCBT",
+                                        PCB2P           = "PumpP",
+                                        AtmoP           = "PCBP",
+                                        GPShDOP         = "GPShdop",
+                                        # GPSQual         = "GPSquality",
+                                        #TODO convert BGFvolt to a battery percentage for shiny app output
+                                        BattVolt        = "BFGvolt")))
   }
 
-  df <- df %>%
-    cbind(df_h_sel)
+  df <- cbind(df, df_h_sel)
 
   return(df)
 }
