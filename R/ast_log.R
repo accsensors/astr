@@ -2,7 +2,7 @@
 #'log file
 #'
 #' @param file Any AST air sampler log file name.
-#' @param update_names Option to update old sampler names to latest version.
+#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
 #' @param tz_offset Pass an optional timezone offset.
 #' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
 #' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
@@ -109,7 +109,7 @@ make_raw_ast_log = function(file){
 #'
 #' @param df_h A formatted data frame of AST air sampler log file header data.
 #' @param df_log An unformatted data frame of sample log data.
-#' @param update_names Option to update old variable names to current names.
+#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
 #' @param tz_offset Pass an optional timezone offset.
 #' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
 #' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
@@ -135,7 +135,7 @@ format_ast_log = function(df_h, df_log, update_names = FALSE, tz_offset = NA, co
 
     if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
 
-      df <- astr::format_upasv2x_log(df_h, df_log, tz_offset, cols_keep, cols_drop)
+      df <- astr::format_upasv2x_log(df_h, df_log, update_names, tz_offset, cols_keep, cols_drop)
 
     }else if(grepl("UPAS_v2_0", firmware)){
 
