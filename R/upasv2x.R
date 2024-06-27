@@ -153,8 +153,13 @@ format_upasv2x_header = function(df_h) {
 #' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
 #' @param df Pass a upasv2x dataframe from read_ast_header function.
 #' @param tz_offset Pass an optional timezone offset value.
-#' @param cols_keep Specify log file columns to keep.
-#' @param cols_drop Specify log file columns to remove.
+#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
+#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+#'#' Column selection will occur in the same order in which the function arguments are specified above.
+#' In other words, the columns specified in cols_keep will be selected first.
+#' If the cols_keep argument is not specified, all columns will be kept.  Then,
+#' The columns specified in cols_drop will be dropped.  If the cols_drop
+#' argument is not specified, no columns will be dropped.
 #'
 #' @return A modified data frame with all log data.
 #' @export
@@ -163,7 +168,7 @@ format_upasv2x_header = function(df_h) {
 #' @examples
 #' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 
-format_upasv2x_log = function(df_h, df, tz_offset = NA, cols_keep = c(), cols_drop = c()) {
+format_upasv2x_log = function(df_h, df, tz_offset=NA, cols_keep=c(), cols_drop=c()) {
 
   tz_off <- ifelse(is.na(tz_offset), df_h$GPSUTCOffset, tz_offset)
 

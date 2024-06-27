@@ -12,8 +12,8 @@
 #'
 #' @param df_h A UPASv2 header data frame transposed to wide format using
 #' [transpose_raw_ast_header]
-#' @param update_names If `TRUE`, convert old log file column names to match
-#' latest version.
+#' @param update_names If `TRUE`, rename old log file variable names to match
+#' the variable names used in the latest firmware version.
 #' If firmware > rev100:
 #' * VolumetricFlowRate        -> FlowRateSetpoint
 #' * DutyCycle                 -> FlowDutyCycle
@@ -164,10 +164,15 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 #'
 #' @param df_h A UPASv2 header dataframe
 #' @param df_log A UPASv2 raw dataframe
-#' @param update_names Convert old log file column names to match current log
-#' file names.
-#' @param tz_offset Pass an option timezone offset.
-#' @param update_names Option to update old sampler names to latest version.
+#' @param update_names Convert old log file column names to match current log file names.
+#' @param tz_offset Pass an optional timezone offset.
+#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
+#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+#' Column selection will occur in the same order in which the function arguments are specified above.
+#' In other words, the columns specified in cols_keep will be selected first.
+#' If the cols_keep argument is not specified, all columns will be kept. Then,
+#' The columns specified in cols_drop will be dropped.  If the cols_drop
+#' argument is not specified, no columns will be dropped.
 #'
 #' @return A data frame.
 #' @export
@@ -176,7 +181,7 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 #' @examples
 #' upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)
 
-format_upasv2_log = function(df_h, df_log, tz_offset = NA, update_names=FALSE){
+format_upasv2_log = function(df_h, df_log, update_names=FALSE, tz_offset=NA, cols_keep=c(), cols_drop=c()){
 
   tz_off <- ifelse(is.na(tz_offset), df_h$GPSUTCOffset, tz_offset)
 
@@ -267,6 +272,12 @@ format_upasv2_log = function(df_h, df_log, tz_offset = NA, update_names=FALSE){
   }
 
   df <- cbind(df, df_h_sel)
+
+  if(!is.null(cols_keep)){
+    df <- dplyr::select(df, cols_keep)
+  }else if(!is.null(cols_drop)){
+    df <- dplyr::select(df, -cols_drop)
+  }
 
   return(df)
 }

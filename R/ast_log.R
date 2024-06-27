@@ -2,10 +2,15 @@
 #'log file
 #'
 #' @param file Any AST air sampler log file name.
-#' @param tz_offset Pass an option timezone offset.
 #' @param update_names Option to update old sampler names to latest version.
-#' @param cols_keep Specify log file columns to keep.
-#' @param cols_drop Specify log file columns to remove.
+#' @param tz_offset Pass an optional timezone offset.
+#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
+#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+#' Column selection will occur in the same order in which the function arguments are specified above.
+#' In other words, the columns specified in cols_keep will be selected first.
+#' If the cols_keep argument is not specified, all columns will be kept.  Then,
+#' The columns specified in cols_drop will be dropped.  If the cols_drop
+#' argument is not specified, no columns will be dropped.
 #' @param shiny Option to make TRUE if using function with AST shiny app.
 #'
 #' @return A data frame with all log data plus some header data appended.
@@ -30,7 +35,7 @@
 #' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_log <- read_ast_log(upasv2x_rev158_file, update_names=FALSE)
 
-read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny = FALSE) {
+read_ast_log = function(file, update_names=FALSE, tz_offset=NA, cols_keep=c(), cols_drop=c(), shiny = FALSE) {
 
   df_log <- astr::make_raw_ast_log(file)
 
@@ -45,8 +50,7 @@ read_ast_log = function(file, tz_offset = NA, update_names = FALSE, cols_keep = 
 #'Technologies (AST) air sampler log file
 #'
 #' @description
-#' `make_raw_ast_log`reads in the sample log data exactly as it appears in the
-#' log file.
+#' `make_raw_ast_log`reads in the sample log data exactly as it appears in the log file.
 #'
 #' @inheritParams read_ast_log
 #'
@@ -105,10 +109,15 @@ make_raw_ast_log = function(file){
 #'
 #' @param df_h A formatted data frame of AST air sampler log file header data.
 #' @param df_log An unformatted data frame of sample log data.
-#' @param tz_offset Pass an optional timezone offset.
 #' @param update_names Option to update old variable names to current names.
-#' @param cols_keep Specify log file columns to keep.
-#' @param cols_drop Specify log file columns to remove.
+#' @param tz_offset Pass an optional timezone offset.
+#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
+#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+#' Column selection will occur in the same order in which the function arguments are specified above.
+#' In other words, the columns specified in cols_keep will be selected first.
+#' If the cols_keep argument is not specified, all columns will be kept.  Then,
+#' The columns specified in cols_drop will be dropped.  If the cols_drop
+#' argument is not specified, no columns will be dropped.
 #' @param shiny Option to make TRUE if using this function with AST shiny app.
 #'
 #' @return A data frame containing formatted sample log data.
@@ -118,7 +127,7 @@ make_raw_ast_log = function(file){
 #' @examples
 #' data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
 
-format_ast_log = function(df_h, df_log, tz_offset = NA, update_names = FALSE, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
+format_ast_log = function(df_h, df_log, update_names = FALSE, tz_offset = NA, cols_keep = c(), cols_drop = c(), shiny=FALSE) {
 
   firmware <- df_h$Firmware
 
@@ -132,7 +141,7 @@ format_ast_log = function(df_h, df_log, tz_offset = NA, update_names = FALSE, co
 
       if(shiny){update_names <- TRUE} #TODO move to own function format_shiny_header so that shiny functionality is not present in normal functions
 
-      df <- astr::format_upasv2_log(df_h, df_log, update_names=update_names)
+      df <- astr::format_upasv2_log(df_h, df_log, update_names, tz_offset, cols_keep, cols_drop)
 
     }else if(grepl("HHBv2", firmware)){
 

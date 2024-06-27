@@ -35,8 +35,8 @@ format_hhb_header = function(df_h) {
 #' @param df_h A formatted AST HHB log file header data frame.
 #' @param df_raw An unformatted AST HHB sample log data frame.
 #' @param tz_offset Pass an optional timezone offset.
-#' @param cols_keep Specify log file columns to keep.
-#' @param cols_drop Specify log file columns to remove.
+#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
+#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
 #'
 #' @return A data frame with all log data.
 #' @export
@@ -45,8 +45,7 @@ format_hhb_header = function(df_h) {
 #' @examples
 #' data_ast_log <- format_ast_log(hhb_header, data_hhb_raw)
 
-format_hhb_log = function(df_h, df_log, tz_offset = NA, cols_keep = c(),
-                          cols_drop = c()) {
+format_hhb_log = function(df_h, df_log, tz_offset=NA, cols_keep=c(), cols_drop=c()) {
 
   if (nrow(df_log) > 0) {
 
