@@ -6,7 +6,7 @@
 #' a column to specify the sampler type, and adds a column to describe the
 #' shutdown reason associated with the shutdown mode code.
 #'
-#' @param df A UPASv2.1 PLUS header data frame returned by the [transpose_ast_header] function
+#' @param data A UPASv2.1 PLUS header data frame returned by the [transpose_ast_header] function
 #'
 #' @return A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.
 #' @export
@@ -39,9 +39,9 @@
 #' upasv2x_rev158_diag_header_wide <- transpose_ast_header(upasv2x_rev158_diag_header_raw)
 #' upasv2x_rev158_diag_header <- format_upasv2x_header(upasv2x_rev158_diag_header_wide)
 
-format_upasv2x_header = function(df) {
+format_upasv2x_header = function(data) {
 
-  df <- dplyr::mutate(df,
+  data <- dplyr::mutate(data,
     ASTSampler  = sub("-rev.*", "", .data$Firmware),
     FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
     FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)),
@@ -117,12 +117,12 @@ format_upasv2x_header = function(df) {
     CartridgeID = gsub("-+$", "", .data$CartridgeID),
     CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
 
-  df <- dplyr::relocate(df, "ASTSampler")
-  df <- dplyr::relocate(df, "FirmwareRev",       .after = "Firmware")
-  df <- dplyr::relocate(df, "ShutdownReason",    .after = "ShutdownMode")
-  df <- dplyr::relocate(df, "PMSensorOperation", .after = "PMSensorInterval")
+  data <- dplyr::relocate(data, "ASTSampler")
+  data <- dplyr::relocate(data, "FirmwareRev",       .after = "Firmware")
+  data <- dplyr::relocate(data, "ShutdownReason",    .after = "ShutdownMode")
+  data <- dplyr::relocate(data, "PMSensorOperation", .after = "PMSensorInterval")
 
-  return(df)
+  return(data)
 }
 
 #'Format the sample log data from an Access Sensor Technologies UPAS v2.1 PLUS

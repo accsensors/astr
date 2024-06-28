@@ -7,7 +7,7 @@
 #' associated with the shutdown mode code, and can be directed to update old
 #' variable names to the current names.
 #'
-#' @param df A UPASv2 header data frame returned by [transpose_ast_header]
+#' @param data A UPASv2 header data frame returned by [transpose_ast_header]
 #' @inheritParams read_ast_header
 #' @return A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.
 #' @export
@@ -45,11 +45,11 @@
 #' upasv2_rev138_diag_header_transp <- transpose_ast_header(upasv2_rev138_diag_header_raw)
 #' upasv2_rev138_diag_header <- format_upasv2_header(upasv2_rev138_diag_header_transp, update_names=FALSE)
 
-format_upasv2_header <- function(df, update_names=FALSE){
+format_upasv2_header <- function(data, update_names=FALSE){
 
-  df <- dplyr::rename(df, LogFilename = "UPASlogFilename")
+  data <- dplyr::rename(data, LogFilename = "UPASlogFilename")
 
-  df <- dplyr::mutate(df,
+  data <- dplyr::mutate(data,
                   ASTSampler = sub("-rev.*", "", .data$Firmware),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)),
@@ -89,9 +89,9 @@ format_upasv2_header <- function(df, update_names=FALSE){
                     .data$ShutdownMode == 6 ~ "max power during sample",
                     .data$ShutdownMode == 7 ~ "blocked flow"))
 
-  if(df$FirmwareRev != 100){
+  if(data$FirmwareRev != 100){
 
-    df <- dplyr::mutate(df,
+    data <- dplyr::mutate(data,
                         SampleName  = gsub("_+$", "", .data$SampleName),
                         SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
                         CartridgeID = gsub("_+$", "", .data$CartridgeID),
@@ -99,14 +99,14 @@ format_upasv2_header <- function(df, update_names=FALSE){
                         CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
   }
 
-  df <- df %>%
+  data <- data %>%
     dplyr::relocate("ASTSampler") %>%
     dplyr::relocate("FirmwareRev", .after = "Firmware") %>%
     dplyr::relocate("ShutdownReason", .after = "ShutdownMode")
 
   if(update_names){
 
-    df <- dplyr::rename(df, dplyr::any_of(
+    data <- dplyr::rename(data, dplyr::any_of(
                         c(LifetimeSampleRuntime  = "CumulativeSamplingTime",
                           StartDateTimeUTC       = "StartDateTime",
                           PumpingFlowRateAverage = "AverageVolumetricFlow",
@@ -120,10 +120,10 @@ format_upasv2_header <- function(df, update_names=FALSE){
                           MFSCalMFMin            = "MFSMFMin",
                           MFSCalMFMax            = "MFSMFMax",
                           MFSCalDate             = "CalDateTime")))
-    df <- dplyr::select(df, -dplyr::any_of(c("MFSVoltMaxEst","MFSMFMaxEst","CalUNIXTIME")))
+    data <- dplyr::select(data, -dplyr::any_of(c("MFSVoltMaxEst","MFSMFMaxEst","CalUNIXTIME")))
   }
 
-  return(df)
+  return(data)
 }
 
 #'Format the sample log data from an Access Sensor Technologies UPAS v2

@@ -21,7 +21,7 @@ test_that("count_header_rows works with diagnostic UPASv2 log file", {
 })
 
 test_that("count_header_rows works with standard UPASv2x log file", {
-  filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
+  filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
   nrows_header <- count_header_rows(file)
   expect_identical(nrows_header$nrow_header_with_blanks, 112)
