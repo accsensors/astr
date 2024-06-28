@@ -15,22 +15,63 @@ format_ast_log(
 )
 }
 \arguments{
-\item{log}{An unformatted data frame of sample log data.}
+\item{log}{An unformatted data frame of sample log data returned by the \link{fread_ast_log} function.}
 
-\item{header}{A formatted data frame of header data.}
+\item{header}{A formatted data frame of header data returned by the \link{read_ast_header} function.}
 
 \item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-See \link{read_ast_log} for additional information.}
+
+For samples collected using UPAS v2.1 PLUS firmware versions preceding revXXX,
+the column name "AceelComplianceHrs" will be updated to "AccelComplianceHrs".
+
+For samples collected using the UPAS v2, the old names shown on the left will
+be updated to the names shown on the right:
+VolumetricFlowRate -> PumpingFlowRate
+\itemize{
+\item AtmoRho          -> AtmoDensity
+\item FdPdP            -> FilterDP
+\item PumpT            -> AtmoT
+\item PumpRH           -> AtmoRH
+\item PCBT             -> PCB1T
+\item PumpP            -> PCB2P
+\item PCBP             -> AtmoP
+\item GPShdop          -> GPShDOP
+\item BFGvolt          -> BattVolt
+}
+
+For samples collected specifically using UPAS v2 firmware rev100, the old
+names shown on the left will be updated to the names shown on the right:
+\itemize{
+\item UTCDateTime     -> DateTimeUTC
+\item VolFlow         -> VolumetricFlowRate
+\item UPASLogFilename -> LogFilename
+}
+
+Variable names cannot be updated for log files written using UPAS v2 firmware
+versions preceding rev100.}
 
 \item{tz}{Optional: A character string specifying the tz database time zone that should be used to display local times.
-See \link{read_ast_log} for additional information.}
+
+Example tz database time zones include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+For additional information, see: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+If your GPSUTCOffset is a whole number of hours, this function will be able
+to automatically convert the DateTimeLocal variable in the sample log to a
+POSIXct object displayed in the local time zone, without this tz parameter
+being specified.  If your GPSUTCOffset is not a whole number of hours, it's
+better to specify the local time zone as a character string here.}
 
 \item{cols_keep}{Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.}
 
 \item{cols_drop}{Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
-See \link{read_ast_log} for additional information.}
 
-\item{shiny}{Option to make TRUE if using this function with AST shiny app.}
+Column selection will occur in the same order in which the function arguments are specified above.
+In other words, the columns specified in cols_keep will be selected first.
+If the cols_keep argument is not specified, all columns will be kept.  Then,
+The columns specified in cols_drop will be dropped.  If the cols_drop
+argument is not specified, no columns will be dropped.}
+
+\item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
 A data frame with formatted sample log data plus key header data appended.

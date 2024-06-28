@@ -14,7 +14,7 @@ read_ast_log(
 )
 }
 \arguments{
-\item{file}{Any AST air sampler log file name.}
+\item{file}{Any Access Sensor Technologies air sampler log file name.}
 
 \item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
 

@@ -7,7 +7,7 @@
 #' identifying unique log files when data from multiple sample logs have been
 #' combined into a single data frame.
 #'
-#' @param file Any AST air sampler log file name.
+#' @param file Any Access Sensor Technologies air sampler log file name.
 #' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
 #'
 #' For samples collected using UPAS v2.1 PLUS firmware versions preceding revXXX,
@@ -159,16 +159,9 @@ fread_ast_log = function(file){
 #' unique log files when data from multiple sample logs have been combined into
 #' a single data frame.
 #'
-#' @param log An unformatted data frame of sample log data.
-#' @param header A formatted data frame of header data.
-#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-#' See [read_ast_log] for additional information.
-#' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
-#' See [read_ast_log] for additional information.
-#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
-#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
-#' See [read_ast_log] for additional information.
-#' @param shiny Option to make TRUE if using this function with AST shiny app.
+#' @param log An unformatted data frame of sample log data returned by the [fread_ast_log] function.
+#' @param header A formatted data frame of header data returned by the [read_ast_header] function.
+#' @inheritParams read_ast_log
 #'
 #' @return A data frame with formatted sample log data plus key header data appended.
 #' @export

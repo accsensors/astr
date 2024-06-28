@@ -280,9 +280,7 @@ transpose_ast_header = function(header, diag = NULL){
 #' directed to update old variable names to current variable names.
 #'
 #' @param data A header data frame returned by the [transpose_ast_header] function.
-#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-#' See [read_ast_header] for additional information.
-#' @param shiny Option to make TRUE if using function with AST shiny app.
+#' @inheritParams read_ast_header
 #'
 #' @return A data frame with a single row of header data that are formatted and ready for analysis.
 #' @export

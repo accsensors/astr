@@ -10,7 +10,27 @@ format_upasv2_header(df, update_names = FALSE)
 \item{df}{A UPASv2 header data frame returned by \link{transpose_ast_header}}
 
 \item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-See \link{read_ast_header} for additional information.}
+
+For samples collected using UPAS v2 firmware versions beyond rev100, the old
+names shown on the left will be updated to the names shown on the right:
+\itemize{
+\item VolumetricFlowRate        -> FlowRateSetpoint
+\item DutyCycle                 -> FlowDutyCycle
+\item LoggedRuntime             -> OverallDuration
+\item SampledRuntime            -> PumpingDuration
+\item AverageVolumetricFlowRate -> PumpingFlowRateAverage
+}
+
+For samples collected using UPAS v2 firmware rev100, the old names shown on
+the left will be updated to the names shown on the right:
+\itemize{
+\item CumulativeSamplingTime -> LifetimeSampleRuntime
+\item StartDateTime          -> StartDateTimeUTC
+\item AverageVolumetricFlow  -> AverageVolumetricFlowRate
+}
+
+Variable names cannot be updated for log files written using UPAS v2 firmware
+versions preceding rev100.}
 }
 \value{
 A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.

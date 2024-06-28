@@ -8,8 +8,7 @@
 #' variable names to the current names.
 #'
 #' @param df A UPASv2 header data frame returned by [transpose_ast_header]
-#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-#' See [read_ast_header] for additional information.
+#' @inheritParams read_ast_header
 #' @return A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.
 #' @export
 #' @importFrom rlang .data
@@ -131,13 +130,7 @@ format_upasv2_header <- function(df, update_names=FALSE){
 #'
 #' @param log A data frame of UPAS v2 sample log data returned by the [fread_ast_log] function.
 #' @param header A data frame of UPAS v2 header data returned by the [read_ast_header] function.
-#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-#' See [read_ast_log] for additional information.
-#' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
-#' See [read_ast_log] for additional information.
-#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
-#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
-#' See [read_ast_log] for additional information.
+#' @inheritParams format_ast_log
 #'
 #' @return A data frame of of UPAS v2 sample log data that are formatted and ready for analysis.
 #' This data frame will contain one row for each timestamp in the sample log.
