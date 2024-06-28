@@ -1,55 +1,55 @@
 ###################################
-# make_raw_ast_header
+# fread_ast_header
 ###################################
 
-test_that("make_raw_ast_header works with standard UPASv2 file", {
+test_that("fread_ast_header works with standard UPASv2 file", {
   file <- use_extdata_file('PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt')
-  header_raw <- make_raw_ast_header(file)
-  expect_identical(tail(header_raw, n=1)[[1]], "SAMPLE LOG")
-  expect_equal(ncol(header_raw), 3)
-  expect_type(sapply(header_raw, class), "character")
+  header_raw <- fread_ast_header(file)
+  expect_identical(tail(header_raw$header, n=1)[[1]], "SAMPLE LOG")
+  expect_equal(ncol(header_raw$header), 3)
+  expect_type(sapply(header_raw$header, class), "character")
 })
 
-test_that("make_raw_ast_header works with DIAGNOSTIC UPASv2 file", {
+test_that("fread_ast_header works with DIAGNOSTIC UPASv2 file", {
   file <- use_extdata_file('PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt')
-  header_raw <- make_raw_ast_header(file)
-  expect_identical(tail(header_raw, n=1)[[1]], "SAMPLE LOG")
-  expect_gt(ncol(header_raw), 3)
-  expect_type(sapply(header_raw, class), "character")
+  header_raw <- fread_ast_header(file)
+  expect_identical(tail(header_raw$header, n=1)[[1]], "SAMPLE LOG")
+  expect_gt(ncol(header_raw$header), 3)
+  expect_type(sapply(header_raw$header, class), "character")
 })
 
-test_that("make_raw_ast_header works with standard UPASv2x file", {
+test_that("fread_ast_header works with standard UPASv2x file", {
   file <- use_extdata_file('PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt')
-  header_raw <- make_raw_ast_header(file)
-  expect_identical(tail(header_raw, n=1)[[1]], "SAMPLE LOG")
-  expect_equal(ncol(header_raw), 3)
-  expect_type(sapply(header_raw, class), "character")
+  header_raw <- fread_ast_header(file)
+  expect_identical(tail(header_raw$header, n=1)[[1]], "SAMPLE LOG")
+  expect_equal(ncol(header_raw$header), 3)
+  expect_type(sapply(header_raw$header, class), "character")
 })
 
-test_that("make_raw_ast_header works with DIAGNOSTIC UPASv2x  file", {
+test_that("fread_ast_header works with DIAGNOSTIC UPASv2x  file", {
   file <- use_extdata_file('PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt')
-  header_raw <- make_raw_ast_header(file)
-  expect_identical(tail(header_raw, n=1)[[1]], "SAMPLE LOG")
-  expect_gt(ncol(header_raw), 3)
-  expect_type(sapply(header_raw, class), "character")
+  header_raw <- fread_ast_header(file)
+  expect_identical(tail(header_raw$header, n=1)[[1]], "SAMPLE LOG")
+  expect_gt(ncol(header_raw$header), 3)
+  expect_type(sapply(header_raw$header, class), "character")
 })
 
 
 ###################################
-# transpose_raw_ast_header
+# transpose_ast_header
 ###################################
 
-test_that("transpose_raw_ast_header works with standard UPASv2 file", {
+test_that("transpose_ast_header works with standard UPASv2 file", {
   file <- use_extdata_file('PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt')
-  header_raw <- make_raw_ast_header(file)
-  header_wide <- transpose_raw_ast_header(header_raw)
+  header_raw <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
 })
 
-test_that("transpose_raw_ast_header works with DIAGNOSTIC UPASv2 file", {
+test_that("transpose_ast_header works with DIAGNOSTIC UPASv2 file", {
   file <- use_extdata_file('PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt')
-  header_raw <- make_raw_ast_header(file)
-  header_wide <- transpose_raw_ast_header(header_raw)
+  header_raw <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_contains(colnames(header_wide), c("MFSDIAGVoutBlocked",
                                              "MFSDIAGVoutMax",
@@ -62,17 +62,17 @@ test_that("transpose_raw_ast_header works with DIAGNOSTIC UPASv2 file", {
                                              "MFSDIAGPDeadhead"))
 })
 
-test_that("transpose_raw_ast_header works with standard UPASv2x file", {
+test_that("transpose_ast_header works with standard UPASv2x file", {
   file <- use_extdata_file('PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt')
-  header_raw <- make_raw_ast_header(file)
-  header_wide <- transpose_raw_ast_header(header_raw)
+  header_raw <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
 })
 
-test_that("transpose_raw_ast_header works with DIAGNOSTIC UPASv2x  file", {
+test_that("transpose_ast_header works with DIAGNOSTIC UPASv2x  file", {
   file <- use_extdata_file('PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt')
-  header_raw <- make_raw_ast_header(file)
-  header_wide <- transpose_raw_ast_header(header_raw)
+  header_raw <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_contains(colnames(header_wide), c("MFSDIAGVoutBlocked",
                                              "MFSDIAGVoutMax",
@@ -113,15 +113,15 @@ test_that("If using update names for UPASv2, all applicable column names are upd
 test_that("format_upasv2_header and read_ast_header have the same output", {
   upasv2_file <- use_extdata_file('PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt')
   upasv2_header <- read_ast_header(upasv2_file, update_names = TRUE)
-  upasv2_header_raw <- make_raw_ast_header(upasv2_file)
-  upasv2_header_wide <- transpose_raw_ast_header(upasv2_header_raw)
+  upasv2_header_raw <- fread_ast_header(upasv2_file)
+  upasv2_header_wide <- transpose_ast_header(upasv2_header_raw$header, diag = upasv2_header_raw$diag)
   expect_identical(read_ast_header(upasv2_file, update_names = TRUE), format_upasv2_header(upasv2_header_wide, update_names = TRUE))
 })
 
 test_that("format_upasv2x_header and read_ast_header have the same output", {
   upasv2x_file <- use_extdata_file('PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt')
   upasv2x_header <- read_ast_header(upasv2x_file, update_names = TRUE)
-  upasv2x_header_raw <- make_raw_ast_header(upasv2x_file)
-  upasv2x_header_wide <- transpose_raw_ast_header(upasv2x_header_raw)
+  upasv2x_header_raw <- fread_ast_header(upasv2x_file)
+  upasv2x_header_wide <- transpose_ast_header(upasv2x_header_raw$header, diag = upasv2x_header_raw$diag)
   expect_identical(read_ast_header(upasv2x_file), format_upasv2x_header(upasv2x_header_wide))
 })

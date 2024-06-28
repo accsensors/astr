@@ -1,23 +1,26 @@
-#'Format the header data from an Access Sensor Technologies (AST) Home Health
-#'Box (HHB) log file
+#'Format the header data from an Access Sensor Technologies Home Health Box log file
 #'
-#' @param df_h_raw Any unformatted HHB header data frame.
+#' @description
+#' `format_hhb_header` formats the header data from a HHB v2 log file by setting
+#' the proper data type for each variable.
 #'
-#' @return A data frame with header data in wide format.
+#' @param df A HHB v2 header data frame returned by [transpose_ast_header]
+#'
+#' @return A data frame with a single row of HHB v2 header data that are formatted and ready for analysis.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
 #' data_hhb_header <- format_ast_header(data_hhb_raw)
 
-format_hhb_header = function(df_h) {
+format_hhb_header = function(df) {
 
-  df_h$Firmware <- as.character(gsub(" ", "_", df_h$Firmware))
+  df$Firmware <- as.character(gsub(" ", "_", df$Firmware))
 
-  df_h$ProgrammedRuntime <- ifelse(df_h$ProgrammedRuntime == "indefinite", NA,
-                                   as.numeric(df_h$ProgrammedRuntime))
+  df$ProgrammedRuntime <- ifelse(df$ProgrammedRuntime == "indefinite", NA,
+                                 as.numeric(df$ProgrammedRuntime))
 
-  df_h <- dplyr::mutate(df_h,
+  df <- dplyr::mutate(df,
     across(contains(c("CalVoutMin", "CalVoutMax", "CalMFMin", "CalMFMax", "MF4",
                       "MF3", "MF2", "MF1", "MF0", "UTCOffset", "Runtime",
                       "Volume", "FlowRate", "DutyCycle", "ShutdownMode")),
@@ -25,52 +28,68 @@ format_hhb_header = function(df_h) {
     across(contains(c("StartDateTimeUTC", "EndDateTimeUTC", "CalDate")),
                     \(x) as.POSIXct(x, format="%Y-%m-%dT%H:%M:%S", tz="UTC")))
 
-  return(df_h)
+  return(df)
 }
 
 
-#'Format the sample log data from an Access Sensor Technologies (AST) Home
-#'Health Box (HHB) log file
+#'Format the sample log data from an Access Sensor Technologies Home Health Box log file
 #'
-#' @param df_h A formatted AST HHB log file header data frame.
-#' @param df_raw An unformatted AST HHB sample log data frame.
-#' @param tz_offset Pass an optional timezone offset.
+#'
+#' @param log A data frame of HHB v2 sample log data returned by the [fread_ast_log] function.
+#' @param header A data frame of HHB v2 header data returned by the [read_ast_header] function.
+#' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
+#' See [read_ast_log] for additional information.
 #' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
 #' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+#' See [read_ast_log] for additional information.
 #'
-#' @return A data frame with all log data.
+#' @return A data frame of of HHB v2 sample log data that are formatted and ready for analysis.
+#' This data frame will contain one row for each timestamp in the sample log.
+#'
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
 #' data_ast_log <- format_ast_log(hhb_header, data_hhb_raw)
 
-format_hhb_log = function(df_h, df_log, tz_offset=NA, cols_keep=c(), cols_drop=c()) {
+format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
 
-  if (nrow(df_log) > 0) {
+  if (nrow(log) > 0) {
 
-    tz_off <- ifelse(is.na(tz_offset), df_h$UTCOffset, tz_offset)
+    df_h <- dplyr::select(header,
+                          any_of(c("HHBserial","LogFileName","SampleName","StartDateTimeUTC")),
+                          dplyr::contains(c("ID","VolumetricFlowRate"), ignore.case=F))
 
-    df_h_sel <- dplyr::select(df_h,
-                              any_of(c("HHBserial","LogFileName","SampleName","StartDateTimeUTC")),
-                              dplyr::contains(c("ID","VolumetricFlowRate"), ignore.case = FALSE))
-
-    df <- dplyr::mutate(df_log,
-                        SampleTime = ifelse(SampleTime == "99:99:99", NA,
-                                            strsplit(SampleTime,":")),
-                        SampleTime = as.difftime(
+    df <- dplyr::mutate(log,
+            SampleTime = ifelse(SampleTime == "99:99:99", NA,
+                                strsplit(SampleTime,":")),
+            SampleTime = as.difftime(
                           3600*as.numeric(sapply(.data$SampleTime, `[`, 1)) +
                             60*as.numeric(sapply(.data$SampleTime, `[`, 2)) +
                             as.numeric(sapply(.data$SampleTime, `[`, 3)),
                           units="secs"),
-                        tz_value = ifelse(!is.na(tz_offset), T, F),
-                        DateTimeLocal = DateTimeUTC + (tz_off * 3600),
-                        TZOffset = tz_off)
+            UserTZ  = ifelse(!is.na(tz), T, F),
+            LocalTZ  = case_when(!is.na(tz) ~ tz,
+                                 header$UTCOffset == 0 ~ "UTC",
+                                 (round(header$UTCOffset) == header$UTCOffset) &
+                                  (header$UTCOffset < 0) ~
+                                   sprintf("Etc/GMT+%i", abs(header$UTCOffset)),
+                                 (round(header$UTCOffset) == header$UTCOffset) &
+                                  (header$UTCOffset > 0) ~
+                                   sprintf("Etc/GMT-%i", abs(header$UTCOffset)),
+                                 T ~ NA))
 
-    df <- dplyr::select(df,
-                        1:match("DateTimeLocal", colnames(df)), TZOffset,
-                        (match("DateTimeLocal",colnames(df))+1):ncol(df))
-    df <- cbind(df, df_h_sel)
+    if(!is.na(unique(df$LocalTZ))){
+      df <- dplyr::mutate(df,
+                          DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
+                                                      tzone=unique(df$LocalTZ)))
+    }else{
+      df <- dplyr::mutate(df, DateTimeLocal = as.character(DateTimeLocal))
+    }
+
+    df <- dplyr::relocate(df,
+                          c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
+    df <- cbind(df, df_h)
 
     if (!is.null(cols_keep)){
       df <- dplyr::select(df, cols_keep)

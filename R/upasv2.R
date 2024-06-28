@@ -1,34 +1,16 @@
-
-#' Formats UPASv2 header data that has already been transposed to a wide
-#' data frame
+#' Format UPAS v2 header data that hae already been transposed to a wide data frame
 #'
 #' @description
-#' `format_upasv2_header` completes the UPASv2 log file header formatting prior
-#' to running any data analysis. It sets the proper data types for each variable,
-#' adds a column to specify the AST sampler type, adds a column to describe the
-#' shutdown reason associated with the shutdown mode code, and - if
-#' `update_names=TRUE` - updates old log file variable names
-#' to match current log file names.
+#' `format_upasv2_header` formats the header data from a UPAS v2 log file.
+#' This function sets the proper data type for each variable, adds a column
+#' specifying the AST sampler type, adds a column describing the shutdown reason
+#' associated with the shutdown mode code, and can be directed to update old
+#' variable names to the current names.
 #'
-#' @param df_h A UPASv2 header data frame transposed to wide format using
-#' [transpose_raw_ast_header]
-#' @param update_names If `TRUE`, rename old log file variable names to match
-#' the variable names used in the latest firmware version.
-#' If firmware > rev100:
-#' * VolumetricFlowRate        -> FlowRateSetpoint
-#' * DutyCycle                 -> FlowDutyCycle
-#' * SampledRuntime            -> OverallDuration
-#' * AverageVolumetricFlowRate -> PumpingFlowRateAverage
-#'
-#' If firmware is equal to rev100:
-#' * CumulativeSamplingTime -> LifetimeSampleRuntime
-#' * StartDateTime          -> StartDateTimeUTC
-#' * AverageVolumetricFlow  -> PumpingFlowRateAverage
-#'
-#' Behavior not defined for firmwares < rev100
-#'
-#' @return A data frame with formatted UPASv2 header data in wide format that
-#' is ready for data analysis
+#' @param df A UPASv2 header data frame returned by [transpose_ast_header]
+#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+#' See [read_ast_header] for additional information.
+#' @return A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.
 #' @export
 #' @importFrom rlang .data
 #'
@@ -54,35 +36,26 @@
 #' upasv2_rev138_diag_header_transp <- transpose_raw_ast_header(upasv2_rev138_diag_header_raw)
 #' upasv2_rev138_diag_header <- format_upasv2_header(upasv2_rev138_diag_header_transp, update_names=FALSE)
 
-format_upasv2_header <- function(df_h, update_names=FALSE){
+format_upasv2_header <- function(df, update_names=FALSE){
 
-  df_h <- dplyr::rename(df_h, LogFilename = "UPASlogFilename")
+  df <- dplyr::rename(df, LogFilename = "UPASlogFilename")
 
-  df_h <- dplyr::mutate(df_h,
+  df <- dplyr::mutate(df,
                   ASTSampler = sub("-rev.*", "", .data$Firmware),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)),
-                  dplyr::across(dplyr::any_of(c("UPASserial",
-                                                "GPSUTCOffset",
+                  dplyr::across(dplyr::any_of(c("UPASserial", "GPSUTCOffset",
                                                 "StartOnNextPowerUp",
-                                                "ProgrammedStartDelay",
-                                                "ProgrammedRuntime",
                                                 "VolumetricFlowRate",
-                                                "DutyCycle",
-                                                "DutyCycleWindow",
-                                                "GPSEnabled",
-                                                "LogFileMode",
-                                                "LogInterval",
-                                                "AppLock",
-                                                "StartBatteryCharge",
-                                                "StartBatteryVoltage",
-                                                "EndBatteryCharge",
-                                                "EndBatteryVoltage",
+                                                "GPSEnabled", "LogFileMode",
+                                                "LogInterval", "AppLock",
                                                 "ShutdownMode",
-                                                "SampledVolume",
-                                                "SampledRuntime",
-                                                "LoggedRuntime")),
+                                                "SampledVolume")),
                                 \(x) as.numeric(x)),
+                  dplyr::across(starts_with("Programmed"), \(x) as.numeric(x)),
+                  dplyr::across(starts_with("DutyCycle"),  \(x) as.numeric(x)),
+                  dplyr::across(contains("Battery"),       \(x) as.numeric(x)),
+                  dplyr::across(ends_with("Runtime"),      \(x) as.numeric(x)),
                   dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
                                                 "GPSEnabled")),
                                 \(x) as.logical(x)),
@@ -98,31 +71,30 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
                     .data$ShutdownMode == 6 ~ "max power during sample",
                     .data$ShutdownMode == 7 ~ "blocked flow"))
 
-  df_h <- df_h %>%
+  df <- df %>%
     dplyr::relocate("ASTSampler") %>%
     dplyr::relocate("FirmwareRev", .after = "Firmware") %>%
     dplyr::relocate("ShutdownReason", .after = "ShutdownMode")
 
-  if(df_h$FirmwareRev == 100){
+  if(df$FirmwareRev == 100){
 
-    df_h <- dplyr::mutate(df_h,
-                          across(c("PowerCycles","CumulativeSamplingTime",
-                                   "AverageVolumetricFlow"), \(x) as.numeric(x)),
-                          StartDateTime = as.POSIXct(.data$StartDateTime,
+    df <- dplyr::mutate(df,
+                        across(c("PowerCycles","CumulativeSamplingTime",
+                                  "AverageVolumetricFlow"), \(x) as.numeric(x)),
+                        StartDateTime = as.POSIXct(.data$StartDateTime,
                                                 format = "%Y-%m-%dT%H:%M:%SUTC",
                                                 tz = "UTC"))
 
     if(update_names){
 
-      df_h <- dplyr::rename(df_h,
-                            LifetimeSampleRuntime = "CumulativeSamplingTime",
-                            StartDateTimeUTC = "StartDateTime",
-                            AverageVolumetricFlowRate = "AverageVolumetricFlow")
+      df <- dplyr::rename(df, LifetimeSampleRuntime = "CumulativeSamplingTime",
+                              StartDateTimeUTC = "StartDateTime",
+                              AverageVolumetricFlowRate="AverageVolumetricFlow")
     }
 
   }else{
 
-    df_h <- dplyr::mutate(df_h,
+    df <- dplyr::mutate(df,
       across(c("LifetimeSampleCount","LifetimeSampleRuntime","FlowOffset",
                "AverageVolumetricFlowRate"), \(x) as.numeric(x)),
       across(c("StartDateTimeUTC", "EndDateTimeUTC"),
@@ -137,64 +109,60 @@ format_upasv2_header <- function(df_h, update_names=FALSE){
 
     if(update_names){
 
-      df_h <- dplyr::rename(df_h,
+      df <- dplyr::rename(df,
                           FlowRateSetpoint = "VolumetricFlowRate",
-                          FlowDutyCycle = "DutyCycle",
-                          OverallDuration = "LoggedRuntime",
-                          PumpingDuration = "SampledRuntime",
+                          FlowDutyCycle    = "DutyCycle",
+                          OverallDuration  = "LoggedRuntime",
+                          PumpingDuration  = "SampledRuntime",
                           PumpingFlowRateAverage = "AverageVolumetricFlowRate")
 
-      if(any(df_h$SampleName == 'DIAGNOSTIC')) {
+      if(any(df$SampleName == 'DIAGNOSTIC')) {
 
-        df_h <- dplyr::rename(df_h,
-                              MFSCalVoutMin = "MFSVoltMin",
-                              MFSCalVoutMax = "MFSVoltMax",
-                              MFSCalMFMin = "MFSMFMin",
-                              MFSCalMFMax = "MFSMFMax",
-                              MFSCalDate = "CalDateTime")
-        df_h <- dplyr::select(df_h,
-                              !c("MFSVoltMaxEst", "MFSMFMaxEst", "CalUNIXTIME"))
+        df <- dplyr::rename(df, MFSCalVoutMin = "MFSVoltMin",
+                                MFSCalVoutMax = "MFSVoltMax",
+                                MFSCalMFMin = "MFSMFMin",
+                                MFSCalMFMax = "MFSMFMax",
+                                MFSCalDate = "CalDateTime")
+        df <- dplyr::select(df, !c("MFSVoltMaxEst","MFSMFMaxEst","CalUNIXTIME"))
       }
     }
 
-  return(df_h)
+  return(df)
 }
 
-#' Read the log data from a UPASv2 log file
+#'Format the sample log data from an Access Sensor Technologies UPAS v2
 #'
-#' @param df_h A UPASv2 header dataframe
-#' @param df_log A UPASv2 raw dataframe
-#' @param update_names Convert old log file column names to match current log file names.
-#' @param tz_offset Pass an optional timezone offset.
+#' @param log A data frame of UPAS v2 sample log data returned by the [fread_ast_log] function.
+#' @param header A data frame of UPAS v2 header data returned by the [read_ast_header] function.
+#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+#' See [read_ast_log] for additional information.
+#' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
+#' See [read_ast_log] for additional information.
 #' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
 #' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
-#' Column selection will occur in the same order in which the function arguments are specified above.
-#' In other words, the columns specified in cols_keep will be selected first.
-#' If the cols_keep argument is not specified, all columns will be kept. Then,
-#' The columns specified in cols_drop will be dropped.  If the cols_drop
-#' argument is not specified, no columns will be dropped.
+#' See [read_ast_log] for additional information.
 #'
-#' @return A data frame.
+#' @return A data frame of of UPAS v2 sample log data that are formatted and ready for analysis.
+#' This data frame will contain one row for each timestamp in the sample log.
+#'
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
 #' upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)
 
-format_upasv2_log = function(df_h, df_log, update_names=FALSE, tz_offset=NA, cols_keep=c(), cols_drop=c()){
-
-  tz_off <- ifelse(is.na(tz_offset), df_h$GPSUTCOffset, tz_offset)
+format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()){
 
   # Get header data
-  df_h_sel <- dplyr::select(df_h, dplyr::any_of(c("ASTSampler","UPASserial",
-                                                  "UPASlogFilename",
-                                                  "SampleName","CartridgeID",
-                                                  "StartDateTimeUTC",
-                                                  "LogFileMode")))
+  df_h <- dplyr::select(header, dplyr::any_of(c("ASTSampler","UPASserial",
+                                                "UPASlogFilename",
+                                                "SampleName","CartridgeID",
+                                                "StartDateTimeUTC",
+                                                "LogFileMode")))
 
-  if(nrow(df_log) > 0){
+  if(nrow(log) > 0){
 
-    df <- dplyr::mutate(df_log,
+    df <- dplyr::mutate(log,
             SampleTime = ifelse(.data$SampleTime == "99:99:99", NA,
                                 .data$SampleTime),
             SampleTime = ifelse(!is.na(.data$SampleTime),
@@ -226,21 +194,37 @@ format_upasv2_log = function(df_h, df_log, update_names=FALSE, tz_offset=NA, col
 
     }else{ # For firmware version > 100
       df <- dplyr::mutate(df,
-                          dplyr::across(-dplyr::one_of(c("SampleTime",
-                                                         "DateTimeUTC",
-                                                         "DateTimeLocal")),
-                                        \(x) as.numeric(x)),
-                          DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
-                                                   format = "%Y-%m-%dT%H:%M:%S",
-                                                   tz = "UTC"),
-                          tz_value = ifelse(!is.na(tz_offset), T, F),
-                          DateTimeLocal = .data$DateTimeUTC + (tz_off * 3600),
-                          TZOffset = tz_off)
+              dplyr::across(-dplyr::one_of(c("SampleTime","DateTimeUTC",
+                                             "DateTimeLocal")),
+                                           \(x) as.numeric(x)),
+              DateTimeUTC = as.POSIXct(.data$DateTimeUTC,
+                                       format = "%Y-%m-%dT%H:%M:%S", tz="UTC"),
+              UserTZ  = ifelse(!is.na(tz), T, F),
+              LocalTZ  = case_when(!is.na(tz) ~ tz,
+                                   header$GPSUTCOffset == 0 ~ "UTC",
+                           (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
+                            (header$GPSUTCOffset < 0) ~
+                                sprintf("Etc/GMT+%i", abs(header$GPSUTCOffset)),
+                           (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
+                             (header$GPSUTCOffset > 0) ~
+                                sprintf("Etc/GMT-%i", abs(header$GPSUTCOffset)),
+                           T ~ NA))
+
+      if(!is.na(unique(df$LocalTZ))){
+        df <- dplyr::mutate(df,
+                           DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
+                                                      tzone=unique(df$LocalTZ)))
+      }else{
+        df <- dplyr::mutate(df, DateTimeLocal = as.character(DateTimeLocal))
+      }
+
+      df <- dplyr::relocate(df,
+                            c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
     }
 
-    if(!is.null(df_h$LogFileMode)){
+    if(!is.null(header$LogFileMode)){
       # For debug files
-      if((df_h$LogFileMode == "debug") & ("PumpsON" %in% colnames(df))){
+      if((header$LogFileMode == "debug") & ("PumpsON" %in% colnames(df))){
 
         df <- dplyr::mutate(df,
                             across(any_of(c("PumpsON","Dead","BCS1","BCS2",
@@ -271,7 +255,7 @@ format_upasv2_log = function(df_h, df_log, update_names=FALSE, tz_offset=NA, col
                                         BattVolt        = "BFGvolt")))
   }
 
-  df <- cbind(df, df_h_sel)
+  df <- cbind(df, df_h)
 
   if(!is.null(cols_keep)){
     df <- dplyr::select(df, cols_keep)
@@ -281,4 +265,3 @@ format_upasv2_log = function(df_h, df_log, update_names=FALSE, tz_offset=NA, col
 
   return(df)
 }
-

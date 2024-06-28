@@ -1,16 +1,14 @@
-#' Formats UPASv2x header data that has already been transposed to a wide
-#' data frame
+#' Format UPAS v2.1 PLUS header data that have already been transposed to a wide data frame
 #'
 #' @description
-#' `format_upasv2x_header` completes the UPASv2 log file header formatting prior
-#' to running any data analysis. It sets the proper data types for each variable,
-#' adds a column to specify the AST sampler type, and adds a column to describe
-#' the shutdown reason associated with the shutdown mode code.
+#' `format_upasv2x_header` formats the UPAS v2.1 PLUS log file header data prior
+#' to analysis. This function sets the proper data types for each variable, adds
+#' a column to specify the sampler type, and adds a column to describe the
+#' shutdown reason associated with the shutdown mode code.
 #'
-#' @param df_h A UPASv2x header data frame
+#' @param df A UPASv2.1 PLUS header data frame returned by the [transpose_ast_header] function
 #'
-#' @return A data frame with formatted UPASv2x header data in wide format that
-#' is ready for data analysis
+#' @return A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.
 #' @export
 #' @importFrom rlang .data
 #'
@@ -41,58 +39,39 @@
 #' upasv2x_rev158_diag_header_wide <- transpose_raw_ast_header(upasv2x_rev158_diag_header_raw)
 #' upasv2x_rev158_diag_header <- format_upasv2x_header(upasv2x_rev158_diag_header_wide)
 
-format_upasv2x_header = function(df_h) {
+format_upasv2x_header = function(df) {
 
-  df_h <- dplyr::mutate(df_h,
+  df <- dplyr::mutate(df,
     ASTSampler  = sub("-rev.*", "", .data$Firmware),
     FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
     FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)),
     ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite", NA,
                                .data$ProgrammedRuntime),
-    dplyr::across(dplyr::any_of(c("UPASserial",
-                                  "LifetimeSampleCount",
-                                  "LifetimeSampleRuntime",
-                                  "GPSUTCOffset",
-                                  "StartOnNextPowerUp",
-                                  "ProgrammedStartTime",
-                                  "ProgrammedRuntime",
-                                  "FlowRateSetpoint",
-                                  "FlowOffset",
-                                  "FlowCheckMeterReadingPreSample",
-                                  "FlowCheckMeterReadingPostSample",
-                                  "FlowDutyCycle",
-                                  "DutyCycleWindow",
-                                  "GPSEnabled",
-                                  "PMSensorInterval",
-                                  "RTGasSampleState",
-                                  "LogInterval",
-                                  "PowerSaveMode",
-                                  "AppLock",
-                                  "OverallDuration",
-                                  "PumpingDuration",
-                                  "OverallFlowRateAverage",
-                                  "PumpingFlowRateAverage",
-                                  "SampledVolume",
-                                  "StartBatteryCharge",
-                                  "EndBatteryCharge",
-                                  "StartBatteryVoltage",
-                                  "EndBatteryVoltage",
-                                  "ShutdownMode",
-                                  "MFSCalVoutBlocked",
-                                  "MFSCalVoutMin",
-                                  "MFSCalVoutMax",
-                                  "MFSCalMFBlocked",
-                                  "MFSCalMFMin",
-                                  "MFSCalMFMax",
-                                  "MFSCalPumpVBoostMin",
-                                  "MFSCalPumpVBoostMax",
+    dplyr::across(dplyr::any_of(c("UPASserial", "UPASpcbRev", "GPSUTCOffset",
+                                  "StartOnNextPowerUp", "DutyCycleWindow",
+                                  "GPSEnabled", "PMSensorInterval",
+                                  "LogInterval", "SamplerConfiguration",
+                                  "PowerSaveMode", "AppLock", "SampledVolume",
+                                  "PercentTimeWorn", "ShutdownMode",
+                                  "CO2CalTarget", "CO2CalOffset",
                                   "MFSCalPDeadhead",
                                   "MF4", "MF3", "MF2", "MF1", "MF0")),
                   \(x) as.numeric(x)),
-    dplyr::across(dplyr::any_of(c("GPSEnabled", "RTGasSampleState",
-                                  "PowerSaveMode",
-                                  #TODO Add ExternalPowerMode and any other missing booleans
-                                  "AppLock")), \(x) as.logical(x)),
+    dplyr::across(starts_with("Lifetime"),      \(x) as.numeric(x)),
+    dplyr::across(starts_with("Programmed"),    \(x) as.numeric(x)),
+    dplyr::across(starts_with("Flow"),          \(x) as.numeric(x)),
+    dplyr::across(ends_with("SampleState"),     \(x) as.numeric(x)),
+    dplyr::across(ends_with("Duration"),        \(x) as.numeric(x)),
+    dplyr::across(ends_with("FlowRateAverage"), \(x) as.numeric(x)),
+    dplyr::across(contains("Battery"),          \(x) as.numeric(x)),
+    dplyr::across(starts_with("MFSCalVout"),    \(x) as.numeric(x)),
+    dplyr::across(starts_with("MFSCalMF"),      \(x) as.numeric(x)),
+    dplyr::across(starts_with("MFSCalPump"),    \(x) as.numeric(x)),
+    dplyr::across(dplyr::any_of(c("GPSEnabled", "PowerSaveMode", "AppLock")),
+                  \(x) as.logical(x)),
+    dplyr::across(ends_with("SampleState"), \(x) as.logical(x)),
+    dplyr::across(dplyr::any_of(c("ExternalPowerMode")),
+                  \(x) ifelse(x == "F0", T, F)),
     LogFilename = gsub("/sd/", "", .data$LogFilename),
     ShutdownReason = dplyr::case_when(
                    .data$ShutdownMode == 0 ~ "unknown error",
@@ -129,7 +108,7 @@ format_upasv2x_header = function(df_h) {
        .data$PMSensorInterval == "18" ~ "20s Warmup 10s Measurement 30s Sleep",
        TRUE ~ "NA" ),
     dplyr::across(dplyr::any_of(c("StartDateTimeUTC","EndDateTimeUTC",
-                                  "MFSCalDate")),
+                                  "CO2CalDate", "MFSCalDate")),
                   \(x) as.POSIXct(x, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")),
     SampleName  = gsub("_+$", "", .data$SampleName),
     SampleName  = gsub("-+$", "", .data$SampleName),
@@ -138,50 +117,44 @@ format_upasv2x_header = function(df_h) {
     CartridgeID = gsub("-+$", "", .data$CartridgeID),
     CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
 
-  df_h <- df_h %>%
-          dplyr::relocate("ASTSampler") %>%
-          dplyr::relocate("FirmwareRev",       .after = "Firmware") %>%
-          dplyr::relocate("ShutdownReason",    .after = "ShutdownMode") %>%
-          dplyr::relocate("PMSensorOperation", .after = "PMSensorInterval")
+  df <- dplyr::relocate(df, "ASTSampler")
+  df <- dplyr::relocate(df, "FirmwareRev",       .after = "Firmware")
+  df <- dplyr::relocate(df, "ShutdownReason",    .after = "ShutdownMode")
+  df <- dplyr::relocate(df, "PMSensorOperation", .after = "PMSensorInterval")
 
-  return(df_h)
+  return(df)
 }
 
-#'Read the log data from an Access Sensor Technologies (AST) air sampler
-#'log file
+#'Format the sample log data from an Access Sensor Technologies UPAS v2.1 PLUS
 #'
-#' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
-#' @param df Pass a upasv2x dataframe from read_ast_header function.
+#' @param log A data frame of UPAS v2.1 PLUS sample log data returned by the [fread_ast_log] function.
+#' @param header A data frame of UPAS v2.1 PLUS header data returned by the [read_ast_header] function.
 #' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-#' @param tz_offset Pass an optional timezone offset value.
+#' See [read_ast_log] for additional information.
+#' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
+#' See [read_ast_log] for additional information.
 #' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
 #' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
-#'#' Column selection will occur in the same order in which the function arguments are specified above.
-#' In other words, the columns specified in cols_keep will be selected first.
-#' If the cols_keep argument is not specified, all columns will be kept.  Then,
-#' The columns specified in cols_drop will be dropped.  If the cols_drop
-#' argument is not specified, no columns will be dropped.
+#' See [read_ast_log] for additional information.
 #'
-#' @return A modified data frame with all log data.
+#' @return A data frame of of UPAS v2.1 PLUS sample log data that are formatted and ready for analysis.
+#' This data frame will contain one row for each timestamp in the sample log.
+#'
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
 #' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 
-format_upasv2x_log = function(df_h, df, update_names=FALSE, tz_offset=NA, cols_keep=c(), cols_drop=c()) {
+format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()) {
 
-  tz_off <- ifelse(is.na(tz_offset), df_h$GPSUTCOffset, tz_offset)
+  df_h <- dplyr::select(header, dplyr::any_of(c("ASTSampler", "UPASserial",
+                                                "LogFilename", "SampleName",
+                                                "CartridgeID",
+                                                "VolumetricFlowRateSet",
+                                                "StartDateTimeUTC")))
 
-  df_h_sel <- dplyr::select(df_h, dplyr::any_of(c("ASTSampler", "UPASserial",
-                                                  "LogFilename", "SampleName",
-                                                  "CartridgeID",
-                                                  "VolumetricFlowRateSet",
-                                                  "StartDateTimeUTC")))
-
-  df[df == 'NULL'] <- NA
-
-  df <- dplyr::mutate(df,
+  df <- dplyr::mutate(log,
     dplyr::across(-dplyr::one_of(c("SampleTime","DateTimeUTC","DateTimeLocal")),
                   \(x) as.numeric(x)),
     dplyr::across(dplyr::any_of(c("PumpsON","Dead","BCS1","BCS2","BC_NPG")),
@@ -196,18 +169,32 @@ format_upasv2x_log = function(df_h, df, update_names=FALSE, tz_offset=NA, cols_k
                     units="secs"),
     DateTimeUTC = as.POSIXct(.data$DateTimeUTC, format = "%Y-%m-%dT%H:%M:%S",
                              tz = "UTC"),
-    tz_value = ifelse(!is.na(tz_offset), T, F),
-    DateTimeLocal = .data$DateTimeUTC + (tz_off * 3600),
-    TZOffset = tz_off,
+    UserTZ   = ifelse(!is.na(tz), T, F),
+    LocalTZ  = case_when(!is.na(tz) ~ tz,
+                         header$GPSUTCOffset == 0 ~ "UTC",
+                         (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
+                           (header$GPSUTCOffset < 0) ~
+                                sprintf("Etc/GMT+%i", abs(header$GPSUTCOffset)),
+                         (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
+                           (header$GPSUTCOffset > 0) ~
+                                sprintf("Etc/GMT-%i", abs(header$GPSUTCOffset)),
+                         T ~ NA),
     GPSlat   = ifelse(.data$GPSlat   == -9999, NA, .data$GPSlat),
     GPSlon   = ifelse(.data$GPSlon   == -9999, NA, .data$GPSlon),
     GPSalt   = ifelse(.data$GPSalt   == -9999, NA, .data$GPSalt),
     GPSspeed = ifelse(.data$GPSspeed == -9999, NA, .data$GPSspeed),
     GPShDOP  = ifelse(.data$GPShDOP  == -9999, NA, .data$GPShDOP))
 
-  df <- dplyr::select(df, 1:match("DateTimeLocal",colnames(df)), TZOffset,
-                      (match("DateTimeLocal",colnames(df))+1):ncol(df))
-  df <- cbind(df, df_h_sel)
+  if(!is.na(unique(df$LocalTZ))){
+    df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
+                                                      tzone=unique(df$LocalTZ)))
+  }else{
+    df <- dplyr::mutate(df, DateTimeLocal = as.character(DateTimeLocal))
+  }
+
+  df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
+
+  df <- cbind(df, df_h)
 
   if(update_names){
     df <- dplyr::rename(df, dplyr::any_of(c(AccelComplianceHrs = "AceelComplianceHrs")))
@@ -227,7 +214,7 @@ format_upasv2x_log = function(df_h, df, update_names=FALSE, tz_offset=NA, cols_k
 #'air sampler header dataframe
 #'
 #' @param df_h Pass a upasv2x header dataframe from read_ast_header function.
-#' @param df Pass a upasv2x dataframe from read_ast_header function.
+#' @param df Pass a upasv2x dataframe from read_ast_log function.
 #' @param shiny Option to make TRUE if using function with AST shiny app.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).loa
 #'
@@ -239,7 +226,7 @@ format_upasv2x_log = function(df_h, df, update_names=FALSE, tz_offset=NA, cols_k
 #' upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header, upasv2x_log)
 #' upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header)
 
-upasv2x_sample_summary = function(df_h, df = NULL, shiny=FALSE, fract_units=FALSE) {
+upasv2x_sample_summary = function(df_h, df=NULL, shiny=FALSE, fract_units=FALSE) {
   #TODO move to new function shiny_sample_summary so that shiny functionality is not present in normal functions
   df_h <- astr::shiny_flag(df_h)
 
