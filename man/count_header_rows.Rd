@@ -7,26 +7,27 @@
 count_header_rows(file)
 }
 \arguments{
-\item{file}{Any AST air sampler raw log file name}
+\item{file}{Any AST air sampler log file name}
 }
 \value{
-A dataframe including:
+A data frame including:
 \itemize{
 \item Header row counts with and without blank rows
-\item Row count to the start of diagnostic summary if applicable
-\item Number of rows in diagnostic summary if applicable
+\item Row count to the start of diagnostic summary, if applicable
+\item Number of rows in diagnostic summary, if applicable
 \item Boolean indicating if the file is diagnostic
 }
 }
 \description{
 \code{count_header_rows} is a quick way to find where the log file header ends
 before reading the file into a data frame.
-It finds the number of rows with and without blank rows included. This is
-useful for knowing the amount of rows to read or skip when using file read
-functions from other packages such as fread, read_csv, and read.csv. If
-working with diagnostic files, the function also indicates the starting row and
-length of the diagnostic summary. \code{count_header_rows} also returns a boolean
-value to indicate if the file is diagnostic.
+It finds the number of rows in the log file header with and without blank
+rows included. This information is useful for determining the number of
+header rows to read or skip when using file read functions from other
+packages such as fread, read_csv, and read.csv. For diagnostic files, this
+function indicates the starting row and length of the diagnostic summary too.
+\code{count_header_rows} also returns a boolean value to indicate if the file is
+diagnostic.
 }
 \examples{
 # Using a standard UPASv2x log file

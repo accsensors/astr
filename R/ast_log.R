@@ -79,17 +79,17 @@
 #' upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_diag_log <- read_ast_log(upasv2x_diag_file, update_names=FALSE)
-#' upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
-#' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
-#' upasv2x_rev158_log <- read_ast_log(upasv2x_rev158_file, update_names=FALSE)
+#' upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+#' upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev157_log <- read_ast_log(upasv2x_rev157_file, update_names=FALSE)
 
 read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c(), shiny=FALSE) {
 
-  log <- fread_ast_log(file) # astr::
+  log <- astr::fread_ast_log(file)
 
-  header <- read_ast_header(file) # astr::
+  header <- astr::read_ast_header(file)
 
-  df <- format_ast_log(log, header, update_names, tz, cols_keep, cols_drop, shiny=shiny) # astr::
+  df <- astr::format_ast_log(log, header, update_names, tz, cols_keep, cols_drop, shiny=shiny)
 
   return(df)
 }
@@ -123,16 +123,16 @@ read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_dro
 #' upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev110_diag_log_raw <- fread_ast_log(upasv2x_rev110_diag_file)
-#' upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
-#' upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
-#' upasv2x_rev158_log_raw <- fread_ast_log(upasv2x_rev158_file)
+#' upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+#' upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_rev157_log_raw <- fread_ast_log(upasv2x_rev157_file)
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_log_raw <- fread_ast_log(upasv2x_rev158_diag_file)
 
 fread_ast_log = function(file){
 
-  nrows_header <- count_header_rows(file) # Determine no. of header rows astr::
+  nrows_header <- astr::count_header_rows(file)
 
   # Need to account for blank lines when using skip in fread
   nrow_header_skip <- nrows_header$nrow_header_with_blanks +
@@ -185,17 +185,17 @@ format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(),
 
     if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
 
-      df <- format_upasv2x_log(log, header, update_names, tz, cols_keep, cols_drop) # astr::
+      df <- astr::format_upasv2x_log(log, header, update_names, tz, cols_keep, cols_drop)
 
     }else if(grepl("UPAS_v2_0", firmware)){
 
       if(shiny){update_names <- TRUE} #TODO move to own function format_shiny_header so that shiny functionality is not present in normal functions
 
-      df <- format_upasv2_log(log, header, update_names, tz, cols_keep, cols_drop) # astr::
+      df <- astr::format_upasv2_log(log, header, update_names, tz, cols_keep, cols_drop)
 
     }else if(grepl("HHBv2", firmware)){
 
-      df <- format_hhb_log(log, header, tz, cols_keep, cols_drop) # astr::
+      df <- astr::format_hhb_log(log, header, tz, cols_keep, cols_drop)
 
     }
 

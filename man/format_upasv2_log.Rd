@@ -2,24 +2,39 @@
 % Please edit documentation in R/upasv2.R
 \name{format_upasv2_log}
 \alias{format_upasv2_log}
-\title{Read the log data from a UPASv2 log file}
+\title{Format the sample log data from an Access Sensor Technologies UPAS v2}
 \usage{
-format_upasv2_log(df_h, df_raw, tz_offset = NA, update_names = FALSE)
+format_upasv2_log(
+  log,
+  header,
+  update_names = FALSE,
+  tz = NA,
+  cols_keep = c(),
+  cols_drop = c()
+)
 }
 \arguments{
-\item{df_h}{A UPASv2 header dataframe}
+\item{log}{A data frame of UPAS v2 sample log data returned by the \link{fread_ast_log} function.}
 
-\item{df_raw}{A UPASv2 raw dataframe}
+\item{header}{A data frame of UPAS v2 header data returned by the \link{read_ast_header} function.}
 
-\item{tz_offset}{Pass an option timezone offset.}
+\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+See \link{read_ast_log} for additional information.}
 
-\item{update_names}{Option to update old sampler names to latest version.}
+\item{tz}{Optional: A character string specifying the tz database time zone that should be used to display local times.
+See \link{read_ast_log} for additional information.}
+
+\item{cols_keep}{Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.}
+
+\item{cols_drop}{Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+See \link{read_ast_log} for additional information.}
 }
 \value{
-A data frame.
+A data frame of of UPAS v2 sample log data that are formatted and ready for analysis.
+This data frame will contain one row for each timestamp in the sample log.
 }
 \description{
-Read the log data from a UPASv2 log file
+Format the sample log data from an Access Sensor Technologies UPAS v2
 }
 \examples{
 upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)

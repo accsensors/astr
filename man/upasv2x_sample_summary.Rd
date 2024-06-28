@@ -10,7 +10,7 @@ upasv2x_sample_summary(df_h, df = NULL, shiny = FALSE, fract_units = FALSE)
 \arguments{
 \item{df_h}{Pass a upasv2x header dataframe from read_ast_header function.}
 
-\item{df}{Pass a upasv2x dataframe from read_ast_header function.}
+\item{df}{Pass a upasv2x dataframe from read_ast_log function.}
 
 \item{shiny}{Option to make TRUE if using function with AST shiny app.}
 

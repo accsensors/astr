@@ -2,42 +2,67 @@
 % Please edit documentation in R/ast_header.R
 \name{read_ast_header}
 \alias{read_ast_header}
-\title{Read and format the header data from an Access Sensor Technologies (AST) air sampler
-log file}
+\title{Read and format the header data from an Access Sensor Technologies air sampler log file}
 \usage{
 read_ast_header(file, update_names = FALSE, shiny = FALSE)
 }
 \arguments{
-\item{file}{Any AST air sampler log file name.}
+\item{file}{Any Access Sensor Technologies air sampler log file name.}
 
-\item{update_names}{Option to update old sampler names to latest version.
-See \link{format_upasv2_header} for more information.}
+\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+
+For samples collected using UPAS v2 firmware versions beyond rev100, the old
+names shown on the left will be updated to the names shown on the right:
+\itemize{
+\item VolumetricFlowRate        -> FlowRateSetpoint
+\item DutyCycle                 -> FlowDutyCycle
+\item LoggedRuntime             -> OverallDuration
+\item SampledRuntime            -> PumpingDuration
+\item AverageVolumetricFlowRate -> PumpingFlowRateAverage
+}
+
+For samples collected using UPAS v2 firmware rev100, the old names shown on
+the left will be updated to the names shown on the right:
+\itemize{
+\item CumulativeSamplingTime -> LifetimeSampleRuntime
+\item StartDateTime          -> StartDateTimeUTC
+\item AverageVolumetricFlow  -> AverageVolumetricFlowRate
+}
+
+Variable names cannot be updated for log files written using UPAS v2 firmware
+versions preceding rev100.}
 
 \item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
-A data frame with formatted header data in wide format that is ready
-for data analysis
+A data frame with a single row of header data that are formatted and ready for analysis.
 }
 \description{
-\code{read_ast_header} reads a raw log file, transposes the log file header to a
-wide format, and completes device specific formatting. It sets the proper
-data types for each variable, adds a column to specify the AST sampler type,
-adds columns to describe the codes associated with variables such as
-ShutdownMode and PMSensorInterval, and - if \code{update_names=TRUE} - updates old
-log file variable names to match the latest variable names.
+\code{read_ast_header} reads in the header data frome a log file, transposes the
+data into a wide format, and applies device-specific formatting to the
+columns of the resulting data frame. This function sets the proper data type
+for each variable, adds a column to specify the AST sampler type, adds
+columns to describe the codes associated with the ShutdownMode and
+PMSensorInterval variables, and can also be directed to update old variable
+names to the current variable names.
 
-This function can be used in conjuction with lapply() or map() to read in
-header data from any number of log files and create a data frame that
-contains a line with the summary information for each sample.
+Use this function in conjuction with lapply() or map() to read in header data
+from any number of log files and combine them into a single data frame that
+contains a unique row for each sample.
 }
 \examples{
+upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
+upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
+upasv2_rev100_header <- read_ast_header(upasv2_rev100_file, update_names=FALSE)
+upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
+upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
+upasv2_rev100_diag_header <- read_ast_header(upasv2_rev100_diag_file, update_names=FALSE)
 upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=FALSE)
-upasv2_rev130_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
-upasv2_rev130_file <- system.file("extdata", upasv2_rev130_filename, package = "astr", mustWork = TRUE)
-upasv2_rev130_header <- read_ast_header(upasv2_rev130_file, update_names=FALSE)
+upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
+upasv2_rev130_diag_header <- read_ast_header(upasv2_rev130_diag_file, update_names=FALSE)
 upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
@@ -50,9 +75,9 @@ upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE
 upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev110_diag_header <- read_ast_header(upasv2x_rev110_diag_file, update_names=FALSE)
-upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
-upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev158_header <- read_ast_header(upasv2x_rev158_file, update_names=FALSE)
+upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev157_header <- read_ast_header(upasv2x_rev157_file, update_names=FALSE)
 upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)

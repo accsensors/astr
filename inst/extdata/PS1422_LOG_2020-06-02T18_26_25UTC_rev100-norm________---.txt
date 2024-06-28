@@ -1,0 +1,45 @@
+UPASserial,1422
+UPASfirmware,UPAS_v2_0-rev0100-L152RE_20180405_mbed116.bin compiledApr  6 2018_00:19:25UTC
+UPASlogFilename,/sd/PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt
+PowerCycles,8,(counts)
+CumulativeSamplingTime,5.70,(hrs)
+
+
+SETUP SUMMARY
+
+PARAMETER,VALUE,UNITS/NOTES
+StartOnNextPowerUp,0,(0=no 1=yes)
+StartDateTime,2020-06-02T18:26:25UTC,(YYYY-MM-DDTHH:MM:SSUTC)
+GPSUTCOffset,-6.00,(hour)
+ProgrammedStartDelay,0,(s)
+ProgrammedRuntime,172800,(s) (360000000 means 'indefinite')
+VolumetricFlowRate,1.000,(L*min^-1)
+DutyCycle,100,(%)
+DutyCycleWindow,30,(s)
+GPSEnabled,1,(0=no 1=yes)
+LogFileMode,0,(0=normal 1=debug)
+LogInterval,30,(s)
+AppLock,0,(0=unlocked,1=locked,-1=not set)
+AppVersion,i2.1.9,(i=iOS A=Android)
+
+
+SAMPLE SUMMARY
+
+PARAMETER,VALUE,UNITS/NOTES
+ShutdownMode,1,(0=unknown error 1=user pushbutton stop 2=depleted battery (<2.8v) 3=completed preset sample duration 4=thermal protection shutdown 5=max power at initialization 6=max power during sample 7=blocked flow during sample
+StartBatteryCharge,053,(%)
+StartBatteryVoltage,2.83,(V)
+EndBatteryCharge,053,(%)
+EndBatteryVoltage,2.85,(V)
+SampledVolume,    0.90,(L)
+SampledRuntime,  0.015,(Hr)
+LoggedRuntime,  0.015,(Hr)
+AverageVolumetricFlow,1.016,(L*min^-1)
+
+
+SAMPLE LOG
+
+(HH:MM:SS),(s),(YYYY-MM-DDTHH:MM:SS),(L*min^-1),(L),(C),(C),(C),(hPa),(hPa),(Pa),(%),(g*L^-1),(integer),(integer),(V),(g*min^-1),(V),(integer),(decimalDegree),(decimalDegree),(m),(integer),(-)
+SampleTime,UnixTime,UTCDateTime,VolFlow,SampledVolume,PumpT,PCBT,FdpT,PumpP,PCBP,FdPdP,PumpRH,AtmoRho,PumpPow1,PumpPow2,PumpV,MassFlow,BFGvolt,BFGenergy,GPSlat,GPSlon,GPSalt,GPSsat,GPSpdop
+0:00:23,1591122420,2020-06-02T18:26:58,1.017,0.39,26.33,27.54,27.70,846.62,845.64,107.466667,29.83,0.9792,533,0,9.561,1.00012,2.85,32809,40.542163,-105.098265,1565.0,5,4.4
+0:00:53,1591122450,2020-06-02T18:27:28,1.015,0.90,26.72,27.68,28.12,846.56,845.98,105.733330,28.90,0.9783,535,0,9.527,0.99334,2.85,32813,40.542214,-105.098298,1563.1,6,4.0

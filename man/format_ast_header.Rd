@@ -2,43 +2,44 @@
 % Please edit documentation in R/ast_header.R
 \name{format_ast_header}
 \alias{format_ast_header}
-\title{Format a raw header data frame from an Access Sensor
-Technologies (AST) air sampler log file}
+\title{Format header data from an Access Sensor Technologies air sampler log file to
+to make sure each column in the header data frame is the correct data type.}
 \usage{
-format_ast_header(df_h_raw, update_names = FALSE, shiny = FALSE)
+format_ast_header(data, update_names = FALSE, shiny = FALSE)
 }
 \arguments{
-\item{df_h_raw}{Any AST air sampler unformatted header data frame created
-with \code{\link[=make_raw_ast_header]{make_raw_ast_header()}}}
+\item{data}{A header data frame returned by the \link{transpose_ast_header} function.}
 
-\item{update_names}{Option to update old sampler names to latest version.
-See \link{format_upasv2_header} for more information.}
+\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+See \link{read_ast_header} for additional information.}
 
 \item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
-A data frame with formatted AST air sampler header data in wide
-format that is ready for data analysis
+A data frame with a single row of header data that are formatted and ready for analysis.
 }
 \description{
-\code{format_ast_header} transposes the the AST log file header to a wide format
-and completes device specific formatting. It sets the proper data types for
-each variable, adds a column to specify the AST sampler type, adds columns to
-describe the codes associated with variables such as ShutdownMode and
-PMSensorInterval, and - if \code{update_names=TRUE} - updates old log file
-variable names to match the latest variable names.
+\code{format_ast_header} applies deviced-specific formatting to the columns in a
+data frame of header data from an Access Sensor Technologies air sampler
+log file. This function sets the proper data type for each variable, adds a
+column to specify the AST sampler type, adds columns to describe the codes
+wassociated ith the ShutdownMode and PMSensorInterval, and can also be
+directed to update old variable names to current variable names.
 }
 \examples{
 upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
-upasv2_rev138_header_raw <- make_raw_ast_header(upasv2_rev138_file)
-upasv2_rev138_header <- format_ast_header(upasv2_rev138_header_raw, update_names=TRUE)
-upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
-upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev158_header_raw <- make_raw_ast_header(upasv2x_rev158_file)
-upasv2x_rev158_header <- format_ast_header(upasv2x_rev158_header_raw, update_names=FALSE)
+upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
+upasv2_rev138_header_wide <- transpose_ast_header(upasv2_rev138_header_list$header)
+upasv2_rev138_header <- format_ast_header(upasv2_rev138_header_wide, update_names=TRUE)
+upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)
+upasv2x_rev157_header_wide <- transpose_ast_header(upasv2x_rev157_header_list$header)
+upasv2x_rev157_header <- format_ast_header(upasv2x_rev157_header_wide, update_names=FALSE)
 upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev158_diag_header_raw <- make_raw_ast_header(upasv2x_rev158_diag_file)
-upasv2x_rev158_diag_header <- format_ast_header(upasv2x_rev158_diag_header_raw, update_names=FALSE)
+upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
+upasv2x_rev158_diag_header_wide <- transpose_ast_header(upasv2x_rev158_diag_header_list$header, upasv2x_rev158_diag_header_list$diag)
+upasv2x_rev158_diag_header <- format_ast_header(upasv2x_rev158_diag_header_wide, update_names=FALSE)
 }

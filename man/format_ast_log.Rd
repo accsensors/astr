@@ -2,40 +2,45 @@
 % Please edit documentation in R/ast_log.R
 \name{format_ast_log}
 \alias{format_ast_log}
-\title{Extract only the log data from an Access Sensor Technologies (AST) air sampler
-log file}
+\title{Format the sample log data from an Access Sensor Technologies air sampler log file}
 \usage{
 format_ast_log(
-  df_h,
-  df_raw,
-  tz_offset = NA,
+  log,
+  header,
   update_names = FALSE,
+  tz = NA,
   cols_keep = c(),
   cols_drop = c(),
   shiny = FALSE
 )
 }
 \arguments{
-\item{df_h}{An AST air sampler formatted log file header dataframe.}
+\item{log}{An unformatted data frame of sample log data.}
 
-\item{df_raw}{Any AST air sampler unformatted log file dataframe.}
+\item{header}{A formatted data frame of header data.}
 
-\item{tz_offset}{Pass an option timezone offset.}
+\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+See \link{read_ast_log} for additional information.}
 
-\item{update_names}{Option to update old sampler names to latest version.}
+\item{tz}{Optional: A character string specifying the tz database time zone that should be used to display local times.
+See \link{read_ast_log} for additional information.}
 
-\item{cols_keep}{Specify log file columns to keep.}
+\item{cols_keep}{Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.}
 
-\item{cols_drop}{Specify log file columns to remove.}
+\item{cols_drop}{Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+See \link{read_ast_log} for additional information.}
 
-\item{shiny}{Option to make TRUE if using function with AST shiny app.}
+\item{shiny}{Option to make TRUE if using this function with AST shiny app.}
 }
 \value{
-A data frame with all log data.
+A data frame with formatted sample log data plus key header data appended.
 }
 \description{
-Extract only the log data from an Access Sensor Technologies (AST) air sampler
-log file
+\code{format_ast_log} Applies device-specific formatting to the columns of a
+sample log data frame returned by the \link{fread_ast_log} function. It sets the
+proper data type for each variable and adds columns that aid in identifying
+unique log files when data from multiple sample logs have been combined into
+a single data frame.
 }
 \examples{
 data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)

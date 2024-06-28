@@ -2,13 +2,12 @@
 % Please edit documentation in R/ast_log.R
 \name{read_ast_log}
 \alias{read_ast_log}
-\title{Read the full log data from an Access Sensor Technologies (AST) air sampler
-log file}
+\title{Read the sample log data from an Access Sensor Technologies air sampler log file}
 \usage{
 read_ast_log(
   file,
-  tz_offset = NA,
   update_names = FALSE,
+  tz = NA,
   cols_keep = c(),
   cols_drop = c(),
   shiny = FALSE
@@ -17,22 +16,72 @@ read_ast_log(
 \arguments{
 \item{file}{Any AST air sampler log file name.}
 
-\item{tz_offset}{Pass an option timezone offset.}
+\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
 
-\item{update_names}{Option to update old sampler names to latest version.}
+For samples collected using UPAS v2.1 PLUS firmware versions preceding revXXX,
+the column name "AceelComplianceHrs" will be updated to "AccelComplianceHrs".
 
-\item{cols_keep}{Specify log file columns to keep.}
+For samples collected using the UPAS v2, the old names shown on the left will
+be updated to the names shown on the right:
+VolumetricFlowRate -> PumpingFlowRate
+\itemize{
+\item AtmoRho          -> AtmoDensity
+\item FdPdP            -> FilterDP
+\item PumpT            -> AtmoT
+\item PumpRH           -> AtmoRH
+\item PCBT             -> PCB1T
+\item PumpP            -> PCB2P
+\item PCBP             -> AtmoP
+\item GPShdop          -> GPShDOP
+\item BFGvolt          -> BattVolt
+}
 
-\item{cols_drop}{Specify log file columns to remove.}
+For samples collected specifically using UPAS v2 firmware rev100, the old
+names shown on the left will be updated to the names shown on the right:
+\itemize{
+\item UTCDateTime     -> DateTimeUTC
+\item VolFlow         -> VolumetricFlowRate
+\item UPASLogFilename -> LogFilename
+}
+
+Variable names cannot be updated for log files written using UPAS v2 firmware
+versions preceding rev100.}
+
+\item{tz}{Optional: A character string specifying the tz database time zone that should be used to display local times.
+
+Example tz database time zones include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+For additional information, see: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+If your GPSUTCOffset is a whole number of hours, this function will be able
+to automatically convert the DateTimeLocal variable in the sample log to a
+POSIXct object displayed in the local time zone, without this tz parameter
+being specified.  If your GPSUTCOffset is not a whole number of hours, it's
+better to specify the local time zone as a character string here.}
+
+\item{cols_keep}{Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.}
+
+\item{cols_drop}{Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+
+Column selection will occur in the same order in which the function arguments are specified above.
+In other words, the columns specified in cols_keep will be selected first.
+If the cols_keep argument is not specified, all columns will be kept.  Then,
+The columns specified in cols_drop will be dropped.  If the cols_drop
+argument is not specified, no columns will be dropped.}
 
 \item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
-A data frame with all log data plus some header data appended.
+A data frame of of sample log data that are formatted and ready for analysis.
+This data frame will contain one row for each timestamp in the sample log.
+Columns with key header data will be appended to the sample log columns to
+aid in identification and analysis of unique samples.
 }
 \description{
-Read the full log data from an Access Sensor Technologies (AST) air sampler
-log file
+\code{read_ast_log} reads in the sample log data frome a log file and applies
+device-specific formatting to the columns of the resulting data frame.
+It sets the proper data type for each variable and adds columns that aid in
+identifying unique log files when data from multiple sample logs have been
+combined into a single data frame.
 }
 \examples{
 upasv2_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
@@ -48,7 +97,7 @@ data_ast_log <- read_ast_log(file2, cols_keep = c("SampleTime","UnixTime","DateT
 upasv2x_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
 upasv2x_diag_log <- read_ast_log(upasv2x_diag_file, update_names=FALSE)
-upasv2x_rev158_filename <- 'PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt'
-upasv2x_rev158_file <- system.file("extdata", upasv2x_rev158_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev158_log <- read_ast_log(upasv2x_rev158_file, update_names=FALSE)
+upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev157_log <- read_ast_log(upasv2x_rev157_file, update_names=FALSE)
 }
