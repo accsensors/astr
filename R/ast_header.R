@@ -28,7 +28,7 @@
 #' the left will be updated to the names shown on the right:
 #' * CumulativeSamplingTime -> LifetimeSampleRuntime
 #' * StartDateTime          -> StartDateTimeUTC
-#' * AverageVolumetricFlow  -> AverageVolumetricFlowRate
+#' * AverageVolumetricFlow  -> PumpingFlowRateAverage
 #'
 #' Variable names cannot be updated for log files written using UPAS v2 firmware
 #' versions preceding rev100.
@@ -133,9 +133,9 @@ fread_ast_header = function(file) {
   nrows_header <- astr::count_header_rows(file) # Determine no. of header rows
 
   # Read header data
-  header <- data.table::fread(file, sep = ',', header = TRUE, fill = TRUE,
+  header <- data.table::fread(file, sep = ',', header = FALSE, fill = TRUE,
                               skip  = 0,
-                              nrows = nrows_header$nrow_header_no_blanks - 1,
+                              nrows = nrows_header$nrow_header_no_blanks,
                               blank.lines.skip = TRUE, stringsAsFactors = FALSE)
 
   # If the file is a diagnostic file, read the diagnostic test data
@@ -215,7 +215,8 @@ fread_ast_header = function(file) {
 
 transpose_ast_header = function(header, diag = NULL){
 
-  df <- header[header$`UNITS/NOTES` != "", 1:2] # Remove rows with subheadings
+  df <- header[header$V2 != "", 1:2] # Remove rows with subheadings
+  df <- df[df$V1 != "PARAMETER", ] # Required for firmware version 100
 
   df <- t(df) # Transpose
   df <- as.data.frame(df) # Convert into data frame
