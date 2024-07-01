@@ -16,6 +16,3 @@ A data frame with a single row of HHB v2 header data that are formatted and read
 \code{format_hhb_header} formats the header data from a HHB v2 log file by setting
 the proper data type for each variable.
 }
-\examples{
-data_hhb_header <- format_ast_header(data_hhb_raw)
-}

@@ -77,6 +77,3 @@ This data frame will contain one row for each timestamp in the sample log.
 \description{
 Format the sample log data from an Access Sensor Technologies UPAS v2.1 PLUS
 }
-\examples{
-upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
-}

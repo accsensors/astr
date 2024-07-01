@@ -18,6 +18,6 @@ Add a flag to the shiny header indicating a failed sample.
 Can be used to highlight rows in the shinyAST app
 }
 \examples{
-upasv2x_header_flagged <- shiny_flag(upasv2x_header)
-upasv2_header_flaggged <- shiny_flag(upasv2_header)
+# upasv2x_header_flagged <- shiny_flag(upasv2x_header)
+# upasv2_header_flaggged <- shiny_flag(upasv2_header)
 }

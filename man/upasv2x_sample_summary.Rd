@@ -23,7 +23,3 @@ A modified data frame with only the sample summary data.
 Create sample summary dataframe from an Access Sensor Technologies (AST)
 air sampler header dataframe
 }
-\examples{
-upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header, upasv2x_log)
-upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header)
-}

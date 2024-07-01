@@ -11,7 +11,6 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' data_hhb_header <- format_ast_header(data_hhb_raw)
 
 format_hhb_header = function(df) {
 
@@ -21,11 +20,11 @@ format_hhb_header = function(df) {
                                  as.numeric(df$ProgrammedRuntime))
 
   df <- dplyr::mutate(df,
-    across(contains(c("CalVoutMin", "CalVoutMax", "CalMFMin", "CalMFMax", "MF4",
+    dplyr::across(dplyr::contains(c("CalVoutMin", "CalVoutMax", "CalMFMin", "CalMFMax", "MF4",
                       "MF3", "MF2", "MF1", "MF0", "UTCOffset", "Runtime",
                       "Volume", "FlowRate", "DutyCycle", "ShutdownMode")),
            \(x) as.numeric(x)),
-    across(contains(c("StartDateTimeUTC", "EndDateTimeUTC", "CalDate")),
+    dplyr::across(dplyr::contains(c("StartDateTimeUTC", "EndDateTimeUTC", "CalDate")),
                     \(x) as.POSIXct(x, format="%Y-%m-%dT%H:%M:%S", tz="UTC")))
 
   return(df)
@@ -50,26 +49,25 @@ format_hhb_header = function(df) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' data_ast_log <- format_ast_log(hhb_header, data_hhb_raw)
 
 format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
 
   if (nrow(log) > 0) {
 
     df_h <- dplyr::select(header,
-                          any_of(c("HHBserial","LogFileName","SampleName","StartDateTimeUTC")),
+                          dplyr::any_of(c("HHBserial","LogFileName","SampleName","StartDateTimeUTC")),
                           dplyr::contains(c("ID","VolumetricFlowRate"), ignore.case=F))
 
     df <- dplyr::mutate(log,
-            SampleTime = ifelse(SampleTime == "99:99:99", NA,
-                                strsplit(SampleTime,":")),
+            SampleTime = ifelse(.data$SampleTime == "99:99:99", NA,
+                                strsplit(.data$SampleTime,":")),
             SampleTime = as.difftime(
                           3600*as.numeric(sapply(.data$SampleTime, `[`, 1)) +
                             60*as.numeric(sapply(.data$SampleTime, `[`, 2)) +
                             as.numeric(sapply(.data$SampleTime, `[`, 3)),
                           units="secs"),
             UserTZ  = ifelse(!is.na(tz), T, F),
-            LocalTZ  = case_when(!is.na(tz) ~ tz,
+            LocalTZ  = dplyr::case_when(!is.na(tz) ~ tz,
                                  header$UTCOffset == 0 ~ "UTC",
                                  (round(header$UTCOffset) == header$UTCOffset) &
                                   (header$UTCOffset < 0) ~
@@ -84,7 +82,7 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
                           DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
                                                       tzone=unique(df$LocalTZ)))
     }else{
-      df <- dplyr::mutate(df, DateTimeLocal = as.character(DateTimeLocal))
+      df <- dplyr::mutate(df, DateTimeLocal = as.character(.data$DateTimeLocal))
     }
 
     df <- dplyr::relocate(df,

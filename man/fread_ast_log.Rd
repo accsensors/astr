@@ -16,6 +16,7 @@ A data frame of unformatted sample log data
 \code{fread_ast_log} reads in the sample log data exactly as it appears in the file.
 }
 \examples{
+# UPASv2 EXAMPLES
 upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 upasv2_rev125_log_raw <- fread_ast_log(upasv2_rev125_file)
@@ -25,6 +26,8 @@ upasv2_rev130_diag_log_raw <- fread_ast_log(upasv2_rev130_diag_file)
 upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 upasv2_rev138_log_raw <- fread_ast_log(upasv2_rev138_file)
+
+# UPASv2x EXAMPLES
 upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev81_log_raw <- fread_ast_log(upasv2x_rev81_file)

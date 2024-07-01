@@ -9,8 +9,8 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header_shiny <- shiny_header(upasv2x_header)
-#' upasv2_header_shiny <- shiny_header(upasv2_header)
+#' # upasv2x_header_shiny <- shiny_header(upasv2x_header)
+#' # upasv2_header_shiny <- shiny_header(upasv2_header)
 
 shiny_header = function(df_h, fract_units = FALSE) {
 
@@ -104,7 +104,7 @@ shiny_header = function(df_h, fract_units = FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_log_shiny <- shiny_log(upasv2x_log)
+#' # upasv2x_log_shiny <- shiny_log(upasv2x_log)
 
 shiny_log = function(df) {
 
@@ -154,7 +154,7 @@ shiny_log = function(df) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' plot_label <- shiny_axis(colnames(upasv2x_log))
+#' # plot_label <- shiny_axis(colnames(upasv2x_log))
 
 shiny_axis = function(clm_name, fract_units = FALSE){
 
@@ -333,8 +333,8 @@ shiny_units = function(vect){
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header_flagged <- shiny_flag(upasv2x_header)
-#' upasv2_header_flaggged <- shiny_flag(upasv2_header)
+#' # upasv2x_header_flagged <- shiny_flag(upasv2x_header)
+#' # upasv2_header_flaggged <- shiny_flag(upasv2_header)
 
 shiny_flag = function(df_h) {
 
@@ -359,7 +359,7 @@ shiny_flag = function(df_h) {
 #' @importFrom stats var
 #'
 #' @examples
-#' upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
+#' # upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
 
 get_30s_mean = function(df) {
 

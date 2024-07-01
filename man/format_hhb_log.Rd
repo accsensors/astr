@@ -26,6 +26,3 @@ This data frame will contain one row for each timestamp in the sample log.
 \description{
 Format the sample log data from an Access Sensor Technologies Home Health Box log file
 }
-\examples{
-data_ast_log <- format_ast_log(hhb_header, data_hhb_raw)
-}

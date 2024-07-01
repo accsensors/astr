@@ -20,6 +20,6 @@ Rename UPAS header file data frame columns
 to be more user friendly for the Shiny app
 }
 \examples{
-upasv2x_header_shiny <- shiny_header(upasv2x_header)
-upasv2_header_shiny <- shiny_header(upasv2_header)
+# upasv2x_header_shiny <- shiny_header(upasv2x_header)
+# upasv2_header_shiny <- shiny_header(upasv2_header)
 }

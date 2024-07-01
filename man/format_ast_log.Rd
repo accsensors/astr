@@ -83,6 +83,3 @@ proper data type for each variable and adds columns that aid in identifying
 unique log files when data from multiple sample logs have been combined into
 a single data frame.
 }
-\examples{
-data_ast_log <- format_ast_log(upasv2x_header, data_ast_raw)
-}

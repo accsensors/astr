@@ -21,6 +21,3 @@ A modified data frame with only the sample settings data.
 Create sample metadata dataframe from an Access Sensor Technologies (AST)
 air sampler header dataframe
 }
-\examples{
-upasv2x_sample_meta <- upasv2x_sample_meta(upasv2x_header)
-}

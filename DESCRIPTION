@@ -27,7 +27,6 @@ Imports:
     magrittr,
     rlang,
     sp,
-    stringr,
     zoo
 Suggests: 
     testthat (>= 3.0.0)

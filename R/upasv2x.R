@@ -57,19 +57,19 @@ format_upasv2x_header = function(data) {
                                   "MFSCalPDeadhead",
                                   "MF4", "MF3", "MF2", "MF1", "MF0")),
                   \(x) as.numeric(x)),
-    dplyr::across(starts_with("Lifetime"),      \(x) as.numeric(x)),
-    dplyr::across(starts_with("Programmed"),    \(x) as.numeric(x)),
-    dplyr::across(starts_with("Flow"),          \(x) as.numeric(x)),
-    dplyr::across(ends_with("SampleState"),     \(x) as.numeric(x)),
-    dplyr::across(ends_with("Duration"),        \(x) as.numeric(x)),
-    dplyr::across(ends_with("FlowRateAverage"), \(x) as.numeric(x)),
-    dplyr::across(contains("Battery"),          \(x) as.numeric(x)),
-    dplyr::across(starts_with("MFSCalVout"),    \(x) as.numeric(x)),
-    dplyr::across(starts_with("MFSCalMF"),      \(x) as.numeric(x)),
-    dplyr::across(starts_with("MFSCalPump"),    \(x) as.numeric(x)),
+    dplyr::across(dplyr::starts_with("Lifetime"),      \(x) as.numeric(x)),
+    dplyr::across(dplyr::starts_with("Programmed"),    \(x) as.numeric(x)),
+    dplyr::across(dplyr::starts_with("Flow"),          \(x) as.numeric(x)),
+    dplyr::across(dplyr::ends_with("SampleState"),     \(x) as.numeric(x)),
+    dplyr::across(dplyr::ends_with("Duration"),        \(x) as.numeric(x)),
+    dplyr::across(dplyr::ends_with("FlowRateAverage"), \(x) as.numeric(x)),
+    dplyr::across(dplyr::contains("Battery"),          \(x) as.numeric(x)),
+    dplyr::across(dplyr::starts_with("MFSCalVout"),    \(x) as.numeric(x)),
+    dplyr::across(dplyr::starts_with("MFSCalMF"),      \(x) as.numeric(x)),
+    dplyr::across(dplyr::starts_with("MFSCalPump"),    \(x) as.numeric(x)),
     dplyr::across(dplyr::any_of(c("GPSEnabled", "PowerSaveMode", "AppLock")),
                   \(x) as.logical(x)),
-    dplyr::across(ends_with("SampleState"), \(x) as.logical(x)),
+    dplyr::across(dplyr::ends_with("SampleState"), \(x) as.logical(x)),
     dplyr::across(dplyr::any_of(c("ExternalPowerMode")),
                   \(x) ifelse(x == "F0", T, F)),
     LogFilename = gsub("/sd/", "", .data$LogFilename),
@@ -138,7 +138,7 @@ format_upasv2x_header = function(data) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
+#'
 
 format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()) {
 
@@ -164,7 +164,7 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
     DateTimeUTC = as.POSIXct(.data$DateTimeUTC, format = "%Y-%m-%dT%H:%M:%S",
                              tz = "UTC"),
     UserTZ   = ifelse(!is.na(tz), T, F),
-    LocalTZ  = case_when(!is.na(tz) ~ tz,
+    LocalTZ  = dplyr::case_when(!is.na(tz) ~ tz,
                          header$GPSUTCOffset == 0 ~ "UTC",
                          (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
                            (header$GPSUTCOffset < 0) ~
@@ -183,7 +183,7 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
     df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
                                                       tzone=unique(df$LocalTZ)))
   }else{
-    df <- dplyr::mutate(df, DateTimeLocal = as.character(DateTimeLocal))
+    df <- dplyr::mutate(df, DateTimeLocal = as.character(.data$DateTimeLocal))
   }
 
   df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
@@ -217,8 +217,7 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header, upasv2x_log)
-#' upasv2x_sample_summary <- upasv2x_sample_summary(upasv2x_header)
+
 
 upasv2x_sample_summary = function(df_h, df=NULL, shiny=FALSE, fract_units=FALSE) {
   #TODO move to new function shiny_sample_summary so that shiny functionality is not present in normal functions
@@ -269,7 +268,6 @@ upasv2x_sample_summary = function(df_h, df=NULL, shiny=FALSE, fract_units=FALSE)
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_sample_settings <- upasv2x_sample_settings(upasv2x_header)
 
 upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
   #TODO move to new function shiny_sample_settings so that shiny functionality is not present in normal functions
@@ -305,7 +303,6 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_sample_meta <- upasv2x_sample_meta(upasv2x_header)
 
 upasv2x_sample_meta = function(df_h, shiny=FALSE, fract_units=FALSE) {
   #TODO move to new function shiny_sample_meta so that shiny functionality is not present in normal functions
