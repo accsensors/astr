@@ -51,12 +51,13 @@ from any number of log files and combine them into a single data frame that
 contains a unique row for each sample.
 }
 \examples{
-upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
-upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
-upasv2_rev100_header <- read_ast_header(upasv2_rev100_file, update_names=FALSE)
-upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
-upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
-upasv2_rev100_diag_header <- read_ast_header(upasv2_rev100_diag_file, update_names=FALSE)
+# UPASv2 EXAMPLES
+#upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
+#upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
+#upasv2_rev100_header <- read_ast_header(upasv2_rev100_file, update_names=FALSE)
+#upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
+#upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
+#upasv2_rev100_diag_header <- read_ast_header(upasv2_rev100_diag_file, update_names=FALSE)
 upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=FALSE)
@@ -66,6 +67,7 @@ upasv2_rev130_diag_header <- read_ast_header(upasv2_rev130_diag_file, update_nam
 upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
+# UPASv2x EXAMPLES
 upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev81_header <- read_ast_header(upasv2x_rev81_file, update_names=FALSE)

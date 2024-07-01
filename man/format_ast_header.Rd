@@ -47,11 +47,14 @@ wassociated ith the ShutdownMode and PMSensorInterval, and can also be
 directed to update old variable names to current variable names.
 }
 \examples{
+# UPASv2 EXAMPLES
 upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
 upasv2_rev138_header_wide <- transpose_ast_header(upasv2_rev138_header_list$header)
 upasv2_rev138_header <- format_ast_header(upasv2_rev138_header_wide, update_names=TRUE)
+
+# UPASv2x EXAMPLES
 upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
 upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)

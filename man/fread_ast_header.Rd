@@ -20,6 +20,7 @@ the data formatted exactly as they appear in the log file.
 diagnostic test data from the specified file.
 }
 \examples{
+# UPASv2 EXAMPLES
 upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
 upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
 upasv2_rev100_header_list <- fread_ast_header(upasv2_rev100_file)
@@ -42,6 +43,8 @@ upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
 upasv2_rev138_header <- upasv2_rev138_header_list$header
+
+# UPASv2x EXAMPLES
 upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev81_header_list <- fread_ast_header(upasv2x_rev81_file)
