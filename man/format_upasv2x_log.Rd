@@ -75,5 +75,41 @@ A data frame of of UPAS v2.1 PLUS sample log data that are formatted and ready f
 This data frame will contain one row for each timestamp in the sample log.
 }
 \description{
-Format the sample log data from an Access Sensor Technologies UPAS v2.1 PLUS
+#' @description
+\code{format_upasv2x_log} Applies device-specific formatting to the columns of a
+sample log data frame returned by the \link{fread_ast_log} function. It sets the
+proper data type for each variable and adds columns that aid in identifying
+unique log files when data from multiple sample logs have been combined into
+a single data frame.
+}
+\examples{
+upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev81_log_raw <- fread_ast_log(upasv2x_rev81_file)
+upasv2x_rev81_header <- read_ast_header(upasv2x_rev81_file, update_names=TRUE)
+upasv2x_rev81_log <- format_upasv2x_log(upasv2x_rev81_log_raw, upasv2x_rev81_header, update_names=TRUE)
+
+upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev117_log_raw <- fread_ast_log(upasv2x_rev117_file)
+upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE)
+upasv2x_rev117_log <- format_upasv2x_log(upasv2x_rev117_log_raw, upasv2x_rev117_header, update_names=FALSE)
+
+upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev110_diag_log_raw <- fread_ast_log(upasv2x_rev110_diag_file)
+upasv2x_rev110_diag_header <- read_ast_header(upasv2x_rev110_diag_file, update_names=FALSE)
+upasv2x_rev110_diag_log <- format_upasv2x_log(upasv2x_rev110_diag_log_raw, upasv2x_rev110_diag_header, update_names=FALSE)
+
+upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev157_log_raw <- fread_ast_log(upasv2x_rev157_file)
+upasv2x_rev157_header <- read_ast_header(upasv2x_rev157_file, update_names=FALSE)
+upasv2x_rev157_log <- format_upasv2x_log(upasv2x_rev157_log_raw, upasv2x_rev157_header, update_names=FALSE)
+
+upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_diag_log_raw <- fread_ast_log(upasv2x_rev158_diag_file)
+upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
+upasv2x_rev158_diag_log <- format_upasv2x_log(upasv2x_rev158_diag_log_raw, upasv2x_rev158_diag_header, update_names=FALSE)
 }

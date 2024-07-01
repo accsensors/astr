@@ -19,21 +19,25 @@
 #' #upasv2_rev100_header_list <- fread_ast_header(upasv2_rev100_file)
 #' #upasv2_rev100_header_wide <- transpose_ast_header(upasv2_rev100_header_list$header)
 #' #upasv2_rev100_header <- format_upasv2_header(upasv2_rev100_header_wide)
+#'
 #' #upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
 #' #upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
 #' #upasv2_rev100_diag_header_list <- fread_ast_header(upasv2_rev100_diag_file)
 #' #upasv2_rev100_diag_header_wide <- transpose_ast_header(upasv2_rev100_diag_header_list$header, upasv2_rev100_diag_header_list$diag)
 #' #upasv2_rev100_diag_header <- format_upasv2_header(upasv2_rev100_diag_header_wide)
+#'
 #' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 #' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev125_header_list <- fread_ast_header(upasv2_rev125_file)
 #' upasv2_rev125_header_wide <- transpose_ast_header(upasv2_rev125_header_list$header)
 #' upasv2_rev125_header <- format_upasv2_header(upasv2_rev125_header_wide)
+#'
 #' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
 #' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev130_diag_header_list <- fread_ast_header(upasv2_rev130_diag_file)
 #' upasv2_rev130_diag_header_wide <- transpose_ast_header(upasv2_rev130_diag_header_list$header, upasv2_rev130_diag_header_list$diag)
 #' upasv2_rev130_diag_header <- format_upasv2_header(upasv2_rev130_diag_header_wide)
+#'
 #' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 #' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
@@ -123,6 +127,13 @@ format_upasv2_header <- function(data, update_names=FALSE){
 
 #'Format the sample log data from an Access Sensor Technologies UPAS v2
 #'
+#'#' @description
+#' `format_upasv2_log` Applies device-specific formatting to the columns of a
+#' sample log data frame returned by the [fread_ast_log] function. It sets the
+#' proper data type for each variable and adds columns that aid in identifying
+#' unique log files when data from multiple sample logs have been combined into
+#' a single data frame.
+#'
 #' @param log A data frame of UPAS v2 sample log data returned by the [fread_ast_log] function.
 #' @param header A data frame of UPAS v2 header data returned by the [read_ast_header] function.
 #' @inheritParams format_ast_log
@@ -134,6 +145,23 @@ format_upasv2_header <- function(data, update_names=FALSE){
 #' @importFrom rlang .data
 #'
 #' @examples
+#' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
+#' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev125_log_raw <- fread_ast_log(upasv2_rev125_file)
+#' upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=FALSE)
+#' upasv2_rev125_log <- format_upasv2_log(upasv2_rev125_log_raw, upasv2_rev125_header, update_names=FALSE)
+#'
+#' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+#' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev130_diag_log_raw <- fread_ast_log(upasv2_rev130_diag_file)
+#' upasv2_rev130_diag_header <- read_ast_header(upasv2_rev130_diag_file, update_names=FALSE)
+#' upasv2_rev130_diag_log <- format_upasv2_log(upasv2_rev130_diag_log_raw, upasv2_rev130_diag_header)
+#'
+#' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+#' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev138_log_raw <- fread_ast_log(upasv2_rev138_file)
+#' upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
+#' upasv2_rev138_log <- format_upasv2_log(upasv2_rev138_log_raw, upasv2_rev138_header)
 
 format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()){
 

@@ -44,31 +44,40 @@
 #' #upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
 #' #upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
 #' #upasv2_rev100_header <- read_ast_header(upasv2_rev100_file, update_names=FALSE)
+#'
 #' #upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
 #' #upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
 #' #upasv2_rev100_diag_header <- read_ast_header(upasv2_rev100_diag_file, update_names=FALSE)
+#'
 #' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 #' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=FALSE)
+#'
 #' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
 #' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev130_diag_header <- read_ast_header(upasv2_rev130_diag_file, update_names=FALSE)
+#'
 #' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 #' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
+#'
 #' # UPASv2x EXAMPLES
 #' upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 #' upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev81_header <- read_ast_header(upasv2x_rev81_file, update_names=FALSE)
+#'
 #' upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
 #' upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE)
+#'
 #' upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev110_diag_header <- read_ast_header(upasv2x_rev110_diag_file, update_names=FALSE)
+#'
 #' upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
 #' upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev157_header <- read_ast_header(upasv2x_rev157_file, update_names=FALSE)
+#'
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
@@ -104,20 +113,24 @@ read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 #' upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev100_header_list <- fread_ast_header(upasv2_rev100_file)
 #' upasv2_rev100_header <- upasv2_rev100_header_list$header
+#'
 #' upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
 #' upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev100_diag_header_list <- fread_ast_header(upasv2_rev100_diag_file)
 #' upasv2_rev100_diag_header <- upasv2_rev100_diag_header_list$header
 #' upasv2_rev100_diag_diag <- upasv2_rev100_diag_header_list$diag
+#'
 #' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 #' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev125_header_list <- fread_ast_header(upasv2_rev125_file)
 #' upasv2_rev125_header <- upasv2_rev125_header_list$header
+#'
 #' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
 #' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev130_diag_header_list <- fread_ast_header(upasv2_rev130_diag_file)
 #' upasv2_rev130_diag_header <- upasv2_rev130_diag_header_list$header
 #' upasv2_rev130_diag_diag <- upasv2_rev130_diag_header_list$diag
+#'
 #' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 #' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
@@ -128,19 +141,23 @@ read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 #' upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev81_header_list <- fread_ast_header(upasv2x_rev81_file)
 #' upasv2x_rev81_header <- upasv2x_rev81_header_list$header
+#'
 #' upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
 #' upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev117_header_list <- fread_ast_header(upasv2x_rev117_file)
 #' upasv2x_rev117_header <- upasv2x_rev117_header_list$header
+#'
 #' upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev110_diag_header_list <- fread_ast_header(upasv2x_rev110_diag_file)
 #' upasv2x_rev110_diag_header <- upasv2x_rev110_diag_header_list$header
 #' upasv2x_rev110_diag_diag <- upasv2x_rev110_diag_header_list$diag
+#'
 #' upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
 #' upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)
 #' upasv2x_rev157_header <- upasv2x_rev157_header_list$header
+#'
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
@@ -195,18 +212,22 @@ fread_ast_header = function(file) {
 #' #upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
 #' #upasv2_rev100_header_list <- fread_ast_header(upasv2_rev100_file)
 #' #upasv2_rev100_header_wide <- transpose_ast_header(upasv2_rev100_header_list$header)
+#'
 #' #upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
 #' #upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
 #' #upasv2_rev100_diag_header_list <- fread_ast_header(upasv2_rev100_diag_file)
 #' #upasv2_rev100_diag_header_wide <- transpose_ast_header(upasv2_rev100_diag_header_list$header, upasv2_rev100_diag_header_list$diag)
+#'
 #' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 #' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev125_header_list <- fread_ast_header(upasv2_rev125_file)
 #' upasv2_rev125_header_wide <- transpose_ast_header(upasv2_rev125_header_list$header)
+#'
 #' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
 #' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev130_diag_header_list <- fread_ast_header(upasv2_rev130_diag_file)
 #' upasv2_rev130_diag_header_wide <- transpose_ast_header(upasv2_rev130_diag_header_list$header, upasv2_rev130_diag_header_list$diag)
+#'
 #' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 #' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
@@ -217,18 +238,22 @@ fread_ast_header = function(file) {
 #' upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev81_header_list <- fread_ast_header(upasv2x_rev81_file)
 #' upasv2x_rev81_header_wide <- transpose_ast_header(upasv2x_rev81_header_list$header)
+#'
 #' upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
 #' upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev117_header_list <- fread_ast_header(upasv2x_rev117_file)
 #' upasv2x_rev117_header_wide <- transpose_ast_header(upasv2x_rev117_header_list$header)
+#'
 #' upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev110_diag_header_list <- fread_ast_header(upasv2x_rev110_diag_file)
 #' upasv2x_rev110_diag_header_wide <- transpose_ast_header(upasv2x_rev110_diag_header_list$header, upasv2x_rev110_diag_header_list$diag)
+#'
 #' upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
 #' upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)
 #' upasv2x_rev157_header_wide <- transpose_ast_header(upasv2x_rev157_header_list$header)
+#'
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
@@ -323,6 +348,7 @@ transpose_ast_header = function(header, diag = NULL){
 #' upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)
 #' upasv2x_rev157_header_wide <- transpose_ast_header(upasv2x_rev157_header_list$header)
 #' upasv2x_rev157_header <- format_ast_header(upasv2x_rev157_header_wide, update_names=FALSE)
+#'
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
