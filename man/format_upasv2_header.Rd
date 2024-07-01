@@ -4,10 +4,10 @@
 \alias{format_upasv2_header}
 \title{Format UPAS v2 header data that hae already been transposed to a wide data frame}
 \usage{
-format_upasv2_header(df, update_names = FALSE)
+format_upasv2_header(data, update_names = FALSE)
 }
 \arguments{
-\item{df}{A UPASv2 header data frame returned by \link{transpose_ast_header}}
+\item{data}{A UPASv2 header data frame returned by \link{transpose_ast_header}}
 
 \item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
 
@@ -26,7 +26,7 @@ the left will be updated to the names shown on the right:
 \itemize{
 \item CumulativeSamplingTime -> LifetimeSampleRuntime
 \item StartDateTime          -> StartDateTimeUTC
-\item AverageVolumetricFlow  -> AverageVolumetricFlowRate
+\item AverageVolumetricFlow  -> PumpingFlowRateAverage
 }
 
 Variable names cannot be updated for log files written using UPAS v2 firmware

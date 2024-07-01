@@ -4,10 +4,10 @@
 \alias{format_upasv2x_header}
 \title{Format UPAS v2.1 PLUS header data that have already been transposed to a wide data frame}
 \usage{
-format_upasv2x_header(df)
+format_upasv2x_header(data)
 }
 \arguments{
-\item{df}{A UPASv2.1 PLUS header data frame returned by the \link{transpose_ast_header} function}
+\item{data}{A UPASv2.1 PLUS header data frame returned by the \link{transpose_ast_header} function}
 }
 \value{
 A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.

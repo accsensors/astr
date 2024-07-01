@@ -26,7 +26,7 @@ the left will be updated to the names shown on the right:
 \itemize{
 \item CumulativeSamplingTime -> LifetimeSampleRuntime
 \item StartDateTime          -> StartDateTimeUTC
-\item AverageVolumetricFlow  -> AverageVolumetricFlowRate
+\item AverageVolumetricFlow  -> PumpingFlowRateAverage
 }
 
 Variable names cannot be updated for log files written using UPAS v2 firmware
