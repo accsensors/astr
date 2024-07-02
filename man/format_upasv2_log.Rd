@@ -86,8 +86,8 @@ a single data frame.
 upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 upasv2_rev125_log_raw <- fread_ast_log(upasv2_rev125_file)
-upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=FALSE)
-upasv2_rev125_log <- format_upasv2_log(upasv2_rev125_log_raw, upasv2_rev125_header, update_names=FALSE)
+upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=TRUE)
+upasv2_rev125_log <- format_upasv2_log(upasv2_rev125_log_raw, upasv2_rev125_header, update_names=TRUE)
 
 upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
 upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)

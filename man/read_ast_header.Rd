@@ -92,4 +92,9 @@ upasv2x_rev157_header <- read_ast_header(upasv2x_rev157_file, update_names=FALSE
 upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
+
+# HHB EXAMPLES
+hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+hhb_header <- read_ast_header(hhb_file)
 }

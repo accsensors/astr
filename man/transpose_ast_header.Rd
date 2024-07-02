@@ -75,4 +75,10 @@ upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC_
 upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
 upasv2x_rev158_diag_header_wide <- transpose_ast_header(upasv2x_rev158_diag_header_list$header, upasv2x_rev158_diag_header_list$diag)
+
+# HHB EXAMPLES
+hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+hhb_header_raw <- fread_ast_header(hhb_file)$header
+hhb_header_wide <- transpose_ast_header(hhb_header_raw)
 }

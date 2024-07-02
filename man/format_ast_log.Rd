@@ -133,4 +133,11 @@ upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename,
 upasv2x_rev158_diag_log_raw <- fread_ast_log(upasv2x_rev158_diag_file)
 upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
 upasv2x_rev158_diag_log <- format_ast_log(upasv2x_rev158_diag_log_raw, upasv2x_rev158_diag_header, update_names=FALSE)
+
+# HHB EXAMPLES
+hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+hhb_log_raw <- fread_ast_log(hhb_file)
+hhb_header <- read_ast_header(hhb_file)
+hhb_log <- format_ast_log(hhb_log_raw, hhb_header)
 }

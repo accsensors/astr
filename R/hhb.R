@@ -11,6 +11,11 @@
 #' @importFrom rlang .data
 #'
 #' @examples
+#' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_header_raw <- fread_ast_header(hhb_file)$header
+#' hhb_header_wide <- transpose_ast_header(hhb_header_raw)
+#' hhb_header <- format_hhb_header(hhb_header_wide)
 
 format_hhb_header = function(df) {
 
@@ -49,6 +54,11 @@ format_hhb_header = function(df) {
 #' @importFrom rlang .data
 #'
 #' @examples
+#' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_log_raw <- fread_ast_log(hhb_file)
+#' hhb_header <- read_ast_header(hhb_file)
+#' hhb_log <- format_hhb_log(hhb_log_raw, hhb_header)
 
 format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
 

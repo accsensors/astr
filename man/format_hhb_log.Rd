@@ -26,3 +26,10 @@ This data frame will contain one row for each timestamp in the sample log.
 \description{
 Format the sample log data from an Access Sensor Technologies Home Health Box log file
 }
+\examples{
+hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+hhb_log_raw <- fread_ast_log(hhb_file)
+hhb_header <- read_ast_header(hhb_file)
+hhb_log <- format_hhb_log(hhb_log_raw, hhb_header)
+}

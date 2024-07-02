@@ -107,6 +107,11 @@
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_log <- read_ast_log(upasv2x_rev158_diag_file, update_names=FALSE)
+#'
+#' # HHB EXAMPLES
+#' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_log <- read_ast_log(hhb_file)
 
 read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c(), shiny=FALSE) {
 
@@ -163,6 +168,11 @@ read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_dro
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_log_raw <- fread_ast_log(upasv2x_rev158_diag_file)
+#'
+#' # HHB EXAMPLES
+#' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_log_raw <- fread_ast_log(hhb_file)
 
 fread_ast_log = function(file){
 
@@ -251,6 +261,13 @@ fread_ast_log = function(file){
 #' upasv2x_rev158_diag_log_raw <- fread_ast_log(upasv2x_rev158_diag_file)
 #' upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
 #' upasv2x_rev158_diag_log <- format_ast_log(upasv2x_rev158_diag_log_raw, upasv2x_rev158_diag_header, update_names=FALSE)
+#'
+#' # HHB EXAMPLES
+#' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_log_raw <- fread_ast_log(hhb_file)
+#' hhb_header <- read_ast_header(hhb_file)
+#' hhb_log <- format_ast_log(hhb_log_raw, hhb_header)
 
 format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c(), shiny=FALSE) {
 
