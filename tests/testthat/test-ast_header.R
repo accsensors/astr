@@ -171,7 +171,6 @@ test_that("If using update names for UPASv2, all applicable column names are upd
 test_that("format_upasv2_header and read_ast_header have the same output", {
   upasv2_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
   upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-  upasv2_header <- read_ast_header(upasv2_file, update_names = TRUE)
   upasv2_header_raw <- fread_ast_header(upasv2_file)
   upasv2_header_wide <- transpose_ast_header(upasv2_header_raw$header, diag = upasv2_header_raw$diag)
   expect_identical(read_ast_header(upasv2_file, update_names = TRUE), format_upasv2_header(upasv2_header_wide, update_names = TRUE))
@@ -180,7 +179,6 @@ test_that("format_upasv2_header and read_ast_header have the same output", {
 test_that("format_upasv2x_header and read_ast_header have the same output", {
   upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
   upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  upasv2x_header <- read_ast_header(upasv2x_file, update_names = TRUE)
   upasv2x_header_raw <- fread_ast_header(upasv2x_file)
   upasv2x_header_wide <- transpose_ast_header(upasv2x_header_raw$header, diag = upasv2x_header_raw$diag)
   expect_identical(read_ast_header(upasv2x_file), format_upasv2x_header(upasv2x_header_wide))

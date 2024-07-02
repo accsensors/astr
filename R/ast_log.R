@@ -79,6 +79,7 @@
 #' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev125_log <- read_ast_log(upasv2_rev125_file, update_names=FALSE)
 #'
+#'
 #' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
 #' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev130_diag_log <- read_ast_log(upasv2_rev130_diag_file, update_names=FALSE)
@@ -86,6 +87,9 @@
 #' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 #' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 #' upasv2_rev138_log <- read_ast_log(upasv2_rev138_file, update_names=FALSE)
+#'
+#' # Use of update_names with UPASv2 log file
+#' upasv2_rev125_log_updatednames <- read_ast_log(upasv2_rev125_file, update_names=TRUE)
 #'
 #' # UPASv2x EXAMPLES
 #' upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
@@ -111,6 +115,14 @@
 #' upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
 #' upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
 #' upasv2x_rev158_diag_log <- read_ast_log(upasv2x_rev158_diag_file, update_names=FALSE)
+#'
+#' # Use of cols_drop, cols_keep, and tz  with a UPASv2x log file
+#' upasv2x_rev157_log_colsdrop <- read_ast_log(upasv2x_rev157_file,
+#'                 cols_drop = c("DateTimeLocal", "AtmoT", "AtmoP", "AtmoRH"))
+#' upasv2x_rev157_log_colskeep <- read_ast_log(upasv2x_rev157_file, tz="America/New_York",
+#'                 cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
+#'                                "LocalTZ",  "UserTZ", "AtmoT", "AtmoP", "AtmoRH"))
+#'
 #'
 #' # HHB EXAMPLES
 #' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'

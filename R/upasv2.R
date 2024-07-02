@@ -187,7 +187,7 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
                                      units="secs"),
             dplyr::across(dplyr::any_of(c("UTCDateTime", "DateTimeUTC")),
                    \(x) as.POSIXct(x, format="%Y-%m-%dT%H:%M:%S", tz="UTC")),
-            dplyr::across(-dplyr::one_of(c("SampleTime","DateTimeUTC",
+            dplyr::across(-dplyr::any_of(c("SampleTime","DateTimeUTC",
                                            "UTCDateTime","DateTimeLocal")),
                           \(x) as.numeric(x)),
             UserTZ  = ifelse(!is.na(tz), T, F))
@@ -260,17 +260,20 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
                                         PCB2P           = "PumpP",
                                         AtmoP           = "PCBP",
                                         GPShDOP         = "GPShdop",
-                                        # GPSQual         = "GPSquality",
+                                        BattVolt        = "BFGvolt",
+                                        #DIAGNOSTIC FILES
+                                        GPSQual         = "GPSquality",
+                                        MFSVout         = "MFSVolt"
                                         #TODO convert BGFvolt to a battery percentage for shiny app output
-                                        BattVolt        = "BFGvolt")))
+                                        )))
   }
 
   df <- cbind(df, df_h)
 
   if(!is.null(cols_keep)){
-    df <- dplyr::select(df, cols_keep)
+    df <- dplyr::select(df, dplyr::all_of(cols_keep))
   }else if(!is.null(cols_drop)){
-    df <- dplyr::select(df, -cols_drop)
+    df <- dplyr::select(df, -dplyr::all_of(cols_drop))
   }
 
   return(df)

@@ -188,7 +188,7 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
                                                 "StartDateTimeUTC")))
 
   df <- dplyr::mutate(log,
-    dplyr::across(-dplyr::one_of(c("SampleTime","DateTimeUTC","DateTimeLocal")),
+    dplyr::across(-dplyr::any_of(c("SampleTime","DateTimeUTC","DateTimeLocal")),
                   \(x) as.numeric(x)),
     dplyr::across(dplyr::any_of(c("PumpsON","Dead","BCS1","BCS2","BC_NPG")),
                   \(x) as.logical(x)),
@@ -234,9 +234,9 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
   }
 
   if(!is.null(cols_keep)){
-    df <- dplyr::select(df, cols_keep)
+    df <- dplyr::select(df, dplyr::all_of(cols_keep))
   }else if(!is.null(cols_drop)){
-    df <- dplyr::select(df, -cols_drop)
+    df <- dplyr::select(df, -dplyr::all_of(cols_drop))
   }
 
   return(df)

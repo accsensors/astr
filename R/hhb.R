@@ -100,9 +100,9 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
     df <- cbind(df, df_h)
 
     if (!is.null(cols_keep)){
-      df <- dplyr::select(df, cols_keep)
+      df <- dplyr::select(df, dplyr::all_of(cols_keep))
     }else if (!is.null(cols_drop)){
-      df <- dplyr::select(df, -cols_drop)
+      df <- dplyr::select(df, -dplyr::all_of(cols_drop))
     }
   }
 

@@ -72,6 +72,9 @@ upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
 
+# Use of update_names with UPASv2 log file
+upasv2_rev125_header_updatednames <- read_ast_header(upasv2_rev125_file, update_names=TRUE)
+
 # UPASv2x EXAMPLES
 upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
