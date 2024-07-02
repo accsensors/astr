@@ -14,17 +14,17 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' #upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
-#' #upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
-#' #upasv2_rev100_header_list <- fread_ast_header(upasv2_rev100_file)
-#' #upasv2_rev100_header_wide <- transpose_ast_header(upasv2_rev100_header_list$header)
-#' #upasv2_rev100_header <- format_upasv2_header(upasv2_rev100_header_wide)
+#' upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
+#' upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev100_header_list <- fread_ast_header(upasv2_rev100_file)
+#' upasv2_rev100_header_wide <- transpose_ast_header(upasv2_rev100_header_list$header)
+#' upasv2_rev100_header <- format_upasv2_header(upasv2_rev100_header_wide)
 #'
-#' #upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
-#' #upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
-#' #upasv2_rev100_diag_header_list <- fread_ast_header(upasv2_rev100_diag_file)
-#' #upasv2_rev100_diag_header_wide <- transpose_ast_header(upasv2_rev100_diag_header_list$header, upasv2_rev100_diag_header_list$diag)
-#' #upasv2_rev100_diag_header <- format_upasv2_header(upasv2_rev100_diag_header_wide)
+#' upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
+#' upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2_rev100_diag_header_list <- fread_ast_header(upasv2_rev100_diag_file)
+#' upasv2_rev100_diag_header_wide <- transpose_ast_header(upasv2_rev100_diag_header_list$header, upasv2_rev100_diag_header_list$diag)
+#' upasv2_rev100_diag_header <- format_upasv2_header(upasv2_rev100_diag_header_wide)
 #'
 #' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
 #' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
