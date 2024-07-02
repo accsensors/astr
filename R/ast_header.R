@@ -277,8 +277,8 @@ fread_ast_header = function(file) {
 
 transpose_ast_header = function(header, diag = NULL){
 
-  df <- header[header$V3 != "", 1:2] # Remove rows with subheadings
-  df <- df[df$V1 != "PARAMETER", ] # Required for UPASv2 firmware version 100
+  df <- header[!((header$V2 == "") & (header$V3 == "")), 1:2] # Remove subheads
+  df <- df[df$V1 != "PARAMETER", ] # Remove PARAMETER,VALUE,UNITS/NOTES header
 
   df <- t(df) # Transpose
   df <- as.data.frame(df) # Convert into data frame
