@@ -260,7 +260,7 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
 
 upasv2x_sample_summary = function(df_h, df=NULL, shiny=FALSE, fract_units=FALSE) {
   #TODO move to new function shiny_sample_summary so that shiny functionality is not present in normal functions
-  df_h <- astr::shiny_flag(df_h)
+  df_h <- astr::sample_success_flag(df_h)
 
   df_h <- dplyr::select(df_h,
     dplyr::any_of(c("ASTSampler", "UPASserial", "SampleName", "CartridgeID",
@@ -310,7 +310,7 @@ upasv2x_sample_summary = function(df_h, df=NULL, shiny=FALSE, fract_units=FALSE)
 
 upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
   #TODO move to new function shiny_sample_settings so that shiny functionality is not present in normal functions
-  df_h <- astr::shiny_flag(df_h)
+  df_h <- astr::sample_success_flag(df_h)
 
   df_h <- dplyr::select(df_h,
     dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
@@ -345,7 +345,7 @@ upasv2x_sample_settings = function(df_h, shiny=FALSE, fract_units=FALSE) {
 
 upasv2x_sample_meta = function(df_h, shiny=FALSE, fract_units=FALSE) {
   #TODO move to new function shiny_sample_meta so that shiny functionality is not present in normal functions
-  df_h <- astr::shiny_flag(df_h)
+  df_h <- astr::sample_success_flag(df_h)
 
   df_h <- dplyr::select(df_h,
     dplyr::any_of(c('ASTSampler','UPASserial','PMSerial','SampleName',

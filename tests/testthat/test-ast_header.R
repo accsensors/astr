@@ -76,6 +76,16 @@ test_that("fread_ast_header works with SHEAR UPASv2x file", {
 ###################################
 #UPASv2rev100 keeps the UPASserial, Firmware, and UPASlogFilename fields when transposed
 
+test_that("transpose_ast_header works with UPASv2 rev100 file", {
+  filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
+  expect_equal(nrow(header_wide), 1)
+  expect_false(any(is.na(colnames(header_wide))))
+  expect_contains(colnames(header_wide), c("UPASserial", "Firmware", "UPASlogFilename"))
+})
+
 test_that("transpose_ast_header works with standard UPASv2 file", {
   filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
