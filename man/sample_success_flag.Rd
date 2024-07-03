@@ -7,7 +7,7 @@
 sample_success_flag(df_h)
 }
 \arguments{
-\item{df_h}{A formatted data frame of header data returned by the \link{read_ast_header} function.}
+\item{df_h}{A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the \link{read_ast_header} function.}
 }
 \value{
 A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to indicate sample PASS/FAIL
@@ -17,6 +17,7 @@ Add a flag to a UPAS v2 or UPAS v2.1 PLUS header data frame to indicate PASS/FAI
 }
 \examples{
 # UPASv2 EXAMPLES
+# PASS
 upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
 upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
