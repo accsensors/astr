@@ -48,24 +48,25 @@ directed to update old variable names to current variable names.
 }
 \examples{
 # UPASv2 EXAMPLES
-upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
-upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
-upasv2_rev138_header_wide <- transpose_ast_header(upasv2_rev138_header_list$header)
-upasv2_rev138_header <- format_ast_header(upasv2_rev138_header_wide, update_names=TRUE)
+upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+upasv2_header_list <- fread_ast_header(upasv2_file)
+upasv2_header_wide <- transpose_ast_header(upasv2_header_list$header)
+upasv2_header <- format_ast_header(upasv2_header_wide, update_names=TRUE)
 
 # UPASv2x EXAMPLES
-upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)
-upasv2x_rev157_header_wide <- transpose_ast_header(upasv2x_rev157_header_list$header)
-upasv2x_rev157_header <- format_ast_header(upasv2x_rev157_header_wide, update_names=FALSE)
+upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+upasv2x_header_list <- fread_ast_header(upasv2x_file)
+upasv2x_header_wide <- transpose_ast_header(upasv2x_header_list$header)
+upasv2x_header <- format_ast_header(upasv2x_header_wide, update_names=FALSE)
 
-upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
-upasv2x_rev158_diag_header_wide <- transpose_ast_header(upasv2x_rev158_diag_header_list$header, upasv2x_rev158_diag_header_list$diag)
-upasv2x_rev158_diag_header <- format_ast_header(upasv2x_rev158_diag_header_wide, update_names=FALSE)
+# Diagnostic file
+upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
+upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header, upasv2x_diag_header_list$diag)
+upasv2x_diag_header <- format_ast_header(upasv2x_diag_header_wide, update_names=FALSE)
 
 # HHB EXAMPLES
 hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'

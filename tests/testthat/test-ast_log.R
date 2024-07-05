@@ -134,6 +134,10 @@ test_that("read_ast_log works with all UPASv2x firmwares", {
   upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
   expect_snapshot(read_ast_log(upasv2x_rev157_file, update_names=FALSE))
 
+  upasv2x_rev158_noGPS_filename <- 'PSP00270_LOG_2024-06-14T18_54_44UTC_NoGPS___________----------.txt'
+  upasv2x_rev158_noGPS_file <- system.file("extdata", upasv2x_rev158_noGPS_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(upasv2x_rev158_noGPS_file, update_names=FALSE))
+
   upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
   upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
   expect_snapshot(read_ast_log(upasv2x_rev158_diag_file, update_names=FALSE))

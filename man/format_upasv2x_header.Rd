@@ -19,33 +19,16 @@ a column to specify the sampler type, and adds a column to describe the
 shutdown reason associated with the shutdown mode code.
 }
 \examples{
-upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
-upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev81_header_list <- fread_ast_header(upasv2x_rev81_file)
-upasv2x_rev81_header_wide <- transpose_ast_header(upasv2x_rev81_header_list$header)
-upasv2x_rev81_header <- format_upasv2x_header(upasv2x_rev81_header_wide)
+upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+upasv2x_header_list <- fread_ast_header(upasv2x_file)
+upasv2x_header_wide <- transpose_ast_header(upasv2x_header_list$header)
+upasv2x_header <- format_upasv2x_header(upasv2x_header_wide)
 
-upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
-upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev117_header_list <- fread_ast_header(upasv2x_rev117_file)
-upasv2x_rev117_header_wide <- transpose_ast_header(upasv2x_rev117_header_list$header)
-upasv2x_rev117_header <- format_upasv2x_header(upasv2x_rev117_header_wide)
-
-upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
-upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev110_diag_header_list <- fread_ast_header(upasv2x_rev110_diag_file)
-upasv2x_rev110_diag_header_wide <- transpose_ast_header(upasv2x_rev110_diag_header_list$header, upasv2x_rev110_diag_header_list$diag)
-upasv2x_rev110_diag_header <- format_upasv2x_header(upasv2x_rev110_diag_header_wide)
-
-upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)
-upasv2x_rev157_header_wide <- transpose_ast_header(upasv2x_rev157_header_list$header)
-upasv2x_rev157_header <- format_upasv2x_header(upasv2x_rev157_header_wide)
-
-upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
-upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
-upasv2x_rev158_diag_header_wide <- transpose_ast_header(upasv2x_rev158_diag_header_list$header, upasv2x_rev158_diag_header_list$diag)
-upasv2x_rev158_diag_header <- format_upasv2x_header(upasv2x_rev158_diag_header_wide)
+# Diagnostic file
+upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
+upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header, upasv2x_diag_header_list$diag)
+upasv2x_diag_header <- format_upasv2x_header(upasv2x_diag_header_wide)
 }

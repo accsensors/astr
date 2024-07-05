@@ -14,35 +14,19 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2_rev100_filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
-#' upasv2_rev100_file <- system.file("extdata", upasv2_rev100_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev100_header_list <- fread_ast_header(upasv2_rev100_file)
-#' upasv2_rev100_header_wide <- transpose_ast_header(upasv2_rev100_header_list$header)
-#' upasv2_rev100_header <- format_upasv2_header(upasv2_rev100_header_wide)
+#' upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+#' upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+#' upasv2_header_list <- fread_ast_header(upasv2_file)
+#' upasv2_header_wide <- transpose_ast_header(upasv2_header_list$header)
+#' upasv2_header <- format_upasv2_header(upasv2_header_wide)
 #'
-#' upasv2_rev100_diag_filename <- 'PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt'
-#' upasv2_rev100_diag_file <- system.file("extdata", upasv2_rev100_diag_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev100_diag_header_list <- fread_ast_header(upasv2_rev100_diag_file)
-#' upasv2_rev100_diag_header_wide <- transpose_ast_header(upasv2_rev100_diag_header_list$header, upasv2_rev100_diag_header_list$diag)
-#' upasv2_rev100_diag_header <- format_upasv2_header(upasv2_rev100_diag_header_wide)
-#'
-#' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
-#' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev125_header_list <- fread_ast_header(upasv2_rev125_file)
-#' upasv2_rev125_header_wide <- transpose_ast_header(upasv2_rev125_header_list$header)
-#' upasv2_rev125_header <- format_upasv2_header(upasv2_rev125_header_wide)
-#'
-#' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
-#' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev130_diag_header_list <- fread_ast_header(upasv2_rev130_diag_file)
-#' upasv2_rev130_diag_header_wide <- transpose_ast_header(upasv2_rev130_diag_header_list$header, upasv2_rev130_diag_header_list$diag)
-#' upasv2_rev130_diag_header <- format_upasv2_header(upasv2_rev130_diag_header_wide)
-#'
-#' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-#' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev138_header_list <- fread_ast_header(upasv2_rev138_file)
-#' upasv2_rev138_header_wide <- transpose_ast_header(upasv2_rev138_header_list$header)
-#' upasv2_rev138_header <- format_upasv2_header(upasv2_rev138_header_wide)
+#' # Diagnostic file
+#' upasv2_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+#' upasv2_diag_file <- system.file("extdata", upasv2_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2_diag_header_list <- fread_ast_header(upasv2_diag_file)
+#' upasv2_diag_header_wide <- transpose_ast_header(upasv2_diag_header_list$header, upasv2_diag_header_list$diag)
+#' upasv2_diag_header <- format_upasv2_header(upasv2_diag_header_wide)
+
 
 format_upasv2_header <- function(data, update_names=FALSE){
 
@@ -63,18 +47,21 @@ format_upasv2_header <- function(data, update_names=FALSE){
                                                 "CumulativeSamplingTime",
                                                 "AverageVolumetricFlow",
                                                 "AverageVolumetricFlowRate",
-                                                "FlowOffset")),
+                                                "FlowOffset",
+                                                "MF4", "MF3", "MF2", "MF1", "MF0")),
                                 \(x) as.numeric(x)),
                   dplyr::across(dplyr::starts_with("Lifetime"),   \(x) as.numeric(x)),
                   dplyr::across(dplyr::starts_with("Programmed"), \(x) as.numeric(x)),
                   dplyr::across(dplyr::starts_with("DutyCycle"),  \(x) as.numeric(x)),
                   dplyr::across(dplyr::contains("Battery"),       \(x) as.numeric(x)),
+                  dplyr::across(dplyr::starts_with("MFSVolt"),    \(x) as.numeric(x)),
+                  dplyr::across(dplyr::starts_with("MFSMF"),      \(x) as.numeric(x)),
                   dplyr::across(dplyr::ends_with("Runtime"),      \(x) as.numeric(x)),
                   dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
                                                 "GPSEnabled")),
                                 \(x) as.logical(x)),
                   dplyr::across(dplyr::any_of(c("StartDateTimeUTC", "EndDateTimeUTC",
-                                         "StartDateTime")), \(x)
+                                         "StartDateTime", "CalDateTime")), \(x)
                          as.POSIXct(x, format="%Y-%m-%dT%H:%M:%S", tz="UTC")),
                   LogFilename = gsub("/sd/", "", .data$LogFilename),
                   LogFileMode = ifelse(.data$LogFileMode==0, "normal", "debug"),
@@ -145,23 +132,18 @@ format_upasv2_header <- function(data, update_names=FALSE){
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2_rev125_filename <- 'PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt'
-#' upasv2_rev125_file <- system.file("extdata", upasv2_rev125_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev125_log_raw <- fread_ast_log(upasv2_rev125_file)
-#' upasv2_rev125_header <- read_ast_header(upasv2_rev125_file, update_names=TRUE)
-#' upasv2_rev125_log <- format_upasv2_log(upasv2_rev125_log_raw, upasv2_rev125_header, update_names=TRUE)
+#' upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+#' upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+#' upasv2_log_raw <- fread_ast_log(upasv2_file)
+#' upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
+#' upasv2_log <- format_upasv2_log(upasv2_log_raw, upasv2_header)
 #'
-#' upasv2_rev130_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
-#' upasv2_rev130_diag_file <- system.file("extdata", upasv2_rev130_diag_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev130_diag_log_raw <- fread_ast_log(upasv2_rev130_diag_file)
-#' upasv2_rev130_diag_header <- read_ast_header(upasv2_rev130_diag_file, update_names=FALSE)
-#' upasv2_rev130_diag_log <- format_upasv2_log(upasv2_rev130_diag_log_raw, upasv2_rev130_diag_header)
-#'
-#' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-#' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
-#' upasv2_rev138_log_raw <- fread_ast_log(upasv2_rev138_file)
-#' upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
-#' upasv2_rev138_log <- format_upasv2_log(upasv2_rev138_log_raw, upasv2_rev138_header)
+#' # Diagnostic file
+#' upasv2_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+#' upasv2_diag_file <- system.file("extdata", upasv2_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2_diag_log_raw <- fread_ast_log(upasv2_diag_file)
+#' upasv2_diag_header <- read_ast_header(upasv2_diag_file, update_names=FALSE)
+#' upasv2_diag_log <- format_upasv2_log(upasv2_diag_log_raw, upasv2_diag_header)
 
 format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()){
 
@@ -269,6 +251,9 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
   }
 
   df <- cbind(df, df_h)
+
+  df <- df %>%
+    dplyr::relocate(dplyr::any_of(c("ASTSampler", "UPASserial", "SampleName", "CartridgeID")))
 
   if(!is.null(cols_keep)){
     df <- dplyr::select(df, dplyr::all_of(cols_keep))

@@ -36,9 +36,9 @@
         PowerCycles CumulativeSamplingTime      MF4      MF3       MF2      MF1
       1          10                   5.72 0.015635 0.606876 -1.676746 2.649093
               MF0 MFSVoltMin MFSVoltMax MFSVoltMaxEst MFSMFMin MFSMFMax MFSMFMaxEst
-      1 -1.030556   0.525875   2.153250      2.990000 0.000200 3.300400    9.371970
-              CalUNIXTIME       CalDateTime FlowOffset StartOnNextPowerUp
-      1 1584561792.000000 18-03-20_20:03:12          0              FALSE
+      1 -1.030556   0.525875    2.15325          2.99    2e-04   3.3004     9.37197
+              CalUNIXTIME CalDateTime FlowOffset StartOnNextPowerUp
+      1 1584561792.000000        <NA>          0              FALSE
               StartDateTime GPSUTCOffset ProgrammedStartDelay ProgrammedRuntime
       1 2020-06-02 18:29:11           -6                    0            172800
         VolumetricFlowRate DutyCycle DutyCycleWindow GPSEnabled LogFileMode
@@ -110,9 +110,9 @@
         AverageVolumetricFlowRate      MF4       MF3       MF2      MF1       MF0
       1                     1.538 0.329437 -0.478687 -0.141832 1.783128 -0.814451
         MFSVoltMin MFSVoltMax MFSVoltMaxEst MFSMFMin MFSMFMax MFSMFMaxEst
-      1   0.493750   1.899250      1.899250 0.000000 3.062900    3.062900
+      1    0.49375    1.89925       1.89925        0   3.0629      3.0629
               CalUNIXTIME         CalDateTime MFSDIAGVoutBlocked MFSDIAGVoutMax
-      1 1677782528.000000 2023-03-02T18:42:08               0.54       1.914125
+      1 1677782528.000000 2023-03-02 18:42:08               0.54       1.914125
         MFSDIAGVoutMin MFSDIAGMFBlocked MFSDIAGMFMax MFSDIAGMFMin
       1         0.8405                0       3.0629     0.464254
         MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead

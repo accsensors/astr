@@ -32,4 +32,12 @@ hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TR
 hhb_log_raw <- fread_ast_log(hhb_file)
 hhb_header <- read_ast_header(hhb_file)
 hhb_log <- format_hhb_log(hhb_log_raw, hhb_header)
+
+# Use of cols_drop, cols_keep, and tz  with a UPASv2x log file
+hhb_log_colsdrop <- format_hhb_log(hhb_log_raw, hhb_header,
+                cols_drop = c("AccelX", "AccelY", "AccelZ"))
+hhb_log_colskeep <- format_hhb_log(hhb_log_raw, hhb_header, tz="America/New_York",
+                cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
+                               "LocalTZ",  "UserTZ",
+                               grep("^SEN55", colnames(hhb_log), value=TRUE)))
 }
