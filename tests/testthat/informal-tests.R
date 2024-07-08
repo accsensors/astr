@@ -1,4 +1,3 @@
-#TODO update examples to more recent log files and firmware
 #TODO log file averaging and mapping functions from shiny_ast.R
 
 load_all()

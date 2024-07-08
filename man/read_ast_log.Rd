@@ -77,11 +77,14 @@ Columns with key header data will be appended to the sample log columns to
 aid in identification and analysis of unique samples.
 }
 \description{
-\code{read_ast_log} reads in the sample log data frome a log file and applies
+\code{read_ast_log} reads in the sample log data from a log file and applies
 device-specific formatting to the columns of the resulting data frame.
 It sets the proper data type for each variable and adds columns that aid in
 identifying unique log files when data from multiple sample logs have been
 combined into a single data frame.
+
+Use this function in conjuction with \link{lapply} or \link[purrr:map]{purrr::map} to read in log data
+from any number of log files and combine them into a single data frame
 }
 \examples{
 # UPASv2 EXAMPLES
@@ -106,19 +109,22 @@ upasv2x_log_colskeep <- read_ast_log(upasv2x_file, tz="America/New_York",
 
 # GPS Disabled file
 upasv2x_noGPS_filename <- 'PSP00270_LOG_2024-06-14T18_54_44UTC_NoGPS___________----------.txt'
-upasv2x_noGPS_file <- system.file("extdata", upasv2x_noGPS_filename, package = "astr", mustWork = TRUE)
+upasv2x_noGPS_file <- system.file("extdata", upasv2x_noGPS_filename, package = "astr",
+                                   mustWork = TRUE)
 upasv2x_noGPS_log <- read_ast_log(upasv2x_noGPS_file, update_names=FALSE)
 
 # Diagnostic file
 upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+                                  mustWork = TRUE)
 upasv2x_diag_log <- read_ast_log(upasv2x_diag_file, update_names=FALSE)
 
 # Read in multiple UPAS files at once to a single data frame using lapply.
 # The map() function from the purrr library can also be used in place of lapply.
-multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",  full.names = TRUE) \%>\%
-lapply(read_ast_log, update_names = TRUE) \%>\%
-dplyr::bind_rows()
+multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+                                full.names = TRUE) \%>\%
+        lapply(read_ast_log, update_names = TRUE) \%>\%
+        dplyr::bind_rows()
 
 # HHB EXAMPLES
 hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'

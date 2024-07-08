@@ -21,9 +21,11 @@
 #'
 #' # Diagnostic file
 #' upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+#'                                   mustWork = TRUE)
 #' upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
-#' upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header, upasv2x_diag_header_list$diag)
+#' upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header,
+#'                                   upasv2x_diag_header_list$diag)
 #' upasv2x_diag_header <- format_upasv2x_header(upasv2x_diag_header_wide)
 
 format_upasv2x_header = function(data) {
@@ -147,10 +149,12 @@ format_upasv2x_header = function(data) {
 #'
 #' # Diagnostic file
 #' upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+#'                                   mustWork = TRUE)
 #' upasv2x_diag_log_raw <- fread_ast_log(upasv2x_diag_file)
 #' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
-#' upasv2x_diag_log <- format_upasv2x_log(upasv2x_diag_log_raw, upasv2x_diag_header, update_names=FALSE)
+#' upasv2x_diag_log <- format_upasv2x_log(upasv2x_diag_log_raw, upasv2x_diag_header,
+#'                                   update_names=FALSE)
 
 format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()) {
 

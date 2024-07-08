@@ -9,7 +9,7 @@
 #' PMSensorInterval variables, and can also be directed to update old variable
 #' names to the current variable names.
 #'
-#' Use this function in conjuction with lapply() or map() to read in header data
+#' Use this function in conjuction with [lapply] or [purrr::map] to read in header data
 #' from any number of log files and combine them into a single data frame that
 #' contains a unique row for each sample.
 #'
@@ -55,14 +55,16 @@
 #'
 #' # Diagnostic file
 #' upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+#'                                   mustWork = TRUE)
 #' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 #'
 #' # Read in multiple UPAS files at once to a single data frame using lapply.
 #' # The map() function from the purrr library can also be used in place of lapply.
-#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",  full.names = TRUE) %>%
-#' lapply(read_ast_header, update_names = TRUE) %>%
-#' dplyr::bind_rows()
+#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#'                                   full.names = TRUE) %>%
+#'         lapply(read_ast_header, update_names = TRUE) %>%
+#'         dplyr::bind_rows()
 #'
 #' # HHB EXAMPLES
 #' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
@@ -109,7 +111,8 @@ read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
 #'
 #' # Diagnostic file
 #' upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+#'                                   mustWork = TRUE)
 #' upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
 #' upasv2x_diag_header <- upasv2x_diag_header_list$header
 #' upasv2x_diag_diag <- upasv2x_diag_header_list$diag
@@ -176,9 +179,11 @@ fread_ast_header = function(file) {
 #'
 #' # Diagnostic file
 #' upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+#'                                 mustWork = TRUE)
 #' upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
-#' upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header, upasv2x_diag_header_list$diag)
+#' upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header,
+#'                                 upasv2x_diag_header_list$diag)
 #'
 #' # HHB EXAMPLES
 #' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
@@ -277,9 +282,11 @@ transpose_ast_header = function(header, diag = NULL){
 #'
 #' # Diagnostic file
 #' upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+#'                                   mustWork = TRUE)
 #' upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
-#' upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header, upasv2x_diag_header_list$diag)
+#' upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header,
+#'                                   upasv2x_diag_header_list$diag)
 #' upasv2x_diag_header <- format_ast_header(upasv2x_diag_header_wide, update_names=FALSE)
 #'
 #' # HHB EXAMPLES

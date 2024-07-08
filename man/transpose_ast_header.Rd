@@ -38,9 +38,11 @@ upasv2x_header_wide <- transpose_ast_header(upasv2x_header_list$header)
 
 # Diagnostic file
 upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+                                mustWork = TRUE)
 upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
-upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header, upasv2x_diag_header_list$diag)
+upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header,
+                                upasv2x_diag_header_list$diag)
 
 # HHB EXAMPLES
 hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'

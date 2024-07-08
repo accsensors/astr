@@ -1,20 +1,20 @@
 Package: astr
-Title: Process UPASv2 and UPASv2X Log Files
-Version: 0.0.0.9025
+Title: Process Access Sensor Technologies Air Sampler Log Files
+Version: 0.0.0.9026
 Authors@R: c(
-    person("Casey", "Quinn", , "cquinn@accsensors.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-6802-5250")),
     person("Jessica", "Tryner", , "jtryner@accsensors.com", role = "aut",
            comment = c(ORCID = "0000-0002-0522-4551")),
-    person("Ander", "Wilson", , "ander.wilson@colostate.edu", role = "aut",
-           comment = c(ORCID = "0000-0003-4774-3883")),
     person("Gabe", "Neymark", , "gneymark@accsensors.com", role = "aut",
            comment = c(ORCID = "0000-0003-0720-1908")),
+    person("Ander", "Wilson", , "ander.wilson@colostate.edu", role = "aut",
+           comment = c(ORCID = "0000-0003-4774-3883")),
+    person("Casey", "Quinn", , "cquinn@accsensors.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-6802-5250")),           
     person("Access Sensor Technologies", role = c("cph", "fnd")),
     person("National Institutes of Health", role = "fnd")
   )
-Description: Reads in log files from UPASv2 or UPASv2X air samplers.
-    Formats log files in data frame for easier analysis and plotting.
+Description: Reads in log files from Access Sensor Technologies air samplers.
+    Formats the log files in a data frame for easier analysis and plotting.
 License: MPL-2.0 | file LICENSE
 Depends: 
     R (>= 2.10)

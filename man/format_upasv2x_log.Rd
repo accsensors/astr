@@ -98,8 +98,10 @@ upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, tz="
 
 # Diagnostic file
 upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+                                  mustWork = TRUE)
 upasv2x_diag_log_raw <- fread_ast_log(upasv2x_diag_file)
 upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
-upasv2x_diag_log <- format_upasv2x_log(upasv2x_diag_log_raw, upasv2x_diag_header, update_names=FALSE)
+upasv2x_diag_log <- format_upasv2x_log(upasv2x_diag_log_raw, upasv2x_diag_header,
+                                  update_names=FALSE)
 }

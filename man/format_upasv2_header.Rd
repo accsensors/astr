@@ -53,6 +53,7 @@ upasv2_header <- format_upasv2_header(upasv2_header_wide)
 upasv2_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
 upasv2_diag_file <- system.file("extdata", upasv2_diag_filename, package = "astr", mustWork = TRUE)
 upasv2_diag_header_list <- fread_ast_header(upasv2_diag_file)
-upasv2_diag_header_wide <- transpose_ast_header(upasv2_diag_header_list$header, upasv2_diag_header_list$diag)
+upasv2_diag_header_wide <- transpose_ast_header(upasv2_diag_header_list$header,
+                                  upasv2_diag_header_list$diag)
 upasv2_diag_header <- format_upasv2_header(upasv2_diag_header_wide)
 }

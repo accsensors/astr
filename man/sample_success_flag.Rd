@@ -19,19 +19,22 @@ Add a flag to a UPAS v2 or UPAS v2.1 PLUS header data frame to indicate PASS/FAI
 # UPASv2 EXAMPLES
 # PASS
 upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr", mustWork = TRUE)
+upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr",
+                                 mustWork = TRUE)
 upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
 upasv2_rev138_header_flagged <- sample_success_flag(upasv2_rev138_header)
 
 # UPASv2x EXAMPLES
 # PASS
 upasv2x_rev157_filename_pass <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-upasv2x_rev157_file_pass <- system.file("extdata", upasv2x_rev157_filename_pass, package = "astr", mustWork = TRUE)
+upasv2x_rev157_file_pass <- system.file("extdata", upasv2x_rev157_filename_pass,
+                                    package = "astr", mustWork = TRUE)
 upasv2x_rev157_header_pass <- read_ast_header(upasv2x_rev157_file_pass, update_names=FALSE)
 upasv2x_rev157_header_pass <- sample_success_flag(upasv2x_rev157_header_pass)
 # FAIL
 upasv2x_rev157_filename_fail <- 'PSP00270_LOG_2024-07-02T22_28_20UTC_fail____________----------.txt'
-upasv2x_rev157_file_fail <- system.file("extdata", upasv2x_rev157_filename_fail, package = "astr", mustWork = TRUE)
+upasv2x_rev157_file_fail <- system.file("extdata", upasv2x_rev157_filename_fail,
+                                    package = "astr", mustWork = TRUE)
 upasv2x_rev157_header_fail <- read_ast_header(upasv2x_rev157_file_fail, update_names=FALSE)
 upasv2x_rev157_header_fail <- sample_success_flag(upasv2x_rev157_header_fail)
 }
