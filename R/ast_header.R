@@ -1,7 +1,7 @@
 #'Read and format the header data from an Access Sensor Technologies air sampler log file
 #'
 #' @description
-#' `read_ast_header` reads in the header data frome a log file, transposes the
+#' `read_ast_header` reads in the header data from a log file, transposes the
 #' data into a wide format, and applies device-specific formatting to the
 #' columns of the resulting data frame. This function sets the proper data type
 #' for each variable, adds a column to specify the AST sampler type, adds
@@ -251,7 +251,7 @@ transpose_ast_header = function(header, diag = NULL){
 #'to make sure each column in the header data frame is the correct data type.
 #'
 #' @description
-#' `format_ast_header` applies deviced-specific formatting to the columns in a
+#' `format_ast_header` applies device-specific formatting to the columns in a
 #' data frame of header data from an Access Sensor Technologies air sampler
 #' log file. This function sets the proper data type for each variable, adds a
 #' column to specify the AST sampler type, adds columns to describe the codes

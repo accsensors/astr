@@ -1,16 +1,162 @@
-#'Rename UPAS header file data frame columns
-#'to be more user friendly for the Shiny app
+#'Create sample summary data frame from an Access Sensor Technologies (AST)
+#'UPAS header data frame.
 #'
-#' @param df_h Pass a UPAS v2 or v2+ data frame from [read_ast_header] function.
+#' @description
+#' `shiny_sample_summary` modifies an Access Sensor Technologies header data frame
+#' for use with the Sample Summary tab in the online shinyAST data analysis app.
+#' This function sets the proper data type for each variable,
+#' appends a sample PASS/FAIL flag column,
+#' and adds units to the applicable variable names.
+#'
+#' @param df_h A header data frame returned by the [read_ast_header] function
+#' with the argument `shiny = TRUE`.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
-#' @return A modified data frame with units and user friendly column names for header data.
+#' @return A modified single row header data frame with select sample summary data.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' # upasv2x_header_shiny <- shiny_header(upasv2x_header)
-#' # upasv2_header_shiny <- shiny_header(upasv2_header)
+#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#' full.names = TRUE) %>%
+#'     lapply(read_ast_header, shiny=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' sample_summary <- shiny_sample_summary(multiple_upas_headers, fract_units=TRUE)
+
+shiny_sample_summary = function(df_h, fract_units=FALSE) {
+
+  df_h <- astr::shiny_success_flag(df_h)
+
+  df_h <- dplyr::select(df_h,
+                        dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
+                                        'SampleSuccess', 'OverallDuration',
+                                        'PumpingDuration', 'PumpingFlowRateAverage',
+                                        'OverallFlowRateAverage', 'SampledVolume',
+                                        'ShutdownReason'))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c('OverallDuration',
+                                                'PumpingDuration',
+                                                'PumpingFlowRateAverage',
+                                                'OverallFlowRateAverage',
+                                                'SampledVolume')),
+                                \(x) as.numeric(x)),
+                  dplyr::across(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName')),
+                                \(x) as.factor(x)))
+
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
+
+  return(df_h)
+}
+
+#'Create sample settings data frame from an Access Sensor Technologies (AST)
+#'UPAS header data frame.
+#'
+#' @description
+#' `shiny_sample_settings` modifies an Access Sensor Technologies header data frame
+#' for use with the Sample Settings tab in the online shinyAST data analysis app.
+#' This function sets the proper data type for each variable,
+#' appends a sample PASS/FAIL flag column,
+#' and adds units to the applicable variable names.
+#'
+#' @inheritParams shiny_sample_summary
+#'
+#' @return A modified single row header data frame with select sample settings data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#' full.names = TRUE) %>%
+#'     lapply(read_ast_header, shiny=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' sample_settings <- shiny_sample_settings(multiple_upas_headers, fract_units=TRUE)
+
+shiny_sample_settings = function(df_h, fract_units=FALSE) {
+
+  df_h <- astr::shiny_success_flag(df_h)
+
+  df_h <- dplyr::select(df_h,
+                        dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
+                                        'StartOnNextPowerUp','ProgrammedStartDelay',
+                                        'ProgrammedStartTime','ProgrammedRuntime',
+                                        'SizeSelectiveInlet','VolumetricFlowRateSet',
+                                        'FlowRateSetpoint','DutyCycle','FlowDutyCycle','GPSEnabled',
+                                        'PMSensorOperation','RTGasSampleState','LogInterval',
+                                        'PowerSaveMode','AppVersion','SampleSuccess'))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName')),
+                                \(x) as.factor(x)))
+
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
+
+  return(df_h)
+}
+
+#'Create sample metadata data frame from an Access Sensor Technologies (AST)
+#'UPAS header data frame.
+#'
+#' @description
+#' `shiny_sample_operation` modifies an Access Sensor Technologies header data frame
+#' for use with the UPAS Operation tab in the online shinyAST data analysis app.
+#' This function sets the proper data type for each variable,
+#' appends a sample PASS/FAIL flag column,
+#' and adds units to the applicable variable names.
+#'
+#' @inheritParams shiny_sample_summary
+#'
+#' @return A modified single row header data frame with select sample operation data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#' full.names = TRUE) %>%
+#'     lapply(read_ast_header, shiny=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' sample_operation <- shiny_sample_operation(multiple_upas_headers, fract_units=TRUE)
+
+shiny_sample_operation = function(df_h, fract_units=FALSE) {
+
+  df_h <- astr::shiny_success_flag(df_h)
+
+  df_h <- dplyr::select(df_h,
+                        dplyr::any_of(c('ASTSampler','UPASserial', 'SampleName',
+                                        'CartridgeID','StartDateTimeUTC','EndDateTimeUTC',
+                                        'StartBatteryVoltage','EndBatteryVoltage',
+                                        'StartBatteryCharge','EndBatteryCharge','GPSUTCOffset',
+                                        'FirmwareRev','ShutdownReason','SampleSuccess'))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName')),
+                                \(x) as.factor(x)))
+
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
+
+  return(df_h)
+}
+
+#'Rename Access Sensor Technologies (AST) UPAS
+#'header data frame columns and add units
+#'for the online shinyAST app
+#'
+#' @description
+#' `shiny_header` modifies an Access Sensor Technologies header data frame
+#' for use with the online shinyAST data analysis app.
+#' This function adds units to the applicable variable names.
+#'
+#' @inheritParams shiny_sample_summary
+#'
+#' @return A modified single row header data frame with column names and units
+#' for the online shinyAST app.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#'                                   full.names = TRUE) %>%
+#'         lapply(read_ast_header, shiny = TRUE) %>%
+#'         dplyr::bind_rows()
+#' upas_shiny_header <- shiny_header(multiple_upas_headers)
+#'
 
 shiny_header = function(df_h, fract_units = FALSE) {
 
@@ -22,69 +168,76 @@ shiny_header = function(df_h, fract_units = FALSE) {
                              .data$ProgrammedRuntime))
   }
 
+  df_h <- dplyr::rename(df_h, dplyr::any_of(
+    c("LifetimeSampleCount (#)"           = "LifetimeSampleCount",
+      "LifetimeSampleRuntime (Hr)"        = "LifetimeSampleRuntime",
+      "LifetimeBatteryRuntime (Hr)"       = "LifetimeBatteryRuntime",
+      "LifetimeSamplePumptime (Hr)"       = "LifetimeSamplePumptime",
+      "LifetimePMSensorFanStartCount (#)" = "LifetimePMSensorFanStartCount",
+      "LifetimePMSensorFanHours (Hr)"     = "LifetimePMSensorFanHours",
+      "LifetimePMSensorPMMC (mg)"         = "LifetimePMSensorPMMC",
+      "LifetimeCO2SensorHours (Hr)"       = "LifetimeCO2SensorHours",
+      "LifetimeVOCSensorHours (Hr)"       = "LifetimeVOCSensorHours",
 
-  df_h <- df_h %>%
-    dplyr::rename_with(
-      ~ dplyr::case_when(
-        . == "LifetimeSampleCount" ~ "LifetimeSampleCount (#)",
-        . == "LifetimeSampleRuntime" ~ "LifetimeSampleRuntime (Hr)",
+      # SETUP SUMMARY
+      "GPSUTCOffset (Hr)"                 = "GPSUTCOffset",
+      "StartOnNextPowerUp (0=no 1=yes)"   = "StartOnNextPowerUp",
+      "ProgrammedStartTime (sec since 1/1/1970)" = "ProgrammedStartTime",
+      "ProgrammedRuntime (Hr)"            = "ProgrammedRuntime",
+      "FlowRateSetpoint (L min^-1)"       = "FlowRateSetpoint",
+      "FlowOffset (%)"                    = "FlowOffset",
+      "FlowDutyCycle (%)"                 = "FlowDutyCycle",
+      "DutyCycleWindow (s)"               = "DutyCycleWindow",
+      "LogInterval (s)"                   = "LogInterval",
 
-        #SETUP SUMMARY
-        . == "GPSUTCOffset" ~ "GPSUTCOffset (Hr)",
-        # . == "StartOnNextPowerUp" ~ "StartOnNextPowerUp (0=no 1=yes)",
-        . == "ProgrammedStartTime" ~ "ProgrammedStartTime (sec since 1/1/1970)",
-        . == "ProgrammedRuntime" ~ "ProgrammedRuntime (Hr)",
-        . == "FlowRateSetpoint" ~ "FlowRateSetpoint (L min^-1)",
-        . == "FlowOffset" ~ "FlowOffset (%)",
-        . == "FlowCheckMeterReadingPreSample" ~ "FlowCheckMeterReadingPreSample (L min^-1)",
-        . == "FlowCheckMeterReadingPostSample" ~ "FlowCheckMeterReadingPostSample (L min^-1)",
-        . == "FlowDutyCycle" ~ "FlowDutyCycle (%)",
-        . == "DutyCycleWindow" ~ "DutyCycleWindow (s)",
-        # . == "PMSensorInterval" ~ "PMSensorInterval",
-        . == "LogInterval" ~ "LogInterval (s)",
+      # SAMPLE SUMMARY
+      # "StartDateTimeUTC (YYYY-MM-DDTHH:MM:SS)"   = "StartDateTimeUTC",
+      # "EndDateTimeUTC (YYYY-MM-DDTHH:MM:SS)"     = "EndDateTimeUTC",
+      # "StartDateTimeLocal (YYYY-MM-DDTHH:MM:SS)" = "StartDateTimeLocal",
+      # "EndDateTimeLocal (YYYY-MM-DDTHH:MM:SS)"   = "EndDateTimeLocal",
+      "FlowCheckMeterReadingPreSample (L min^-1)"  = "FlowCheckMeterReadingPreSample",
+      "FlowCheckMeterReadingPostSample (L min^-1)" = "FlowCheckMeterReadingPostSample",
+      "OverallDuration (Hr)"              = "OverallDuration",
+      "PumpingDuration (Hr)"              = "PumpingDuration",
+      "OverallFlowRateAverage (L min^-1)" = "OverallFlowRateAverage",
+      "PumpingFlowRateAverage (L min^-1)" = "PumpingFlowRateAverage",
+      "SampledVolume (L)"                 = "SampledVolume",
+      "PercentTimeWorn (%)"               = "PercentTimeWorn",
+      "StartBatteryCharge (%)"            = "StartBatteryCharge",
+      "EndBatteryCharge (%)"              = "EndBatteryCharge",
+      "StartBatteryVoltage (V)"           = "StartBatteryVoltage",
+      "EndBatteryVoltage (V)"             = "EndBatteryVoltage",
 
-        #SAMPLE SUMMARY
-        # . == "StartDateTimeUTC" ~ "StartDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
-        # . == "EndDateTimeUTC" ~ "EndDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
-        # . == "StartDateTimeLocal" ~ "StartDateTimeLocal (YYYY-MM-DDTHH:MM:SS)",
-        # . == "EndDateTimeLocal"  ~ "EndDateTimeLocal (YYYY-MM-DDTHH:MM:SS)" ,
-        . == "OverallDuration" ~ "OverallDuration (Hr)",
-        . == "PumpingDuration" ~ "PumpingDuration (Hr)",
-        . == "OverallFlowRateAverage" ~ "OverallFlowRateAverage (L min^-1)",
-        . == "PumpingFlowRateAverage" ~ "PumpingFlowRateAverage (L min^-1)",
-        . == "SampledVolume" ~ "SampledVolume (L)",
-        . == "StartBatteryCharge" ~ "StartBatteryCharge (%)",
-        . == "EndBatteryCharge" ~ "EndBatteryCharge (%)",
-        . == "StartBatteryVoltage" ~ "StartBatteryVoltage (V)",
-        . == "EndBatteryVoltage" ~ "EndBatteryVoltage (V)",
+      # CO2 SENSOR CALIBRATION
+      # "CO2CalDate (YYYY-MM-DDTHH:MM:SS)" = "CO2CalDate",
+      "CO2CalTarget (ppm)"                = "CO2CalTarget",
+      "CO2CalOffset (ppm)"                = "CO2CalOffset",
 
-        #MASS FLOW SENSOR CALIBRATION
-        . == "MFSCalDate" ~ "MFSCalDate (YYYY-MM-DDTHH:MM:SS)",
-        . == "MFSCalVoutBlocked" ~ "MFSCalVoutBlocked (V)",
-        . == "MFSCalVoutMin" ~ "MFSCalVoutMin (V)",
-        . == "MFSCalVoutMax" ~ "MFSCalVoutMax (V)",
-        . == "MFSCalMFBlocked" ~ "MFSCalMFBlocked (g min^-1)",
-        . == "MFSCalMFMin" ~ "MFSCalMFMin (g min^-1)",
-        . == "MFSCalMFMax" ~ "MFSCalMFMax (g min^-1)",
-        . == "MFSCalPumpVBoostMin" ~ "MFSCalPumpVBoostMin (V)",
-        . == "MFSCalPumpVBoostMax" ~ "MFSCalPumpVBoostMax (V)",
-        . == "MFSCalPDeadhead" ~ "MFSCalPDeadhead (Pa)" ,
-        . == "MF4" ~ "MF4 (coefficient)",
-        . == "MF3" ~ "MF3 (coefficient)",
-        . == "MF2" ~ "MF2 (coefficient)",
-        . == "MF1"  ~ "MF1 (coefficient)" ,
-        . == "MF0" ~ "MF0 (coefficient)",
+      # MASS FLOW SENSOR CALIBRATION
+      # "MFSCalDate (YYYY-MM-DDTHH:MM:SS)" = "MFSCalDate",
+      "MFSCalVoutBlocked (V)"     = "MFSCalVoutBlocked",
+      "MFSCalVoutMin (V)"         = "MFSCalVoutMin",
+      "MFSCalVoutMax (V)"         = "MFSCalVoutMax",
+      "MFSCalMFBlocked (g min^-1)"= "MFSCalMFBlocked",
+      "MFSCalMFMin (g min^-1)"    = "MFSCalMFMin",
+      "MFSCalMFMax (g min^-1)"    = "MFSCalMFMax",
+      "MFSCalPumpVBoostMin (V)"   = "MFSCalPumpVBoostMin",
+      "MFSCalPumpVBoostMax (V)"   = "MFSCalPumpVBoostMax",
+      "MFSCalPDeadhead (Pa)"      = "MFSCalPDeadhead",
+      "MF4 (coefficient)"         = "MF4",
+      "MF3 (coefficient)"         = "MF3",
+      "MF2 (coefficient)"         = "MF2",
+      "MF1 (coefficient)"         = "MF1",
+      "MF0 (coefficient)"         = "MF0",
 
-        #v2 Specific when update_names = FALSE
-        . == "ProgrammedStartDelay" ~ "ProgrammedStartDelay (s)",
-        . == "VolumetricFlowRate" ~ "VolumetricFlowRate",
-        . == "DutyCycle" ~ "DutyCycle (%)",
-        . == "LogFileMode" ~ "LogFileMode (0=normal 1=debug)",
-        . == "SampledRuntime" ~ "SampledRuntime (Hr)",
-        . == "LoggedRuntime" ~ "LoggedRuntime (Hr)",
-        . == "AverageVolumetricFlowRate" ~ "AverageVolumetricFlowRate (L min^-1)",
-
-        TRUE ~ .))
+      #UPASv2 Specific when update_names = FALSE
+      "ProgrammedStartDelay (s)"      = "ProgrammedStartDelay",
+      "VolumetricFlowRate (L min^-1)" = "VolumetricFlowRate",
+      "DutyCycle (%)"                 = "DutyCycle",
+      "SampledRuntime (Hr)"           = "SampledRuntime",
+      "LoggedRuntime (Hr)"            = "LoggedRuntime",
+      "AverageVolumetricFlowRate (L min^-1)" = "AverageVolumetricFlowRate"
+      )))
 
   if(fract_units) {
     colnames(df_h) <- shiny_units(colnames(df_h))
@@ -338,7 +491,7 @@ shiny_units = function(vect){
 #' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr",
 #'                                  mustWork = TRUE)
 #' upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
-#' upasv2_rev138_header_flagged <- sample_success_flag(upasv2_rev138_header)
+#' upasv2_rev138_header_flagged <- shiny_success_flag(upasv2_rev138_header)
 #'
 #' # UPASv2x EXAMPLES
 #' # PASS
@@ -346,22 +499,20 @@ shiny_units = function(vect){
 #' upasv2x_rev157_file_pass <- system.file("extdata", upasv2x_rev157_filename_pass,
 #'                                     package = "astr", mustWork = TRUE)
 #' upasv2x_rev157_header_pass <- read_ast_header(upasv2x_rev157_file_pass, update_names=FALSE)
-#' upasv2x_rev157_header_pass <- sample_success_flag(upasv2x_rev157_header_pass)
+#' upasv2x_rev157_header_pass <- shiny_success_flag(upasv2x_rev157_header_pass)
 #' # FAIL
 #' upasv2x_rev157_filename_fail <- 'PSP00270_LOG_2024-07-02T22_28_20UTC_fail____________----------.txt'
 #' upasv2x_rev157_file_fail <- system.file("extdata", upasv2x_rev157_filename_fail,
 #'                                     package = "astr", mustWork = TRUE)
 #' upasv2x_rev157_header_fail <- read_ast_header(upasv2x_rev157_file_fail, update_names=FALSE)
-#' upasv2x_rev157_header_fail <- sample_success_flag(upasv2x_rev157_header_fail)
+#' upasv2x_rev157_header_fail <- shiny_success_flag(upasv2x_rev157_header_fail)
 
-sample_success_flag = function(df_h) {
+shiny_success_flag = function(df_h) {
 
   df_h <- df_h %>%
     dplyr::mutate(SampleSuccess = dplyr::case_when(
-                                            # ProgrammedRuntime=="indefinite" ~ "PASS",
-                                            # OverallDuration!=ProgrammedRuntime ~ "FAIL",
-                                            ShutdownMode == 1  ~ "PASS",
-                                            ShutdownMode == 3 ~ "PASS",
+                                            "ShutdownMode" == 1  ~ "PASS",
+                                            "ShutdownMode" == 3 ~ "PASS",
                                             TRUE ~ "FAIL"
                                             ))
   return(df_h)

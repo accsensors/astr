@@ -38,7 +38,7 @@ versions preceding rev100.}
 A data frame with a single row of header data that are formatted and ready for analysis.
 }
 \description{
-\code{read_ast_header} reads in the header data frome a log file, transposes the
+\code{read_ast_header} reads in the header data from a log file, transposes the
 data into a wide format, and applies device-specific formatting to the
 columns of the resulting data frame. This function sets the proper data type
 for each variable, adds a column to specify the AST sampler type, adds

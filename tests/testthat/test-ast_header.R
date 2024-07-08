@@ -193,6 +193,29 @@ test_that("format_upasv2x_header and read_ast_header have the same output", {
   expect_identical(read_ast_header(upasv2x_file), format_upasv2x_header(upasv2x_header_wide))
 })
 
+test_that("For a UPASv2 header, update_names=TRUE and shiny=TRUE have the same effect", {
+  upasv2_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
+  upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+  expect_identical(read_ast_header(upasv2_file, update_names = TRUE),
+                   read_ast_header(upasv2_file, shiny = TRUE))
+})
+
+test_that("For a UPASv2x header, update_names=TRUE and shiny=TRUE have the same effect", {
+  upasv2_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
+  upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+  expect_identical(read_ast_header(upasv2_file, update_names = TRUE),
+                   read_ast_header(upasv2_file, shiny = TRUE))
+})
+
+test_that("For a UPASv2x header, update_names=TRUE and shiny=TRUE have no effect", {
+  upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+  expect_identical(read_ast_header(upasv2x_file, update_names = TRUE),
+                   read_ast_header(upasv2x_file))
+  expect_identical(read_ast_header(upasv2x_file, shiny = TRUE),
+                   read_ast_header(upasv2x_file))
+})
+
 ###################################
 # read_ast_header backwards compatibility
 ###################################

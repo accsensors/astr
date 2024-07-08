@@ -94,7 +94,8 @@ format_upasv2_header <- function(data, update_names=FALSE){
   if(update_names){
 
     data <- dplyr::rename(data, dplyr::any_of(
-                        c(LifetimeSampleRuntime  = "CumulativeSamplingTime",
+                        c(LifetimeSampleCount    = "PowerCycles",
+                          LifetimeSampleRuntime  = "CumulativeSamplingTime",
                           StartDateTimeUTC       = "StartDateTime",
                           PumpingFlowRateAverage = "AverageVolumetricFlow",
                           FlowRateSetpoint       = "VolumetricFlowRate",

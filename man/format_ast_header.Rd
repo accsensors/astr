@@ -39,7 +39,7 @@ versions preceding rev100.}
 A data frame with a single row of header data that are formatted and ready for analysis.
 }
 \description{
-\code{format_ast_header} applies deviced-specific formatting to the columns in a
+\code{format_ast_header} applies device-specific formatting to the columns in a
 data frame of header data from an Access Sensor Technologies air sampler
 log file. This function sets the proper data type for each variable, adds a
 column to specify the AST sampler type, adds columns to describe the codes
