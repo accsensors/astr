@@ -4,7 +4,7 @@
 \alias{read_ast_header}
 \title{Read and format the header data from an Access Sensor Technologies air sampler log file}
 \usage{
-read_ast_header(file, update_names = FALSE, shiny = FALSE)
+read_ast_header(file, update_names = FALSE)
 }
 \arguments{
 \item{file}{Any Access Sensor Technologies air sampler log file name.}
@@ -31,8 +31,6 @@ the left will be updated to the names shown on the right:
 
 Variable names cannot be updated for log files written using UPAS v2 firmware
 versions preceding rev100.}
-
-\item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
 A data frame with a single row of header data that are formatted and ready for analysis.

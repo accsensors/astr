@@ -9,8 +9,7 @@ read_ast_log(
   update_names = FALSE,
   tz = NA,
   cols_keep = c(),
-  cols_drop = c(),
-  shiny = FALSE
+  cols_drop = c()
 )
 }
 \arguments{
@@ -67,8 +66,6 @@ In other words, the columns specified in cols_keep will be selected first.
 If the cols_keep argument is not specified, all columns will be kept.  Then,
 The columns specified in cols_drop will be dropped.  If the cols_drop
 argument is not specified, no columns will be dropped.}
-
-\item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
 A data frame of of sample log data that are formatted and ready for analysis.

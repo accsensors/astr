@@ -5,7 +5,7 @@
 \title{Format header data from an Access Sensor Technologies air sampler log file to
 to make sure each column in the header data frame is the correct data type.}
 \usage{
-format_ast_header(data, update_names = FALSE, shiny = FALSE)
+format_ast_header(data, update_names = FALSE)
 }
 \arguments{
 \item{data}{A header data frame returned by the \link{transpose_ast_header} function.}
@@ -32,8 +32,6 @@ the left will be updated to the names shown on the right:
 
 Variable names cannot be updated for log files written using UPAS v2 firmware
 versions preceding rev100.}
-
-\item{shiny}{Option to make TRUE if using function with AST shiny app.}
 }
 \value{
 A data frame with a single row of header data that are formatted and ready for analysis.

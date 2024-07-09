@@ -76,6 +76,7 @@ format_upasv2_header <- function(data, update_names=FALSE){
                     .data$ShutdownMode == 6 ~ "max power during sample",
                     .data$ShutdownMode == 7 ~ "blocked flow"))
 
+
   if(data$FirmwareRev != 100){
 
     data <- dplyr::mutate(data,
@@ -94,7 +95,7 @@ format_upasv2_header <- function(data, update_names=FALSE){
   if(update_names){
 
     data <- dplyr::rename(data, dplyr::any_of(
-                        c(LifetimeSampleCount    = "PowerCycles",
+                        c(LifetimeSampleCount    = "PowerCycles", #for rev100
                           LifetimeSampleRuntime  = "CumulativeSamplingTime",
                           StartDateTimeUTC       = "StartDateTime",
                           PumpingFlowRateAverage = "AverageVolumetricFlow",

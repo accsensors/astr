@@ -58,8 +58,6 @@
 #' The columns specified in cols_drop will be dropped.  If the cols_drop
 #' argument is not specified, no columns will be dropped.
 #'
-#' @param shiny Option to make TRUE if using function with AST shiny app.
-#'
 #' @return A data frame of of sample log data that are formatted and ready for analysis.
 #' This data frame will contain one row for each timestamp in the sample log.
 #' Columns with key header data will be appended to the sample log columns to
@@ -113,13 +111,13 @@
 #' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 #' hhb_log <- read_ast_log(hhb_file)
 
-read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c(), shiny=FALSE) {
+read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()) {
 
   log <- astr::fread_ast_log(file)
 
   header <- astr::read_ast_header(file)
 
-  df <- astr::format_ast_log(log, header, update_names, tz, cols_keep, cols_drop, shiny=shiny)
+  df <- astr::format_ast_log(log, header, update_names, tz, cols_keep, cols_drop)
 
   return(df)
 }
@@ -223,7 +221,7 @@ fread_ast_log = function(file){
 #' hhb_header <- read_ast_header(hhb_file)
 #' hhb_log <- format_ast_log(hhb_log_raw, hhb_header)
 
-format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c(), shiny=FALSE) {
+format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()) {
 
   firmware <- header$Firmware
 
@@ -235,8 +233,6 @@ format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(),
 
     }else if(grepl("UPAS_v2_0", firmware)){
 
-      if(shiny){update_names <- TRUE} #TODO move to own function format_shiny_header so that shiny functionality is not present in normal functions
-
       df <- astr::format_upasv2_log(log, header, update_names, tz, cols_keep, cols_drop)
 
     }else if(grepl("HHBv2", firmware)){
@@ -245,7 +241,6 @@ format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(),
 
     }
 
-    if(shiny){df <- astr::shiny_log(df)} #TODO move to own function format_shiny_log so that shiny functionality is not present in normal functions
   }
 
   return(df)

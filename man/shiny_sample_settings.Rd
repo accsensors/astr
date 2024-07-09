@@ -9,7 +9,7 @@ shiny_sample_settings(df_h, fract_units = FALSE)
 }
 \arguments{
 \item{df_h}{A header data frame returned by the \link{read_ast_header} function
-with the argument \code{shiny = TRUE}.}
+with the argument \code{update_names = TRUE}.}
 
 \item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}
 }
@@ -26,7 +26,7 @@ and adds units to the applicable variable names.
 \examples{
 multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
 full.names = TRUE) \%>\%
-    lapply(read_ast_header, shiny=TRUE) \%>\%
+    lapply(read_ast_header, update_names=TRUE) \%>\%
     dplyr::bind_rows()
 
 sample_settings <- shiny_sample_settings(multiple_upas_headers, fract_units=TRUE)

@@ -68,7 +68,7 @@ test_that("format_upasv2_log and read_ast_log have the same output", {
                    format_upasv2_log(upasv2_log_raw, upasv2_header, update_names = TRUE))
 })
 
-test_that("format_upasv2x_header and read_ast_header have the same output", {
+test_that("format_upasv2x_log and read_ast_log have the same output", {
   upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
   upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
   upasv2x_header <- read_ast_header(upasv2x_file)

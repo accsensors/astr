@@ -1,15 +1,16 @@
 #'Create sample summary data frame from an Access Sensor Technologies (AST)
-#'UPAS header data frame.
+#'UPAS v2 or UPAS v2.1 PLUS header data frame.
 #'
 #' @description
-#' `shiny_sample_summary` modifies an Access Sensor Technologies header data frame
+#' `shiny_sample_summary` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
 #' for use with the Sample Summary tab in the online shinyAST data analysis app.
 #' This function sets the proper data type for each variable,
 #' appends a sample PASS/FAIL flag column,
 #' and adds units to the applicable variable names.
 #'
 #' @param df_h A header data frame returned by the [read_ast_header] function
-#' with the argument `shiny = TRUE`.
+#' with the argument `update_names = TRUE`.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
 #' @return A modified single row header data frame with select sample summary data.
@@ -19,7 +20,7 @@
 #' @examples
 #' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
 #' full.names = TRUE) %>%
-#'     lapply(read_ast_header, shiny=TRUE) %>%
+#'     lapply(read_ast_header, update_names=TRUE) %>%
 #'     dplyr::bind_rows()
 #'
 #' sample_summary <- shiny_sample_summary(multiple_upas_headers, fract_units=TRUE)
@@ -49,10 +50,11 @@ shiny_sample_summary = function(df_h, fract_units=FALSE) {
 }
 
 #'Create sample settings data frame from an Access Sensor Technologies (AST)
-#'UPAS header data frame.
+#'UPAS v2 or UPAS v2.1 PLUS header data frame.
 #'
 #' @description
-#' `shiny_sample_settings` modifies an Access Sensor Technologies header data frame
+#' `shiny_sample_settings` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
 #' for use with the Sample Settings tab in the online shinyAST data analysis app.
 #' This function sets the proper data type for each variable,
 #' appends a sample PASS/FAIL flag column,
@@ -67,7 +69,7 @@ shiny_sample_summary = function(df_h, fract_units=FALSE) {
 #' @examples
 #' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
 #' full.names = TRUE) %>%
-#'     lapply(read_ast_header, shiny=TRUE) %>%
+#'     lapply(read_ast_header, update_names=TRUE) %>%
 #'     dplyr::bind_rows()
 #'
 #' sample_settings <- shiny_sample_settings(multiple_upas_headers, fract_units=TRUE)
@@ -92,11 +94,12 @@ shiny_sample_settings = function(df_h, fract_units=FALSE) {
   return(df_h)
 }
 
-#'Create sample metadata data frame from an Access Sensor Technologies (AST)
-#'UPAS header data frame.
+#'Create sample operation data frame from an Access Sensor Technologies (AST)
+#'UPAS v2 or UPAS v2.1 PLUS header data frame.
 #'
 #' @description
-#' `shiny_sample_operation` modifies an Access Sensor Technologies header data frame
+#' `shiny_sample_operation` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
 #' for use with the UPAS Operation tab in the online shinyAST data analysis app.
 #' This function sets the proper data type for each variable,
 #' appends a sample PASS/FAIL flag column,
@@ -111,7 +114,7 @@ shiny_sample_settings = function(df_h, fract_units=FALSE) {
 #' @examples
 #' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
 #' full.names = TRUE) %>%
-#'     lapply(read_ast_header, shiny=TRUE) %>%
+#'     lapply(read_ast_header, update_names=TRUE) %>%
 #'     dplyr::bind_rows()
 #'
 #' sample_operation <- shiny_sample_operation(multiple_upas_headers, fract_units=TRUE)
@@ -134,12 +137,13 @@ shiny_sample_operation = function(df_h, fract_units=FALSE) {
   return(df_h)
 }
 
-#'Rename Access Sensor Technologies (AST) UPAS
+#'Rename and format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
 #'header data frame columns and add units
 #'for the online shinyAST app
 #'
 #' @description
-#' `shiny_header` modifies an Access Sensor Technologies header data frame
+#' `shiny_header` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
 #' for use with the online shinyAST data analysis app.
 #' This function adds units to the applicable variable names.
 #'
@@ -153,10 +157,10 @@ shiny_sample_operation = function(df_h, fract_units=FALSE) {
 #' @examples
 #' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
 #'                                   full.names = TRUE) %>%
-#'         lapply(read_ast_header, shiny = TRUE) %>%
+#'         lapply(read_ast_header, update_names = TRUE) %>%
 #'         dplyr::bind_rows()
-#' upas_shiny_header <- shiny_header(multiple_upas_headers)
 #'
+#' upas_shiny_header <- shiny_header(multiple_upas_headers)
 
 shiny_header = function(df_h, fract_units = FALSE) {
 
@@ -164,8 +168,13 @@ shiny_header = function(df_h, fract_units = FALSE) {
     df_h <- df_h %>%
       dplyr::mutate(ProgrammedRuntime =
                       ifelse(.data$ASTSampler=="UPAS_v2_0",
+                             # convert to hours for UPASv2
                              ifelse(.data$ProgrammedRuntime==360000000, "indefinite", .data$ProgrammedRuntime/3600),
-                             .data$ProgrammedRuntime))
+                             # Since ProgrammedRuntime is numeric, indefinite values for UPASv2x are normally displayed as NA,
+                             # but for the shinyAST app these should be displayed as "indefinite"
+                             ifelse(is.na(.data$ProgrammedRuntime), "indefinite", .data$ProgrammedRuntime)),
+                    # Make sure this column is a character to prevent row binding issues when reading multiple files
+                    ProgrammedRuntime = as.character(.data$ProgrammedRuntime))
   }
 
   df_h <- dplyr::rename(df_h, dplyr::any_of(
@@ -246,18 +255,32 @@ shiny_header = function(df_h, fract_units = FALSE) {
   return(df_h)
 }
 
-#'Format specific UPAS log file data frame columns
-#'to be more user friendly for the Shiny app
+#'Format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+#'log data frame columns
+#'for the online shinyAST app
 #'
-#' @param df Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.
+#' @description
+#' `shiny_log` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' log data frame
+#' for use with the online shinyAST data analysis app.
+#' This function removes and reorders some columns to create a better user interface.
 #'
-#' @return A modified data frame with extraneous variables removed and
-#' formatted SampleTime for shiny app plots.
+#' @param df A log data frame returned by the [read_ast_log] function
+#' with the argument `update_names = TRUE`.
+#'
+#' @return A modified log data frame with extraneous variables removed,
+#' more used variables brought to the front of the data frame,
+#' and SampleTime formatted to hours for the online shinyAST app plots.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' # upasv2x_log_shiny <- shiny_log(upasv2x_log)
+#' multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#'     full.names = TRUE) %>%
+#'     lapply(read_ast_log, update_names=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' upas_shiny_log <- shiny_log(multiple_upas_logs)
 
 shiny_log = function(df) {
 
@@ -287,8 +310,6 @@ shiny_log = function(df) {
                     "AtmoDensity",
                     "AtmoAlt")))
 
-
-
   if("SampleTime" %in% colnames(df)){
     df <- df %>% dplyr::mutate(SampleTime = as.numeric(.data$SampleTime, units="hours"))
   }
@@ -296,8 +317,8 @@ shiny_log = function(df) {
   return(df)
 }
 
-#'Rename UPAS log file single column name
-#'to be more user friendly for the Shiny app plot
+#'Rename an Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+#'log file single column name and add units for the online shinyAST app
 #'
 #' @param clm_name Pass a UPAS v2 or v2+ log column name from a formatted data frame.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
@@ -434,17 +455,6 @@ shiny_axis = function(clm_name, fract_units = FALSE){
       dplyr::select(dplyr::any_of(clm_name))
 
     clm_name <- paste(df_sel["axis_name",], df_sel["unit",], sep=" ")
-
-    # df_long <- df %>%
-    #   t()
-    #
-    # df_long <- cbind(rownames(df_long), data.frame(df_long, row.names=NULL)) %>%
-    #   dplyr::rename(`var` = `rownames(df_long)`)
-
-    # clm_name <- df_long %>%
-    #   dplyr::filter(var == clm_name)
-    #
-    # clm_name <- paste(clm_name$axis_name, clm_name$unit, sep=" ")
 
     if(fract_units){clm_name <- shiny_units(clm_name)}
 

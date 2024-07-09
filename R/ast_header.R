@@ -33,8 +33,6 @@
 #' Variable names cannot be updated for log files written using UPAS v2 firmware
 #' versions preceding rev100.
 #'
-#' @param shiny Option to make TRUE if using function with AST shiny app.
-#'
 #' @return A data frame with a single row of header data that are formatted and ready for analysis.
 #' @export
 #' @importFrom rlang .data
@@ -71,13 +69,13 @@
 #' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 #' hhb_header <- read_ast_header(hhb_file)
 
-read_ast_header = function(file, update_names=FALSE, shiny=FALSE) {
+read_ast_header = function(file, update_names=FALSE) {
 
   data <- astr::fread_ast_header(file)
 
   df <- astr::transpose_ast_header(data$header, diag=data$diag)
 
-  df <- astr::format_ast_header(df, update_names=update_names, shiny=shiny)
+  df <- astr::format_ast_header(df, update_names=update_names)
 
   return(df)
 }
@@ -296,7 +294,7 @@ transpose_ast_header = function(header, diag = NULL){
 #' hhb_header_wide <- transpose_ast_header(hhb_header_raw)
 #' hhb_header <- format_ast_header(hhb_header_wide)
 
-format_ast_header = function(data, update_names=FALSE, shiny=FALSE) {
+format_ast_header = function(data, update_names=FALSE) {
 
   firmware <- data$Firmware
 
@@ -305,8 +303,6 @@ format_ast_header = function(data, update_names=FALSE, shiny=FALSE) {
     df_h <- astr::format_upasv2x_header(data)
 
   }else if(grepl("UPAS_v2_0", firmware)){
-
-    if(shiny){update_names <- TRUE} #TODO move to own function format_shiny_header so that shiny functionality is not present in normal functions
 
     df_h <- astr::format_upasv2_header(data, update_names = update_names)
 

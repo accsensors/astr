@@ -193,7 +193,8 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
     GPSlon   = ifelse(.data$GPSlon   == -9999, NA, .data$GPSlon),
     GPSalt   = ifelse(.data$GPSalt   == -9999, NA, .data$GPSalt),
     GPSspeed = ifelse(.data$GPSspeed == -9999, NA, .data$GPSspeed),
-    GPShDOP  = ifelse(.data$GPShDOP  == -9999, NA, .data$GPShDOP))
+    GPShDOP  = ifelse(.data$GPShDOP  == -9999, NA, .data$GPShDOP)) %>%
+    dplyr::select(-dplyr::starts_with("V1")) # Remove any unnamed columns from firmwares with extra commas in the log
 
   if(!is.na(unique(df$LocalTZ))){
     df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
