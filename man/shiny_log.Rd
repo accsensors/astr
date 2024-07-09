@@ -2,7 +2,8 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_log}
 \alias{shiny_log}
-\title{Format Access Sensor Technologies (AST) UPAS log data frame columns
+\title{Format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+log data frame columns
 for the online shinyAST app}
 \usage{
 shiny_log(df)
@@ -17,7 +18,8 @@ more used variables brought to the front of the data frame,
 and SampleTime formatted to hours for the online shinyAST app plots.
 }
 \description{
-\code{shiny_log} modifies an Access Sensor Technologies log data frame
+\code{shiny_log} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+log data frame
 for use with the online shinyAST data analysis app.
 This function removes and reorders some columns to create a better user interface.
 }
@@ -26,5 +28,6 @@ multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
     full.names = TRUE) \%>\%
     lapply(read_ast_log, update_names=TRUE) \%>\%
     dplyr::bind_rows()
+
 upas_shiny_log <- shiny_log(multiple_upas_logs)
 }

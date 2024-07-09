@@ -11,30 +11,16 @@ shiny_success_flag(df_h)
 }
 \value{
 A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to indicate sample PASS/FAIL
+based off the sample ShutdownMode.
 }
 \description{
 Add a flag to a UPAS v2 or UPAS v2.1 PLUS header data frame to indicate PASS/FAIL for a sample.
 }
 \examples{
-# UPASv2 EXAMPLES
-# PASS
-upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr",
-                                 mustWork = TRUE)
-upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
-upasv2_rev138_header_flagged <- shiny_success_flag(upasv2_rev138_header)
+multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+                                  full.names = TRUE) \%>\%
+        lapply(read_ast_header, update_names = TRUE) \%>\%
+        dplyr::bind_rows()
 
-# UPASv2x EXAMPLES
-# PASS
-upasv2x_rev157_filename_pass <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-upasv2x_rev157_file_pass <- system.file("extdata", upasv2x_rev157_filename_pass,
-                                    package = "astr", mustWork = TRUE)
-upasv2x_rev157_header_pass <- read_ast_header(upasv2x_rev157_file_pass, update_names=FALSE)
-upasv2x_rev157_header_pass <- shiny_success_flag(upasv2x_rev157_header_pass)
-# FAIL
-upasv2x_rev157_filename_fail <- 'PSP00270_LOG_2024-07-02T22_28_20UTC_fail____________----------.txt'
-upasv2x_rev157_file_fail <- system.file("extdata", upasv2x_rev157_filename_fail,
-                                    package = "astr", mustWork = TRUE)
-upasv2x_rev157_header_fail <- read_ast_header(upasv2x_rev157_file_fail, update_names=FALSE)
-upasv2x_rev157_header_fail <- shiny_success_flag(upasv2x_rev157_header_fail)
+upas_headers_flagged <- shiny_success_flag(multiple_upas_headers)
 }

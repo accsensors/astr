@@ -3,7 +3,7 @@
 \name{shiny_sample_summary}
 \alias{shiny_sample_summary}
 \title{Create sample summary data frame from an Access Sensor Technologies (AST)
-UPAS header data frame.}
+UPAS v2 or UPAS v2.1 PLUS header data frame.}
 \usage{
 shiny_sample_summary(df_h, fract_units = FALSE)
 }
@@ -17,7 +17,8 @@ with the argument \code{update_names = TRUE}.}
 A modified single row header data frame with select sample summary data.
 }
 \description{
-\code{shiny_sample_summary} modifies an Access Sensor Technologies header data frame
+\code{shiny_sample_summary} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+header data frame
 for use with the Sample Summary tab in the online shinyAST data analysis app.
 This function sets the proper data type for each variable,
 appends a sample PASS/FAIL flag column,

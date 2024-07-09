@@ -2,23 +2,33 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_axis}
 \alias{shiny_axis}
-\title{Rename UPAS log file single column name
-to be more user friendly for the Shiny app plot}
+\title{Rename an Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+log file single column name and add units for the online shinyAST app}
 \usage{
-shiny_axis(clm_name, fract_units = FALSE)
+shiny_axis(col_name, fract_units = FALSE)
 }
 \arguments{
-\item{clm_name}{Pass a UPAS v2 or v2+ log column name from a formatted data frame.}
+\item{col_name}{A UPAS v2 or UPAS v2.1 PLUS log column name from a data frame
+returned by the \link{read_ast_log} function
+with the argument \code{update_names = TRUE}.}
 
 \item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}
 }
 \value{
-A modified column name for plot axis label in shinyAST app.
+A modified column name for plot axis labels in the online shinyAST app.
 }
 \description{
-Rename UPAS log file single column name
-to be more user friendly for the Shiny app plot
+Rename an Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+log file single column name and add units for the online shinyAST app
 }
 \examples{
-# plot_label <- shiny_axis(colnames(upasv2x_log))
+upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+upasv2x_log <- read_ast_log(upasv2x_file, update_names=TRUE) \%>\%
+shiny_log()
+
+upasv2x_clm_names <- colnames(upasv2x_log)
+
+plotx_label <- shiny_axis("SampleTime", fract_units = FALSE)
+ploty_label <- shiny_axis("PumpingFlowRate", fract_units = TRUE)
 }

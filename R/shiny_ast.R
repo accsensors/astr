@@ -286,13 +286,30 @@ shiny_log = function(df) {
 
   df <- df %>%
     dplyr::select(!dplyr::any_of(c("tz_value",
-                   "TZOffset",
+                   "LocalTZ",
+                   "UnixTimeMCU",
                    "ASTSampler",
                    "SampleName",
                    "CartridgeID",
                    "StartDateTimeUTC",
                    "LogFileMode",
-                   "LogFilename"))) %>%
+                   "LogFilename",
+                   "IAQStabStat",
+                   "IAQRunIn",
+                   "IAQRes",
+                   "IAQ",
+                   "IAQAcc",
+                   "StaticIAQ",
+                   "StaticIAQAcc",
+                   "CO2e",
+                   "CO2eAcc",
+                   "bVOC",
+                   "bVOCAcc",
+                   "gasComp",
+                   "gasCompAcc",
+                   "gasPerc",
+                   "gasPercAcc",
+                   "UserTZ"))) %>%
     dplyr::relocate(dplyr::any_of(c("SampleTime",
                     "DateTimeUTC",
                     "DateTimeLocal",
@@ -320,31 +337,44 @@ shiny_log = function(df) {
 #'Rename an Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
 #'log file single column name and add units for the online shinyAST app
 #'
-#' @param clm_name Pass a UPAS v2 or v2+ log column name from a formatted data frame.
+#' @param col_name A UPAS v2 or UPAS v2.1 PLUS log column name from a data frame
+#' returned by the [read_ast_log] function
+#' with the argument `update_names = TRUE`.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
-#' @return A modified column name for plot axis label in shinyAST app.
+#' @return A modified column name for plot axis labels in the online shinyAST app.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' # plot_label <- shiny_axis(colnames(upasv2x_log))
+#' upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+#' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_log <- read_ast_log(upasv2x_file, update_names=TRUE) %>%
+#' shiny_log()
+#'
+#' upasv2x_clm_names <- colnames(upasv2x_log)
+#'
+#' plotx_label <- shiny_axis("SampleTime", fract_units = FALSE)
+#' ploty_label <- shiny_axis("PumpingFlowRate", fract_units = TRUE)
 
-shiny_axis = function(clm_name, fract_units = FALSE){
+shiny_axis = function(col_name, fract_units = FALSE){
 
-  #TODO Check that this covers all possible log file variables (might be nice to add standard v2 log file titles so this can be used with standard v2 file)
   df <- data.frame(SampleTime = c("Sample Time", "(Hr)"),
                   UnixTime = c("Unix Time", "(s)"),
+                  UnixTimeMCU = c("Unix Time MCU", "(s)"),
                   DateTimeUTC = c("Date Time UTC", ""),
                   DateTimeLocal = c("Date Time Local", ""),
-                  TZOffset = c("Time Zone Offset", "(Hr)"),
+                  LocalTZ = c("Local Timezone", ""),
                   PumpingFlowRate = c("Pumping Flow Rate", "(L min^-1)"),
+                  OverallFlowRate = c("Overall Flow Rate", "(L min^-1)"),
                   SampledVolume = c("Sampled Volume", "(L)"),
                   FilterDP = c("Filter Differential Pressure", "(Pa)"),
+                  BatteryCharge = c("Battery Charge", "(%)"),
                   AtmoT = c("Atmospheric T", "(C)"),
                   AtmoP = c("Atmospheric P", "(hPa)"),
                   AtmoRH = c("Atmospheric RH", "(%RH)"),
                   AtmoDensity = c("Atmospheric Density", "(g L^-1)"),
+                  AtmoAlt = c("Altitude Above Sea Level", "(m)"),
                   GPSQual = c("GPS Signal Quality", "(NMEA Standard)"),
                   GPSlat = c("GPS Latitude", "(decimalDegrees)"),
                   GPSlon = c("GPS Longitude", "(decimalDegrees)"),
@@ -353,10 +383,6 @@ shiny_axis = function(clm_name, fract_units = FALSE){
                   GPSspeed = c("GPS Measured Speed", "(m s^-1)"),
                   GPShDOP = c("GPS Horizontal Dilution of Precision", ""),
 
-                  UnixTimeMCU = c("Unix Time MCU", "(s)"),
-                  OverallFlowRate = c("Overall Flow Rate", "(L min^-1)"),
-                  BatteryCharge = c("Battery Charge", "(%)"),
-                  AtmoAlt = c("Altitude Above Sea Level", "(m)"),
                   AccelX = c("X Acceleration", "(mg)"),
                   AccelXVar = c("X Acceleration Variance", "(mg)"),
                   AccelXMin = c("X Acceleration Minimum", "(mg)"),
@@ -448,42 +474,59 @@ shiny_axis = function(clm_name, fract_units = FALSE){
                   SCDRH = c("CO2 Sensor RH", "(%RH)"),
                   VOCRaw = c("VOC Sensor Raw Output", ""),
                   NOXRaw = c("NOx Sensor Raw Output", ""),
+                  AccelComplianceCnt = c("Accelerometer Compliance Count", "(#)"),
+                  AccelComplianceHrs = c("Accelerometer Compliance Time", "(hrs)"),
+                  PMReadingErrorCnt = c("Accelerometer Compliance Time", "(hrs)"),
+                  PMFanErrorCnt = c("SPS30 Fan Errors per Logging Period", "(#)"),
+                  PMLaserErrorCnt = c("SPS30 Laser Errors per Logging Period", "(#)"),
+                  PMFanSpeedWarn = c("SPS30 Fan Speed Errors per Logging Period", "(#)"),
                   row.names = c("axis_name", "unit")
                   )
 
     df_sel <- df %>%
-      dplyr::select(dplyr::any_of(clm_name))
+      dplyr::select(dplyr::any_of(col_name))
 
-    clm_name <- paste(df_sel["axis_name",], df_sel["unit",], sep=" ")
+    col_name <- paste(df_sel["axis_name",], df_sel["unit",], sep=" ")
 
-    if(fract_units){clm_name <- shiny_units(clm_name)}
+    if(fract_units){col_name <- shiny_units(col_name)}
 
-  return(clm_name)
+  return(col_name)
 }
 
-#'Reformat units for shinyAST app
+#'Reformat Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+#'data frame units to be fractional for online shinyAST app
 #'
-#' @param vect Pass a vector.
+#' @param col_names_vect Pass a vector of column names.
+#' A UPAS v2 or UPAS v2.1 PLUS vector of column names from a data frame
+#' returned by the [read_ast_header] or [read_ast_log] function
+#' with the argument `update_names = TRUE`.
 #'
-#' @return A vector with fractional units instead of the
-#' standard UPASv2 and UPASv2+ log file unit format
+#' @return A vector of column names with fractional units (L/min) instead of the
+#' standard UPASv2 and UPASv2+ log file unit format (L min^-1).
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
+#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#'                                   full.names = TRUE) %>%
+#'         lapply(read_ast_header, update_names = TRUE) %>%
+#'         dplyr::bind_rows()
 #'
+#' upas_shiny_header <- shiny_header(multiple_upas_headers)
+#' upas_standard_units <- colnames(upas_shiny_header)
+#' upas_shiny_units <- shiny_units(upas_standard_units)
 
-shiny_units = function(vect){
-  vect <- gsub("L min^-1", "L/min", fixed=TRUE,
+shiny_units = function(col_names_vect){
+  col_names_vect <- gsub("L min^-1", "L/min", fixed=TRUE,
           gsub("(g L^-1)", "(g/L)", fixed=TRUE,
           gsub("(m s^-1)", "(m/s)", fixed=TRUE,
           gsub("mdeg s^-1)", "(mdeg/s)", fixed=TRUE,
           gsub("(ug m^-3)", "(ug/m^3)", fixed=TRUE,
           gsub("(# cm^-3)", "(#/cm^3)", fixed=TRUE,
           gsub("(g min^-1)", "(g/min)", fixed=TRUE,
-               x=vect)))))))
+               x=col_names_vect)))))))
 
-  return(vect)
+  return(col_names_vect)
 }
 
 #'Add a flag to a UPAS v2 or UPAS v2.1 PLUS header data frame to indicate PASS/FAIL for a sample.
@@ -491,39 +534,25 @@ shiny_units = function(vect){
 #' @param df_h A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the [read_ast_header] function.
 #'
 #' @return A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to indicate sample PASS/FAIL
+#' based off the sample ShutdownMode.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' # UPASv2 EXAMPLES
-#' # PASS
-#' upasv2_rev138_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-#' upasv2_rev138_file <- system.file("extdata", upasv2_rev138_filename, package = "astr",
-#'                                  mustWork = TRUE)
-#' upasv2_rev138_header <- read_ast_header(upasv2_rev138_file, update_names=FALSE)
-#' upasv2_rev138_header_flagged <- shiny_success_flag(upasv2_rev138_header)
+#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+#'                                   full.names = TRUE) %>%
+#'         lapply(read_ast_header, update_names = TRUE) %>%
+#'         dplyr::bind_rows()
 #'
-#' # UPASv2x EXAMPLES
-#' # PASS
-#' upasv2x_rev157_filename_pass <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-#' upasv2x_rev157_file_pass <- system.file("extdata", upasv2x_rev157_filename_pass,
-#'                                     package = "astr", mustWork = TRUE)
-#' upasv2x_rev157_header_pass <- read_ast_header(upasv2x_rev157_file_pass, update_names=FALSE)
-#' upasv2x_rev157_header_pass <- shiny_success_flag(upasv2x_rev157_header_pass)
-#' # FAIL
-#' upasv2x_rev157_filename_fail <- 'PSP00270_LOG_2024-07-02T22_28_20UTC_fail____________----------.txt'
-#' upasv2x_rev157_file_fail <- system.file("extdata", upasv2x_rev157_filename_fail,
-#'                                     package = "astr", mustWork = TRUE)
-#' upasv2x_rev157_header_fail <- read_ast_header(upasv2x_rev157_file_fail, update_names=FALSE)
-#' upasv2x_rev157_header_fail <- shiny_success_flag(upasv2x_rev157_header_fail)
+#' upas_headers_flagged <- shiny_success_flag(multiple_upas_headers)
 
 shiny_success_flag = function(df_h) {
 
-  df_h <- df_h %>%
-    dplyr::mutate(SampleSuccess = dplyr::case_when(
-                                            "ShutdownMode" == 1  ~ "PASS",
-                                            "ShutdownMode" == 3 ~ "PASS",
-                                            TRUE ~ "FAIL"
+  df_h <- dplyr::mutate(df_h,
+                SampleSuccess = dplyr::case_when(
+                                      df_h$ShutdownMode == 1  ~ "PASS",
+                                      df_h$ShutdownMode == 3 ~ "PASS",
+                                      .default = "FAIL"
                                             ))
   return(df_h)
 }

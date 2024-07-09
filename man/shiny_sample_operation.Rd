@@ -3,7 +3,7 @@
 \name{shiny_sample_operation}
 \alias{shiny_sample_operation}
 \title{Create sample operation data frame from an Access Sensor Technologies (AST)
-UPAS header data frame.}
+UPAS v2 or UPAS v2.1 PLUS header data frame.}
 \usage{
 shiny_sample_operation(df_h, fract_units = FALSE)
 }
@@ -17,7 +17,8 @@ with the argument \code{update_names = TRUE}.}
 A modified single row header data frame with select sample operation data.
 }
 \description{
-\code{shiny_sample_operation} modifies an Access Sensor Technologies header data frame
+\code{shiny_sample_operation} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+header data frame
 for use with the UPAS Operation tab in the online shinyAST data analysis app.
 This function sets the proper data type for each variable,
 appends a sample PASS/FAIL flag column,

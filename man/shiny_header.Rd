@@ -2,7 +2,7 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_header}
 \alias{shiny_header}
-\title{Rename and format Access Sensor Technologies (AST) UPAS
+\title{Rename and format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
 header data frame columns and add units
 for the online shinyAST app}
 \usage{
@@ -19,7 +19,8 @@ A modified single row header data frame with column names and units
 for the online shinyAST app.
 }
 \description{
-\code{shiny_header} modifies an Access Sensor Technologies header data frame
+\code{shiny_header} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+header data frame
 for use with the online shinyAST data analysis app.
 This function adds units to the applicable variable names.
 }
@@ -28,5 +29,6 @@ multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
                                   full.names = TRUE) \%>\%
         lapply(read_ast_header, update_names = TRUE) \%>\%
         dplyr::bind_rows()
+
 upas_shiny_header <- shiny_header(multiple_upas_headers)
 }

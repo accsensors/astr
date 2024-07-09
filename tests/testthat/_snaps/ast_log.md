@@ -2003,20 +2003,13 @@
       3:     0   FALSE  FALSE   TRUE   TRUE   TRUE 0.404132 0.130983 0.051785
       4:     0   FALSE  FALSE   TRUE   TRUE   TRUE 0.446130 0.137156 0.066887
       5:     0   FALSE  FALSE   TRUE   TRUE   TRUE 0.488577 0.114660 0.052078
-         SD_HEADW TPumpsOFF TPumpsON   CO2  SCDT SCDRH VOCRaw NOXRaw  V113  V114
-            <num>     <num>    <num> <num> <num> <num>  <num>  <num> <num> <num>
-      1: 0.000000         0       30    NA    NA    NA     NA     NA    NA    NA
-      2: 0.078341         0       30    NA    NA    NA     NA     NA    NA    NA
-      3: 0.078967         0       30    NA    NA    NA     NA     NA    NA    NA
-      4: 0.078205         0       30    NA    NA    NA     NA     NA    NA    NA
-      5: 0.079356         0       30    NA    NA    NA     NA     NA    NA    NA
-          V115  V116  V117  V118  V119  V120  V121  V122  V123 UserTZ
-         <num> <num> <num> <num> <num> <num> <num> <num> <num> <lgcl>
-      1:    NA    NA    NA    NA    NA    NA    NA    NA    NA  FALSE
-      2:    NA    NA    NA    NA    NA    NA    NA    NA    NA  FALSE
-      3:    NA    NA    NA    NA    NA    NA    NA    NA    NA  FALSE
-      4:    NA    NA    NA    NA    NA    NA    NA    NA    NA  FALSE
-      5:    NA    NA    NA    NA    NA    NA    NA    NA    NA  FALSE
+         SD_HEADW TPumpsOFF TPumpsON   CO2  SCDT SCDRH VOCRaw NOXRaw UserTZ
+            <num>     <num>    <num> <num> <num> <num>  <num>  <num> <lgcl>
+      1: 0.000000         0       30    NA    NA    NA     NA     NA  FALSE
+      2: 0.078341         0       30    NA    NA    NA     NA     NA  FALSE
+      3: 0.078967         0       30    NA    NA    NA     NA     NA  FALSE
+      4: 0.078205         0       30    NA    NA    NA     NA     NA  FALSE
+      5: 0.079356         0       30    NA    NA    NA     NA     NA  FALSE
                                                                          LogFilename
                                                                               <char>
       1: 20220324/PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt

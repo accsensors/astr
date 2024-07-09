@@ -33,12 +33,17 @@ upas_sample_summary <- shiny_sample_summary(multiple_upas_headers)
 upas_sample_settings <- shiny_sample_settings(multiple_upas_headers)
 upas_sample_operation <- shiny_sample_operation(multiple_upas_headers)
 
-multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
+multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PSP.*.txt$",
                                  full.names = TRUE) %>%
   lapply(read_ast_log, update_names=TRUE) %>%
   dplyr::bind_rows()
 upas_shiny_log <- shiny_log(multiple_upas_logs)
 
+start1 <- Sys.time()
+ploty_label <- shiny_axis("PumpingFlowRate", fract_units = TRUE)
+end1 <- Sys.time()
+time1 <- end1-start1
+time1
 
 ast_header <- dplyr::bind_rows(upasv2x_header, upasv2_header)
 
