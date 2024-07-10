@@ -190,7 +190,7 @@ shiny_header = function(df_h, fract_units = FALSE) {
 
       # SETUP SUMMARY
       "GPSUTCOffset (Hr)"                 = "GPSUTCOffset",
-      "StartOnNextPowerUp (0=no 1=yes)"   = "StartOnNextPowerUp",
+      "StartOnNextPowerUp"                = "StartOnNextPowerUp",
       "ProgrammedStartTime (sec since 1/1/1970)" = "ProgrammedStartTime",
       "ProgrammedRuntime (Hr)"            = "ProgrammedRuntime",
       "FlowRateSetpoint (L min^-1)"       = "FlowRateSetpoint",
@@ -515,6 +515,7 @@ shiny_axis = function(col_name, fract_units = FALSE){
 #' upas_shiny_header <- shiny_header(multiple_upas_headers)
 #' upas_standard_units <- colnames(upas_shiny_header)
 #' upas_shiny_units <- shiny_units(upas_standard_units)
+#' setdiff(upas_shiny_units, upas_standard_units)
 
 shiny_units = function(col_names_vect){
   col_names_vect <- gsub("L min^-1", "L/min", fixed=TRUE,
@@ -567,13 +568,17 @@ shiny_success_flag = function(df_h) {
 #' @importFrom stats var
 #'
 #' @examples
-#' # upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
+#' multiple_upasv2x_logs <- list.files(path = "inst/extdata", pattern="^PSP.*.txt$",
+#'       full.names = TRUE) %>%
+#'       lapply(read_ast_log, update_names=TRUE) %>%
+#'       dplyr::bind_rows()
 
 get_30s_mean = function(df) {
 
   df_30s_mean <- df %>%
     dplyr::select(
       dplyr::any_of(c("UPASserial",
+                      "SampleName",
                       "DateTimeLocal",
                       "PM2_5MC",
                       "AccelX",
@@ -583,7 +588,7 @@ get_30s_mean = function(df) {
                       "GPSlat",
                       "GPSlon")))%>%
     dplyr::mutate(datetime_local_rounded = lubridate::floor_date(.data$DateTimeLocal, "30 sec")) %>%
-    dplyr::group_by(.data$UPASserial, .data$datetime_local_rounded)%>%
+    dplyr::group_by(.data$UPASserial, .data$SampleName, .data$datetime_local_rounded)%>%
     #TODO make the mutate check if the variable exists so no errors are thrown
           # for past firmware versions
     dplyr::mutate(mean30PM2_5MC = mean(.data$PM2_5MC, na.rm = T),
@@ -598,10 +603,10 @@ get_30s_mean = function(df) {
                   # var30CO2 = stats::var(.data$CO2, na.rm = T),
                   mean30GPSlat = base::mean(.data$GPSlat, na.rm = T),
                   mean30GPSlon = base::mean(.data$GPSlon, na.rm = T)) %>%
-    dplyr::select(.data$UPASserial, .data$datetime_local_rounded, .data$mean30PM2_5MC:.data$mean30GPSlon) %>%
+    dplyr::select(.data$UPASserial, .data$SampleName, .data$datetime_local_rounded, .data$mean30PM2_5MC:.data$mean30GPSlon) %>%
     dplyr::distinct() %>%
     dplyr::ungroup() %>%
-    dplyr::group_by(.data$UPASserial) %>%
+    dplyr::group_by(.data$UPASserial, .data$SampleName) %>%
     dplyr::mutate(compliance = ifelse((.data$var30AccelX > 100) | (.data$var30AccelY > 100) | (.data$var30AccelZ > 100), 1, 0),
                   compliance_rollmean = ifelse(
                     as.numeric(zoo::rollapply(.data$compliance, width=20,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA)) > 0, 1, 0))
@@ -636,7 +641,7 @@ gps_map = function(df) {
 
   if(("mean30PM2_5MC") %in% colnames(df)){
   gpsPMPlot_data <- df %>%
-    dplyr::select(.data$UPASserial, .data$datetime_local_rounded, .data$mean30GPSlat, .data$mean30GPSlon, .data$mean30PM2_5MC) %>%
+    dplyr::select(.data$UPASserial, .data$SampleName, .data$datetime_local_rounded, .data$mean30GPSlat, .data$mean30GPSlon, .data$mean30PM2_5MC) %>%
     dplyr::mutate(aqi = as.factor(dplyr::case_when(
       .data$mean30PM2_5MC<12.0 ~ "Good",
       .data$mean30PM2_5MC<35.4 ~ "Moderate",
@@ -646,31 +651,31 @@ gps_map = function(df) {
       TRUE ~ "Hazardous"))) %>%
     dplyr::filter(!is.na(.data$mean30PM2_5MC), !is.na(.data$mean30GPSlat), !is.na(.data$mean30GPSlon))
 
-  sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
-  # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
+sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
+# crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
 
-  pal <- leaflet::colorBin(
-    palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
-    domain = gpsPMPlot_data$mean30PM2_5MC,
-    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, Inf)
-  )
+pal <- leaflet::colorBin(
+  palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
+  domain = gpsPMPlot_data$mean30PM2_5MC,
+  bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, Inf)
+)
 
-  pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
+pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
 
-  pm25_leaflet <- pm25_leaflet %>%
-    leaflet::addCircleMarkers(
-      color=~pal(mean30PM2_5MC),
-      popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gpsPMPlot_data$mean30PM2_5MC, digits=2),
-                  "<br>","UPAS:", gpsPMPlot_data$UPASserial,
-                  "<br>","Local Time:", gpsPMPlot_data$datetime_local_rounded), stroke = FALSE,
-      radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
-    leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
-                      options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
-    leaflet::addLegend("topright",
-                       pal = pal,
-                       values = gpsPMPlot_data$mean30PM2_5MC,
-                       title = "PM2.5 (&#181g/m<sup>3</sup>)",
-                       opacity = 0.9)
+pm25_leaflet <- pm25_leaflet %>%
+  leaflet::addCircleMarkers(
+    color=~pal(mean30PM2_5MC),
+    popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gpsPMPlot_data$mean30PM2_5MC, digits=2),
+                "<br>","UPAS:", gpsPMPlot_data$UPASserial,
+                "<br>","Local Time:", gpsPMPlot_data$datetime_local_rounded), stroke = FALSE,
+    radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
+  leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
+                    options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
+  leaflet::addLegend("topright",
+                     pal = pal,
+                     values = gpsPMPlot_data$mean30PM2_5MC,
+                     title = "PM2.5 (&#181g/m<sup>3</sup>)",
+                     opacity = 0.9)
 
   # return(gpsPMPlot_data)
   return(pm25_leaflet)

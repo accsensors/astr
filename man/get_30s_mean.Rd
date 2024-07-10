@@ -16,5 +16,8 @@ A modified data frame with 30 second mean data for select variables.
 Calculate 30 second averages for select variables
 }
 \examples{
-# upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
+multiple_upasv2x_logs <- list.files(path = "inst/extdata", pattern="^PSP.*.txt$",
+      full.names = TRUE) \%>\%
+      lapply(read_ast_log, update_names=TRUE) \%>\%
+      dplyr::bind_rows()
 }

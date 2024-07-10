@@ -36,8 +36,14 @@ format_upasv2x_header = function(data) {
     FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)),
     ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite", NA,
                                .data$ProgrammedRuntime),
+    StartOnNextPowerUp = dplyr::case_when(
+                    .data$StartOnNextPowerUp == 0 ~ "FALSE",
+                    .data$StartOnNextPowerUp == 1 ~ "TRUE",
+                    .data$StartOnNextPowerUp == 2 ~ "system reset",
+                    .data$StartOnNextPowerUp == 4 ~ "always"
+    ),
     dplyr::across(dplyr::any_of(c("UPASserial", "UPASpcbRev", "GPSUTCOffset",
-                                  "StartOnNextPowerUp", "DutyCycleWindow",
+                                  "DutyCycleWindow",
                                   "GPSEnabled", "PMSensorInterval",
                                   "LogInterval", "SamplerConfiguration",
                                   "PowerSaveMode", "AppLock", "SampledVolume",

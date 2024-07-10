@@ -37,8 +37,11 @@ format_upasv2_header <- function(data, update_names=FALSE){
                   ASTSampler = sub("-rev.*", "", .data$Firmware),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)),
+                  StartOnNextPowerUp = dplyr::case_when(
+                    .data$StartOnNextPowerUp == 0 ~ "FALSE",
+                    .data$StartOnNextPowerUp == 1 ~ "TRUE"
+                  ),
                   dplyr::across(dplyr::any_of(c("UPASserial", "GPSUTCOffset",
-                                                "StartOnNextPowerUp",
                                                 "VolumetricFlowRate",
                                                 "GPSEnabled", "LogFileMode",
                                                 "LogInterval", "AppLock",
@@ -58,8 +61,7 @@ format_upasv2_header <- function(data, update_names=FALSE){
                   dplyr::across(dplyr::starts_with("MFSVolt"),    \(x) as.numeric(x)),
                   dplyr::across(dplyr::starts_with("MFSMF"),      \(x) as.numeric(x)),
                   dplyr::across(dplyr::ends_with("Runtime"),      \(x) as.numeric(x)),
-                  dplyr::across(dplyr::any_of(c("StartOnNextPowerUp",
-                                                "GPSEnabled")),
+                  dplyr::across(dplyr::any_of(c("GPSEnabled")),
                                 \(x) as.logical(x)),
                   dplyr::across(dplyr::any_of(c("StartDateTimeUTC", "EndDateTimeUTC",
                                          "StartDateTime", "CalDateTime")), \(x)

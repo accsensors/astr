@@ -30,4 +30,5 @@ multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
 upas_shiny_header <- shiny_header(multiple_upas_headers)
 upas_standard_units <- colnames(upas_shiny_header)
 upas_shiny_units <- shiny_units(upas_standard_units)
+setdiff(upas_shiny_units, upas_standard_units)
 }
