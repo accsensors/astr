@@ -18,8 +18,7 @@ with the argument \code{update_names = TRUE}.}
 A modified column name for plot axis labels in the online shinyAST app.
 }
 \description{
-Rename an Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
-log file single column name and add units for the online shinyAST app
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
 upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'

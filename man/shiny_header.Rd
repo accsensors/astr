@@ -19,6 +19,7 @@ A modified single row header data frame with column names and units
 for the online shinyAST app.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 \code{shiny_header} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 header data frame
 for use with the online shinyAST data analysis app.

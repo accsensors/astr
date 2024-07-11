@@ -2,6 +2,7 @@
 #'UPAS v2 or UPAS v2.1 PLUS header data frame.
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #' `shiny_sample_summary` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the Sample Summary tab in the online shinyAST data analysis app.
@@ -53,6 +54,7 @@ shiny_sample_summary = function(df_h, fract_units=FALSE) {
 #'UPAS v2 or UPAS v2.1 PLUS header data frame.
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #' `shiny_sample_settings` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the Sample Settings tab in the online shinyAST data analysis app.
@@ -98,6 +100,7 @@ shiny_sample_settings = function(df_h, fract_units=FALSE) {
 #'UPAS v2 or UPAS v2.1 PLUS header data frame.
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #' `shiny_sample_operation` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the UPAS Operation tab in the online shinyAST data analysis app.
@@ -142,6 +145,7 @@ shiny_sample_operation = function(df_h, fract_units=FALSE) {
 #'for the online shinyAST app
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #' `shiny_header` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the online shinyAST data analysis app.
@@ -260,6 +264,7 @@ shiny_header = function(df_h, fract_units = FALSE) {
 #'for the online shinyAST app
 #'
 #' @description
+#' `r lifecycle::badge("experimental")`
 #' `shiny_log` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' log data frame
 #' for use with the online shinyAST data analysis app.
@@ -336,6 +341,9 @@ shiny_log = function(df) {
 
 #'Rename an Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
 #'log file single column name and add units for the online shinyAST app
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
 #'
 #' @param col_name A UPAS v2 or UPAS v2.1 PLUS log column name from a data frame
 #' returned by the [read_ast_log] function
@@ -496,6 +504,9 @@ shiny_axis = function(col_name, fract_units = FALSE){
 #'Reformat Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
 #'data frame units to be fractional for online shinyAST app
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' @param col_names_vect Pass a vector of column names.
 #' A UPAS v2 or UPAS v2.1 PLUS vector of column names from a data frame
 #' returned by the [read_ast_header] or [read_ast_log] function
@@ -532,6 +543,9 @@ shiny_units = function(col_names_vect){
 
 #'Add a flag to a UPAS v2 or UPAS v2.1 PLUS header data frame to indicate PASS/FAIL for a sample.
 #'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
 #' @param df_h A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the [read_ast_header] function.
 #'
 #' @return A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to indicate sample PASS/FAIL
@@ -557,138 +571,3 @@ shiny_success_flag = function(df_h) {
                                             ))
   return(df_h)
 }
-
-#'Calculate 30 second averages for select variables
-#'
-#' @param df Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.
-#'
-#' @return A modified data frame with 30 second mean data for select variables.
-#' @export
-#' @importFrom rlang .data
-#' @importFrom stats var
-#'
-#' @examples
-#' multiple_upasv2x_logs <- list.files(path = "inst/extdata", pattern="^PSP.*.txt$",
-#'       full.names = TRUE) %>%
-#'       lapply(read_ast_log, update_names=TRUE) %>%
-#'       dplyr::bind_rows()
-
-get_30s_mean = function(df) {
-
-  df_30s_mean <- df %>%
-    dplyr::select(
-      dplyr::any_of(c("UPASserial",
-                      "SampleName",
-                      "DateTimeLocal",
-                      "PM2_5MC",
-                      "AccelX",
-                      "AccelY",
-                      "AccelZ",
-                      "CO2",
-                      "GPSlat",
-                      "GPSlon")))%>%
-    dplyr::mutate(datetime_local_rounded = lubridate::floor_date(.data$DateTimeLocal, "30 sec")) %>%
-    dplyr::group_by(.data$UPASserial, .data$SampleName, .data$datetime_local_rounded)%>%
-    #TODO make the mutate check if the variable exists so no errors are thrown
-          # for past firmware versions
-    dplyr::mutate(mean30PM2_5MC = mean(.data$PM2_5MC, na.rm = T),
-                  var30PM2_5MC = stats::var(.data$PM2_5MC, na.rm = T),
-                  mean30AccelX = mean(.data$AccelX, na.rm = T),
-                  var30AccelX = stats::var(.data$AccelX, na.rm = T),
-                  mean30AccelY = mean(.data$AccelY, na.rm = T),
-                  var30AccelY = stats::var(.data$AccelY, na.rm = T),
-                  mean30AccelZ = mean(.data$AccelZ, na.rm = T),
-                  var30AccelZ = stats::var(.data$AccelZ, na.rm = T),
-                  # mean30CO2 = base::mean(.data$CO2, na.rm = T),
-                  # var30CO2 = stats::var(.data$CO2, na.rm = T),
-                  mean30GPSlat = base::mean(.data$GPSlat, na.rm = T),
-                  mean30GPSlon = base::mean(.data$GPSlon, na.rm = T)) %>%
-    dplyr::select(.data$UPASserial, .data$SampleName, .data$datetime_local_rounded, .data$mean30PM2_5MC:.data$mean30GPSlon) %>%
-    dplyr::distinct() %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by(.data$UPASserial, .data$SampleName) %>%
-    dplyr::mutate(compliance = ifelse((.data$var30AccelX > 100) | (.data$var30AccelY > 100) | (.data$var30AccelZ > 100), 1, 0),
-                  compliance_rollmean = ifelse(
-                    as.numeric(zoo::rollapply(.data$compliance, width=20,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA)) > 0, 1, 0))
-  # dplyr::mutate(mean30AccelX = zoo::rollapply(AccelX, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               var30AccelX = zoo::rollapply(AccelX, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               mean30AccelY = zoo::rollapply(AccelY, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               var30AccelY = zoo::rollapply(AccelY, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               mean30AccelZ = zoo::rollapply(AccelZ, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               var30AccelZ = zoo::rollapply(AccelZ, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA))
-
-  # df_30s_mean <- df_30s_mean %>%
-  #   dplyr::group_by(UPASserial) %>%
-  #   dplyr::summarise(compliance_hours = sum(compliance_rollmean, na.rm = T)/2/60,
-  #                    compliance_percent = sum(compliance_rollmean, na.rm = T)/n())
-
-  return(df_30s_mean)
-}
-
-#'Generate a gps map from a data frame with time-averaged data
-#'
-#' @param df Pass a UPAS v2+ log data frame from 'get_30s_mean' function.
-#'
-#' @return A leaflet map of 30s averages of the selected variable.
-#' @export
-#' @importFrom rlang .data
-#'
-#' @examples
-#'
-
-#TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
-gps_map = function(df) {
-
-  if(("mean30PM2_5MC") %in% colnames(df)){
-  gpsPMPlot_data <- df %>%
-    dplyr::select(.data$UPASserial, .data$SampleName, .data$datetime_local_rounded, .data$mean30GPSlat, .data$mean30GPSlon, .data$mean30PM2_5MC) %>%
-    dplyr::mutate(aqi = as.factor(dplyr::case_when(
-      .data$mean30PM2_5MC<12.0 ~ "Good",
-      .data$mean30PM2_5MC<35.4 ~ "Moderate",
-      .data$mean30PM2_5MC<55.4 ~ "USG",
-      .data$mean30PM2_5MC<150.4 ~ "Unhealthy",
-      .data$mean30PM2_5MC<250.4 ~ "Very Unhealthy",
-      TRUE ~ "Hazardous"))) %>%
-    dplyr::filter(!is.na(.data$mean30PM2_5MC), !is.na(.data$mean30GPSlat), !is.na(.data$mean30GPSlon))
-
-sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
-# crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
-
-pal <- leaflet::colorBin(
-  palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
-  domain = gpsPMPlot_data$mean30PM2_5MC,
-  bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, Inf)
-)
-
-pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
-
-pm25_leaflet <- pm25_leaflet %>%
-  leaflet::addCircleMarkers(
-    color=~pal(mean30PM2_5MC),
-    popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gpsPMPlot_data$mean30PM2_5MC, digits=2),
-                "<br>","UPAS:", gpsPMPlot_data$UPASserial,
-                "<br>","Local Time:", gpsPMPlot_data$datetime_local_rounded), stroke = FALSE,
-    radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
-  leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
-                    options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
-  leaflet::addLegend("topright",
-                     pal = pal,
-                     values = gpsPMPlot_data$mean30PM2_5MC,
-                     title = "PM2.5 (&#181g/m<sup>3</sup>)",
-                     opacity = 0.9)
-
-  # return(gpsPMPlot_data)
-  return(pm25_leaflet)
-  }
-
-  # Throw error if no 30s averaged PM data to map
-  else{
-    error <- "No PM data in log file"
-
-    return(error)
-
-  }
-
-}
-
-

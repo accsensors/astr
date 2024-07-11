@@ -17,6 +17,7 @@ with the argument \code{update_names = TRUE}.}
 A modified single row header data frame with select sample summary data.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 \code{shiny_sample_summary} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 header data frame
 for use with the Sample Summary tab in the online shinyAST data analysis app.

@@ -18,8 +18,7 @@ A vector of column names with fractional units (L/min) instead of the
 standard UPASv2 and UPASv2+ log file unit format (L min^-1).
 }
 \description{
-Reformat Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
-data frame units to be fractional for online shinyAST app
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
 multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",

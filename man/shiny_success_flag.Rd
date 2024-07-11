@@ -14,7 +14,7 @@ A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to in
 based off the sample ShutdownMode.
 }
 \description{
-Add a flag to a UPAS v2 or UPAS v2.1 PLUS header data frame to indicate PASS/FAIL for a sample.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
 multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",

@@ -18,6 +18,7 @@ more used variables brought to the front of the data frame,
 and SampleTime formatted to hours for the online shinyAST app plots.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 \code{shiny_log} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 log data frame
 for use with the online shinyAST data analysis app.
