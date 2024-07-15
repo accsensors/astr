@@ -30,10 +30,10 @@ the following command:
 library(astr)
 ```
 
-Two functions are used to read log files into R: read_ast_header and
-read_ast_log. These functions work for UPASv2, UPASv2x, and Home Health
-Box (HHB) log files. To view the documentation for these two functions,
-use either of the following commands:
+Two functions are used to read log files into R: `read_ast_header` and
+`read_ast_log`. These functions work for UPASv2, UPASv2x, and Home
+Health Box (HHB) log files. To view the documentation for these two
+functions, use either of the following commands:
 
 ``` r
 ?read_ast_header
@@ -97,7 +97,7 @@ You will notice there are log files for UPASv2 (“PS” prefix), UPASv2x
 generate example data frames using the example UPAS log files. Change
 the `pattern` argument in `list.files` as previously described to select
 the types of log file read (e.g. `pattern = "^HHB.*.csv$"` for HHB log
-files.
+files).
 
 ``` r
 data_upas_examples_h <- system.file("extdata", package = "astr", mustWork = TRUE) |>
@@ -116,7 +116,7 @@ data_upas_examples <- system.file("extdata", package = "astr", mustWork = TRUE) 
 ## Make a GPS Map of UPAS Data
 
 The `astr` package includes the experimental function `gps_map` for
-making a GPS map of PM2.5 or CO2 data. This functions is mainly for use
+making a GPS map of PM2.5 or CO2 data. This function is mainly for use
 with our online [Shiny App](https://accsensors.shinyapps.io/shinyAST/),
 but can be used in general scripts. Since `gps_map` is experimental, the
 look and functionality of the map may see rapid changes during future
