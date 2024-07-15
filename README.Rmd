@@ -62,7 +62,7 @@ data_upas <- list.files(path = ".", pattern="^PS.*.txt$",  full.names = TRUE)%>%
   dplyr::bind_rows()
 ```
 
-For the examples above, you will need to update the `path` argument in the `list.files` function to indicate the location where your log files are stored, relative to your working directory. Specifying `pattern = "^PS.*.txt$"`, will choose only UPAS log files, since UPASv2 and UPASv2x log files are prefixed by `"PS"` and `"PSP"` respectively. To read only UPASv2, UPASv2x, or HHB files edit the `pattern` argument in `list.files` as shown below:
+For the examples above, you will need to update the `path` argument in the `list.files` function to indicate the location where your log files are stored, relative to your working directory. Specifying `pattern = "^PS.*.txt$"`, will choose only UPAS log files, since UPASv2 and UPASv2x log files are prefixed by "PS" and "PSP" respectively. To read only UPASv2, UPASv2x, or HHB files edit the `pattern` argument in `list.files` as shown below:
 
 ```{r specific_files}
 # UPASv2 files
@@ -88,7 +88,7 @@ example_files <- system.file("extdata", package = "astr", mustWork = TRUE) |>
     list.files(pattern=NULL, full.names = TRUE)
 ```
 
-You will notice there are log files for UPASv2 (prefixed by `"PS"`), UPASv2x (prefixed by `"PSP"`), and HHB (prefixed by `"HHB"`). 
+You will notice there are log files for UPASv2 ("PS" prefix), UPASv2x ("PSP" prefix), and HHB ("HHB" prefix). 
 Use the commands below to generate example data frames using the example UPAS log files. Change the `pattern` argument in `list.files` as previously described to select the types of log file read (e.g. `pattern = "^HHB.*.csv$"` for HHB log files.
 
 ```{r example_header}
@@ -106,7 +106,38 @@ data_upas_examples <- system.file("extdata", package = "astr", mustWork = TRUE) 
     dplyr::bind_rows()
 ```
 
-Describe the other functions
-Describe shiny functions and recommendations for use
-Describe map functions and maybe show example
-Edit the read_ast_log and read_ast_header documentation to also specify some of the extra info stated here
+
+## Make a GPS Map of UPAS Data
+
+The `astr` package includes the experimental function `gps_map` for making a GPS map of PM2.5 or CO2 data.
+This functions is mainly for use with our online [Shiny App](https://accsensors.shinyapps.io/shinyAST/),
+but can be used in general scripts. Since `gps_map` is experimental, the look and functionality of the map
+may see rapid changes during future development. 
+
+```{r example_map}
+multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+    lapply(read_ast_log, update_names=TRUE) %>%
+    dplyr::bind_rows()
+
+upasv2x_pm25_map <- gps_map(multiple_upas_logs, variable="PM2_5MC")
+upasv2x_CO2_map <- gps_map(multiple_upas_logs, variable="CO2")
+```
+
+## Other Helper Functions
+
+The `astr` package contains helper functions called by the `read_ast_header`, and
+`read_ast_log` functions to process files. If you would like to use any of these helper
+functions independently in your script, you can find documentation and examples
+by typing a '?' before the function name.
+These helper functions are: `count_header_rows`, `format_ast_header`, `format_ast_log`,
+`format_hhb_header`, `format_hhb_log`, `format_upasv2_header`, `format_upasv2_log`,
+`format_upasv2x_header`, `format_upasv2x_log`, `fread_ast_header`, `fread_ast_log`,
+`transpose_ast_header`.
+
+
+The `astr` package also includes functions we use for our online [Shiny App](https://accsensors.shinyapps.io/shinyAST/).
+We do not recommend using these functions in your scripts since they are experimental,
+and likely to see rapid change in future development. 
+These functions are: `shiny_axis`, `shiny_header`, `shiny_log`, `shiny_sample_operation`,
+`shiny_sample_settings`, `shiny_sample_summary`, `shiny_success_flag`, `shiny_units`

@@ -62,9 +62,9 @@ For the examples above, you will need to update the `path` argument in
 the `list.files` function to indicate the location where your log files
 are stored, relative to your working directory. Specifying
 `pattern = "^PS.*.txt$"`, will choose only UPAS log files, since UPASv2
-and UPASv2x log files are prefixed by `"PS"` and `"PSP"` respectively.
-To read only UPASv2, UPASv2x, or HHB files edit the `pattern` argument
-in `list.files` as shown below:
+and UPASv2x log files are prefixed by “PS” and “PSP” respectively. To
+read only UPASv2, UPASv2x, or HHB files edit the `pattern` argument in
+`list.files` as shown below:
 
 ``` r
 # UPASv2 files
@@ -88,39 +88,16 @@ To see a list of the example log files included with this package, use
 the command below:
 
 ``` r
-system.file("extdata", package = "astr", mustWork = TRUE) |>
+example_files <- system.file("extdata", package = "astr", mustWork = TRUE) |>
     list.files(pattern=NULL, full.names = TRUE)
-#>  [1] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/HHB00032_LOG_2024-07-01T18_20UTC.csv"                              
-#>  [2] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt"      
-#>  [3] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt"      
-#>  [4] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt"      
-#>  [5] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt"      
-#>  [6] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt"      
-#>  [7] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PS1771_LOG_2024-06-18T02_46_00UTC_NoGPS______________Eng.txt"      
-#>  [8] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt"      
-#>  [9] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt"
-#> [10] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt"
-#> [11] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00055_LOG_2022-02-24T19_26_03UTC_test1___________----------.txt"
-#> [12] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt"
-#> [13] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-06-10T21_50_55UTC_name____________eng_______.txt"
-#> [14] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt"
-#> [15] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-06-14T18_36_07UTC_GPSin-out-in____eng_______.txt"
-#> [16] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-06-14T18_54_44UTC_NoGPS___________----------.txt"
-#> [17] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt"
-#> [18] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-07-02T22_28_20UTC_fail____________----------.txt"
-#> [19] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-07-10T19_30_20UTC_StartOnNext_____----------.txt"
-#> [20] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-07-10T19_43_31UTC_000354__________----------.txt"
-#> [21] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt"
-#> [22] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/SH00007_LOG_2021-12-13T13_28_41UTC_---------------_-----.txt"      
-#> [23] "C:/Users/GabeNeymark/AppData/Local/Temp/RtmpIPY2oZ/temp_libpath6868442b4e4b/astr/extdata/SH00009_LOG_2022-02-14T17_02_32UTC_---------------_5VX__.txt"
 ```
 
-You will notice there are log files for UPASv2 (prefixed by `"PS"`),
-UPASv2x (prefixed by `"PSP"`), and HHB (prefixed by `"HHB"`). Use the
-commands below to generate example data frames using the example UPAS
-log files. Change the `pattern` argument in `list.files` as previously
-described to select the types of log file read
-(e.g. `pattern = "^HHB.*.csv$"` for HHB log files.
+You will notice there are log files for UPASv2 (“PS” prefix), UPASv2x
+(“PSP” prefix), and HHB (“HHB” prefix). Use the commands below to
+generate example data frames using the example UPAS log files. Change
+the `pattern` argument in `list.files` as previously described to select
+the types of log file read (e.g. `pattern = "^HHB.*.csv$"` for HHB log
+files.
 
 ``` r
 data_upas_examples_h <- system.file("extdata", package = "astr", mustWork = TRUE) |>
@@ -136,7 +113,41 @@ data_upas_examples <- system.file("extdata", package = "astr", mustWork = TRUE) 
     dplyr::bind_rows()
 ```
 
-Describe the other functions Describe shiny functions and
-recommendations for use Describe map functions and maybe show example
-Edit the read_ast_log and read_ast_header documentation to also specify
-some of the extra info stated here
+## Make a GPS Map of UPAS Data
+
+The `astr` package includes the experimental function `gps_map` for
+making a GPS map of PM2.5 or CO2 data. This functions is mainly for use
+with our online [Shiny App](https://accsensors.shinyapps.io/shinyAST/),
+but can be used in general scripts. Since `gps_map` is experimental, the
+look and functionality of the map may see rapid changes during future
+development.
+
+``` r
+multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+    lapply(read_ast_log, update_names=TRUE) %>%
+    dplyr::bind_rows()
+
+upasv2x_pm25_map <- gps_map(multiple_upas_logs, variable="PM2_5MC")
+upasv2x_CO2_map <- gps_map(multiple_upas_logs, variable="CO2")
+```
+
+## Other Helper Functions
+
+The `astr` package contains helper functions called by the
+`read_ast_header`, and `read_ast_log` functions to process files. If you
+would like to use any of these helper functions independently in your
+script, you can find documentation and examples by typing a ‘?’ before
+the function name. These helper functions are: `count_header_rows`,
+`format_ast_header`, `format_ast_log`, `format_hhb_header`,
+`format_hhb_log`, `format_upasv2_header`, `format_upasv2_log`,
+`format_upasv2x_header`, `format_upasv2x_log`, `fread_ast_header`,
+`fread_ast_log`, `transpose_ast_header`.
+
+The `astr` package also includes functions we use for our online [Shiny
+App](https://accsensors.shinyapps.io/shinyAST/). We do not recommend
+using these functions in your scripts since they are experimental, and
+likely to see rapid change in future development. These functions are:
+`shiny_axis`, `shiny_header`, `shiny_log`, `shiny_sample_operation`,
+`shiny_sample_settings`, `shiny_sample_summary`, `shiny_success_flag`,
+`shiny_units`

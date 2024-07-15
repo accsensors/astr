@@ -123,6 +123,12 @@ multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) 
     lapply(read_ast_log, update_names = TRUE) \%>\%
     dplyr::bind_rows()
 
+# To change the type of device log file being read in the above example,
+# change the `pattern` argument in [list.files] as follows:
+# UPASv2: `pattern = "^PS[1-9].*.txt$"`
+# UPASv2x: `pattern = "^PSP.*.txt$"`
+# HHB: `pattern = "^HHB.*.csv$"`
+
 # HHB EXAMPLES
 hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
 hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
