@@ -81,7 +81,7 @@ upasv2x_rev117_log_raw <- fread_ast_log(upasv2x_rev117_file)
 upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE)
 upasv2x_rev117_log <- format_upasv2x_log(upasv2x_rev117_log_raw, upasv2x_rev117_header, update_names=FALSE)
 
-upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_rev157_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
 upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev157_log_raw <- fread_ast_log(upasv2x_rev157_file)
 upasv2x_rev157_header <- read_ast_header(upasv2x_rev157_file, update_names=FALSE)

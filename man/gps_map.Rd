@@ -4,7 +4,7 @@
 \alias{gps_map}
 \title{Generate a gps map from an Access Sensor Technologies (AST) UPAS v2.1 PLUS log data frame}
 \usage{
-gps_map(df, variable = "PM2_5MC")
+gps_map(df, variable = c("PM2_5MC", "CO2"))
 }
 \arguments{
 \item{df}{A log data frame returned by the \link{read_ast_log} function
@@ -27,10 +27,10 @@ at a less than 30 second log interval.
 The UPAS must have been outside with GPS reception and collecting PM2.5 or CO2 data.
 }
 \examples{
-multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-      full.names = TRUE) \%>\%
-      lapply(read_ast_log, update_names=TRUE) \%>\%
-      dplyr::bind_rows()
+multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
+    lapply(read_ast_log, update_names=TRUE) \%>\%
+    dplyr::bind_rows()
 
 upasv2x_pm25_map <- gps_map(multiple_upas_logs, variable="PM2_5MC")
 upasv2x_CO2_map <- gps_map(multiple_upas_logs, variable="CO2")

@@ -225,8 +225,8 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
                                             "BC_NPG")), \(x) as.logical(x)))
 
         if(("gpsspeed" %in% colnames(df)) & update_names){
-          df <-  dplyr::rename(df, GPSspeed   = .data$gpsspeed,
-                                   GPSquality = .data$gpsquality)}
+          df <-  dplyr::rename(df, GPSspeed   = "gpsspeed",
+                                   GPSquality = "gpsquality")}
       }
     }
   }

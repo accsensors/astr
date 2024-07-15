@@ -21,10 +21,10 @@ standard UPASv2 and UPASv2+ log file unit format (L min^-1).
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
-multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-                                  full.names = TRUE) \%>\%
-        lapply(read_ast_header, update_names = TRUE) \%>\%
-        dplyr::bind_rows()
+multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
+    lapply(read_ast_header, update_names = TRUE) \%>\%
+    dplyr::bind_rows()
 
 upas_shiny_header <- shiny_header(multiple_upas_headers)
 upas_standard_units <- colnames(upas_shiny_header)

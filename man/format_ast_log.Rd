@@ -89,7 +89,7 @@ upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 upasv2_log <- format_ast_log(upasv2_log_raw, upasv2_header)
 
 # UPASv2x EXAMPLES
-upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_log_raw <- fread_ast_log(upasv2x_file)
 upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)

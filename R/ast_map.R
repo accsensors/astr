@@ -20,19 +20,21 @@
 #' @importFrom stats var
 #'
 #' @examples
-#' multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#'       full.names = TRUE) %>%
-#'       lapply(read_ast_log, update_names=TRUE) %>%
-#'       dplyr::bind_rows()
+#' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_log, update_names=TRUE) %>%
+#'     dplyr::bind_rows()
 #'
 #' gps_map_data <- format_gps_map_data(multiple_upas_logs, variable="PM2_5MC")
 #' gps_map_data <- format_gps_map_data(multiple_upas_logs, variable="CO2")
 
-format_gps_map_data = function(df, variable="PM2_5MC") {
+format_gps_map_data = function(df, variable=c("PM2_5MC", "CO2")) {
 
-  if(variable %in% colnames(df)) {
+  gps_map_data <- NULL
 
-    df_gps_map <- df %>%
+  if(variable %in% colnames(df) & any(variable == c("PM2_5MC", "CO2")) ) {
+
+    gps_map_data <- df %>%
       dplyr::filter(.data$ASTSampler == "UPAS_v2_x") %>%
       dplyr::select(dplyr::any_of(
         c("UPASserial",
@@ -55,11 +57,11 @@ format_gps_map_data = function(df, variable="PM2_5MC") {
         mean30GPSlat = mean(.data$GPSlat, na.rm = T),
         mean30GPSlon = mean(.data$GPSlon, na.rm = T)
       ) %>%
-      dplyr::select(-.data$DateTimeLocal) %>%
+      dplyr::select(-"DateTimeLocal") %>%
       dplyr::distinct()
 
     if (variable == "PM2_5MC") {
-      df_gps_map <- df_gps_map %>%
+      gps_map_data <- gps_map_data %>%
         dplyr::mutate(aqi = as.factor(
           dplyr::case_when(
             .data$mean30PM2_5MC < 12.0  ~ "Good",
@@ -73,31 +75,29 @@ format_gps_map_data = function(df, variable="PM2_5MC") {
           !is.na(.data$mean30GPSlon))
 
     } else if(variable == "CO2") {
-      df_gps_map <- df_gps_map %>%
-        dplyr::mutate(CO2Level = as.factor(
-          dplyr::case_when(
-            .data$mean30CO2 < 400  ~ "Average Outdoor",
-            .data$mean30CO2 < 1000  ~ "Good",
-            .data$mean30CO2 < 2000  ~ "Moderate",
-            .data$mean30CO2 < 5000 ~ "Unhealthy",
-            .data$mean30CO2 < 40000 ~ "Very Unhealthy",
-            TRUE ~ "Hazardous"
-          ))) %>%
+      gps_map_data <- gps_map_data %>%
+        # dplyr::mutate(CO2Level = as.factor(
+        #   dplyr::case_when(
+        #     .data$mean30CO2 < 400  ~ "Average Outdoor",
+        #     .data$mean30CO2 < 1000  ~ "Good",
+        #     .data$mean30CO2 < 2000  ~ "Moderate",
+        #     .data$mean30CO2 < 5000 ~ "Unhealthy",
+        #     .data$mean30CO2 < 40000 ~ "Very Unhealthy",
+        #     TRUE ~ "Hazardous"
+        #   ))) %>%
         dplyr::filter(!is.na(.data$mean30CO2), !is.na(.data$mean30GPSlat),
                       !is.na(.data$mean30GPSlon))
-    } else {
-            df_gps_map <- NULL
-    }
+    } else {}
+
+    if(nrow(gps_map_data)==0) {gps_map_data <- NULL}
   }
 
-  else{
+  if (is.null(gps_map_data)) {
     message("Invalid variable or log file for GPS mapping.
     Use either 'PM2_5MC' or 'CO2' with a UPASv2x log file")
-
-    df_gps_map <- NULL
     }
 
-  return(df_gps_map)
+  return(gps_map_data)
 }
 
 #'Generate a gps map from an Access Sensor Technologies (AST) UPAS v2.1 PLUS log data frame
@@ -122,19 +122,19 @@ format_gps_map_data = function(df, variable="PM2_5MC") {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#'       full.names = TRUE) %>%
-#'       lapply(read_ast_log, update_names=TRUE) %>%
-#'       dplyr::bind_rows()
+#' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_log, update_names=TRUE) %>%
+#'     dplyr::bind_rows()
 #'
 #' upasv2x_pm25_map <- gps_map(multiple_upas_logs, variable="PM2_5MC")
 #' upasv2x_CO2_map <- gps_map(multiple_upas_logs, variable="CO2")
 
-gps_map = function(df, variable="PM2_5MC") {
+gps_map = function(df, variable=c("PM2_5MC", "CO2")) {
 
-  if(variable %in% colnames(df)) {
+  gps_map_data <- format_gps_map_data(df, variable=variable)
 
-    gps_map_data <- format_gps_map_data(df, variable=variable)
+  if(!is.null(gps_map_data)) {
 
     sp::coordinates(gps_map_data)<- ~mean30GPSlon + mean30GPSlat
     # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
@@ -155,7 +155,7 @@ gps_map = function(df, variable="PM2_5MC") {
           popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gps_map_data$mean30PM2_5MC, digits=2),
                       "<br>","UPAS:", gps_map_data$UPASserial,
                       "<br>","Sample Name:", gps_map_data$SampleName,
-                      "<br>","Local Time:", gps_map_data$datetime_local_rounded), stroke = FALSE,
+                      "<br>","Local Time:", gps_map_data$DateTimeLocal_Rounded), stroke = FALSE,
           radius = 7.5, fillOpacity = 0.7 , group = as.factor(gps_map_data$UPASserial)) %>%
         leaflet::addLayersControl(overlayGroups = (as.factor(gps_map_data$UPASserial)),
                                   options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
@@ -165,9 +165,7 @@ gps_map = function(df, variable="PM2_5MC") {
                            title = "PM2.5 (&#181g/m<sup>3</sup>)",
                            opacity = 0.9)
 
-    }
-
-    if((variable == "CO2")){
+    } else if((variable == "CO2")){
 
       pal <- leaflet::colorBin(
         palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
@@ -183,7 +181,7 @@ gps_map = function(df, variable="PM2_5MC") {
           popup=paste("CO2 (ppm):", round(gps_map_data$mean30CO2, digits=2),
                       "<br>","UPAS:", gps_map_data$UPASserial,
                       "<br>","Sample Name:", gps_map_data$SampleName,
-                      "<br>","Local Time:", gps_map_data$datetime_local_rounded), stroke = FALSE,
+                      "<br>","Local Time:", gps_map_data$DateTimeLocal_Rounded), stroke = FALSE,
           radius = 7.5, fillOpacity = 0.7 , group = as.factor(gps_map_data$UPASserial)) %>%
         leaflet::addLayersControl(overlayGroups = (as.factor(gps_map_data$UPASserial)),
                                   options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
@@ -193,14 +191,13 @@ gps_map = function(df, variable="PM2_5MC") {
                            title = "CO2 (ppm)",
                            opacity = 0.9)
 
-    }
-  }else{ # Output error message if no mappable data
+    } else {gps_leaflet <- NULL}
 
+  } else { # Output error message if no mappable data
     message("No gps mappable data in log file. Must use a UPASv2x log file that
-    was collecting PM data and outside with GPS reception.")
+    was collecting PM2.5 or CO2 data and outside with GPS reception.")
 
     gps_leaflet <- NULL
-
   }
 
   return(gps_leaflet)

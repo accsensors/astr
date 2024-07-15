@@ -19,8 +19,8 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#' full.names = TRUE) %>%
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_header, update_names=TRUE) %>%
 #'     dplyr::bind_rows()
 #'
@@ -69,8 +69,8 @@ shiny_sample_summary = function(df_h, fract_units=FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#' full.names = TRUE) %>%
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_header, update_names=TRUE) %>%
 #'     dplyr::bind_rows()
 #'
@@ -115,8 +115,8 @@ shiny_sample_settings = function(df_h, fract_units=FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#' full.names = TRUE) %>%
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_header, update_names=TRUE) %>%
 #'     dplyr::bind_rows()
 #'
@@ -159,8 +159,8 @@ shiny_sample_operation = function(df_h, fract_units=FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#'                                   full.names = TRUE) %>%
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'         lapply(read_ast_header, update_names = TRUE) %>%
 #'         dplyr::bind_rows()
 #'
@@ -280,8 +280,8 @@ shiny_header = function(df_h, fract_units = FALSE) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#'     full.names = TRUE) %>%
+#' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_log, update_names=TRUE) %>%
 #'     dplyr::bind_rows()
 #'
@@ -293,9 +293,9 @@ shiny_log = function(df) {
     dplyr::select(!dplyr::any_of(c("tz_value",
                    "LocalTZ",
                    "UnixTimeMCU",
-                   "ASTSampler",
-                   "SampleName",
-                   "CartridgeID",
+                   # "ASTSampler",
+                   # "SampleName",
+                   # "CartridgeID",
                    "StartDateTimeUTC",
                    "LogFileMode",
                    "LogFilename",
@@ -330,7 +330,11 @@ shiny_log = function(df) {
                     "AtmoP",
                     "AtmoRH",
                     "AtmoDensity",
-                    "AtmoAlt")))
+                    "AtmoAlt"))) %>%
+    dplyr::relocate(dplyr::any_of(c("ASTSampler",
+                                 "UPASserial",
+                                 "SampleName",
+                                 "CartridgeID")), .after = dplyr::last_col())
 
   if("SampleTime" %in% colnames(df)){
     df <- df %>% dplyr::mutate(SampleTime = as.numeric(.data$SampleTime, units="hours"))
@@ -518,10 +522,10 @@ shiny_axis = function(col_name, fract_units = FALSE){
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#'                                   full.names = TRUE) %>%
-#'         lapply(read_ast_header, update_names = TRUE) %>%
-#'         dplyr::bind_rows()
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_header, update_names = TRUE) %>%
+#'     dplyr::bind_rows()
 #'
 #' upas_shiny_header <- shiny_header(multiple_upas_headers)
 #' upas_standard_units <- colnames(upas_shiny_header)
@@ -554,18 +558,18 @@ shiny_units = function(col_names_vect){
 #' @importFrom rlang .data
 #'
 #' @examples
-#' multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-#'                                   full.names = TRUE) %>%
-#'         lapply(read_ast_header, update_names = TRUE) %>%
-#'         dplyr::bind_rows()
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_header, update_names = TRUE) %>%
+#'     dplyr::bind_rows()
 #'
 #' upas_headers_flagged <- shiny_success_flag(multiple_upas_headers)
 
 shiny_success_flag = function(df_h) {
 
-  df_h <- dplyr::mutate(df_h,
-                SampleSuccess = dplyr::case_when(
-                                      df_h$ShutdownMode == 1  ~ "PASS",
+  df_h <- df_h %>%
+    dplyr::mutate(SampleSuccess = dplyr::case_when(
+                                      df_h$ShutdownMode == 1 ~ "PASS",
                                       df_h$ShutdownMode == 3 ~ "PASS",
                                       .default = "FAIL"
                                             ))

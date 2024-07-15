@@ -26,8 +26,8 @@ appends a sample PASS/FAIL flag column,
 and adds units to the applicable variable names.
 }
 \examples{
-multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-full.names = TRUE) \%>\%
+multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
     lapply(read_ast_header, update_names=TRUE) \%>\%
     dplyr::bind_rows()
 

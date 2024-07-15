@@ -17,10 +17,10 @@ based off the sample ShutdownMode.
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 }
 \examples{
-multiple_upas_headers <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-                                  full.names = TRUE) \%>\%
-        lapply(read_ast_header, update_names = TRUE) \%>\%
-        dplyr::bind_rows()
+multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
+    lapply(read_ast_header, update_names = TRUE) \%>\%
+    dplyr::bind_rows()
 
 upas_headers_flagged <- shiny_success_flag(multiple_upas_headers)
 }

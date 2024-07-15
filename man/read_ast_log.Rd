@@ -93,7 +93,7 @@ upasv2_log <- read_ast_log(upasv2_file, update_names=FALSE)
 upasv2_log_updatednames <- read_ast_log(upasv2_file, update_names=TRUE)
 
 # UPASv2x EXAMPLES
-upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_log <- read_ast_log(upasv2x_file, update_names=FALSE)
 
@@ -118,10 +118,10 @@ upasv2x_diag_log <- read_ast_log(upasv2x_diag_file, update_names=FALSE)
 
 # Read in multiple UPAS files at once to a single data frame using lapply.
 # The map() function from the purrr library can also be used in place of lapply.
-multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-                                full.names = TRUE) \%>\%
-        lapply(read_ast_log, update_names = TRUE) \%>\%
-        dplyr::bind_rows()
+multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
+    lapply(read_ast_log, update_names = TRUE) \%>\%
+    dplyr::bind_rows()
 
 # HHB EXAMPLES
 hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'

@@ -25,8 +25,8 @@ for use with the online shinyAST data analysis app.
 This function removes and reorders some columns to create a better user interface.
 }
 \examples{
-multiple_upas_logs <- list.files(path = "inst/extdata", pattern="^PS.*.txt$",
-    full.names = TRUE) \%>\%
+multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
     lapply(read_ast_log, update_names=TRUE) \%>\%
     dplyr::bind_rows()
 
