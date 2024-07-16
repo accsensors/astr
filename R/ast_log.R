@@ -7,8 +7,9 @@
 #' identifying unique log files when data from multiple sample logs have been
 #' combined into a single data frame.
 #'
-#' Use this function in conjuction with [lapply] or [purrr::map] to read in log data
-#' from any number of log files and combine them into a single data frame
+#' Use this function in conjuction with \code{\link[base]{lapply}} or
+#' \code{\link[purrr]{map}} to read in log data from any number of files and
+#' combine those data into a single data frame.
 #'
 #' @param file Any Access Sensor Technologies air sampler log file name.
 #' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
@@ -16,24 +17,31 @@
 #' For samples collected using UPAS v2.1 PLUS firmware versions preceding revXXX,
 #' the column name "AceelComplianceHrs" will be updated to "AccelComplianceHrs".
 #'
-#' For samples collected using the UPAS v2, the old names shown on the left will
-#' be updated to the names shown on the right:
-#' VolumetricFlowRate -> PumpingFlowRate
-#' * AtmoRho          -> AtmoDensity
-#' * FdPdP            -> FilterDP
-#' * PumpT            -> AtmoT
-#' * PumpRH           -> AtmoRH
-#' * PCBT             -> PCB1T
-#' * PumpP            -> PCB2P
-#' * PCBP             -> AtmoP
-#' * GPShdop          -> GPShDOP
-#' * BFGvolt          -> BattVolt
+#' For samples collected using the UPAS v2, the deprecated names shown on the
+#' left will be updated to the current names shown on the right:
+#' \tabular{ll}{
+#'    \strong{Deprecated name} \tab \strong{Current name} \cr
+#'    VolumetricFlowRate \tab PumpingFlowRate \cr
+#'    AtmoRho \tab AtmoDensity \cr
+#'    FdPdP   \tab FilterDP    \cr
+#'    PumpT   \tab AtmoT       \cr
+#'    PumpRH  \tab AtmoRH      \cr
+#'    PCBT    \tab PCB1T       \cr
+#'    PumpP   \tab PCB2P       \cr
+#'    PCBP    \tab AtmoP       \cr
+#'    GPShdop \tab GPShDOP     \cr
+#'    BFGvolt \tab BattVolt    \cr
+#' }
 #'
-#' For samples collected specifically using UPAS v2 firmware rev100, the old
-#' names shown on the left will be updated to the names shown on the right:
-#' * UTCDateTime     -> DateTimeUTC
-#' * VolFlow         -> VolumetricFlowRate
-#' * UPASLogFilename -> LogFilename
+#' For samples collected specifically using UPAS v2 firmware rev100, the
+#' deprecated names shown on the left will be updated to the current names shown
+#' on the right:
+#' \tabular{ll}{
+#'    \strong{Deprecated name} \tab \strong{Current name} \cr
+#'    UTCDateTime     \tab DateTimeUTC \cr
+#'    VolFlow         \tab VolumetricFlowRate \cr
+#'    UPASLogFilename \tab LogFilename    \cr
+#' }
 #'
 #' Variable names cannot be updated for log files written using UPAS v2 firmware
 #' versions preceding rev100.
@@ -41,7 +49,7 @@
 #' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
 #'
 #' Example tz database time zones include: "America/New_York", "America/Denver", and "America/Los_Angeles".
-#' For additional information, see: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+#' For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
 #'
 #' If your GPSUTCOffset is a whole number of hours, this function will be able
 #' to automatically convert the DateTimeLocal variable in the sample log to a
@@ -60,8 +68,46 @@
 #'
 #' @return A data frame of of sample log data that are formatted and ready for analysis.
 #' This data frame will contain one row for each timestamp in the sample log.
-#' Columns with key header data will be appended to the sample log columns to
-#' aid in identification and analysis of unique samples.
+#' All variables in the log file header will be included in the data frame.
+#' Additionally, columns with key header data will be appended to the sample log
+#' columns to aid in identification and analysis of unique samples.
+#'
+#' For all log files, the following columns will be appended:
+#' \itemize{
+#'    \item SampleName: A string indicating the user-supplied sample name
+#'    \item UserTZ: A boolean value indicating whether the `tz` argument was supplied to this function
+#'    \item LocalTZ: A string indicating the timezone in which DateTimeLocal values are displayed
+#'    \item StartDateTimeUTC: A POSIXct object indicating the date and time when sample started (in coordinated universal time)
+#' }
+#'
+#' For UPAS log files, the following columns will also be appended:
+#' \itemize{
+#'    \item ASTSampler: A string indicating the model of the sampler, e.g., UPAS_v2
+#'    \item UPASserial: The UPAS serial ID
+#'    \item LogFilename: A string indicating the log filename
+#'    \item CartridgeID: A string indicating the cartridge identifier entered by the user into the mobile application
+#'    \item LogFileMode: A string indicating whether this is a "normal" log file or a "debug" log file (UPAS v2 only)
+#'    \item VolumetricFlowRateSet: (UPAS v2.1 and UPAS v2.1 PLUS only)
+#' }
+#'
+#' #' For HHB v2 log files, the following columns will be appended:
+#' \itemize{
+#'    \item DateTimeLocal: DateTimeUTC displayed in the local time zone
+#'    \item HHBserial: The HHB serial ID
+#'    \item LogFileName: A string indicating the log filename
+#'    \item G.Alphasense1_ID: Serial number of Alphasense B-series electrochemical sensor in gas sensor housing position 1 (if installed)
+#'    \item G.Alphasense2_ID: Serial number of Alphasense B-series electrochemical sensor in gas sensor housing position 2 (if installed)
+#'    \item G.Alphasense3_ID: Serial number of Alphasense B-series electrochemical sensor in gas sensor housing position 3 (if installed)
+#'    \item G.Alphasense4_ID: Serial number of Alphasense B-series electrochemical sensor in gas sensor housing position 4 (if installed)
+#'    \item A.FilterCID: Identifier for filter cartridge installed in Channel A (as entered by the user)
+#'    \item B.FilterCID: Identifier for filter cartridge installed in Channel B (as entered by the user)
+#'    \item C.SorbentCID: Identifier for sorbent media installed in Channel C (as entered by the user)
+#'    \item D.SorbentCID: Identifier for sorbent media installed in Channel D (as entered by the user)
+#'    \item A.FilterVolumetricFlowRate: Programmed volumetric sample flow rate for Channel A
+#'    \item B.FilterVolumetricFlowRate: Programmed volumetric sample flow rate for Channel B
+#'    \item C.SorbentVolumetricFlowRate: Programmed volumetric sample flow rate for Channel C
+#'    \item D.SorbentVolumetricFlowRate: Programmed volumetric sample flow rate for Channel D
+#' }
 #'
 #' @export
 #' @importFrom rlang .data
@@ -99,11 +145,19 @@
 #'                                   mustWork = TRUE)
 #' upasv2x_diag_log <- read_ast_log(upasv2x_diag_file, update_names=FALSE)
 #'
-#' # Read in multiple UPAS files at once to a single data frame using lapply.
-#' # The map() function from the purrr library can also be used in place of lapply.
+#' # Use \code{\link[base]{lapply}} to read in multiple UPAS files at once and
+#' # combine the data from those files into a single data frame. A column with
+#' # the LogFilename will be appended to the sample log data so that each
+#' # individual sample can be identified easily.
 #' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
 #'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_log, update_names = TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' # The \code{\link[purrr]{map}} function can also be used in place of \code{\link[base]{lapply}}.
+#' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     purrr::map(read_ast_log, update_names = TRUE) %>%
 #'     dplyr::bind_rows()
 #'
 #' # To change the type of device log file being read in the above example,
@@ -184,13 +238,13 @@ fread_ast_log = function(file){
 #'
 #' @description
 #' `format_ast_log` Applies device-specific formatting to the columns of a
-#' sample log data frame returned by the [fread_ast_log] function. It sets the
+#' sample log data frame returned by the \code{\link{fread_ast_log}} function. It sets the
 #' proper data type for each variable and adds columns that aid in identifying
 #' unique log files when data from multiple sample logs have been combined into
 #' a single data frame.
 #'
-#' @param log An unformatted data frame of sample log data returned by the [fread_ast_log] function.
-#' @param header A formatted data frame of header data returned by the [read_ast_header] function.
+#' @param log An unformatted data frame of sample log data returned by the \code{\link{fread_ast_log}} function.
+#' @param header A formatted data frame of header data returned by the \code{\link{read_ast_header}} function.
 #' @inheritParams read_ast_log
 #'
 #' @return A data frame with formatted sample log data plus key header data appended.

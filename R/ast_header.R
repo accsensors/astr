@@ -9,31 +9,48 @@
 #' PMSensorInterval variables, and can also be directed to update old variable
 #' names to the current variable names.
 #'
-#' Use this function in conjuction with [lapply] or [purrr::map] to read in header data
-#' from any number of log files and combine them into a single data frame that
-#' contains a unique row for each sample.
+#' Use this function in conjuction with \code{\link[base]{lapply}} or
+#' \code{\link[purrr]{map}} to read in header data from any number of log files
+#' and combine those data into a single data frame that contains a unique row
+#' for each sample.
 #'
 #' @param file Any Access Sensor Technologies air sampler log file name.
-#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+#' @param update_names Option to update any deprecated variable names from log files written using older firmware versions to the variable names used in the current firmware version.
 #'
-#' For samples collected using UPAS v2 firmware versions beyond rev100, the old
-#' names shown on the left will be updated to the names shown on the right:
-#' * VolumetricFlowRate        -> FlowRateSetpoint
-#' * DutyCycle                 -> FlowDutyCycle
-#' * LoggedRuntime             -> OverallDuration
-#' * SampledRuntime            -> PumpingDuration
-#' * AverageVolumetricFlowRate -> PumpingFlowRateAverage
+#' For samples collected using UPAS v2 firmware versions beyond rev100, the
+#' deprecated names shown on the left will be updated to the current names shown
+#' on the right:
+#' \tabular{ll}{
+#'    \strong{Deprecated name}  \tab \strong{Current name}  \cr
+#'    VolumetricFlowRate        \tab FlowRateSetpoint       \cr
+#'    DutyCycle                 \tab FlowDutyCycle          \cr
+#'    LoggedRuntime             \tab OverallDuration        \cr
+#'    SampledRuntime            \tab PumpingDuration        \cr
+#'    AverageVolumetricFlowRate \tab PumpingFlowRateAverage \cr
+#' }
 #'
-#' For samples collected using UPAS v2 firmware rev100, the old names shown on
-#' the left will be updated to the names shown on the right:
-#' * CumulativeSamplingTime -> LifetimeSampleRuntime
-#' * StartDateTime          -> StartDateTimeUTC
-#' * AverageVolumetricFlow  -> PumpingFlowRateAverage
+#' For samples collected using UPAS v2 firmware rev100, the deprecated names
+#' shown on the left will be updated to the current names shown on the right:
+#' \tabular{ll}{
+#'    \strong{Deprecated name} \tab \strong{Current name}  \cr
+#'    CumulativeSamplingTime   \tab LifetimeSampleRuntime  \cr
+#'    StartDateTime            \tab StartDateTimeUTC       \cr
+#'    AverageVolumetricFlow    \tab PumpingFlowRateAverage \cr
+#' }
 #'
 #' Variable names cannot be updated for log files written using UPAS v2 firmware
 #' versions preceding rev100.
 #'
 #' @return A data frame with a single row of header data that are formatted and ready for analysis.
+#' All variables in the log file header will be included in the data frame.
+#' Additionally, for UPAS log files, the following columns will be appended:
+#' \itemize{
+#'    \item ASTSampler: A string indicating the model of the sampler, e.g., UPAS_v2
+#'    \item FirmwareRev: A numeric value indicating the firmware revision number
+#'    \item ShutdownReason: A string indicating the meaning of the numeric ShutdownMode number
+#'    \item PMSensorOperation: A string indicating the meaning of the PMSensorInterval number (for UPAS v2.1 PLUS only)
+#' }
+#'
 #' @export
 #' @importFrom rlang .data
 #'
@@ -57,11 +74,18 @@
 #'                                   mustWork = TRUE)
 #' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 #'
-#' # Read in multiple UPAS files at once to a single data frame using lapply.
-#' # The map() function from the purrr library can also be used in place of lapply.
+#' # Use \code{\link[base]{lapply}} to read in multiple UPAS files at once and
+#' # combine the data from those files into a single data frame with one row for
+#' # each file.
 #' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
 #'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_header, update_names = TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' # The \code{\link[purrr]{map}} function can also be used in place of \code{\link[base]{lapply}}.
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     purr::map(read_ast_header, update_names = TRUE) %>%
 #'     dplyr::bind_rows()
 #'
 #' # To change the type of device log file being read in the above example,
@@ -156,15 +180,15 @@ fread_ast_header = function(file) {
 #'file and format the transposed header as a data frame.
 #'
 #' @description
-#' `transpose_ast_header` Takes the data read using the [fread_ast_header]
+#' `transpose_ast_header` Takes the data read using the \code{\link{fread_ast_header}}
 #' function and transposes those data so each variable in the header is a unique
 #' column in a data frame.
 #'
-#' @param header A data table containing header data read using the
-#' [fread_ast_header] function.
+#' @param header A data table containing header data read using the \code{\link{fread_ast_header}} function.
 #' @param diag An optional data table containing diagnostic test data read using
-#' the [fread_ast_header] function. If the diag argument is specified, key
-#' metrics from the diagnostic test will be added to the header data frame.
+#' the \code{\link{fread_ast_header}} function. If the \code{diag} argument is
+#' specified, key metrics from the diagnostic test will be added to the header
+#' data frame.
 #'
 #' @return A data frame of header data.
 #' @export
@@ -263,7 +287,7 @@ transpose_ast_header = function(header, diag = NULL){
 #' wassociated ith the ShutdownMode and PMSensorInterval, and can also be
 #' directed to update old variable names to current variable names.
 #'
-#' @param data A header data frame returned by the [transpose_ast_header] function.
+#' @param data A header data frame returned by the \code{\link{transpose_ast_header}} function.
 #' @inheritParams read_ast_header
 #'
 #' @return A data frame with a single row of header data that are formatted and ready for analysis.

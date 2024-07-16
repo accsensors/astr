@@ -99,12 +99,10 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
       df <- dplyr::mutate(df,
                           DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
                                                       tzone=unique(df$LocalTZ)))
-    }else{
-      df <- dplyr::mutate(df, DateTimeLocal = as.character(.data$DateTimeLocal))
     }
 
-    df <- dplyr::relocate(df,
-                          c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
+    df <- dplyr::relocate(df, dplyr::any_of(c("DateTimeLocal","LocalTZ")),
+                          .after = "DateTimeUTC")
     df <- cbind(df, df_h)
 
     if (!is.null(cols_keep)){

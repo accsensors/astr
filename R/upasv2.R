@@ -154,7 +154,7 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
 
   # Get header data
   df_h <- dplyr::select(header, dplyr::any_of(c("ASTSampler","UPASserial",
-                                                "UPASlogFilename",
+                                                "UPASlogFilename","LogFilename",
                                                 "SampleName","CartridgeID",
                                                 "StartDateTimeUTC",
                                                 "LogFileMode")))
