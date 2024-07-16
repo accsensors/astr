@@ -12,13 +12,33 @@
 #' combine those data into a single data frame.
 #'
 #' @param file Any Access Sensor Technologies air sampler log file name.
-#' @param update_names Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
+#' @param update_names Option to update any deprecated variable names from log
+#' files recorded using older firmware versions to the variable names used in
+#' the current firmware version. Variable names cannot be updated for log files
+#' written using UPAS v2 firmware versions preceding rev100.
 #'
-#' For samples collected using UPAS v2.1 PLUS firmware versions preceding revXXX,
-#' the column name "AceelComplianceHrs" will be updated to "AccelComplianceHrs".
+#' @param tz Optional: A character string specifying the tz database time zone
+#' that should be used to display local times. Example tz database time zones
+#' include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+#' For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
 #'
-#' For samples collected using the UPAS v2, the deprecated names shown on the
-#' left will be updated to the current names shown on the right:
+#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
+#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
+#'
+#' @return A data frame of of sample log data that are formatted and ready for analysis.
+#' This data frame will contain one row for each timestamp in the sample log.
+#' All variables in the log file header will be included in the data frame.
+#' Additionally, columns with key header data will be appended to the sample log
+#' columns to aid in identification and analysis of unique samples.
+#'
+#' @details
+#' If `update_names = TRUE`, then, for samples collected using UPAS v2.1 and
+#' UPAS v2.1 PLUS firmware versions preceding revXXX, the column name
+#' "AceelComplianceHrs" will be updated to "AccelComplianceHrs".
+#'
+#' If `update_names = TRUE`, then, for samples collected using the UPAS v2, the
+#' deprecated names shown on the left will be updated to the current names shown
+#' on the right:
 #' \tabular{ll}{
 #'    \strong{Deprecated name} \tab \strong{Current name} \cr
 #'    VolumetricFlowRate \tab PumpingFlowRate \cr
@@ -33,9 +53,9 @@
 #'    BFGvolt \tab BattVolt    \cr
 #' }
 #'
-#' For samples collected specifically using UPAS v2 firmware rev100, the
-#' deprecated names shown on the left will be updated to the current names shown
-#' on the right:
+#' If `update_names = TRUE`, then, for samples collected specifically using UPAS
+#' v2 firmware rev100, the deprecated names shown on the left will be updated to
+#' the current names shown on the right:
 #' \tabular{ll}{
 #'    \strong{Deprecated name} \tab \strong{Current name} \cr
 #'    UTCDateTime     \tab DateTimeUTC \cr
@@ -43,36 +63,22 @@
 #'    UPASLogFilename \tab LogFilename    \cr
 #' }
 #'
-#' Variable names cannot be updated for log files written using UPAS v2 firmware
-#' versions preceding rev100.
+#' If the GPSUTCOffset in the log file header is a whole number of hours, this
+#' function will be able to convert the DateTimeLocal variable in the sample log
+#' to a POSIXct object displayed in the local time zone automatically, without
+#' the `tz` argument being specified.  If the GPSUTCOffset is not a whole number
+#' of hours, it's better to specify the local time zone as a character string
+#' using the `tz` argument.
 #'
-#' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
+#' If the `cols_keep` or `cols_drop` arguments are specified, column selection
+#' will occur in the same order in which these function arguments are specified
+#' above. In other words, columns specified in `cols_keep` will be selected
+#' first. If the `cols_keep` argument is not specified, all columns will be
+#' kept.  Then, The columns specified in `cols_drop` will be dropped.  If the
+#' `cols_drop` argument is not specified, no columns will be dropped.
 #'
-#' Example tz database time zones include: "America/New_York", "America/Denver", and "America/Los_Angeles".
-#' For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
-#'
-#' If your GPSUTCOffset is a whole number of hours, this function will be able
-#' to automatically convert the DateTimeLocal variable in the sample log to a
-#' POSIXct object displayed in the local time zone, without this tz parameter
-#' being specified.  If your GPSUTCOffset is not a whole number of hours, it's
-#' better to specify the local time zone as a character string here.
-#'
-#' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.
-#' @param cols_drop Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.
-#'
-#' Column selection will occur in the same order in which the function arguments are specified above.
-#' In other words, the columns specified in cols_keep will be selected first.
-#' If the cols_keep argument is not specified, all columns will be kept.  Then,
-#' The columns specified in cols_drop will be dropped.  If the cols_drop
-#' argument is not specified, no columns will be dropped.
-#'
-#' @return A data frame of of sample log data that are formatted and ready for analysis.
-#' This data frame will contain one row for each timestamp in the sample log.
-#' All variables in the log file header will be included in the data frame.
-#' Additionally, columns with key header data will be appended to the sample log
-#' columns to aid in identification and analysis of unique samples.
-#'
-#' For all log files, the following columns will be appended:
+#' The data frame returned by this function will include all variables from the
+#' sample log.  For all log files, the following columns will also be appended:
 #' \itemize{
 #'    \item SampleName: A string indicating the user-supplied sample name
 #'    \item UserTZ: A boolean value indicating whether the `tz` argument was supplied to this function
@@ -90,7 +96,7 @@
 #'    \item VolumetricFlowRateSet: (UPAS v2.1 and UPAS v2.1 PLUS only)
 #' }
 #'
-#' #' For HHB v2 log files, the following columns will be appended:
+#' For HHB v2 log files, the following columns will be appended:
 #' \itemize{
 #'    \item DateTimeLocal: DateTimeUTC displayed in the local time zone
 #'    \item HHBserial: The HHB serial ID

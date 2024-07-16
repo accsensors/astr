@@ -15,11 +15,17 @@
 #' for each sample.
 #'
 #' @param file Any Access Sensor Technologies air sampler log file name.
-#' @param update_names Option to update any deprecated variable names from log files written using older firmware versions to the variable names used in the current firmware version.
+#' @param update_names Option to update any deprecated variable names from log
+#' files written using older firmware versions to the variable names used in the
+#' current firmware version. Variable names cannot be updated for log files
+#' written using UPAS v2 firmware versions preceding rev100.
 #'
-#' For samples collected using UPAS v2 firmware versions beyond rev100, the
-#' deprecated names shown on the left will be updated to the current names shown
-#' on the right:
+#' @return A data frame with a single row of header data that are formatted and ready for analysis.
+#'
+#' @details
+#' If `update_names = TRUE`, then, for samples collected using UPAS v2 firmware
+#' versions beyond rev100, the deprecated names shown on the left will be
+#' updated to the current names shown on the right:
 #' \tabular{ll}{
 #'    \strong{Deprecated name}  \tab \strong{Current name}  \cr
 #'    VolumetricFlowRate        \tab FlowRateSetpoint       \cr
@@ -29,8 +35,9 @@
 #'    AverageVolumetricFlowRate \tab PumpingFlowRateAverage \cr
 #' }
 #'
-#' For samples collected using UPAS v2 firmware rev100, the deprecated names
-#' shown on the left will be updated to the current names shown on the right:
+#' If `update_names = TRUE`, then, for samples collected using UPAS v2 firmware
+#' rev100, the deprecated names shown on the left will be updated to the current
+#' names shown on the right:
 #' \tabular{ll}{
 #'    \strong{Deprecated name} \tab \strong{Current name}  \cr
 #'    CumulativeSamplingTime   \tab LifetimeSampleRuntime  \cr
@@ -38,12 +45,9 @@
 #'    AverageVolumetricFlow    \tab PumpingFlowRateAverage \cr
 #' }
 #'
-#' Variable names cannot be updated for log files written using UPAS v2 firmware
-#' versions preceding rev100.
-#'
-#' @return A data frame with a single row of header data that are formatted and ready for analysis.
-#' All variables in the log file header will be included in the data frame.
-#' Additionally, for UPAS log files, the following columns will be appended:
+#' The data frame returned by this function will include all variables from the
+#' log file header. Additionally, for UPAS log files, the following columns will
+#' be appended:
 #' \itemize{
 #'    \item ASTSampler: A string indicating the model of the sampler, e.g., UPAS_v2
 #'    \item FirmwareRev: A numeric value indicating the firmware revision number
