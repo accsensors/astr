@@ -2,22 +2,33 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_log}
 \alias{shiny_log}
-\title{Format specific UPAS log file data frame columns
-to be more user friendly for the Shiny app}
+\title{Format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+log data frame columns
+for the online shinyAST app}
 \usage{
 shiny_log(df)
 }
 \arguments{
-\item{df}{Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.}
+\item{df}{A log data frame returned by the \code{\link[=read_ast_log]{read_ast_log()}} function
+with the argument \code{update_names = TRUE}.}
 }
 \value{
-A modified data frame with extraneous variables removed and
-formatted SampleTime for shiny app plots.
+A modified log data frame with extraneous variables removed,
+more used variables brought to the front of the data frame,
+and SampleTime formatted to hours for the online shinyAST app plots.
 }
 \description{
-Format specific UPAS log file data frame columns
-to be more user friendly for the Shiny app
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\code{shiny_log()} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+log data frame
+for use with the online shinyAST data analysis app.
+This function removes and reorders some columns to create a better user interface.
 }
 \examples{
-upasv2x_log_shiny <- shiny_log(upasv2x_log)
+multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
+    lapply(read_ast_log, update_names=TRUE) \%>\%
+    dplyr::bind_rows()
+
+upas_shiny_log <- shiny_log(multiple_upas_logs)
 }

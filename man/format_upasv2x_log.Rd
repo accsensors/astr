@@ -2,29 +2,68 @@
 % Please edit documentation in R/upasv2x.R
 \name{format_upasv2x_log}
 \alias{format_upasv2x_log}
-\title{Read the log data from an Access Sensor Technologies (AST) air sampler
-log file}
+\title{Format the sample log data from an Access Sensor Technologies UPAS v2.1 PLUS}
 \usage{
-format_upasv2x_log(df_h, df, tz_offset = NA, cols_keep = c(), cols_drop = c())
+format_upasv2x_log(
+  log,
+  header,
+  update_names = FALSE,
+  tz = NA,
+  cols_keep = c(),
+  cols_drop = c()
+)
 }
 \arguments{
-\item{df_h}{Pass a upasv2x header dataframe from read_ast_header function.}
+\item{log}{A data frame of UPAS v2.1 PLUS sample log data returned by the \code{\link[=fread_ast_log]{fread_ast_log()}} function.}
 
-\item{df}{Pass a upasv2x dataframe from read_ast_header function.}
+\item{header}{A data frame of UPAS v2.1 PLUS header data returned by the \code{\link[=read_ast_header]{read_ast_header()}} function.}
 
-\item{tz_offset}{Pass an optional timezone offset value.}
+\item{update_names}{Option to update any deprecated variable names from log
+files written using older firmware versions to the variable names used in
+the current firmware version. Variable names cannot be updated for log files
+written using UPAS v2 firmware versions preceding rev100.}
 
-\item{cols_keep}{Specify log file columns to keep.}
+\item{tz}{Optional: A character string specifying the tz database time zone
+that should be used to display local times. Example tz database time zones
+include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
 
-\item{cols_drop}{Specify log file columns to remove.}
+\item{cols_keep}{Optional: A character vector specifying the names of a subset of sample log columns to keep.}
+
+\item{cols_drop}{Optional: A character vector specifying the names of a subset of sample log columns to remove.}
 }
 \value{
-A modified data frame with all log data.
+A data frame of of UPAS v2.1 PLUS sample log data that are formatted and ready for analysis.
+This data frame will contain one row for each timestamp in the sample log.
 }
 \description{
-Read the log data from an Access Sensor Technologies (AST) air sampler
-log file
+#' @description
+\code{format_upasv2x_log()} Applies device-specific formatting to the columns of a
+sample log data frame returned by the \code{\link[=fread_ast_log]{fread_ast_log()}} function. It sets the
+proper data type for each variable and adds columns that aid in identifying
+unique log files when data from multiple sample logs have been combined into
+a single data frame.
 }
 \examples{
-upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
+upasv2x_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
+upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+upasv2x_log_raw <- fread_ast_log(upasv2x_file)
+upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
+upasv2x_log <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, update_names=FALSE)
+
+# Use of cols_drop, cols_keep, and tz  with a UPASv2x log file
+upasv2x_log_colsdrop <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
+                cols_drop = c("DateTimeLocal", "AtmoT", "AtmoP", "AtmoRH"))
+upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, tz="America/New_York",
+                cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
+                               "LocalTZ",  "UserTZ", "AtmoT", "AtmoP", "AtmoRH"))
+
+# Diagnostic file
+upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+                                  mustWork = TRUE)
+upasv2x_diag_log_raw <- fread_ast_log(upasv2x_diag_file)
+upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
+upasv2x_diag_log <- format_upasv2x_log(upasv2x_diag_log_raw, upasv2x_diag_header,
+                                  update_names=FALSE)
 }

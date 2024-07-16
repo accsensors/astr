@@ -1,90 +1,256 @@
-#'Rename UPAS header file data frame columns
-#'to be more user friendly for the Shiny app
+#'Create sample summary data frame from an Access Sensor Technologies (AST)
+#'UPAS v2 or UPAS v2.1 PLUS header data frame.
 #'
-#' @param df_h Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.
+#' @description
+#' `r lifecycle::badge("experimental")`
+#' `shiny_sample_summary()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
+#' for use with the Sample Summary tab in the online shinyAST data analysis app.
+#' This function sets the proper data type for each variable,
+#' appends a sample PASS/FAIL flag column,
+#' and adds units to the applicable variable names.
+#'
+#' @param df_h A header data frame returned by the [astr::read_ast_header()] function
+#' with the argument `update_names = TRUE`.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
-#' @return A modified data frame with units and user friendly column names for header data.
+#' @return A modified single row header data frame with select sample summary data.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header_shiny <- shiny_header(upasv2x_header)
-#' upasv2_header_shiny <- shiny_header(upasv2_header)
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_header, update_names=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' sample_summary <- shiny_sample_summary(multiple_upas_headers, fract_units=TRUE)
+
+shiny_sample_summary = function(df_h, fract_units=FALSE) {
+
+  df_h <- astr::shiny_success_flag(df_h)
+
+  df_h <- dplyr::select(df_h,
+                        dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
+                                        'SampleSuccess', 'OverallDuration',
+                                        'PumpingDuration', 'PumpingFlowRateAverage',
+                                        'OverallFlowRateAverage', 'SampledVolume',
+                                        'ShutdownReason'))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c('OverallDuration',
+                                                'PumpingDuration',
+                                                'PumpingFlowRateAverage',
+                                                'OverallFlowRateAverage',
+                                                'SampledVolume')),
+                                \(x) as.numeric(x)),
+                  dplyr::across(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName')),
+                                \(x) as.factor(x)))
+
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
+
+  return(df_h)
+}
+
+#'Create sample settings data frame from an Access Sensor Technologies (AST)
+#'UPAS v2 or UPAS v2.1 PLUS header data frame.
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#' `shiny_sample_settings()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
+#' for use with the Sample Settings tab in the online shinyAST data analysis app.
+#' This function sets the proper data type for each variable,
+#' appends a sample PASS/FAIL flag column,
+#' and adds units to the applicable variable names.
+#'
+#' @inheritParams shiny_sample_summary
+#'
+#' @return A modified single row header data frame with select sample settings data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_header, update_names=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' sample_settings <- shiny_sample_settings(multiple_upas_headers, fract_units=TRUE)
+
+shiny_sample_settings = function(df_h, fract_units=FALSE) {
+
+  df_h <- astr::shiny_success_flag(df_h)
+
+  df_h <- dplyr::select(df_h,
+                        dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName', 'CartridgeID',
+                                        'StartOnNextPowerUp','ProgrammedStartDelay',
+                                        'ProgrammedStartTime','ProgrammedRuntime',
+                                        'SizeSelectiveInlet','VolumetricFlowRateSet',
+                                        'FlowRateSetpoint','DutyCycle','FlowDutyCycle','GPSEnabled',
+                                        'PMSensorOperation','RTGasSampleState','LogInterval',
+                                        'PowerSaveMode','AppVersion','SampleSuccess'))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName')),
+                                \(x) as.factor(x)))
+
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
+
+  return(df_h)
+}
+
+#'Create sample operation data frame from an Access Sensor Technologies (AST)
+#'UPAS v2 or UPAS v2.1 PLUS header data frame.
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#' `shiny_sample_operation()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
+#' for use with the UPAS Operation tab in the online shinyAST data analysis app.
+#' This function sets the proper data type for each variable,
+#' appends a sample PASS/FAIL flag column,
+#' and adds units to the applicable variable names.
+#'
+#' @inheritParams shiny_sample_summary
+#'
+#' @return A modified single row header data frame with select sample operation data.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_header, update_names=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' sample_operation <- shiny_sample_operation(multiple_upas_headers, fract_units=TRUE)
+
+shiny_sample_operation = function(df_h, fract_units=FALSE) {
+
+  df_h <- astr::shiny_success_flag(df_h)
+
+  df_h <- dplyr::select(df_h,
+                        dplyr::any_of(c('ASTSampler','UPASserial', 'SampleName',
+                                        'CartridgeID','StartDateTimeUTC','EndDateTimeUTC',
+                                        'StartBatteryVoltage','EndBatteryVoltage',
+                                        'StartBatteryCharge','EndBatteryCharge','GPSUTCOffset',
+                                        'FirmwareRev','ShutdownReason','SampleSuccess'))) %>%
+    dplyr::mutate(dplyr::across(dplyr::any_of(c('ASTSampler', 'UPASserial', 'SampleName')),
+                                \(x) as.factor(x)))
+
+    df_h <- astr::shiny_header(df_h, fract_units=fract_units)
+
+  return(df_h)
+}
+
+#'Rename and format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+#'header data frame columns and add units
+#'for the online shinyAST app
+#'
+#' @description
+#' `r lifecycle::badge("experimental")`
+#' `shiny_header()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' header data frame
+#' for use with the online shinyAST data analysis app.
+#' This function adds units to the applicable variable names.
+#'
+#' @inheritParams shiny_sample_summary
+#'
+#' @return A modified single row header data frame with column names and units
+#' for the online shinyAST app.
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'         lapply(read_ast_header, update_names = TRUE) %>%
+#'         dplyr::bind_rows()
+#'
+#' upas_shiny_header <- shiny_header(multiple_upas_headers)
 
 shiny_header = function(df_h, fract_units = FALSE) {
 
   if(("ProgrammedRuntime") %in% colnames(df_h)){
     df_h <- df_h %>%
       dplyr::mutate(ProgrammedRuntime =
-                      ifelse(ASTSampler=="UPAS_v2_0",
-                             ifelse(ProgrammedRuntime==360000000, "indefinite", ProgrammedRuntime/3600),
-                             ProgrammedRuntime))
+                      ifelse(.data$ASTSampler=="UPAS_v2_0",
+                             # convert to hours for UPASv2
+                             ifelse(.data$ProgrammedRuntime==360000000, "indefinite", .data$ProgrammedRuntime/3600),
+                             # Since ProgrammedRuntime is numeric, indefinite values for UPASv2x are normally displayed as NA,
+                             # but for the shinyAST app these should be displayed as "indefinite"
+                             ifelse(is.na(.data$ProgrammedRuntime), "indefinite", .data$ProgrammedRuntime)),
+                    # Make sure this column is a character to prevent row binding issues when reading multiple files
+                    ProgrammedRuntime = as.character(.data$ProgrammedRuntime))
   }
 
+  df_h <- dplyr::rename(df_h, dplyr::any_of(
+    c("LifetimeSampleCount (#)"           = "LifetimeSampleCount",
+      "LifetimeSampleRuntime (Hr)"        = "LifetimeSampleRuntime",
+      "LifetimeBatteryRuntime (Hr)"       = "LifetimeBatteryRuntime",
+      "LifetimeSamplePumptime (Hr)"       = "LifetimeSamplePumptime",
+      "LifetimePMSensorFanStartCount (#)" = "LifetimePMSensorFanStartCount",
+      "LifetimePMSensorFanHours (Hr)"     = "LifetimePMSensorFanHours",
+      "LifetimePMSensorPMMC (mg)"         = "LifetimePMSensorPMMC",
+      "LifetimeCO2SensorHours (Hr)"       = "LifetimeCO2SensorHours",
+      "LifetimeVOCSensorHours (Hr)"       = "LifetimeVOCSensorHours",
 
-  df_h <- df_h %>%
-    dplyr::rename_with(
-      ~ dplyr::case_when(
-        . == "LifetimeSampleCount" ~ "LifetimeSampleCount (#)",
-        . == "LifetimeSampleRuntime" ~ "LifetimeSampleRuntime (Hr)",
+      # SETUP SUMMARY
+      "GPSUTCOffset (Hr)"                 = "GPSUTCOffset",
+      "StartOnNextPowerUp"                = "StartOnNextPowerUp",
+      "ProgrammedStartTime (sec since 1/1/1970)" = "ProgrammedStartTime",
+      "ProgrammedRuntime (Hr)"            = "ProgrammedRuntime",
+      "FlowRateSetpoint (L min^-1)"       = "FlowRateSetpoint",
+      "FlowOffset (%)"                    = "FlowOffset",
+      "FlowDutyCycle (%)"                 = "FlowDutyCycle",
+      "DutyCycleWindow (s)"               = "DutyCycleWindow",
+      "LogInterval (s)"                   = "LogInterval",
 
-        #SETUP SUMMARY
-        . == "GPSUTCOffset" ~ "GPSUTCOffset (Hr)",
-        # . == "StartOnNextPowerUp" ~ "StartOnNextPowerUp (0=no 1=yes)",
-        . == "ProgrammedStartTime" ~ "ProgrammedStartTime (sec since 1/1/1970)",
-        . == "ProgrammedRuntime" ~ "ProgrammedRuntime (Hr)",
-        . == "FlowRateSetpoint" ~ "FlowRateSetpoint (L min^-1)",
-        . == "FlowOffset" ~ "FlowOffset (%)",
-        . == "FlowCheckMeterReadingPreSample" ~ "FlowCheckMeterReadingPreSample (L min^-1)",
-        . == "FlowCheckMeterReadingPostSample" ~ "FlowCheckMeterReadingPostSample (L min^-1)",
-        . == "FlowDutyCycle" ~ "FlowDutyCycle (%)",
-        . == "DutyCycleWindow" ~ "DutyCycleWindow (s)",
-        # . == "PMSensorInterval" ~ "PMSensorInterval",
-        . == "LogInterval" ~ "LogInterval (s)",
+      # SAMPLE SUMMARY
+      # "StartDateTimeUTC (YYYY-MM-DDTHH:MM:SS)"   = "StartDateTimeUTC",
+      # "EndDateTimeUTC (YYYY-MM-DDTHH:MM:SS)"     = "EndDateTimeUTC",
+      # "StartDateTimeLocal (YYYY-MM-DDTHH:MM:SS)" = "StartDateTimeLocal",
+      # "EndDateTimeLocal (YYYY-MM-DDTHH:MM:SS)"   = "EndDateTimeLocal",
+      "FlowCheckMeterReadingPreSample (L min^-1)"  = "FlowCheckMeterReadingPreSample",
+      "FlowCheckMeterReadingPostSample (L min^-1)" = "FlowCheckMeterReadingPostSample",
+      "OverallDuration (Hr)"              = "OverallDuration",
+      "PumpingDuration (Hr)"              = "PumpingDuration",
+      "OverallFlowRateAverage (L min^-1)" = "OverallFlowRateAverage",
+      "PumpingFlowRateAverage (L min^-1)" = "PumpingFlowRateAverage",
+      "SampledVolume (L)"                 = "SampledVolume",
+      "PercentTimeWorn (%)"               = "PercentTimeWorn",
+      "StartBatteryCharge (%)"            = "StartBatteryCharge",
+      "EndBatteryCharge (%)"              = "EndBatteryCharge",
+      "StartBatteryVoltage (V)"           = "StartBatteryVoltage",
+      "EndBatteryVoltage (V)"             = "EndBatteryVoltage",
 
-        #SAMPLE SUMMARY
-        # . == "StartDateTimeUTC" ~ "StartDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
-        # . == "EndDateTimeUTC" ~ "EndDateTimeUTC (YYYY-MM-DDTHH:MM:SS)",
-        # . == "StartDateTimeLocal" ~ "StartDateTimeLocal (YYYY-MM-DDTHH:MM:SS)",
-        # . == "EndDateTimeLocal"  ~ "EndDateTimeLocal (YYYY-MM-DDTHH:MM:SS)" ,
-        . == "OverallDuration" ~ "OverallDuration (Hr)",
-        . == "PumpingDuration" ~ "PumpingDuration (Hr)",
-        . == "OverallFlowRateAverage" ~ "OverallFlowRateAverage (L min^-1)",
-        . == "PumpingFlowRateAverage" ~ "PumpingFlowRateAverage (L min^-1)",
-        . == "SampledVolume" ~ "SampledVolume (L)",
-        . == "StartBatteryCharge" ~ "StartBatteryCharge (%)",
-        . == "EndBatteryCharge" ~ "EndBatteryCharge (%)",
-        . == "StartBatteryVoltage" ~ "StartBatteryVoltage (V)",
-        . == "EndBatteryVoltage" ~ "EndBatteryVoltage (V)",
+      # CO2 SENSOR CALIBRATION
+      # "CO2CalDate (YYYY-MM-DDTHH:MM:SS)" = "CO2CalDate",
+      "CO2CalTarget (ppm)"                = "CO2CalTarget",
+      "CO2CalOffset (ppm)"                = "CO2CalOffset",
 
-        #MASS FLOW SENSOR CALIBRATION
-        . == "MFSCalDate" ~ "MFSCalDate (YYYY-MM-DDTHH:MM:SS)",
-        . == "MFSCalVoutBlocked" ~ "MFSCalVoutBlocked (V)",
-        . == "MFSCalVoutMin" ~ "MFSCalVoutMin (V)",
-        . == "MFSCalVoutMax" ~ "MFSCalVoutMax (V)",
-        . == "MFSCalMFBlocked" ~ "MFSCalMFBlocked (g min^-1)",
-        . == "MFSCalMFMin" ~ "MFSCalMFMin (g min^-1)",
-        . == "MFSCalMFMax" ~ "MFSCalMFMax (g min^-1)",
-        . == "MFSCalPumpVBoostMin" ~ "MFSCalPumpVBoostMin (V)",
-        . == "MFSCalPumpVBoostMax" ~ "MFSCalPumpVBoostMax (V)",
-        . == "MFSCalPDeadhead" ~ "MFSCalPDeadhead (Pa)" ,
-        . == "MF4" ~ "MF4 (coefficient)",
-        . == "MF3" ~ "MF3 (coefficient)",
-        . == "MF2" ~ "MF2 (coefficient)",
-        . == "MF1"  ~ "MF1 (coefficient)" ,
-        . == "MF0" ~ "MF0 (coefficient)",
+      # MASS FLOW SENSOR CALIBRATION
+      # "MFSCalDate (YYYY-MM-DDTHH:MM:SS)" = "MFSCalDate",
+      "MFSCalVoutBlocked (V)"     = "MFSCalVoutBlocked",
+      "MFSCalVoutMin (V)"         = "MFSCalVoutMin",
+      "MFSCalVoutMax (V)"         = "MFSCalVoutMax",
+      "MFSCalMFBlocked (g min^-1)"= "MFSCalMFBlocked",
+      "MFSCalMFMin (g min^-1)"    = "MFSCalMFMin",
+      "MFSCalMFMax (g min^-1)"    = "MFSCalMFMax",
+      "MFSCalPumpVBoostMin (V)"   = "MFSCalPumpVBoostMin",
+      "MFSCalPumpVBoostMax (V)"   = "MFSCalPumpVBoostMax",
+      "MFSCalPDeadhead (Pa)"      = "MFSCalPDeadhead",
+      "MF4 (coefficient)"         = "MF4",
+      "MF3 (coefficient)"         = "MF3",
+      "MF2 (coefficient)"         = "MF2",
+      "MF1 (coefficient)"         = "MF1",
+      "MF0 (coefficient)"         = "MF0",
 
-        #v2 Specific when update_names = FALSE
-        . == "ProgrammedStartDelay" ~ "ProgrammedStartDelay (s)",
-        . == "VolumetricFlowRate" ~ "VolumetricFlowRate",
-        . == "DutyCycle" ~ "DutyCycle (%)",
-        . == "LogFileMode" ~ "LogFileMode (0=normal 1=debug)",
-        . == "SampledRuntime" ~ "SampledRuntime (Hr)",
-        . == "LoggedRuntime" ~ "LoggedRuntime (Hr)",
-        . == "AverageVolumetricFlowRate" ~ "AverageVolumetricFlowRate (L min^-1)",
-
-        TRUE ~ .))
+      #UPASv2 Specific when update_names = FALSE
+      "ProgrammedStartDelay (s)"      = "ProgrammedStartDelay",
+      "VolumetricFlowRate (L min^-1)" = "VolumetricFlowRate",
+      "DutyCycle (%)"                 = "DutyCycle",
+      "SampledRuntime (Hr)"           = "SampledRuntime",
+      "LoggedRuntime (Hr)"            = "LoggedRuntime",
+      "AverageVolumetricFlowRate (L min^-1)" = "AverageVolumetricFlowRate"
+      )))
 
   if(fract_units) {
     colnames(df_h) <- shiny_units(colnames(df_h))
@@ -93,30 +259,62 @@ shiny_header = function(df_h, fract_units = FALSE) {
   return(df_h)
 }
 
-#'Format specific UPAS log file data frame columns
-#'to be more user friendly for the Shiny app
+#'Format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+#'log data frame columns
+#'for the online shinyAST app
 #'
-#' @param df Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.
+#' @description
+#' `r lifecycle::badge("experimental")`
+#' `shiny_log()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' log data frame
+#' for use with the online shinyAST data analysis app.
+#' This function removes and reorders some columns to create a better user interface.
 #'
-#' @return A modified data frame with extraneous variables removed and
-#' formatted SampleTime for shiny app plots.
+#' @param df A log data frame returned by the [astr::read_ast_log()] function
+#' with the argument `update_names = TRUE`.
+#'
+#' @return A modified log data frame with extraneous variables removed,
+#' more used variables brought to the front of the data frame,
+#' and SampleTime formatted to hours for the online shinyAST app plots.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_log_shiny <- shiny_log(upasv2x_log)
+#' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_log, update_names=TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' upas_shiny_log <- shiny_log(multiple_upas_logs)
 
 shiny_log = function(df) {
 
   df <- df %>%
     dplyr::select(!dplyr::any_of(c("tz_value",
-                   "TZOffset",                 
-                   "ASTSampler",
-                   "SampleName",
-                   "CartridgeID",
+                   "LocalTZ",
+                   "UnixTimeMCU",
+                   # "ASTSampler",
+                   # "SampleName",
+                   # "CartridgeID",
                    "StartDateTimeUTC",
                    "LogFileMode",
-                   "LogFilename"))) %>%
+                   "LogFilename",
+                   "IAQStabStat",
+                   "IAQRunIn",
+                   "IAQRes",
+                   "IAQ",
+                   "IAQAcc",
+                   "StaticIAQ",
+                   "StaticIAQAcc",
+                   "CO2e",
+                   "CO2eAcc",
+                   "bVOC",
+                   "bVOCAcc",
+                   "gasComp",
+                   "gasCompAcc",
+                   "gasPerc",
+                   "gasPercAcc",
+                   "UserTZ"))) %>%
     dplyr::relocate(dplyr::any_of(c("SampleTime",
                     "DateTimeUTC",
                     "DateTimeLocal",
@@ -132,45 +330,63 @@ shiny_log = function(df) {
                     "AtmoP",
                     "AtmoRH",
                     "AtmoDensity",
-                    "AtmoAlt")))
-  
-
+                    "AtmoAlt"))) %>%
+    dplyr::relocate(dplyr::any_of(c("ASTSampler",
+                                 "UPASserial",
+                                 "SampleName",
+                                 "CartridgeID")), .after = dplyr::last_col())
 
   if("SampleTime" %in% colnames(df)){
-    df <- df %>% dplyr::mutate(SampleTime = as.numeric(SampleTime, units="hours"))
+    df <- df %>% dplyr::mutate(SampleTime = as.numeric(.data$SampleTime, units="hours"))
   }
 
   return(df)
 }
 
-#'Rename UPAS log file single column name
-#'to be more user friendly for the Shiny app plot
+#'Rename an Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+#'log file single column name and add units for the online shinyAST app
 #'
-#' @param clm_name Pass a UPAS v2 or v2+ log column name from a formatted data frame.
+#' @description
+#' `r lifecycle::badge("experimental")`
+#'
+#' @param col_name A UPAS v2 or UPAS v2.1 PLUS log column name from a data frame
+#' returned by the [astr::read_ast_log()] function
+#' with the argument `update_names = TRUE`.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
-#' @return A modified column name for plot axis label in shinyAST app.
+#' @return A modified column name for plot axis labels in the online shinyAST app.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' plot_label <- shiny_axis(colnames(upasv2x_log))
+#' upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+#' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_log <- read_ast_log(upasv2x_file, update_names=TRUE) %>%
+#' shiny_log()
+#'
+#' upasv2x_clm_names <- colnames(upasv2x_log)
+#'
+#' plotx_label <- shiny_axis("SampleTime", fract_units = FALSE)
+#' ploty_label <- shiny_axis("PumpingFlowRate", fract_units = TRUE)
 
-shiny_axis = function(clm_name, fract_units = FALSE){
+shiny_axis = function(col_name, fract_units = FALSE){
 
-  #TODO Check that this covers all possible log file variables (might be nice to add standard v2 log file titles so this can be used with standard v2 file)
   df <- data.frame(SampleTime = c("Sample Time", "(Hr)"),
                   UnixTime = c("Unix Time", "(s)"),
+                  UnixTimeMCU = c("Unix Time MCU", "(s)"),
                   DateTimeUTC = c("Date Time UTC", ""),
                   DateTimeLocal = c("Date Time Local", ""),
-                  TZOffset = c("Time Zone Offset", "(Hr)"),
+                  LocalTZ = c("Local Timezone", ""),
                   PumpingFlowRate = c("Pumping Flow Rate", "(L min^-1)"),
+                  OverallFlowRate = c("Overall Flow Rate", "(L min^-1)"),
                   SampledVolume = c("Sampled Volume", "(L)"),
                   FilterDP = c("Filter Differential Pressure", "(Pa)"),
+                  BatteryCharge = c("Battery Charge", "(%)"),
                   AtmoT = c("Atmospheric T", "(C)"),
                   AtmoP = c("Atmospheric P", "(hPa)"),
                   AtmoRH = c("Atmospheric RH", "(%RH)"),
                   AtmoDensity = c("Atmospheric Density", "(g L^-1)"),
+                  AtmoAlt = c("Altitude Above Sea Level", "(m)"),
                   GPSQual = c("GPS Signal Quality", "(NMEA Standard)"),
                   GPSlat = c("GPS Latitude", "(decimalDegrees)"),
                   GPSlon = c("GPS Longitude", "(decimalDegrees)"),
@@ -179,10 +395,6 @@ shiny_axis = function(clm_name, fract_units = FALSE){
                   GPSspeed = c("GPS Measured Speed", "(m s^-1)"),
                   GPShDOP = c("GPS Horizontal Dilution of Precision", ""),
 
-                  UnixTimeMCU = c("Unix Time MCU", "(s)"),
-                  OverallFlowRate = c("Overall Flow Rate", "(L min^-1)"),
-                  BatteryCharge = c("Battery Charge", "(%)"),
-                  AtmoAlt = c("Altitude Above Sea Level", "(m)"),
                   AccelX = c("X Acceleration", "(mg)"),
                   AccelXVar = c("X Acceleration Variance", "(mg)"),
                   AccelXMin = c("X Acceleration Minimum", "(mg)"),
@@ -274,207 +486,92 @@ shiny_axis = function(clm_name, fract_units = FALSE){
                   SCDRH = c("CO2 Sensor RH", "(%RH)"),
                   VOCRaw = c("VOC Sensor Raw Output", ""),
                   NOXRaw = c("NOx Sensor Raw Output", ""),
+                  AccelComplianceCnt = c("Accelerometer Compliance Count", "(#)"),
+                  AccelComplianceHrs = c("Accelerometer Compliance Time", "(hrs)"),
+                  PMReadingErrorCnt = c("Accelerometer Compliance Time", "(hrs)"),
+                  PMFanErrorCnt = c("SPS30 Fan Errors per Logging Period", "(#)"),
+                  PMLaserErrorCnt = c("SPS30 Laser Errors per Logging Period", "(#)"),
+                  PMFanSpeedWarn = c("SPS30 Fan Speed Errors per Logging Period", "(#)"),
                   row.names = c("axis_name", "unit")
                   )
 
     df_sel <- df %>%
-      dplyr::select(dplyr::any_of(clm_name))
+      dplyr::select(dplyr::any_of(col_name))
 
-    clm_name <- paste(df_sel["axis_name",], df_sel["unit",], sep=" ")
+    col_name <- paste(df_sel["axis_name",], df_sel["unit",], sep=" ")
 
-    # df_long <- df %>%
-    #   t()
-    #
-    # df_long <- cbind(rownames(df_long), data.frame(df_long, row.names=NULL)) %>%
-    #   dplyr::rename(`var` = `rownames(df_long)`)
+    if(fract_units){col_name <- shiny_units(col_name)}
 
-    # clm_name <- df_long %>%
-    #   dplyr::filter(var == clm_name)
-    #
-    # clm_name <- paste(clm_name$axis_name, clm_name$unit, sep=" ")
-
-    if(fract_units){clm_name <- shiny_units(clm_name)}
-
-  return(clm_name)
+  return(col_name)
 }
 
-#'Reformat units for shinyAST app
+#'Reformat Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+#'data frame units to be fractional for online shinyAST app
 #'
-#' @param vect Pass a vector.
+#' @description
+#' `r lifecycle::badge("experimental")`
 #'
-#' @return A vector with fractional units instead of the
-#' standard UPASv2 and UPASv2+ log file unit format
+#' @param col_names_vect Pass a vector of column names.
+#' A UPAS v2 or UPAS v2.1 PLUS vector of column names from a data frame
+#' returned by the [astr::read_ast_header()] or [astr::read_ast_log()] function
+#' with the argument `update_names = TRUE`.
+#'
+#' @return A vector of column names with fractional units (L/min) instead of the
+#' standard UPASv2 and UPASv2+ log file unit format (L min^-1).
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_header, update_names = TRUE) %>%
+#'     dplyr::bind_rows()
 #'
+#' upas_shiny_header <- shiny_header(multiple_upas_headers)
+#' upas_standard_units <- colnames(upas_shiny_header)
+#' upas_shiny_units <- shiny_units(upas_standard_units)
+#' setdiff(upas_shiny_units, upas_standard_units)
 
-shiny_units = function(vect){
-  vect <- gsub("L min^-1", "L/min", fixed=TRUE,
+shiny_units = function(col_names_vect){
+  col_names_vect <- gsub("L min^-1", "L/min", fixed=TRUE,
           gsub("(g L^-1)", "(g/L)", fixed=TRUE,
           gsub("(m s^-1)", "(m/s)", fixed=TRUE,
           gsub("mdeg s^-1)", "(mdeg/s)", fixed=TRUE,
           gsub("(ug m^-3)", "(ug/m^3)", fixed=TRUE,
           gsub("(# cm^-3)", "(#/cm^3)", fixed=TRUE,
           gsub("(g min^-1)", "(g/min)", fixed=TRUE,
-               x=vect)))))))
+               x=col_names_vect)))))))
 
-  return(vect)
+  return(col_names_vect)
 }
 
-#'Add a flag to the shiny header indicating a failed sample.
-#'Can be used to highlight rows in the shinyAST app
+#'Add a flag to a UPAS v2 or UPAS v2.1 PLUS header data frame to indicate PASS/FAIL for a sample.
 #'
-#' @param df_h Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.
+#' @description
+#' `r lifecycle::badge("experimental")`
 #'
-#' @return A modified data frame with a flag indicating a failed sample.
+#' @param df_h A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the [astr::read_ast_header()] function.
+#'
+#' @return A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to indicate sample PASS/FAIL
+#' based off the sample `ShutdownMode`.
 #' @export
 #' @importFrom rlang .data
 #'
 #' @examples
-#' upasv2x_header_flagged <- shiny_flag(upasv2x_header)
-#' upasv2_header_flaggged <- shiny_flag(upasv2_header)
+#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+#'     lapply(read_ast_header, update_names = TRUE) %>%
+#'     dplyr::bind_rows()
+#'
+#' upas_headers_flagged <- shiny_success_flag(multiple_upas_headers)
 
-shiny_flag = function(df_h) {
+shiny_success_flag = function(df_h) {
 
   df_h <- df_h %>%
     dplyr::mutate(SampleSuccess = dplyr::case_when(
-                                            # ProgrammedRuntime=="indefinite" ~ "PASS",
-                                            # OverallDuration!=ProgrammedRuntime ~ "FAIL",
-                                            ShutdownMode == 1  ~ "PASS",
-                                            ShutdownMode == 3 ~ "PASS",
-                                            TRUE ~ "FAIL"
+                                      df_h$ShutdownMode == 1 ~ "PASS",
+                                      df_h$ShutdownMode == 3 ~ "PASS",
+                                      .default = "FAIL"
                                             ))
   return(df_h)
 }
-
-#'Calculate 30 second averages for select variables
-#'
-#' @param df Pass a UPAS v2 or v2+ log data frame from 'read_ast_log' function.
-#'
-#' @return A modified data frame with 30 second mean data for select variables.
-#' @export
-#' @importFrom rlang .data
-#'
-#' @examples
-#' upasv2x_30s_mean <- get_30s_mean(upasv2x_log)
-
-get_30s_mean = function(df) {
-
-  df_30s_mean <- df %>%
-    dplyr::select(
-      dplyr::any_of(c("UPASserial",
-                      "DateTimeLocal",
-                      "PM2_5MC",
-                      "AccelX",
-                      "AccelY",
-                      "AccelZ",
-                      "CO2",
-                      "GPSlat",
-                      "GPSlon")))%>%
-    dplyr::mutate(datetime_local_rounded = lubridate::floor_date(DateTimeLocal, "30 sec")) %>%
-    dplyr::group_by(UPASserial, datetime_local_rounded)%>%
-    #TODO make the mutate check if the variable exists so no errors are thrown
-          # for past firmware versions
-    dplyr::mutate(mean30PM2_5MC = mean(PM2_5MC, na.rm = T),
-                  var30PM2_5MC = var(PM2_5MC, na.rm = T),
-                  mean30AccelX = mean(AccelX, na.rm = T),
-                  var30AccelX = var(AccelX, na.rm = T),
-                  mean30AccelY = mean(AccelY, na.rm = T),
-                  var30AccelY = var(AccelY, na.rm = T),
-                  mean30AccelZ = mean(AccelZ, na.rm = T),
-                  var30AccelZ = var(AccelZ, na.rm = T),
-                  # mean30CO2 = mean(CO2, na.rm = T),
-                  # var30CO2 = var(CO2, na.rm = T),
-                  mean30GPSlat = mean(GPSlat, na.rm = T),
-                  mean30GPSlon = mean(GPSlon, na.rm = T)) %>%
-    dplyr::select(UPASserial, datetime_local_rounded, mean30PM2_5MC:mean30GPSlon) %>%
-    dplyr::distinct() %>%
-    dplyr::ungroup() %>%
-    dplyr::group_by(UPASserial) %>%
-    dplyr::mutate(compliance = ifelse((var30AccelX > 100) | (var30AccelY > 100) | (var30AccelZ > 100), 1, 0),
-                  compliance_rollmean = ifelse(
-                    as.numeric(zoo::rollapply(compliance, width=20,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA)) > 0, 1, 0))
-  # dplyr::mutate(mean30AccelX = zoo::rollapply(AccelX, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               var30AccelX = zoo::rollapply(AccelX, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               mean30AccelY = zoo::rollapply(AccelY, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               var30AccelY = zoo::rollapply(AccelY, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               mean30AccelZ = zoo::rollapply(AccelZ, width=30,  FUN = mean, align = "center", na.rm = TRUE, partial=F, fill = NA),
-  #               var30AccelZ = zoo::rollapply(AccelZ, width=30,  FUN = var, align = "center", na.rm = TRUE, partial=F, fill = NA))
-
-  # df_30s_mean <- df_30s_mean %>%
-  #   dplyr::group_by(UPASserial) %>%
-  #   dplyr::summarise(compliance_hours = sum(compliance_rollmean, na.rm = T)/2/60,
-  #                    compliance_percent = sum(compliance_rollmean, na.rm = T)/n())
-
-  return(df_30s_mean)
-}
-
-#'Generate a gps map from a data frame with time-averaged data
-#'
-#' @param df Pass a UPAS v2+ log data frame from 'get_30s_mean' function.
-#'
-#' @return A leaflet map of 30s averages of the selected variable.
-#' @export
-#' @importFrom rlang .data
-#'
-#' @examples
-#'
-
-#TODO add variable input so user can specify variable to be mapped (PM or CO2 and more)
-gps_map = function(df) {
-
-  if(("mean30PM2_5MC") %in% colnames(df)){
-  gpsPMPlot_data <- df %>%
-    dplyr::select(UPASserial, datetime_local_rounded, mean30GPSlat, mean30GPSlon, mean30PM2_5MC) %>%
-    dplyr::mutate(aqi = as.factor(dplyr::case_when(
-      mean30PM2_5MC<12.0 ~ "Good",
-      mean30PM2_5MC<35.4 ~ "Moderate",
-      mean30PM2_5MC<55.4 ~ "USG",
-      mean30PM2_5MC<150.4 ~ "Unhealthy",
-      mean30PM2_5MC<250.4 ~ "Very Unhealthy",
-      TRUE ~ "Hazardous"))) %>%
-    dplyr::filter(!is.na(mean30PM2_5MC), !is.na(mean30GPSlat), !is.na(mean30GPSlon))
-
-  sp::coordinates(gpsPMPlot_data)<- ~mean30GPSlon + mean30GPSlat
-  # crs(gpsPMPlot_data) <- CRS("+init=epsg:4326")
-
-  pal <- leaflet::colorBin(
-    palette = c("#47AF22", "#EEEE22", "#FF8B14","#FF0000","#800080","#581D00"),
-    domain = gpsPMPlot_data$mean30PM2_5MC,
-    bins = c(0, 12.0, 35.4, 55.4, 150.4, 250.4, Inf)
-  )
-
-  pm25_leaflet <- leaflet::leaflet(gpsPMPlot_data) %>% leaflet::addTiles()
-
-  pm25_leaflet <- pm25_leaflet %>%
-    leaflet::addCircleMarkers(
-      color=~pal(mean30PM2_5MC),
-      popup=paste("PM2.5 (&#181g/m<sup>3</sup>):", round(gpsPMPlot_data$mean30PM2_5MC, digits=2),
-                  "<br>","UPAS:", gpsPMPlot_data$UPASserial,
-                  "<br>","Local Time:", gpsPMPlot_data$datetime_local_rounded), stroke = FALSE,
-      radius = 7.5, fillOpacity = 0.7 , group = as.factor(gpsPMPlot_data$UPASserial)) %>%
-    leaflet::addLayersControl(overlayGroups = (as.factor(gpsPMPlot_data$UPASserial)),
-                      options = leaflet::layersControlOptions(collapsed = FALSE)) %>%
-    leaflet::addLegend("topright",
-                       pal = pal,
-                       values = gpsPMPlot_data$mean30PM2_5MC,
-                       title = "PM2.5 (&#181g/m<sup>3</sup>)",
-                       opacity = 0.9)
-
-  # return(gpsPMPlot_data)
-  return(pm25_leaflet)
-  }
-
-  # Throw error if no 30s averaged PM data to map
-  else{
-    error <- "No PM data in log file"
-
-    return(error)
-
-  }
-
-}
-
-

@@ -2,25 +2,59 @@
 % Please edit documentation in R/upasv2.R
 \name{format_upasv2_log}
 \alias{format_upasv2_log}
-\title{Read the log data from a UPASv2 log file}
+\title{Format the sample log data from an Access Sensor Technologies UPAS v2}
 \usage{
-format_upasv2_log(df_h, df_raw, tz_offset = NA, update_names = FALSE)
+format_upasv2_log(
+  log,
+  header,
+  update_names = FALSE,
+  tz = NA,
+  cols_keep = c(),
+  cols_drop = c()
+)
 }
 \arguments{
-\item{df_h}{A UPASv2 header dataframe}
+\item{log}{A data frame of UPAS v2 sample log data returned by the \code{\link[=fread_ast_log]{fread_ast_log()}} function.}
 
-\item{df_raw}{A UPASv2 raw dataframe}
+\item{header}{A data frame of UPAS v2 header data returned by the \code{\link[=read_ast_header]{read_ast_header()}} function.}
 
-\item{tz_offset}{Pass an option timezone offset.}
+\item{update_names}{Option to update any deprecated variable names from log
+files written using older firmware versions to the variable names used in
+the current firmware version. Variable names cannot be updated for log files
+written using UPAS v2 firmware versions preceding rev100.}
 
-\item{update_names}{Option to update old sampler names to latest version.}
+\item{tz}{Optional: A character string specifying the tz database time zone
+that should be used to display local times. Example tz database time zones
+include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
+
+\item{cols_keep}{Optional: A character vector specifying the names of a subset of sample log columns to keep.}
+
+\item{cols_drop}{Optional: A character vector specifying the names of a subset of sample log columns to remove.}
 }
 \value{
-A data frame.
+A data frame of of UPAS v2 sample log data that are formatted and ready for analysis.
+This data frame will contain one row for each timestamp in the sample log.
 }
 \description{
-Read the log data from a UPASv2 log file
+#' @description
+\code{format_upasv2_log()} Applies device-specific formatting to the columns of a
+sample log data frame returned by the \code{\link[=fread_ast_log]{fread_ast_log()}} function. It sets the
+proper data type for each variable and adds columns that aid in identifying
+unique log files when data from multiple sample logs have been combined into
+a single data frame.
 }
 \examples{
-upasv2_log <- format_upasv2_log(upasv2_header, upasv2_log_raw)
+upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+upasv2_log_raw <- fread_ast_log(upasv2_file)
+upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
+upasv2_log <- format_upasv2_log(upasv2_log_raw, upasv2_header)
+
+# Diagnostic file
+upasv2_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+upasv2_diag_file <- system.file("extdata", upasv2_diag_filename, package = "astr", mustWork = TRUE)
+upasv2_diag_log_raw <- fread_ast_log(upasv2_diag_file)
+upasv2_diag_header <- read_ast_header(upasv2_diag_file, update_names=FALSE)
+upasv2_diag_log <- format_upasv2_log(upasv2_diag_log_raw, upasv2_diag_header)
 }

@@ -2,22 +2,40 @@
 % Please edit documentation in R/upasv2.R
 \name{format_upasv2_header}
 \alias{format_upasv2_header}
-\title{Read the header data from a UPASv2 log file}
+\title{Format UPAS v2 header data that hae already been transposed to a wide data frame}
 \usage{
-format_upasv2_header(df_h, update_names = FALSE)
+format_upasv2_header(data, update_names = FALSE)
 }
 \arguments{
-\item{df_h}{A UPASv2 header dataframe}
+\item{data}{A UPASv2 header data frame returned by \code{\link[=transpose_ast_header]{transpose_ast_header()}}}
 
-\item{update_names}{Convert old log file column names to match current log
-file names.}
+\item{update_names}{Option to update any deprecated variable names from log
+files written using older firmware versions to the variable names used in the
+current firmware version. Variable names cannot be updated for files
+written using UPAS v2 firmware versions preceding rev100.}
 }
 \value{
-A data frame.
+A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.
 }
 \description{
-Read the header data from a UPASv2 log file
+\code{format_upasv2_header()} formats the header data from a UPAS v2 log file.
+This function sets the proper data type for each variable, adds a column
+specifying the AST sampler type, adds a column describing the shutdown reason
+associated with the shutdown mode code, and can be directed to update old
+variable names to the current names.
 }
 \examples{
-upasv2_header <- format_upasv2_header(upasv2_header_raw, update_names=FALSE)
+upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
+upasv2_header_list <- fread_ast_header(upasv2_file)
+upasv2_header_wide <- transpose_ast_header(upasv2_header_list$header)
+upasv2_header <- format_upasv2_header(upasv2_header_wide)
+
+# Diagnostic file
+upasv2_diag_filename <- 'PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt'
+upasv2_diag_file <- system.file("extdata", upasv2_diag_filename, package = "astr", mustWork = TRUE)
+upasv2_diag_header_list <- fread_ast_header(upasv2_diag_file)
+upasv2_diag_header_wide <- transpose_ast_header(upasv2_diag_header_list$header,
+                                  upasv2_diag_header_list$diag)
+upasv2_diag_header <- format_upasv2_header(upasv2_diag_header_wide)
 }

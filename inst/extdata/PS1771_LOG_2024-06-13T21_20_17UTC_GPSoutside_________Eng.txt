@@ -1,0 +1,71 @@
+PARAMETER,VALUE,UNITS/NOTES
+UPASserial,1771,(UPAS serial identification-numerical)
+UPASfirmware,UPAS_v2_0-rev0138-L152RE_20230510_mbed116.bin compiledMay 11 2023_02:06:55UTC,(installed firmware version)
+LifetimeSampleCount,43,(count-total lifetime sample runs)
+LifetimeSampleRuntime,532.60,(hrs-total lifetime cumulative sample runtime)
+
+
+
+
+SAMPLE IDENTIFICATION
+
+UPASlogFilename,/sd/PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt,(log file filename-automatically defined)
+SampleName,GPSoutside_____,(Sample Name-user entered into app)
+CartridgeID,Eng,(Cartridge Identification-user entered into app)
+
+
+
+
+SETUP SUMMARY
+
+GPSUTCOffset,-6.00,(hours offset from UTC date time)
+StartOnNextPowerUp,0,(0=no 1=yes)
+ProgrammedStartDelay,0,(s)
+ProgrammedRuntime,360000000,(s) (360000000 means 'indefinite')
+VolumetricFlowRate,1.000,(L*min^-1)
+FlowOffset,0.000000,(%)
+DutyCycle,100,(%)
+DutyCycleWindow,30,(s)
+GPSEnabled,1,(0=no 1=yes)
+LogFileMode,0,(0=normal 1=debug)
+LogInterval,30,(s)
+AppLock,0,(0=unlocked 1=locked -1=not set)
+AppVersion,i2.2.2,(i=iOS A=Android)
+
+
+
+
+SAMPLE SUMMARY
+
+StartDateTimeUTC,2024-06-13T21:20:17,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+StartDateTimeLocal,2024-06-13T15:20:17,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+StartBatteryCharge,093,(%)
+StartBatteryVoltage,4.04,(V)
+EndDateTimeUTC,2024-06-13T21:25:30,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+EndDateTimeLocal,2024-06-13T15:25:30,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+EndBatteryCharge,093,(%)
+EndBatteryVoltage,4.01,(V)
+ShutdownMode,1,(0=unknown error 1=user pushbutton stop 2=depleted battery [<2.8v] 3=completed preset sample duration 4=thermal protection shutdown 5=max power at initialization 6=max power during sample 7=blocked flow during sample)
+SampledVolume,    5.02,(L)
+SampledRuntime,  0.084,(Hr)
+LoggedRuntime,  0.084,(Hr)
+AverageVolumetricFlowRate,0.997,(L*min^-1)
+
+
+
+
+SAMPLE LOG
+
+(HH:MM:SS),(s),(YYYY-MM-DDTHH:MM:SS) (UTC date time format),(YYYY-MM-DDTHH:MM:SS) (Local date time format),(L*min^-1),(L),(C),(C),(C),(hPa),(hPa),(Pa),(%),(g*L^-1),(integer),(integer),(V),(g*min^-1),(V),(integer),(decimalDegree),(decimalDegree),(m),(integer),(m*s^-1),(-)
+SampleTime,UnixTime,DateTimeUTC,DateTimeLocal,VolumetricFlowRate,SampledVolume,PumpT,PCBT,FdpT,PumpP,PCBP,FdPdP,PumpRH,AtmoRho,PumpPow1,PumpPow2,PumpV,MassFlow,BFGvolt,BFGenergy,GPSlat,GPSlon,GPSalt,GPSsat,GPSspeed,GPShdop
+0:00:01,1718313630,2024-06-13T21:20:30,2024-06-13T15:20:30,1.016,0.03,39.86,40.49,40.51,803.55,801.18,99.800003,11.25,0.8882,641,0,8.895,0.90205,4.01,50299,37.299018,-107.869902,2026.2,6,1.199162,1.6
+0:00:31,1718313660,2024-06-13T21:21:00,2024-06-13T15:21:00,1.011,0.54,39.89,39.80,40.55,803.65,802.30,98.699997,9.70,0.8898,643,0,8.876,0.90362,4.01,50291,37.298715,-107.870374,1973.2,10,1.963994,1.0
+0:01:01,1718313690,2024-06-13T21:21:30,2024-06-13T15:21:30,1.004,1.04,39.84,39.13,40.55,803.72,803.15,97.599998,9.79,0.8909,643,0,8.856,0.89213,4.01,50283,37.298618,-107.870128,1992.1,11,1.406818,1.0
+0:01:31,1718313720,2024-06-13T21:22:00,2024-06-13T15:22:00,1.002,1.54,39.74,38.51,40.49,803.72,803.89,95.599998,8.51,0.8924,643,0,8.848,0.89665,4.01,50275,37.298389,-107.870262,2003.7,10,0.911322,1.0
+0:02:01,1718313750,2024-06-13T21:22:30,2024-06-13T15:22:30,0.997,2.04,39.61,37.95,40.38,803.93,804.49,96.400002,8.14,0.8936,643,0,8.842,0.88626,4.01,50267,37.298040,-107.870500,2006.9,11,1.089166,1.0
+0:02:31,1718313780,2024-06-13T21:23:00,2024-06-13T15:23:00,0.993,2.54,39.67,37.52,40.52,803.84,805.17,97.650002,10.01,0.8936,642,0,8.836,0.88384,4.01,50259,37.297722,-107.870593,2001.4,11,1.031084,1.0
+0:03:01,1718313810,2024-06-13T21:23:30,2024-06-13T15:23:30,0.992,3.03,39.78,37.19,40.74,803.90,805.71,97.050003,8.06,0.8945,641,0,8.837,0.88505,4.01,50251,37.297679,-107.870639,1998.1,11,0.769972,1.0
+0:03:31,1718313840,2024-06-13T21:24:00,2024-06-13T15:24:00,0.991,3.53,39.84,37.06,40.87,803.80,805.85,97.300003,9.78,0.8939,640,0,8.841,0.88608,4.01,50243,37.297941,-107.870506,1992.8,11,0.620398,1.0
+0:04:01,1718313870,2024-06-13T21:24:30,2024-06-13T15:24:30,0.992,4.02,39.86,36.98,40.94,803.77,806.01,97.150002,9.36,0.8942,639,0,8.844,0.88798,4.01,50235,37.298247,-107.870386,1997.6,11,0.792588,1.0
+0:04:31,1718313900,2024-06-13T21:25:00,2024-06-13T15:25:00,0.995,4.52,39.76,36.84,40.85,803.73,805.93,95.949997,9.24,0.8944,639,0,8.849,0.89213,4.01,50227,37.298573,-107.870287,2002.0,11,1.067578,1.0
+0:05:01,1718313930,2024-06-13T21:25:30,2024-06-13T15:25:30,0.995,5.02,39.67,36.74,40.77,803.57,805.90,95.550003,7.50,0.8952,639,0,8.848,0.89109,4.01,50219,37.298820,-107.870521,1998.5,11,0.816746,1.0

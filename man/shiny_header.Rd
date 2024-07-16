@@ -2,24 +2,34 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_header}
 \alias{shiny_header}
-\title{Rename UPAS header file data frame columns
-to be more user friendly for the Shiny app}
+\title{Rename and format Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+header data frame columns and add units
+for the online shinyAST app}
 \usage{
 shiny_header(df_h, fract_units = FALSE)
 }
 \arguments{
-\item{df_h}{Pass a UPAS v2 or v2+ data frame from 'read_ast_header' function.}
+\item{df_h}{A header data frame returned by the \code{\link[=read_ast_header]{read_ast_header()}} function
+with the argument \code{update_names = TRUE}.}
 
 \item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}
 }
 \value{
-A modified data frame with units and user friendly column names for header data.
+A modified single row header data frame with column names and units
+for the online shinyAST app.
 }
 \description{
-Rename UPAS header file data frame columns
-to be more user friendly for the Shiny app
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+\code{shiny_header()} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+header data frame
+for use with the online shinyAST data analysis app.
+This function adds units to the applicable variable names.
 }
 \examples{
-upasv2x_header_shiny <- shiny_header(upasv2x_header)
-upasv2_header_shiny <- shiny_header(upasv2_header)
+multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
+        lapply(read_ast_header, update_names = TRUE) \%>\%
+        dplyr::bind_rows()
+
+upas_shiny_header <- shiny_header(multiple_upas_headers)
 }

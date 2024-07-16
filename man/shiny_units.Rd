@@ -2,17 +2,32 @@
 % Please edit documentation in R/shiny_ast.R
 \name{shiny_units}
 \alias{shiny_units}
-\title{Reformat units for shinyAST app}
+\title{Reformat Access Sensor Technologies (AST) UPAS v2 or UPAS v2.1 PLUS
+data frame units to be fractional for online shinyAST app}
 \usage{
-shiny_units(vect)
+shiny_units(col_names_vect)
 }
 \arguments{
-\item{vect}{Pass a vector.}
+\item{col_names_vect}{Pass a vector of column names.
+A UPAS v2 or UPAS v2.1 PLUS vector of column names from a data frame
+returned by the \code{\link[=read_ast_header]{read_ast_header()}} or \code{\link[=read_ast_log]{read_ast_log()}} function
+with the argument \code{update_names = TRUE}.}
 }
 \value{
-A vector with fractional units instead of the
-standard UPASv2 and UPASv2+ log file unit format
+A vector of column names with fractional units (L/min) instead of the
+standard UPASv2 and UPASv2+ log file unit format (L min^-1).
 }
 \description{
-Reformat units for shinyAST app
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+}
+\examples{
+multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
+    lapply(read_ast_header, update_names = TRUE) \%>\%
+    dplyr::bind_rows()
+
+upas_shiny_header <- shiny_header(multiple_upas_headers)
+upas_standard_units <- colnames(upas_shiny_header)
+upas_shiny_units <- shiny_units(upas_standard_units)
+setdiff(upas_shiny_units, upas_standard_units)
 }

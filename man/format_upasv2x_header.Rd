@@ -2,21 +2,35 @@
 % Please edit documentation in R/upasv2x.R
 \name{format_upasv2x_header}
 \alias{format_upasv2x_header}
-\title{Read the header data from an Access Sensor Technologies (AST) air sampler
-log file}
+\title{Format UPAS v2.1 PLUS header data that have already been transposed to a wide data frame}
 \usage{
-format_upasv2x_header(df_h)
+format_upasv2x_header(data)
 }
 \arguments{
-\item{df_h}{Pass a upasv2x dataframe from read_ast_header function.}
+\item{data}{A UPASv2.1 PLUS header data frame returned by the \code{\link[=transpose_ast_header]{transpose_ast_header()}} function}
 }
 \value{
-A modified data frame with header data in wide format.
+A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.
 }
 \description{
-Read the header data from an Access Sensor Technologies (AST) air sampler
-log file
+\code{format_upasv2x_header()} formats the UPAS v2.1 PLUS log file header data prior
+to analysis. This function sets the proper data types for each variable, adds
+a column to specify the sampler type, and adds a column to describe the
+shutdown reason associated with the shutdown mode code.
 }
 \examples{
-upasv2x_header <- format_upasv2x_header(upasv2x_header_raw)
+upasv2x_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
+upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+upasv2x_header_list <- fread_ast_header(upasv2x_file)
+upasv2x_header_wide <- transpose_ast_header(upasv2x_header_list$header)
+upasv2x_header <- format_upasv2x_header(upasv2x_header_wide)
+
+# Diagnostic file
+upasv2x_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "astr",
+                                  mustWork = TRUE)
+upasv2x_diag_header_list <- fread_ast_header(upasv2x_diag_file)
+upasv2x_diag_header_wide <- transpose_ast_header(upasv2x_diag_header_list$header,
+                                  upasv2x_diag_header_list$diag)
+upasv2x_diag_header <- format_upasv2x_header(upasv2x_diag_header_wide)
 }

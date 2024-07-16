@@ -1,77 +1,102 @@
-library(data.table)
-library(dplyr)
-library(usethis)
+# Allows developer to choose from various UPASv2x firmware versions to generate example data output.
+# Different example sets can also be run individually for interactive testing.
+# Written by: Gabe Neymark
 
-filename <- 'PSP00055_LOG_2022-02-24T19_26_03UTC_test1___________----------.txt'
-file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+# NOTE: Currently have not used yet for generating public facing example data outputs
+## in the "data" folder because it has made more sense to write documentation examples
+## with raw log files from "inst/extdata"
 
-###########
-# upasv2x_header
-###########
+load_all()
 
-upasv2x_header <- read_ast_header(file)
-usethis::use_data(upasv2x_header, overwrite = TRUE)
+#######################
+# upasv2x header output
+#######################
 
-###########
-# data_ast_raw
-###########
+upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev81_header_list <- fread_ast_header(upasv2x_rev81_file)
+upasv2x_rev81_header_raw <- upasv2x_rev81_header_list$header
+upasv2x_rev81_header_wide <- transpose_ast_header(upasv2x_rev81_header_list$header)
+upasv2x_rev81_header <- format_upasv2x_header(upasv2x_rev81_header_wide)
 
-data_ast_raw <- data.table::fread(file=file, sep=',',
-                                  header = FALSE, fill = TRUE, blank.lines.skip = TRUE,
-                                  stringsAsFactors = FALSE)
+upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev110_diag_header_list <- fread_ast_header(upasv2x_rev110_diag_file)
+upasv2x_rev110_diag_header_raw <- upasv2x_rev110_diag_header_list$header
+upasv2x_rev110_diag_diag_raw <- upasv2x_rev110_diag_header_list$diag
+upasv2x_rev110_diag_header_wide <- transpose_ast_header(upasv2x_rev110_diag_header_list$header, upasv2x_rev110_diag_header_list$diag)
+upasv2x_rev110_diag_header <- format_upasv2x_header(upasv2x_rev110_diag_header_wide)
 
-usethis::use_data(data_ast_raw, overwrite = TRUE)
+upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev117_header_list <- fread_ast_header(upasv2x_rev117_file)
+upasv2x_rev117_header_raw <- upasv2x_rev117_header_list$header
+upasv2x_rev117_header_wide <- transpose_ast_header(upasv2x_rev117_header_list$header)
+upasv2x_rev117_header <- format_upasv2x_header(upasv2x_rev117_header_wide)
 
-###########
-# upasv2x_header_raw
-###########
+upasv2x_rev157_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev157_header_list <- fread_ast_header(upasv2x_rev157_file)
+upasv2x_rev157_header_raw <- upasv2x_rev157_header_list$header
+upasv2x_rev157_header_wide <- transpose_ast_header(upasv2x_rev157_header_list$header)
+upasv2x_rev157_header <- format_upasv2x_header(upasv2x_rev157_header_wide)
 
-my_cols <- c('V1','V2')
+upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_diag_header_list <- fread_ast_header(upasv2x_rev158_diag_file)
+upasv2x_rev158_diag_header_raw <- upasv2x_rev158_diag_header_list$header
+upasv2x_rev158_diag_diag_raw <- upasv2x_rev158_diag_header_list$diag
+upasv2x_rev158_diag_header_wide <- transpose_ast_header(upasv2x_rev158_diag_header_list$header, upasv2x_rev158_diag_header_list$diag)
+upasv2x_rev158_diag_header <- format_upasv2x_header(upasv2x_rev158_diag_header_wide)
 
-df_h <- data_ast_raw %>%
-  dplyr::select(my_cols)
-
-df_h <- df_h[2:(which(df_h$V1=="SAMPLE LOG")-1),]
-
-remove_names <- c("SAMPLE IDENTIFICATION","SETUP SUMMARY",
-                  "SAMPLE IDENTIFICATION","SAMPLE SUMMARY",
-                  "MASS FLOW SENSOR CALIBRATION")
-
-df_h <- df_h[ grep(paste(remove_names,collapse="|"), df_h$V1, invert = TRUE) , ]
-
-df_h <- df_h %>%
-  t()
-
-df_h <- as.data.frame(df_h)
-
-colnames(df_h) <- df_h[1, ]
-df_h <- df_h[-1, ]
-rownames(df_h) <- c(1)
-
-upasv2x_header_raw <- df_h %>%
-  dplyr::rename('Firmware' = names(df_h[stringr::str_detect(names(df_h), 'firmware')]) )
-
+upasv2x_header_raw <- upasv2x_rev157_header_raw
+upasv2x_header_wide <- upasv2x_rev157_header_wide
+upasv2x_header <- upasv2x_rev157_header
+upasv2x_diag_header <- upasv2x_rev158_diag_header
 
 usethis::use_data(upasv2x_header_raw, overwrite = TRUE)
+usethis::use_data(upasv2x_header_wide, overwrite = TRUE)
+usethis::use_data(upasv2x_header, overwrite = TRUE)
+usethis::use_data(upasv2x_diag_header, overwrite = TRUE)
 
-###########
-# upasv2x_log_raw
-###########
+#######################
+# upasv2x log output
+#######################
 
-df_cols <- data_ast_raw %>%
-  dplyr::slice(which(data_ast_raw$V1=="SAMPLE LOG")+2) %>%
-  unlist(use.names = FALSE)
+upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
+upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev81_log_raw <- fread_ast_log(upasv2x_rev81_file)
+upasv2x_rev81_header <- read_ast_header(upasv2x_rev81_file, update_names=FALSE)
+upasv2x_rev81_log <- format_upasv2x_log(upasv2x_rev81_log_raw, upasv2x_rev81_header, update_names=FALSE)
 
-upasv2x_log_raw <- data_ast_raw %>%
-  dplyr::slice(which(data_ast_raw$V1=="SAMPLE LOG")+4:dplyr::n())
+upasv2x_rev110_diag_filename <- 'PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev110_diag_file <- system.file("extdata", upasv2x_rev110_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev110_diag_log_raw <- fread_ast_log(upasv2x_rev110_diag_file)
+upasv2x_rev110_diag_header <- read_ast_header(upasv2x_rev110_diag_file, update_names=FALSE)
+upasv2x_rev110_diag_log <- format_upasv2x_log(upasv2x_rev110_diag_log_raw, upasv2x_rev110_diag_header, update_names=FALSE)
 
-colnames(upasv2x_log_raw) <- df_cols
+upasv2x_rev117_filename <- 'PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt'
+upasv2x_rev117_file <- system.file("extdata", upasv2x_rev117_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev117_log_raw <- fread_ast_log(upasv2x_rev117_file)
+upasv2x_rev117_header <- read_ast_header(upasv2x_rev117_file, update_names=FALSE)
+upasv2x_rev117_log <- format_upasv2x_log(upasv2x_rev117_log_raw, upasv2x_rev117_header, update_names=FALSE)
+
+upasv2x_rev157_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
+upasv2x_rev157_file <- system.file("extdata", upasv2x_rev157_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev157_log_raw <- fread_ast_log(upasv2x_rev157_file)
+upasv2x_rev157_header <- read_ast_header(upasv2x_rev157_file, update_names=FALSE)
+upasv2x_rev157_log <- format_upasv2x_log(upasv2x_rev157_log_raw, upasv2x_rev157_header, update_names=FALSE)
+
+upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
+upasv2x_rev158_diag_log_raw <- fread_ast_log(upasv2x_rev158_diag_file)
+upasv2x_rev158_diag_header <- read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE)
+upasv2x_rev158_diag_log <- format_upasv2x_log(upasv2x_rev158_diag_log_raw, upasv2x_rev158_diag_header, update_names=FALSE)
+
+upasv2x_log_raw <- upasv2x_rev157_log_raw
+upasv2x_log <- upasv2x_rev157_log
+upasv2x_diag_log <- upasv2x_rev158_diag_log
 
 usethis::use_data(upasv2x_log_raw, overwrite = TRUE)
-
-###########
-# upasv2x_log
-###########
-
-upasv2x_log <- format_upasv2x_log(upasv2x_header, upasv2x_log_raw)
 usethis::use_data(upasv2x_log, overwrite = TRUE)
+usethis::use_data(upasv2x_diag_log, overwrite = TRUE)

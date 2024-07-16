@@ -2,20 +2,21 @@
 % Please edit documentation in R/astr-package.R
 \docType{package}
 \name{astr-package}
+\alias{astr}
 \alias{astr-package}
-\alias{_PACKAGE}
 \title{astr}
 \description{
-Package description here
+Reads in log files from Access Sensor Technologies air samplers.
+Formats the log files in a data frame for easier analysis and plotting.
 }
 \author{
-\strong{Maintainer}: Casey Quinn \email{cquinn@accsensors.com} (\href{https://orcid.org/0000-0002-6802-5250}{ORCID})
+\strong{Maintainer}: Jessica Tryner \email{jtryner@accsensors.com} (\href{https://orcid.org/0000-0002-0522-4551}{ORCID})
 
 Authors:
 \itemize{
-  \item Jessica Tryner \email{jtryner@accsensors.com} (\href{https://orcid.org/0000-0002-0522-4551}{ORCID})
-  \item Ander Wilson \email{ander.wilson@colostate.edu} (\href{https://orcid.org/0000-0003-4774-3883}{ORCID})
   \item Gabe Neymark \email{gneymark@accsensors.com} (\href{https://orcid.org/0000-0003-0720-1908}{ORCID})
+  \item Casey Quinn \email{cquinn@accsensors.com} (\href{https://orcid.org/0000-0002-6802-5250}{ORCID})
+  \item Ander Wilson \email{ander.wilson@colostate.edu} (\href{https://orcid.org/0000-0003-4774-3883}{ORCID})
 }
 
 Other contributors:
