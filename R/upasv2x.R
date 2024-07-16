@@ -164,10 +164,9 @@ format_upasv2x_header = function(data) {
 
 format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()) {
 
-  df_h <- dplyr::select(header, dplyr::any_of(c("ASTSampler", "UPASserial",
-                                                "LogFilename", "SampleName",
-                                                "CartridgeID",
-                                                "VolumetricFlowRateSet",
+  df_h <- dplyr::select(header, dplyr::any_of(c("ASTSampler","UPASserial",
+                                                "UPASlogFilename","LogFilename",
+                                                "SampleName","CartridgeID",
                                                 "StartDateTimeUTC")))
 
   df <- dplyr::mutate(log,

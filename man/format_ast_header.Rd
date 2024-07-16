@@ -12,7 +12,7 @@ format_ast_header(data, update_names = FALSE)
 
 \item{update_names}{Option to update any deprecated variable names from log
 files written using older firmware versions to the variable names used in the
-current firmware version. Variable names cannot be updated for log files
+current firmware version. Variable names cannot be updated for files
 written using UPAS v2 firmware versions preceding rev100.}
 }
 \value{

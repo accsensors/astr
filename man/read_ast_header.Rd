@@ -11,7 +11,7 @@ read_ast_header(file, update_names = FALSE)
 
 \item{update_names}{Option to update any deprecated variable names from log
 files written using older firmware versions to the variable names used in the
-current firmware version. Variable names cannot be updated for log files
+current firmware version. Variable names cannot be updated for files
 written using UPAS v2 firmware versions preceding rev100.}
 }
 \value{
@@ -23,13 +23,13 @@ data into a wide format, and applies device-specific formatting to the
 columns of the resulting data frame. This function sets the proper data type
 for each variable, adds a column to specify the AST sampler type, adds
 columns to describe the codes associated with the ShutdownMode and
-PMSensorInterval variables, and can also be directed to update old variable
-names to the current variable names.
+PMSensorInterval variables, and can also be directed to update deprecated
+variable names to the current variable names.
 
 Use this function in conjuction with \code{\link[base:lapply]{base::lapply()}} or
 \code{\link[purrr:map]{purrr::map()}} to read in header data from any number of log files
 and combine those data into a single data frame that contains a unique row
-for each sample.
+for each file.
 }
 \details{
 If \code{update_names = TRUE}, then, for samples collected using UPAS v2 firmware
@@ -60,20 +60,20 @@ be appended:
 \itemize{
 \item ASTSampler: A string indicating the model of the sampler, e.g., UPAS_v2
 \item FirmwareRev: A numeric value indicating the firmware revision number
-\item ShutdownReason: A string indicating the meaning of the numeric ShutdownMode number
+\item ShutdownReason: A string indicating the meaning of the ShutdownMode number
 \item PMSensorOperation: A string indicating the meaning of the PMSensorInterval number (for UPAS v2.1 PLUS only)
 }
 }
 \examples{
-# UPASv2 EXAMPLES
+# UPAS v2 EXAMPLES
 upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
 upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 
-# Use of `update_names` with UPASv2 log file
+# Use of `update_names` with UPAS v2 log file
 upasv2_header_updatednames <- read_ast_header(upasv2_file, update_names=TRUE)
 
-# UPASv2x EXAMPLES
+# UPAS v2.1 PLUS EXAMPLES
 upasv2x_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
@@ -84,9 +84,8 @@ upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "as
                                   mustWork = TRUE)
 upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 
-# Use `base::lapply()` to read in multiple UPAS files at once and
-# combine the data from those files into a single data frame with one row for
-# each file.
+# Use `base::lapply()` to read in multiple UPAS files and combine the data
+# from those files into a single data frame with one row for each file.
 # The `purrr::map()` function can also be used in place of `lapply()`.
 multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
     list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
@@ -95,12 +94,11 @@ multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRU
 
 # To change the type of device log file being read in the above example,
 # change the `pattern` argument in `list.files()` as follows:
-# UPASv2: `pattern = "^PS[1-9].*.txt$"`
-# UPASv2x: `pattern = "^PSP.*.txt$"`
-# HHB: `pattern = "^HHB.*.csv$"`
+# UPAS v2: `pattern = "^PS[1-9].*.txt$"`
+# UPAS v2.1 and v2.1 PLUS: `pattern = "^PSP.*.txt$"`
+# HHB v2: `pattern = "^HHB.*.csv$"`
 
-
-# HHB EXAMPLES
+# HHB v2 EXAMPLES
 hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
 hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 hhb_header <- read_ast_header(hhb_file)

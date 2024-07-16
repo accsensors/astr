@@ -16,7 +16,7 @@ read_ast_log(
 \item{file}{Any Access Sensor Technologies air sampler log file name.}
 
 \item{update_names}{Option to update any deprecated variable names from log
-files recorded using older firmware versions to the variable names used in
+files written using older firmware versions to the variable names used in
 the current firmware version. Variable names cannot be updated for log files
 written using UPAS v2 firmware versions preceding rev100.}
 
@@ -25,16 +25,18 @@ that should be used to display local times. Example tz database time zones
 include: "America/New_York", "America/Denver", and "America/Los_Angeles".
 For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
 
-\item{cols_keep}{Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.}
+\item{cols_keep}{Optional: A character vector specifying the names of a subset of sample log columns to keep.}
 
-\item{cols_drop}{Optional: Provide a character vector specifying the names of a subset of sample log columns to remove.}
+\item{cols_drop}{Optional: A character vector specifying the names of a subset of sample log columns to remove.}
 }
 \value{
 A data frame of of sample log data that are formatted and ready for analysis.
 This data frame will contain one row for each timestamp in the sample log.
-All variables in the log file header will be included in the data frame.
-Additionally, columns with key header data will be appended to the sample log
-columns to aid in identification and analysis of unique samples.
+If neither \code{cols_keep} nor \code{cols_drop} are specified, all variables in the
+sample log will be included in the data frame. Otherwise, the variables
+specified using \code{cols_keep} will be included and the variables specified
+using \code{cols_drop} will be excluded. Additionally, columns with key header
+data will be appended to aid in identification of unique samples.
 }
 \description{
 \code{read_ast_log()} reads in the sample log data from a log file and applies
@@ -49,7 +51,7 @@ combine those data into a single data frame.
 }
 \details{
 If \code{update_names = TRUE}, then, for samples collected using UPAS v2.1 and
-UPAS v2.1 PLUS firmware versions preceding revXXX, the column name
+UPAS v2.1 PLUS firmware revisions 128 through 149, the column name
 "AceelComplianceHrs" will be updated to "AccelComplianceHrs".
 
 If \code{update_names = TRUE}, then, for samples collected using the UPAS v2, the
@@ -69,9 +71,9 @@ GPShdop \tab GPShDOP     \cr
 BFGvolt \tab BattVolt    \cr
 }
 
-If \code{update_names = TRUE}, then, for samples collected specifically using UPAS
-v2 firmware rev100, the deprecated names shown on the left will be updated to
-the current names shown on the right:
+If \code{update_names = TRUE}, then, for samples collected using UPAS v2 firmware
+rev100, the deprecated names shown on the left will be updated to the current
+names shown on the right:
 \tabular{ll}{
 \strong{Deprecated name} \tab \strong{Current name} \cr
 UTCDateTime     \tab DateTimeUTC \cr
@@ -80,42 +82,40 @@ UPASLogFilename \tab LogFilename    \cr
 }
 
 If the GPSUTCOffset in the log file header is a whole number of hours, this
-function will be able to convert the DateTimeLocal variable in the sample log
-to a POSIXct object displayed in the local time zone automatically, without
-the \code{tz} argument being specified.  If the GPSUTCOffset is not a whole number
-of hours, it's better to specify the local time zone as a character string
-using the \code{tz} argument.
+function will be able to display the DateTimeLocal variable as a POSIXct
+with the local time zone automatically, without the \code{tz} argument being
+specified.  If the GPSUTCOffset is not a whole number of hours, it's better
+to specify the local time zone as a character string using the \code{tz} argument.
 
 If the \code{cols_keep} or \code{cols_drop} arguments are specified, column selection
-will occur in the same order in which these function arguments are specified
-above. In other words, columns specified in \code{cols_keep} will be selected
-first. If the \code{cols_keep} argument is not specified, all columns will be
-kept.  Then, The columns specified in \code{cols_drop} will be dropped.  If the
-\code{cols_drop} argument is not specified, no columns will be dropped.
+will occur in the same order in which these arguments are specified above.
+In other words, columns specified in \code{cols_keep} will be selected first. If
+the \code{cols_keep} argument is not specified, all columns will be kept. Then,
+columns specified in \code{cols_drop} will be dropped.  If the \code{cols_drop}
+argument is not specified, no columns will be dropped.
 
 The data frame returned by this function will include all variables from the
 sample log.  For all log files, the following columns will also be appended:
 \itemize{
 \item SampleName: A string indicating the user-supplied sample name
 \item UserTZ: A boolean value indicating whether the \code{tz} argument was supplied to this function
-\item LocalTZ: A string indicating the timezone in which DateTimeLocal values are displayed
+\item LocalTZ: A string indicating the timezone associated with DateTimeLocal values
 \item StartDateTimeUTC: A POSIXct object indicating the date and time when sample started (in coordinated universal time)
 }
 
 For UPAS log files, the following columns will also be appended:
 \itemize{
 \item ASTSampler: A string indicating the model of the sampler, e.g., UPAS_v2
-\item UPASserial: The UPAS serial ID
+\item UPASserial: A numeric value indicating the UPAS serial ID
 \item LogFilename: A string indicating the log filename
 \item CartridgeID: A string indicating the cartridge identifier entered by the user into the mobile application
 \item LogFileMode: A string indicating whether this is a "normal" log file or a "debug" log file (UPAS v2 only)
-\item VolumetricFlowRateSet: (UPAS v2.1 and UPAS v2.1 PLUS only)
 }
 
 For HHB v2 log files, the following columns will be appended:
 \itemize{
 \item DateTimeLocal: DateTimeUTC displayed in the local time zone
-\item HHBserial: The HHB serial ID
+\item HHBserial: A string indicating the HHB serial ID
 \item LogFileName: A string indicating the log filename
 \item G.Alphasense1_ID: Serial number of Alphasense B-series electrochemical sensor in gas sensor housing position 1 (if installed)
 \item G.Alphasense2_ID: Serial number of Alphasense B-series electrochemical sensor in gas sensor housing position 2 (if installed)
@@ -132,27 +132,27 @@ For HHB v2 log files, the following columns will be appended:
 }
 }
 \examples{
-# UPASv2 EXAMPLES
+# UPAS v2 EXAMPLES
 upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
 upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
 upasv2_log <- read_ast_log(upasv2_file, update_names=FALSE)
 
-# Use of `update_names` with UPASv2 log file
+# Use of `update_names` with UPAS v2 log file
 upasv2_log_updatednames <- read_ast_log(upasv2_file, update_names=TRUE)
 
-# UPASv2x EXAMPLES
+# UPAS v2.1 and v2.1 PLUS EXAMPLES
 upasv2x_filename <- 'PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt'
 upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
 upasv2x_log <- read_ast_log(upasv2x_file, update_names=FALSE)
 
-# Use of cols_drop, cols_keep, and tz  with a UPASv2x log file
+# Use of cols_drop, cols_keep, and tz  with a UPAS v2.1 PLUS log file
 upasv2x_log_colsdrop <- read_ast_log(upasv2x_file,
                 cols_drop = c("DateTimeLocal", "AtmoT", "AtmoP", "AtmoRH"))
 upasv2x_log_colskeep <- read_ast_log(upasv2x_file, tz="America/New_York",
                 cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
                                "LocalTZ",  "UserTZ", "AtmoT", "AtmoP", "AtmoRH"))
 
-# GPS Disabled file
+# GPS disabled file
 upasv2x_noGPS_filename <- 'PSP00270_LOG_2024-06-14T18_54_44UTC_NoGPS___________----------.txt'
 upasv2x_noGPS_file <- system.file("extdata", upasv2x_noGPS_filename, package = "astr",
                                    mustWork = TRUE)
@@ -164,10 +164,9 @@ upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "as
                                   mustWork = TRUE)
 upasv2x_diag_log <- read_ast_log(upasv2x_diag_file, update_names=FALSE)
 
-# Use `base::lapply()` to read in multiple UPAS files at once and
-# combine the data from those files into a single data frame. A column with
-# the "LogFilename" will be appended to the sample log data so that each
-# individual sample can be identified easily.
+# Use `base::lapply()` to read multiple files and combine the data from those
+# files into a single data frame. A column with the log filename will be
+# appended to the sample log data so that each sample can be identified easily.
 # The `purrr::map()` function can also be used in place of `lapply()`.
 multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
     list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
@@ -176,11 +175,11 @@ multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) 
 
 # To change the type of device log file being read in the above example,
 # change the `pattern` argument in [list.files] as follows:
-# UPASv2: `pattern = "^PS[1-9].*.txt$"`
-# UPASv2x: `pattern = "^PSP.*.txt$"`
-# HHB: `pattern = "^HHB.*.csv$"`
+# UPAS v2: `pattern = "^PS[1-9].*.txt$"`
+# UPAS v2.1 and v2.1 PLUS: `pattern = "^PSP.*.txt$"`
+# HHB v2: `pattern = "^HHB.*.csv$"`
 
-# HHB EXAMPLES
+# HHB v2 EXAMPLES
 hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
 hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 hhb_log <- read_ast_log(hhb_file)

@@ -6,8 +6,9 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of astr is to make working with Access Sensor Technologies
-(AST) air sampler log files easy.
+The goal of astr is to make it easy to work with log files from Access
+Sensor Technologies (AST) air samplers, like the Ultrasonic Personal Air
+Sampler (UPAS), in R.
 
 ## Installation
 
