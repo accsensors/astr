@@ -7,8 +7,8 @@
 <!-- badges: end -->
 
 The goal of astr is to make it easy to work with log files from Access
-Sensor Technologies (AST) air samplers, like the Ultrasonic Personal Air
-Sampler (UPAS), in R.
+Sensor Technologies (AST) air samplers, including the Ultrasonic
+Personal Air Sampler (UPAS), in R.
 
 ## Installation
 
@@ -49,7 +49,7 @@ replace “lapply” with “purrr::map” in the example below.
 
 ``` r
 data_upas_h <- list.files(path = ".", pattern = "^PS.*.txt$", full.names = T) %>%
-  lapply(read_ast_header, update_names = T)%>%
+  lapply(read_ast_header, update_names = T) %>%
   dplyr::bind_rows()
 ```
 
