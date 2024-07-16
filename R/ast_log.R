@@ -1,14 +1,14 @@
 #'Read the sample log data from an Access Sensor Technologies air sampler log file
 #'
 #' @description
-#' `read_ast_log` reads in the sample log data from a log file and applies
+#' `read_ast_log()` reads in the sample log data from a log file and applies
 #' device-specific formatting to the columns of the resulting data frame.
 #' It sets the proper data type for each variable and adds columns that aid in
 #' identifying unique log files when data from multiple sample logs have been
 #' combined into a single data frame.
 #'
-#' Use this function in conjuction with \code{\link[base]{lapply}} or
-#' \code{\link[purrr]{map}} to read in log data from any number of files and
+#' Use this function in conjuction with [base::lapply()] or
+#' [purrr::map()] to read in log data from any number of files and
 #' combine those data into a single data frame.
 #'
 #' @param file Any Access Sensor Technologies air sampler log file name.
@@ -124,7 +124,7 @@
 #' upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
 #' upasv2_log <- read_ast_log(upasv2_file, update_names=FALSE)
 #'
-#' # Use of update_names with UPASv2 log file
+#' # Use of `update_names` with UPASv2 log file
 #' upasv2_log_updatednames <- read_ast_log(upasv2_file, update_names=TRUE)
 #'
 #' # UPASv2x EXAMPLES
@@ -151,19 +151,14 @@
 #'                                   mustWork = TRUE)
 #' upasv2x_diag_log <- read_ast_log(upasv2x_diag_file, update_names=FALSE)
 #'
-#' # Use \code{\link[base]{lapply}} to read in multiple UPAS files at once and
+#' # Use `base::lapply()` to read in multiple UPAS files at once and
 #' # combine the data from those files into a single data frame. A column with
-#' # the LogFilename will be appended to the sample log data so that each
+#' # the "LogFilename" will be appended to the sample log data so that each
 #' # individual sample can be identified easily.
+#' # The `purrr::map()` function can also be used in place of `lapply()`.
 #' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
 #'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_log, update_names = TRUE) %>%
-#'     dplyr::bind_rows()
-#'
-#' # The \code{\link[purrr]{map}} function can also be used in place of \code{\link[base]{lapply}}.
-#' multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
-#'     purrr::map(read_ast_log, update_names = TRUE) %>%
 #'     dplyr::bind_rows()
 #'
 #' # To change the type of device log file being read in the above example,
@@ -191,7 +186,7 @@ read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_dro
 #'Use fread to read the sample log data from an Access Sensor Technologies air sampler log file
 #'
 #' @description
-#' `fread_ast_log` reads in the sample log data exactly as it appears in the file.
+#' `fread_ast_log()` reads in the sample log data exactly as it appears in the file.
 #'
 #' @param file Any Access Sensor Technologies air sampler log file name.
 #'
@@ -243,14 +238,14 @@ fread_ast_log = function(file){
 #'Format the sample log data from an Access Sensor Technologies air sampler log file
 #'
 #' @description
-#' `format_ast_log` Applies device-specific formatting to the columns of a
-#' sample log data frame returned by the \code{\link{fread_ast_log}} function. It sets the
+#' `format_ast_log()` Applies device-specific formatting to the columns of a
+#' sample log data frame returned by the [astr::fread_ast_log()] function. It sets the
 #' proper data type for each variable and adds columns that aid in identifying
 #' unique log files when data from multiple sample logs have been combined into
 #' a single data frame.
 #'
-#' @param log An unformatted data frame of sample log data returned by the \code{\link{fread_ast_log}} function.
-#' @param header A formatted data frame of header data returned by the \code{\link{read_ast_header}} function.
+#' @param log An unformatted data frame of sample log data returned by the [astr::fread_ast_log()] function.
+#' @param header A formatted data frame of header data returned by the [astr::read_ast_header()] function.
 #' @inheritParams read_ast_log
 #'
 #' @return A data frame with formatted sample log data plus key header data appended.

@@ -1,12 +1,12 @@
 #' Format UPAS v2.1 PLUS header data that have already been transposed to a wide data frame
 #'
 #' @description
-#' `format_upasv2x_header` formats the UPAS v2.1 PLUS log file header data prior
+#' `format_upasv2x_header()` formats the UPAS v2.1 PLUS log file header data prior
 #' to analysis. This function sets the proper data types for each variable, adds
 #' a column to specify the sampler type, and adds a column to describe the
 #' shutdown reason associated with the shutdown mode code.
 #'
-#' @param data A UPASv2.1 PLUS header data frame returned by the [transpose_ast_header] function
+#' @param data A UPASv2.1 PLUS header data frame returned by the [astr::transpose_ast_header()] function
 #'
 #' @return A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.
 #' @export
@@ -123,14 +123,14 @@ format_upasv2x_header = function(data) {
 #'Format the sample log data from an Access Sensor Technologies UPAS v2.1 PLUS
 #'
 #'#' @description
-#' `format_upasv2x_log` Applies device-specific formatting to the columns of a
-#' sample log data frame returned by the [fread_ast_log] function. It sets the
+#' `format_upasv2x_log()` Applies device-specific formatting to the columns of a
+#' sample log data frame returned by the [astr::fread_ast_log()] function. It sets the
 #' proper data type for each variable and adds columns that aid in identifying
 #' unique log files when data from multiple sample logs have been combined into
 #' a single data frame.
 #'
-#' @param log A data frame of UPAS v2.1 PLUS sample log data returned by the [fread_ast_log] function.
-#' @param header A data frame of UPAS v2.1 PLUS header data returned by the [read_ast_header] function.
+#' @param log A data frame of UPAS v2.1 PLUS sample log data returned by the [astr::fread_ast_log()] function.
+#' @param header A data frame of UPAS v2.1 PLUS header data returned by the [astr::read_ast_header()] function.
 #' @inheritParams format_ast_log
 #'
 #' @return A data frame of of UPAS v2.1 PLUS sample log data that are formatted and ready for analysis.

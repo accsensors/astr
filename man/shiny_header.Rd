@@ -9,7 +9,7 @@ for the online shinyAST app}
 shiny_header(df_h, fract_units = FALSE)
 }
 \arguments{
-\item{df_h}{A header data frame returned by the \link{read_ast_header} function
+\item{df_h}{A header data frame returned by the \code{\link[=read_ast_header]{read_ast_header()}} function
 with the argument \code{update_names = TRUE}.}
 
 \item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}
@@ -20,7 +20,7 @@ for the online shinyAST app.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-\code{shiny_header} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+\code{shiny_header()} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 header data frame
 for use with the online shinyAST data analysis app.
 This function adds units to the applicable variable names.

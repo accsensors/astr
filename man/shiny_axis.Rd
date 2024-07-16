@@ -9,7 +9,7 @@ shiny_axis(col_name, fract_units = FALSE)
 }
 \arguments{
 \item{col_name}{A UPAS v2 or UPAS v2.1 PLUS log column name from a data frame
-returned by the \link{read_ast_log} function
+returned by the \code{\link[=read_ast_log]{read_ast_log()}} function
 with the argument \code{update_names = TRUE}.}
 
 \item{fract_units}{Boolean to specify if units should be fractional (L min^-1 vs L/min).}

@@ -8,18 +8,18 @@ file and format the transposed header as a data frame.}
 transpose_ast_header(header, diag = NULL)
 }
 \arguments{
-\item{header}{A data table containing header data read using the
-\link{fread_ast_header} function.}
+\item{header}{A data table containing header data read using the \code{\link[=fread_ast_header]{fread_ast_header()}} function.}
 
 \item{diag}{An optional data table containing diagnostic test data read using
-the \link{fread_ast_header} function. If the diag argument is specified, key
-metrics from the diagnostic test will be added to the header data frame.}
+the \code{\link[=fread_ast_header]{fread_ast_header()}} function. If the \code{diag} argument is
+specified, key metrics from the diagnostic test will be added to the header
+data frame.}
 }
 \value{
 A data frame of header data.
 }
 \description{
-\code{transpose_ast_header} Takes the data read using the \link{fread_ast_header}
+\code{transpose_ast_header()} Takes the data read using the \code{\link[=fread_ast_header]{fread_ast_header()}}
 function and transposes those data so each variable in the header is a unique
 column in a data frame.
 }

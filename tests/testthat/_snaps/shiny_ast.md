@@ -691,238 +691,238 @@
       726:      919        0  7.943  0.87628     3.99     51731 37.29881 -107.8702
       727:      918        0  7.923  0.87592     3.98     51717 37.29877 -107.8703
       728:      917        0  7.908  0.87106     3.99     51703       NA        NA
-           GPSalt GPSsat GPSspeed GPShDOP UserTZ    StartDateTimeUTC LogFileMode
-            <num>  <num>    <num>   <num> <lgcl>              <POSc>      <char>
-        1: 1552.0     11 0.105884     1.0  FALSE 2021-09-29 17:37:09      normal
-        2: 1558.0     12 0.029298     0.8  FALSE 2021-09-29 17:37:09      normal
-        3: 1556.6     12 0.039578     0.8  FALSE 2021-09-29 17:37:09      normal
-        4: 1557.5     12 0.051914     0.8  FALSE 2021-09-29 17:37:09      normal
-        5: 1555.2     12 0.111538     0.8  FALSE 2021-09-29 17:37:09      normal
-       ---                                                                      
-      724: 2004.3      8 0.374706     1.1  FALSE 2024-07-11 18:01:22        <NA>
-      725: 1998.0      6 1.031084     1.2  FALSE 2024-07-11 18:01:22        <NA>
-      726: 2001.3      8 0.684648     1.1  FALSE 2024-07-11 18:01:22        <NA>
-      727: 1991.1      8 0.359286     1.1  FALSE 2024-07-11 18:01:22        <NA>
-      728:     NA      4       NA      NA  FALSE 2024-07-11 18:01:22        <NA>
-           GPSpdop GPSQual GPSvdop MFlowDelta VFlowDelta MFSADS VInADS PumpADS
-             <num>   <num>   <num>      <num>      <num>  <num>  <num>   <num>
-        1:      NA      NA      NA         NA         NA     NA     NA      NA
-        2:      NA      NA      NA         NA         NA     NA     NA      NA
-        3:      NA      NA      NA         NA         NA     NA     NA      NA
-        4:      NA      NA      NA         NA         NA     NA     NA      NA
-        5:      NA      NA      NA         NA         NA     NA     NA      NA
-       ---                                                                    
-      724:      NA       1      NA         NA         NA     NA     NA      NA
-      725:      NA       1      NA         NA         NA     NA     NA      NA
-      726:      NA       1      NA         NA         NA     NA     NA      NA
-      727:      NA       1      NA         NA         NA     NA     NA      NA
-      728:      NA       0      NA         NA         NA     NA     NA      NA
-            MFSVout PumpsON   Dead   BCS1   BCS2 BC_NPG UnixTimeMCU OverallFlowRate
-              <num>  <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>       <num>           <num>
-        1:       NA      NA     NA     NA     NA     NA          NA              NA
-        2:       NA      NA     NA     NA     NA     NA          NA              NA
-        3:       NA      NA     NA     NA     NA     NA          NA              NA
-        4:       NA      NA     NA     NA     NA     NA          NA              NA
-        5:       NA      NA     NA     NA     NA     NA          NA              NA
-       ---                                                                         
-      724: 1.190875    TRUE  FALSE   TRUE   TRUE   TRUE  1720723140           1.012
-      725: 1.185125    TRUE  FALSE   TRUE   TRUE   TRUE  1720723170           1.000
-      726: 1.183500    TRUE  FALSE   TRUE   TRUE   TRUE  1720723200           0.998
-      727: 1.183250    TRUE  FALSE   TRUE   TRUE   TRUE  1720723230           0.996
-      728: 1.179875    TRUE  FALSE   TRUE   TRUE   TRUE  1720723260           0.981
-           BatteryCharge AtmoAlt AccelX AccelXVar AccelXMin AccelXMax AccelY
-                   <num>   <num>  <num>     <num>     <num>     <num>  <num>
-        1:            NA      NA     NA        NA        NA        NA     NA
-        2:            NA      NA     NA        NA        NA        NA     NA
-        3:            NA      NA     NA        NA        NA        NA     NA
-        4:            NA      NA     NA        NA        NA        NA     NA
-        5:            NA      NA     NA        NA        NA        NA     NA
-       ---                                                                  
-      724:            97  1893.0  482.9   70471.3      -390       726 -141.6
-      725:            97  1893.0  228.6   53104.2      -134       595  -49.9
-      726:            97  1893.2    0.0       0.0         0         0  -21.5
-      727:            97  1893.3    0.0       0.0         0         0  -21.7
-      728:            96  1893.3  120.3   58162.5         0       636  -70.3
-           AccelYVar AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax    RotX
-               <num>     <num>     <num>  <num>     <num>     <num>     <num>   <num>
-        1:        NA        NA        NA     NA        NA        NA        NA      NA
-        2:        NA        NA        NA     NA        NA        NA        NA      NA
-        3:        NA        NA        NA     NA        NA        NA        NA      NA
-        4:        NA        NA        NA     NA        NA        NA        NA      NA
-        5:        NA        NA        NA     NA        NA        NA        NA      NA
-       ---                                                                           
-      724:   56128.6      -986       120 -796.1   30108.7     -1232      -422  6153.1
-      725:   12886.5      -468       264 -930.5    8324.1     -1089      -710 -5500.6
-      726:       0.3       -22       -20 -991.0      -0.2      -992      -990 -7538.7
-      727:       0.2       -22       -21 -991.1      -0.2      -992      -991 -7073.5
-      728:    9750.5      -345       -21 -951.0   10014.9     -1089      -717 -7215.2
-             RotXVar RotXMin RotXMax    RotY     RotYVar RotYMin RotYMax     RotZ
-               <num>   <num>   <num>   <num>       <num>   <num>   <num>    <num>
-        1:        NA      NA      NA      NA          NA      NA      NA       NA
-        2:        NA      NA      NA      NA          NA      NA      NA       NA
-        3:        NA      NA      NA      NA          NA      NA      NA       NA
-        4:        NA      NA      NA      NA          NA      NA      NA       NA
-        5:        NA      NA      NA      NA          NA      NA      NA       NA
-       ---                                                                       
-      724: 650115264  -66955   47687 -6097.5 257212096.0  -62028   12626 -11240.5
-      725:  84108080  -21770   23476  3592.9 180045760.0  -14656   54110  -3749.8
-      726:  21042828  -15942    3333  -217.8      1313.6    -288    -140   -205.3
-      727:  15074708  -15636    3605  -220.4       801.1    -280    -157   -204.6
-      728:  76597080  -16975   34903   742.5  13999127.0   -1837   15102   2874.4
-                RotZVar RotZMin RotZMax   Xup XDown   Yup Ydown   Zup Zdown StepCount
-                  <num>   <num>   <num> <num> <num> <num> <num> <num> <num>     <num>
-        1:           NA      NA      NA    NA    NA    NA    NA    NA    NA        NA
-        2:           NA      NA      NA    NA    NA    NA    NA    NA    NA        NA
-        3:           NA      NA      NA    NA    NA    NA    NA    NA    NA        NA
-        4:           NA      NA      NA    NA    NA    NA    NA    NA    NA        NA
-        5:           NA      NA      NA    NA    NA    NA    NA    NA    NA        NA
-       ---                                                                           
-      724: 1039706496.0  -69317   74550     0    10   3.3     0  86.7     0        34
-      725:  154139600.0  -53497   10736     0     0   0.0     0 100.0     0         0
-      726:       2614.7    -332     -96     0     0   0.0     0 100.0     0         0
-      727:       2762.0    -332    -122     0     0   0.0     0 100.0     0         0
-      728:  241952384.0   -2135   86406     0     0   0.0     0 100.0     0         0
-              LUX UVindex HighVisRaw LowVisRaw  IRRaw UVRaw PMMeasCnt PM1MC PM1MCVar
-            <num>   <num>      <num>     <num>  <num> <num>     <num> <num>    <num>
-        1:     NA      NA         NA        NA     NA    NA        NA    NA       NA
-        2:     NA      NA         NA        NA     NA    NA        NA    NA       NA
-        3:     NA      NA         NA        NA     NA    NA        NA    NA       NA
-        4:     NA      NA         NA        NA     NA    NA        NA    NA       NA
-        5:     NA      NA         NA        NA     NA    NA        NA    NA       NA
-       ---                                                                          
-      724: 1276.7    0.33    11544.2 1120259.4 8998.7  37.9        30  1.53     0.21
-      725:  171.4    0.29     1274.9    1284.7 1974.6  33.4        30  1.28     0.01
-      726:  143.9    0.38     1062.3    1078.7 1708.1  42.7        30  1.26     0.00
-      727:  141.0    0.34     1052.4    1057.6 1682.2  40.9        30  1.54     0.01
-      728:  170.1    0.38     1266.7    1286.6 2030.7  47.3        30  1.58     0.02
-           PM2_5MC PM2_5MCVar PM4MC PM4MCVar PM10MC PM10MCVar PM0_5NC PM0_5NCVar
-             <num>      <num> <num>    <num>  <num>     <num>   <num>      <num>
-        1:      NA         NA    NA       NA     NA        NA      NA         NA
-        2:      NA         NA    NA       NA     NA        NA      NA         NA
-        3:      NA         NA    NA       NA     NA        NA      NA         NA
-        4:      NA         NA    NA       NA     NA        NA      NA         NA
-        5:      NA         NA    NA       NA     NA        NA      NA         NA
-       ---                                                                      
-      724:    1.61       0.23  1.61     0.23   1.61      0.23   10.74      10.18
-      725:    1.35       0.01  1.35     0.01   1.35      0.01    8.99       0.30
-      726:    1.33       0.00  1.33     0.00   1.33      0.00    8.88       0.21
-      727:    1.63       0.01  1.63     0.01   1.63      0.01   10.82       0.43
-      728:    1.67       0.02  1.67     0.02   1.67      0.02   11.13       0.78
-           PM1NC PM1NCVar PM2_5NC PM2_5NCVar PM4NC PM4NCVar PM10NC PM10NCVar
-           <num>    <num>   <num>      <num> <num>    <num>  <num>     <num>
-        1:    NA       NA      NA         NA    NA       NA     NA        NA
-        2:    NA       NA      NA         NA    NA       NA     NA        NA
-        3:    NA       NA      NA         NA    NA       NA     NA        NA
-        4:    NA       NA      NA         NA    NA       NA     NA        NA
-        5:    NA       NA      NA         NA    NA       NA     NA        NA
-       ---                                                                  
-      724: 12.16    13.06   12.18      13.10 12.19    13.11  12.19     13.11
-      725: 10.19     0.38   10.20       0.38 10.21     0.38  10.21      0.38
-      726: 10.06     0.27   10.07       0.27 10.08     0.27  10.08      0.27
-      727: 12.25     0.55   12.27       0.56 12.28     0.56  12.28      0.56
-      728: 12.61     1.00   12.63       1.00 12.63     1.00  12.63      1.00
-           PMtypicalParticleSize PMtypicalParticleSizeVar PM2_5SampledMass PCB2T
-                           <num>                    <num>            <num> <num>
-        1:                    NA                       NA               NA    NA
-        2:                    NA                       NA               NA    NA
-        3:                    NA                       NA               NA    NA
-        4:                    NA                       NA               NA    NA
-        5:                    NA                       NA               NA    NA
-       ---                                                                      
-      724:                  0.40                        0           1.7792 47.42
-      725:                  0.39                        0           1.7799 46.94
-      726:                  0.39                        0           1.7806 45.79
-      727:                  0.39                        0           1.7813 44.64
-      728:                  0.38                        0           1.7822 43.59
-           AccelT PT100R  v3_3    v5 FLOWCTL    GPSRT SD_DATAW SD_HEADW TPumpsOFF
-            <num>  <num> <num> <num>   <num>    <num>    <num>    <num>     <num>
-        1:     NA     NA    NA    NA      NA       NA       NA       NA        NA
-        2:     NA     NA    NA    NA      NA       NA       NA       NA        NA
-        3:     NA     NA    NA    NA      NA       NA       NA       NA        NA
-        4:     NA     NA    NA    NA      NA       NA       NA       NA        NA
-        5:     NA     NA    NA    NA      NA       NA       NA       NA        NA
-       ---                                                                       
-      724:  43.10 117.48  3.34     5   0.499 0.123482    0.020    0.042         0
-      725:  43.30 117.44  3.34     5   0.488 0.163676    0.020    0.041         0
-      726:  43.27 117.26  3.34     5   0.502 0.043363    0.025    0.050         0
-      727:  43.04 117.02  3.34     5   0.488 0.086179    0.019    0.042         0
-      728:  42.49 116.81  3.34     5   0.490 0.131042    0.021    0.041         0
-           TPumpsON IAQStabStat IAQRunIn IAQRes   IAQ IAQAcc StaticIAQ StaticIAQAcc
-              <num>       <num>    <num>  <num> <num>  <num>     <num>        <num>
-        1:       NA          NA       NA     NA    NA     NA        NA           NA
-        2:       NA          NA       NA     NA    NA     NA        NA           NA
-        3:       NA          NA       NA     NA    NA     NA        NA           NA
-        4:       NA          NA       NA     NA    NA     NA        NA           NA
-        5:       NA          NA       NA     NA    NA     NA        NA           NA
-       ---                                                                         
-      724:       30          NA       NA     NA    NA     NA        NA           NA
-      725:       30          NA       NA     NA    NA     NA        NA           NA
-      726:       30          NA       NA     NA    NA     NA        NA           NA
-      727:       30          NA       NA     NA    NA     NA        NA           NA
-      728:       30          NA       NA     NA    NA     NA        NA           NA
-            CO2e CO2eAcc  bVOC bVOCAcc gasComp gasCompAcc gasPerc gasPercAcc
-           <num>   <num> <num>   <num>   <num>      <num>   <num>      <num>
-        1:    NA      NA    NA      NA      NA         NA      NA         NA
-        2:    NA      NA    NA      NA      NA         NA      NA         NA
-        3:    NA      NA    NA      NA      NA         NA      NA         NA
-        4:    NA      NA    NA      NA      NA         NA      NA         NA
-        5:    NA      NA    NA      NA      NA         NA      NA         NA
-       ---                                                                  
-      724:    NA      NA    NA      NA      NA         NA      NA         NA
-      725:    NA      NA    NA      NA      NA         NA      NA         NA
-      726:    NA      NA    NA      NA      NA         NA      NA         NA
-      727:    NA      NA    NA      NA      NA         NA      NA         NA
-      728:    NA      NA    NA      NA      NA         NA      NA         NA
+           GPSalt GPSsat GPSspeed GPShDOP UserTZ
+            <num>  <num>    <num>   <num> <lgcl>
+        1: 1552.0     11 0.105884     1.0  FALSE
+        2: 1558.0     12 0.029298     0.8  FALSE
+        3: 1556.6     12 0.039578     0.8  FALSE
+        4: 1557.5     12 0.051914     0.8  FALSE
+        5: 1555.2     12 0.111538     0.8  FALSE
+       ---                                      
+      724: 2004.3      8 0.374706     1.1  FALSE
+      725: 1998.0      6 1.031084     1.2  FALSE
+      726: 2001.3      8 0.684648     1.1  FALSE
+      727: 1991.1      8 0.359286     1.1  FALSE
+      728:     NA      4       NA      NA  FALSE
                                                                            LogFilename
                                                                                 <char>
-        1:                                                                        <NA>
-        2:                                                                        <NA>
-        3:                                                                        <NA>
-        4:                                                                        <NA>
-        5:                                                                        <NA>
+        1:                PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+        2:                PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+        3:                PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+        4:                PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+        5:                PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
        ---                                                                            
       724: 20240711/PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt
       725: 20240711/PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt
       726: 20240711/PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt
       727: 20240711/PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt
       728: 20240711/PSP00270_LOG_2024-07-11T18_01_22UTC_PM_CO2_Map______----------.txt
-                CO2     SCDT    SCDRH   VOCRaw   NOXRaw AccelComplianceCnt
-              <num>    <num>    <num>    <num>    <num>              <num>
-        1:       NA       NA       NA       NA       NA                 NA
-        2:       NA       NA       NA       NA       NA                 NA
-        3:       NA       NA       NA       NA       NA                 NA
-        4:       NA       NA       NA       NA       NA                 NA
-        5:       NA       NA       NA       NA       NA                 NA
-       ---                                                                
-      724: 1487.500 41.27967 18.18483 29417.07 13947.87                  9
-      725: 6622.143 41.41114 22.63300 29292.47 14319.20                  9
-      726: 6877.000 41.43350 20.87533 29736.57 14151.93                  8
-      727: 3919.000 41.24443 19.13857 29789.73 13924.77                  7
-      728: 2333.333 40.82750 18.55833 29804.50 13802.60                  7
-           AccelComplianceHrs PMReadingErrorCnt PMFanErrorCnt PMLaserErrorCnt
-                        <num>             <num>         <num>           <num>
-        1:                 NA                NA            NA              NA
-        2:                 NA                NA            NA              NA
-        3:                 NA                NA            NA              NA
-        4:                 NA                NA            NA              NA
-        5:                 NA                NA            NA              NA
+              StartDateTimeUTC LogFileMode GPSpdop GPSQual GPSvdop MFlowDelta
+                        <POSc>      <char>   <num>   <num>   <num>      <num>
+        1: 2021-09-29 17:37:09      normal      NA      NA      NA         NA
+        2: 2021-09-29 17:37:09      normal      NA      NA      NA         NA
+        3: 2021-09-29 17:37:09      normal      NA      NA      NA         NA
+        4: 2021-09-29 17:37:09      normal      NA      NA      NA         NA
+        5: 2021-09-29 17:37:09      normal      NA      NA      NA         NA
        ---                                                                   
-      724:               0.58                 0             0               0
-      725:               0.59                 0             0               0
-      726:               0.60                 0             0               0
-      727:               0.61                 0             0               0
-      728:               0.62                 0             0               0
-           PMFanSpeedWarn
-                    <num>
-        1:             NA
-        2:             NA
-        3:             NA
-        4:             NA
-        5:             NA
-       ---               
-      724:              0
-      725:              0
-      726:              0
-      727:              0
-      728:              0
+      724: 2024-07-11 18:01:22        <NA>      NA       1      NA         NA
+      725: 2024-07-11 18:01:22        <NA>      NA       1      NA         NA
+      726: 2024-07-11 18:01:22        <NA>      NA       1      NA         NA
+      727: 2024-07-11 18:01:22        <NA>      NA       1      NA         NA
+      728: 2024-07-11 18:01:22        <NA>      NA       0      NA         NA
+           VFlowDelta MFSADS VInADS PumpADS  MFSVout PumpsON   Dead   BCS1   BCS2
+                <num>  <num>  <num>   <num>    <num>  <lgcl> <lgcl> <lgcl> <lgcl>
+        1:         NA     NA     NA      NA       NA      NA     NA     NA     NA
+        2:         NA     NA     NA      NA       NA      NA     NA     NA     NA
+        3:         NA     NA     NA      NA       NA      NA     NA     NA     NA
+        4:         NA     NA     NA      NA       NA      NA     NA     NA     NA
+        5:         NA     NA     NA      NA       NA      NA     NA     NA     NA
+       ---                                                                       
+      724:         NA     NA     NA      NA 1.190875    TRUE  FALSE   TRUE   TRUE
+      725:         NA     NA     NA      NA 1.185125    TRUE  FALSE   TRUE   TRUE
+      726:         NA     NA     NA      NA 1.183500    TRUE  FALSE   TRUE   TRUE
+      727:         NA     NA     NA      NA 1.183250    TRUE  FALSE   TRUE   TRUE
+      728:         NA     NA     NA      NA 1.179875    TRUE  FALSE   TRUE   TRUE
+           BC_NPG UnixTimeMCU OverallFlowRate BatteryCharge AtmoAlt AccelX AccelXVar
+           <lgcl>       <num>           <num>         <num>   <num>  <num>     <num>
+        1:     NA          NA              NA            NA      NA     NA        NA
+        2:     NA          NA              NA            NA      NA     NA        NA
+        3:     NA          NA              NA            NA      NA     NA        NA
+        4:     NA          NA              NA            NA      NA     NA        NA
+        5:     NA          NA              NA            NA      NA     NA        NA
+       ---                                                                          
+      724:   TRUE  1720723140           1.012            97  1893.0  482.9   70471.3
+      725:   TRUE  1720723170           1.000            97  1893.0  228.6   53104.2
+      726:   TRUE  1720723200           0.998            97  1893.2    0.0       0.0
+      727:   TRUE  1720723230           0.996            97  1893.3    0.0       0.0
+      728:   TRUE  1720723260           0.981            96  1893.3  120.3   58162.5
+           AccelXMin AccelXMax AccelY AccelYVar AccelYMin AccelYMax AccelZ AccelZVar
+               <num>     <num>  <num>     <num>     <num>     <num>  <num>     <num>
+        1:        NA        NA     NA        NA        NA        NA     NA        NA
+        2:        NA        NA     NA        NA        NA        NA     NA        NA
+        3:        NA        NA     NA        NA        NA        NA     NA        NA
+        4:        NA        NA     NA        NA        NA        NA     NA        NA
+        5:        NA        NA     NA        NA        NA        NA     NA        NA
+       ---                                                                          
+      724:      -390       726 -141.6   56128.6      -986       120 -796.1   30108.7
+      725:      -134       595  -49.9   12886.5      -468       264 -930.5    8324.1
+      726:         0         0  -21.5       0.3       -22       -20 -991.0      -0.2
+      727:         0         0  -21.7       0.2       -22       -21 -991.1      -0.2
+      728:         0       636  -70.3    9750.5      -345       -21 -951.0   10014.9
+           AccelZMin AccelZMax    RotX   RotXVar RotXMin RotXMax    RotY     RotYVar
+               <num>     <num>   <num>     <num>   <num>   <num>   <num>       <num>
+        1:        NA        NA      NA        NA      NA      NA      NA          NA
+        2:        NA        NA      NA        NA      NA      NA      NA          NA
+        3:        NA        NA      NA        NA      NA      NA      NA          NA
+        4:        NA        NA      NA        NA      NA      NA      NA          NA
+        5:        NA        NA      NA        NA      NA      NA      NA          NA
+       ---                                                                          
+      724:     -1232      -422  6153.1 650115264  -66955   47687 -6097.5 257212096.0
+      725:     -1089      -710 -5500.6  84108080  -21770   23476  3592.9 180045760.0
+      726:      -992      -990 -7538.7  21042828  -15942    3333  -217.8      1313.6
+      727:      -992      -991 -7073.5  15074708  -15636    3605  -220.4       801.1
+      728:     -1089      -717 -7215.2  76597080  -16975   34903   742.5  13999127.0
+           RotYMin RotYMax     RotZ      RotZVar RotZMin RotZMax   Xup XDown   Yup
+             <num>   <num>    <num>        <num>   <num>   <num> <num> <num> <num>
+        1:      NA      NA       NA           NA      NA      NA    NA    NA    NA
+        2:      NA      NA       NA           NA      NA      NA    NA    NA    NA
+        3:      NA      NA       NA           NA      NA      NA    NA    NA    NA
+        4:      NA      NA       NA           NA      NA      NA    NA    NA    NA
+        5:      NA      NA       NA           NA      NA      NA    NA    NA    NA
+       ---                                                                        
+      724:  -62028   12626 -11240.5 1039706496.0  -69317   74550     0    10   3.3
+      725:  -14656   54110  -3749.8  154139600.0  -53497   10736     0     0   0.0
+      726:    -288    -140   -205.3       2614.7    -332     -96     0     0   0.0
+      727:    -280    -157   -204.6       2762.0    -332    -122     0     0   0.0
+      728:   -1837   15102   2874.4  241952384.0   -2135   86406     0     0   0.0
+           Ydown   Zup Zdown StepCount    LUX UVindex HighVisRaw LowVisRaw  IRRaw
+           <num> <num> <num>     <num>  <num>   <num>      <num>     <num>  <num>
+        1:    NA    NA    NA        NA     NA      NA         NA        NA     NA
+        2:    NA    NA    NA        NA     NA      NA         NA        NA     NA
+        3:    NA    NA    NA        NA     NA      NA         NA        NA     NA
+        4:    NA    NA    NA        NA     NA      NA         NA        NA     NA
+        5:    NA    NA    NA        NA     NA      NA         NA        NA     NA
+       ---                                                                       
+      724:     0  86.7     0        34 1276.7    0.33    11544.2 1120259.4 8998.7
+      725:     0 100.0     0         0  171.4    0.29     1274.9    1284.7 1974.6
+      726:     0 100.0     0         0  143.9    0.38     1062.3    1078.7 1708.1
+      727:     0 100.0     0         0  141.0    0.34     1052.4    1057.6 1682.2
+      728:     0 100.0     0         0  170.1    0.38     1266.7    1286.6 2030.7
+           UVRaw PMMeasCnt PM1MC PM1MCVar PM2_5MC PM2_5MCVar PM4MC PM4MCVar PM10MC
+           <num>     <num> <num>    <num>   <num>      <num> <num>    <num>  <num>
+        1:    NA        NA    NA       NA      NA         NA    NA       NA     NA
+        2:    NA        NA    NA       NA      NA         NA    NA       NA     NA
+        3:    NA        NA    NA       NA      NA         NA    NA       NA     NA
+        4:    NA        NA    NA       NA      NA         NA    NA       NA     NA
+        5:    NA        NA    NA       NA      NA         NA    NA       NA     NA
+       ---                                                                        
+      724:  37.9        30  1.53     0.21    1.61       0.23  1.61     0.23   1.61
+      725:  33.4        30  1.28     0.01    1.35       0.01  1.35     0.01   1.35
+      726:  42.7        30  1.26     0.00    1.33       0.00  1.33     0.00   1.33
+      727:  40.9        30  1.54     0.01    1.63       0.01  1.63     0.01   1.63
+      728:  47.3        30  1.58     0.02    1.67       0.02  1.67     0.02   1.67
+           PM10MCVar PM0_5NC PM0_5NCVar PM1NC PM1NCVar PM2_5NC PM2_5NCVar PM4NC
+               <num>   <num>      <num> <num>    <num>   <num>      <num> <num>
+        1:        NA      NA         NA    NA       NA      NA         NA    NA
+        2:        NA      NA         NA    NA       NA      NA         NA    NA
+        3:        NA      NA         NA    NA       NA      NA         NA    NA
+        4:        NA      NA         NA    NA       NA      NA         NA    NA
+        5:        NA      NA         NA    NA       NA      NA         NA    NA
+       ---                                                                     
+      724:      0.23   10.74      10.18 12.16    13.06   12.18      13.10 12.19
+      725:      0.01    8.99       0.30 10.19     0.38   10.20       0.38 10.21
+      726:      0.00    8.88       0.21 10.06     0.27   10.07       0.27 10.08
+      727:      0.01   10.82       0.43 12.25     0.55   12.27       0.56 12.28
+      728:      0.02   11.13       0.78 12.61     1.00   12.63       1.00 12.63
+           PM4NCVar PM10NC PM10NCVar PMtypicalParticleSize PMtypicalParticleSizeVar
+              <num>  <num>     <num>                 <num>                    <num>
+        1:       NA     NA        NA                    NA                       NA
+        2:       NA     NA        NA                    NA                       NA
+        3:       NA     NA        NA                    NA                       NA
+        4:       NA     NA        NA                    NA                       NA
+        5:       NA     NA        NA                    NA                       NA
+       ---                                                                         
+      724:    13.11  12.19     13.11                  0.40                        0
+      725:     0.38  10.21      0.38                  0.39                        0
+      726:     0.27  10.08      0.27                  0.39                        0
+      727:     0.56  12.28      0.56                  0.39                        0
+      728:     1.00  12.63      1.00                  0.38                        0
+           PM2_5SampledMass PCB2T AccelT PT100R  v3_3    v5 FLOWCTL    GPSRT SD_DATAW
+                      <num> <num>  <num>  <num> <num> <num>   <num>    <num>    <num>
+        1:               NA    NA     NA     NA    NA    NA      NA       NA       NA
+        2:               NA    NA     NA     NA    NA    NA      NA       NA       NA
+        3:               NA    NA     NA     NA    NA    NA      NA       NA       NA
+        4:               NA    NA     NA     NA    NA    NA      NA       NA       NA
+        5:               NA    NA     NA     NA    NA    NA      NA       NA       NA
+       ---                                                                           
+      724:           1.7792 47.42  43.10 117.48  3.34     5   0.499 0.123482    0.020
+      725:           1.7799 46.94  43.30 117.44  3.34     5   0.488 0.163676    0.020
+      726:           1.7806 45.79  43.27 117.26  3.34     5   0.502 0.043363    0.025
+      727:           1.7813 44.64  43.04 117.02  3.34     5   0.488 0.086179    0.019
+      728:           1.7822 43.59  42.49 116.81  3.34     5   0.490 0.131042    0.021
+           SD_HEADW TPumpsOFF TPumpsON IAQStabStat IAQRunIn IAQRes   IAQ IAQAcc
+              <num>     <num>    <num>       <num>    <num>  <num> <num>  <num>
+        1:       NA        NA       NA          NA       NA     NA    NA     NA
+        2:       NA        NA       NA          NA       NA     NA    NA     NA
+        3:       NA        NA       NA          NA       NA     NA    NA     NA
+        4:       NA        NA       NA          NA       NA     NA    NA     NA
+        5:       NA        NA       NA          NA       NA     NA    NA     NA
+       ---                                                                     
+      724:    0.042         0       30          NA       NA     NA    NA     NA
+      725:    0.041         0       30          NA       NA     NA    NA     NA
+      726:    0.050         0       30          NA       NA     NA    NA     NA
+      727:    0.042         0       30          NA       NA     NA    NA     NA
+      728:    0.041         0       30          NA       NA     NA    NA     NA
+           StaticIAQ StaticIAQAcc  CO2e CO2eAcc  bVOC bVOCAcc gasComp gasCompAcc
+               <num>        <num> <num>   <num> <num>   <num>   <num>      <num>
+        1:        NA           NA    NA      NA    NA      NA      NA         NA
+        2:        NA           NA    NA      NA    NA      NA      NA         NA
+        3:        NA           NA    NA      NA    NA      NA      NA         NA
+        4:        NA           NA    NA      NA    NA      NA      NA         NA
+        5:        NA           NA    NA      NA    NA      NA      NA         NA
+       ---                                                                      
+      724:        NA           NA    NA      NA    NA      NA      NA         NA
+      725:        NA           NA    NA      NA    NA      NA      NA         NA
+      726:        NA           NA    NA      NA    NA      NA      NA         NA
+      727:        NA           NA    NA      NA    NA      NA      NA         NA
+      728:        NA           NA    NA      NA    NA      NA      NA         NA
+           gasPerc gasPercAcc      CO2     SCDT    SCDRH   VOCRaw   NOXRaw
+             <num>      <num>    <num>    <num>    <num>    <num>    <num>
+        1:      NA         NA       NA       NA       NA       NA       NA
+        2:      NA         NA       NA       NA       NA       NA       NA
+        3:      NA         NA       NA       NA       NA       NA       NA
+        4:      NA         NA       NA       NA       NA       NA       NA
+        5:      NA         NA       NA       NA       NA       NA       NA
+       ---                                                                
+      724:      NA         NA 1487.500 41.27967 18.18483 29417.07 13947.87
+      725:      NA         NA 6622.143 41.41114 22.63300 29292.47 14319.20
+      726:      NA         NA 6877.000 41.43350 20.87533 29736.57 14151.93
+      727:      NA         NA 3919.000 41.24443 19.13857 29789.73 13924.77
+      728:      NA         NA 2333.333 40.82750 18.55833 29804.50 13802.60
+           AccelComplianceCnt AccelComplianceHrs PMReadingErrorCnt PMFanErrorCnt
+                        <num>              <num>             <num>         <num>
+        1:                 NA                 NA                NA            NA
+        2:                 NA                 NA                NA            NA
+        3:                 NA                 NA                NA            NA
+        4:                 NA                 NA                NA            NA
+        5:                 NA                 NA                NA            NA
+       ---                                                                      
+      724:                  9               0.58                 0             0
+      725:                  9               0.59                 0             0
+      726:                  8               0.60                 0             0
+      727:                  7               0.61                 0             0
+      728:                  7               0.62                 0             0
+           PMLaserErrorCnt PMFanSpeedWarn
+                     <num>          <num>
+        1:              NA             NA
+        2:              NA             NA
+        3:              NA             NA
+        4:              NA             NA
+        5:              NA             NA
+       ---                               
+      724:               0              0
+      725:               0              0
+      726:               0              0
+      727:               0              0
+      728:               0              0
 

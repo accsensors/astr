@@ -2,14 +2,14 @@
 #' Count header rows in an Access Sensor Technologies (AST) air sampler log file
 #'
 #' @description
-#' `count_header_rows` is a quick way to find where the log file header ends
+#' `count_header_rows()` is a quick way to find where the log file header ends
 #' before reading the file into a data frame.
 #' It finds the number of rows in the log file header with and without blank
 #' rows included. This information is useful for determining the number of
 #' header rows to read or skip when using file read functions from other
 #' packages such as fread, read_csv, and read.csv. For diagnostic files, this
 #' function indicates the starting row and length of the diagnostic summary too.
-#' `count_header_rows` also returns a boolean value to indicate if the file is
+#' `count_header_rows()` also returns a boolean value to indicate if the file is
 #' diagnostic.
 #'
 #' @param file Any AST air sampler log file name

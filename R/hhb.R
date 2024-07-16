@@ -1,10 +1,10 @@
 #'Format the header data from an Access Sensor Technologies Home Health Box log file
 #'
 #' @description
-#' `format_hhb_header` formats the header data from a HHB v2 log file by setting
+#' `format_hhb_header()` formats the header data from a HHB v2 log file by setting
 #' the proper data type for each variable.
 #'
-#' @param df A HHB v2 header data frame returned by [transpose_ast_header]
+#' @param df A HHB v2 header data frame returned by [astr::transpose_ast_header()]
 #'
 #' @return A data frame with a single row of HHB v2 header data that are formatted and ready for analysis.
 #' @export
@@ -39,8 +39,8 @@ format_hhb_header = function(df) {
 #'Format the sample log data from an Access Sensor Technologies Home Health Box log file
 #'
 #'
-#' @param log A data frame of HHB v2 sample log data returned by the [fread_ast_log] function.
-#' @param header A data frame of HHB v2 header data returned by the [read_ast_header] function.
+#' @param log A data frame of HHB v2 sample log data returned by the [astr::fread_ast_log()] function.
+#' @param header A data frame of HHB v2 header data returned by the [astr::read_ast_header()] function.
 #' @param tz Optional: A character string specifying the tz database time zone that should be used to display local times.
 #' See [read_ast_log] for additional information.
 #' @param cols_keep Optional: Provide a character vector specifying the names of a subset of sample log columns to keep.

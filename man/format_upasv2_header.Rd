@@ -7,36 +7,18 @@
 format_upasv2_header(data, update_names = FALSE)
 }
 \arguments{
-\item{data}{A UPASv2 header data frame returned by \link{transpose_ast_header}}
+\item{data}{A UPASv2 header data frame returned by \code{\link[=transpose_ast_header]{transpose_ast_header()}}}
 
-\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-
-For samples collected using UPAS v2 firmware versions beyond rev100, the old
-names shown on the left will be updated to the names shown on the right:
-\itemize{
-\item VolumetricFlowRate        -> FlowRateSetpoint
-\item DutyCycle                 -> FlowDutyCycle
-\item LoggedRuntime             -> OverallDuration
-\item SampledRuntime            -> PumpingDuration
-\item AverageVolumetricFlowRate -> PumpingFlowRateAverage
-}
-
-For samples collected using UPAS v2 firmware rev100, the old names shown on
-the left will be updated to the names shown on the right:
-\itemize{
-\item CumulativeSamplingTime -> LifetimeSampleRuntime
-\item StartDateTime          -> StartDateTimeUTC
-\item AverageVolumetricFlow  -> PumpingFlowRateAverage
-}
-
-Variable names cannot be updated for log files written using UPAS v2 firmware
-versions preceding rev100.}
+\item{update_names}{Option to update any deprecated variable names from log
+files written using older firmware versions to the variable names used in the
+current firmware version. Variable names cannot be updated for log files
+written using UPAS v2 firmware versions preceding rev100.}
 }
 \value{
 A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.
 }
 \description{
-\code{format_upasv2_header} formats the header data from a UPAS v2 log file.
+\code{format_upasv2_header()} formats the header data from a UPAS v2 log file.
 This function sets the proper data type for each variable, adds a column
 specifying the AST sampler type, adds a column describing the shutdown reason
 associated with the shutdown mode code, and can be directed to update old

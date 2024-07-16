@@ -15,10 +15,14 @@
             <num>    <num> <num>    <num>   <num>     <num>    <num>     <num>  <num>
       1:      533        0 9.561  1.00012    2.85     32809 40.54216 -105.0983 1565.0
       2:      535        0 9.527  0.99334    2.85     32813 40.54221 -105.0983 1563.1
-         GPSsat GPSpdop UserTZ LocalTZ LogFileMode
-          <num>   <num> <lgcl>  <lgcl>      <char>
-      1:      5     4.4  FALSE      NA      normal
-      2:      6     4.0  FALSE      NA      normal
+         GPSsat GPSpdop UserTZ LocalTZ
+          <num>   <num> <lgcl>  <lgcl>
+      1:      5     4.4  FALSE      NA
+      2:      6     4.0  FALSE      NA
+                                                          LogFilename LogFileMode
+                                                               <char>      <char>
+      1: PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt      normal
+      2: PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt      normal
 
 ---
 
@@ -525,106 +529,206 @@
       96:      0.005  10514   5874    8538   1.314    TRUE  FALSE  FALSE   TRUE
       97:      0.004  10508   5874    8540   1.314    TRUE  FALSE  FALSE   TRUE
           VFlowDelta MFSADS VInADS PumpADS MFSVolt PumpsON   Dead   BCS1   BCS2
-          BC_NPG UserTZ LocalTZ LogFileMode
-          <lgcl> <lgcl>  <lgcl>      <char>
-       1:  FALSE  FALSE      NA       debug
-       2:  FALSE  FALSE      NA       debug
-       3:  FALSE  FALSE      NA       debug
-       4:  FALSE  FALSE      NA       debug
-       5:  FALSE  FALSE      NA       debug
-       6:  FALSE  FALSE      NA       debug
-       7:  FALSE  FALSE      NA       debug
-       8:  FALSE  FALSE      NA       debug
-       9:  FALSE  FALSE      NA       debug
-      10:  FALSE  FALSE      NA       debug
-      11:  FALSE  FALSE      NA       debug
-      12:  FALSE  FALSE      NA       debug
-      13:  FALSE  FALSE      NA       debug
-      14:  FALSE  FALSE      NA       debug
-      15:  FALSE  FALSE      NA       debug
-      16:  FALSE  FALSE      NA       debug
-      17:  FALSE  FALSE      NA       debug
-      18:  FALSE  FALSE      NA       debug
-      19:  FALSE  FALSE      NA       debug
-      20:  FALSE  FALSE      NA       debug
-      21:  FALSE  FALSE      NA       debug
-      22:  FALSE  FALSE      NA       debug
-      23:  FALSE  FALSE      NA       debug
-      24:  FALSE  FALSE      NA       debug
-      25:  FALSE  FALSE      NA       debug
-      26:  FALSE  FALSE      NA       debug
-      27:  FALSE  FALSE      NA       debug
-      28:  FALSE  FALSE      NA       debug
-      29:  FALSE  FALSE      NA       debug
-      30:  FALSE  FALSE      NA       debug
-      31:  FALSE  FALSE      NA       debug
-      32:  FALSE  FALSE      NA       debug
-      33:  FALSE  FALSE      NA       debug
-      34:  FALSE  FALSE      NA       debug
-      35:  FALSE  FALSE      NA       debug
-      36:  FALSE  FALSE      NA       debug
-      37:  FALSE  FALSE      NA       debug
-      38:  FALSE  FALSE      NA       debug
-      39:  FALSE  FALSE      NA       debug
-      40:  FALSE  FALSE      NA       debug
-      41:  FALSE  FALSE      NA       debug
-      42:  FALSE  FALSE      NA       debug
-      43:  FALSE  FALSE      NA       debug
-      44:  FALSE  FALSE      NA       debug
-      45:  FALSE  FALSE      NA       debug
-      46:  FALSE  FALSE      NA       debug
-      47:  FALSE  FALSE      NA       debug
-      48:  FALSE  FALSE      NA       debug
-      49:  FALSE  FALSE      NA       debug
-      50:  FALSE  FALSE      NA       debug
-      51:  FALSE  FALSE      NA       debug
-      52:  FALSE  FALSE      NA       debug
-      53:  FALSE  FALSE      NA       debug
-      54:  FALSE  FALSE      NA       debug
-      55:  FALSE  FALSE      NA       debug
-      56:  FALSE  FALSE      NA       debug
-      57:  FALSE  FALSE      NA       debug
-      58:  FALSE  FALSE      NA       debug
-      59:  FALSE  FALSE      NA       debug
-      60:  FALSE  FALSE      NA       debug
-      61:  FALSE  FALSE      NA       debug
-      62:  FALSE  FALSE      NA       debug
-      63:  FALSE  FALSE      NA       debug
-      64:  FALSE  FALSE      NA       debug
-      65:  FALSE  FALSE      NA       debug
-      66:  FALSE  FALSE      NA       debug
-      67:  FALSE  FALSE      NA       debug
-      68:  FALSE  FALSE      NA       debug
-      69:  FALSE  FALSE      NA       debug
-      70:  FALSE  FALSE      NA       debug
-      71:  FALSE  FALSE      NA       debug
-      72:  FALSE  FALSE      NA       debug
-      73:  FALSE  FALSE      NA       debug
-      74:  FALSE  FALSE      NA       debug
-      75:  FALSE  FALSE      NA       debug
-      76:  FALSE  FALSE      NA       debug
-      77:  FALSE  FALSE      NA       debug
-      78:  FALSE  FALSE      NA       debug
-      79:  FALSE  FALSE      NA       debug
-      80:  FALSE  FALSE      NA       debug
-      81:  FALSE  FALSE      NA       debug
-      82:  FALSE  FALSE      NA       debug
-      83:  FALSE  FALSE      NA       debug
-      84:  FALSE  FALSE      NA       debug
-      85:  FALSE  FALSE      NA       debug
-      86:  FALSE  FALSE      NA       debug
-      87:  FALSE  FALSE      NA       debug
-      88:  FALSE  FALSE      NA       debug
-      89:  FALSE  FALSE      NA       debug
-      90:  FALSE  FALSE      NA       debug
-      91:  FALSE  FALSE      NA       debug
-      92:  FALSE  FALSE      NA       debug
-      93:  FALSE  FALSE      NA       debug
-      94:  FALSE  FALSE      NA       debug
-      95:  FALSE  FALSE      NA       debug
-      96:  FALSE  FALSE      NA       debug
-      97:  FALSE  FALSE      NA       debug
-          BC_NPG UserTZ LocalTZ LogFileMode
+          BC_NPG UserTZ LocalTZ
+          <lgcl> <lgcl>  <lgcl>
+       1:  FALSE  FALSE      NA
+       2:  FALSE  FALSE      NA
+       3:  FALSE  FALSE      NA
+       4:  FALSE  FALSE      NA
+       5:  FALSE  FALSE      NA
+       6:  FALSE  FALSE      NA
+       7:  FALSE  FALSE      NA
+       8:  FALSE  FALSE      NA
+       9:  FALSE  FALSE      NA
+      10:  FALSE  FALSE      NA
+      11:  FALSE  FALSE      NA
+      12:  FALSE  FALSE      NA
+      13:  FALSE  FALSE      NA
+      14:  FALSE  FALSE      NA
+      15:  FALSE  FALSE      NA
+      16:  FALSE  FALSE      NA
+      17:  FALSE  FALSE      NA
+      18:  FALSE  FALSE      NA
+      19:  FALSE  FALSE      NA
+      20:  FALSE  FALSE      NA
+      21:  FALSE  FALSE      NA
+      22:  FALSE  FALSE      NA
+      23:  FALSE  FALSE      NA
+      24:  FALSE  FALSE      NA
+      25:  FALSE  FALSE      NA
+      26:  FALSE  FALSE      NA
+      27:  FALSE  FALSE      NA
+      28:  FALSE  FALSE      NA
+      29:  FALSE  FALSE      NA
+      30:  FALSE  FALSE      NA
+      31:  FALSE  FALSE      NA
+      32:  FALSE  FALSE      NA
+      33:  FALSE  FALSE      NA
+      34:  FALSE  FALSE      NA
+      35:  FALSE  FALSE      NA
+      36:  FALSE  FALSE      NA
+      37:  FALSE  FALSE      NA
+      38:  FALSE  FALSE      NA
+      39:  FALSE  FALSE      NA
+      40:  FALSE  FALSE      NA
+      41:  FALSE  FALSE      NA
+      42:  FALSE  FALSE      NA
+      43:  FALSE  FALSE      NA
+      44:  FALSE  FALSE      NA
+      45:  FALSE  FALSE      NA
+      46:  FALSE  FALSE      NA
+      47:  FALSE  FALSE      NA
+      48:  FALSE  FALSE      NA
+      49:  FALSE  FALSE      NA
+      50:  FALSE  FALSE      NA
+      51:  FALSE  FALSE      NA
+      52:  FALSE  FALSE      NA
+      53:  FALSE  FALSE      NA
+      54:  FALSE  FALSE      NA
+      55:  FALSE  FALSE      NA
+      56:  FALSE  FALSE      NA
+      57:  FALSE  FALSE      NA
+      58:  FALSE  FALSE      NA
+      59:  FALSE  FALSE      NA
+      60:  FALSE  FALSE      NA
+      61:  FALSE  FALSE      NA
+      62:  FALSE  FALSE      NA
+      63:  FALSE  FALSE      NA
+      64:  FALSE  FALSE      NA
+      65:  FALSE  FALSE      NA
+      66:  FALSE  FALSE      NA
+      67:  FALSE  FALSE      NA
+      68:  FALSE  FALSE      NA
+      69:  FALSE  FALSE      NA
+      70:  FALSE  FALSE      NA
+      71:  FALSE  FALSE      NA
+      72:  FALSE  FALSE      NA
+      73:  FALSE  FALSE      NA
+      74:  FALSE  FALSE      NA
+      75:  FALSE  FALSE      NA
+      76:  FALSE  FALSE      NA
+      77:  FALSE  FALSE      NA
+      78:  FALSE  FALSE      NA
+      79:  FALSE  FALSE      NA
+      80:  FALSE  FALSE      NA
+      81:  FALSE  FALSE      NA
+      82:  FALSE  FALSE      NA
+      83:  FALSE  FALSE      NA
+      84:  FALSE  FALSE      NA
+      85:  FALSE  FALSE      NA
+      86:  FALSE  FALSE      NA
+      87:  FALSE  FALSE      NA
+      88:  FALSE  FALSE      NA
+      89:  FALSE  FALSE      NA
+      90:  FALSE  FALSE      NA
+      91:  FALSE  FALSE      NA
+      92:  FALSE  FALSE      NA
+      93:  FALSE  FALSE      NA
+      94:  FALSE  FALSE      NA
+      95:  FALSE  FALSE      NA
+      96:  FALSE  FALSE      NA
+      97:  FALSE  FALSE      NA
+          BC_NPG UserTZ LocalTZ
+                                                           LogFilename LogFileMode
+                                                                <char>      <char>
+       1: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       2: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       3: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       4: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       5: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       6: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       7: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       8: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+       9: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      10: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      11: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      12: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      13: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      14: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      15: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      16: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      17: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      18: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      19: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      20: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      21: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      22: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      23: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      24: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      25: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      26: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      27: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      28: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      29: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      30: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      31: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      32: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      33: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      34: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      35: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      36: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      37: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      38: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      39: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      40: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      41: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      42: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      43: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      44: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      45: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      46: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      47: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      48: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      49: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      50: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      51: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      52: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      53: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      54: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      55: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      56: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      57: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      58: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      59: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      60: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      61: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      62: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      63: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      64: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      65: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      66: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      67: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      68: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      69: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      70: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      71: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      72: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      73: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      74: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      75: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      76: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      77: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      78: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      79: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      80: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      81: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      82: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      83: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      84: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      85: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      86: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      87: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      88: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      89: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      90: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      91: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      92: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      93: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      94: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      95: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      96: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+      97: PS1422_LOG_2020-06-02T18_29_11UTC_DIAGNOSTIC____________.txt       debug
+                                                           LogFilename LogFileMode
 
 ---
 
@@ -675,17 +779,39 @@
       7:      334        0 14.556  0.98111    3.55     33265 40.56361 -105.1125
       8:      334        0 14.562  0.98132    3.54     33253 40.56359 -105.1125
       9:      334        0 14.566  0.98152    3.54     33241 40.56358 -105.1126
-         GPSalt GPSsat GPSspeed GPShdop UserTZ    StartDateTimeUTC LogFileMode
-          <num>  <num>    <num>   <num> <lgcl>              <POSc>      <char>
-      1: 1552.0     11 0.105884     1.0  FALSE 2021-09-29 17:37:09      normal
-      2: 1558.0     12 0.029298     0.8  FALSE 2021-09-29 17:37:09      normal
-      3: 1556.6     12 0.039578     0.8  FALSE 2021-09-29 17:37:09      normal
-      4: 1557.5     12 0.051914     0.8  FALSE 2021-09-29 17:37:09      normal
-      5: 1555.2     12 0.111538     0.8  FALSE 2021-09-29 17:37:09      normal
-      6: 1550.3     12 0.062194     0.9  FALSE 2021-09-29 17:37:09      normal
-      7: 1546.8     12 0.015420     0.8  FALSE 2021-09-29 17:37:09      normal
-      8: 1548.9     11 0.143920     1.0  FALSE 2021-09-29 17:37:09      normal
-      9: 1550.5     12 0.041634     0.8  FALSE 2021-09-29 17:37:09      normal
+         GPSalt GPSsat GPSspeed GPShdop UserTZ
+          <num>  <num>    <num>   <num> <lgcl>
+      1: 1552.0     11 0.105884     1.0  FALSE
+      2: 1558.0     12 0.029298     0.8  FALSE
+      3: 1556.6     12 0.039578     0.8  FALSE
+      4: 1557.5     12 0.051914     0.8  FALSE
+      5: 1555.2     12 0.111538     0.8  FALSE
+      6: 1550.3     12 0.062194     0.9  FALSE
+      7: 1546.8     12 0.015420     0.8  FALSE
+      8: 1548.9     11 0.143920     1.0  FALSE
+      9: 1550.5     12 0.041634     0.8  FALSE
+                                                          LogFilename
+                                                               <char>
+      1: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      2: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      3: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      4: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      5: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      6: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      7: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      8: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+      9: PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt
+            StartDateTimeUTC LogFileMode
+                      <POSc>      <char>
+      1: 2021-09-29 17:37:09      normal
+      2: 2021-09-29 17:37:09      normal
+      3: 2021-09-29 17:37:09      normal
+      4: 2021-09-29 17:37:09      normal
+      5: 2021-09-29 17:37:09      normal
+      6: 2021-09-29 17:37:09      normal
+      7: 2021-09-29 17:37:09      normal
+      8: 2021-09-29 17:37:09      normal
+      9: 2021-09-29 17:37:09      normal
 
 ---
 
@@ -1196,6 +1322,90 @@
       80:   13849   1.622    TRUE  FALSE   TRUE   TRUE   TRUE  FALSE
       81:   13849   1.622    TRUE  FALSE   TRUE   TRUE   TRUE  FALSE
           PumpADS MFSVolt PumpsON   Dead   BCS1   BCS2 BC_NPG UserTZ
+                                                           LogFilename
+                                                                <char>
+       1: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       2: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       3: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       4: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       5: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       6: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       7: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       8: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+       9: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      10: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      11: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      12: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      13: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      14: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      15: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      16: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      17: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      18: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      19: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      20: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      21: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      22: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      23: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      24: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      25: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      26: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      27: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      28: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      29: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      30: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      31: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      32: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      33: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      34: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      35: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      36: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      37: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      38: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      39: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      40: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      41: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      42: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      43: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      44: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      45: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      46: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      47: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      48: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      49: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      50: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      51: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      52: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      53: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      54: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      55: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      56: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      57: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      58: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      59: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      60: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      61: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      62: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      63: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      64: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      65: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      66: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      67: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      68: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      69: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      70: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      71: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      72: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      73: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      74: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      75: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      76: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      77: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      78: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      79: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      80: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+      81: PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt
+                                                           LogFilename
              StartDateTimeUTC LogFileMode
                        <POSc>      <char>
        1: 2023-03-02 21:45:43       debug
@@ -1338,19 +1548,45 @@
        9:        0 8.844  0.88798    4.01     50235 37.29825 -107.8704 1997.6     11
       10:        0 8.849  0.89213    4.01     50227 37.29857 -107.8703 2002.0     11
       11:        0 8.848  0.89109    4.01     50219 37.29882 -107.8705 1998.5     11
-          GPSspeed GPShdop UserTZ    StartDateTimeUTC LogFileMode
-             <num>   <num> <lgcl>              <POSc>      <char>
-       1: 1.199162     1.6  FALSE 2024-06-13 21:20:17      normal
-       2: 1.963994     1.0  FALSE 2024-06-13 21:20:17      normal
-       3: 1.406818     1.0  FALSE 2024-06-13 21:20:17      normal
-       4: 0.911322     1.0  FALSE 2024-06-13 21:20:17      normal
-       5: 1.089166     1.0  FALSE 2024-06-13 21:20:17      normal
-       6: 1.031084     1.0  FALSE 2024-06-13 21:20:17      normal
-       7: 0.769972     1.0  FALSE 2024-06-13 21:20:17      normal
-       8: 0.620398     1.0  FALSE 2024-06-13 21:20:17      normal
-       9: 0.792588     1.0  FALSE 2024-06-13 21:20:17      normal
-      10: 1.067578     1.0  FALSE 2024-06-13 21:20:17      normal
-      11: 0.816746     1.0  FALSE 2024-06-13 21:20:17      normal
+          GPSspeed GPShdop UserTZ
+             <num>   <num> <lgcl>
+       1: 1.199162     1.6  FALSE
+       2: 1.963994     1.0  FALSE
+       3: 1.406818     1.0  FALSE
+       4: 0.911322     1.0  FALSE
+       5: 1.089166     1.0  FALSE
+       6: 1.031084     1.0  FALSE
+       7: 0.769972     1.0  FALSE
+       8: 0.620398     1.0  FALSE
+       9: 0.792588     1.0  FALSE
+      10: 1.067578     1.0  FALSE
+      11: 0.816746     1.0  FALSE
+                                                           LogFilename
+                                                                <char>
+       1: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       2: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       3: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       4: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       5: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       6: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       7: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       8: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+       9: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+      10: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+      11: PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
+             StartDateTimeUTC LogFileMode
+                       <POSc>      <char>
+       1: 2024-06-13 21:20:17      normal
+       2: 2024-06-13 21:20:17      normal
+       3: 2024-06-13 21:20:17      normal
+       4: 2024-06-13 21:20:17      normal
+       5: 2024-06-13 21:20:17      normal
+       6: 2024-06-13 21:20:17      normal
+       7: 2024-06-13 21:20:17      normal
+       8: 2024-06-13 21:20:17      normal
+       9: 2024-06-13 21:20:17      normal
+      10: 2024-06-13 21:20:17      normal
+      11: 2024-06-13 21:20:17      normal
 
 # read_ast_log works with all UPASv2x firmwares
 

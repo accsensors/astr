@@ -9,7 +9,7 @@ for the online shinyAST app}
 shiny_log(df)
 }
 \arguments{
-\item{df}{A log data frame returned by the \link{read_ast_log} function
+\item{df}{A log data frame returned by the \code{\link[=read_ast_log]{read_ast_log()}} function
 with the argument \code{update_names = TRUE}.}
 }
 \value{
@@ -19,7 +19,7 @@ and SampleTime formatted to hours for the online shinyAST app plots.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-\code{shiny_log} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+\code{shiny_log()} modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 log data frame
 for use with the online shinyAST data analysis app.
 This function removes and reorders some columns to create a better user interface.

@@ -8,19 +8,19 @@ generating a gps map}
 format_gps_map_data(df, variable = c("PM2_5MC", "CO2"))
 }
 \arguments{
-\item{df}{A log data frame returned by the \link{read_ast_log} function
+\item{df}{A log data frame returned by the \code{\link[=read_ast_log]{read_ast_log()}} function
 with the argument \code{update_names = TRUE}.}
 
-\item{variable}{A column name from the log file. Choose "PM2_5MC" for PM2.5,
-and "CO2" for CO2 data.}
+\item{variable}{A column name from the log file. Choose \code{"PM2_5MC"} for PM2.5,
+and \code{"CO2"} for CO2 data.}
 }
 \value{
 A modified data frame with 30 second mean data for select variables.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-\code{format_gps_map_data} formats data from an Access Sensor Technologies
-UPAS v2.1 PLUS log data frame for the \link{gps_map} function.
+\code{format_gps_map_data()} formats data from an Access Sensor Technologies
+UPAS v2.1 PLUS log data frame for the \code{\link[=gps_map]{gps_map()}} function.
 This function calculates 30 second averaged PM2.5 or CO2 data and removes
 variables not necessary for generating the map.
 If UPASv2 data is provided, data will not be generated for that device.

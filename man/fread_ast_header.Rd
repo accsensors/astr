@@ -10,13 +10,13 @@ fread_ast_header(file)
 \item{file}{Any Access Sensor Technologies air sampler log file name.}
 }
 \value{
-A list containing two items named "header" and "diag". The "header"
-item is a data table that contains the header data and the "diag" item is a
+A list containing two items named \code{header} and \code{diag}. The \code{header}
+item is a data table that contains the header data and the \code{diag} item is a
 data table that contains the diagnostic test data. These data tables contain
 the data formatted exactly as they appear in the log file.
 }
 \description{
-\code{fread_ast_header} uses fread to read the header data and, if applicable, the
+\code{fread_ast_header()} uses fread to read the header data and, if applicable, the
 diagnostic test data from the specified file.
 }
 \examples{

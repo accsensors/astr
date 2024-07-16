@@ -10,7 +10,7 @@ shiny_units(col_names_vect)
 \arguments{
 \item{col_names_vect}{Pass a vector of column names.
 A UPAS v2 or UPAS v2.1 PLUS vector of column names from a data frame
-returned by the \link{read_ast_header} or \link{read_ast_log} function
+returned by the \code{\link[=read_ast_header]{read_ast_header()}} or \code{\link[=read_ast_log]{read_ast_log()}} function
 with the argument \code{update_names = TRUE}.}
 }
 \value{

@@ -9,34 +9,16 @@ read_ast_header(file, update_names = FALSE)
 \arguments{
 \item{file}{Any Access Sensor Technologies air sampler log file name.}
 
-\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-
-For samples collected using UPAS v2 firmware versions beyond rev100, the old
-names shown on the left will be updated to the names shown on the right:
-\itemize{
-\item VolumetricFlowRate        -> FlowRateSetpoint
-\item DutyCycle                 -> FlowDutyCycle
-\item LoggedRuntime             -> OverallDuration
-\item SampledRuntime            -> PumpingDuration
-\item AverageVolumetricFlowRate -> PumpingFlowRateAverage
-}
-
-For samples collected using UPAS v2 firmware rev100, the old names shown on
-the left will be updated to the names shown on the right:
-\itemize{
-\item CumulativeSamplingTime -> LifetimeSampleRuntime
-\item StartDateTime          -> StartDateTimeUTC
-\item AverageVolumetricFlow  -> PumpingFlowRateAverage
-}
-
-Variable names cannot be updated for log files written using UPAS v2 firmware
-versions preceding rev100.}
+\item{update_names}{Option to update any deprecated variable names from log
+files written using older firmware versions to the variable names used in the
+current firmware version. Variable names cannot be updated for log files
+written using UPAS v2 firmware versions preceding rev100.}
 }
 \value{
 A data frame with a single row of header data that are formatted and ready for analysis.
 }
 \description{
-\code{read_ast_header} reads in the header data from a log file, transposes the
+\code{read_ast_header()} reads in the header data from a log file, transposes the
 data into a wide format, and applies device-specific formatting to the
 columns of the resulting data frame. This function sets the proper data type
 for each variable, adds a column to specify the AST sampler type, adds
@@ -44,9 +26,43 @@ columns to describe the codes associated with the ShutdownMode and
 PMSensorInterval variables, and can also be directed to update old variable
 names to the current variable names.
 
-Use this function in conjuction with \link{lapply} or \link[purrr:map]{purrr::map} to read in header data
-from any number of log files and combine them into a single data frame that
-contains a unique row for each sample.
+Use this function in conjuction with \code{\link[base:lapply]{base::lapply()}} or
+\code{\link[purrr:map]{purrr::map()}} to read in header data from any number of log files
+and combine those data into a single data frame that contains a unique row
+for each sample.
+}
+\details{
+If \code{update_names = TRUE}, then, for samples collected using UPAS v2 firmware
+versions beyond rev100, the deprecated names shown on the left will be
+updated to the current names shown on the right:
+\tabular{ll}{
+\strong{Deprecated name}  \tab \strong{Current name}  \cr
+VolumetricFlowRate        \tab FlowRateSetpoint       \cr
+DutyCycle                 \tab FlowDutyCycle          \cr
+LoggedRuntime             \tab OverallDuration        \cr
+SampledRuntime            \tab PumpingDuration        \cr
+AverageVolumetricFlowRate \tab PumpingFlowRateAverage \cr
+}
+
+If \code{update_names = TRUE}, then, for samples collected using UPAS v2 firmware
+rev100, the deprecated names shown on the left will be updated to the current
+names shown on the right:
+\tabular{ll}{
+\strong{Deprecated name} \tab \strong{Current name}  \cr
+CumulativeSamplingTime   \tab LifetimeSampleRuntime  \cr
+StartDateTime            \tab StartDateTimeUTC       \cr
+AverageVolumetricFlow    \tab PumpingFlowRateAverage \cr
+}
+
+The data frame returned by this function will include all variables from the
+log file header. Additionally, for UPAS log files, the following columns will
+be appended:
+\itemize{
+\item ASTSampler: A string indicating the model of the sampler, e.g., UPAS_v2
+\item FirmwareRev: A numeric value indicating the firmware revision number
+\item ShutdownReason: A string indicating the meaning of the numeric ShutdownMode number
+\item PMSensorOperation: A string indicating the meaning of the PMSensorInterval number (for UPAS v2.1 PLUS only)
+}
 }
 \examples{
 # UPASv2 EXAMPLES
@@ -54,7 +70,7 @@ upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt
 upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
 upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 
-# Use of update_names with UPASv2 log file
+# Use of `update_names` with UPASv2 log file
 upasv2_header_updatednames <- read_ast_header(upasv2_file, update_names=TRUE)
 
 # UPASv2x EXAMPLES
@@ -68,15 +84,17 @@ upasv2x_diag_file <- system.file("extdata", upasv2x_diag_filename, package = "as
                                   mustWork = TRUE)
 upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 
-# Read in multiple UPAS files at once to a single data frame using lapply.
-# The map() function from the purrr library can also be used in place of lapply.
+# Use `base::lapply()` to read in multiple UPAS files at once and
+# combine the data from those files into a single data frame with one row for
+# each file.
+# The `purrr::map()` function can also be used in place of `lapply()`.
 multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
     list.files(pattern="^PS.*.txt$", full.names = TRUE) \%>\%
     lapply(read_ast_header, update_names = TRUE) \%>\%
     dplyr::bind_rows()
 
 # To change the type of device log file being read in the above example,
-# change the `pattern` argument in [list.files] as follows:
+# change the `pattern` argument in `list.files()` as follows:
 # UPASv2: `pattern = "^PS[1-9].*.txt$"`
 # UPASv2x: `pattern = "^PSP.*.txt$"`
 # HHB: `pattern = "^HHB.*.csv$"`

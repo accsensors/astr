@@ -7,11 +7,11 @@
 shiny_success_flag(df_h)
 }
 \arguments{
-\item{df_h}{A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the \link{read_ast_header} function.}
+\item{df_h}{A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the \code{\link[=read_ast_header]{read_ast_header()}} function.}
 }
 \value{
 A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to indicate sample PASS/FAIL
-based off the sample ShutdownMode.
+based off the sample \code{ShutdownMode}.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}

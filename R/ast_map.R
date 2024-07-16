@@ -3,8 +3,8 @@
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `format_gps_map_data` formats data from an Access Sensor Technologies
-#' UPAS v2.1 PLUS log data frame for the [gps_map] function.
+#' `format_gps_map_data()` formats data from an Access Sensor Technologies
+#' UPAS v2.1 PLUS log data frame for the [astr::gps_map()] function.
 #' This function calculates 30 second averaged PM2.5 or CO2 data and removes
 #' variables not necessary for generating the map.
 #' If UPASv2 data is provided, data will not be generated for that device.
@@ -104,7 +104,7 @@ format_gps_map_data = function(df, variable=c("PM2_5MC", "CO2")) {
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `gps_map` generates a gps map of 30 second averaged PM2.5 or CO2 data from
+#' `gps_map()` generates a gps map of 30 second averaged PM2.5 or CO2 data from
 #' an Access Sensor Technologies
 #' UPAS v2.1 PLUS log data frame.
 #' If UPASv2 data is provided, a map will not be generated for that device.
@@ -112,10 +112,10 @@ format_gps_map_data = function(df, variable=c("PM2_5MC", "CO2")) {
 #' at a less than 30 second log interval.
 #' The UPAS must have been outside with GPS reception and collecting PM2.5 or CO2 data.
 #'
-#' @param df A log data frame returned by the [read_ast_log] function
+#' @param df A log data frame returned by the [astr::read_ast_log()] function
 #' with the argument `update_names = TRUE`.
-#' @param variable A column name from the log file. Choose "PM2_5MC" for PM2.5,
-#' and "CO2" for CO2 data.
+#' @param variable A column name from the log file. Choose `"PM2_5MC"` for PM2.5,
+#' and `"CO2"` for CO2 data.
 #'
 #' @return A gps map of 30 second averaged data for the selected variable.
 #' @export

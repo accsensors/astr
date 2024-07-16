@@ -13,7 +13,7 @@ fread_ast_log(file)
 A data frame of unformatted sample log data
 }
 \description{
-\code{fread_ast_log} reads in the sample log data exactly as it appears in the file.
+\code{fread_ast_log()} reads in the sample log data exactly as it appears in the file.
 }
 \examples{
 # UPASv2 EXAMPLES

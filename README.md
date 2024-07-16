@@ -23,63 +23,70 @@ devtools::install_github("accsensors/astr")
 
 ## Reading Air Sampler Log Files into R
 
-Once the astr package has been installed, you can load the package using
-the following command:
+Once the `astr` package has been installed, you can load the package
+using the following command:
 
 ``` r
 library(astr)
 ```
 
-Two functions are used to read log files into R: `read_ast_header` and
-`read_ast_log`. These functions work for UPASv2, UPASv2x, and Home
-Health Box (HHB) log files. To view the documentation for these two
-functions, use either of the following commands:
+Two functions are used to read log files into R: `read_ast_header()` and
+`read_ast_log()`. These functions will read UPAS v2, UPAS v2.1, UPAS
+v2.1 PLUS, and Home Health Box (HHB) v2 log files. Use the following
+commands to view the documentation for these two functions:
 
 ``` r
 ?read_ast_header
 ?read_ast_log
 ```
 
-To read the header data from multiple UPAS log files and create a data
-frame with one row for each file:
+You can use either the `base::lapply()` function or the `purrr::map()`
+function to read header data from multiple log files and combine those
+data into a single data frame with one row for each file. Below is an
+example using `lapply()`. If you prefer to use `purrr::map()`, just
+replace “lapply” with “purrr::map” in the example below.
 
 ``` r
-data_upas_h <- list.files(path = ".", pattern="^PS.*.txt$",  full.names = TRUE)%>%
-  lapply(read_ast_header, update_names = TRUE)%>%
+data_upas_h <- list.files(path = ".", pattern = "^PS.*.txt$", full.names = T) %>%
+  lapply(read_ast_header, update_names = T)%>%
   dplyr::bind_rows()
 ```
 
-To read the sample logs from multiple UPAS log files and combine them
-all into a single data frame:
+You can also use either the `base::lapply()` function or the
+`purrr::map()` function to read sample logs from multiple files and
+combine those data into a single data frame. A column with the file name
+will be appended so that the data from each individual file can be
+identified easily.
 
 ``` r
-data_upas <- list.files(path = ".", pattern="^PS.*.txt$",  full.names = TRUE)%>%
-  lapply(read_ast_log, update_names = TRUE)%>%
+data_upas <- list.files(path = ".", pattern = "^PS.*.txt$", full.names = T) %>%
+  lapply(read_ast_log, update_names = T) %>%
   dplyr::bind_rows()
 ```
 
 For the examples above, you will need to update the `path` argument in
-the `list.files` function to indicate the location where your log files
-are stored, relative to your working directory. Specifying
-`pattern = "^PS.*.txt$"`, will choose only UPAS log files, since UPASv2
-and UPASv2x log files are prefixed by “PS” and “PSP” respectively. To
-read only UPASv2, UPASv2x, or HHB files edit the `pattern` argument in
-`list.files` as shown below:
+the `list.files()` function to indicate the location where your log
+files are stored, relative to your working directory. Specifying
+`pattern = "^PS.*.txt$"` will choose only UPAS log files, since UPAS v2,
+UPAS v2.1, and UPAS v2.1 PLUS log files are prefixed by “PS”, “PSP”, and
+“PSP” respectively. To read only UPAS v2, UPAS v2.1 and UPAS v2.1 PLUS,
+or HHB v2 files, edit the `pattern` argument in `list.files()` as shown
+below:
 
 ``` r
-# UPASv2 files
-data_upasv2 <- list.files(path = ".", pattern="^PS[1-9].*.txt$",  full.names = TRUE)%>%
-  lapply(read_ast_log, update_names = FALSE)%>%
+# UPAS v2 files
+data_upasv2 <- list.files(path = ".", pattern = "^PS[1-9].*.txt$", full.names = T) %>%
+  lapply(read_ast_log, update_names = F) %>%
   dplyr::bind_rows()
 
-# UPASv2x files
-data_upasv2x <- list.files(path = ".", pattern="^PSP.*.txt$",  full.names = TRUE)%>%
-  lapply(read_ast_log, update_names = FALSE)%>%
+# UPAS v2.1 and UPAS v2.1 PLUS files
+data_upasv2x <- list.files(path = ".", pattern = "^PSP.*.txt$", full.names = T) %>%
+  lapply(read_ast_log, update_names = F) %>%
   dplyr::bind_rows()
 
-# HHB files
-data_hhb <- list.files(path = ".", pattern="^HHB.*.csv$",  full.names = TRUE)%>%
-  lapply(read_ast_log, update_names = TRUE)%>%
+# HHB v2 files
+data_hhb <- list.files(path = ".", pattern = "^HHB.*.csv$", full.names = T) %>%
+  lapply(read_ast_log, update_names = T)%>%
   dplyr::bind_rows()
 ```
 
@@ -88,66 +95,68 @@ To see a list of the example log files included with this package, use
 the command below:
 
 ``` r
-example_files <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-    list.files(pattern=NULL, full.names = TRUE)
+example_files <- system.file("extdata", package = "astr", mustWork = T) |>
+    list.files(pattern = NULL, full.names = T)
 ```
 
-You will notice there are log files for UPASv2 (“PS” prefix), UPASv2x
-(“PSP” prefix), and HHB (“HHB” prefix). Use the commands below to
-generate example data frames using the example UPAS log files. Change
-the `pattern` argument in `list.files` as previously described to select
-the types of log file read (e.g. `pattern = "^HHB.*.csv$"` for HHB log
-files).
+You will notice that example log files from UPAS v2 (“PS” prefix), UPAS
+v2.1 PLUS (“PSP” prefix), and HHB v2 (“HHB” prefix) are included.
+
+Use the commands below to generate example data frames using the example
+log files. Change the `pattern` argument in `list.files()` as previously
+described to select the types of log file read (e.g.,
+`pattern = "^HHB.*.csv$"` for HHB log files).
 
 ``` r
-data_upas_examples_h <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
-    lapply(read_ast_header, update_names = TRUE) %>%
+data_upas_examples_h <- system.file("extdata", package = "astr", mustWork = T) |>
+    list.files(pattern = "^PS.*.txt$", full.names = T) %>%
+    lapply(read_ast_header, update_names = T) %>%
     dplyr::bind_rows()
 ```
 
 ``` r
-data_upas_examples <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
-    lapply(read_ast_log, update_names = TRUE) %>%
+data_upas_examples <- system.file("extdata", package = "astr", mustWork = T) |>
+    list.files(pattern="^PS.*.txt$", full.names = T) %>%
+    lapply(read_ast_log, update_names = T) %>%
     dplyr::bind_rows()
 ```
 
 ## Make a GPS Map of UPAS Data
 
-The `astr` package includes the experimental function `gps_map` for
-making a GPS map of PM2.5 or CO2 data. This function is mainly for use
-with our online [Shiny App](https://accsensors.shinyapps.io/shinyAST/),
-but can be used in general scripts. Since `gps_map` is experimental, the
-look and functionality of the map may see rapid changes during future
-development.
+The `astr` package includes the experimental function `gps_map()` for
+making a GPS map of PM<sub>2.5</sub> or CO<sub>2</sub> data. This
+function is mainly for use with our online [Shiny
+App](https://accsensors.shinyapps.io/shinyAST/), but can be used in
+general scripts. Since `gps_map()` is experimental, the appearance and
+functionality of the map may change during future development.
 
 ``` r
 multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+    list.files(pattern = "^PS.*.txt$", full.names = TRUE) %>%
     lapply(read_ast_log, update_names=TRUE) %>%
     dplyr::bind_rows()
 
-upasv2x_pm25_map <- gps_map(multiple_upas_logs, variable="PM2_5MC")
-upasv2x_CO2_map <- gps_map(multiple_upas_logs, variable="CO2")
+upasv2x_pm25_map <- gps_map(multiple_upas_logs, variable = "PM2_5MC")
+upasv2x_CO2_map  <- gps_map(multiple_upas_logs, variable = "CO2")
 ```
 
 ## Other Helper Functions
 
 The `astr` package contains helper functions called by the
-`read_ast_header`, and `read_ast_log` functions to process files. If you
-would like to use any of these helper functions independently in your
-script, you can find documentation and examples by typing a ‘?’ before
-the function name. These helper functions are: `count_header_rows`,
-`format_ast_header`, `format_ast_log`, `format_hhb_header`,
-`format_hhb_log`, `format_upasv2_header`, `format_upasv2_log`,
-`format_upasv2x_header`, `format_upasv2x_log`, `fread_ast_header`,
-`fread_ast_log`, `transpose_ast_header`.
+`read_ast_header()`, and `read_ast_log()` functions to process files. If
+you would like to use any of these helper functions independently in
+your script, you can find documentation and examples by typing a ‘?’
+before the function name. These helper functions are:
+`count_header_rows()`, `format_ast_header()`, `format_ast_log()`,
+`format_hhb_header()`, `format_hhb_log()`, `format_upasv2_header()`,
+`format_upasv2_log()`, `format_upasv2x_header()`,
+`format_upasv2x_log()`, `fread_ast_header()`, `fread_ast_log()`, and
+`transpose_ast_header()`.
 
 The `astr` package also includes functions we use for our online [Shiny
 App](https://accsensors.shinyapps.io/shinyAST/). We do not recommend
-using these functions in your scripts since they are experimental, and
-likely to see rapid change in future development. These functions are:
-`shiny_axis`, `shiny_header`, `shiny_log`, `shiny_sample_operation`,
-`shiny_sample_settings`, `shiny_sample_summary`, `shiny_success_flag`,
-`shiny_units`
+using these functions in your scripts because they are experimental and
+likely to change during future development. These functions are:
+`shiny_axis()`, `shiny_header()`, `shiny_log()`,
+`shiny_sample_operation()`, `shiny_sample_settings()`,
+`shiny_sample_summary()`, `shiny_success_flag()`, and `shiny_units()`.

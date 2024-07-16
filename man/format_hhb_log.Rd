@@ -7,9 +7,9 @@
 format_hhb_log(log, header, tz = NA, cols_keep = c(), cols_drop = c())
 }
 \arguments{
-\item{log}{A data frame of HHB v2 sample log data returned by the \link{fread_ast_log} function.}
+\item{log}{A data frame of HHB v2 sample log data returned by the \code{\link[=fread_ast_log]{fread_ast_log()}} function.}
 
-\item{header}{A data frame of HHB v2 header data returned by the \link{read_ast_header} function.}
+\item{header}{A data frame of HHB v2 header data returned by the \code{\link[=read_ast_header]{read_ast_header()}} function.}
 
 \item{tz}{Optional: A character string specifying the tz database time zone that should be used to display local times.
 See \link{read_ast_log} for additional information.}

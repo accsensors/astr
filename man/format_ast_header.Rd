@@ -8,36 +8,18 @@ to make sure each column in the header data frame is the correct data type.}
 format_ast_header(data, update_names = FALSE)
 }
 \arguments{
-\item{data}{A header data frame returned by the \link{transpose_ast_header} function.}
+\item{data}{A header data frame returned by the \code{\link[=transpose_ast_header]{transpose_ast_header()}} function.}
 
-\item{update_names}{Option to update any deprecated variable names from log files recorded using older firmware versions to the variable names used in the current firmware version.
-
-For samples collected using UPAS v2 firmware versions beyond rev100, the old
-names shown on the left will be updated to the names shown on the right:
-\itemize{
-\item VolumetricFlowRate        -> FlowRateSetpoint
-\item DutyCycle                 -> FlowDutyCycle
-\item LoggedRuntime             -> OverallDuration
-\item SampledRuntime            -> PumpingDuration
-\item AverageVolumetricFlowRate -> PumpingFlowRateAverage
-}
-
-For samples collected using UPAS v2 firmware rev100, the old names shown on
-the left will be updated to the names shown on the right:
-\itemize{
-\item CumulativeSamplingTime -> LifetimeSampleRuntime
-\item StartDateTime          -> StartDateTimeUTC
-\item AverageVolumetricFlow  -> PumpingFlowRateAverage
-}
-
-Variable names cannot be updated for log files written using UPAS v2 firmware
-versions preceding rev100.}
+\item{update_names}{Option to update any deprecated variable names from log
+files written using older firmware versions to the variable names used in the
+current firmware version. Variable names cannot be updated for log files
+written using UPAS v2 firmware versions preceding rev100.}
 }
 \value{
 A data frame with a single row of header data that are formatted and ready for analysis.
 }
 \description{
-\code{format_ast_header} applies device-specific formatting to the columns in a
+\code{format_ast_header()} applies device-specific formatting to the columns in a
 data frame of header data from an Access Sensor Technologies air sampler
 log file. This function sets the proper data type for each variable, adds a
 column to specify the AST sampler type, adds columns to describe the codes

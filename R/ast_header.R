@@ -1,7 +1,7 @@
 #'Read and format the header data from an Access Sensor Technologies air sampler log file
 #'
 #' @description
-#' `read_ast_header` reads in the header data from a log file, transposes the
+#' `read_ast_header()` reads in the header data from a log file, transposes the
 #' data into a wide format, and applies device-specific formatting to the
 #' columns of the resulting data frame. This function sets the proper data type
 #' for each variable, adds a column to specify the AST sampler type, adds
@@ -9,8 +9,8 @@
 #' PMSensorInterval variables, and can also be directed to update old variable
 #' names to the current variable names.
 #'
-#' Use this function in conjuction with \code{\link[base]{lapply}} or
-#' \code{\link[purrr]{map}} to read in header data from any number of log files
+#' Use this function in conjuction with [base::lapply()] or
+#' [purrr::map()] to read in header data from any number of log files
 #' and combine those data into a single data frame that contains a unique row
 #' for each sample.
 #'
@@ -64,7 +64,7 @@
 #' upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
 #' upasv2_header <- read_ast_header(upasv2_file, update_names=FALSE)
 #'
-#' # Use of update_names with UPASv2 log file
+#' # Use of `update_names` with UPASv2 log file
 #' upasv2_header_updatednames <- read_ast_header(upasv2_file, update_names=TRUE)
 #'
 #' # UPASv2x EXAMPLES
@@ -78,22 +78,17 @@
 #'                                   mustWork = TRUE)
 #' upasv2x_diag_header <- read_ast_header(upasv2x_diag_file, update_names=FALSE)
 #'
-#' # Use \code{\link[base]{lapply}} to read in multiple UPAS files at once and
+#' # Use `base::lapply()` to read in multiple UPAS files at once and
 #' # combine the data from those files into a single data frame with one row for
 #' # each file.
+#' # The `purrr::map()` function can also be used in place of `lapply()`.
 #' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
 #'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
 #'     lapply(read_ast_header, update_names = TRUE) %>%
 #'     dplyr::bind_rows()
 #'
-#' # The \code{\link[purrr]{map}} function can also be used in place of \code{\link[base]{lapply}}.
-#' multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-#'     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
-#'     purr::map(read_ast_header, update_names = TRUE) %>%
-#'     dplyr::bind_rows()
-#'
 #' # To change the type of device log file being read in the above example,
-#' # change the `pattern` argument in [list.files] as follows:
+#' # change the `pattern` argument in `list.files()` as follows:
 #' # UPASv2: `pattern = "^PS[1-9].*.txt$"`
 #' # UPASv2x: `pattern = "^PSP.*.txt$"`
 #' # HHB: `pattern = "^HHB.*.csv$"`
@@ -118,13 +113,13 @@ read_ast_header = function(file, update_names=FALSE) {
 #'Use fread to read the header data from an Access Sensor Technologies air sampler log file
 #'
 #' @description
-#' `fread_ast_header` uses fread to read the header data and, if applicable, the
+#' `fread_ast_header()` uses fread to read the header data and, if applicable, the
 #' diagnostic test data from the specified file.
 #'
 #' @param file Any Access Sensor Technologies air sampler log file name.
 #'
-#' @return A list containing two items named "header" and "diag". The "header"
-#' item is a data table that contains the header data and the "diag" item is a
+#' @return A list containing two items named `header` and `diag`. The `header`
+#' item is a data table that contains the header data and the `diag` item is a
 #' data table that contains the diagnostic test data. These data tables contain
 #' the data formatted exactly as they appear in the log file.
 #' @export
@@ -184,13 +179,13 @@ fread_ast_header = function(file) {
 #'file and format the transposed header as a data frame.
 #'
 #' @description
-#' `transpose_ast_header` Takes the data read using the \code{\link{fread_ast_header}}
+#' `transpose_ast_header()` Takes the data read using the [astr::fread_ast_header()]
 #' function and transposes those data so each variable in the header is a unique
 #' column in a data frame.
 #'
-#' @param header A data table containing header data read using the \code{\link{fread_ast_header}} function.
+#' @param header A data table containing header data read using the [astr::fread_ast_header()] function.
 #' @param diag An optional data table containing diagnostic test data read using
-#' the \code{\link{fread_ast_header}} function. If the \code{diag} argument is
+#' the [astr::fread_ast_header()] function. If the `diag` argument is
 #' specified, key metrics from the diagnostic test will be added to the header
 #' data frame.
 #'
@@ -284,14 +279,14 @@ transpose_ast_header = function(header, diag = NULL){
 #'to make sure each column in the header data frame is the correct data type.
 #'
 #' @description
-#' `format_ast_header` applies device-specific formatting to the columns in a
+#' `format_ast_header()` applies device-specific formatting to the columns in a
 #' data frame of header data from an Access Sensor Technologies air sampler
 #' log file. This function sets the proper data type for each variable, adds a
 #' column to specify the AST sampler type, adds columns to describe the codes
 #' wassociated ith the ShutdownMode and PMSensorInterval, and can also be
 #' directed to update old variable names to current variable names.
 #'
-#' @param data A header data frame returned by the \code{\link{transpose_ast_header}} function.
+#' @param data A header data frame returned by the [astr::transpose_ast_header()] function.
 #' @inheritParams read_ast_header
 #'
 #' @return A data frame with a single row of header data that are formatted and ready for analysis.

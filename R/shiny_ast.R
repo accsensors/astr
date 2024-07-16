@@ -3,14 +3,14 @@
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `shiny_sample_summary` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' `shiny_sample_summary()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the Sample Summary tab in the online shinyAST data analysis app.
 #' This function sets the proper data type for each variable,
 #' appends a sample PASS/FAIL flag column,
 #' and adds units to the applicable variable names.
 #'
-#' @param df_h A header data frame returned by the [read_ast_header] function
+#' @param df_h A header data frame returned by the [astr::read_ast_header()] function
 #' with the argument `update_names = TRUE`.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
@@ -55,7 +55,7 @@ shiny_sample_summary = function(df_h, fract_units=FALSE) {
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `shiny_sample_settings` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' `shiny_sample_settings()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the Sample Settings tab in the online shinyAST data analysis app.
 #' This function sets the proper data type for each variable,
@@ -101,7 +101,7 @@ shiny_sample_settings = function(df_h, fract_units=FALSE) {
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `shiny_sample_operation` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' `shiny_sample_operation()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the UPAS Operation tab in the online shinyAST data analysis app.
 #' This function sets the proper data type for each variable,
@@ -146,7 +146,7 @@ shiny_sample_operation = function(df_h, fract_units=FALSE) {
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `shiny_header` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' `shiny_header()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' header data frame
 #' for use with the online shinyAST data analysis app.
 #' This function adds units to the applicable variable names.
@@ -265,12 +265,12 @@ shiny_header = function(df_h, fract_units = FALSE) {
 #'
 #' @description
 #' `r lifecycle::badge("experimental")`
-#' `shiny_log` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
+#' `shiny_log()` modifies an Access Sensor Technologies UPAS v2 or UPAS v2.1 PLUS
 #' log data frame
 #' for use with the online shinyAST data analysis app.
 #' This function removes and reorders some columns to create a better user interface.
 #'
-#' @param df A log data frame returned by the [read_ast_log] function
+#' @param df A log data frame returned by the [astr::read_ast_log()] function
 #' with the argument `update_names = TRUE`.
 #'
 #' @return A modified log data frame with extraneous variables removed,
@@ -350,7 +350,7 @@ shiny_log = function(df) {
 #' `r lifecycle::badge("experimental")`
 #'
 #' @param col_name A UPAS v2 or UPAS v2.1 PLUS log column name from a data frame
-#' returned by the [read_ast_log] function
+#' returned by the [astr::read_ast_log()] function
 #' with the argument `update_names = TRUE`.
 #' @param fract_units Boolean to specify if units should be fractional (L min^-1 vs L/min).
 #'
@@ -513,7 +513,7 @@ shiny_axis = function(col_name, fract_units = FALSE){
 #'
 #' @param col_names_vect Pass a vector of column names.
 #' A UPAS v2 or UPAS v2.1 PLUS vector of column names from a data frame
-#' returned by the [read_ast_header] or [read_ast_log] function
+#' returned by the [astr::read_ast_header()] or [astr::read_ast_log()] function
 #' with the argument `update_names = TRUE`.
 #'
 #' @return A vector of column names with fractional units (L/min) instead of the
@@ -550,10 +550,10 @@ shiny_units = function(col_names_vect){
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' @param df_h A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the [read_ast_header] function.
+#' @param df_h A formatted data frame of UPAS v2 or UPAS v2.1 PLUS header data returned by the [astr::read_ast_header()] function.
 #'
 #' @return A data frame of UPAS v2 or UPAS v2.1 PLUS header data with an added column to indicate sample PASS/FAIL
-#' based off the sample ShutdownMode.
+#' based off the sample `ShutdownMode`.
 #' @export
 #' @importFrom rlang .data
 #'

@@ -7,13 +7,13 @@
 format_hhb_header(df)
 }
 \arguments{
-\item{df}{A HHB v2 header data frame returned by \link{transpose_ast_header}}
+\item{df}{A HHB v2 header data frame returned by \code{\link[=transpose_ast_header]{transpose_ast_header()}}}
 }
 \value{
 A data frame with a single row of HHB v2 header data that are formatted and ready for analysis.
 }
 \description{
-\code{format_hhb_header} formats the header data from a HHB v2 log file by setting
+\code{format_hhb_header()} formats the header data from a HHB v2 log file by setting
 the proper data type for each variable.
 }
 \examples{

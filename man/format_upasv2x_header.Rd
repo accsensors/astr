@@ -7,13 +7,13 @@
 format_upasv2x_header(data)
 }
 \arguments{
-\item{data}{A UPASv2.1 PLUS header data frame returned by the \link{transpose_ast_header} function}
+\item{data}{A UPASv2.1 PLUS header data frame returned by the \code{\link[=transpose_ast_header]{transpose_ast_header()}} function}
 }
 \value{
 A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.
 }
 \description{
-\code{format_upasv2x_header} formats the UPAS v2.1 PLUS log file header data prior
+\code{format_upasv2x_header()} formats the UPAS v2.1 PLUS log file header data prior
 to analysis. This function sets the proper data types for each variable, adds
 a column to specify the sampler type, and adds a column to describe the
 shutdown reason associated with the shutdown mode code.

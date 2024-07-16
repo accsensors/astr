@@ -7,18 +7,18 @@
 gps_map(df, variable = c("PM2_5MC", "CO2"))
 }
 \arguments{
-\item{df}{A log data frame returned by the \link{read_ast_log} function
+\item{df}{A log data frame returned by the \code{\link[=read_ast_log]{read_ast_log()}} function
 with the argument \code{update_names = TRUE}.}
 
-\item{variable}{A column name from the log file. Choose "PM2_5MC" for PM2.5,
-and "CO2" for CO2 data.}
+\item{variable}{A column name from the log file. Choose \code{"PM2_5MC"} for PM2.5,
+and \code{"CO2"} for CO2 data.}
 }
 \value{
 A gps map of 30 second averaged data for the selected variable.
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
-\code{gps_map} generates a gps map of 30 second averaged PM2.5 or CO2 data from
+\code{gps_map()} generates a gps map of 30 second averaged PM2.5 or CO2 data from
 an Access Sensor Technologies
 UPAS v2.1 PLUS log data frame.
 If UPASv2 data is provided, a map will not be generated for that device.
