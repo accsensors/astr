@@ -20,10 +20,8 @@ multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) 
 #   lapply(read_ast_log, update_names=TRUE) %>%
 #   dplyr::bind_rows()
 
-upas_shiny_log <- shiny_log(multiple_upas_logs)
-
 gps_map_data <- format_gps_map_data(multiple_upas_logs, variable="PM2_5MC")
 
-heat_map <- gps_map(upas_shiny_log, variable="PM2_5MC")
+heat_map <- gps_map(gps_map_data, variable="PM2_5MC")
 heat_map
 

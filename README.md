@@ -153,11 +153,3 @@ before the function name. These helper functions are:
 `format_upasv2_log()`, `format_upasv2x_header()`,
 `format_upasv2x_log()`, `fread_ast_header()`, `fread_ast_log()`, and
 `transpose_ast_header()`.
-
-The `astr` package also includes functions we use for our online [Shiny
-App](https://accsensors.shinyapps.io/shinyAST/). We do not recommend
-using these functions in your scripts because they are experimental and
-likely to change during future development. These functions are:
-`shiny_axis()`, `shiny_header()`, `shiny_log()`,
-`shiny_sample_operation()`, `shiny_sample_settings()`,
-`shiny_sample_summary()`, `shiny_success_flag()`, and `shiny_units()`.

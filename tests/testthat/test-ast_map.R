@@ -1,24 +1,17 @@
 ###################################
 # gps_map
 ###################################
-test_that("gps_map works with shiny log and standard log and throws error if no mappable data", {
+test_that("gps_map works with standard log and throws error if no mappable data", {
   multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
     lapply(read_ast_log, update_names=TRUE) %>%
     dplyr::bind_rows()
-  shiny_log <- shiny_log(multiple_upas_logs)
 
   expect_message(standard_log_fail <- gps_map(multiple_upas_logs, variable="PM2_5M"))
   expect_true(is.null(standard_log_fail))
 
   expect_no_message(standard_log_pass <- gps_map(multiple_upas_logs, variable="PM2_5MC"))
   expect_false(is.null(standard_log_pass))
-
-  expect_message(shiny_log_fail <- gps_map(shiny_log, variable="CO"))
-  expect_true(is.null(shiny_log_fail))
-
-  expect_no_message(shiny_log_pass <- gps_map(shiny_log, variable="CO2"))
-  expect_false(is.null(shiny_log_pass))
 
   # UPASv2x variable that exists but no code in place for mapping
   expect_message(standard_log_fail <- gps_map(multiple_upas_logs, variable="PM4MC"))
@@ -43,24 +36,17 @@ test_that("gps_map works with shiny log and standard log and throws error if no 
 ###################################
 # format_gps_map_data
 ###################################
-test_that("format_gps_map_data works with shiny log and standard log and is NULL if no mappable data", {
+test_that("format_gps_map_data works with standard log and is NULL if no mappable data", {
   multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
     list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
     lapply(read_ast_log, update_names=TRUE) %>%
     dplyr::bind_rows()
-  shiny_log <- shiny_log(multiple_upas_logs)
 
   expect_message(standard_log_fail <- format_gps_map_data(multiple_upas_logs, variable="PM2"))
   expect_true(is.null(standard_log_fail))
 
   expect_no_message(standard_log_pass <- format_gps_map_data(multiple_upas_logs, variable="PM2_5MC"))
   expect_false(is.null(standard_log_pass))
-
-  expect_message(shiny_log_fail <- format_gps_map_data(shiny_log, variable="CO"))
-  expect_true(is.null(shiny_log_fail))
-
-  expect_no_message(shiny_log_pass <- format_gps_map_data(shiny_log, variable="CO2"))
-  expect_false(is.null(shiny_log_pass))
 
   # UPASv2x variable that exists but no code in place for mapping
   expect_message(standard_log_fail <- format_gps_map_data(multiple_upas_logs, variable="PM4MC"))
