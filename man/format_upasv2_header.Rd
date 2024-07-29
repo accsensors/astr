@@ -4,7 +4,7 @@
 \alias{format_upasv2_header}
 \title{Format UPAS v2 header data that hae already been transposed to a wide data frame}
 \usage{
-format_upasv2_header(data, update_names = FALSE)
+format_upasv2_header(data, update_names = FALSE, tz = NA)
 }
 \arguments{
 \item{data}{A UPASv2 header data frame returned by \code{\link[=transpose_ast_header]{transpose_ast_header()}}}
@@ -13,6 +13,11 @@ format_upasv2_header(data, update_names = FALSE)
 files written using older firmware versions to the variable names used in the
 current firmware version. Variable names cannot be updated for files
 written using UPAS v2 firmware versions preceding rev100.}
+
+\item{tz}{Optional: A character string specifying the tz database time zone
+that should be used to display local times. Example tz database time zones
+include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
 }
 \value{
 A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.

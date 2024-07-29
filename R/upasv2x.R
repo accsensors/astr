@@ -7,7 +7,7 @@
 #' shutdown reason associated with the shutdown mode code.
 #'
 #' @param data A UPASv2.1 PLUS header data frame returned by the [astr::transpose_ast_header()] function
-#'
+#' @inheritParams read_ast_header
 #' @return A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.
 #' @export
 #' @importFrom rlang .data
@@ -28,7 +28,7 @@
 #'                                   upasv2x_diag_header_list$diag)
 #' upasv2x_diag_header <- format_upasv2x_header(upasv2x_diag_header_wide)
 
-format_upasv2x_header = function(data) {
+format_upasv2x_header = function(data, tz=NA) {
 
   data <- dplyr::mutate(data,
     ASTSampler  = sub("-rev.*", "", .data$Firmware),
@@ -111,6 +111,28 @@ format_upasv2x_header = function(data) {
     CartridgeID = gsub("_+$", "", .data$CartridgeID),
     CartridgeID = gsub("-+$", "", .data$CartridgeID),
     CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
+
+  tz_string <- dplyr::case_when(!is.na(tz) ~ tz,
+                                data$GPSUTCOffset == 0 ~ "UTC",
+     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset < 0) ~
+                                  sprintf("Etc/GMT+%i", abs(data$GPSUTCOffset)),
+     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset > 0) ~
+                                  sprintf("Etc/GMT-%i", abs(data$GPSUTCOffset)),
+                                T ~ NA)
+
+  if(!is.na(tz_string)){
+    data <- dplyr::mutate(data,
+                          StartDateTimeLocal =
+                            lubridate::with_tz(.data$StartDateTimeUTC,
+                                               tzone = tz_string),
+                          EndDateTimeLocal =
+                            lubridate::with_tz(.data$EndDateTimeUTC,
+                                               tzone = tz_string))
+  }else{
+    data <- dplyr::mutate(data,
+                    StartDateTimeLocal = as.character(.data$StartDateTimeLocal),
+                    EndDateTimeLocal   = as.character(.data$EndDateTimeLocal))
+  }
 
   data <- dplyr::relocate(data, "ASTSampler")
   data <- dplyr::relocate(data, "FirmwareRev",       .after = "Firmware")

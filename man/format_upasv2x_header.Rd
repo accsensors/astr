@@ -4,10 +4,15 @@
 \alias{format_upasv2x_header}
 \title{Format UPAS v2.1 PLUS header data that have already been transposed to a wide data frame}
 \usage{
-format_upasv2x_header(data)
+format_upasv2x_header(data, tz = NA)
 }
 \arguments{
 \item{data}{A UPASv2.1 PLUS header data frame returned by the \code{\link[=transpose_ast_header]{transpose_ast_header()}} function}
+
+\item{tz}{Optional: A character string specifying the tz database time zone
+that should be used to display local times. Example tz database time zones
+include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
 }
 \value{
 A data frame with a single row of UPAS v2.1 PLUS header data that are formatted and ready for analysis.

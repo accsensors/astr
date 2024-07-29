@@ -4,7 +4,7 @@
 \alias{read_ast_header}
 \title{Read and format the header data from an Access Sensor Technologies air sampler log file}
 \usage{
-read_ast_header(file, update_names = FALSE)
+read_ast_header(file, update_names = FALSE, tz = NA)
 }
 \arguments{
 \item{file}{Any Access Sensor Technologies air sampler log file name.}
@@ -13,6 +13,11 @@ read_ast_header(file, update_names = FALSE)
 files written using older firmware versions to the variable names used in the
 current firmware version. Variable names cannot be updated for files
 written using UPAS v2 firmware versions preceding rev100.}
+
+\item{tz}{Optional: A character string specifying the tz database time zone
+that should be used to display local times. Example tz database time zones
+include: "America/New_York", "America/Denver", and "America/Los_Angeles".
+For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
 }
 \value{
 A data frame with a single row of header data that are formatted and ready for analysis.
@@ -53,6 +58,12 @@ CumulativeSamplingTime   \tab LifetimeSampleRuntime  \cr
 StartDateTime            \tab StartDateTimeUTC       \cr
 AverageVolumetricFlow    \tab PumpingFlowRateAverage \cr
 }
+
+If the GPSUTCOffset in the file header is a whole number of hours, this
+function will be able to convert local times to POSIXct format automatically,
+without the \code{tz} argument being specified. If the GPSUTCOffset is not a whole
+number of hours, it's better to specify the local time zone as a character
+string using the \code{tz} argument.
 
 The data frame returned by this function will include all variables from the
 log file header. Additionally, for UPAS log files, the following columns will

@@ -29,7 +29,7 @@
 #' upasv2_diag_header <- format_upasv2_header(upasv2_diag_header_wide)
 
 
-format_upasv2_header <- function(data, update_names=FALSE){
+format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
 
   data <- dplyr::rename(data, LogFilename = "UPASlogFilename")
 
@@ -79,14 +79,36 @@ format_upasv2_header <- function(data, update_names=FALSE){
                     .data$ShutdownMode == 7 ~ "blocked flow"))
 
 
-  if(data$FirmwareRev != 100){
+  if(data$FirmwareRev > 100){
 
     data <- dplyr::mutate(data,
-                        SampleName  = gsub("_+$", "", .data$SampleName),
-                        SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
-                        CartridgeID = gsub("_+$", "", .data$CartridgeID),
-                        CartridgeID = gsub("-+$", "", .data$CartridgeID),
-                        CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
+             SampleName  = gsub("_+$", "", .data$SampleName),
+             SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
+             CartridgeID = gsub("_+$", "", .data$CartridgeID),
+             CartridgeID = gsub("-+$", "", .data$CartridgeID),
+             CartridgeID = ifelse(.data$CartridgeID != "",.data$CartridgeID,NA))
+
+    tz_string <- dplyr::case_when(!is.na(tz) ~ tz,
+                                  data$GPSUTCOffset == 0 ~ "UTC",
+     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset < 0) ~
+                                  sprintf("Etc/GMT+%i", abs(data$GPSUTCOffset)),
+     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset > 0) ~
+                                  sprintf("Etc/GMT-%i", abs(data$GPSUTCOffset)),
+                                  T ~ NA)
+
+    if(!is.na(tz_string)){
+      data <- dplyr::mutate(data,
+                            StartDateTimeLocal =
+                                      lubridate::with_tz(.data$StartDateTimeUTC,
+                                                         tzone = tz_string),
+                            EndDateTimeLocal =
+                                      lubridate::with_tz(.data$EndDateTimeUTC,
+                                                         tzone = tz_string))
+    }else{
+      data <- dplyr::mutate(data,
+                    StartDateTimeLocal = as.character(.data$StartDateTimeLocal),
+                    EndDateTimeLocal   = as.character(.data$EndDateTimeLocal))
+    }
   }
 
   data <- data %>%

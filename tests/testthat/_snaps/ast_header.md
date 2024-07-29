@@ -74,9 +74,9 @@
         GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
       1       TRUE      normal          30       0     i2.2.2 2021-09-29 17:37:09
          StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 2021-09-29T11:37:09                 54                3.58
+      1 2021-09-29 11:37:09                 54                3.58
              EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
-      1 2021-09-29 17:41:30 2021-09-29T11:41:30               54              3.54
+      1 2021-09-29 17:41:30 2021-09-29 11:41:30               54              3.54
         ShutdownMode       ShutdownReason SampledVolume SampledRuntime LoggedRuntime
       1            1 user pushbutton stop          4.28           0.07         0.069
         AverageVolumetricFlowRate
@@ -102,9 +102,9 @@
         GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
       1       TRUE       debug           1       0     i2.2.2 2023-03-02 21:45:43
          StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 2023-03-02T13:45:43                 99                3.56
+      1 2023-03-02 13:45:43                 99                3.56
              EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
-      1 2023-03-02 21:48:17 2023-03-02T13:48:11               99               3.5
+      1 2023-03-02 21:48:17 2023-03-02 13:48:17               99               3.5
         ShutdownMode ShutdownReason SampledVolume SampledRuntime LoggedRuntime
       1            0  unknown error          0.97          0.011         0.023
         AverageVolumetricFlowRate      MF4       MF3       MF2      MF1       MF0
@@ -138,9 +138,9 @@
         GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
       1       TRUE      normal          30       0     i2.2.2 2024-06-13 21:20:17
          StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 2024-06-13T15:20:17                 93                4.04
+      1 2024-06-13 15:20:17                 93                4.04
              EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
-      1 2024-06-13 21:25:30 2024-06-13T15:25:30               93              4.01
+      1 2024-06-13 21:25:30 2024-06-13 15:25:30               93              4.01
         ShutdownMode       ShutdownReason SampledVolume SampledRuntime LoggedRuntime
       1            1 user pushbutton stop          5.02          0.084         0.084
         AverageVolumetricFlowRate
@@ -170,9 +170,9 @@
         RTGasSampleState LogInterval PowerSaveMode AppLock AppVersion
       1            FALSE          30          TRUE   FALSE     i1.0.0
            StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1 2021-08-11 18:18:03 2021-08-11T14:18:03 2021-08-12 01:04:11
+      1 2021-08-11 18:18:03 2021-08-11 14:18:03 2021-08-12 01:04:11
            EndDateTimeLocal OverallDuration PumpingDuration OverallFlowRateAverage
-      1 2021-08-11T21:04:11           6.763           1.353                    0.2
+      1 2021-08-11 21:04:11           6.763           1.353                    0.2
         PumpingFlowRateAverage SampledVolume StartBatteryCharge EndBatteryCharge
       1                  0.999         81.06                 99               86
         StartBatteryVoltage EndBatteryVoltage ShutdownMode       ShutdownReason
@@ -210,7 +210,7 @@
         LogInterval PowerSaveMode AppLock AppVersion    StartDateTimeUTC
       1          30         FALSE   FALSE     i1.0.1 2022-05-11 23:24:01
          StartDateTimeLocal      EndDateTimeUTC    EndDateTimeLocal
-      1 2022-05-11T16:24:01 2022-05-11 23:31:17 2022-05-11T16:31:17
+      1 2022-05-11 16:24:01 2022-05-11 23:31:17 2022-05-11 16:31:17
         FlowCheckMeterReadingPreSample FlowCheckMeterReadingPostSample
       1                             NA                              NA
         OverallDuration PumpingDuration OverallFlowRateAverage PumpingFlowRateAverage
@@ -250,9 +250,9 @@
              PMSensorOperation RTGasSampleState LogInterval PowerSaveMode AppLock
       1 Continuous Measurement            FALSE           1         FALSE   FALSE
         AppVersion    StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1     i1.0.0 2022-03-24 18:05:32 2022-03-24T12:05:32 2022-03-24 18:08:32
+      1     i1.0.0 2022-03-24 18:05:32 2022-03-24 12:05:32 2022-03-24 18:08:32
            EndDateTimeLocal FlowCheckMeterReadingPreSample
-      1 2022-03-24T12:08:32                             NA
+      1 2022-03-24 12:08:32                             NA
         FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
       1                              NA           0.051           0.025
         OverallFlowRateAverage PumpingFlowRateAverage SampledVolume
@@ -302,9 +302,9 @@
         SamplerConfiguration ExternalPowerMode PowerSaveMode AppLock AppVersion
       1                    0             FALSE         FALSE   FALSE     i1.0.4
            StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1 2024-06-25 21:37:48 2024-06-25T15:37:48 2024-06-25 22:21:13
+      1 2024-06-25 21:37:48 2024-06-25 15:37:48 2024-06-25 22:21:13
            EndDateTimeLocal FlowCheckMeterReadingPreSample
-      1 2024-06-25T16:21:13                             NA
+      1 2024-06-25 16:21:13                             NA
         FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
       1                              NA           0.714           0.714
         OverallFlowRateAverage PumpingFlowRateAverage SampledVolume PercentTimeWorn
@@ -352,9 +352,9 @@
         SamplerConfiguration ExternalPowerMode PowerSaveMode AppLock AppVersion
       1                    0             FALSE         FALSE   FALSE     i1.0.4
            StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1 2024-06-13 16:24:47 2024-06-13T10:24:47 2024-06-13 16:27:26
+      1 2024-06-13 16:24:47 2024-06-13 10:24:47 2024-06-13 16:27:26
            EndDateTimeLocal FlowCheckMeterReadingPreSample
-      1 2024-06-13T10:27:26                             NA
+      1 2024-06-13 10:27:26                             NA
         FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
       1                              NA           0.037           0.037
         OverallFlowRateAverage PumpingFlowRateAverage SampledVolume PercentTimeWorn
