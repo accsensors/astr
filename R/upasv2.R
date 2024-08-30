@@ -34,8 +34,8 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
   data <- dplyr::rename(data, LogFilename = "UPASlogFilename")
 
   data <- dplyr::mutate(data,
-                  UPASserial = sub("(^.*)(PS.*)_LOG.*", "\\2", .data$LogFilename),
                   ASTSampler = sub("-rev.*", "", .data$Firmware),
+                  UPASserial = sub("(^.*)(PS.*)_LOG.*", "\\2", .data$LogFilename),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)),
                   StartOnNextPowerUp = dplyr::case_when(

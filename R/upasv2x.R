@@ -31,8 +31,10 @@
 format_upasv2x_header = function(data, tz=NA) {
 
   data <- dplyr::mutate(data,
-    UPASserial = sub("(^.*)(PSP.*)_LOG.*", "\\2", .data$LogFilename),
     ASTSampler  = sub("-rev.*", "", .data$Firmware),
+    UPASserial = ifelse(.data$ASTSampler == "UPAS_v2_x", ## Change UPASserial based off standard vs. SHEAR UPAS
+      sub("(^.*)(PSP.*)_LOG.*", "\\2", .data$LogFilename),
+      sub("(^.*)(SH.*)_LOG.*", "\\2", .data$LogFilename)),
     FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
     FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)),
     ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite", NA,
