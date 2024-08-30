@@ -4,9 +4,9 @@
       read_ast_log(upasv2_rev100_file, update_names = FALSE)
     Output
          ASTSampler UPASserial SampleTime   UnixTime         UTCDateTime VolFlow
-             <char>      <num> <difftime>      <num>              <POSc>   <num>
-      1:  UPAS_v2_0       1422    23 secs 1591122420 2020-06-02 18:26:58   1.017
-      2:  UPAS_v2_0       1422    53 secs 1591122450 2020-06-02 18:27:28   1.015
+             <char>     <char> <difftime>      <num>              <POSc>   <num>
+      1:  UPAS_v2_0     PS1422    23 secs 1591122420 2020-06-02 18:26:58   1.017
+      2:  UPAS_v2_0     PS1422    53 secs 1591122450 2020-06-02 18:27:28   1.015
          SampledVolume PumpT  PCBT  FdpT  PumpP   PCBP    FdPdP PumpRH AtmoRho
                  <num> <num> <num> <num>  <num>  <num>    <num>  <num>   <num>
       1:          0.39 26.33 27.54 27.70 846.62 845.64 107.4667  29.83  0.9792
@@ -30,104 +30,104 @@
       read_ast_log(upasv2_rev100_diag_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleTime   UnixTime         UTCDateTime VolFlow
-              <char>      <num> <difftime>      <num>              <POSc>   <num>
-       1:  UPAS_v2_0       1422    NA secs          0 2020-06-02 18:30:13   0.169
-       2:  UPAS_v2_0       1422    NA secs          0 2020-06-02 18:30:14   1.064
-       3:  UPAS_v2_0       1422    NA secs          0 2020-06-02 18:30:15   1.050
-       4:  UPAS_v2_0       1422    NA secs          0 2020-06-02 18:30:16   1.037
-       5:  UPAS_v2_0       1422    NA secs          0 2020-06-02 18:30:17   1.030
-       6:  UPAS_v2_0       1422    NA secs          0 2020-06-02 18:30:18   1.021
-       7:  UPAS_v2_0       1422    NA secs          0 2020-06-02 18:30:19   1.009
-       8:  UPAS_v2_0       1422     1 secs 1591122622 2020-06-02 18:30:22   1.006
-       9:  UPAS_v2_0       1422     2 secs 1591122623 2020-06-02 18:30:23   1.012
-      10:  UPAS_v2_0       1422     3 secs 1591122624 2020-06-02 18:30:24   1.007
-      11:  UPAS_v2_0       1422     4 secs 1591122625 2020-06-02 18:30:25   1.008
-      12:  UPAS_v2_0       1422     5 secs 1591122626 2020-06-02 18:30:26   1.006
-      13:  UPAS_v2_0       1422     6 secs 1591122627 2020-06-02 18:30:27   1.001
-      14:  UPAS_v2_0       1422     7 secs 1591122628 2020-06-02 18:30:29   1.004
-      15:  UPAS_v2_0       1422     8 secs 1591122629 2020-06-02 18:30:30   0.997
-      16:  UPAS_v2_0       1422     9 secs 1591122630 2020-06-02 18:30:31   0.998
-      17:  UPAS_v2_0       1422    10 secs 1591122631 2020-06-02 18:30:32   0.998
-      18:  UPAS_v2_0       1422    11 secs 1591122632 2020-06-02 18:30:33   1.002
-      19:  UPAS_v2_0       1422    12 secs 1591122633 2020-06-02 18:30:35   1.005
-      20:  UPAS_v2_0       1422    13 secs 1591122634 2020-06-02 18:30:36   1.002
-      21:  UPAS_v2_0       1422    14 secs 1591122635 2020-06-02 18:30:37   1.007
-      22:  UPAS_v2_0       1422    15 secs 1591122636 2020-06-02 18:30:38   1.004
-      23:  UPAS_v2_0       1422    16 secs 1591122637 2020-06-02 18:30:39   1.001
-      24:  UPAS_v2_0       1422    17 secs 1591122638 2020-06-02 18:30:41   0.996
-      25:  UPAS_v2_0       1422    18 secs 1591122639 2020-06-02 18:30:42   1.006
-      26:  UPAS_v2_0       1422    19 secs 1591122640 2020-06-02 18:30:43   0.997
-      27:  UPAS_v2_0       1422    20 secs 1591122641 2020-06-02 18:30:44   1.004
-      28:  UPAS_v2_0       1422    21 secs 1591122642 2020-06-02 18:30:45   1.002
-      29:  UPAS_v2_0       1422    22 secs 1591122643 2020-06-02 18:30:46   0.997
-      30:  UPAS_v2_0       1422    23 secs 1591122644 2020-06-02 18:30:48   1.002
-      31:  UPAS_v2_0       1422    24 secs 1591122645 2020-06-02 18:30:49   1.000
-      32:  UPAS_v2_0       1422    25 secs 1591122646 2020-06-02 18:30:50   0.997
-      33:  UPAS_v2_0       1422    26 secs 1591122647 2020-06-02 18:30:51   1.001
-      34:  UPAS_v2_0       1422    27 secs 1591122648 2020-06-02 18:30:52   0.998
-      35:  UPAS_v2_0       1422    28 secs 1591122649 2020-06-02 18:30:54   1.007
-      36:  UPAS_v2_0       1422    29 secs 1591122650 2020-06-02 18:30:55   0.995
-      37:  UPAS_v2_0       1422    30 secs 1591122651 2020-06-02 18:30:56   1.006
-      38:  UPAS_v2_0       1422    31 secs 1591122652 2020-06-02 18:30:57   1.000
-      39:  UPAS_v2_0       1422    32 secs 1591122653 2020-06-02 18:30:58   0.999
-      40:  UPAS_v2_0       1422    33 secs 1591122654 2020-06-02 18:31:00   0.996
-      41:  UPAS_v2_0       1422    34 secs 1591122655 2020-06-02 18:31:01   1.001
-      42:  UPAS_v2_0       1422    35 secs 1591122656 2020-06-02 18:31:02   0.995
-      43:  UPAS_v2_0       1422    36 secs 1591122657 2020-06-02 18:31:03   1.003
-      44:  UPAS_v2_0       1422    37 secs 1591122658 2020-06-02 18:31:04   0.998
-      45:  UPAS_v2_0       1422    38 secs 1591122659 2020-06-02 18:31:05   1.001
-      46:  UPAS_v2_0       1422    39 secs 1591122660 2020-06-02 18:31:07   0.996
-      47:  UPAS_v2_0       1422    40 secs 1591122661 2020-06-02 18:31:09   1.000
-      48:  UPAS_v2_0       1422    41 secs 1591122662 2020-06-02 18:31:10   1.006
-      49:  UPAS_v2_0       1422    42 secs 1591122663 2020-06-02 18:31:12   0.995
-      50:  UPAS_v2_0       1422    43 secs 1591122664 2020-06-02 18:31:13   0.999
-      51:  UPAS_v2_0       1422    44 secs 1591122665 2020-06-02 18:31:14   1.003
-      52:  UPAS_v2_0       1422    45 secs 1591122666 2020-06-02 18:31:15   0.998
-      53:  UPAS_v2_0       1422    46 secs 1591122667 2020-06-02 18:31:16   0.996
-      54:  UPAS_v2_0       1422    47 secs 1591122668 2020-06-02 18:31:18   1.005
-      55:  UPAS_v2_0       1422    48 secs 1591122669 2020-06-02 18:31:19   0.999
-      56:  UPAS_v2_0       1422    49 secs 1591122670 2020-06-02 18:31:20   0.999
-      57:  UPAS_v2_0       1422    50 secs 1591122671 2020-06-02 18:31:21   0.998
-      58:  UPAS_v2_0       1422    51 secs 1591122672 2020-06-02 18:31:22   1.001
-      59:  UPAS_v2_0       1422    52 secs 1591122673 2020-06-02 18:31:24   1.005
-      60:  UPAS_v2_0       1422    53 secs 1591122674 2020-06-02 18:31:25   1.005
-      61:  UPAS_v2_0       1422    54 secs 1591122675 2020-06-02 18:31:26   0.998
-      62:  UPAS_v2_0       1422    55 secs 1591122676 2020-06-02 18:31:27   1.006
-      63:  UPAS_v2_0       1422    56 secs 1591122677 2020-06-02 18:31:28   0.993
-      64:  UPAS_v2_0       1422    57 secs 1591122678 2020-06-02 18:31:30   1.004
-      65:  UPAS_v2_0       1422    58 secs 1591122679 2020-06-02 18:31:31   1.000
-      66:  UPAS_v2_0       1422    59 secs 1591122680 2020-06-02 18:31:32   1.000
-      67:  UPAS_v2_0       1422    60 secs 1591122681 2020-06-02 18:31:33   0.999
-      68:  UPAS_v2_0       1422    61 secs 1591122682 2020-06-02 18:31:34   1.002
-      69:  UPAS_v2_0       1422    62 secs 1591122683 2020-06-02 18:31:35   1.000
-      70:  UPAS_v2_0       1422    63 secs 1591122684 2020-06-02 18:31:37   1.005
-      71:  UPAS_v2_0       1422    64 secs 1591122685 2020-06-02 18:31:38   1.003
-      72:  UPAS_v2_0       1422    65 secs 1591122686 2020-06-02 18:31:39   1.002
-      73:  UPAS_v2_0       1422    66 secs 1591122687 2020-06-02 18:31:40   0.998
-      74:  UPAS_v2_0       1422    67 secs 1591122688 2020-06-02 18:31:41   1.005
-      75:  UPAS_v2_0       1422    68 secs 1591122689 2020-06-02 18:31:43   0.994
-      76:  UPAS_v2_0       1422    69 secs 1591122690 2020-06-02 18:31:44   0.998
-      77:  UPAS_v2_0       1422    70 secs 1591122691 2020-06-02 18:31:45   1.003
-      78:  UPAS_v2_0       1422    71 secs 1591122692 2020-06-02 18:31:46   1.004
-      79:  UPAS_v2_0       1422    72 secs 1591122693 2020-06-02 18:31:47   0.999
-      80:  UPAS_v2_0       1422    73 secs 1591122694 2020-06-02 18:31:49   1.005
-      81:  UPAS_v2_0       1422    74 secs 1591122695 2020-06-02 18:31:50   1.005
-      82:  UPAS_v2_0       1422    75 secs 1591122696 2020-06-02 18:31:51   0.997
-      83:  UPAS_v2_0       1422    76 secs 1591122697 2020-06-02 18:31:52   1.004
-      84:  UPAS_v2_0       1422    77 secs 1591122698 2020-06-02 18:31:53   1.003
-      85:  UPAS_v2_0       1422    78 secs 1591122699 2020-06-02 18:31:55   1.006
-      86:  UPAS_v2_0       1422    79 secs 1591122700 2020-06-02 18:31:56   1.005
-      87:  UPAS_v2_0       1422    80 secs 1591122701 2020-06-02 18:31:57   0.997
-      88:  UPAS_v2_0       1422    81 secs 1591122702 2020-06-02 18:31:58   1.002
-      89:  UPAS_v2_0       1422    82 secs 1591122703 2020-06-02 18:31:59   0.998
-      90:  UPAS_v2_0       1422    83 secs 1591122704 2020-06-02 18:32:00   0.999
-      91:  UPAS_v2_0       1422    84 secs 1591122705 2020-06-02 18:32:02   1.004
-      92:  UPAS_v2_0       1422    85 secs 1591122706 2020-06-02 18:32:03   0.994
-      93:  UPAS_v2_0       1422    86 secs 1591122707 2020-06-02 18:32:04   1.005
-      94:  UPAS_v2_0       1422    87 secs 1591122708 2020-06-02 18:32:05   1.000
-      95:  UPAS_v2_0       1422    88 secs 1591122709 2020-06-02 18:32:06   1.000
-      96:  UPAS_v2_0       1422    89 secs 1591122710 2020-06-02 18:32:08   1.005
-      97:  UPAS_v2_0       1422    90 secs 1591122711 2020-06-02 18:32:09   1.004
+              <char>     <char> <difftime>      <num>              <POSc>   <num>
+       1:  UPAS_v2_0     PS1422    NA secs          0 2020-06-02 18:30:13   0.169
+       2:  UPAS_v2_0     PS1422    NA secs          0 2020-06-02 18:30:14   1.064
+       3:  UPAS_v2_0     PS1422    NA secs          0 2020-06-02 18:30:15   1.050
+       4:  UPAS_v2_0     PS1422    NA secs          0 2020-06-02 18:30:16   1.037
+       5:  UPAS_v2_0     PS1422    NA secs          0 2020-06-02 18:30:17   1.030
+       6:  UPAS_v2_0     PS1422    NA secs          0 2020-06-02 18:30:18   1.021
+       7:  UPAS_v2_0     PS1422    NA secs          0 2020-06-02 18:30:19   1.009
+       8:  UPAS_v2_0     PS1422     1 secs 1591122622 2020-06-02 18:30:22   1.006
+       9:  UPAS_v2_0     PS1422     2 secs 1591122623 2020-06-02 18:30:23   1.012
+      10:  UPAS_v2_0     PS1422     3 secs 1591122624 2020-06-02 18:30:24   1.007
+      11:  UPAS_v2_0     PS1422     4 secs 1591122625 2020-06-02 18:30:25   1.008
+      12:  UPAS_v2_0     PS1422     5 secs 1591122626 2020-06-02 18:30:26   1.006
+      13:  UPAS_v2_0     PS1422     6 secs 1591122627 2020-06-02 18:30:27   1.001
+      14:  UPAS_v2_0     PS1422     7 secs 1591122628 2020-06-02 18:30:29   1.004
+      15:  UPAS_v2_0     PS1422     8 secs 1591122629 2020-06-02 18:30:30   0.997
+      16:  UPAS_v2_0     PS1422     9 secs 1591122630 2020-06-02 18:30:31   0.998
+      17:  UPAS_v2_0     PS1422    10 secs 1591122631 2020-06-02 18:30:32   0.998
+      18:  UPAS_v2_0     PS1422    11 secs 1591122632 2020-06-02 18:30:33   1.002
+      19:  UPAS_v2_0     PS1422    12 secs 1591122633 2020-06-02 18:30:35   1.005
+      20:  UPAS_v2_0     PS1422    13 secs 1591122634 2020-06-02 18:30:36   1.002
+      21:  UPAS_v2_0     PS1422    14 secs 1591122635 2020-06-02 18:30:37   1.007
+      22:  UPAS_v2_0     PS1422    15 secs 1591122636 2020-06-02 18:30:38   1.004
+      23:  UPAS_v2_0     PS1422    16 secs 1591122637 2020-06-02 18:30:39   1.001
+      24:  UPAS_v2_0     PS1422    17 secs 1591122638 2020-06-02 18:30:41   0.996
+      25:  UPAS_v2_0     PS1422    18 secs 1591122639 2020-06-02 18:30:42   1.006
+      26:  UPAS_v2_0     PS1422    19 secs 1591122640 2020-06-02 18:30:43   0.997
+      27:  UPAS_v2_0     PS1422    20 secs 1591122641 2020-06-02 18:30:44   1.004
+      28:  UPAS_v2_0     PS1422    21 secs 1591122642 2020-06-02 18:30:45   1.002
+      29:  UPAS_v2_0     PS1422    22 secs 1591122643 2020-06-02 18:30:46   0.997
+      30:  UPAS_v2_0     PS1422    23 secs 1591122644 2020-06-02 18:30:48   1.002
+      31:  UPAS_v2_0     PS1422    24 secs 1591122645 2020-06-02 18:30:49   1.000
+      32:  UPAS_v2_0     PS1422    25 secs 1591122646 2020-06-02 18:30:50   0.997
+      33:  UPAS_v2_0     PS1422    26 secs 1591122647 2020-06-02 18:30:51   1.001
+      34:  UPAS_v2_0     PS1422    27 secs 1591122648 2020-06-02 18:30:52   0.998
+      35:  UPAS_v2_0     PS1422    28 secs 1591122649 2020-06-02 18:30:54   1.007
+      36:  UPAS_v2_0     PS1422    29 secs 1591122650 2020-06-02 18:30:55   0.995
+      37:  UPAS_v2_0     PS1422    30 secs 1591122651 2020-06-02 18:30:56   1.006
+      38:  UPAS_v2_0     PS1422    31 secs 1591122652 2020-06-02 18:30:57   1.000
+      39:  UPAS_v2_0     PS1422    32 secs 1591122653 2020-06-02 18:30:58   0.999
+      40:  UPAS_v2_0     PS1422    33 secs 1591122654 2020-06-02 18:31:00   0.996
+      41:  UPAS_v2_0     PS1422    34 secs 1591122655 2020-06-02 18:31:01   1.001
+      42:  UPAS_v2_0     PS1422    35 secs 1591122656 2020-06-02 18:31:02   0.995
+      43:  UPAS_v2_0     PS1422    36 secs 1591122657 2020-06-02 18:31:03   1.003
+      44:  UPAS_v2_0     PS1422    37 secs 1591122658 2020-06-02 18:31:04   0.998
+      45:  UPAS_v2_0     PS1422    38 secs 1591122659 2020-06-02 18:31:05   1.001
+      46:  UPAS_v2_0     PS1422    39 secs 1591122660 2020-06-02 18:31:07   0.996
+      47:  UPAS_v2_0     PS1422    40 secs 1591122661 2020-06-02 18:31:09   1.000
+      48:  UPAS_v2_0     PS1422    41 secs 1591122662 2020-06-02 18:31:10   1.006
+      49:  UPAS_v2_0     PS1422    42 secs 1591122663 2020-06-02 18:31:12   0.995
+      50:  UPAS_v2_0     PS1422    43 secs 1591122664 2020-06-02 18:31:13   0.999
+      51:  UPAS_v2_0     PS1422    44 secs 1591122665 2020-06-02 18:31:14   1.003
+      52:  UPAS_v2_0     PS1422    45 secs 1591122666 2020-06-02 18:31:15   0.998
+      53:  UPAS_v2_0     PS1422    46 secs 1591122667 2020-06-02 18:31:16   0.996
+      54:  UPAS_v2_0     PS1422    47 secs 1591122668 2020-06-02 18:31:18   1.005
+      55:  UPAS_v2_0     PS1422    48 secs 1591122669 2020-06-02 18:31:19   0.999
+      56:  UPAS_v2_0     PS1422    49 secs 1591122670 2020-06-02 18:31:20   0.999
+      57:  UPAS_v2_0     PS1422    50 secs 1591122671 2020-06-02 18:31:21   0.998
+      58:  UPAS_v2_0     PS1422    51 secs 1591122672 2020-06-02 18:31:22   1.001
+      59:  UPAS_v2_0     PS1422    52 secs 1591122673 2020-06-02 18:31:24   1.005
+      60:  UPAS_v2_0     PS1422    53 secs 1591122674 2020-06-02 18:31:25   1.005
+      61:  UPAS_v2_0     PS1422    54 secs 1591122675 2020-06-02 18:31:26   0.998
+      62:  UPAS_v2_0     PS1422    55 secs 1591122676 2020-06-02 18:31:27   1.006
+      63:  UPAS_v2_0     PS1422    56 secs 1591122677 2020-06-02 18:31:28   0.993
+      64:  UPAS_v2_0     PS1422    57 secs 1591122678 2020-06-02 18:31:30   1.004
+      65:  UPAS_v2_0     PS1422    58 secs 1591122679 2020-06-02 18:31:31   1.000
+      66:  UPAS_v2_0     PS1422    59 secs 1591122680 2020-06-02 18:31:32   1.000
+      67:  UPAS_v2_0     PS1422    60 secs 1591122681 2020-06-02 18:31:33   0.999
+      68:  UPAS_v2_0     PS1422    61 secs 1591122682 2020-06-02 18:31:34   1.002
+      69:  UPAS_v2_0     PS1422    62 secs 1591122683 2020-06-02 18:31:35   1.000
+      70:  UPAS_v2_0     PS1422    63 secs 1591122684 2020-06-02 18:31:37   1.005
+      71:  UPAS_v2_0     PS1422    64 secs 1591122685 2020-06-02 18:31:38   1.003
+      72:  UPAS_v2_0     PS1422    65 secs 1591122686 2020-06-02 18:31:39   1.002
+      73:  UPAS_v2_0     PS1422    66 secs 1591122687 2020-06-02 18:31:40   0.998
+      74:  UPAS_v2_0     PS1422    67 secs 1591122688 2020-06-02 18:31:41   1.005
+      75:  UPAS_v2_0     PS1422    68 secs 1591122689 2020-06-02 18:31:43   0.994
+      76:  UPAS_v2_0     PS1422    69 secs 1591122690 2020-06-02 18:31:44   0.998
+      77:  UPAS_v2_0     PS1422    70 secs 1591122691 2020-06-02 18:31:45   1.003
+      78:  UPAS_v2_0     PS1422    71 secs 1591122692 2020-06-02 18:31:46   1.004
+      79:  UPAS_v2_0     PS1422    72 secs 1591122693 2020-06-02 18:31:47   0.999
+      80:  UPAS_v2_0     PS1422    73 secs 1591122694 2020-06-02 18:31:49   1.005
+      81:  UPAS_v2_0     PS1422    74 secs 1591122695 2020-06-02 18:31:50   1.005
+      82:  UPAS_v2_0     PS1422    75 secs 1591122696 2020-06-02 18:31:51   0.997
+      83:  UPAS_v2_0     PS1422    76 secs 1591122697 2020-06-02 18:31:52   1.004
+      84:  UPAS_v2_0     PS1422    77 secs 1591122698 2020-06-02 18:31:53   1.003
+      85:  UPAS_v2_0     PS1422    78 secs 1591122699 2020-06-02 18:31:55   1.006
+      86:  UPAS_v2_0     PS1422    79 secs 1591122700 2020-06-02 18:31:56   1.005
+      87:  UPAS_v2_0     PS1422    80 secs 1591122701 2020-06-02 18:31:57   0.997
+      88:  UPAS_v2_0     PS1422    81 secs 1591122702 2020-06-02 18:31:58   1.002
+      89:  UPAS_v2_0     PS1422    82 secs 1591122703 2020-06-02 18:31:59   0.998
+      90:  UPAS_v2_0     PS1422    83 secs 1591122704 2020-06-02 18:32:00   0.999
+      91:  UPAS_v2_0     PS1422    84 secs 1591122705 2020-06-02 18:32:02   1.004
+      92:  UPAS_v2_0     PS1422    85 secs 1591122706 2020-06-02 18:32:03   0.994
+      93:  UPAS_v2_0     PS1422    86 secs 1591122707 2020-06-02 18:32:04   1.005
+      94:  UPAS_v2_0     PS1422    87 secs 1591122708 2020-06-02 18:32:05   1.000
+      95:  UPAS_v2_0     PS1422    88 secs 1591122709 2020-06-02 18:32:06   1.000
+      96:  UPAS_v2_0     PS1422    89 secs 1591122710 2020-06-02 18:32:08   1.005
+      97:  UPAS_v2_0     PS1422    90 secs 1591122711 2020-06-02 18:32:09   1.004
           ASTSampler UPASserial SampleTime   UnixTime         UTCDateTime VolFlow
           SampledVolume PumpT  PCBT  FdpT  PumpP   PCBP    FdPdP PumpRH AtmoRho
                   <num> <num> <num> <num>  <num>  <num>    <num>  <num>   <num>
@@ -736,16 +736,16 @@
       read_ast_log(upasv2_rev125_file, update_names = FALSE)
     Output
          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-             <char>      <num>     <char>      <lgcl> <difftime>      <num>
-      1:  UPAS_v2_0        166       test          NA    10 secs 1632937050
-      2:  UPAS_v2_0        166       test          NA    40 secs 1632937080
-      3:  UPAS_v2_0        166       test          NA    70 secs 1632937110
-      4:  UPAS_v2_0        166       test          NA   100 secs 1632937140
-      5:  UPAS_v2_0        166       test          NA   130 secs 1632937170
-      6:  UPAS_v2_0        166       test          NA   160 secs 1632937200
-      7:  UPAS_v2_0        166       test          NA   190 secs 1632937230
-      8:  UPAS_v2_0        166       test          NA   220 secs 1632937260
-      9:  UPAS_v2_0        166       test          NA   250 secs 1632937290
+             <char>     <char>     <char>      <lgcl> <difftime>      <num>
+      1:  UPAS_v2_0     PS0166       test          NA    10 secs 1632937050
+      2:  UPAS_v2_0     PS0166       test          NA    40 secs 1632937080
+      3:  UPAS_v2_0     PS0166       test          NA    70 secs 1632937110
+      4:  UPAS_v2_0     PS0166       test          NA   100 secs 1632937140
+      5:  UPAS_v2_0     PS0166       test          NA   130 secs 1632937170
+      6:  UPAS_v2_0     PS0166       test          NA   160 secs 1632937200
+      7:  UPAS_v2_0     PS0166       test          NA   190 secs 1632937230
+      8:  UPAS_v2_0     PS0166       test          NA   220 secs 1632937260
+      9:  UPAS_v2_0     PS0166       test          NA   250 secs 1632937290
                  DateTimeUTC       DateTimeLocal   LocalTZ VolumetricFlowRate
                       <POSc>              <POSc>    <char>              <num>
       1: 2021-09-29 17:37:30 2021-09-29 11:37:30 Etc/GMT+6              1.041
@@ -819,88 +819,88 @@
       read_ast_log(upasv2_rev130_diag_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>      <num>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793599
-       2:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793600
-       3:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793601
-       4:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793602
-       5:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793603
-       6:  UPAS_v2_0       1786 DIAGNOSTIC          NA     0 secs 1677793609
-       7:  UPAS_v2_0       1786 DIAGNOSTIC          NA     1 secs 1677793610
-       8:  UPAS_v2_0       1786 DIAGNOSTIC          NA     2 secs 1677793611
-       9:  UPAS_v2_0       1786 DIAGNOSTIC          NA     3 secs 1677793612
-      10:  UPAS_v2_0       1786 DIAGNOSTIC          NA     4 secs 1677793613
-      11:  UPAS_v2_0       1786 DIAGNOSTIC          NA     5 secs 1677793614
-      12:  UPAS_v2_0       1786 DIAGNOSTIC          NA     6 secs 1677793615
-      13:  UPAS_v2_0       1786 DIAGNOSTIC          NA     7 secs 1677793616
-      14:  UPAS_v2_0       1786 DIAGNOSTIC          NA     8 secs 1677793617
-      15:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793621
-      16:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793622
-      17:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793623
-      18:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793624
-      19:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793625
-      20:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793626
-      21:  UPAS_v2_0       1786 DIAGNOSTIC          NA    18 secs 1677793627
-      22:  UPAS_v2_0       1786 DIAGNOSTIC          NA    19 secs 1677793628
-      23:  UPAS_v2_0       1786 DIAGNOSTIC          NA    20 secs 1677793629
-      24:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793633
-      25:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793634
-      26:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793635
-      27:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793636
-      28:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793637
-      29:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793638
-      30:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793639
-      31:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793640
-      32:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793641
-      33:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793642
-      34:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793643
-      35:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793644
-      36:  UPAS_v2_0       1786 DIAGNOSTIC          NA    36 secs 1677793645
-      37:  UPAS_v2_0       1786 DIAGNOSTIC          NA    37 secs 1677793646
-      38:  UPAS_v2_0       1786 DIAGNOSTIC          NA    38 secs 1677793647
-      39:  UPAS_v2_0       1786 DIAGNOSTIC          NA    39 secs 1677793648
-      40:  UPAS_v2_0       1786 DIAGNOSTIC          NA    40 secs 1677793649
-      41:  UPAS_v2_0       1786 DIAGNOSTIC          NA    41 secs 1677793650
-      42:  UPAS_v2_0       1786 DIAGNOSTIC          NA    42 secs 1677793651
-      43:  UPAS_v2_0       1786 DIAGNOSTIC          NA    43 secs 1677793652
-      44:  UPAS_v2_0       1786 DIAGNOSTIC          NA    44 secs 1677793653
-      45:  UPAS_v2_0       1786 DIAGNOSTIC          NA    45 secs 1677793654
-      46:  UPAS_v2_0       1786 DIAGNOSTIC          NA    45 secs 1677793654
-      47:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793658
-      48:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793660
-      49:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793661
-      50:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793662
-      51:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793663
-      52:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793663
-      53:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793665
-      54:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793665
-      55:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793666
-      56:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793667
-      57:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793668
-      58:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793669
-      59:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793670
-      60:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793671
-      61:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793672
-      62:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793673
-      63:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793674
-      64:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793675
-      65:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793676
-      66:  UPAS_v2_0       1786 DIAGNOSTIC          NA    NA secs 1677793677
-      67:  UPAS_v2_0       1786 DIAGNOSTIC          NA    69 secs 1677793678
-      68:  UPAS_v2_0       1786 DIAGNOSTIC          NA    70 secs 1677793679
-      69:  UPAS_v2_0       1786 DIAGNOSTIC          NA    71 secs 1677793680
-      70:  UPAS_v2_0       1786 DIAGNOSTIC          NA    72 secs 1677793681
-      71:  UPAS_v2_0       1786 DIAGNOSTIC          NA    73 secs 1677793682
-      72:  UPAS_v2_0       1786 DIAGNOSTIC          NA    74 secs 1677793683
-      73:  UPAS_v2_0       1786 DIAGNOSTIC          NA    75 secs 1677793684
-      74:  UPAS_v2_0       1786 DIAGNOSTIC          NA    75 secs 1677793684
-      75:  UPAS_v2_0       1786 DIAGNOSTIC          NA    77 secs 1677793686
-      76:  UPAS_v2_0       1786 DIAGNOSTIC          NA    77 secs 1677793686
-      77:  UPAS_v2_0       1786 DIAGNOSTIC          NA    78 secs 1677793687
-      78:  UPAS_v2_0       1786 DIAGNOSTIC          NA    79 secs 1677793688
-      79:  UPAS_v2_0       1786 DIAGNOSTIC          NA    80 secs 1677793689
-      80:  UPAS_v2_0       1786 DIAGNOSTIC          NA    81 secs 1677793690
-      81:  UPAS_v2_0       1786 DIAGNOSTIC          NA    82 secs 1677793691
+              <char>     <char>     <char>      <lgcl> <difftime>      <num>
+       1:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793599
+       2:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793600
+       3:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793601
+       4:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793602
+       5:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793603
+       6:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     0 secs 1677793609
+       7:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     1 secs 1677793610
+       8:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     2 secs 1677793611
+       9:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     3 secs 1677793612
+      10:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     4 secs 1677793613
+      11:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     5 secs 1677793614
+      12:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     6 secs 1677793615
+      13:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     7 secs 1677793616
+      14:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     8 secs 1677793617
+      15:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793621
+      16:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793622
+      17:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793623
+      18:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793624
+      19:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793625
+      20:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793626
+      21:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    18 secs 1677793627
+      22:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    19 secs 1677793628
+      23:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    20 secs 1677793629
+      24:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793633
+      25:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793634
+      26:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793635
+      27:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793636
+      28:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793637
+      29:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793638
+      30:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793639
+      31:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793640
+      32:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793641
+      33:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793642
+      34:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793643
+      35:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793644
+      36:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    36 secs 1677793645
+      37:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    37 secs 1677793646
+      38:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    38 secs 1677793647
+      39:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    39 secs 1677793648
+      40:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    40 secs 1677793649
+      41:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    41 secs 1677793650
+      42:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    42 secs 1677793651
+      43:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    43 secs 1677793652
+      44:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    44 secs 1677793653
+      45:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    45 secs 1677793654
+      46:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    45 secs 1677793654
+      47:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793658
+      48:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793660
+      49:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793661
+      50:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793662
+      51:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793663
+      52:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793663
+      53:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793665
+      54:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793665
+      55:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793666
+      56:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793667
+      57:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793668
+      58:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793669
+      59:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793670
+      60:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793671
+      61:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793672
+      62:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793673
+      63:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793674
+      64:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793675
+      65:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793676
+      66:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793677
+      67:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    69 secs 1677793678
+      68:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    70 secs 1677793679
+      69:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    71 secs 1677793680
+      70:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    72 secs 1677793681
+      71:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    73 secs 1677793682
+      72:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    74 secs 1677793683
+      73:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    75 secs 1677793684
+      74:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    75 secs 1677793684
+      75:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    77 secs 1677793686
+      76:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    77 secs 1677793686
+      77:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    78 secs 1677793687
+      78:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    79 secs 1677793688
+      79:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    80 secs 1677793689
+      80:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    81 secs 1677793690
+      81:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    82 secs 1677793691
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
                   DateTimeUTC       DateTimeLocal   LocalTZ VolumetricFlowRate
                        <POSc>              <POSc>    <char>              <num>
@@ -1497,18 +1497,18 @@
       read_ast_log(upasv2_rev138_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>      <num>     <char>      <char> <difftime>      <num>
-       1:  UPAS_v2_0       1771 GPSoutside         Eng     1 secs 1718313630
-       2:  UPAS_v2_0       1771 GPSoutside         Eng    31 secs 1718313660
-       3:  UPAS_v2_0       1771 GPSoutside         Eng    61 secs 1718313690
-       4:  UPAS_v2_0       1771 GPSoutside         Eng    91 secs 1718313720
-       5:  UPAS_v2_0       1771 GPSoutside         Eng   121 secs 1718313750
-       6:  UPAS_v2_0       1771 GPSoutside         Eng   151 secs 1718313780
-       7:  UPAS_v2_0       1771 GPSoutside         Eng   181 secs 1718313810
-       8:  UPAS_v2_0       1771 GPSoutside         Eng   211 secs 1718313840
-       9:  UPAS_v2_0       1771 GPSoutside         Eng   241 secs 1718313870
-      10:  UPAS_v2_0       1771 GPSoutside         Eng   271 secs 1718313900
-      11:  UPAS_v2_0       1771 GPSoutside         Eng   301 secs 1718313930
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_0     PS1771 GPSoutside         Eng     1 secs 1718313630
+       2:  UPAS_v2_0     PS1771 GPSoutside         Eng    31 secs 1718313660
+       3:  UPAS_v2_0     PS1771 GPSoutside         Eng    61 secs 1718313690
+       4:  UPAS_v2_0     PS1771 GPSoutside         Eng    91 secs 1718313720
+       5:  UPAS_v2_0     PS1771 GPSoutside         Eng   121 secs 1718313750
+       6:  UPAS_v2_0     PS1771 GPSoutside         Eng   151 secs 1718313780
+       7:  UPAS_v2_0     PS1771 GPSoutside         Eng   181 secs 1718313810
+       8:  UPAS_v2_0     PS1771 GPSoutside         Eng   211 secs 1718313840
+       9:  UPAS_v2_0     PS1771 GPSoutside         Eng   241 secs 1718313870
+      10:  UPAS_v2_0     PS1771 GPSoutside         Eng   271 secs 1718313900
+      11:  UPAS_v2_0     PS1771 GPSoutside         Eng   301 secs 1718313930
                   DateTimeUTC       DateTimeLocal   LocalTZ VolumetricFlowRate
                        <POSc>              <POSc>    <char>              <num>
        1: 2024-06-13 21:20:30 2024-06-13 15:20:30 Etc/GMT+6              1.016
@@ -1594,19 +1594,19 @@
       read_ast_log(upasv2x_rev81_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>      <num>     <char>      <char> <difftime>      <num>
-       1:  UPAS_v2_x         24       test        test    46 secs 1628705940
-       2:  UPAS_v2_x         24       test        test    76 secs 1628705970
-       3:  UPAS_v2_x         24       test        test   106 secs 1628706000
-       4:  UPAS_v2_x         24       test        test   136 secs 1628706030
-       5:  UPAS_v2_x         24       test        test   166 secs 1628706060
-       6:  UPAS_v2_x         24       test        test   196 secs 1628706090
-       7:  UPAS_v2_x         24       test        test   226 secs 1628706120
-       8:  UPAS_v2_x         24       test        test   256 secs 1628706150
-       9:  UPAS_v2_x         24       test        test   286 secs 1628706180
-      10:  UPAS_v2_x         24       test        test   316 secs 1628706210
-      11:  UPAS_v2_x         24       test        test   346 secs 1628706240
-      12:  UPAS_v2_x         24       test        test   376 secs 1628706270
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00024       test        test    46 secs 1628705940
+       2:  UPAS_v2_x   PSP00024       test        test    76 secs 1628705970
+       3:  UPAS_v2_x   PSP00024       test        test   106 secs 1628706000
+       4:  UPAS_v2_x   PSP00024       test        test   136 secs 1628706030
+       5:  UPAS_v2_x   PSP00024       test        test   166 secs 1628706060
+       6:  UPAS_v2_x   PSP00024       test        test   196 secs 1628706090
+       7:  UPAS_v2_x   PSP00024       test        test   226 secs 1628706120
+       8:  UPAS_v2_x   PSP00024       test        test   256 secs 1628706150
+       9:  UPAS_v2_x   PSP00024       test        test   286 secs 1628706180
+      10:  UPAS_v2_x   PSP00024       test        test   316 secs 1628706210
+      11:  UPAS_v2_x   PSP00024       test        test   346 secs 1628706240
+      12:  UPAS_v2_x   PSP00024       test        test   376 secs 1628706270
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
        1:  1628705940 2021-08-11 18:19:00 2021-08-11 14:19:00 Etc/GMT+4
@@ -1866,20 +1866,20 @@
       read_ast_log(upasv2x_rev117_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>      <num>     <lgcl>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x         30         NA          NA    35 secs 1652311500
-       2:  UPAS_v2_x         30         NA          NA    65 secs 1652311530
-       3:  UPAS_v2_x         30         NA          NA    95 secs 1652311560
-       4:  UPAS_v2_x         30         NA          NA   125 secs 1652311590
-       5:  UPAS_v2_x         30         NA          NA   155 secs 1652311620
-       6:  UPAS_v2_x         30         NA          NA   185 secs 1652311650
-       7:  UPAS_v2_x         30         NA          NA   215 secs 1652311680
-       8:  UPAS_v2_x         30         NA          NA   245 secs 1652311710
-       9:  UPAS_v2_x         30         NA          NA   275 secs 1652311740
-      10:  UPAS_v2_x         30         NA          NA   305 secs 1652311770
-      11:  UPAS_v2_x         30         NA          NA   335 secs 1652311800
-      12:  UPAS_v2_x         30         NA          NA   365 secs 1652311830
-      13:  UPAS_v2_x         30         NA          NA   395 secs 1652311860
+              <char>     <char>     <lgcl>      <lgcl> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00030         NA          NA    35 secs 1652311500
+       2:  UPAS_v2_x   PSP00030         NA          NA    65 secs 1652311530
+       3:  UPAS_v2_x   PSP00030         NA          NA    95 secs 1652311560
+       4:  UPAS_v2_x   PSP00030         NA          NA   125 secs 1652311590
+       5:  UPAS_v2_x   PSP00030         NA          NA   155 secs 1652311620
+       6:  UPAS_v2_x   PSP00030         NA          NA   185 secs 1652311650
+       7:  UPAS_v2_x   PSP00030         NA          NA   215 secs 1652311680
+       8:  UPAS_v2_x   PSP00030         NA          NA   245 secs 1652311710
+       9:  UPAS_v2_x   PSP00030         NA          NA   275 secs 1652311740
+      10:  UPAS_v2_x   PSP00030         NA          NA   305 secs 1652311770
+      11:  UPAS_v2_x   PSP00030         NA          NA   335 secs 1652311800
+      12:  UPAS_v2_x   PSP00030         NA          NA   365 secs 1652311830
+      13:  UPAS_v2_x   PSP00030         NA          NA   395 secs 1652311860
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
        1:  1652311499 2022-05-11 23:25:00 2022-05-11 16:25:00 Etc/GMT+7
@@ -2142,12 +2142,12 @@
       read_ast_log(upasv2x_rev110_diag_file, update_names = FALSE)
     Output
          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-             <char>      <num>     <char>      <lgcl> <difftime>      <num>
-      1:  UPAS_v2_x         55 DIAGNOSTIC          NA    62 secs 1648145191
-      2:  UPAS_v2_x         55 DIAGNOSTIC          NA    63 secs 1648145192
-      3:  UPAS_v2_x         55 DIAGNOSTIC          NA    64 secs 1648145193
-      4:  UPAS_v2_x         55 DIAGNOSTIC          NA    65 secs 1648145194
-      5:  UPAS_v2_x         55 DIAGNOSTIC          NA    66 secs 1648145195
+             <char>     <char>     <char>      <lgcl> <difftime>      <num>
+      1:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    62 secs 1648145191
+      2:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    63 secs 1648145192
+      3:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    64 secs 1648145193
+      4:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    65 secs 1648145194
+      5:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    66 secs 1648145195
          UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                <num>              <POSc>              <POSc>    <char>
       1:  1648145191 2022-03-24 18:06:31 2022-03-24 12:06:31 Etc/GMT+6
@@ -2267,92 +2267,92 @@
       read_ast_log(upasv2x_rev157_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>      <num>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x        270 GPS-in-out          NA    49 secs 1719351540
-       2:  UPAS_v2_x        270 GPS-in-out          NA    79 secs 1719351570
-       3:  UPAS_v2_x        270 GPS-in-out          NA   109 secs 1719351600
-       4:  UPAS_v2_x        270 GPS-in-out          NA   139 secs 1719351630
-       5:  UPAS_v2_x        270 GPS-in-out          NA   169 secs 1719351660
-       6:  UPAS_v2_x        270 GPS-in-out          NA   199 secs 1719351690
-       7:  UPAS_v2_x        270 GPS-in-out          NA   229 secs 1719351720
-       8:  UPAS_v2_x        270 GPS-in-out          NA   259 secs 1719351750
-       9:  UPAS_v2_x        270 GPS-in-out          NA   289 secs 1719351780
-      10:  UPAS_v2_x        270 GPS-in-out          NA   319 secs 1719351810
-      11:  UPAS_v2_x        270 GPS-in-out          NA   349 secs 1719351840
-      12:  UPAS_v2_x        270 GPS-in-out          NA   379 secs 1719351870
-      13:  UPAS_v2_x        270 GPS-in-out          NA   409 secs 1719351900
-      14:  UPAS_v2_x        270 GPS-in-out          NA   439 secs 1719351930
-      15:  UPAS_v2_x        270 GPS-in-out          NA   469 secs 1719351960
-      16:  UPAS_v2_x        270 GPS-in-out          NA   499 secs 1719351990
-      17:  UPAS_v2_x        270 GPS-in-out          NA   529 secs 1719352020
-      18:  UPAS_v2_x        270 GPS-in-out          NA   559 secs 1719352050
-      19:  UPAS_v2_x        270 GPS-in-out          NA   589 secs 1719352080
-      20:  UPAS_v2_x        270 GPS-in-out          NA   619 secs 1719352110
-      21:  UPAS_v2_x        270 GPS-in-out          NA   649 secs 1719352140
-      22:  UPAS_v2_x        270 GPS-in-out          NA   679 secs 1719352170
-      23:  UPAS_v2_x        270 GPS-in-out          NA   709 secs 1719352200
-      24:  UPAS_v2_x        270 GPS-in-out          NA   739 secs 1719352230
-      25:  UPAS_v2_x        270 GPS-in-out          NA   769 secs 1719352260
-      26:  UPAS_v2_x        270 GPS-in-out          NA   799 secs 1719352290
-      27:  UPAS_v2_x        270 GPS-in-out          NA   829 secs 1719352320
-      28:  UPAS_v2_x        270 GPS-in-out          NA   859 secs 1719352350
-      29:  UPAS_v2_x        270 GPS-in-out          NA   889 secs 1719352380
-      30:  UPAS_v2_x        270 GPS-in-out          NA   919 secs 1719352410
-      31:  UPAS_v2_x        270 GPS-in-out          NA   949 secs 1719352440
-      32:  UPAS_v2_x        270 GPS-in-out          NA   979 secs 1719352470
-      33:  UPAS_v2_x        270 GPS-in-out          NA  1009 secs 1719352500
-      34:  UPAS_v2_x        270 GPS-in-out          NA  1039 secs 1719352530
-      35:  UPAS_v2_x        270 GPS-in-out          NA  1069 secs 1719352560
-      36:  UPAS_v2_x        270 GPS-in-out          NA  1099 secs 1719352590
-      37:  UPAS_v2_x        270 GPS-in-out          NA  1129 secs 1719352620
-      38:  UPAS_v2_x        270 GPS-in-out          NA  1159 secs 1719352650
-      39:  UPAS_v2_x        270 GPS-in-out          NA  1189 secs 1719352680
-      40:  UPAS_v2_x        270 GPS-in-out          NA  1219 secs 1719352710
-      41:  UPAS_v2_x        270 GPS-in-out          NA  1249 secs 1719352740
-      42:  UPAS_v2_x        270 GPS-in-out          NA  1279 secs 1719352770
-      43:  UPAS_v2_x        270 GPS-in-out          NA  1309 secs 1719352800
-      44:  UPAS_v2_x        270 GPS-in-out          NA  1339 secs 1719352830
-      45:  UPAS_v2_x        270 GPS-in-out          NA  1369 secs 1719352860
-      46:  UPAS_v2_x        270 GPS-in-out          NA  1399 secs 1719352890
-      47:  UPAS_v2_x        270 GPS-in-out          NA  1429 secs 1719352920
-      48:  UPAS_v2_x        270 GPS-in-out          NA  1459 secs 1719352950
-      49:  UPAS_v2_x        270 GPS-in-out          NA  1489 secs 1719352980
-      50:  UPAS_v2_x        270 GPS-in-out          NA  1519 secs 1719353010
-      51:  UPAS_v2_x        270 GPS-in-out          NA  1549 secs 1719353040
-      52:  UPAS_v2_x        270 GPS-in-out          NA  1579 secs 1719353070
-      53:  UPAS_v2_x        270 GPS-in-out          NA  1609 secs 1719353100
-      54:  UPAS_v2_x        270 GPS-in-out          NA  1639 secs 1719353130
-      55:  UPAS_v2_x        270 GPS-in-out          NA  1669 secs 1719353160
-      56:  UPAS_v2_x        270 GPS-in-out          NA  1699 secs 1719353190
-      57:  UPAS_v2_x        270 GPS-in-out          NA  1729 secs 1719353220
-      58:  UPAS_v2_x        270 GPS-in-out          NA  1759 secs 1719353250
-      59:  UPAS_v2_x        270 GPS-in-out          NA  1789 secs 1719353280
-      60:  UPAS_v2_x        270 GPS-in-out          NA  1819 secs 1719353310
-      61:  UPAS_v2_x        270 GPS-in-out          NA  1849 secs 1719353340
-      62:  UPAS_v2_x        270 GPS-in-out          NA  1879 secs 1719353370
-      63:  UPAS_v2_x        270 GPS-in-out          NA  1909 secs 1719353400
-      64:  UPAS_v2_x        270 GPS-in-out          NA  1939 secs 1719353430
-      65:  UPAS_v2_x        270 GPS-in-out          NA  1969 secs 1719353460
-      66:  UPAS_v2_x        270 GPS-in-out          NA  1999 secs 1719353490
-      67:  UPAS_v2_x        270 GPS-in-out          NA  2029 secs 1719353520
-      68:  UPAS_v2_x        270 GPS-in-out          NA  2059 secs 1719353550
-      69:  UPAS_v2_x        270 GPS-in-out          NA  2089 secs 1719353580
-      70:  UPAS_v2_x        270 GPS-in-out          NA  2119 secs 1719353610
-      71:  UPAS_v2_x        270 GPS-in-out          NA  2149 secs 1719353640
-      72:  UPAS_v2_x        270 GPS-in-out          NA  2179 secs 1719353670
-      73:  UPAS_v2_x        270 GPS-in-out          NA  2209 secs 1719353700
-      74:  UPAS_v2_x        270 GPS-in-out          NA  2239 secs 1719353730
-      75:  UPAS_v2_x        270 GPS-in-out          NA  2269 secs 1719353760
-      76:  UPAS_v2_x        270 GPS-in-out          NA  2299 secs 1719353790
-      77:  UPAS_v2_x        270 GPS-in-out          NA  2329 secs 1719353820
-      78:  UPAS_v2_x        270 GPS-in-out          NA  2359 secs 1719353850
-      79:  UPAS_v2_x        270 GPS-in-out          NA  2389 secs 1719353880
-      80:  UPAS_v2_x        270 GPS-in-out          NA  2419 secs 1719353910
-      81:  UPAS_v2_x        270 GPS-in-out          NA  2449 secs 1719353940
-      82:  UPAS_v2_x        270 GPS-in-out          NA  2479 secs 1719353970
-      83:  UPAS_v2_x        270 GPS-in-out          NA  2509 secs 1719354000
-      84:  UPAS_v2_x        270 GPS-in-out          NA  2539 secs 1719354030
-      85:  UPAS_v2_x        270 GPS-in-out          NA  2569 secs 1719354060
+              <char>     <char>     <char>      <lgcl> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00270 GPS-in-out          NA    49 secs 1719351540
+       2:  UPAS_v2_x   PSP00270 GPS-in-out          NA    79 secs 1719351570
+       3:  UPAS_v2_x   PSP00270 GPS-in-out          NA   109 secs 1719351600
+       4:  UPAS_v2_x   PSP00270 GPS-in-out          NA   139 secs 1719351630
+       5:  UPAS_v2_x   PSP00270 GPS-in-out          NA   169 secs 1719351660
+       6:  UPAS_v2_x   PSP00270 GPS-in-out          NA   199 secs 1719351690
+       7:  UPAS_v2_x   PSP00270 GPS-in-out          NA   229 secs 1719351720
+       8:  UPAS_v2_x   PSP00270 GPS-in-out          NA   259 secs 1719351750
+       9:  UPAS_v2_x   PSP00270 GPS-in-out          NA   289 secs 1719351780
+      10:  UPAS_v2_x   PSP00270 GPS-in-out          NA   319 secs 1719351810
+      11:  UPAS_v2_x   PSP00270 GPS-in-out          NA   349 secs 1719351840
+      12:  UPAS_v2_x   PSP00270 GPS-in-out          NA   379 secs 1719351870
+      13:  UPAS_v2_x   PSP00270 GPS-in-out          NA   409 secs 1719351900
+      14:  UPAS_v2_x   PSP00270 GPS-in-out          NA   439 secs 1719351930
+      15:  UPAS_v2_x   PSP00270 GPS-in-out          NA   469 secs 1719351960
+      16:  UPAS_v2_x   PSP00270 GPS-in-out          NA   499 secs 1719351990
+      17:  UPAS_v2_x   PSP00270 GPS-in-out          NA   529 secs 1719352020
+      18:  UPAS_v2_x   PSP00270 GPS-in-out          NA   559 secs 1719352050
+      19:  UPAS_v2_x   PSP00270 GPS-in-out          NA   589 secs 1719352080
+      20:  UPAS_v2_x   PSP00270 GPS-in-out          NA   619 secs 1719352110
+      21:  UPAS_v2_x   PSP00270 GPS-in-out          NA   649 secs 1719352140
+      22:  UPAS_v2_x   PSP00270 GPS-in-out          NA   679 secs 1719352170
+      23:  UPAS_v2_x   PSP00270 GPS-in-out          NA   709 secs 1719352200
+      24:  UPAS_v2_x   PSP00270 GPS-in-out          NA   739 secs 1719352230
+      25:  UPAS_v2_x   PSP00270 GPS-in-out          NA   769 secs 1719352260
+      26:  UPAS_v2_x   PSP00270 GPS-in-out          NA   799 secs 1719352290
+      27:  UPAS_v2_x   PSP00270 GPS-in-out          NA   829 secs 1719352320
+      28:  UPAS_v2_x   PSP00270 GPS-in-out          NA   859 secs 1719352350
+      29:  UPAS_v2_x   PSP00270 GPS-in-out          NA   889 secs 1719352380
+      30:  UPAS_v2_x   PSP00270 GPS-in-out          NA   919 secs 1719352410
+      31:  UPAS_v2_x   PSP00270 GPS-in-out          NA   949 secs 1719352440
+      32:  UPAS_v2_x   PSP00270 GPS-in-out          NA   979 secs 1719352470
+      33:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1009 secs 1719352500
+      34:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1039 secs 1719352530
+      35:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1069 secs 1719352560
+      36:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1099 secs 1719352590
+      37:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1129 secs 1719352620
+      38:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1159 secs 1719352650
+      39:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1189 secs 1719352680
+      40:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1219 secs 1719352710
+      41:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1249 secs 1719352740
+      42:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1279 secs 1719352770
+      43:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1309 secs 1719352800
+      44:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1339 secs 1719352830
+      45:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1369 secs 1719352860
+      46:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1399 secs 1719352890
+      47:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1429 secs 1719352920
+      48:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1459 secs 1719352950
+      49:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1489 secs 1719352980
+      50:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1519 secs 1719353010
+      51:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1549 secs 1719353040
+      52:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1579 secs 1719353070
+      53:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1609 secs 1719353100
+      54:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1639 secs 1719353130
+      55:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1669 secs 1719353160
+      56:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1699 secs 1719353190
+      57:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1729 secs 1719353220
+      58:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1759 secs 1719353250
+      59:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1789 secs 1719353280
+      60:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1819 secs 1719353310
+      61:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1849 secs 1719353340
+      62:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1879 secs 1719353370
+      63:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1909 secs 1719353400
+      64:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1939 secs 1719353430
+      65:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1969 secs 1719353460
+      66:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1999 secs 1719353490
+      67:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2029 secs 1719353520
+      68:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2059 secs 1719353550
+      69:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2089 secs 1719353580
+      70:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2119 secs 1719353610
+      71:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2149 secs 1719353640
+      72:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2179 secs 1719353670
+      73:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2209 secs 1719353700
+      74:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2239 secs 1719353730
+      75:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2269 secs 1719353760
+      76:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2299 secs 1719353790
+      77:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2329 secs 1719353820
+      78:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2359 secs 1719353850
+      79:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2389 secs 1719353880
+      80:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2419 secs 1719353910
+      81:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2449 secs 1719353940
+      82:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2479 secs 1719353970
+      83:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2509 secs 1719354000
+      84:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2539 secs 1719354030
+      85:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2569 secs 1719354060
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
@@ -3945,31 +3945,31 @@
       read_ast_log(upasv2x_rev158_noGPS_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>      <num>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x        270      NoGPS          NA    52 secs 1718391360
-       2:  UPAS_v2_x        270      NoGPS          NA    82 secs 1718391390
-       3:  UPAS_v2_x        270      NoGPS          NA   112 secs 1718391420
-       4:  UPAS_v2_x        270      NoGPS          NA   142 secs 1718391450
-       5:  UPAS_v2_x        270      NoGPS          NA   172 secs 1718391480
-       6:  UPAS_v2_x        270      NoGPS          NA   202 secs 1718391510
-       7:  UPAS_v2_x        270      NoGPS          NA   232 secs 1718391540
-       8:  UPAS_v2_x        270      NoGPS          NA   262 secs 1718391570
-       9:  UPAS_v2_x        270      NoGPS          NA   292 secs 1718391600
-      10:  UPAS_v2_x        270      NoGPS          NA   322 secs 1718391630
-      11:  UPAS_v2_x        270      NoGPS          NA   352 secs 1718391660
-      12:  UPAS_v2_x        270      NoGPS          NA   382 secs 1718391690
-      13:  UPAS_v2_x        270      NoGPS          NA   412 secs 1718391720
-      14:  UPAS_v2_x        270      NoGPS          NA   442 secs 1718391750
-      15:  UPAS_v2_x        270      NoGPS          NA   472 secs 1718391780
-      16:  UPAS_v2_x        270      NoGPS          NA   502 secs 1718391810
-      17:  UPAS_v2_x        270      NoGPS          NA   532 secs 1718391840
-      18:  UPAS_v2_x        270      NoGPS          NA   562 secs 1718391870
-      19:  UPAS_v2_x        270      NoGPS          NA   592 secs 1718391900
-      20:  UPAS_v2_x        270      NoGPS          NA   622 secs 1718391930
-      21:  UPAS_v2_x        270      NoGPS          NA   652 secs 1718391960
-      22:  UPAS_v2_x        270      NoGPS          NA   682 secs 1718391990
-      23:  UPAS_v2_x        270      NoGPS          NA   712 secs 1718392020
-      24:  UPAS_v2_x        270      NoGPS          NA   742 secs 1718392050
+              <char>     <char>     <char>      <lgcl> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00270      NoGPS          NA    52 secs 1718391360
+       2:  UPAS_v2_x   PSP00270      NoGPS          NA    82 secs 1718391390
+       3:  UPAS_v2_x   PSP00270      NoGPS          NA   112 secs 1718391420
+       4:  UPAS_v2_x   PSP00270      NoGPS          NA   142 secs 1718391450
+       5:  UPAS_v2_x   PSP00270      NoGPS          NA   172 secs 1718391480
+       6:  UPAS_v2_x   PSP00270      NoGPS          NA   202 secs 1718391510
+       7:  UPAS_v2_x   PSP00270      NoGPS          NA   232 secs 1718391540
+       8:  UPAS_v2_x   PSP00270      NoGPS          NA   262 secs 1718391570
+       9:  UPAS_v2_x   PSP00270      NoGPS          NA   292 secs 1718391600
+      10:  UPAS_v2_x   PSP00270      NoGPS          NA   322 secs 1718391630
+      11:  UPAS_v2_x   PSP00270      NoGPS          NA   352 secs 1718391660
+      12:  UPAS_v2_x   PSP00270      NoGPS          NA   382 secs 1718391690
+      13:  UPAS_v2_x   PSP00270      NoGPS          NA   412 secs 1718391720
+      14:  UPAS_v2_x   PSP00270      NoGPS          NA   442 secs 1718391750
+      15:  UPAS_v2_x   PSP00270      NoGPS          NA   472 secs 1718391780
+      16:  UPAS_v2_x   PSP00270      NoGPS          NA   502 secs 1718391810
+      17:  UPAS_v2_x   PSP00270      NoGPS          NA   532 secs 1718391840
+      18:  UPAS_v2_x   PSP00270      NoGPS          NA   562 secs 1718391870
+      19:  UPAS_v2_x   PSP00270      NoGPS          NA   592 secs 1718391900
+      20:  UPAS_v2_x   PSP00270      NoGPS          NA   622 secs 1718391930
+      21:  UPAS_v2_x   PSP00270      NoGPS          NA   652 secs 1718391960
+      22:  UPAS_v2_x   PSP00270      NoGPS          NA   682 secs 1718391990
+      23:  UPAS_v2_x   PSP00270      NoGPS          NA   712 secs 1718392020
+      24:  UPAS_v2_x   PSP00270      NoGPS          NA   742 secs 1718392050
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
@@ -4464,45 +4464,45 @@
       read_ast_log(upasv2x_rev158_diag_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>      <num>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x        270 DIAGNOSTIC          NA    84 secs 1718295952
-       2:  UPAS_v2_x        270 DIAGNOSTIC          NA    85 secs 1718295953
-       3:  UPAS_v2_x        270 DIAGNOSTIC          NA    86 secs 1718295954
-       4:  UPAS_v2_x        270 DIAGNOSTIC          NA    87 secs 1718295955
-       5:  UPAS_v2_x        270 DIAGNOSTIC          NA    88 secs 1718295956
-       6:  UPAS_v2_x        270 DIAGNOSTIC          NA    89 secs 1718295957
-       7:  UPAS_v2_x        270 DIAGNOSTIC          NA    90 secs 1718295958
-       8:  UPAS_v2_x        270 DIAGNOSTIC          NA    91 secs 1718295959
-       9:  UPAS_v2_x        270 DIAGNOSTIC          NA    92 secs 1718295960
-      10:  UPAS_v2_x        270 DIAGNOSTIC          NA    93 secs 1718295961
-      11:  UPAS_v2_x        270 DIAGNOSTIC          NA    94 secs 1718295962
-      12:  UPAS_v2_x        270 DIAGNOSTIC          NA    95 secs 1718295963
-      13:  UPAS_v2_x        270 DIAGNOSTIC          NA    96 secs 1718295964
-      14:  UPAS_v2_x        270 DIAGNOSTIC          NA    97 secs 1718295965
-      15:  UPAS_v2_x        270 DIAGNOSTIC          NA    98 secs 1718295966
-      16:  UPAS_v2_x        270 DIAGNOSTIC          NA    99 secs 1718295967
-      17:  UPAS_v2_x        270 DIAGNOSTIC          NA   100 secs 1718295968
-      18:  UPAS_v2_x        270 DIAGNOSTIC          NA   101 secs 1718295969
-      19:  UPAS_v2_x        270 DIAGNOSTIC          NA   102 secs 1718295970
-      20:  UPAS_v2_x        270 DIAGNOSTIC          NA   103 secs 1718295971
-      21:  UPAS_v2_x        270 DIAGNOSTIC          NA   104 secs 1718295972
-      22:  UPAS_v2_x        270 DIAGNOSTIC          NA   105 secs 1718295973
-      23:  UPAS_v2_x        270 DIAGNOSTIC          NA   106 secs 1718295974
-      24:  UPAS_v2_x        270 DIAGNOSTIC          NA   107 secs 1718295975
-      25:  UPAS_v2_x        270 DIAGNOSTIC          NA   109 secs 1718295977
-      26:  UPAS_v2_x        270 DIAGNOSTIC          NA   111 secs 1718295979
-      27:  UPAS_v2_x        270 DIAGNOSTIC          NA   113 secs 1718295981
-      28:  UPAS_v2_x        270 DIAGNOSTIC          NA   115 secs 1718295983
-      29:  UPAS_v2_x        270 DIAGNOSTIC          NA   117 secs 1718295985
-      30:  UPAS_v2_x        270 DIAGNOSTIC          NA   119 secs 1718295987
-      31:  UPAS_v2_x        270 DIAGNOSTIC          NA   121 secs 1718295989
-      32:  UPAS_v2_x        270 DIAGNOSTIC          NA   123 secs 1718295991
-      33:  UPAS_v2_x        270 DIAGNOSTIC          NA   125 secs 1718295993
-      34:  UPAS_v2_x        270 DIAGNOSTIC          NA   127 secs 1718295995
-      35:  UPAS_v2_x        270 DIAGNOSTIC          NA   129 secs 1718295997
-      36:  UPAS_v2_x        270 DIAGNOSTIC          NA   131 secs 1718295999
-      37:  UPAS_v2_x        270 DIAGNOSTIC          NA   133 secs 1718296001
-      38:  UPAS_v2_x        270 DIAGNOSTIC          NA   135 secs 1718296003
+              <char>     <char>     <char>      <lgcl> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    84 secs 1718295952
+       2:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    85 secs 1718295953
+       3:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    86 secs 1718295954
+       4:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    87 secs 1718295955
+       5:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    88 secs 1718295956
+       6:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    89 secs 1718295957
+       7:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    90 secs 1718295958
+       8:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    91 secs 1718295959
+       9:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    92 secs 1718295960
+      10:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    93 secs 1718295961
+      11:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    94 secs 1718295962
+      12:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    95 secs 1718295963
+      13:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    96 secs 1718295964
+      14:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    97 secs 1718295965
+      15:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    98 secs 1718295966
+      16:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    99 secs 1718295967
+      17:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   100 secs 1718295968
+      18:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   101 secs 1718295969
+      19:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   102 secs 1718295970
+      20:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   103 secs 1718295971
+      21:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   104 secs 1718295972
+      22:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   105 secs 1718295973
+      23:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   106 secs 1718295974
+      24:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   107 secs 1718295975
+      25:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   109 secs 1718295977
+      26:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   111 secs 1718295979
+      27:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   113 secs 1718295981
+      28:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   115 secs 1718295983
+      29:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   117 secs 1718295985
+      30:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   119 secs 1718295987
+      31:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   121 secs 1718295989
+      32:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   123 secs 1718295991
+      33:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   125 secs 1718295993
+      34:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   127 secs 1718295995
+      35:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   129 secs 1718295997
+      36:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   131 secs 1718295999
+      37:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   133 secs 1718296001
+      38:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   135 secs 1718296003
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>

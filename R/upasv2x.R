@@ -31,6 +31,7 @@
 format_upasv2x_header = function(data, tz=NA) {
 
   data <- dplyr::mutate(data,
+    UPASserial = sub("(^.*)(PSP.*)_LOG.*", "\\2", .data$LogFilename),
     ASTSampler  = sub("-rev.*", "", .data$Firmware),
     FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
     FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)),
@@ -42,7 +43,7 @@ format_upasv2x_header = function(data, tz=NA) {
                     .data$StartOnNextPowerUp == 2 ~ "system reset",
                     .data$StartOnNextPowerUp == 4 ~ "always"
     ),
-    dplyr::across(dplyr::any_of(c("UPASserial", "UPASpcbRev", "GPSUTCOffset",
+    dplyr::across(dplyr::any_of(c("UPASpcbRev", "GPSUTCOffset",
                                   "DutyCycleWindow",
                                   "GPSEnabled", "PMSensorInterval",
                                   "LogInterval", "SamplerConfiguration",
