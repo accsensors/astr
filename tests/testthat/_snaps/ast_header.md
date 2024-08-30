@@ -4,7 +4,7 @@
       read_ast_header(upasv2_rev100_file, update_names = FALSE)
     Output
         ASTSampler UPASserial
-      1  UPAS_v2_0       1422
+      1  UPAS_v2_0     PS1422
                                                                              Firmware
       1 UPAS_v2_0-rev0100-L152RE_20180405_mbed116.bin compiledApr  6 2018_00:19:25UTC
         FirmwareRev                                                  LogFilename
@@ -28,7 +28,7 @@
       read_ast_header(upasv2_rev100_diag_file, update_names = FALSE)
     Output
         ASTSampler UPASserial
-      1  UPAS_v2_0       1422
+      1  UPAS_v2_0     PS1422
                                                                              Firmware
       1 UPAS_v2_0-rev0100-L152RE_20180405_mbed116.bin compiledApr  6 2018_00:19:25UTC
         FirmwareRev                                                  LogFilename
@@ -60,7 +60,7 @@
       read_ast_header(upasv2_rev125_file, update_names = FALSE)
     Output
         ASTSampler UPASserial
-      1  UPAS_v2_0        166
+      1  UPAS_v2_0     PS0166
                                                                              Firmware
       1 UPAS_v2_0-rev0125-L152RE_20210925_mbed116.bin compiledSep 25 2021_17:35:48UTC
         FirmwareRev LifetimeSampleCount LifetimeSampleRuntime
@@ -88,7 +88,7 @@
       read_ast_header(upasv2_rev130_diag_file, update_names = FALSE)
     Output
         ASTSampler UPASserial
-      1  UPAS_v2_0       1786
+      1  UPAS_v2_0     PS1786
                                                                              Firmware
       1 UPAS_v2_0-rev0130-L152RE_20220310_mbed116.bin compiledMar 10 2022_20:39:40UTC
         FirmwareRev LifetimeSampleCount LifetimeSampleRuntime
@@ -124,7 +124,7 @@
       read_ast_header(upasv2_rev138_file, update_names = FALSE)
     Output
         ASTSampler UPASserial
-      1  UPAS_v2_0       1771
+      1  UPAS_v2_0     PS1771
                                                                              Firmware
       1 UPAS_v2_0-rev0138-L152RE_20230510_mbed116.bin compiledMay 11 2023_02:06:55UTC
         FirmwareRev LifetimeSampleCount LifetimeSampleRuntime
@@ -152,7 +152,7 @@
       read_ast_header(upasv2x_rev81_file, update_names = FALSE)
     Output
         ASTSampler UPASserial
-      1  UPAS_v2_x         24
+      1  UPAS_v2_x   PSP00024
                                                                                        Firmware
       1 UPAS_v2_x-rev_00081-L476RE_20210806_mbedOS-6_13_0.bin compiled Aug  6 2021_21:59:53 UTC
         FirmwareRev LifetimeSampleCount LifetimeSampleRuntime
@@ -192,7 +192,7 @@
       read_ast_header(upasv2x_rev117_file, update_names = FALSE)
     Output
         ASTSampler UPASserial UPASpcbRev UPASexpRev                   PMserial
-      1  UPAS_v2_x         30          0          1 1F3F67618F0F615B_2.2_7_2.0
+      1  UPAS_v2_x   PSP00030          0          1 1F3F67618F0F615B_2.2_7_2.0
                                                                                        Firmware
       1 UPAS_v2_x-rev_00117-L476RE_20220511_mbedOS-6_15_1.bin compiled May 11 2022_21:25:01 UTC
         FirmwareRev LifetimeSampleCount LifetimeSampleRuntime
@@ -234,7 +234,7 @@
       read_ast_header(upasv2x_rev110_diag_file, update_names = FALSE)
     Output
         ASTSampler UPASserial                   PMserial
-      1  UPAS_v2_x         55 B7D1537B9ADF2439_2.3_7_2.0
+      1  UPAS_v2_x   PSP00055 B7D1537B9ADF2439_2.3_7_2.0
                                                                                        Firmware
       1 UPAS_v2_x-rev_00110-L476RE_20220323_mbedOS-6_15_1.bin compiled Mar 23 2022_22:33:23 UTC
         FirmwareRev LifetimeSampleCount LifetimeSampleRuntime
@@ -278,7 +278,7 @@
       read_ast_header(upasv2x_rev157_file, update_names = FALSE)
     Output
         ASTSampler UPASserial UPASpcbRev UPASexpRev MotionID
-      1  UPAS_v2_x        270          1       0BR2     0x6B
+      1  UPAS_v2_x   PSP00270          1       0BR2     0x6B
                           PMserial      CO2serial      Gasserial
       1 B1D3251112E134C8_2.3_7_2.0 0x63ea7f073b80 0x000003da2859
                                                                                        Firmware
@@ -328,7 +328,7 @@
       read_ast_header(upasv2x_rev158_diag_file, update_names = FALSE)
     Output
         ASTSampler UPASserial UPASpcbRev UPASexpRev MotionID
-      1  UPAS_v2_x        270          1       0BR2     0x6B
+      1  UPAS_v2_x   PSP00270          1       0BR2     0x6B
                           PMserial      CO2serial      Gasserial
       1 B1D3251112E134C8_2.3_7_2.0 0x63ea7f073b80 0x000003da2859
                                                                                        Firmware

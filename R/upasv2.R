@@ -35,13 +35,14 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
 
   data <- dplyr::mutate(data,
                   ASTSampler = sub("-rev.*", "", .data$Firmware),
+                  UPASserial = sub("(^.*)(PS.*)_LOG.*", "\\2", .data$LogFilename),
                   FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
                   FirmwareRev = as.numeric(gsub("rev", "", .data$FirmwareRev)),
                   StartOnNextPowerUp = dplyr::case_when(
                     .data$StartOnNextPowerUp == 0 ~ "FALSE",
                     .data$StartOnNextPowerUp == 1 ~ "TRUE"
                   ),
-                  dplyr::across(dplyr::any_of(c("UPASserial", "GPSUTCOffset",
+                  dplyr::across(dplyr::any_of(c("GPSUTCOffset",
                                                 "VolumetricFlowRate",
                                                 "GPSEnabled", "LogFileMode",
                                                 "LogInterval", "AppLock",

@@ -12,6 +12,13 @@ load_all()
 # upasv2x header output
 #######################
 
+upasv2x_shear_filename <- 'SH00009_LOG_2022-02-14T17_02_32UTC_---------------_5VX__.txt'
+upasv2x_shear_file <- system.file("extdata", upasv2x_shear_filename, package = "astr", mustWork = TRUE)
+upasv2x_shear_header_list <- fread_ast_header(upasv2x_shear_file)
+upasv2x_shear_header_raw <- upasv2x_shear_header_list$header
+upasv2x_shear_header_wide <- transpose_ast_header(upasv2x_shear_header_list$header)
+upasv2x_shear_header <- format_upasv2x_header(upasv2x_shear_header_wide)
+
 upasv2x_rev81_filename <- 'PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt'
 upasv2x_rev81_file <- system.file("extdata", upasv2x_rev81_filename, package = "astr", mustWork = TRUE)
 upasv2x_rev81_header_list <- fread_ast_header(upasv2x_rev81_file)
