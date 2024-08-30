@@ -32,6 +32,9 @@ format_upasv2x_header = function(data, tz=NA) {
 
   data <- dplyr::mutate(data,
     ASTSampler  = sub("-rev.*", "", .data$Firmware),
+    UPASserial = ifelse(.data$ASTSampler == "UPAS_v2_x", ## Change UPASserial based off standard vs. SHEAR UPAS
+      sub("(^.*)(PSP.*)_LOG.*", "\\2", .data$LogFilename),
+      sub("(^.*)(SH.*)_LOG.*", "\\2", .data$LogFilename)),
     FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
     FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)),
     ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite", NA,
@@ -42,7 +45,7 @@ format_upasv2x_header = function(data, tz=NA) {
                     .data$StartOnNextPowerUp == 2 ~ "system reset",
                     .data$StartOnNextPowerUp == 4 ~ "always"
     ),
-    dplyr::across(dplyr::any_of(c("UPASserial", "UPASpcbRev", "GPSUTCOffset",
+    dplyr::across(dplyr::any_of(c("UPASpcbRev", "GPSUTCOffset",
                                   "DutyCycleWindow",
                                   "GPSEnabled", "PMSensorInterval",
                                   "LogInterval", "SamplerConfiguration",
