@@ -89,13 +89,7 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
              CartridgeID = gsub("-+$", "", .data$CartridgeID),
              CartridgeID = ifelse(.data$CartridgeID != "",.data$CartridgeID,NA))
 
-    tz_string <- dplyr::case_when(!is.na(tz) ~ tz,
-                                  data$GPSUTCOffset == 0 ~ "UTC",
-     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset < 0) ~
-                                  sprintf("Etc/GMT+%i", abs(data$GPSUTCOffset)),
-     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset > 0) ~
-                                  sprintf("Etc/GMT-%i", abs(data$GPSUTCOffset)),
-                                  T ~ NA)
+    tz_string <- astr::get_tz_string(data$GPSUTCOffset, tz=tz)
 
     if(!is.na(tz_string)){
       data <- dplyr::mutate(data,
@@ -217,16 +211,7 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
 
     }else{ # For firmware version > 100
 
-      df <- dplyr::mutate(df,
-              LocalTZ  = dplyr::case_when(!is.na(tz) ~ tz,
-                                   header$GPSUTCOffset == 0 ~ "UTC",
-                           (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
-                            (header$GPSUTCOffset < 0) ~
-                                sprintf("Etc/GMT+%i", abs(header$GPSUTCOffset)),
-                           (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
-                             (header$GPSUTCOffset > 0) ~
-                                sprintf("Etc/GMT-%i", abs(header$GPSUTCOffset)),
-                           T ~ NA))
+      df <- dplyr::mutate(df, LocalTZ = astr::get_tz_string(header$GPSUTCOffset, tz=tz))
 
       if(!is.na(unique(df$LocalTZ))){
         df <- dplyr::mutate(df,

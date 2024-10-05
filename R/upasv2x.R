@@ -115,13 +115,7 @@ format_upasv2x_header = function(data, tz=NA) {
     CartridgeID = gsub("-+$", "", .data$CartridgeID),
     CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
 
-  tz_string <- dplyr::case_when(!is.na(tz) ~ tz,
-                                data$GPSUTCOffset == 0 ~ "UTC",
-     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset < 0) ~
-                                  sprintf("Etc/GMT+%i", abs(data$GPSUTCOffset)),
-     (round(data$GPSUTCOffset) == data$GPSUTCOffset) & (data$GPSUTCOffset > 0) ~
-                                  sprintf("Etc/GMT-%i", abs(data$GPSUTCOffset)),
-                                T ~ NA)
+  tz_string <- astr::get_tz_string(data$GPSUTCOffset, tz=tz)
 
   if(!is.na(tz_string)){
     data <- dplyr::mutate(data,
@@ -210,15 +204,7 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
     DateTimeUTC = as.POSIXct(.data$DateTimeUTC, format = "%Y-%m-%dT%H:%M:%S",
                              tz = "UTC"),
     UserTZ   = ifelse(!is.na(tz), T, F),
-    LocalTZ  = dplyr::case_when(!is.na(tz) ~ tz,
-                         header$GPSUTCOffset == 0 ~ "UTC",
-                         (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
-                           (header$GPSUTCOffset < 0) ~
-                                sprintf("Etc/GMT+%i", abs(header$GPSUTCOffset)),
-                         (round(header$GPSUTCOffset) == header$GPSUTCOffset) &
-                           (header$GPSUTCOffset > 0) ~
-                                sprintf("Etc/GMT-%i", abs(header$GPSUTCOffset)),
-                         T ~ NA),
+    LocalTZ  = astr::get_tz_string(header$GPSUTCOffset, tz=tz),
     GPSlat   = ifelse(.data$GPSlat   == -9999, NA, .data$GPSlat),
     GPSlon   = ifelse(.data$GPSlon   == -9999, NA, .data$GPSlon),
     GPSalt   = ifelse(.data$GPSalt   == -9999, NA, .data$GPSalt),

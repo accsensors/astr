@@ -69,3 +69,36 @@ count_header_rows = function(file) {
 
   return(df)
 }
+
+#' Get the time zone string to be used to format local times in an Access Sensor Technologies (AST) air sampler log file
+#'
+#' @description
+#' `get_tz_string()` returns a string representing the time zone with which
+#' local times in a log file should be formatted. If the GPSUTCOffset in your
+#' log file is a whole number of hour, `get_tz_string()` function will return a
+#' string. If the GPSUTCOffset in your log file is a fraction of an hour, it's
+#' best to specify the optional `tz` parameter; otherwise, `get_tz_string()`
+#' will return `NA` and local times in the log file will be formatted as strings
+#' instead of as `POSIXct` objects.
+#'
+#' @param UTCOffset A numeric value from the log file header representing the
+#' offset, in hours, between the UTC time and the local time zone associated
+#' with the sample. In UPAS log files, this variable is named "GPSUTCOffset".
+#' In  Home Health Box v2 log files, this variable is named "UTCOffset".
+#' @inheritParams read_ast_header
+#'
+#' @return A string containing the name of a time zone or an `NA` value.
+#' @export
+
+get_tz_string = function(UTCOffset, tz=NA) {
+
+  tz_string <- dplyr::case_when(!is.na(tz) ~ tz,
+                                UTCOffset == 0 ~ "UTC",
+                                round(UTCOffset) != UTCOffset ~ NA,
+                                UTCOffset < 0 ~ sprintf("Etc/GMT+%0.f",
+                                                                abs(UTCOffset)),
+                                UTCOffset > 0 ~ sprintf("Etc/GMT-%0.f",
+                                                                abs(UTCOffset)))
+
+  return(tz_string)
+}

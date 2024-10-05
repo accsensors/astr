@@ -85,15 +85,7 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
                             as.numeric(sapply(.data$SampleTime, `[`, 3)),
                           units="secs"),
             UserTZ  = ifelse(!is.na(tz), T, F),
-            LocalTZ  = dplyr::case_when(!is.na(tz) ~ tz,
-                                 header$UTCOffset == 0 ~ "UTC",
-                                 (round(header$UTCOffset) == header$UTCOffset) &
-                                  (header$UTCOffset < 0) ~
-                                   sprintf("Etc/GMT+%i", abs(header$UTCOffset)),
-                                 (round(header$UTCOffset) == header$UTCOffset) &
-                                  (header$UTCOffset > 0) ~
-                                   sprintf("Etc/GMT-%i", abs(header$UTCOffset)),
-                                 T ~ NA))
+            LocalTZ = astr::get_tz_string(header$UTCOffset, tz=tz))
 
     if(!is.na(unique(df$LocalTZ))){
       df <- dplyr::mutate(df,
