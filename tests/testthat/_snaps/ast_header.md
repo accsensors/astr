@@ -73,14 +73,14 @@
       1            172800                  1          0       100              30
         GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
       1       TRUE      normal          30       0     i2.2.2 2021-09-29 17:37:09
-         StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 2021-09-29 11:37:09                 54                3.58
+          LocalTZ  StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
+      1 Etc/GMT+6 2021-09-29 11:37:09                 54                3.58
              EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
       1 2021-09-29 17:41:30 2021-09-29 11:41:30               54              3.54
         ShutdownMode       ShutdownReason SampledVolume SampledRuntime LoggedRuntime
       1            1 user pushbutton stop          4.28           0.07         0.069
-        AverageVolumetricFlowRate
-      1                     1.022
+        AverageVolumetricFlowRate UserTZ
+      1                     1.022  FALSE
 
 ---
 
@@ -101,8 +101,8 @@
       1            172800                  1          0         0              30
         GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
       1       TRUE       debug           1       0     i2.2.2 2023-03-02 21:45:43
-         StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 2023-03-02 13:45:43                 99                3.56
+          LocalTZ  StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
+      1 Etc/GMT+8 2023-03-02 13:45:43                 99                3.56
              EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
       1 2023-03-02 21:48:17 2023-03-02 13:48:17               99               3.5
         ShutdownMode ShutdownReason SampledVolume SampledRuntime LoggedRuntime
@@ -115,8 +115,8 @@
       1 1677782528.000000 2023-03-02 18:42:08               0.54       1.914125
         MFSDIAGVoutMin MFSDIAGMFBlocked MFSDIAGMFMax MFSDIAGMFMin
       1         0.8405                0       3.0629     0.464254
-        MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead
-      1             28.00899             7.160145          1638.35
+        MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead UserTZ
+      1             28.00899             7.160145          1638.35  FALSE
 
 ---
 
@@ -137,14 +137,14 @@
       1           3.6e+08                  1          0       100              30
         GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
       1       TRUE      normal          30       0     i2.2.2 2024-06-13 21:20:17
-         StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 2024-06-13 15:20:17                 93                4.04
+          LocalTZ  StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
+      1 Etc/GMT+6 2024-06-13 15:20:17                 93                4.04
              EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
       1 2024-06-13 21:25:30 2024-06-13 15:25:30               93              4.01
         ShutdownMode       ShutdownReason SampledVolume SampledRuntime LoggedRuntime
       1            1 user pushbutton stop          5.02          0.084         0.084
-        AverageVolumetricFlowRate
-      1                     0.997
+        AverageVolumetricFlowRate UserTZ
+      1                     0.997  FALSE
 
 # read_ast_header works with all UPASv2x firmwares
 
@@ -169,8 +169,8 @@
       1              30      FALSE                1 Continuous Measurement
         RTGasSampleState LogInterval PowerSaveMode AppLock AppVersion
       1            FALSE          30          TRUE   FALSE     i1.0.0
-           StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1 2021-08-11 18:18:03 2021-08-11 14:18:03 2021-08-12 01:04:11
+           StartDateTimeUTC   LocalTZ  StartDateTimeLocal      EndDateTimeUTC
+      1 2021-08-11 18:18:03 Etc/GMT+4 2021-08-11 14:18:03 2021-08-12 01:04:11
            EndDateTimeLocal OverallDuration PumpingDuration OverallFlowRateAverage
       1 2021-08-11 21:04:11           6.763           1.353                    0.2
         PumpingFlowRateAverage SampledVolume StartBatteryCharge EndBatteryCharge
@@ -183,8 +183,8 @@
       1         2.146              NA       2e-04       3.577                  NA
         MFSCalPumpVBoostMax MFSCalPDeadhead      MF4       MF3      MF2      MF1
       1                  NA              NA 0.228346 -0.384661 0.094702 1.251266
-            MF0
-      1 -0.5875
+            MF0 UserTZ
+      1 -0.5875  FALSE
 
 ---
 
@@ -207,8 +207,8 @@
       1            20              30       TRUE               17
                           PMSensorOperation RTGasSampleState CO2SampleState
       1 15s Warmup 5s Measurement 40s Sleep             TRUE           TRUE
-        LogInterval PowerSaveMode AppLock AppVersion    StartDateTimeUTC
-      1          30         FALSE   FALSE     i1.0.1 2022-05-11 23:24:01
+        LogInterval PowerSaveMode AppLock AppVersion    StartDateTimeUTC   LocalTZ
+      1          30         FALSE   FALSE     i1.0.1 2022-05-11 23:24:01 Etc/GMT+7
          StartDateTimeLocal      EndDateTimeUTC    EndDateTimeLocal
       1 2022-05-11 16:24:01 2022-05-11 23:31:17 2022-05-11 16:31:17
         FlowCheckMeterReadingPreSample FlowCheckMeterReadingPostSample
@@ -225,8 +225,8 @@
       1          0.48        2.1515              NA    0.002244      3.5224
         MFSCalPumpVBoostMin MFSCalPumpVBoostMax MFSCalPDeadhead      MF4      MF3
       1                  NA                  NA              NA 0.119098 0.154664
-             MF2      MF1       MF0
-      1 -0.84873 1.899014 -0.737162
+             MF2      MF1       MF0 UserTZ
+      1 -0.84873 1.899014 -0.737162  FALSE
 
 ---
 
@@ -249,10 +249,10 @@
       1            50              30       TRUE                1
              PMSensorOperation RTGasSampleState LogInterval PowerSaveMode AppLock
       1 Continuous Measurement            FALSE           1         FALSE   FALSE
-        AppVersion    StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1     i1.0.0 2022-03-24 18:05:32 2022-03-24 12:05:32 2022-03-24 18:08:32
-           EndDateTimeLocal FlowCheckMeterReadingPreSample
-      1 2022-03-24 12:08:32                             NA
+        AppVersion    StartDateTimeUTC   LocalTZ  StartDateTimeLocal
+      1     i1.0.0 2022-03-24 18:05:32 Etc/GMT+6 2022-03-24 12:05:32
+             EndDateTimeUTC    EndDateTimeLocal FlowCheckMeterReadingPreSample
+      1 2022-03-24 18:08:32 2022-03-24 12:08:32                             NA
         FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
       1                              NA           0.051           0.025
         OverallFlowRateAverage PumpingFlowRateAverage SampledVolume
@@ -269,8 +269,8 @@
       1 -4.507419 6.382635 -2.589087 0.178156             0.7455       1.872625
         MFSDIAGVoutMin MFSDIAGMFBlocked MFSDIAGMFMax MFSDIAGMFMin
       1       0.916625         0.295771     2.765242     0.537403
-        MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead
-      1             28.45308             7.633833          1638.35
+        MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead UserTZ
+      1             28.45308             7.633833          1638.35  FALSE
 
 ---
 
@@ -301,8 +301,8 @@
       1 Continuous Measurement             TRUE           TRUE          30
         SamplerConfiguration ExternalPowerMode PowerSaveMode AppLock AppVersion
       1                    0             FALSE         FALSE   FALSE     i1.0.4
-           StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1 2024-06-25 21:37:48 2024-06-25 15:37:48 2024-06-25 22:21:13
+           StartDateTimeUTC   LocalTZ  StartDateTimeLocal      EndDateTimeUTC
+      1 2024-06-25 21:37:48 Etc/GMT+6 2024-06-25 15:37:48 2024-06-25 22:21:13
            EndDateTimeLocal FlowCheckMeterReadingPreSample
       1 2024-06-25 16:21:13                             NA
         FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
@@ -319,8 +319,8 @@
       1       1.94575              NA    0.006072      3.0542                  NA
         MFSCalPumpVBoostMax MFSCalPDeadhead      MF4      MF3      MF2      MF1
       1                  NA              NA 0.639249 -1.96428 2.275305 0.071015
-             MF0
-      1 -0.39268
+             MF0 UserTZ
+      1 -0.39268  FALSE
 
 ---
 
@@ -351,8 +351,8 @@
       1 Continuous Measurement             TRUE           TRUE           1
         SamplerConfiguration ExternalPowerMode PowerSaveMode AppLock AppVersion
       1                    0             FALSE         FALSE   FALSE     i1.0.4
-           StartDateTimeUTC  StartDateTimeLocal      EndDateTimeUTC
-      1 2024-06-13 16:24:47 2024-06-13 10:24:47 2024-06-13 16:27:26
+           StartDateTimeUTC   LocalTZ  StartDateTimeLocal      EndDateTimeUTC
+      1 2024-06-13 16:24:47 Etc/GMT+6 2024-06-13 10:24:47 2024-06-13 16:27:26
            EndDateTimeLocal FlowCheckMeterReadingPreSample
       1 2024-06-13 10:27:26                             NA
         FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
@@ -373,8 +373,8 @@
       1 -0.39268           2.011125          2.011       1.037125           3.0542
         MFSDIAGMFMax MFSDIAGMFMin MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin
       1       3.0542     0.676676             27.93224             7.155759
-        MFSDIAGPDeadhead
-      1           626.85
+        MFSDIAGPDeadhead UserTZ
+      1           626.85  FALSE
 
 # read_ast_header works with all HHBv2 firmwares
 

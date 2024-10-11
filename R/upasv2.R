@@ -83,23 +83,27 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
   if(data$FirmwareRev > 100){
 
     data <- dplyr::mutate(data,
+             UserTZ   = ifelse(!is.na(tz), T, F),
+             LocalTZ  = astr::get_tz_string(.data$GPSUTCOffset, tz=tz),
              SampleName  = gsub("_+$", "", .data$SampleName),
              SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
              CartridgeID = gsub("_+$", "", .data$CartridgeID),
              CartridgeID = gsub("-+$", "", .data$CartridgeID),
              CartridgeID = ifelse(.data$CartridgeID != "",.data$CartridgeID,NA))
 
-    tz_string <- astr::get_tz_string(data$GPSUTCOffset, tz=tz)
+    # tz_string <- astr::get_tz_string(data$GPSUTCOffset, tz=tz)
 
-    if(!is.na(tz_string)){
+    if(!is.na(data$LocalTZ)){
       data <- dplyr::mutate(data,
                             StartDateTimeLocal =
-                                      lubridate::with_tz(.data$StartDateTimeUTC,
-                                                         tzone = tz_string),
+                              lubridate::with_tz(.data$StartDateTimeUTC,
+                                                 tzone = data$LocalTZ),
                             EndDateTimeLocal =
-                                      lubridate::with_tz(.data$EndDateTimeUTC,
-                                                         tzone = tz_string))
+                              lubridate::with_tz(.data$EndDateTimeUTC,
+                                                 tzone = data$LocalTZ))
     }
+
+    data <- dplyr::relocate(data, "LocalTZ", .after = "StartDateTimeUTC")
   }
 
   data <- data %>%

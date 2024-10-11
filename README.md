@@ -151,5 +151,5 @@ before the function name. These helper functions are:
 `count_header_rows()`, `format_ast_header()`, `format_ast_log()`,
 `format_hhb_header()`, `format_hhb_log()`, `format_upasv2_header()`,
 `format_upasv2_log()`, `format_upasv2x_header()`,
-`format_upasv2x_log()`, `fread_ast_header()`, `fread_ast_log()`, and
-`transpose_ast_header()`.
+`format_upasv2x_log()`, `fread_ast_header()`, `fread_ast_log()`,
+`get_tz_string()` and `transpose_ast_header()`.

@@ -20,8 +20,8 @@ include: "America/New_York", "America/Denver", and "America/Los_Angeles".
 For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
 
 If the GPSUTCOffset in your log file is a fraction of an hour, it's
-best to specify the optional \code{tz} parameter; otherwise, local times in the log file
-will be incorrectly labeled as UTC time.}
+best to specify the optional \code{tz} parameter; otherwise, the local time zone in the log file
+will be automatically categorized based off the GPSUTCOffset.}
 }
 \value{
 A data frame with a single row of header data that are formatted and ready for analysis.
@@ -77,6 +77,8 @@ be appended:
 \item FirmwareRev: A numeric value indicating the firmware revision number
 \item ShutdownReason: A string indicating the meaning of the ShutdownMode number
 \item PMSensorOperation: A string indicating the meaning of the PMSensorInterval number (for UPAS v2.1 PLUS only)
+\item UserTZ: A boolean value indicating whether the \code{tz} argument was supplied to this function
+\item LocalTZ: A string indicating the timezone associated with StartDateTimeLocal and EndDateTimeLocal values
 }
 }
 \examples{

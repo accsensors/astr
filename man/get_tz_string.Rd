@@ -18,8 +18,8 @@ include: "America/New_York", "America/Denver", and "America/Los_Angeles".
 For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
 
 If the GPSUTCOffset in your log file is a fraction of an hour, it's
-best to specify the optional \code{tz} parameter; otherwise, local times in the log file
-will be incorrectly labeled as UTC time.}
+best to specify the optional \code{tz} parameter; otherwise, the local time zone in the log file
+will be automatically categorized based off the GPSUTCOffset.}
 }
 \value{
 A string containing the name of a time zone or an \code{NA} value.

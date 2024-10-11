@@ -108,6 +108,8 @@ format_upasv2x_header = function(data, tz=NA) {
     dplyr::across(dplyr::any_of(c("StartDateTimeUTC","EndDateTimeUTC",
                                   "CO2CalDate", "MFSCalDate")),
                   \(x) as.POSIXct(x, format = "%Y-%m-%dT%H:%M:%S", tz = "UTC")),
+    UserTZ   = ifelse(!is.na(tz), T, F),
+    LocalTZ  = astr::get_tz_string(.data$GPSUTCOffset, tz=tz),
     SampleName  = gsub("_+$", "", .data$SampleName),
     SampleName  = gsub("-+$", "", .data$SampleName),
     SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
@@ -115,22 +117,23 @@ format_upasv2x_header = function(data, tz=NA) {
     CartridgeID = gsub("-+$", "", .data$CartridgeID),
     CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID, NA))
 
-  tz_string <- astr::get_tz_string(data$GPSUTCOffset, tz=tz)
+  # tz_string <- astr::get_tz_string(data$GPSUTCOffset, tz=tz)
 
-  if(!is.na(tz_string)){
+  if(!is.na(data$LocalTZ)){
     data <- dplyr::mutate(data,
                           StartDateTimeLocal =
                             lubridate::with_tz(.data$StartDateTimeUTC,
-                                               tzone = tz_string),
+                                               tzone = data$LocalTZ),
                           EndDateTimeLocal =
                             lubridate::with_tz(.data$EndDateTimeUTC,
-                                               tzone = tz_string))
+                                               tzone = data$LocalTZ))
   }
 
   data <- dplyr::relocate(data, "ASTSampler")
   data <- dplyr::relocate(data, "FirmwareRev",       .after = "Firmware")
   data <- dplyr::relocate(data, "ShutdownReason",    .after = "ShutdownMode")
   data <- dplyr::relocate(data, "PMSensorOperation", .after = "PMSensorInterval")
+  data <- dplyr::relocate(data, "LocalTZ",           .after = "StartDateTimeUTC")
 
   return(data)
 }
