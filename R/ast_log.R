@@ -11,16 +11,7 @@
 #' [purrr::map()] to read in log data from any number of files and
 #' combine those data into a single data frame.
 #'
-#' @param file Any Access Sensor Technologies air sampler log file name.
-#' @param update_names Option to update any deprecated variable names from log
-#' files written using older firmware versions to the variable names used in
-#' the current firmware version. Variable names cannot be updated for log files
-#' written using UPAS v2 firmware versions preceding rev100.
-#'
-#' @param tz Optional: A character string specifying the tz database time zone
-#' that should be used to display local times. Example tz database time zones
-#' include: "America/New_York", "America/Denver", and "America/Los_Angeles".
-#' For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
+#' @inheritParams read_ast_header
 #'
 #' @param cols_keep Optional: A character vector specifying the names of a subset of sample log columns to keep.
 #' @param cols_drop Optional: A character vector specifying the names of a subset of sample log columns to remove.

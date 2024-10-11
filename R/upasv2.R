@@ -99,10 +99,6 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
                             EndDateTimeLocal =
                                       lubridate::with_tz(.data$EndDateTimeUTC,
                                                          tzone = tz_string))
-    }else{
-      data <- dplyr::mutate(data,
-                    StartDateTimeLocal = as.character(.data$StartDateTimeLocal),
-                    EndDateTimeLocal   = as.character(.data$EndDateTimeLocal))
     }
   }
 
@@ -217,11 +213,10 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
         df <- dplyr::mutate(df,
                            DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
                                                       tzone=unique(df$LocalTZ)))
-      }else{
-        df <- dplyr::mutate(df, DateTimeLocal = as.character(.data$DateTimeLocal))
       }
 
       df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
+
     }
 
     if(!is.null(header$LogFileMode)){

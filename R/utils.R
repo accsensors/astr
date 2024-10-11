@@ -77,9 +77,8 @@ count_header_rows = function(file) {
 #' local times in a log file should be formatted. If the GPSUTCOffset in your
 #' log file is a whole number of hour, `get_tz_string()` function will return a
 #' string. If the GPSUTCOffset in your log file is a fraction of an hour, it's
-#' best to specify the optional `tz` parameter; otherwise, `get_tz_string()`
-#' will return `NA` and local times in the log file will be formatted as strings
-#' instead of as `POSIXct` objects.
+#' best to specify the optional `tz` parameter to for easier time stamp handling;
+#' otherwise, `get_tz_string()`will return `NA`.
 #'
 #' @param UTCOffset A numeric value from the log file header representing the
 #' offset, in hours, between the UTC time and the local time zone associated
@@ -89,16 +88,38 @@ count_header_rows = function(file) {
 #'
 #' @return A string containing the name of a time zone or an `NA` value.
 #' @export
+#'
+#' @examples
+#' # Using a standard UPASv2x log file
+#' upasv2x_filename <- 'PSP00270_LOG_2024-07-10T19_30_20UTC_StartOnNext_____----------.txt'
+#' upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+#' upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
+#' get_tz_string(upasv2x_header$GPSUTCOffset)
 
 get_tz_string = function(UTCOffset, tz=NA) {
 
+  fractional_tz <- round(UTCOffset) != UTCOffset ## Test if time zone is fractional
+
   tz_string <- dplyr::case_when(!is.na(tz) ~ tz,
                                 UTCOffset == 0 ~ "UTC",
-                                round(UTCOffset) != UTCOffset ~ NA,
-                                UTCOffset < 0 ~ sprintf("Etc/GMT+%0.f",
+                                # round(UTCOffset) != UTCOffset ~ NA,
+                                (UTCOffset < 0) && (!fractional_tz) ~ sprintf("Etc/GMT+%0.f",
                                                                 abs(UTCOffset)),
-                                UTCOffset > 0 ~ sprintf("Etc/GMT-%0.f",
-                                                                abs(UTCOffset)))
+                                (UTCOffset > 0) && (!fractional_tz) ~ sprintf("Etc/GMT-%0.f",
+                                                                abs(UTCOffset)),
+                                (UTCOffset == -3.5) || (UTCOffset == -2.5) ~ "America/St_Johns",
+                                UTCOffset == 4.5 ~ "Asia/Kabul",
+                                UTCOffset == 5.75 ~ "Asia/Kathmandu",
+                                UTCOffset == 5.5 ~ "Asia/Kolkata",
+                                UTCOffset == 6.5 ~ "Asia/Rangoon",
+                                UTCOffset == 3.5 ~ "Asia/Tehran",
+                                UTCOffset == 10.5 ~ "Australia/Adelaide", # This is DST for Adelaide, so Australia/Adelaide will only be categorized on DST
+                                UTCOffset == 9.5 ~ "Australia/Darwin",
+                                UTCOffset == 8.75 ~ "Australia/Eucla",
+                                # (UTCOffset == 10.5) || (UTCOffset == 11) ~ "Australia/LHI", # Decided not to use this time zone to make distinguishing other Australia time zones easier.
+                                (UTCOffset == 12.75) || (UTCOffset == 13.75) ~ "Pacific/Chatham",
+                                UTCOffset == -9.5 ~ "Pacific/Marquesas",
+                                )
 
   return(tz_string)
 }

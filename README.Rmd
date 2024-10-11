@@ -124,4 +124,4 @@ upasv2x_CO2_map  <- gps_map(multiple_upas_logs, variable = "CO2")
 
 The `astr` package contains helper functions called by the `read_ast_header()`, and
 `read_ast_log()` functions to process files. If you would like to use any of these helper functions independently in your script, you can find documentation and examples by typing a '?' before the function name.
-These helper functions are: `count_header_rows()`, `format_ast_header()`, `format_ast_log()`, `format_hhb_header()`, `format_hhb_log()`, `format_upasv2_header()`, `format_upasv2_log()`, `format_upasv2x_header()`, `format_upasv2x_log()`, `fread_ast_header()`, `fread_ast_log()`, and `transpose_ast_header()`. 
+These helper functions are: `count_header_rows()`, `format_ast_header()`, `format_ast_log()`, `format_hhb_header()`, `format_hhb_log()`, `format_upasv2_header()`, `format_upasv2_log()`, `format_upasv2x_header()`, `format_upasv2x_log()`, `fread_ast_header()`, `fread_ast_log()`, `get_tz_string()` and `transpose_ast_header()`. 

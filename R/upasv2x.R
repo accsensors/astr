@@ -125,10 +125,6 @@ format_upasv2x_header = function(data, tz=NA) {
                           EndDateTimeLocal =
                             lubridate::with_tz(.data$EndDateTimeUTC,
                                                tzone = tz_string))
-  }else{
-    data <- dplyr::mutate(data,
-                    StartDateTimeLocal = as.character(.data$StartDateTimeLocal),
-                    EndDateTimeLocal   = as.character(.data$EndDateTimeLocal))
   }
 
   data <- dplyr::relocate(data, "ASTSampler")
@@ -215,8 +211,6 @@ format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=
   if(!is.na(unique(df$LocalTZ))){
     df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
                                                       tzone=unique(df$LocalTZ)))
-  }else{
-    df <- dplyr::mutate(df, DateTimeLocal = as.character(.data$DateTimeLocal))
   }
 
   df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")

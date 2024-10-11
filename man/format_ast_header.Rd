@@ -18,7 +18,11 @@ written using UPAS v2 firmware versions preceding rev100.}
 \item{tz}{Optional: A character string specifying the tz database time zone
 that should be used to display local times. Example tz database time zones
 include: "America/New_York", "America/Denver", and "America/Los_Angeles".
-For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
+For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
+
+If the GPSUTCOffset in your log file is a fraction of an hour, it's
+best to specify the optional \code{tz} parameter; otherwise, local times in the log file
+will be incorrectly labeled as UTC time.}
 }
 \value{
 A data frame with a single row of header data that are formatted and ready for analysis.

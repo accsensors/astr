@@ -15,7 +15,11 @@ In  Home Health Box v2 log files, this variable is named "UTCOffset".}
 \item{tz}{Optional: A character string specifying the tz database time zone
 that should be used to display local times. Example tz database time zones
 include: "America/New_York", "America/Denver", and "America/Los_Angeles".
-For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}}
+For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
+
+If the GPSUTCOffset in your log file is a fraction of an hour, it's
+best to specify the optional \code{tz} parameter; otherwise, local times in the log file
+will be incorrectly labeled as UTC time.}
 }
 \value{
 A string containing the name of a time zone or an \code{NA} value.
@@ -25,7 +29,13 @@ A string containing the name of a time zone or an \code{NA} value.
 local times in a log file should be formatted. If the GPSUTCOffset in your
 log file is a whole number of hour, \code{get_tz_string()} function will return a
 string. If the GPSUTCOffset in your log file is a fraction of an hour, it's
-best to specify the optional \code{tz} parameter; otherwise, \code{get_tz_string()}
-will return \code{NA} and local times in the log file will be formatted as strings
-instead of as \code{POSIXct} objects.
+best to specify the optional \code{tz} parameter to for easier time stamp handling;
+otherwise, \code{get_tz_string()}will return \code{NA}.
+}
+\examples{
+# Using a standard UPASv2x log file
+upasv2x_filename <- 'PSP00270_LOG_2024-07-10T19_30_20UTC_StartOnNext_____----------.txt'
+upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+upasv2x_header <- read_ast_header(upasv2x_file, update_names=FALSE)
+get_tz_string(upasv2x_header$GPSUTCOffset)
 }

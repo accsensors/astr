@@ -200,6 +200,27 @@ test_that("For a UPASv2x header, update_names=TRUE has no effect", {
                    read_ast_header(upasv2x_file))
 })
 
+test_that("Local time is not altered for files with fractional time zone offsets", {
+  upasv2x_filename <- 'PSP01002_LOG_2024-02-28T11_37_58UTC_OnlyRT_3________NA________.txt'
+  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
+  upasv2x_header <- read_ast_header(upasv2x_file)
+  upasv2x_header_tz <- read_ast_header(upasv2x_file, tz = "Asia/Kolkata")
+  expect_identical(upasv2x_header$StartDateTimeLocal[1], as.POSIXct("2024-02-28 17:07:58", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
+  expect_identical(upasv2x_header$StartDateTimeLocal[1], upasv2x_header_tz$StartDateTimeLocal[1])
+  expect_identical(upasv2x_header$EndDateTimeLocal[1], as.POSIXct("2024-02-28 19:57:25", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
+  expect_identical(upasv2x_header$EndDateTimeLocal[1], upasv2x_header_tz$EndDateTimeLocal[1])
+
+  ## Binding rows maintains proper local time despite changing time zone to match the first file
+  multiple_upas_headers <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
+    lapply(read_ast_header, update_names=TRUE) %>%
+    dplyr::bind_rows()
+  expect_contains(multiple_upas_headers$StartDateTimeLocal, upasv2x_header$StartDateTimeLocal)
+  expect_contains(multiple_upas_headers$EndDateTimeLocal, upasv2x_header$EndDateTimeLocal)
+  expect_contains(multiple_upas_headers$StartDateTimeUTC, upasv2x_header$StartDateTimeUTC)
+  expect_contains(multiple_upas_headers$EndDateTimeUTC, upasv2x_header$EndDateTimeUTC)
+})
+
 ###################################
 # read_ast_header backwards compatibility
 ###################################

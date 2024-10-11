@@ -26,6 +26,10 @@
 #' include: "America/New_York", "America/Denver", and "America/Los_Angeles".
 #' For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
 #'
+#' If the GPSUTCOffset in your log file is a fraction of an hour, it's
+#' best to specify the optional `tz` parameter; otherwise, local times in the log file
+#' will be incorrectly labeled as UTC time.
+#'
 #' @return A data frame with a single row of header data that are formatted and ready for analysis.
 #'
 #' @details
