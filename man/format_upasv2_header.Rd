@@ -19,9 +19,12 @@ that should be used to display local times. Example tz database time zones
 include: "America/New_York", "America/Denver", and "America/Los_Angeles".
 For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
 
-If the GPSUTCOffset in your log file is a fraction of an hour, it's
-best to specify the optional \code{tz} parameter; otherwise, the local time zone in the log file
-will be automatically categorized based off the GPSUTCOffset.}
+If the \code{tz} parameter is not specified, local times will be displayed using
+the time zone associated with the GPSUTCOffset in the log file.
+
+Note that, in the unlikely event that your local time zone is
+"Australia/Lord_Howe," you will need to specify this time zone using the tz
+parameter to ensure that your local times are displayed correctly.}
 }
 \value{
 A data frame with a single row of UPAS v2 header data that are formatted and ready for analysis.
