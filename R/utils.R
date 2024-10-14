@@ -102,20 +102,19 @@ get_tz_string = function(UTCOffset, tz=NA) {
 
   tz_string <- dplyr::case_when(!is.na(tz) ~ tz,
                                 UTCOffset == 0 ~ "UTC",
-                                # round(UTCOffset) != UTCOffset ~ NA,
                                 (UTCOffset < 0) && (!fractional_tz) ~ sprintf("Etc/GMT+%0.f",
                                                                 abs(UTCOffset)),
                                 (UTCOffset > 0) && (!fractional_tz) ~ sprintf("Etc/GMT-%0.f",
                                                                 abs(UTCOffset)),
                                 (UTCOffset == -3.5) || (UTCOffset == -2.5) ~ "America/St_Johns",
-                                UTCOffset == 4.5 ~ "Asia/Kabul",
-                                UTCOffset == 5.75 ~ "Asia/Kathmandu",
-                                UTCOffset == 5.5 ~ "Asia/Kolkata",
-                                UTCOffset == 6.5 ~ "Asia/Rangoon",
-                                UTCOffset == 3.5 ~ "Asia/Tehran",
-                                UTCOffset == 10.5 ~ "Australia/Adelaide", # This is DST for Adelaide, so Australia/Adelaide will only be categorized on DST
-                                UTCOffset == 9.5 ~ "Australia/Darwin",
-                                UTCOffset == 8.75 ~ "Australia/Eucla",
+                                UTCOffset ==  4.5  ~ "Asia/Kabul",
+                                UTCOffset ==  5.75 ~ "Asia/Kathmandu",
+                                UTCOffset ==  5.5  ~ "Asia/Kolkata",
+                                UTCOffset ==  6.5  ~ "Asia/Rangoon",
+                                UTCOffset ==  3.5  ~ "Asia/Tehran",
+                                UTCOffset == 10.5  ~ "Australia/Adelaide", # This is DST for Adelaide, so Australia/Adelaide will only be categorized on DST
+                                UTCOffset ==  9.5  ~ "Australia/Darwin",
+                                UTCOffset ==  8.75 ~ "Australia/Eucla",
                                 # (UTCOffset == 10.5) || (UTCOffset == 11) ~ "Australia/LHI", # Decided not to use this time zone to make distinguishing other Australia time zones easier.
                                 (UTCOffset == 12.75) || (UTCOffset == 13.75) ~ "Pacific/Chatham",
                                 UTCOffset == -9.5 ~ "Pacific/Marquesas",
