@@ -21,7 +21,8 @@ format_hhb_header = function(df) {
 
   df$Firmware <- as.character(gsub(" ", "_", df$Firmware))
 
-  df$ProgrammedRuntime <- ifelse(df$ProgrammedRuntime == "indefinite", NA,
+  df$ProgrammedRuntime <- ifelse(df$ProgrammedRuntime == "indefinite",
+                                 as.numeric(NA),
                                  as.numeric(df$ProgrammedRuntime))
 
   df <- dplyr::mutate(df,

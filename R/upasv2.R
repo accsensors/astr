@@ -85,10 +85,12 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
 
     data <- dplyr::mutate(data,
              SampleName  = gsub("_+$", "", .data$SampleName),
-             SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
+             SampleName  = ifelse(.data$SampleName != "", .data$SampleName,
+                                  as.character(NA)),
              CartridgeID = gsub("_+$", "", .data$CartridgeID),
              CartridgeID = gsub("-+$", "", .data$CartridgeID),
-             CartridgeID = ifelse(.data$CartridgeID != "",.data$CartridgeID,NA))
+             CartridgeID = ifelse(.data$CartridgeID != "", .data$CartridgeID,
+                                  as.character(NA)))
 
     if(!is.na(data$LocalTZ)){
       data <- dplyr::mutate(data,

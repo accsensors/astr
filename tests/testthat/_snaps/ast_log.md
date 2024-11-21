@@ -840,16 +840,16 @@
       read_ast_log(upasv2_rev125_file, update_names = FALSE)
     Output
          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-             <char>     <char>     <char>      <lgcl> <difftime>      <num>
-      1:  UPAS_v2_0     PS0166       test          NA    10 secs 1632937050
-      2:  UPAS_v2_0     PS0166       test          NA    40 secs 1632937080
-      3:  UPAS_v2_0     PS0166       test          NA    70 secs 1632937110
-      4:  UPAS_v2_0     PS0166       test          NA   100 secs 1632937140
-      5:  UPAS_v2_0     PS0166       test          NA   130 secs 1632937170
-      6:  UPAS_v2_0     PS0166       test          NA   160 secs 1632937200
-      7:  UPAS_v2_0     PS0166       test          NA   190 secs 1632937230
-      8:  UPAS_v2_0     PS0166       test          NA   220 secs 1632937260
-      9:  UPAS_v2_0     PS0166       test          NA   250 secs 1632937290
+             <char>     <char>     <char>      <char> <difftime>      <num>
+      1:  UPAS_v2_0     PS0166       test        <NA>    10 secs 1632937050
+      2:  UPAS_v2_0     PS0166       test        <NA>    40 secs 1632937080
+      3:  UPAS_v2_0     PS0166       test        <NA>    70 secs 1632937110
+      4:  UPAS_v2_0     PS0166       test        <NA>   100 secs 1632937140
+      5:  UPAS_v2_0     PS0166       test        <NA>   130 secs 1632937170
+      6:  UPAS_v2_0     PS0166       test        <NA>   160 secs 1632937200
+      7:  UPAS_v2_0     PS0166       test        <NA>   190 secs 1632937230
+      8:  UPAS_v2_0     PS0166       test        <NA>   220 secs 1632937260
+      9:  UPAS_v2_0     PS0166       test        <NA>   250 secs 1632937290
                  DateTimeUTC   LocalTZ       DateTimeLocal VolumetricFlowRate
                       <POSc>    <char>              <POSc>              <num>
       1: 2021-09-29 17:37:30 Etc/GMT+6 2021-09-29 11:37:30              1.041
@@ -923,88 +923,88 @@
       read_ast_log(upasv2_rev130_diag_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>     <char>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793599
-       2:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793600
-       3:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793601
-       4:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793602
-       5:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793603
-       6:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     0 secs 1677793609
-       7:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     1 secs 1677793610
-       8:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     2 secs 1677793611
-       9:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     3 secs 1677793612
-      10:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     4 secs 1677793613
-      11:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     5 secs 1677793614
-      12:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     6 secs 1677793615
-      13:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     7 secs 1677793616
-      14:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA     8 secs 1677793617
-      15:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793621
-      16:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793622
-      17:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793623
-      18:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793624
-      19:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793625
-      20:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793626
-      21:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    18 secs 1677793627
-      22:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    19 secs 1677793628
-      23:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    20 secs 1677793629
-      24:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793633
-      25:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793634
-      26:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793635
-      27:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793636
-      28:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793637
-      29:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793638
-      30:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793639
-      31:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793640
-      32:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793641
-      33:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793642
-      34:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793643
-      35:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793644
-      36:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    36 secs 1677793645
-      37:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    37 secs 1677793646
-      38:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    38 secs 1677793647
-      39:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    39 secs 1677793648
-      40:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    40 secs 1677793649
-      41:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    41 secs 1677793650
-      42:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    42 secs 1677793651
-      43:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    43 secs 1677793652
-      44:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    44 secs 1677793653
-      45:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    45 secs 1677793654
-      46:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    45 secs 1677793654
-      47:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793658
-      48:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793660
-      49:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793661
-      50:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793662
-      51:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793663
-      52:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793663
-      53:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793665
-      54:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793665
-      55:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793666
-      56:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793667
-      57:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793668
-      58:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793669
-      59:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793670
-      60:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793671
-      61:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793672
-      62:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793673
-      63:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793674
-      64:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793675
-      65:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793676
-      66:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    NA secs 1677793677
-      67:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    69 secs 1677793678
-      68:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    70 secs 1677793679
-      69:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    71 secs 1677793680
-      70:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    72 secs 1677793681
-      71:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    73 secs 1677793682
-      72:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    74 secs 1677793683
-      73:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    75 secs 1677793684
-      74:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    75 secs 1677793684
-      75:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    77 secs 1677793686
-      76:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    77 secs 1677793686
-      77:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    78 secs 1677793687
-      78:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    79 secs 1677793688
-      79:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    80 secs 1677793689
-      80:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    81 secs 1677793690
-      81:  UPAS_v2_0     PS1786 DIAGNOSTIC          NA    82 secs 1677793691
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793599
+       2:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793600
+       3:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793601
+       4:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793602
+       5:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793603
+       6:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     0 secs 1677793609
+       7:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     1 secs 1677793610
+       8:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     2 secs 1677793611
+       9:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     3 secs 1677793612
+      10:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     4 secs 1677793613
+      11:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     5 secs 1677793614
+      12:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     6 secs 1677793615
+      13:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     7 secs 1677793616
+      14:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>     8 secs 1677793617
+      15:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793621
+      16:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793622
+      17:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793623
+      18:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793624
+      19:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793625
+      20:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793626
+      21:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    18 secs 1677793627
+      22:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    19 secs 1677793628
+      23:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    20 secs 1677793629
+      24:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793633
+      25:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793634
+      26:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793635
+      27:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793636
+      28:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793637
+      29:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793638
+      30:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793639
+      31:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793640
+      32:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793641
+      33:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793642
+      34:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793643
+      35:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793644
+      36:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    36 secs 1677793645
+      37:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    37 secs 1677793646
+      38:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    38 secs 1677793647
+      39:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    39 secs 1677793648
+      40:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    40 secs 1677793649
+      41:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    41 secs 1677793650
+      42:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    42 secs 1677793651
+      43:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    43 secs 1677793652
+      44:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    44 secs 1677793653
+      45:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    45 secs 1677793654
+      46:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    45 secs 1677793654
+      47:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793658
+      48:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793660
+      49:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793661
+      50:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793662
+      51:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793663
+      52:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793663
+      53:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793665
+      54:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793665
+      55:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793666
+      56:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793667
+      57:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793668
+      58:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793669
+      59:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793670
+      60:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793671
+      61:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793672
+      62:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793673
+      63:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793674
+      64:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793675
+      65:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793676
+      66:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    NA secs 1677793677
+      67:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    69 secs 1677793678
+      68:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    70 secs 1677793679
+      69:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    71 secs 1677793680
+      70:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    72 secs 1677793681
+      71:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    73 secs 1677793682
+      72:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    74 secs 1677793683
+      73:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    75 secs 1677793684
+      74:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    75 secs 1677793684
+      75:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    77 secs 1677793686
+      76:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    77 secs 1677793686
+      77:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    78 secs 1677793687
+      78:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    79 secs 1677793688
+      79:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    80 secs 1677793689
+      80:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    81 secs 1677793690
+      81:  UPAS_v2_0     PS1786 DIAGNOSTIC        <NA>    82 secs 1677793691
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
                   DateTimeUTC   LocalTZ       DateTimeLocal VolumetricFlowRate
                        <POSc>    <char>              <POSc>              <num>
@@ -1740,7 +1740,7 @@
       11:           1.001           0.200         1.101   173.55            99 26.84
       12:           1.000           0.200         1.201   173.35            99 26.87
             AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat
-            <num>  <num>       <num>   <num>   <num> <lgcl> <lgcl> <lgcl>  <num>
+            <num>  <num>       <num>   <num>   <num>  <num>  <num>  <num>  <num>
        1: 1006.69  43.29      1.1637    54.7      NA     NA     NA     NA     NA
        2: 1006.65  42.40      1.1633    55.1      NA     NA     NA     NA     NA
        3: 1006.65  41.92      1.1632    55.1      NA     NA     NA     NA     NA
@@ -1754,7 +1754,7 @@
       11: 1006.55  40.94      1.1625    55.9      NA     NA     NA     NA     NA
       12: 1006.56  40.95      1.1624    55.9      NA     NA     NA     NA     NA
           GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
-            <lgcl>  <lgcl>  <num>     <num>     <num>     <num>  <num>     <num>
+             <num>   <num>  <num>     <num>     <num>     <num>  <num>     <num>
        1:       NA      NA  775.9   75613.8       222      1290   42.5    7766.7
        2:       NA      NA  934.8       0.1       934       935  -19.9       0.1
        3:       NA      NA  934.6       0.2       934       935  -20.0       0.0
@@ -1970,20 +1970,20 @@
       read_ast_log(upasv2x_rev117_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>     <char>     <lgcl>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x   PSP00030         NA          NA    35 secs 1652311500
-       2:  UPAS_v2_x   PSP00030         NA          NA    65 secs 1652311530
-       3:  UPAS_v2_x   PSP00030         NA          NA    95 secs 1652311560
-       4:  UPAS_v2_x   PSP00030         NA          NA   125 secs 1652311590
-       5:  UPAS_v2_x   PSP00030         NA          NA   155 secs 1652311620
-       6:  UPAS_v2_x   PSP00030         NA          NA   185 secs 1652311650
-       7:  UPAS_v2_x   PSP00030         NA          NA   215 secs 1652311680
-       8:  UPAS_v2_x   PSP00030         NA          NA   245 secs 1652311710
-       9:  UPAS_v2_x   PSP00030         NA          NA   275 secs 1652311740
-      10:  UPAS_v2_x   PSP00030         NA          NA   305 secs 1652311770
-      11:  UPAS_v2_x   PSP00030         NA          NA   335 secs 1652311800
-      12:  UPAS_v2_x   PSP00030         NA          NA   365 secs 1652311830
-      13:  UPAS_v2_x   PSP00030         NA          NA   395 secs 1652311860
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00030       <NA>        <NA>    35 secs 1652311500
+       2:  UPAS_v2_x   PSP00030       <NA>        <NA>    65 secs 1652311530
+       3:  UPAS_v2_x   PSP00030       <NA>        <NA>    95 secs 1652311560
+       4:  UPAS_v2_x   PSP00030       <NA>        <NA>   125 secs 1652311590
+       5:  UPAS_v2_x   PSP00030       <NA>        <NA>   155 secs 1652311620
+       6:  UPAS_v2_x   PSP00030       <NA>        <NA>   185 secs 1652311650
+       7:  UPAS_v2_x   PSP00030       <NA>        <NA>   215 secs 1652311680
+       8:  UPAS_v2_x   PSP00030       <NA>        <NA>   245 secs 1652311710
+       9:  UPAS_v2_x   PSP00030       <NA>        <NA>   275 secs 1652311740
+      10:  UPAS_v2_x   PSP00030       <NA>        <NA>   305 secs 1652311770
+      11:  UPAS_v2_x   PSP00030       <NA>        <NA>   335 secs 1652311800
+      12:  UPAS_v2_x   PSP00030       <NA>        <NA>   365 secs 1652311830
+      13:  UPAS_v2_x   PSP00030       <NA>        <NA>   395 secs 1652311860
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
        1:  1652311499 2022-05-11 23:25:00 2022-05-11 16:25:00 Etc/GMT+7
@@ -2015,35 +2015,35 @@
       12:           1.000           0.200         1.202   176.20            99 26.21
       13:           1.002           0.200         1.303   176.40            99 26.24
             AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat
-            <num>  <num>       <num>   <num>   <num> <lgcl> <lgcl> <lgcl>  <num>
-       1: 1015.51  44.49      1.1785   -18.8       0     NA     NA     NA      0
-       2: 1015.52  43.93      1.1782   -18.9       0     NA     NA     NA      0
-       3: 1015.49  43.54      1.1777   -18.7       0     NA     NA     NA      0
-       4: 1015.49  43.20      1.1774   -18.6       0     NA     NA     NA      0
-       5: 1015.49  42.97      1.1772   -18.6       0     NA     NA     NA      0
-       6: 1015.48  42.75      1.1769   -18.6       0     NA     NA     NA      0
-       7: 1015.49  42.51      1.1767   -18.6       0     NA     NA     NA      0
-       8: 1015.49  42.51      1.1763   -18.6       0     NA     NA     NA      0
-       9: 1015.48  42.45      1.1760   -18.6       0     NA     NA     NA      0
-      10: 1015.49  42.18      1.1758   -18.6       0     NA     NA     NA      0
-      11: 1015.49  41.97      1.1757   -18.6       0     NA     NA     NA      0
-      12: 1015.50  41.81      1.1755   -18.7       0     NA     NA     NA      0
-      13: 1015.50  41.67      1.1754   -18.7       0     NA     NA     NA      0
+            <num>  <num>       <num>   <num>   <num>  <num>  <num>  <num>  <num>
+       1: 1015.51  44.49      1.1785   -18.8       0  -9999  -9999  -9999      0
+       2: 1015.52  43.93      1.1782   -18.9       0  -9999  -9999  -9999      0
+       3: 1015.49  43.54      1.1777   -18.7       0  -9999  -9999  -9999      0
+       4: 1015.49  43.20      1.1774   -18.6       0  -9999  -9999  -9999      0
+       5: 1015.49  42.97      1.1772   -18.6       0  -9999  -9999  -9999      0
+       6: 1015.48  42.75      1.1769   -18.6       0  -9999  -9999  -9999      0
+       7: 1015.49  42.51      1.1767   -18.6       0  -9999  -9999  -9999      0
+       8: 1015.49  42.51      1.1763   -18.6       0  -9999  -9999  -9999      0
+       9: 1015.48  42.45      1.1760   -18.6       0  -9999  -9999  -9999      0
+      10: 1015.49  42.18      1.1758   -18.6       0  -9999  -9999  -9999      0
+      11: 1015.49  41.97      1.1757   -18.6       0  -9999  -9999  -9999      0
+      12: 1015.50  41.81      1.1755   -18.7       0  -9999  -9999  -9999      0
+      13: 1015.50  41.67      1.1754   -18.7       0  -9999  -9999  -9999      0
           GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
-            <lgcl>  <lgcl>  <num>     <num>     <num>     <num>  <num>     <num>
-       1:       NA      NA   47.9       0.2        47        49  111.5       0.2
-       2:       NA      NA   47.7       0.4        47        49  111.8       0.4
-       3:       NA      NA   48.6       8.8        43        57  112.6       3.9
-       4:       NA      NA   50.2       1.4        49        53  113.1       1.4
-       5:       NA      NA   49.8       0.9        47        52  112.9       1.2
-       6:       NA      NA   50.5       7.2        45        57  113.0       1.2
-       7:       NA      NA   53.8       1.6        51        56  113.3       1.1
-       8:       NA      NA   53.5       2.6        49        58  113.3       0.8
-       9:       NA      NA   53.7       1.3        52        56  113.4       1.0
-      10:       NA      NA   47.3       1.1        45        51  112.5       0.7
-      11:       NA      NA   47.0       0.1        46        48  112.4       0.2
-      12:       NA      NA   46.9       1.7        43        49  112.7       1.9
-      13:       NA      NA   49.9       1.2        47        52  112.8       1.7
+             <num>   <num>  <num>     <num>     <num>     <num>  <num>     <num>
+       1:    -9999   -9999   47.9       0.2        47        49  111.5       0.2
+       2:    -9999   -9999   47.7       0.4        47        49  111.8       0.4
+       3:    -9999   -9999   48.6       8.8        43        57  112.6       3.9
+       4:    -9999   -9999   50.2       1.4        49        53  113.1       1.4
+       5:    -9999   -9999   49.8       0.9        47        52  112.9       1.2
+       6:    -9999   -9999   50.5       7.2        45        57  113.0       1.2
+       7:    -9999   -9999   53.8       1.6        51        56  113.3       1.1
+       8:    -9999   -9999   53.5       2.6        49        58  113.3       0.8
+       9:    -9999   -9999   53.7       1.3        52        56  113.4       1.0
+      10:    -9999   -9999   47.3       1.1        45        51  112.5       0.7
+      11:    -9999   -9999   47.0       0.1        46        48  112.4       0.2
+      12:    -9999   -9999   46.9       1.7        43        49  112.7       1.9
+      13:    -9999   -9999   49.9       1.2        47        52  112.8       1.7
           AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax  RotX RotXVar
               <num>     <num>  <num>     <num>     <num>     <num> <num>   <num>
        1:       111       112 -983.5       0.9      -985      -981 437.5   430.3
@@ -2246,12 +2246,12 @@
       read_ast_log(upasv2x_rev110_diag_file, update_names = FALSE)
     Output
          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-             <char>     <char>     <char>      <lgcl> <difftime>      <num>
-      1:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    62 secs 1648145191
-      2:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    63 secs 1648145192
-      3:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    64 secs 1648145193
-      4:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    65 secs 1648145194
-      5:  UPAS_v2_x   PSP00055 DIAGNOSTIC          NA    66 secs 1648145195
+             <char>     <char>     <char>      <char> <difftime>      <num>
+      1:  UPAS_v2_x   PSP00055 DIAGNOSTIC        <NA>    62 secs 1648145191
+      2:  UPAS_v2_x   PSP00055 DIAGNOSTIC        <NA>    63 secs 1648145192
+      3:  UPAS_v2_x   PSP00055 DIAGNOSTIC        <NA>    64 secs 1648145193
+      4:  UPAS_v2_x   PSP00055 DIAGNOSTIC        <NA>    65 secs 1648145194
+      5:  UPAS_v2_x   PSP00055 DIAGNOSTIC        <NA>    66 secs 1648145195
          UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                <num>              <POSc>              <POSc>    <char>
       1:  1648145191 2022-03-24 18:06:31 2022-03-24 12:06:31 Etc/GMT+6
@@ -2267,19 +2267,19 @@
       4:               0             NaN             0    67.95            31 27.98
       5:               0             NaN             0    67.95            31 27.98
           AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat
-          <num>  <num>       <num>   <num>   <num> <lgcl> <lgcl> <lgcl>  <num>
-      1: 846.46  15.23      0.9766  1491.6       0     NA     NA     NA      0
-      2: 846.46  15.23      0.9766  1491.6       0     NA     NA     NA      0
-      3: 846.46  15.23      0.9767  1491.6       0     NA     NA     NA      0
-      4: 846.46  15.25      0.9767  1491.6       0     NA     NA     NA      0
-      5: 846.46  15.25      0.9767  1491.6       0     NA     NA     NA      0
+          <num>  <num>       <num>   <num>   <num>  <num>  <num>  <num>  <num>
+      1: 846.46  15.23      0.9766  1491.6       0  -9999  -9999  -9999      0
+      2: 846.46  15.23      0.9766  1491.6       0  -9999  -9999  -9999      0
+      3: 846.46  15.23      0.9767  1491.6       0  -9999  -9999  -9999      0
+      4: 846.46  15.25      0.9767  1491.6       0  -9999  -9999  -9999      0
+      5: 846.46  15.25      0.9767  1491.6       0  -9999  -9999  -9999      0
          GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
-           <lgcl>  <lgcl>  <num>     <num>     <num>     <num>  <num>     <num>
-      1:       NA      NA      0         0         0         0    -28         0
-      2:       NA      NA     -1         0        -1        -1    -30         0
-      3:       NA      NA     -1         0        -1        -1    -23         0
-      4:       NA      NA     -1         0        -1        -1    -29         0
-      5:       NA      NA      0         0         0         0    -28         0
+            <num>   <num>  <num>     <num>     <num>     <num>  <num>     <num>
+      1:    -9999   -9999      0         0         0         0    -28         0
+      2:    -9999   -9999     -1         0        -1        -1    -30         0
+      3:    -9999   -9999     -1         0        -1        -1    -23         0
+      4:    -9999   -9999     -1         0        -1        -1    -29         0
+      5:    -9999   -9999      0         0         0         0    -28         0
          AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax  RotX RotXVar
              <num>     <num>  <num>     <num>     <num>     <num> <num>   <num>
       1:       -28       -28   -973         0      -973      -973   131       0
@@ -2371,92 +2371,92 @@
       read_ast_log(upasv2x_rev157_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>     <char>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x   PSP00270 GPS-in-out          NA    49 secs 1719351540
-       2:  UPAS_v2_x   PSP00270 GPS-in-out          NA    79 secs 1719351570
-       3:  UPAS_v2_x   PSP00270 GPS-in-out          NA   109 secs 1719351600
-       4:  UPAS_v2_x   PSP00270 GPS-in-out          NA   139 secs 1719351630
-       5:  UPAS_v2_x   PSP00270 GPS-in-out          NA   169 secs 1719351660
-       6:  UPAS_v2_x   PSP00270 GPS-in-out          NA   199 secs 1719351690
-       7:  UPAS_v2_x   PSP00270 GPS-in-out          NA   229 secs 1719351720
-       8:  UPAS_v2_x   PSP00270 GPS-in-out          NA   259 secs 1719351750
-       9:  UPAS_v2_x   PSP00270 GPS-in-out          NA   289 secs 1719351780
-      10:  UPAS_v2_x   PSP00270 GPS-in-out          NA   319 secs 1719351810
-      11:  UPAS_v2_x   PSP00270 GPS-in-out          NA   349 secs 1719351840
-      12:  UPAS_v2_x   PSP00270 GPS-in-out          NA   379 secs 1719351870
-      13:  UPAS_v2_x   PSP00270 GPS-in-out          NA   409 secs 1719351900
-      14:  UPAS_v2_x   PSP00270 GPS-in-out          NA   439 secs 1719351930
-      15:  UPAS_v2_x   PSP00270 GPS-in-out          NA   469 secs 1719351960
-      16:  UPAS_v2_x   PSP00270 GPS-in-out          NA   499 secs 1719351990
-      17:  UPAS_v2_x   PSP00270 GPS-in-out          NA   529 secs 1719352020
-      18:  UPAS_v2_x   PSP00270 GPS-in-out          NA   559 secs 1719352050
-      19:  UPAS_v2_x   PSP00270 GPS-in-out          NA   589 secs 1719352080
-      20:  UPAS_v2_x   PSP00270 GPS-in-out          NA   619 secs 1719352110
-      21:  UPAS_v2_x   PSP00270 GPS-in-out          NA   649 secs 1719352140
-      22:  UPAS_v2_x   PSP00270 GPS-in-out          NA   679 secs 1719352170
-      23:  UPAS_v2_x   PSP00270 GPS-in-out          NA   709 secs 1719352200
-      24:  UPAS_v2_x   PSP00270 GPS-in-out          NA   739 secs 1719352230
-      25:  UPAS_v2_x   PSP00270 GPS-in-out          NA   769 secs 1719352260
-      26:  UPAS_v2_x   PSP00270 GPS-in-out          NA   799 secs 1719352290
-      27:  UPAS_v2_x   PSP00270 GPS-in-out          NA   829 secs 1719352320
-      28:  UPAS_v2_x   PSP00270 GPS-in-out          NA   859 secs 1719352350
-      29:  UPAS_v2_x   PSP00270 GPS-in-out          NA   889 secs 1719352380
-      30:  UPAS_v2_x   PSP00270 GPS-in-out          NA   919 secs 1719352410
-      31:  UPAS_v2_x   PSP00270 GPS-in-out          NA   949 secs 1719352440
-      32:  UPAS_v2_x   PSP00270 GPS-in-out          NA   979 secs 1719352470
-      33:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1009 secs 1719352500
-      34:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1039 secs 1719352530
-      35:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1069 secs 1719352560
-      36:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1099 secs 1719352590
-      37:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1129 secs 1719352620
-      38:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1159 secs 1719352650
-      39:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1189 secs 1719352680
-      40:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1219 secs 1719352710
-      41:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1249 secs 1719352740
-      42:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1279 secs 1719352770
-      43:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1309 secs 1719352800
-      44:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1339 secs 1719352830
-      45:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1369 secs 1719352860
-      46:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1399 secs 1719352890
-      47:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1429 secs 1719352920
-      48:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1459 secs 1719352950
-      49:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1489 secs 1719352980
-      50:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1519 secs 1719353010
-      51:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1549 secs 1719353040
-      52:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1579 secs 1719353070
-      53:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1609 secs 1719353100
-      54:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1639 secs 1719353130
-      55:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1669 secs 1719353160
-      56:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1699 secs 1719353190
-      57:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1729 secs 1719353220
-      58:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1759 secs 1719353250
-      59:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1789 secs 1719353280
-      60:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1819 secs 1719353310
-      61:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1849 secs 1719353340
-      62:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1879 secs 1719353370
-      63:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1909 secs 1719353400
-      64:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1939 secs 1719353430
-      65:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1969 secs 1719353460
-      66:  UPAS_v2_x   PSP00270 GPS-in-out          NA  1999 secs 1719353490
-      67:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2029 secs 1719353520
-      68:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2059 secs 1719353550
-      69:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2089 secs 1719353580
-      70:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2119 secs 1719353610
-      71:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2149 secs 1719353640
-      72:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2179 secs 1719353670
-      73:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2209 secs 1719353700
-      74:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2239 secs 1719353730
-      75:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2269 secs 1719353760
-      76:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2299 secs 1719353790
-      77:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2329 secs 1719353820
-      78:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2359 secs 1719353850
-      79:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2389 secs 1719353880
-      80:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2419 secs 1719353910
-      81:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2449 secs 1719353940
-      82:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2479 secs 1719353970
-      83:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2509 secs 1719354000
-      84:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2539 secs 1719354030
-      85:  UPAS_v2_x   PSP00270 GPS-in-out          NA  2569 secs 1719354060
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>    49 secs 1719351540
+       2:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>    79 secs 1719351570
+       3:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   109 secs 1719351600
+       4:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   139 secs 1719351630
+       5:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   169 secs 1719351660
+       6:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   199 secs 1719351690
+       7:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   229 secs 1719351720
+       8:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   259 secs 1719351750
+       9:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   289 secs 1719351780
+      10:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   319 secs 1719351810
+      11:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   349 secs 1719351840
+      12:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   379 secs 1719351870
+      13:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   409 secs 1719351900
+      14:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   439 secs 1719351930
+      15:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   469 secs 1719351960
+      16:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   499 secs 1719351990
+      17:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   529 secs 1719352020
+      18:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   559 secs 1719352050
+      19:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   589 secs 1719352080
+      20:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   619 secs 1719352110
+      21:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   649 secs 1719352140
+      22:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   679 secs 1719352170
+      23:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   709 secs 1719352200
+      24:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   739 secs 1719352230
+      25:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   769 secs 1719352260
+      26:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   799 secs 1719352290
+      27:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   829 secs 1719352320
+      28:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   859 secs 1719352350
+      29:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   889 secs 1719352380
+      30:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   919 secs 1719352410
+      31:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   949 secs 1719352440
+      32:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>   979 secs 1719352470
+      33:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1009 secs 1719352500
+      34:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1039 secs 1719352530
+      35:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1069 secs 1719352560
+      36:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1099 secs 1719352590
+      37:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1129 secs 1719352620
+      38:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1159 secs 1719352650
+      39:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1189 secs 1719352680
+      40:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1219 secs 1719352710
+      41:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1249 secs 1719352740
+      42:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1279 secs 1719352770
+      43:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1309 secs 1719352800
+      44:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1339 secs 1719352830
+      45:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1369 secs 1719352860
+      46:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1399 secs 1719352890
+      47:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1429 secs 1719352920
+      48:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1459 secs 1719352950
+      49:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1489 secs 1719352980
+      50:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1519 secs 1719353010
+      51:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1549 secs 1719353040
+      52:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1579 secs 1719353070
+      53:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1609 secs 1719353100
+      54:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1639 secs 1719353130
+      55:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1669 secs 1719353160
+      56:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1699 secs 1719353190
+      57:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1729 secs 1719353220
+      58:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1759 secs 1719353250
+      59:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1789 secs 1719353280
+      60:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1819 secs 1719353310
+      61:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1849 secs 1719353340
+      62:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1879 secs 1719353370
+      63:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1909 secs 1719353400
+      64:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1939 secs 1719353430
+      65:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1969 secs 1719353460
+      66:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  1999 secs 1719353490
+      67:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2029 secs 1719353520
+      68:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2059 secs 1719353550
+      69:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2089 secs 1719353580
+      70:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2119 secs 1719353610
+      71:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2149 secs 1719353640
+      72:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2179 secs 1719353670
+      73:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2209 secs 1719353700
+      74:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2239 secs 1719353730
+      75:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2269 secs 1719353760
+      76:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2299 secs 1719353790
+      77:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2329 secs 1719353820
+      78:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2359 secs 1719353850
+      79:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2389 secs 1719353880
+      80:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2419 secs 1719353910
+      81:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2449 secs 1719353940
+      82:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2479 secs 1719353970
+      83:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2509 secs 1719354000
+      84:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2539 secs 1719354030
+      85:  UPAS_v2_x   PSP00270 GPS-in-out        <NA>  2569 secs 1719354060
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
@@ -2634,270 +2634,270 @@
       84:           0.997           0.997        42.070    61.45            96 38.61
       85:           0.998           0.998        42.568    61.50            96 38.48
           PumpingFlowRate OverallFlowRate SampledVolume FilterDP BatteryCharge AtmoT
-           AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual   GPSlat    GPSlon GPSalt GPSsat
-           <num>  <num>       <num>   <num>   <num>    <num>     <num>  <num>  <num>
-       1: 802.05  32.27      0.9160  1928.7       0       NA        NA     NA      0
-       2: 802.08  24.90      0.9163  1928.4       0       NA        NA     NA      0
-       3: 802.07  23.79      0.9154  1928.4       0       NA        NA     NA      0
-       4: 802.07  23.36      0.9143  1928.5       1 37.29895 -107.8704 2011.6      5
-       5: 802.06  23.28      0.9132  1928.6       1 37.29890 -107.8704 2007.5      6
-       6: 802.05  22.91      0.9121  1928.7       1 37.29891 -107.8704 2009.5      6
-       7: 802.05  21.91      0.9112  1928.7       1 37.29891 -107.8704 2010.2      7
-       8: 802.04  21.65      0.9103  1928.8       1 37.29892 -107.8704 2011.8      7
-       9: 802.03  21.01      0.9096  1928.8       1 37.29892 -107.8704 2011.8      7
-      10: 802.03  21.31      0.9085  1928.9       1 37.29893 -107.8704 2011.2      7
-      11: 802.03  20.39      0.9078  1928.9       1 37.29894 -107.8704 2004.0      7
-      12: 802.02  19.53      0.9071  1929.0       1 37.29893 -107.8704 2000.0      7
-      13: 802.02  18.45      0.9065  1929.0       1 37.29892 -107.8704 1997.0      7
-      14: 802.02  18.09      0.9058  1929.0       1 37.29891 -107.8704 2001.8      7
-      15: 802.02  18.88      0.9050  1929.0       1 37.29892 -107.8704 1999.6      7
-      16: 802.03  19.38      0.9041  1928.9       1 37.29894 -107.8704 1997.0      7
-      17: 802.03  19.18      0.9035  1928.8       1 37.29894 -107.8704 1995.4      7
-      18: 802.04  18.45      0.9031  1928.8       1 37.29897 -107.8704 1988.8      7
-      19: 802.04  18.58      0.9025  1928.8       1 37.29897 -107.8704 1988.8      7
-      20: 802.03  17.94      0.9022  1928.9       1 37.29894 -107.8704 1996.0      7
-      21: 802.03  18.05      0.9015  1928.9       1 37.29894 -107.8704 1996.0      7
-      22: 802.02  17.71      0.9011  1929.0       1 37.29892 -107.8704 2007.6      8
-      23: 802.02  17.14      0.9010  1929.0       1 37.29890 -107.8704 2014.3      8
-      24: 802.01  17.63      0.9004  1929.0       1 37.29891 -107.8704 2007.4      8
-      25: 802.01  17.22      0.9004  1929.1       1 37.29891 -107.8704 2003.0      8
-      26: 802.00  17.62      0.8999  1929.2       1 37.29892 -107.8704 2002.1      8
-      27: 802.00  17.41      0.8996  1929.2       1 37.29893 -107.8704 2000.8      8
-      28: 801.99  16.63      0.8988  1929.2       1 37.29892 -107.8704 2000.0      8
-      29: 801.99  15.36      0.8978  1929.3       1 37.29891 -107.8704 2002.2      8
-      30: 801.99  15.59      0.8964  1929.3       1 37.29890 -107.8704 2003.9      8
-      31: 801.98  15.04      0.8949  1929.4       1 37.29892 -107.8704 2004.0      8
-      32: 801.98  14.72      0.8932  1929.4       1 37.29893 -107.8704 2003.4      8
-      33: 801.98  14.15      0.8922  1929.4       1 37.29893 -107.8704 2003.4      8
-      34: 801.98  13.45      0.8914  1929.4       1 37.29892 -107.8704 2007.3      8
-      35: 801.97  13.46      0.8908  1929.5       1 37.29891 -107.8704 2007.1      8
-      36: 801.97  12.83      0.8905  1929.5       1 37.29891 -107.8704 2009.5      8
-      37: 801.96  12.51      0.8898  1929.5       1 37.29891 -107.8704 2009.5      8
-      38: 801.96  12.55      0.8887  1929.6       1 37.29891 -107.8704 2007.7      8
-      39: 801.95  12.49      0.8877  1929.7       1 37.29891 -107.8704 2006.2      8
-      40: 801.94  11.54      0.8874  1929.8       1 37.29891 -107.8704 2007.6      9
-      41: 801.93  11.78      0.8868  1929.9       1 37.29891 -107.8704 2005.9      9
-      42: 801.92  11.19      0.8868  1930.0       1 37.29890 -107.8704 2007.7      9
-      43: 801.91  11.62      0.8868  1930.1       1 37.29891 -107.8704 2006.5      9
-      44: 801.91  12.06      0.8866  1930.1       1 37.29892 -107.8704 2008.2      9
-      45: 801.90  12.17      0.8868  1930.2       1 37.29892 -107.8704 2008.2      9
-      46: 801.89  11.95      0.8869  1930.3       1 37.29892 -107.8704 2008.5      9
-      47: 801.88  11.71      0.8872  1930.4       1 37.29892 -107.8704 2009.2      9
-      48: 801.87  12.06      0.8873  1930.5       1 37.29892 -107.8704 2008.3      9
-      49: 801.86  12.18      0.8874  1930.6       1 37.29892 -107.8704 2007.3      9
-      50: 801.86  12.25      0.8878  1930.6       1 37.29892 -107.8704 2005.6      9
-      51: 801.85  12.69      0.8878  1930.7       1 37.29892 -107.8704 2006.4      9
-      52: 801.85  12.96      0.8881  1930.7       1 37.29892 -107.8704 2007.9      9
-      53: 801.84  12.55      0.8886  1930.8       1 37.29890 -107.8704 2006.9      9
-      54: 801.83  12.28      0.8889  1930.9       1 37.29890 -107.8704 2005.3      9
-      55: 801.82  12.74      0.8889  1931.0       1 37.29891 -107.8704 2004.2      9
-      56: 801.82  12.88      0.8890  1931.0       1 37.29891 -107.8704 1999.8      9
-      57: 801.82  12.31      0.8891  1931.0       1 37.29893 -107.8704 2005.4      9
-      58: 801.82  12.95      0.8890  1931.0       1 37.29892 -107.8704 2005.9      9
-      59: 801.82  13.21      0.8890  1930.9       1 37.29894 -107.8704 2006.4      9
-      60: 801.83  12.30      0.8892  1930.9       1 37.29893 -107.8704 2008.4      9
-      61: 801.83  11.56      0.8888  1930.9       1 37.29894 -107.8704 2009.2      9
-      62: 801.82  11.47      0.8881  1931.0       1 37.29891 -107.8704 2008.6      9
-      63: 801.82  11.09      0.8875  1931.0       1 37.29891 -107.8704 2009.2      9
-      64: 801.83  11.34      0.8869  1930.9       1 37.29892 -107.8704 2005.5      9
-      65: 801.83  10.79      0.8867  1930.9       1 37.29892 -107.8704 2004.9      9
-      66: 801.81  17.12      0.8844  1931.1       1 37.29892 -107.8704 2004.9      9
-      67: 801.77  13.30      0.8854  1931.5       1 37.29901 -107.8705 2013.0      9
-      68: 801.75  13.37      0.8858  1931.7       1 37.29905 -107.8703 2017.9      9
-      69: 801.75  13.57      0.8859  1931.7       1 37.29902 -107.8702 2006.9      8
-      70: 801.74  13.77      0.8862  1931.8       1 37.29895 -107.8703 2003.2      9
-      71: 801.74  13.92      0.8864  1931.8       1 37.29906 -107.8703 2006.0      7
-      72: 801.74  14.49      0.8867  1931.8       1 37.29927 -107.8701 2019.6      9
-      73: 801.72  14.37      0.8870  1932.0       1 37.29913 -107.8702 2036.7      9
-      74: 801.70  14.60      0.8873  1932.2       1 37.29926 -107.8701 2035.8      9
-      75: 801.69  14.91      0.8877  1932.4       1 37.29925 -107.8701 2055.2      9
-      76: 801.69  15.15      0.8879  1932.3       1 37.29894 -107.8701 2055.5      8
-      77: 801.68  15.41      0.8883  1932.4       1 37.29917 -107.8701 2028.4      8
-      78: 801.68  15.57      0.8888  1932.4       1 37.29918 -107.8703 2020.0      9
-      79: 801.68  15.77      0.8891  1932.4       1 37.29932 -107.8704 2008.9      8
-      80: 801.68  15.96      0.8894  1932.5       1 37.29920 -107.8703 2017.5      9
-      81: 801.67  15.92      0.8898  1932.5       1 37.29906 -107.8703 2032.5      9
-      82: 801.67  16.09      0.8903  1932.5       1 37.29890 -107.8703 2025.6      9
-      83: 801.67  16.34      0.8904  1932.5       1 37.29892 -107.8704 2012.4      9
-      84: 801.67  16.54      0.8907  1932.5       1 37.29883 -107.8706 1985.6      7
-      85: 801.67  16.72      0.8910  1932.5       1 37.29900 -107.8704 1997.2      9
-           AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual   GPSlat    GPSlon GPSalt GPSsat
-          GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
-             <num>   <num>  <num>     <num>     <num>     <num>  <num>     <num>
-       1:       NA      NA  276.2  165134.3      -315      1004  129.5   40201.9
-       2:       NA      NA 1010.8     783.6      1003      1126   -5.0     665.4
-       3:       NA      NA 1003.7       0.2      1003      1004   -6.8       0.2
-       4: 0.023644     2.5 1003.8       0.1      1003      1004   -6.9       0.1
-       5: 0.043690     2.0 1003.7       0.1      1003      1004   -6.9       0.1
-       6: 0.024672     2.0 1003.6      -0.1      1003      1004   -7.0       0.0
-       7: 0.009252     1.3 1003.6      -0.1      1003      1004   -7.0       0.0
-       8: 0.043690     1.3 1003.8       0.1      1003      1004   -7.0       0.0
-       9: 0.013364     1.3 1003.8      -0.1      1003      1004   -7.0       0.0
-      10: 0.036494     1.3 1003.7       0.1      1003      1004   -7.1       0.1
-      11: 0.061680     1.3 1003.8       0.1      1003      1004   -7.0       0.0
-      12: 0.009766     1.3 1004.0       0.0      1003      1004   -7.1       0.1
-      13: 0.031354     1.3 1003.9      -0.1      1003      1004   -7.1       0.1
-      14: 0.058596     1.3 1004.0       0.0      1003      1005   -7.0       0.1
-      15: 0.017476     1.3 1004.0       0.0      1003      1004   -7.1       0.1
-      16: 0.021074     1.3 1004.0       0.0      1004      1004   -7.0       0.1
-      17: 0.121818     1.3 1004.0       0.0      1004      1005   -7.1       0.1
-      18: 0.051914     1.3 1004.0       0.0      1003      1005   -7.1       0.1
-      19: 0.051914     1.3 1004.0       0.0      1003      1005   -7.1       0.1
-      20: 0.129528     1.3 1003.9      -0.1      1003      1004   -7.2       0.2
-      21: 0.129528     1.3 1003.9       0.1      1003      1004   -7.2       0.2
-      22: 0.015934     1.1 1004.0       0.0      1003      1004   -7.2       0.2
-      23: 0.015934     1.1 1004.0       0.0      1004      1005   -7.2       0.2
-      24: 0.032382     1.1 1004.0       0.1      1003      1005   -7.2       0.1
-      25: 0.056540     1.1 1003.9       0.0      1003      1004   -7.3       0.2
-      26: 0.031868     1.1 1004.0       0.0      1003      1004   -7.3       0.2
-      27: 0.018504     1.1 1004.0       0.0      1004      1005   -7.3       0.2
-      28: 0.048830     1.1 1004.0       0.0      1003      1004   -7.4       0.2
-      29: 0.055512     1.1 1004.1       0.1      1004      1005   -7.6       0.2
-      30: 0.051914     1.1 1004.0       0.0      1004      1004   -7.4       0.2
-      31: 0.041120     1.1 1004.3       0.1      1003      1005   -7.3       0.2
-      32: 0.028270     1.1 1004.3       0.1      1004      1005   -7.7       0.2
-      33: 0.057568     1.1 1004.3       0.1      1004      1005   -7.9       0.1
-      34: 0.010280     1.1 1004.2       0.1      1004      1005   -7.9       0.1
-      35: 0.056540     1.1 1004.4       0.2      1004      1005   -8.0       0.1
-      36: 0.020046     1.1 1004.3       0.1      1004      1005   -8.0       0.0
-      37: 0.020046     1.1 1004.2      -0.1      1004      1005   -8.0       0.1
-      38: 0.005654     1.1 1004.4       0.2      1004      1005   -8.1       0.2
-      39: 0.038036     1.1 1004.6      -0.1      1004      1005   -8.0       0.0
-      40: 0.039578     1.0 1004.3       0.1      1004      1005   -8.1       0.1
-      41: 0.026728     1.0 1004.3       0.1      1004      1005   -8.2       0.2
-      42: 0.002056     1.0 1004.4       0.2      1004      1005   -8.3       0.2
-      43: 0.023644     1.0 1004.3       0.1      1004      1005   -8.2       0.1
-      44: 0.022616     1.0 1004.2       0.1      1004      1005   -8.1       0.2
-      45: 0.037522     1.0 1004.3       0.1      1004      1005   -8.3       0.2
-      46: 0.004112     1.0 1004.4       0.0      1004      1005   -8.2       0.1
-      47: 0.006682     1.0 1004.5       0.0      1004      1005   -8.1       0.1
-      48: 0.035466     1.0 1004.2       0.1      1004      1005   -8.2       0.2
-      49: 0.008738     1.0 1004.3       0.2      1004      1005   -8.2       0.2
-      50: 0.020560     1.0 1004.4       0.0      1004      1005   -8.1       0.1
-      51: 0.048830     1.0 1004.2       0.1      1004      1005   -8.2       0.2
-      52: 0.020560     1.0 1004.3       0.2      1004      1005   -8.1       0.1
-      53: 0.037522     1.0 1004.2       0.1      1004      1005   -8.1       0.1
-      54: 0.029298     1.0 1004.3       0.1      1004      1005   -8.1       0.1
-      55: 0.031354     1.0 1004.1       0.1      1004      1005   -8.3       0.2
-      56: 0.040092     1.0 1004.1       0.1      1004      1005   -8.2       0.2
-      57: 0.050372     1.0 1004.1       0.1      1004      1005   -8.2       0.1
-      58: 0.025186     1.0 1004.2       0.1      1004      1005   -8.2       0.2
-      59: 0.074016     1.0 1004.1       0.1      1004      1005   -8.3       0.2
-      60: 0.070932     1.0 1004.1       0.1      1004      1005   -8.2       0.1
-      61: 0.056026     1.0 1004.0       0.0      1004      1005   -8.3       0.2
-      62: 0.080698     1.0 1004.2       0.1      1004      1005   -8.1       0.1
-      63: 0.049858     1.0 1004.2       0.1      1004      1005   -8.1       0.1
-      64: 0.038036     1.1 1004.3       0.1      1004      1005   -8.3       0.2
-      65: 0.054998     1.1 1004.3       0.1      1004      1005   -8.3       0.2
-      66: 0.377790     1.1  722.4  199160.1      -679      1171   60.7   47995.4
-      67: 1.108698     1.1  853.3  151420.4      -293      1005  -46.0   15857.8
-      68: 0.390126     1.1 1004.3       0.2      1004      1005  -23.6       0.2
-      69: 0.559232     1.1 1004.3       0.1      1004      1005  -23.6       0.3
-      70: 0.515028     1.1 1004.1       0.1      1004      1005  -23.7       1.2
-      71: 0.208170     1.5 1004.2       0.1      1004      1005  -23.4       1.4
-      72: 0.349520     1.1 1004.1       0.4      1002      1005  -23.7       3.3
-      73: 0.250318     1.1 1004.0       0.1      1003      1005  -23.1       0.6
-      74: 1.547654     1.1 1004.1       0.6      1000      1005  -23.1       2.6
-      75: 0.247234     1.1 1004.3       0.9      1003      1009  -22.5       5.8
-      76: 0.329988     1.3 1004.1       0.1      1003      1005  -22.6       0.4
-      77: 1.114866     1.4 1004.1       0.3      1002      1005  -23.0       0.9
-      78: 0.771514     1.1 1004.4       0.0      1004      1005  -22.8       0.6
-      79: 0.927770     1.3 1004.2       0.1      1004      1005  -22.9       0.2
-      80: 0.463628     1.1 1004.2       0.1      1004      1005  -22.6       1.4
-      81: 0.383444     1.1 1004.3       0.2      1004      1005  -23.0       0.1
-      82: 0.328960     1.1 1004.1       0.2      1003      1005  -22.9       0.5
-      83: 0.217422     1.1 1004.1       0.1      1004      1005  -22.8       0.2
-      84: 0.232328     1.3 1004.1       0.2      1003      1005  -22.7       1.1
-      85: 0.737590     1.1 1004.3       0.1      1003      1005  -22.8       1.8
-          GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
-          AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax     RotX
-              <num>     <num>  <num>     <num>     <num>     <num>    <num>
-       1:      -187       850 -684.4  149551.4     -1086        52  -5617.0
-       2:       -79       115   -1.3    4466.7      -345        15  -6650.9
-       3:        -7        -6   14.3       0.2        14        15 -10378.7
-       4:        -7        -6   14.3       0.2        14        15 -10008.7
-       5:        -7        -6   14.3       0.2        14        15 -10287.0
-       6:        -7        -6   14.1       0.1        14        15 -10484.8
-       7:        -7        -6   14.2       0.2        14        15  -8224.5
-       8:        -7        -6   14.0       0.0        14        15 -10662.8
-       9:        -8        -7   14.1       0.2        13        15 -10064.0
-      10:        -8        -7   14.0       0.0        14        15  -8714.2
-      11:        -8        -7   14.1       0.1        14        15 -10457.1
-      12:        -8        -7   14.0       0.2        13        15  -9473.5
-      13:        -8        -7   14.1       0.1        14        15 -10503.2
-      14:        -8        -6   14.0       0.0        14        14 -11163.0
-      15:        -8        -7   14.0       0.0        13        14  -9226.9
-      16:        -8        -6   13.9       0.1        13        14  -9436.8
-      17:        -8        -7   13.9       0.1        13        14 -10112.0
-      18:        -8        -7   13.9       0.1        13        14  -9322.8
-      19:        -8        -7   13.9       0.1        13        14 -10271.2
-      20:        -8        -7   13.9       0.1        13        14  -9906.7
-      21:        -8        -7   13.9       0.1        13        14  -9868.8
-      22:        -8        -7   13.8       0.2        13        15  -8703.5
-      23:        -8        -7   13.8       0.2        13        15 -10768.1
-      24:        -8        -7   13.7       0.2        13        14  -8719.0
-      25:        -8        -7   13.7       0.2        13        14  -8677.6
-      26:        -8        -7   13.8       0.2        13        14  -9409.3
-      27:        -8        -7   13.7       0.2        13        14  -9056.1
-      28:        -8        -7   14.1       0.2        13        15 -10443.0
-      29:        -8        -7   14.3       0.2        14        15  -8328.5
-      30:        -8        -7   14.4       0.2        14        15  -8705.8
-      31:        -8        -7   14.4       0.2        14        15  -7020.6
-      32:        -8        -7   14.5       0.2        14        15  -5241.1
-      33:        -8        -7   14.1       0.1        14        15  -6267.0
-      34:        -8        -7   13.9       0.1        13        14  -8330.9
-      35:        -9        -7   14.0       0.1        13        15  -6828.7
-      36:        -8        -8   14.0       0.1        13        15  -7257.5
-      37:        -9        -7   14.0       0.0        14        15  -8334.3
-      38:        -9        -7   14.0       0.0        14        15  -6692.8
-      39:        -9        -8   13.9       0.1        13        14  -7405.6
-      40:        -9        -7   13.9       0.1        13        14  -6957.4
-      41:        -9        -8   13.8       0.2        13        14  -7536.6
-      42:        -9        -8   13.6       0.2        13        14  -6583.5
-      43:        -9        -8   13.4       0.3        13        15  -6587.9
-      44:        -9        -7   13.2       0.2        13        14  -6957.1
-      45:        -9        -8   13.2       0.2        13        14  -6676.4
-      46:        -9        -8   13.2       0.2        13        14  -7814.6
-      47:        -9        -8   13.0       0.2        12        14  -6866.6
-      48:        -9        -8   13.1       0.1        13        14  -6014.4
-      49:        -9        -8   13.1       0.2        12        14  -6885.3
-      50:        -9        -8   13.0       0.1        12        14  -5167.8
-      51:        -9        -8   12.9       0.1        12        13  -7544.8
-      52:        -9        -8   13.0       0.1        12        14  -7238.5
-      53:        -9        -8   13.1       0.2        12        14  -7456.4
-      54:        -9        -8   13.0       0.0        13        13  -7906.6
-      55:        -9        -8   13.0       0.2        12        14  -7345.0
-      56:        -9        -8   13.0       0.1        12        14  -7000.4
-      57:        -9        -8   13.0       0.2        12        14  -8958.8
-      58:        -9        -8   12.9       0.1        12        13  -7583.8
-      59:        -9        -8   13.1       0.1        13        14  -7083.7
-      60:        -9        -8   13.3       0.2        13        14  -8266.6
-      61:        -9        -8   13.5       0.2        13        14  -5484.9
-      62:        -9        -8   13.8       0.1        13        14  -6591.4
-      63:        -9        -8   13.3       0.2        13        14  -6052.4
-      64:        -9        -8   13.3       0.2        13        14  -7587.0
-      65:        -9        -8   13.4       0.2        13        14  -7141.7
-      66:      -456       577 -343.2  187983.4     -1134        13  -1594.0
-      67:      -686       101 -120.8  127519.0     -1382        25  -3744.4
-      68:       -24       -23   17.1       0.1        17        18  -6316.0
-      69:       -25       -23   17.1       0.4        16        19  -5953.1
-      70:       -26       -22   17.9       2.4        16        24  -5656.2
-      71:       -26       -20   17.4       2.0        16        22  -8617.6
-      72:       -30       -21   17.1      18.9         3        31  -9004.6
-      73:       -24       -22   17.2       0.5        16        18  -7496.5
-      74:       -29       -20   18.7       7.8        16        26  -8527.2
-      75:       -26       -11   18.5       5.8        15        28  -6693.3
-      76:       -24       -21   17.5       1.0        14        20  -7152.1
-      77:       -26       -22   17.3       1.8        13        20  -5966.4
-      78:       -24       -21   17.7       5.2        14        24  -8074.0
-      79:       -24       -22   17.1       0.4        16        18  -9595.5
-      80:       -24       -19   17.7       3.3        14        23  -7275.5
-      81:       -24       -22   17.2       0.4        16        18  -7468.0
-      82:       -25       -22   17.2       1.1        13        20  -9062.3
-      83:       -23       -22   17.3       0.3        16        18  -8224.9
-      84:       -25       -20   17.7       2.1        15        22  -9726.2
-      85:       -27       -20   18.3      14.8        13        36  -9470.7
-          AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax     RotX
+           AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual      GPSlat     GPSlon  GPSalt
+           <num>  <num>       <num>   <num>   <num>       <num>      <num>   <num>
+       1: 802.05  32.27      0.9160  1928.7       0 -9999.00000 -9999.0000 -9999.0
+       2: 802.08  24.90      0.9163  1928.4       0 -9999.00000 -9999.0000 -9999.0
+       3: 802.07  23.79      0.9154  1928.4       0 -9999.00000 -9999.0000 -9999.0
+       4: 802.07  23.36      0.9143  1928.5       1    37.29895  -107.8704  2011.6
+       5: 802.06  23.28      0.9132  1928.6       1    37.29890  -107.8704  2007.5
+       6: 802.05  22.91      0.9121  1928.7       1    37.29891  -107.8704  2009.5
+       7: 802.05  21.91      0.9112  1928.7       1    37.29891  -107.8704  2010.2
+       8: 802.04  21.65      0.9103  1928.8       1    37.29892  -107.8704  2011.8
+       9: 802.03  21.01      0.9096  1928.8       1    37.29892  -107.8704  2011.8
+      10: 802.03  21.31      0.9085  1928.9       1    37.29893  -107.8704  2011.2
+      11: 802.03  20.39      0.9078  1928.9       1    37.29894  -107.8704  2004.0
+      12: 802.02  19.53      0.9071  1929.0       1    37.29893  -107.8704  2000.0
+      13: 802.02  18.45      0.9065  1929.0       1    37.29892  -107.8704  1997.0
+      14: 802.02  18.09      0.9058  1929.0       1    37.29891  -107.8704  2001.8
+      15: 802.02  18.88      0.9050  1929.0       1    37.29892  -107.8704  1999.6
+      16: 802.03  19.38      0.9041  1928.9       1    37.29894  -107.8704  1997.0
+      17: 802.03  19.18      0.9035  1928.8       1    37.29894  -107.8704  1995.4
+      18: 802.04  18.45      0.9031  1928.8       1    37.29897  -107.8704  1988.8
+      19: 802.04  18.58      0.9025  1928.8       1    37.29897  -107.8704  1988.8
+      20: 802.03  17.94      0.9022  1928.9       1    37.29894  -107.8704  1996.0
+      21: 802.03  18.05      0.9015  1928.9       1    37.29894  -107.8704  1996.0
+      22: 802.02  17.71      0.9011  1929.0       1    37.29892  -107.8704  2007.6
+      23: 802.02  17.14      0.9010  1929.0       1    37.29890  -107.8704  2014.3
+      24: 802.01  17.63      0.9004  1929.0       1    37.29891  -107.8704  2007.4
+      25: 802.01  17.22      0.9004  1929.1       1    37.29891  -107.8704  2003.0
+      26: 802.00  17.62      0.8999  1929.2       1    37.29892  -107.8704  2002.1
+      27: 802.00  17.41      0.8996  1929.2       1    37.29893  -107.8704  2000.8
+      28: 801.99  16.63      0.8988  1929.2       1    37.29892  -107.8704  2000.0
+      29: 801.99  15.36      0.8978  1929.3       1    37.29891  -107.8704  2002.2
+      30: 801.99  15.59      0.8964  1929.3       1    37.29890  -107.8704  2003.9
+      31: 801.98  15.04      0.8949  1929.4       1    37.29892  -107.8704  2004.0
+      32: 801.98  14.72      0.8932  1929.4       1    37.29893  -107.8704  2003.4
+      33: 801.98  14.15      0.8922  1929.4       1    37.29893  -107.8704  2003.4
+      34: 801.98  13.45      0.8914  1929.4       1    37.29892  -107.8704  2007.3
+      35: 801.97  13.46      0.8908  1929.5       1    37.29891  -107.8704  2007.1
+      36: 801.97  12.83      0.8905  1929.5       1    37.29891  -107.8704  2009.5
+      37: 801.96  12.51      0.8898  1929.5       1    37.29891  -107.8704  2009.5
+      38: 801.96  12.55      0.8887  1929.6       1    37.29891  -107.8704  2007.7
+      39: 801.95  12.49      0.8877  1929.7       1    37.29891  -107.8704  2006.2
+      40: 801.94  11.54      0.8874  1929.8       1    37.29891  -107.8704  2007.6
+      41: 801.93  11.78      0.8868  1929.9       1    37.29891  -107.8704  2005.9
+      42: 801.92  11.19      0.8868  1930.0       1    37.29890  -107.8704  2007.7
+      43: 801.91  11.62      0.8868  1930.1       1    37.29891  -107.8704  2006.5
+      44: 801.91  12.06      0.8866  1930.1       1    37.29892  -107.8704  2008.2
+      45: 801.90  12.17      0.8868  1930.2       1    37.29892  -107.8704  2008.2
+      46: 801.89  11.95      0.8869  1930.3       1    37.29892  -107.8704  2008.5
+      47: 801.88  11.71      0.8872  1930.4       1    37.29892  -107.8704  2009.2
+      48: 801.87  12.06      0.8873  1930.5       1    37.29892  -107.8704  2008.3
+      49: 801.86  12.18      0.8874  1930.6       1    37.29892  -107.8704  2007.3
+      50: 801.86  12.25      0.8878  1930.6       1    37.29892  -107.8704  2005.6
+      51: 801.85  12.69      0.8878  1930.7       1    37.29892  -107.8704  2006.4
+      52: 801.85  12.96      0.8881  1930.7       1    37.29892  -107.8704  2007.9
+      53: 801.84  12.55      0.8886  1930.8       1    37.29890  -107.8704  2006.9
+      54: 801.83  12.28      0.8889  1930.9       1    37.29890  -107.8704  2005.3
+      55: 801.82  12.74      0.8889  1931.0       1    37.29891  -107.8704  2004.2
+      56: 801.82  12.88      0.8890  1931.0       1    37.29891  -107.8704  1999.8
+      57: 801.82  12.31      0.8891  1931.0       1    37.29893  -107.8704  2005.4
+      58: 801.82  12.95      0.8890  1931.0       1    37.29892  -107.8704  2005.9
+      59: 801.82  13.21      0.8890  1930.9       1    37.29894  -107.8704  2006.4
+      60: 801.83  12.30      0.8892  1930.9       1    37.29893  -107.8704  2008.4
+      61: 801.83  11.56      0.8888  1930.9       1    37.29894  -107.8704  2009.2
+      62: 801.82  11.47      0.8881  1931.0       1    37.29891  -107.8704  2008.6
+      63: 801.82  11.09      0.8875  1931.0       1    37.29891  -107.8704  2009.2
+      64: 801.83  11.34      0.8869  1930.9       1    37.29892  -107.8704  2005.5
+      65: 801.83  10.79      0.8867  1930.9       1    37.29892  -107.8704  2004.9
+      66: 801.81  17.12      0.8844  1931.1       1    37.29892  -107.8704  2004.9
+      67: 801.77  13.30      0.8854  1931.5       1    37.29901  -107.8705  2013.0
+      68: 801.75  13.37      0.8858  1931.7       1    37.29905  -107.8703  2017.9
+      69: 801.75  13.57      0.8859  1931.7       1    37.29902  -107.8702  2006.9
+      70: 801.74  13.77      0.8862  1931.8       1    37.29895  -107.8703  2003.2
+      71: 801.74  13.92      0.8864  1931.8       1    37.29906  -107.8703  2006.0
+      72: 801.74  14.49      0.8867  1931.8       1    37.29927  -107.8701  2019.6
+      73: 801.72  14.37      0.8870  1932.0       1    37.29913  -107.8702  2036.7
+      74: 801.70  14.60      0.8873  1932.2       1    37.29926  -107.8701  2035.8
+      75: 801.69  14.91      0.8877  1932.4       1    37.29925  -107.8701  2055.2
+      76: 801.69  15.15      0.8879  1932.3       1    37.29894  -107.8701  2055.5
+      77: 801.68  15.41      0.8883  1932.4       1    37.29917  -107.8701  2028.4
+      78: 801.68  15.57      0.8888  1932.4       1    37.29918  -107.8703  2020.0
+      79: 801.68  15.77      0.8891  1932.4       1    37.29932  -107.8704  2008.9
+      80: 801.68  15.96      0.8894  1932.5       1    37.29920  -107.8703  2017.5
+      81: 801.67  15.92      0.8898  1932.5       1    37.29906  -107.8703  2032.5
+      82: 801.67  16.09      0.8903  1932.5       1    37.29890  -107.8703  2025.6
+      83: 801.67  16.34      0.8904  1932.5       1    37.29892  -107.8704  2012.4
+      84: 801.67  16.54      0.8907  1932.5       1    37.29883  -107.8706  1985.6
+      85: 801.67  16.72      0.8910  1932.5       1    37.29900  -107.8704  1997.2
+           AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual      GPSlat     GPSlon  GPSalt
+          GPSsat     GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY
+           <num>        <num>   <num>  <num>     <num>     <num>     <num>  <num>
+       1:      0 -9999.000000 -9999.0  276.2  165134.3      -315      1004  129.5
+       2:      0 -9999.000000 -9999.0 1010.8     783.6      1003      1126   -5.0
+       3:      0 -9999.000000 -9999.0 1003.7       0.2      1003      1004   -6.8
+       4:      5     0.023644     2.5 1003.8       0.1      1003      1004   -6.9
+       5:      6     0.043690     2.0 1003.7       0.1      1003      1004   -6.9
+       6:      6     0.024672     2.0 1003.6      -0.1      1003      1004   -7.0
+       7:      7     0.009252     1.3 1003.6      -0.1      1003      1004   -7.0
+       8:      7     0.043690     1.3 1003.8       0.1      1003      1004   -7.0
+       9:      7     0.013364     1.3 1003.8      -0.1      1003      1004   -7.0
+      10:      7     0.036494     1.3 1003.7       0.1      1003      1004   -7.1
+      11:      7     0.061680     1.3 1003.8       0.1      1003      1004   -7.0
+      12:      7     0.009766     1.3 1004.0       0.0      1003      1004   -7.1
+      13:      7     0.031354     1.3 1003.9      -0.1      1003      1004   -7.1
+      14:      7     0.058596     1.3 1004.0       0.0      1003      1005   -7.0
+      15:      7     0.017476     1.3 1004.0       0.0      1003      1004   -7.1
+      16:      7     0.021074     1.3 1004.0       0.0      1004      1004   -7.0
+      17:      7     0.121818     1.3 1004.0       0.0      1004      1005   -7.1
+      18:      7     0.051914     1.3 1004.0       0.0      1003      1005   -7.1
+      19:      7     0.051914     1.3 1004.0       0.0      1003      1005   -7.1
+      20:      7     0.129528     1.3 1003.9      -0.1      1003      1004   -7.2
+      21:      7     0.129528     1.3 1003.9       0.1      1003      1004   -7.2
+      22:      8     0.015934     1.1 1004.0       0.0      1003      1004   -7.2
+      23:      8     0.015934     1.1 1004.0       0.0      1004      1005   -7.2
+      24:      8     0.032382     1.1 1004.0       0.1      1003      1005   -7.2
+      25:      8     0.056540     1.1 1003.9       0.0      1003      1004   -7.3
+      26:      8     0.031868     1.1 1004.0       0.0      1003      1004   -7.3
+      27:      8     0.018504     1.1 1004.0       0.0      1004      1005   -7.3
+      28:      8     0.048830     1.1 1004.0       0.0      1003      1004   -7.4
+      29:      8     0.055512     1.1 1004.1       0.1      1004      1005   -7.6
+      30:      8     0.051914     1.1 1004.0       0.0      1004      1004   -7.4
+      31:      8     0.041120     1.1 1004.3       0.1      1003      1005   -7.3
+      32:      8     0.028270     1.1 1004.3       0.1      1004      1005   -7.7
+      33:      8     0.057568     1.1 1004.3       0.1      1004      1005   -7.9
+      34:      8     0.010280     1.1 1004.2       0.1      1004      1005   -7.9
+      35:      8     0.056540     1.1 1004.4       0.2      1004      1005   -8.0
+      36:      8     0.020046     1.1 1004.3       0.1      1004      1005   -8.0
+      37:      8     0.020046     1.1 1004.2      -0.1      1004      1005   -8.0
+      38:      8     0.005654     1.1 1004.4       0.2      1004      1005   -8.1
+      39:      8     0.038036     1.1 1004.6      -0.1      1004      1005   -8.0
+      40:      9     0.039578     1.0 1004.3       0.1      1004      1005   -8.1
+      41:      9     0.026728     1.0 1004.3       0.1      1004      1005   -8.2
+      42:      9     0.002056     1.0 1004.4       0.2      1004      1005   -8.3
+      43:      9     0.023644     1.0 1004.3       0.1      1004      1005   -8.2
+      44:      9     0.022616     1.0 1004.2       0.1      1004      1005   -8.1
+      45:      9     0.037522     1.0 1004.3       0.1      1004      1005   -8.3
+      46:      9     0.004112     1.0 1004.4       0.0      1004      1005   -8.2
+      47:      9     0.006682     1.0 1004.5       0.0      1004      1005   -8.1
+      48:      9     0.035466     1.0 1004.2       0.1      1004      1005   -8.2
+      49:      9     0.008738     1.0 1004.3       0.2      1004      1005   -8.2
+      50:      9     0.020560     1.0 1004.4       0.0      1004      1005   -8.1
+      51:      9     0.048830     1.0 1004.2       0.1      1004      1005   -8.2
+      52:      9     0.020560     1.0 1004.3       0.2      1004      1005   -8.1
+      53:      9     0.037522     1.0 1004.2       0.1      1004      1005   -8.1
+      54:      9     0.029298     1.0 1004.3       0.1      1004      1005   -8.1
+      55:      9     0.031354     1.0 1004.1       0.1      1004      1005   -8.3
+      56:      9     0.040092     1.0 1004.1       0.1      1004      1005   -8.2
+      57:      9     0.050372     1.0 1004.1       0.1      1004      1005   -8.2
+      58:      9     0.025186     1.0 1004.2       0.1      1004      1005   -8.2
+      59:      9     0.074016     1.0 1004.1       0.1      1004      1005   -8.3
+      60:      9     0.070932     1.0 1004.1       0.1      1004      1005   -8.2
+      61:      9     0.056026     1.0 1004.0       0.0      1004      1005   -8.3
+      62:      9     0.080698     1.0 1004.2       0.1      1004      1005   -8.1
+      63:      9     0.049858     1.0 1004.2       0.1      1004      1005   -8.1
+      64:      9     0.038036     1.1 1004.3       0.1      1004      1005   -8.3
+      65:      9     0.054998     1.1 1004.3       0.1      1004      1005   -8.3
+      66:      9     0.377790     1.1  722.4  199160.1      -679      1171   60.7
+      67:      9     1.108698     1.1  853.3  151420.4      -293      1005  -46.0
+      68:      9     0.390126     1.1 1004.3       0.2      1004      1005  -23.6
+      69:      8     0.559232     1.1 1004.3       0.1      1004      1005  -23.6
+      70:      9     0.515028     1.1 1004.1       0.1      1004      1005  -23.7
+      71:      7     0.208170     1.5 1004.2       0.1      1004      1005  -23.4
+      72:      9     0.349520     1.1 1004.1       0.4      1002      1005  -23.7
+      73:      9     0.250318     1.1 1004.0       0.1      1003      1005  -23.1
+      74:      9     1.547654     1.1 1004.1       0.6      1000      1005  -23.1
+      75:      9     0.247234     1.1 1004.3       0.9      1003      1009  -22.5
+      76:      8     0.329988     1.3 1004.1       0.1      1003      1005  -22.6
+      77:      8     1.114866     1.4 1004.1       0.3      1002      1005  -23.0
+      78:      9     0.771514     1.1 1004.4       0.0      1004      1005  -22.8
+      79:      8     0.927770     1.3 1004.2       0.1      1004      1005  -22.9
+      80:      9     0.463628     1.1 1004.2       0.1      1004      1005  -22.6
+      81:      9     0.383444     1.1 1004.3       0.2      1004      1005  -23.0
+      82:      9     0.328960     1.1 1004.1       0.2      1003      1005  -22.9
+      83:      9     0.217422     1.1 1004.1       0.1      1004      1005  -22.8
+      84:      7     0.232328     1.3 1004.1       0.2      1003      1005  -22.7
+      85:      9     0.737590     1.1 1004.3       0.1      1003      1005  -22.8
+          GPSsat     GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY
+          AccelYVar AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax     RotX
+              <num>     <num>     <num>  <num>     <num>     <num>     <num>    <num>
+       1:   40201.9      -187       850 -684.4  149551.4     -1086        52  -5617.0
+       2:     665.4       -79       115   -1.3    4466.7      -345        15  -6650.9
+       3:       0.2        -7        -6   14.3       0.2        14        15 -10378.7
+       4:       0.1        -7        -6   14.3       0.2        14        15 -10008.7
+       5:       0.1        -7        -6   14.3       0.2        14        15 -10287.0
+       6:       0.0        -7        -6   14.1       0.1        14        15 -10484.8
+       7:       0.0        -7        -6   14.2       0.2        14        15  -8224.5
+       8:       0.0        -7        -6   14.0       0.0        14        15 -10662.8
+       9:       0.0        -8        -7   14.1       0.2        13        15 -10064.0
+      10:       0.1        -8        -7   14.0       0.0        14        15  -8714.2
+      11:       0.0        -8        -7   14.1       0.1        14        15 -10457.1
+      12:       0.1        -8        -7   14.0       0.2        13        15  -9473.5
+      13:       0.1        -8        -7   14.1       0.1        14        15 -10503.2
+      14:       0.1        -8        -6   14.0       0.0        14        14 -11163.0
+      15:       0.1        -8        -7   14.0       0.0        13        14  -9226.9
+      16:       0.1        -8        -6   13.9       0.1        13        14  -9436.8
+      17:       0.1        -8        -7   13.9       0.1        13        14 -10112.0
+      18:       0.1        -8        -7   13.9       0.1        13        14  -9322.8
+      19:       0.1        -8        -7   13.9       0.1        13        14 -10271.2
+      20:       0.2        -8        -7   13.9       0.1        13        14  -9906.7
+      21:       0.2        -8        -7   13.9       0.1        13        14  -9868.8
+      22:       0.2        -8        -7   13.8       0.2        13        15  -8703.5
+      23:       0.2        -8        -7   13.8       0.2        13        15 -10768.1
+      24:       0.1        -8        -7   13.7       0.2        13        14  -8719.0
+      25:       0.2        -8        -7   13.7       0.2        13        14  -8677.6
+      26:       0.2        -8        -7   13.8       0.2        13        14  -9409.3
+      27:       0.2        -8        -7   13.7       0.2        13        14  -9056.1
+      28:       0.2        -8        -7   14.1       0.2        13        15 -10443.0
+      29:       0.2        -8        -7   14.3       0.2        14        15  -8328.5
+      30:       0.2        -8        -7   14.4       0.2        14        15  -8705.8
+      31:       0.2        -8        -7   14.4       0.2        14        15  -7020.6
+      32:       0.2        -8        -7   14.5       0.2        14        15  -5241.1
+      33:       0.1        -8        -7   14.1       0.1        14        15  -6267.0
+      34:       0.1        -8        -7   13.9       0.1        13        14  -8330.9
+      35:       0.1        -9        -7   14.0       0.1        13        15  -6828.7
+      36:       0.0        -8        -8   14.0       0.1        13        15  -7257.5
+      37:       0.1        -9        -7   14.0       0.0        14        15  -8334.3
+      38:       0.2        -9        -7   14.0       0.0        14        15  -6692.8
+      39:       0.0        -9        -8   13.9       0.1        13        14  -7405.6
+      40:       0.1        -9        -7   13.9       0.1        13        14  -6957.4
+      41:       0.2        -9        -8   13.8       0.2        13        14  -7536.6
+      42:       0.2        -9        -8   13.6       0.2        13        14  -6583.5
+      43:       0.1        -9        -8   13.4       0.3        13        15  -6587.9
+      44:       0.2        -9        -7   13.2       0.2        13        14  -6957.1
+      45:       0.2        -9        -8   13.2       0.2        13        14  -6676.4
+      46:       0.1        -9        -8   13.2       0.2        13        14  -7814.6
+      47:       0.1        -9        -8   13.0       0.2        12        14  -6866.6
+      48:       0.2        -9        -8   13.1       0.1        13        14  -6014.4
+      49:       0.2        -9        -8   13.1       0.2        12        14  -6885.3
+      50:       0.1        -9        -8   13.0       0.1        12        14  -5167.8
+      51:       0.2        -9        -8   12.9       0.1        12        13  -7544.8
+      52:       0.1        -9        -8   13.0       0.1        12        14  -7238.5
+      53:       0.1        -9        -8   13.1       0.2        12        14  -7456.4
+      54:       0.1        -9        -8   13.0       0.0        13        13  -7906.6
+      55:       0.2        -9        -8   13.0       0.2        12        14  -7345.0
+      56:       0.2        -9        -8   13.0       0.1        12        14  -7000.4
+      57:       0.1        -9        -8   13.0       0.2        12        14  -8958.8
+      58:       0.2        -9        -8   12.9       0.1        12        13  -7583.8
+      59:       0.2        -9        -8   13.1       0.1        13        14  -7083.7
+      60:       0.1        -9        -8   13.3       0.2        13        14  -8266.6
+      61:       0.2        -9        -8   13.5       0.2        13        14  -5484.9
+      62:       0.1        -9        -8   13.8       0.1        13        14  -6591.4
+      63:       0.1        -9        -8   13.3       0.2        13        14  -6052.4
+      64:       0.2        -9        -8   13.3       0.2        13        14  -7587.0
+      65:       0.2        -9        -8   13.4       0.2        13        14  -7141.7
+      66:   47995.4      -456       577 -343.2  187983.4     -1134        13  -1594.0
+      67:   15857.8      -686       101 -120.8  127519.0     -1382        25  -3744.4
+      68:       0.2       -24       -23   17.1       0.1        17        18  -6316.0
+      69:       0.3       -25       -23   17.1       0.4        16        19  -5953.1
+      70:       1.2       -26       -22   17.9       2.4        16        24  -5656.2
+      71:       1.4       -26       -20   17.4       2.0        16        22  -8617.6
+      72:       3.3       -30       -21   17.1      18.9         3        31  -9004.6
+      73:       0.6       -24       -22   17.2       0.5        16        18  -7496.5
+      74:       2.6       -29       -20   18.7       7.8        16        26  -8527.2
+      75:       5.8       -26       -11   18.5       5.8        15        28  -6693.3
+      76:       0.4       -24       -21   17.5       1.0        14        20  -7152.1
+      77:       0.9       -26       -22   17.3       1.8        13        20  -5966.4
+      78:       0.6       -24       -21   17.7       5.2        14        24  -8074.0
+      79:       0.2       -24       -22   17.1       0.4        16        18  -9595.5
+      80:       1.4       -24       -19   17.7       3.3        14        23  -7275.5
+      81:       0.1       -24       -22   17.2       0.4        16        18  -7468.0
+      82:       0.5       -25       -22   17.2       1.1        13        20  -9062.3
+      83:       0.2       -23       -22   17.3       0.3        16        18  -8224.9
+      84:       1.1       -25       -20   17.7       2.1        15        22  -9726.2
+      85:       1.8       -27       -20   18.3      14.8        13        36  -9470.7
+          AccelYVar AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax     RotX
              RotXVar RotXMin RotXMax    RotY      RotYVar RotYMin RotYMax     RotZ
                <num>   <num>   <num>   <num>        <num>   <num>   <num>    <num>
        1:  845411712  -67261   92321 -5790.6 1285535616.0  -81305  121940 -10015.2
@@ -4049,31 +4049,31 @@
       read_ast_log(upasv2x_rev158_noGPS_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>     <char>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x   PSP00270      NoGPS          NA    52 secs 1718391360
-       2:  UPAS_v2_x   PSP00270      NoGPS          NA    82 secs 1718391390
-       3:  UPAS_v2_x   PSP00270      NoGPS          NA   112 secs 1718391420
-       4:  UPAS_v2_x   PSP00270      NoGPS          NA   142 secs 1718391450
-       5:  UPAS_v2_x   PSP00270      NoGPS          NA   172 secs 1718391480
-       6:  UPAS_v2_x   PSP00270      NoGPS          NA   202 secs 1718391510
-       7:  UPAS_v2_x   PSP00270      NoGPS          NA   232 secs 1718391540
-       8:  UPAS_v2_x   PSP00270      NoGPS          NA   262 secs 1718391570
-       9:  UPAS_v2_x   PSP00270      NoGPS          NA   292 secs 1718391600
-      10:  UPAS_v2_x   PSP00270      NoGPS          NA   322 secs 1718391630
-      11:  UPAS_v2_x   PSP00270      NoGPS          NA   352 secs 1718391660
-      12:  UPAS_v2_x   PSP00270      NoGPS          NA   382 secs 1718391690
-      13:  UPAS_v2_x   PSP00270      NoGPS          NA   412 secs 1718391720
-      14:  UPAS_v2_x   PSP00270      NoGPS          NA   442 secs 1718391750
-      15:  UPAS_v2_x   PSP00270      NoGPS          NA   472 secs 1718391780
-      16:  UPAS_v2_x   PSP00270      NoGPS          NA   502 secs 1718391810
-      17:  UPAS_v2_x   PSP00270      NoGPS          NA   532 secs 1718391840
-      18:  UPAS_v2_x   PSP00270      NoGPS          NA   562 secs 1718391870
-      19:  UPAS_v2_x   PSP00270      NoGPS          NA   592 secs 1718391900
-      20:  UPAS_v2_x   PSP00270      NoGPS          NA   622 secs 1718391930
-      21:  UPAS_v2_x   PSP00270      NoGPS          NA   652 secs 1718391960
-      22:  UPAS_v2_x   PSP00270      NoGPS          NA   682 secs 1718391990
-      23:  UPAS_v2_x   PSP00270      NoGPS          NA   712 secs 1718392020
-      24:  UPAS_v2_x   PSP00270      NoGPS          NA   742 secs 1718392050
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00270      NoGPS        <NA>    52 secs 1718391360
+       2:  UPAS_v2_x   PSP00270      NoGPS        <NA>    82 secs 1718391390
+       3:  UPAS_v2_x   PSP00270      NoGPS        <NA>   112 secs 1718391420
+       4:  UPAS_v2_x   PSP00270      NoGPS        <NA>   142 secs 1718391450
+       5:  UPAS_v2_x   PSP00270      NoGPS        <NA>   172 secs 1718391480
+       6:  UPAS_v2_x   PSP00270      NoGPS        <NA>   202 secs 1718391510
+       7:  UPAS_v2_x   PSP00270      NoGPS        <NA>   232 secs 1718391540
+       8:  UPAS_v2_x   PSP00270      NoGPS        <NA>   262 secs 1718391570
+       9:  UPAS_v2_x   PSP00270      NoGPS        <NA>   292 secs 1718391600
+      10:  UPAS_v2_x   PSP00270      NoGPS        <NA>   322 secs 1718391630
+      11:  UPAS_v2_x   PSP00270      NoGPS        <NA>   352 secs 1718391660
+      12:  UPAS_v2_x   PSP00270      NoGPS        <NA>   382 secs 1718391690
+      13:  UPAS_v2_x   PSP00270      NoGPS        <NA>   412 secs 1718391720
+      14:  UPAS_v2_x   PSP00270      NoGPS        <NA>   442 secs 1718391750
+      15:  UPAS_v2_x   PSP00270      NoGPS        <NA>   472 secs 1718391780
+      16:  UPAS_v2_x   PSP00270      NoGPS        <NA>   502 secs 1718391810
+      17:  UPAS_v2_x   PSP00270      NoGPS        <NA>   532 secs 1718391840
+      18:  UPAS_v2_x   PSP00270      NoGPS        <NA>   562 secs 1718391870
+      19:  UPAS_v2_x   PSP00270      NoGPS        <NA>   592 secs 1718391900
+      20:  UPAS_v2_x   PSP00270      NoGPS        <NA>   622 secs 1718391930
+      21:  UPAS_v2_x   PSP00270      NoGPS        <NA>   652 secs 1718391960
+      22:  UPAS_v2_x   PSP00270      NoGPS        <NA>   682 secs 1718391990
+      23:  UPAS_v2_x   PSP00270      NoGPS        <NA>   712 secs 1718392020
+      24:  UPAS_v2_x   PSP00270      NoGPS        <NA>   742 secs 1718392050
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
@@ -4130,7 +4130,7 @@
       24:           1.003           0.702         8.417    61.40            98 29.33
           PumpingFlowRate OverallFlowRate SampledVolume FilterDP BatteryCharge AtmoT
            AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat
-           <num>  <num>       <num>   <num>   <num> <lgcl> <lgcl> <lgcl>  <num>
+           <num>  <num>       <num>   <num>   <num>  <num>  <num>  <num>  <num>
        1: 805.47  24.77      0.9230  1894.3      NA     NA     NA     NA     NA
        2: 805.46  24.60      0.9238  1894.5      NA     NA     NA     NA     NA
        3: 805.44  24.55      0.9238  1894.6      NA     NA     NA     NA     NA
@@ -4157,7 +4157,7 @@
       24: 805.20  23.35      0.9231  1897.0      NA     NA     NA     NA     NA
            AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat
           GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
-            <lgcl>  <lgcl>  <num>     <num>     <num>     <num>  <num>     <num>
+             <num>   <num>  <num>     <num>     <num>     <num>  <num>     <num>
        1:       NA      NA   -5.0       0.0        -6        -5  -24.0       0.0
        2:       NA      NA   -4.9       0.1        -6        -4  -24.0       0.0
        3:       NA      NA   -5.0       0.0        -5        -4  -24.1       0.1
@@ -4568,45 +4568,45 @@
       read_ast_log(upasv2x_rev158_diag_file, update_names = FALSE)
     Output
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
-              <char>     <char>     <char>      <lgcl> <difftime>      <num>
-       1:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    84 secs 1718295952
-       2:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    85 secs 1718295953
-       3:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    86 secs 1718295954
-       4:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    87 secs 1718295955
-       5:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    88 secs 1718295956
-       6:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    89 secs 1718295957
-       7:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    90 secs 1718295958
-       8:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    91 secs 1718295959
-       9:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    92 secs 1718295960
-      10:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    93 secs 1718295961
-      11:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    94 secs 1718295962
-      12:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    95 secs 1718295963
-      13:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    96 secs 1718295964
-      14:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    97 secs 1718295965
-      15:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    98 secs 1718295966
-      16:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA    99 secs 1718295967
-      17:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   100 secs 1718295968
-      18:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   101 secs 1718295969
-      19:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   102 secs 1718295970
-      20:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   103 secs 1718295971
-      21:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   104 secs 1718295972
-      22:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   105 secs 1718295973
-      23:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   106 secs 1718295974
-      24:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   107 secs 1718295975
-      25:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   109 secs 1718295977
-      26:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   111 secs 1718295979
-      27:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   113 secs 1718295981
-      28:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   115 secs 1718295983
-      29:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   117 secs 1718295985
-      30:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   119 secs 1718295987
-      31:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   121 secs 1718295989
-      32:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   123 secs 1718295991
-      33:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   125 secs 1718295993
-      34:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   127 secs 1718295995
-      35:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   129 secs 1718295997
-      36:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   131 secs 1718295999
-      37:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   133 secs 1718296001
-      38:  UPAS_v2_x   PSP00270 DIAGNOSTIC          NA   135 secs 1718296003
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    84 secs 1718295952
+       2:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    85 secs 1718295953
+       3:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    86 secs 1718295954
+       4:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    87 secs 1718295955
+       5:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    88 secs 1718295956
+       6:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    89 secs 1718295957
+       7:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    90 secs 1718295958
+       8:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    91 secs 1718295959
+       9:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    92 secs 1718295960
+      10:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    93 secs 1718295961
+      11:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    94 secs 1718295962
+      12:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    95 secs 1718295963
+      13:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    96 secs 1718295964
+      14:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    97 secs 1718295965
+      15:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    98 secs 1718295966
+      16:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>    99 secs 1718295967
+      17:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   100 secs 1718295968
+      18:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   101 secs 1718295969
+      19:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   102 secs 1718295970
+      20:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   103 secs 1718295971
+      21:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   104 secs 1718295972
+      22:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   105 secs 1718295973
+      23:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   106 secs 1718295974
+      24:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   107 secs 1718295975
+      25:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   109 secs 1718295977
+      26:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   111 secs 1718295979
+      27:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   113 secs 1718295981
+      28:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   115 secs 1718295983
+      29:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   117 secs 1718295985
+      30:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   119 secs 1718295987
+      31:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   121 secs 1718295989
+      32:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   123 secs 1718295991
+      33:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   125 secs 1718295993
+      34:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   127 secs 1718295995
+      35:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   129 secs 1718295997
+      36:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   131 secs 1718295999
+      37:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   133 secs 1718296001
+      38:  UPAS_v2_x   PSP00270 DIAGNOSTIC        <NA>   135 secs 1718296003
           ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
           UnixTimeMCU         DateTimeUTC       DateTimeLocal   LocalTZ
                 <num>              <POSc>              <POSc>    <char>
@@ -4691,86 +4691,86 @@
       38:           1.172           1.172         0.653    76.05            99 26.34
           PumpingFlowRate OverallFlowRate SampledVolume FilterDP BatteryCharge AtmoT
            AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat
-           <num>  <num>       <num>   <num>   <num> <lgcl> <lgcl> <lgcl>  <num>
-       1: 805.14  23.57      0.9367  1897.6       0     NA     NA     NA      0
-       2: 805.14  23.59      0.9330  1897.6       0     NA     NA     NA      0
-       3: 805.14  23.54      0.9333  1897.6       0     NA     NA     NA      0
-       4: 805.14  23.49      0.9335  1897.7       0     NA     NA     NA      0
-       5: 805.14  23.98      0.9335  1897.7       0     NA     NA     NA      0
-       6: 805.14  23.65      0.9336  1897.7       0     NA     NA     NA      0
-       7: 805.13  23.30      0.9338  1897.7       0     NA     NA     NA      0
-       8: 805.13  23.30      0.9338  1897.7       0     NA     NA     NA      0
-       9: 805.13  23.27      0.9338  1897.8       0     NA     NA     NA      0
-      10: 805.13  23.24      0.9338  1897.8       0     NA     NA     NA      0
-      11: 805.13  23.22      0.9337  1897.8       0     NA     NA     NA      0
-      12: 805.13  23.23      0.9338  1897.8       0     NA     NA     NA      0
-      13: 805.13  23.26      0.9338  1897.8       0     NA     NA     NA      0
-      14: 805.12  23.29      0.9337  1897.8       0     NA     NA     NA      0
-      15: 805.12  23.27      0.9337  1897.8       0     NA     NA     NA      0
-      16: 805.12  23.56      0.9336  1897.8       0     NA     NA     NA      0
-      17: 805.12  22.80      0.9336  1897.8       0     NA     NA     NA      0
-      18: 805.12  23.09      0.9337  1897.9       0     NA     NA     NA      0
-      19: 805.12  23.23      0.9335  1897.9       0     NA     NA     NA      0
-      20: 805.12  23.22      0.9336  1897.9       0     NA     NA     NA      0
-      21: 805.11  23.22      0.9335  1897.9       0     NA     NA     NA      0
-      22: 805.11  23.21      0.9334  1897.9       0     NA     NA     NA      0
-      23: 805.11  23.19      0.9334  1897.9       0     NA     NA     NA      0
-      24: 805.11  23.18      0.9335  1897.9       0     NA     NA     NA      0
-      25: 805.11  24.53      0.9332  1897.9       0     NA     NA     NA      0
-      26: 805.11  25.12      0.9327  1897.9       0     NA     NA     NA      0
-      27: 805.11  24.11      0.9330  1897.9       0     NA     NA     NA      0
-      28: 805.11  23.67      0.9333  1897.9       0     NA     NA     NA      0
-      29: 805.11  23.39      0.9332  1897.9       0     NA     NA     NA      0
-      30: 805.11  23.27      0.9332  1897.9       0     NA     NA     NA      0
-      31: 805.11  23.19      0.9331  1897.9       0     NA     NA     NA      0
-      32: 805.11  23.08      0.9332  1898.0       0     NA     NA     NA      0
-      33: 805.11  23.05      0.9332  1898.0       0     NA     NA     NA      0
-      34: 805.11  23.00      0.9332  1898.0       0     NA     NA     NA      0
-      35: 805.11  22.94      0.9332  1898.0       0     NA     NA     NA      0
-      36: 805.10  22.92      0.9332  1898.0       0     NA     NA     NA      0
-      37: 805.10  22.88      0.9331  1898.0       0     NA     NA     NA      0
-      38: 805.10  22.85      0.9331  1898.0       0     NA     NA     NA      0
+           <num>  <num>       <num>   <num>   <num>  <num>  <num>  <num>  <num>
+       1: 805.14  23.57      0.9367  1897.6       0  -9999  -9999  -9999      0
+       2: 805.14  23.59      0.9330  1897.6       0  -9999  -9999  -9999      0
+       3: 805.14  23.54      0.9333  1897.6       0  -9999  -9999  -9999      0
+       4: 805.14  23.49      0.9335  1897.7       0  -9999  -9999  -9999      0
+       5: 805.14  23.98      0.9335  1897.7       0  -9999  -9999  -9999      0
+       6: 805.14  23.65      0.9336  1897.7       0  -9999  -9999  -9999      0
+       7: 805.13  23.30      0.9338  1897.7       0  -9999  -9999  -9999      0
+       8: 805.13  23.30      0.9338  1897.7       0  -9999  -9999  -9999      0
+       9: 805.13  23.27      0.9338  1897.8       0  -9999  -9999  -9999      0
+      10: 805.13  23.24      0.9338  1897.8       0  -9999  -9999  -9999      0
+      11: 805.13  23.22      0.9337  1897.8       0  -9999  -9999  -9999      0
+      12: 805.13  23.23      0.9338  1897.8       0  -9999  -9999  -9999      0
+      13: 805.13  23.26      0.9338  1897.8       0  -9999  -9999  -9999      0
+      14: 805.12  23.29      0.9337  1897.8       0  -9999  -9999  -9999      0
+      15: 805.12  23.27      0.9337  1897.8       0  -9999  -9999  -9999      0
+      16: 805.12  23.56      0.9336  1897.8       0  -9999  -9999  -9999      0
+      17: 805.12  22.80      0.9336  1897.8       0  -9999  -9999  -9999      0
+      18: 805.12  23.09      0.9337  1897.9       0  -9999  -9999  -9999      0
+      19: 805.12  23.23      0.9335  1897.9       0  -9999  -9999  -9999      0
+      20: 805.12  23.22      0.9336  1897.9       0  -9999  -9999  -9999      0
+      21: 805.11  23.22      0.9335  1897.9       0  -9999  -9999  -9999      0
+      22: 805.11  23.21      0.9334  1897.9       0  -9999  -9999  -9999      0
+      23: 805.11  23.19      0.9334  1897.9       0  -9999  -9999  -9999      0
+      24: 805.11  23.18      0.9335  1897.9       0  -9999  -9999  -9999      0
+      25: 805.11  24.53      0.9332  1897.9       0  -9999  -9999  -9999      0
+      26: 805.11  25.12      0.9327  1897.9       0  -9999  -9999  -9999      0
+      27: 805.11  24.11      0.9330  1897.9       0  -9999  -9999  -9999      0
+      28: 805.11  23.67      0.9333  1897.9       0  -9999  -9999  -9999      0
+      29: 805.11  23.39      0.9332  1897.9       0  -9999  -9999  -9999      0
+      30: 805.11  23.27      0.9332  1897.9       0  -9999  -9999  -9999      0
+      31: 805.11  23.19      0.9331  1897.9       0  -9999  -9999  -9999      0
+      32: 805.11  23.08      0.9332  1898.0       0  -9999  -9999  -9999      0
+      33: 805.11  23.05      0.9332  1898.0       0  -9999  -9999  -9999      0
+      34: 805.11  23.00      0.9332  1898.0       0  -9999  -9999  -9999      0
+      35: 805.11  22.94      0.9332  1898.0       0  -9999  -9999  -9999      0
+      36: 805.10  22.92      0.9332  1898.0       0  -9999  -9999  -9999      0
+      37: 805.10  22.88      0.9331  1898.0       0  -9999  -9999  -9999      0
+      38: 805.10  22.85      0.9331  1898.0       0  -9999  -9999  -9999      0
            AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat
           GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
-            <lgcl>  <lgcl>  <num>     <num>     <num>     <num>  <num>     <num>
-       1:       NA      NA     -3        NA        NA        NA    -25        NA
-       2:       NA      NA     -3        NA        NA        NA    -25        NA
-       3:       NA      NA     -3        NA        NA        NA    -26        NA
-       4:       NA      NA     -2        NA        NA        NA    -25        NA
-       5:       NA      NA     -2        NA        NA        NA    -25        NA
-       6:       NA      NA     -3        NA        NA        NA    -25        NA
-       7:       NA      NA     -3        NA        NA        NA    -25        NA
-       8:       NA      NA     -3        NA        NA        NA    -25        NA
-       9:       NA      NA     -2        NA        NA        NA    -25        NA
-      10:       NA      NA     -3        NA        NA        NA    -25        NA
-      11:       NA      NA     -3        NA        NA        NA    -25        NA
-      12:       NA      NA     -2        NA        NA        NA    -26        NA
-      13:       NA      NA     -2        NA        NA        NA    -25        NA
-      14:       NA      NA     -3        NA        NA        NA    -25        NA
-      15:       NA      NA     -3        NA        NA        NA    -25        NA
-      16:       NA      NA     -2        NA        NA        NA    -26        NA
-      17:       NA      NA     -3        NA        NA        NA    -24        NA
-      18:       NA      NA     -2        NA        NA        NA    -25        NA
-      19:       NA      NA     -4        NA        NA        NA    -24        NA
-      20:       NA      NA     -2        NA        NA        NA    -26        NA
-      21:       NA      NA     -2        NA        NA        NA    -23        NA
-      22:       NA      NA     -4        NA        NA        NA    -27        NA
-      23:       NA      NA     -3        NA        NA        NA    -27        NA
-      24:       NA      NA     -3        NA        NA        NA    -23        NA
-      25:       NA      NA     -2        NA        NA        NA    -25        NA
-      26:       NA      NA     -4        NA        NA        NA    -25        NA
-      27:       NA      NA     -3        NA        NA        NA    -27        NA
-      28:       NA      NA     -3        NA        NA        NA    -25        NA
-      29:       NA      NA     -3        NA        NA        NA    -25        NA
-      30:       NA      NA     NA       0.4        -4        -2     NA       0.9
-      31:       NA      NA     -3        NA        NA        NA    -25        NA
-      32:       NA      NA     -2        NA        NA        NA    -25        NA
-      33:       NA      NA     -2        NA        NA        NA    -25        NA
-      34:       NA      NA     -2        NA        NA        NA    -25        NA
-      35:       NA      NA     -3        NA        NA        NA    -25        NA
-      36:       NA      NA     -2        NA        NA        NA    -25        NA
-      37:       NA      NA     -2        NA        NA        NA    -25        NA
-      38:       NA      NA     -2        NA        NA        NA    -24        NA
+             <num>   <num>  <num>     <num>     <num>     <num>  <num>     <num>
+       1:    -9999   -9999     -3        NA        NA        NA    -25        NA
+       2:    -9999   -9999     -3        NA        NA        NA    -25        NA
+       3:    -9999   -9999     -3        NA        NA        NA    -26        NA
+       4:    -9999   -9999     -2        NA        NA        NA    -25        NA
+       5:    -9999   -9999     -2        NA        NA        NA    -25        NA
+       6:    -9999   -9999     -3        NA        NA        NA    -25        NA
+       7:    -9999   -9999     -3        NA        NA        NA    -25        NA
+       8:    -9999   -9999     -3        NA        NA        NA    -25        NA
+       9:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      10:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      11:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      12:    -9999   -9999     -2        NA        NA        NA    -26        NA
+      13:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      14:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      15:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      16:    -9999   -9999     -2        NA        NA        NA    -26        NA
+      17:    -9999   -9999     -3        NA        NA        NA    -24        NA
+      18:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      19:    -9999   -9999     -4        NA        NA        NA    -24        NA
+      20:    -9999   -9999     -2        NA        NA        NA    -26        NA
+      21:    -9999   -9999     -2        NA        NA        NA    -23        NA
+      22:    -9999   -9999     -4        NA        NA        NA    -27        NA
+      23:    -9999   -9999     -3        NA        NA        NA    -27        NA
+      24:    -9999   -9999     -3        NA        NA        NA    -23        NA
+      25:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      26:    -9999   -9999     -4        NA        NA        NA    -25        NA
+      27:    -9999   -9999     -3        NA        NA        NA    -27        NA
+      28:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      29:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      30:    -9999   -9999     NA       0.4        -4        -2     NA       0.9
+      31:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      32:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      33:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      34:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      35:    -9999   -9999     -3        NA        NA        NA    -25        NA
+      36:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      37:    -9999   -9999     -2        NA        NA        NA    -25        NA
+      38:    -9999   -9999     -2        NA        NA        NA    -24        NA
           GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar
           AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax  RotX RotXVar
               <num>     <num>  <num>     <num>     <num>     <num> <num>   <num>

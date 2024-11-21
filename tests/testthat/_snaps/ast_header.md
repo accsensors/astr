@@ -70,7 +70,7 @@
                                                          LogFilename SampleName
       1 PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt       test
         CartridgeID GPSUTCOffset   LocalTZ UserTZ StartOnNextPowerUp
-      1          NA           -6 Etc/GMT+6  FALSE              FALSE
+      1        <NA>           -6 Etc/GMT+6  FALSE              FALSE
         ProgrammedStartDelay ProgrammedRuntime VolumetricFlowRate FlowOffset
       1                    0            172800                  1          0
         DutyCycle DutyCycleWindow GPSEnabled LogFileMode LogInterval AppLock
@@ -98,7 +98,7 @@
                                                          LogFilename SampleName
       1 PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt DIAGNOSTIC
         CartridgeID GPSUTCOffset   LocalTZ UserTZ StartOnNextPowerUp
-      1          NA           -8 Etc/GMT+8  FALSE              FALSE
+      1        <NA>           -8 Etc/GMT+8  FALSE              FALSE
         ProgrammedStartDelay ProgrammedRuntime VolumetricFlowRate FlowOffset
       1                    0            172800                  1          0
         DutyCycle DutyCycleWindow GPSEnabled LogFileMode LogInterval AppLock
@@ -202,7 +202,7 @@
                                                                         LogFilename
       1 20220511/PSP00030_LOG_2022-05-11T23_24_01UTC_---------------_----------.txt
         SampleName CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartTime
-      1         NA          NA           -7              FALSE                   0
+      1       <NA>        <NA>           -7              FALSE                   0
         ProgrammedRuntime SizeSelectiveInlet FlowRateSetpoint FlowOffset
       1              5.03              PM2.5                1          1
         FlowDutyCycle DutyCycleWindow GPSEnabled PMSensorInterval
@@ -244,7 +244,7 @@
                                                                         LogFilename
       1 20220324/PSP00055_LOG_2022-03-24T18_05_32UTC_DIAGNOSTIC________________.txt
         SampleName CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartTime
-      1 DIAGNOSTIC          NA           -6              FALSE                   0
+      1 DIAGNOSTIC        <NA>           -6              FALSE                   0
         ProgrammedRuntime SizeSelectiveInlet FlowRateSetpoint FlowOffset
       1              0.33               <NA>                0          0
         FlowDutyCycle DutyCycleWindow GPSEnabled PMSensorInterval
@@ -294,7 +294,7 @@
                                                                         LogFilename
       1 20240625/PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt
         SampleName CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartTime
-      1 GPS-in-out          NA           -6              FALSE                   0
+      1 GPS-in-out        <NA>           -6              FALSE                   0
         ProgrammedRuntime SizeSelectiveInlet FlowRateSetpoint FlowOffset
       1                NA              PM2.5                1          0
         FlowDutyCycle DutyCycleWindow GPSEnabled PMSensorInterval
@@ -344,7 +344,7 @@
                                                                         LogFilename
       1 20240613/PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt
         SampleName CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartTime
-      1 DIAGNOSTIC          NA           -6              FALSE                   0
+      1 DIAGNOSTIC        <NA>           -6              FALSE                   0
         ProgrammedRuntime SizeSelectiveInlet FlowRateSetpoint FlowOffset
       1              0.05              PM2.5                1          0
         FlowDutyCycle DutyCycleWindow GPSEnabled PMSensorInterval
