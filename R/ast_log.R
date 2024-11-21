@@ -292,12 +292,5 @@ format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(),
 
   }
 
-  # If there were actually zero rows in he sample log and now there is 1 row
-  # in the data frame (with the values appended from the header; all others NA),
-  # filter the dataframe so that it contains zero rows.
-  if(nrow(df) == 1){
-    df <- dplyr::filter(df, !is.na(.data$UnixTime))
-  }
-
   return(df)
 }
