@@ -162,7 +162,7 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
 #' upasv2_diag_header <- read_ast_header(upasv2_diag_file, update_names=FALSE)
 #' upasv2_diag_log <- format_upasv2_log(upasv2_diag_log_raw, upasv2_diag_header)
 
-format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()){
+format_upasv2_log = function(log, header, update_names=FALSE, cols_keep=c(), cols_drop=c()){
 
   # Get header data
   df_h <- dplyr::select(header, dplyr::any_of(c("ASTSampler","UPASserial",

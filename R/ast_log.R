@@ -166,7 +166,7 @@ read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_dro
 
   log <- astr::fread_ast_log(file)
 
-  header <- astr::read_ast_header(file)
+  header <- astr::read_ast_header(file, update_names, tz)
 
   df <- astr::format_ast_log(log, header, update_names, tz, cols_keep, cols_drop)
 
@@ -282,11 +282,11 @@ format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(),
 
     if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
 
-      df <- astr::format_upasv2x_log(log, header, update_names, tz, cols_keep, cols_drop)
+      df <- astr::format_upasv2x_log(log, header, update_names, cols_keep, cols_drop)
 
     }else if(grepl("UPAS_v2_0", firmware)){
 
-      df <- astr::format_upasv2_log(log, header, update_names, tz, cols_keep, cols_drop)
+      df <- astr::format_upasv2_log(log, header, update_names, cols_keep, cols_drop)
 
     }else if(grepl("HHBv2", firmware)){
 

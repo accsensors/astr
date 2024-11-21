@@ -178,7 +178,7 @@ format_upasv2x_header = function(data, tz=NA) {
 #' upasv2x_diag_log <- format_upasv2x_log(upasv2x_diag_log_raw, upasv2x_diag_header,
 #'                                   update_names=FALSE)
 
-format_upasv2x_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(), cols_drop=c()) {
+format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), cols_drop=c()) {
 
   df_h <- dplyr::select(header, dplyr::any_of(c("ASTSampler","UPASserial",
                                                 "UPASlogFilename","LogFilename",

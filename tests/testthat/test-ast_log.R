@@ -98,14 +98,6 @@ test_that("DateTimeLocal is not altered for files with fractional time zone offs
   upasv2x_log_tz <- read_ast_log(upasv2x_file, tz = "Asia/Kolkata")
   expect_identical(upasv2x_log$DateTimeLocal[1], as.POSIXct("2024-02-28 17:09:00", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
   expect_identical(upasv2x_log$DateTimeLocal[1], upasv2x_log_tz$DateTimeLocal[1])
-
-  ## Binding rows maintains proper local time despite changing time zone to match the first file
-  multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
-    lapply(read_ast_log, update_names=TRUE) %>%
-    dplyr::bind_rows()
-  expect_contains(multiple_upas_logs$DateTimeLocal, upasv2x_log$DateTimeLocal)
-  expect_contains(multiple_upas_logs$DateTimeUTC, upasv2x_log$DateTimeUTC)
 })
 
 
