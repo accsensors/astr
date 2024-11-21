@@ -210,7 +210,7 @@ format_upasv2_log = function(log, header, update_names=FALSE, cols_keep=c(), col
     }
 
   }else{
-    df <- cbind(df, df_h[-1,])
+    df <- cbind(log, df_h[-1,])
   }
 
   if(update_names){

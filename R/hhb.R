@@ -98,7 +98,7 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
     }
 
   }else{
-    df <- cbind(df, df_h[-1,])
+    df <- cbind(log, df_h[-1,])
   }
 
   df <- dplyr::relocate(df, dplyr::any_of(c("DateTimeLocal","LocalTZ")),

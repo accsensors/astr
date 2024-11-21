@@ -216,7 +216,7 @@ format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), co
    }
 
   }else{
-    df <- cbind(df, df_h[-1,])
+    df <- cbind(log, df_h[-1,])
   }
 
   # Remove any unnamed columns from firmwares with extra commas in the log
