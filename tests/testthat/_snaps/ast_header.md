@@ -11,16 +11,16 @@
       1         100 PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt
         PowerCycles CumulativeSamplingTime StartOnNextPowerUp       StartDateTime
       1           8                    5.7              FALSE 2020-06-02 18:26:25
-        GPSUTCOffset ProgrammedStartDelay ProgrammedRuntime VolumetricFlowRate
-      1           -6                    0            172800                  1
-        DutyCycle DutyCycleWindow GPSEnabled LogFileMode LogInterval AppLock
-      1       100              30       TRUE      normal          30       0
-        AppVersion ShutdownMode       ShutdownReason StartBatteryCharge
-      1     i2.1.9            1 user pushbutton stop                 53
-        StartBatteryVoltage EndBatteryCharge EndBatteryVoltage SampledVolume
-      1                2.83               53              2.85           0.9
-        SampledRuntime LoggedRuntime AverageVolumetricFlow
-      1          0.015         0.015                 1.016
+        GPSUTCOffset   LocalTZ UserTZ ProgrammedStartDelay ProgrammedRuntime
+      1           -6 Etc/GMT+6  FALSE                    0            172800
+        VolumetricFlowRate DutyCycle DutyCycleWindow GPSEnabled LogFileMode
+      1                  1       100              30       TRUE      normal
+        LogInterval AppLock AppVersion ShutdownMode       ShutdownReason
+      1          30       0     i2.1.9            1 user pushbutton stop
+        StartBatteryCharge StartBatteryVoltage EndBatteryCharge EndBatteryVoltage
+      1                 53                2.83               53              2.85
+        SampledVolume SampledRuntime LoggedRuntime AverageVolumetricFlow
+      1           0.9          0.015         0.015                 1.016
 
 ---
 
@@ -39,20 +39,22 @@
       1 -1.030556   0.525875    2.15325          2.99    2e-04   3.3004     9.37197
               CalUNIXTIME CalDateTime FlowOffset StartOnNextPowerUp
       1 1584561792.000000        <NA>          0              FALSE
-              StartDateTime GPSUTCOffset ProgrammedStartDelay ProgrammedRuntime
-      1 2020-06-02 18:29:11           -6                    0            172800
-        VolumetricFlowRate DutyCycle DutyCycleWindow GPSEnabled LogFileMode
-      1                  1         0              30       TRUE       debug
-        LogInterval AppLock AppVersion ShutdownMode ShutdownReason StartBatteryCharge
-      1           1       0     i2.1.9            0  unknown error                 53
-        StartBatteryVoltage EndBatteryCharge EndBatteryVoltage SampledVolume
-      1                2.83               53              2.88           1.5
-        SampledRuntime LoggedRuntime AverageVolumetricFlow MFSDIAGVoutBlocked
-      1          0.025         0.025                 1.001             0.6195
-        MFSDIAGVoutMax MFSDIAGVoutMin MFSDIAGMFBlocked MFSDIAGMFMax MFSDIAGMFMin
-      1       2.073125       0.944375                0     2.951006     0.499354
-        MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead
-      1             28.01557             7.109706         546.1166
+              StartDateTime GPSUTCOffset   LocalTZ UserTZ ProgrammedStartDelay
+      1 2020-06-02 18:29:11           -6 Etc/GMT+6  FALSE                    0
+        ProgrammedRuntime VolumetricFlowRate DutyCycle DutyCycleWindow GPSEnabled
+      1            172800                  1         0              30       TRUE
+        LogFileMode LogInterval AppLock AppVersion ShutdownMode ShutdownReason
+      1       debug           1       0     i2.1.9            0  unknown error
+        StartBatteryCharge StartBatteryVoltage EndBatteryCharge EndBatteryVoltage
+      1                 53                2.83               53              2.88
+        SampledVolume SampledRuntime LoggedRuntime AverageVolumetricFlow
+      1           1.5          0.025         0.025                 1.001
+        MFSDIAGVoutBlocked MFSDIAGVoutMax MFSDIAGVoutMin MFSDIAGMFBlocked
+      1             0.6195       2.073125       0.944375                0
+        MFSDIAGMFMax MFSDIAGMFMin MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin
+      1     2.951006     0.499354             28.01557             7.109706
+        MFSDIAGPDeadhead
+      1         546.1166
 
 ---
 
@@ -67,20 +69,20 @@
       1         125                   3                     0
                                                          LogFilename SampleName
       1 PS0166_LOG_2021-09-29T17_37_09UTC_test_______________---.txt       test
-        CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartDelay
-      1          NA           -6              FALSE                    0
-        ProgrammedRuntime VolumetricFlowRate FlowOffset DutyCycle DutyCycleWindow
-      1            172800                  1          0       100              30
-        GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
-      1       TRUE      normal          30       0     i2.2.2 2021-09-29 17:37:09
-          LocalTZ  StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 Etc/GMT+6 2021-09-29 11:37:09                 54                3.58
-             EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
-      1 2021-09-29 17:41:30 2021-09-29 11:41:30               54              3.54
-        ShutdownMode       ShutdownReason SampledVolume SampledRuntime LoggedRuntime
-      1            1 user pushbutton stop          4.28           0.07         0.069
-        AverageVolumetricFlowRate UserTZ
-      1                     1.022  FALSE
+        CartridgeID GPSUTCOffset   LocalTZ UserTZ StartOnNextPowerUp
+      1          NA           -6 Etc/GMT+6  FALSE              FALSE
+        ProgrammedStartDelay ProgrammedRuntime VolumetricFlowRate FlowOffset
+      1                    0            172800                  1          0
+        DutyCycle DutyCycleWindow GPSEnabled LogFileMode LogInterval AppLock
+      1       100              30       TRUE      normal          30       0
+        AppVersion    StartDateTimeUTC  StartDateTimeLocal StartBatteryCharge
+      1     i2.2.2 2021-09-29 17:37:09 2021-09-29 11:37:09                 54
+        StartBatteryVoltage      EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge
+      1                3.58 2021-09-29 17:41:30 2021-09-29 11:41:30               54
+        EndBatteryVoltage ShutdownMode       ShutdownReason SampledVolume
+      1              3.54            1 user pushbutton stop          4.28
+        SampledRuntime LoggedRuntime AverageVolumetricFlowRate
+      1           0.07         0.069                     1.022
 
 ---
 
@@ -95,28 +97,28 @@
       1         130                   1                     0
                                                          LogFilename SampleName
       1 PS1786_LOG_2023-03-02T21_45_43UTC_DIAGNOSTIC____________.txt DIAGNOSTIC
-        CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartDelay
-      1          NA           -8              FALSE                    0
-        ProgrammedRuntime VolumetricFlowRate FlowOffset DutyCycle DutyCycleWindow
-      1            172800                  1          0         0              30
-        GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
-      1       TRUE       debug           1       0     i2.2.2 2023-03-02 21:45:43
-          LocalTZ  StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 Etc/GMT+8 2023-03-02 13:45:43                 99                3.56
-             EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
-      1 2023-03-02 21:48:17 2023-03-02 13:48:17               99               3.5
-        ShutdownMode ShutdownReason SampledVolume SampledRuntime LoggedRuntime
-      1            0  unknown error          0.97          0.011         0.023
-        AverageVolumetricFlowRate      MF4       MF3       MF2      MF1       MF0
-      1                     1.538 0.329437 -0.478687 -0.141832 1.783128 -0.814451
-        MFSVoltMin MFSVoltMax MFSVoltMaxEst MFSMFMin MFSMFMax MFSMFMaxEst
-      1    0.49375    1.89925       1.89925        0   3.0629      3.0629
+        CartridgeID GPSUTCOffset   LocalTZ UserTZ StartOnNextPowerUp
+      1          NA           -8 Etc/GMT+8  FALSE              FALSE
+        ProgrammedStartDelay ProgrammedRuntime VolumetricFlowRate FlowOffset
+      1                    0            172800                  1          0
+        DutyCycle DutyCycleWindow GPSEnabled LogFileMode LogInterval AppLock
+      1         0              30       TRUE       debug           1       0
+        AppVersion    StartDateTimeUTC  StartDateTimeLocal StartBatteryCharge
+      1     i2.2.2 2023-03-02 21:45:43 2023-03-02 13:45:43                 99
+        StartBatteryVoltage      EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge
+      1                3.56 2023-03-02 21:48:17 2023-03-02 13:48:17               99
+        EndBatteryVoltage ShutdownMode ShutdownReason SampledVolume SampledRuntime
+      1               3.5            0  unknown error          0.97          0.011
+        LoggedRuntime AverageVolumetricFlowRate      MF4       MF3       MF2      MF1
+      1         0.023                     1.538 0.329437 -0.478687 -0.141832 1.783128
+              MF0 MFSVoltMin MFSVoltMax MFSVoltMaxEst MFSMFMin MFSMFMax MFSMFMaxEst
+      1 -0.814451    0.49375    1.89925       1.89925        0   3.0629      3.0629
               CalUNIXTIME         CalDateTime MFSDIAGVoutBlocked MFSDIAGVoutMax
       1 1677782528.000000 2023-03-02 18:42:08               0.54       1.914125
         MFSDIAGVoutMin MFSDIAGMFBlocked MFSDIAGMFMax MFSDIAGMFMin
       1         0.8405                0       3.0629     0.464254
-        MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead UserTZ
-      1             28.00899             7.160145          1638.35  FALSE
+        MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin MFSDIAGPDeadhead
+      1             28.00899             7.160145          1638.35
 
 ---
 
@@ -131,20 +133,20 @@
       1         138                  43                 532.6
                                                          LogFilename SampleName
       1 PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt GPSoutside
-        CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartDelay
-      1         Eng           -6              FALSE                    0
-        ProgrammedRuntime VolumetricFlowRate FlowOffset DutyCycle DutyCycleWindow
-      1           3.6e+08                  1          0       100              30
-        GPSEnabled LogFileMode LogInterval AppLock AppVersion    StartDateTimeUTC
-      1       TRUE      normal          30       0     i2.2.2 2024-06-13 21:20:17
-          LocalTZ  StartDateTimeLocal StartBatteryCharge StartBatteryVoltage
-      1 Etc/GMT+6 2024-06-13 15:20:17                 93                4.04
-             EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge EndBatteryVoltage
-      1 2024-06-13 21:25:30 2024-06-13 15:25:30               93              4.01
-        ShutdownMode       ShutdownReason SampledVolume SampledRuntime LoggedRuntime
-      1            1 user pushbutton stop          5.02          0.084         0.084
-        AverageVolumetricFlowRate UserTZ
-      1                     0.997  FALSE
+        CartridgeID GPSUTCOffset   LocalTZ UserTZ StartOnNextPowerUp
+      1         Eng           -6 Etc/GMT+6  FALSE              FALSE
+        ProgrammedStartDelay ProgrammedRuntime VolumetricFlowRate FlowOffset
+      1                    0           3.6e+08                  1          0
+        DutyCycle DutyCycleWindow GPSEnabled LogFileMode LogInterval AppLock
+      1       100              30       TRUE      normal          30       0
+        AppVersion    StartDateTimeUTC  StartDateTimeLocal StartBatteryCharge
+      1     i2.2.2 2024-06-13 21:20:17 2024-06-13 15:20:17                 93
+        StartBatteryVoltage      EndDateTimeUTC    EndDateTimeLocal EndBatteryCharge
+      1                4.04 2024-06-13 21:25:30 2024-06-13 15:25:30               93
+        EndBatteryVoltage ShutdownMode       ShutdownReason SampledVolume
+      1              4.01            1 user pushbutton stop          5.02
+        SampledRuntime LoggedRuntime AverageVolumetricFlowRate
+      1          0.084         0.084                     0.997
 
 # read_ast_header works with all UPASv2x firmwares
 

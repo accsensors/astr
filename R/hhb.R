@@ -70,11 +70,16 @@ format_hhb_header = function(df) {
 
 format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
 
-  if (nrow(log) > 0) {
+  df_h <- dplyr::select(header,
+                        dplyr::any_of(c("HHBserial","LogFileName","SampleName",
+                                        "StartDateTimeUTC")),
+                        dplyr::contains(c("ID","VolumetricFlowRate"),
+                                        ignore.case=F))
+  df_h <- dplyr::mutate(df_h,
+                        UserTZ  = ifelse(!is.na(tz), T, F),
+                        LocalTZ = astr::get_tz_string(header$UTCOffset, tz=tz))
 
-    df_h <- dplyr::select(header,
-                          dplyr::any_of(c("HHBserial","LogFileName","SampleName","StartDateTimeUTC")),
-                          dplyr::contains(c("ID","VolumetricFlowRate"), ignore.case=F))
+  if (nrow(log) > 0) {
 
     df <- dplyr::mutate(log,
             SampleTime = ifelse(.data$SampleTime == "99:99:99", NA,
@@ -83,25 +88,26 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
                           3600*as.numeric(sapply(.data$SampleTime, `[`, 1)) +
                             60*as.numeric(sapply(.data$SampleTime, `[`, 2)) +
                             as.numeric(sapply(.data$SampleTime, `[`, 3)),
-                          units="secs"),
-            UserTZ  = ifelse(!is.na(tz), T, F),
-            LocalTZ = astr::get_tz_string(header$UTCOffset, tz=tz))
+                          units="secs"))
 
-    if(!is.na(unique(df$LocalTZ))){
-      df <- dplyr::mutate(df,
-                          DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
-                                                      tzone=unique(df$LocalTZ)))
-    }
-
-    df <- dplyr::relocate(df, dplyr::any_of(c("DateTimeLocal","LocalTZ")),
-                          .after = "DateTimeUTC")
     df <- cbind(df, df_h)
 
-    if (!is.null(cols_keep)){
-      df <- dplyr::select(df, dplyr::all_of(cols_keep))
-    }else if (!is.null(cols_drop)){
-      df <- dplyr::select(df, -dplyr::all_of(cols_drop))
+    if(!is.na(unique(df$LocalTZ))){
+      df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(
+                                   .data$DateTimeUTC, tzone=unique(df$LocalTZ)))
     }
+
+  }else{
+    df <- cbind(df, df_h[-1,])
+  }
+
+  df <- dplyr::relocate(df, dplyr::any_of(c("DateTimeLocal","LocalTZ")),
+                        .after = "DateTimeUTC")
+
+  if (!is.null(cols_keep)){
+    df <- dplyr::select(df, dplyr::all_of(cols_keep))
+  }else if (!is.null(cols_drop)){
+    df <- dplyr::select(df, -dplyr::all_of(cols_drop))
   }
 
   return(df)

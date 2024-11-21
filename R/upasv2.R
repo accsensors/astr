@@ -77,21 +77,18 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
                     .data$ShutdownMode == 4 ~ "thermal protection",
                     .data$ShutdownMode == 5 ~ "max power at initialization",
                     .data$ShutdownMode == 6 ~ "max power during sample",
-                    .data$ShutdownMode == 7 ~ "blocked flow"))
-
+                    .data$ShutdownMode == 7 ~ "blocked flow"),
+                  UserTZ  = ifelse(!is.na(tz), T, F),
+                  LocalTZ = astr::get_tz_string(.data$GPSUTCOffset, tz=tz))
 
   if(data$FirmwareRev > 100){
 
     data <- dplyr::mutate(data,
-             UserTZ   = ifelse(!is.na(tz), T, F),
-             LocalTZ  = astr::get_tz_string(.data$GPSUTCOffset, tz=tz),
              SampleName  = gsub("_+$", "", .data$SampleName),
              SampleName  = ifelse(.data$SampleName != "", .data$SampleName, NA),
              CartridgeID = gsub("_+$", "", .data$CartridgeID),
              CartridgeID = gsub("-+$", "", .data$CartridgeID),
              CartridgeID = ifelse(.data$CartridgeID != "",.data$CartridgeID,NA))
-
-    # tz_string <- astr::get_tz_string(data$GPSUTCOffset, tz=tz)
 
     if(!is.na(data$LocalTZ)){
       data <- dplyr::mutate(data,
@@ -102,14 +99,12 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
                               lubridate::with_tz(.data$EndDateTimeUTC,
                                                  tzone = data$LocalTZ))
     }
-
-    data <- dplyr::relocate(data, "LocalTZ", .after = "StartDateTimeUTC")
   }
 
-  data <- data %>%
-    dplyr::relocate("ASTSampler") %>%
-    dplyr::relocate("FirmwareRev", .after = "Firmware") %>%
-    dplyr::relocate("ShutdownReason", .after = "ShutdownMode")
+  data <- dplyr::relocate(data, "ASTSampler")
+  data <- dplyr::relocate(data, "FirmwareRev", .after = "Firmware")
+  data <- dplyr::relocate(data, "ShutdownReason", .after = "ShutdownMode")
+  data <- dplyr::relocate(data, c("LocalTZ","UserTZ"), .after = "GPSUTCOffset")
 
   if(update_names){
 
@@ -174,7 +169,8 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
                                                 "UPASlogFilename","LogFilename",
                                                 "SampleName","CartridgeID",
                                                 "StartDateTimeUTC",
-                                                "LogFileMode")))
+                                                "LogFileMode",
+                                                "UserTZ","LocalTZ")))
 
   if(nrow(log) > 0){
 
@@ -194,50 +190,28 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
             dplyr::across(-dplyr::any_of(c("SampleTime","DateTimeUTC",
                                            "UTCDateTime","DateTimeLocal")),
                           \(x) as.numeric(x)),
-            UserTZ  = ifelse(!is.na(tz), T, F))
+            dplyr::across(dplyr::any_of(c("PumpsON","Dead","BCS1","BCS2",
+                                          "BC_NPG")), \(x) as.logical(x)))
 
-    if("UTCDateTime" %in% colnames(df)){ # For firmware version 100
+    df <- cbind(df, df_h)
 
-      df <- dplyr::mutate(df, LocalTZ = ifelse(!is.na(tz), tz, NA))
+    if(!is.na(unique(df$LocalTZ))){
 
-      if(!is.na(unique(df$LocalTZ))){
+      if("UTCDateTime" %in% colnames(df)){ # For firmware version 100
 
-        df <- dplyr::mutate(df,
-                           DateTimeLocal = lubridate::with_tz(.data$UTCDateTime,
-                                                      tzone=unique(df$LocalTZ)))
+        df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(
+                                   .data$UTCDateTime, tzone=unique(df$LocalTZ)))
 
-        df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="UTCDateTime")
-      }
+      }else{ # For firmware version > 100
 
-    }else{ # For firmware version > 100
-
-      df <- dplyr::mutate(df, LocalTZ = astr::get_tz_string(header$GPSUTCOffset, tz=tz))
-
-      if(!is.na(unique(df$LocalTZ))){
-        df <- dplyr::mutate(df,
-                           DateTimeLocal = lubridate::with_tz(.data$DateTimeUTC,
-                                                      tzone=unique(df$LocalTZ)))
-      }
-
-      df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
-
-    }
-
-    if(!is.null(header$LogFileMode)){
-      # For debug files
-      if((header$LogFileMode == "debug") & ("PumpsON" %in% colnames(df))){
-
-        df <- dplyr::mutate(df,
-                            dplyr::across(dplyr::any_of(c("PumpsON","Dead","BCS1","BCS2",
-                                            "BC_NPG")), \(x) as.logical(x)))
-
-        if(("gpsspeed" %in% colnames(df)) & update_names){
-          df <-  dplyr::rename(df, GPSspeed   = "gpsspeed",
-                                   GPSquality = "gpsquality")}
+        df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(
+                                   .data$DateTimeUTC, tzone=unique(df$LocalTZ)))
       }
     }
+
+  }else{
+    df <- cbind(df, df_h[-1,])
   }
-
 
   if(update_names){
 
@@ -256,16 +230,18 @@ format_upasv2_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c
                                         GPShDOP         = "GPShdop",
                                         BattVolt        = "BFGvolt",
                                         #DIAGNOSTIC FILES
+                                        GPSspeed        = "gpsspeed",
+                                        GPSQual         = "gpsquality",
                                         GPSQual         = "GPSquality",
                                         MFSVout         = "MFSVolt"
                                         #TODO convert BGFvolt to a battery percentage for shiny app output
                                         )))
   }
 
-  df <- cbind(df, df_h)
-
-  df <- df %>%
-    dplyr::relocate(dplyr::any_of(c("ASTSampler", "UPASserial", "SampleName", "CartridgeID")))
+  df <- dplyr::relocate(df, dplyr::any_of(c("ASTSampler", "UPASserial",
+                                            "SampleName", "CartridgeID")))
+  df <- dplyr::relocate(df, dplyr::any_of(c("LocalTZ","DateTimeLocal")),
+                        .after=dplyr::any_of(c("DateTimeUTC","UTCDateTime")))
 
   if(!is.null(cols_keep)){
     df <- dplyr::select(df, dplyr::all_of(cols_keep))

@@ -218,8 +218,10 @@ fread_ast_log = function(file){
                           skip = nrow_header_skip,
                           blank.lines.skip = TRUE, stringsAsFactors = FALSE)
 
-  if(df$SampleTime[1] == "(HH:MM:SS)"){ # For files with units below header
-    df <- df[-1, ] # Remove row with units
+  if(nrow(df) > 0){ # If there is sample log data
+    if(df$SampleTime[1] == "(HH:MM:SS)"){ # For files with units below header
+      df <- df[-1, ] # Remove row with units
+    }
   }
 
   return(df)
