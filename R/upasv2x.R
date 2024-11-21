@@ -165,7 +165,7 @@ format_upasv2x_header = function(data, tz=NA) {
 #' # Use of cols_drop, cols_keep, and tz  with a UPASv2x log file
 #' upasv2x_log_colsdrop <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
 #'                 cols_drop = c("DateTimeLocal", "AtmoT", "AtmoP", "AtmoRH"))
-#' upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, tz="America/New_York",
+#' upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
 #'                 cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
 #'                                "LocalTZ",  "UserTZ", "AtmoT", "AtmoP", "AtmoRH"))
 #'
@@ -185,8 +185,6 @@ format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), co
                                                 "SampleName","CartridgeID",
                                                 "StartDateTimeUTC",
                                                 "UserTZ","LocalTZ")))
-
-  if(nrow(log) > 0){
 
    df <- dplyr::mutate(log,
     dplyr::across(-dplyr::any_of(c("SampleTime","DateTimeUTC","DateTimeLocal")),
@@ -208,19 +206,15 @@ format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), co
     GPSspeed = ifelse(.data$GPSspeed == -9999, NA, .data$GPSspeed),
     GPShDOP  = ifelse(.data$GPShDOP  == -9999, NA, .data$GPShDOP))
 
+   # Remove any unnamed columns from firmwares with extra commas in the log
+   df <- dplyr::select(df, -dplyr::starts_with("V1"))
+
    df <- cbind(df, df_h)
 
    if(!is.na(unique(df$LocalTZ))){
     df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(
                                    .data$DateTimeUTC, tzone=unique(df$LocalTZ)))
    }
-
-  }else{
-    df <- cbind(log, df_h[-1,])
-  }
-
-  # Remove any unnamed columns from firmwares with extra commas in the log
-  df <- dplyr::select(df, -dplyr::starts_with("V1"))
 
   df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
   df <- dplyr::relocate(df, dplyr::any_of(c("ASTSampler","UPASserial","SampleName","CartridgeID")))

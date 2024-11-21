@@ -278,22 +278,25 @@ format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(),
 
   firmware <- header$Firmware
 
-  if(nrow(log)>0){
+  if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
 
-    if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
+    df <- astr::format_upasv2x_log(log, header, update_names, cols_keep, cols_drop)
 
-      df <- astr::format_upasv2x_log(log, header, update_names, cols_keep, cols_drop)
+  }else if(grepl("UPAS_v2_0", firmware)){
 
-    }else if(grepl("UPAS_v2_0", firmware)){
+    df <- astr::format_upasv2_log(log, header, update_names, cols_keep, cols_drop)
 
-      df <- astr::format_upasv2_log(log, header, update_names, cols_keep, cols_drop)
+  }else if(grepl("HHBv2", firmware)){
 
-    }else if(grepl("HHBv2", firmware)){
+    df <- astr::format_hhb_log(log, header, tz, cols_keep, cols_drop)
 
-      df <- astr::format_hhb_log(log, header, tz, cols_keep, cols_drop)
+  }
 
-    }
-
+  # If there were actually zero rows in he sample log and now there is 1 row
+  # in the data frame (with the values appended from the header; all others NA),
+  # filter the dataframe so that it contains zero rows.
+  if(nrow(df) == 1){
+    df <- dplyr::filter(df, !is.na(.data$UnixTime))
   }
 
   return(df)

@@ -79,8 +79,6 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
                         UserTZ  = ifelse(!is.na(tz), T, F),
                         LocalTZ = astr::get_tz_string(header$UTCOffset, tz=tz))
 
-  if (nrow(log) > 0) {
-
     df <- dplyr::mutate(log,
             SampleTime = ifelse(.data$SampleTime == "99:99:99", NA,
                                 strsplit(.data$SampleTime,":")),
@@ -96,10 +94,6 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
       df <- dplyr::mutate(df, DateTimeLocal = lubridate::with_tz(
                                    .data$DateTimeUTC, tzone=unique(df$LocalTZ)))
     }
-
-  }else{
-    df <- cbind(log, df_h[-1,])
-  }
 
   df <- dplyr::relocate(df, dplyr::any_of(c("DateTimeLocal","LocalTZ")),
                         .after = "DateTimeUTC")

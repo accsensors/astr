@@ -48,7 +48,7 @@ upasv2x_log <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, update_names=
 # Use of cols_drop, cols_keep, and tz  with a UPASv2x log file
 upasv2x_log_colsdrop <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
                 cols_drop = c("DateTimeLocal", "AtmoT", "AtmoP", "AtmoRH"))
-upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, tz="America/New_York",
+upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
                 cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
                                "LocalTZ",  "UserTZ", "AtmoT", "AtmoP", "AtmoRH"))
 

@@ -172,8 +172,6 @@ format_upasv2_log = function(log, header, update_names=FALSE, cols_keep=c(), col
                                                 "LogFileMode",
                                                 "UserTZ","LocalTZ")))
 
-  if(nrow(log) > 0){
-
     df <- dplyr::mutate(log,
             SampleTime = ifelse(.data$SampleTime == "99:99:99", NA,
                                 .data$SampleTime),
@@ -208,10 +206,6 @@ format_upasv2_log = function(log, header, update_names=FALSE, cols_keep=c(), col
                                    .data$DateTimeUTC, tzone=unique(df$LocalTZ)))
       }
     }
-
-  }else{
-    df <- cbind(log, df_h[-1,])
-  }
 
   if(update_names){
 
