@@ -1,0 +1,116 @@
+PARAMETER,VALUE,UNITS/NOTES
+
+UPASserial,00069,(UPAS serial identification-numerical)
+UPASpcbRev,0,(UPAS pcb revision number)
+UPASexpRev,0CR0,(UPAS expansion pcb rev)
+MotionID,0x6B,0x6B=LSM6DSRX 0x6C=LSM6DSOX)
+PMserial,ABD10DFBD05311B7_2.3_7_2.0,(SPS30 serial identification_FWver_HWrev_SHDLCver)
+CO2serial,0x0ee1bf073b79,(SCD4x serial identification)
+Gasserial,0x000003d94a9d,(SGP4x serial identification)
+UPASfirmware,UPAS_v2_x-rev_00158-L476RE_20241114_mbedOS-6_15_1.bin compiled Nov 14 2024_17:18:05 UTC,(installed firmware version)
+LifetimeSampleCount,26,(count-total lifetime sample runs)
+LifetimeSampleRuntime,    0.55,(hrs-total lifetime cumulative sample runtime)
+LifetimeBatteryRuntime,    0.55,(hrs-total lifetime cumulative battery runtime starting 20241109)
+LifetimeSamplePumptime,    9.16,(hrs-total lifetime cumulative filter pump runtime starting 20241109)
+LifetimePMSensorFanStartCount,   25,(#-total lifetime pm sensor fan starts starting 20241109)
+LifetimePMSensorFanHours,    0.54,(hrs-total lifetime pm sensor fan runtime starting 20241109)
+LifetimePMSensorPMMC,   0.000002,(mg-total lifetime pm massestimate through PM Sensor starting 20241109)
+LifetimeCO2SensorHours,    0.55,(hrs-total lifetime co2 sensor runtime starting 20241109)
+LifetimeVOCSensorHours,    0.55,(hrs-total lifetime voc sensor runtime starting 20241109)
+
+
+
+
+SAMPLE IDENTIFICATION
+
+LogFilename,/sd/20241121/PSP00069_LOG_2024-11-21T21_42_29UTC_no-log__________----------.txt,(log file filename-automatically defined)
+SampleName,no-log_________,(Sample Name-user entered into app)
+CartridgeID,----------,(Cartridge Identification-user entered into app)
+
+
+
+
+SETUP SUMMARY
+
+GPSUTCOffset,-7.00,(hours offset from UTC date time)
+StartOnNextPowerUp,0,(0=no 1=yes 2=system reset)
+ProgrammedStartTime,0,(0 = Now or Start On Next or seconds since 1/1/1970)
+ProgrammedRuntime,indefinite,(Hr)
+SizeSelectiveInlet,PM2.5,(inlet particle size fraction)
+FlowRateSetpoint,1.000,(L*min^-1)
+FlowOffset,0.000000,(%)
+FlowDutyCycle,100,(%)
+DutyCycleWindow,30,(s)
+GPSEnabled,1,(0=no 1=yes)
+PMSensorInterval,1,(0=sensor disabled 1=continuous measurement 2-15=intermittent measurement interval in minutes 16=15s warmup-5s measurement-10s sleep 17=15s warmup-5s measurement-40s sleep 18=20s warmup-10s measurement-30s sleep)
+RTGasSampleState,1,(0=off 1=on)
+CO2SampleState,1,(0=off 1=on)
+LogInterval,30,(s)
+SamplerConfiguration,0,(0=personal/mobile 1=stationary)
+ExternalPowerMode,F0,(0F=off F0=on)
+PowerSaveMode,0,(0=off 1=on)
+AppLock,0,(0=unlocked 1=locked -1=not set)
+AppVersion,i1.0.4,(i=iOS A=Android)
+
+
+
+
+SAMPLE SUMMARY
+
+StartDateTimeUTC,2024-11-21T21:42:29,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+StartDateTimeLocal,2024-11-21T14:42:29,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+EndDateTimeUTC,2024-11-21T21:43:09,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+EndDateTimeLocal,2024-11-21T14:43:09,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+FlowCheckMeterReadingPreSample,NA,(L*min^-1)
+FlowCheckMeterReadingPostSample,NA,(L*min^-1)
+OverallDuration,0000.000,(Hr)
+PumpingDuration,0000.000,(Hr)
+OverallFlowRateAverage,0.000,(L*min^-1)
+PumpingFlowRateAverage,0.000,(L*min^-1)
+SampledVolume,0000000.00,(L)
+PercentTimeWorn,000.0,(%)
+StartBatteryCharge,099,(%)
+EndBatteryCharge,000,(%)
+StartBatteryVoltage,4.09,(V)
+EndBatteryVoltage,0.00,(V)
+ShutdownMode,01,(0=unknown error shutdown 1=user pushbutton sample stop 2=depleted battery shutdown [<2.6v] 3=successfully completed preset sample duration 4=thermal protection shutdown 5=max power at initialization error 6=max pump voltage during sample shutdown 7=blocked flow during sample shutdown 8=SD card removed during sample 64+=freeze 80+=RTOS crash)
+
+
+
+
+CO2 SENSOR CALIBRATION
+
+CO2CalDate,2022-05-17T22:08:14,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+CO2CalTarget,417,(ppm)
+CO2CalOffset,-31,(ppm)
+
+
+
+
+MASS FLOW SENSOR CALIBRATION
+
+MFSCalDate,2022-03-22T03:01:20,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+MFSCalPerson,,(name of person running and approving calibration)
+MFSCalVoutBlocked,,(V)
+MFSCalVoutMin,0.460000,(V)
+MFSCalVoutMax,1.908500,(V)
+MFSCalMFBlocked,,(g*min^-1)
+MFSCalMFMin,0.012286,(g*min^-1)
+MFSCalMFMax,3.274300,(g*min^-1)
+MFSCalPumpVBoostMin,,(V)
+MFSCalPumpVBoostMax,,(V)
+MFSCalPDeadhead,,(Pa)
+MF4,0.671731,(coefficient)
+MF3,-1.864960,(coefficient)
+MF2,1.850003,(coefficient)
+MF1,0.553355,(coefficient)
+MF0,-0.482266,(coefficient)
+
+
+
+
+SAMPLE LOG
+
+DateTime,DateTime,DateTime,DateTime,DateTime,FilterSample,FilterSample,FilterSample,FilterSample,Battery,Atmo,Atmo,Atmo,Atmo,Atmo,GPS,GPS,GPS,GPS,GPS,GPS,GPS,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Motion,Light,Light,Light,Light,Light,Light,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,PMSensor,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,EngData,Gas,Gas,Gas,Gas,Gas
+SampleTime,UnixTime,UnixTimeMCU,DateTimeUTC,DateTimeLocal,PumpingFlowRate,OverallFlowRate,SampledVolume,FilterDP,BatteryCharge,AtmoT,AtmoP,AtmoRH,AtmoDensity,AtmoAlt,GPSQual,GPSlat,GPSlon,GPSalt,GPSsat,GPSspeed,GPShDOP,AccelX,AccelXVar,AccelXMin,AccelXMax,AccelY,AccelYVar,AccelYMin,AccelYMax,AccelZ,AccelZVar,AccelZMin,AccelZMax,RotX,RotXVar,RotXMin,RotXMax,RotY,RotYVar,RotYMin,RotYMax,RotZ,RotZVar,RotZMin,RotZMax,AccelComplianceCnt,AccelComplianceHrs,Xup,XDown,Yup,Ydown,Zup,Zdown,StepCount,LUX,UVindex,HighVisRaw,LowVisRaw,IRRaw,UVRaw,PMMeasCnt,PM1MC,PM1MCVar,PM2_5MC,PM2_5MCVar,PM4MC,PM4MCVar,PM10MC,PM10MCVar,PM0_5NC,PM0_5NCVar,PM1NC,PM1NCVar,PM2_5NC,PM2_5NCVar,PM4NC,PM4NCVar,PM10NC,PM10NCVar,PMtypicalParticleSize,PMtypicalParticleSizeVar,PM2_5SampledMass,PMReadingErrorCnt,PMFanErrorCnt,PMLaserErrorCnt,PMFanSpeedWarn,PCB1T,PCB2T,FdpT,AccelT,PT100R,PCB2P,PumpPow1,PumpPow2,PumpV,MassFlow,MFSVout,BFGenergy,BattVolt,v3_3,v5,PumpsON,Dead,BCS1,BCS2,BC_NPG,FLOWCTL,GPSRT,SD_DATAW,SD_HEADW,TPumpsOFF,TPumpsON,CO2,SCDT,SCDRH,VOCRaw,NOXRaw
+(HH:MM:SS),(s),(s),(YYYY-MM-DDTHH:MM:SS) (UTC date time format),(YYYY-MM-DDTHH:MM:SS) (Local date time format),(L*min^-1),(L*min^-1),(L),(Pa),(%),(C),(hPa),(%RH),(g*L^-1),(m ASL),(-),(decimalDegree),(decimalDegree),(m),(integer),(m*s^-1),(-),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mg),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(mdeg*s^-1),(#),(hrs),(%),(%),(%),(%),(%),(%),(#),(lux),(-),(-),(-),(-),(-),(#),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(#*cm^-3),(um),(um),(ug),(#),(#),(#),(#),(C),(C),(C),(C),(ohm),(hPa),(integer),(integer),(V),(g*min^-1),(V),(integer),(V),(V),(V),(bool),(bool),(bool),(bool),(bool),(s),(s),(s),(s),(s),(s),(ppm),(C),(%),(-),(-)

@@ -166,7 +166,7 @@ read_ast_log = function(file, update_names=FALSE, tz=NA, cols_keep=c(), cols_dro
 
   log <- astr::fread_ast_log(file)
 
-  header <- astr::read_ast_header(file)
+  header <- astr::read_ast_header(file, update_names, tz)
 
   df <- astr::format_ast_log(log, header, update_names, tz, cols_keep, cols_drop)
 
@@ -218,8 +218,10 @@ fread_ast_log = function(file){
                           skip = nrow_header_skip,
                           blank.lines.skip = TRUE, stringsAsFactors = FALSE)
 
-  if(df$SampleTime[1] == "(HH:MM:SS)"){ # For files with units below header
-    df <- df[-1, ] # Remove row with units
+  if(nrow(df) > 0){ # If there is sample log data
+    if(df$SampleTime[1] == "(HH:MM:SS)"){ # For files with units below header
+      df <- df[-1, ] # Remove row with units
+    }
   }
 
   return(df)
@@ -276,21 +278,17 @@ format_ast_log = function(log, header, update_names=FALSE, tz=NA, cols_keep=c(),
 
   firmware <- header$Firmware
 
-  if(nrow(log)>0){
+  if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
 
-    if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
+    df <- astr::format_upasv2x_log(log, header, update_names, cols_keep, cols_drop)
 
-      df <- astr::format_upasv2x_log(log, header, update_names, tz, cols_keep, cols_drop)
+  }else if(grepl("UPAS_v2_0", firmware)){
 
-    }else if(grepl("UPAS_v2_0", firmware)){
+    df <- astr::format_upasv2_log(log, header, update_names, cols_keep, cols_drop)
 
-      df <- astr::format_upasv2_log(log, header, update_names, tz, cols_keep, cols_drop)
+  }else if(grepl("HHBv2", firmware)){
 
-    }else if(grepl("HHBv2", firmware)){
-
-      df <- astr::format_hhb_log(log, header, tz, cols_keep, cols_drop)
-
-    }
+    df <- astr::format_hhb_log(log, header, tz, cols_keep, cols_drop)
 
   }
 

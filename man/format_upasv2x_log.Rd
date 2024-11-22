@@ -8,7 +8,6 @@ format_upasv2x_log(
   log,
   header,
   update_names = FALSE,
-  tz = NA,
   cols_keep = c(),
   cols_drop = c()
 )
@@ -22,18 +21,6 @@ format_upasv2x_log(
 files written using older firmware versions to the variable names used in the
 current firmware version. Variable names cannot be updated for files
 written using UPAS v2 firmware versions preceding rev100.}
-
-\item{tz}{Optional: A character string specifying the tz database time zone
-that should be used to display local times. Example tz database time zones
-include: "America/New_York", "America/Denver", and "America/Los_Angeles".
-For additional information, see: \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones}
-
-If the \code{tz} parameter is not specified, local times will be displayed using
-the time zone associated with the GPSUTCOffset in the log file.
-
-Note that, in the unlikely event that your local time zone is
-"Australia/Lord_Howe," you will need to specify this time zone using the tz
-parameter to ensure that your local times are displayed correctly.}
 
 \item{cols_keep}{Optional: A character vector specifying the names of a subset of sample log columns to keep.}
 
@@ -61,7 +48,7 @@ upasv2x_log <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, update_names=
 # Use of cols_drop, cols_keep, and tz  with a UPASv2x log file
 upasv2x_log_colsdrop <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
                 cols_drop = c("DateTimeLocal", "AtmoT", "AtmoP", "AtmoRH"))
-upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header, tz="America/New_York",
+upasv2x_log_colskeep <- format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
                 cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
                                "LocalTZ",  "UserTZ", "AtmoT", "AtmoP", "AtmoRH"))
 

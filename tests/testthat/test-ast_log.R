@@ -42,10 +42,29 @@ test_that("fread_ast_log works with SHEAR UPASv2x  file", {
   expect_gt(ncol(log_raw), 3)
 })
 
+test_that("fread_ast_log works with UPASv2 file with any empty sample log", {
+  filename <- 'PS2061_LOG_2024-11-21T21_40_53UTC_no-log________________.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_s3_class(log_raw, "data.frame")
+  expect_true(nrow(log_raw) == 0)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
+test_that("fread_ast_log works with UPASv2x file with any empty sample log", {
+    filename <- 'PSP00069_LOG_2024-11-21T21_42_29UTC_no-log__________----------.txt'
+    file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+    log_raw <- fread_ast_log(file)
+    expect_s3_class(log_raw, "data.frame")
+    expect_true(nrow(log_raw) == 0)
+    expect_identical(colnames(log_raw)[1], "SampleTime")
+    expect_gt(ncol(log_raw), 3)
+})
+
 ###################################
 # read_ast_log
 ###################################
-#test cols_keep and cols_drop (also add to examples)
 
 test_that("If using update names for UPASv2, all applicable column names are updated to match UPASv2x", {
   upasv2_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
@@ -98,16 +117,45 @@ test_that("DateTimeLocal is not altered for files with fractional time zone offs
   upasv2x_log_tz <- read_ast_log(upasv2x_file, tz = "Asia/Kolkata")
   expect_identical(upasv2x_log$DateTimeLocal[1], as.POSIXct("2024-02-28 17:09:00", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
   expect_identical(upasv2x_log$DateTimeLocal[1], upasv2x_log_tz$DateTimeLocal[1])
-
-  ## Binding rows maintains proper local time despite changing time zone to match the first file
-  multiple_upas_logs <- system.file("extdata", package = "astr", mustWork = TRUE) |>
-    list.files(pattern="^PS.*.txt$", full.names = TRUE) %>%
-    lapply(read_ast_log, update_names=TRUE) %>%
-    dplyr::bind_rows()
-  expect_contains(multiple_upas_logs$DateTimeLocal, upasv2x_log$DateTimeLocal)
-  expect_contains(multiple_upas_logs$DateTimeUTC, upasv2x_log$DateTimeUTC)
 })
 
+test_that("An empty UPASv2 sample log returns a dataframe with the same columns and types as a UPASv2 sample log that contains data", {
+  upasv2_filename    <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+  upasv2_fname_empty <- 'PS2061_LOG_2024-11-21T21_40_53UTC_no-log________________.txt'
+  upasv2_file    <- system.file("extdata", upasv2_filename,    package = "astr", mustWork = TRUE)
+  upasv2_f_empty <- system.file("extdata", upasv2_fname_empty, package = "astr", mustWork = TRUE)
+  upasv2_log       <- read_ast_log(upasv2_file)
+  upasv2_log_empty <- read_ast_log(upasv2_f_empty)
+  expect_s3_class(upasv2_log_empty, "data.frame")
+  expect_true(nrow(upasv2_log_empty) == 0)
+  expect_true(ncol(upasv2_log) == ncol(upasv2_log_empty))
+  expect_true(unique(sapply(upasv2_log, typeof) == sapply(upasv2_log_empty, typeof)))
+})
+
+test_that("An empty UPASv2x sample log returns a dataframe with the same columns and types as a UPASv2x sample log that contains data", {
+    upasv2x_filename    <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+    upasv2x_fname_empty <- 'PSP00069_LOG_2024-11-21T21_42_29UTC_no-log__________----------.txt'
+    upasv2x_file    <- system.file("extdata", upasv2x_filename,    package = "astr", mustWork = TRUE)
+    upasv2x_f_empty <- system.file("extdata", upasv2x_fname_empty, package = "astr", mustWork = TRUE)
+    upasv2x_log       <- read_ast_log(upasv2x_file)
+    upasv2x_log_empty <- read_ast_log(upasv2x_f_empty)
+    expect_s3_class(upasv2x_log_empty, "data.frame")
+    expect_true(nrow(upasv2x_log_empty) == 0)
+    expect_true(ncol(upasv2x_log) == ncol(upasv2x_log_empty))
+    expect_true(unique(sapply(upasv2x_log, typeof) == sapply(upasv2x_log_empty, typeof)))
+})
+
+test_that("Binding rows when empty log files are included doesn't add any data to the data frame.", {
+  flist <- system.file("extdata", package = "astr", mustWork = TRUE) |>
+    list.files(pattern="^PS.*.txt$", full.names = TRUE)
+  all_upas_logs <- flist %>%
+    lapply(read_ast_log, update_names = TRUE) %>%
+    dplyr::bind_rows()
+  not_empty_logs <- flist[!grepl("no-log", flist)] %>%
+    lapply(read_ast_log, update_names = TRUE) %>%
+    dplyr::bind_rows()
+  expect_identical(all_upas_logs, not_empty_logs)
+})
 
 
 ###################################

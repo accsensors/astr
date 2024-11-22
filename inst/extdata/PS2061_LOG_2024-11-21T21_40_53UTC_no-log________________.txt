@@ -1,0 +1,60 @@
+PARAMETER,VALUE,UNITS/NOTES
+UPASserial,2061,(UPAS serial identification-numerical)
+UPASfirmware,UPAS_v2_0-rev0138-L152RE_20230510_mbed116.bin compiledMay 11 2023_02:06:55UTC,(installed firmware version)
+LifetimeSampleCount,38,(count-total lifetime sample runs)
+LifetimeSampleRuntime,907.47,(hrs-total lifetime cumulative sample runtime)
+
+
+
+
+SAMPLE IDENTIFICATION
+
+UPASlogFilename,/sd/PS2061_LOG_2024-11-21T21_40_53UTC_no-log________________.txt,(log file filename-automatically defined)
+SampleName,no-log_________,(Sample Name-user entered into app)
+CartridgeID,___,(Cartridge Identification-user entered into app)
+
+
+
+
+SETUP SUMMARY
+
+GPSUTCOffset,-7.00,(hours offset from UTC date time)
+StartOnNextPowerUp,0,(0=no 1=yes)
+ProgrammedStartDelay,0,(s)
+ProgrammedRuntime,360000000,(s) (360000000 means 'indefinite')
+VolumetricFlowRate,1.000,(L*min^-1)
+FlowOffset,0.000000,(%)
+DutyCycle,100,(%)
+DutyCycleWindow,30,(s)
+GPSEnabled,1,(0=no 1=yes)
+LogFileMode,0,(0=normal 1=debug)
+LogInterval,30,(s)
+AppLock,0,(0=unlocked 1=locked -1=not set)
+AppVersion,i2.2.2,(i=iOS A=Android)
+
+
+
+
+SAMPLE SUMMARY
+
+StartDateTimeUTC,2024-11-21T21:40:53,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+StartDateTimeLocal,2024-11-21T14:40:53,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+StartBatteryCharge,100,(%)
+StartBatteryVoltage,3.82,(V)
+EndDateTimeUTC,YYYY-MM-DDTHH:MM:SS,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+EndDateTimeLocal,YYYY-MM-DDTHH:MM:SS,(YYYY-MM-DDTHH:MM:SS) (Local date time format)
+EndBatteryCharge,000,(%)
+EndBatteryVoltage,0.00,(V)
+ShutdownMode,1,(0=unknown error 1=user pushbutton stop 2=depleted battery [<2.8v] 3=completed preset sample duration 4=thermal protection shutdown 5=max power at initialization 6=max power during sample 7=blocked flow during sample)
+SampledVolume,00000.00,(L)
+SampledRuntime,000.000,(Hr)
+LoggedRuntime,000.000,(Hr)
+AverageVolumetricFlowRate,0.000,(L*min^-1)
+
+
+
+
+SAMPLE LOG
+
+(HH:MM:SS),(s),(YYYY-MM-DDTHH:MM:SS) (UTC date time format),(YYYY-MM-DDTHH:MM:SS) (Local date time format),(L*min^-1),(L),(C),(C),(C),(hPa),(hPa),(Pa),(%),(g*L^-1),(integer),(integer),(V),(g*min^-1),(V),(integer),(decimalDegree),(decimalDegree),(m),(integer),(m*s^-1),(-)
+SampleTime,UnixTime,DateTimeUTC,DateTimeLocal,VolumetricFlowRate,SampledVolume,PumpT,PCBT,FdpT,PumpP,PCBP,FdPdP,PumpRH,AtmoRho,PumpPow1,PumpPow2,PumpV,MassFlow,BFGvolt,BFGenergy,GPSlat,GPSlon,GPSalt,GPSsat,GPSspeed,GPShdop
