@@ -26,9 +26,10 @@ format_hhb_header = function(df) {
                                  as.numeric(df$ProgrammedRuntime))
 
   df <- dplyr::mutate(df,
-    dplyr::across(dplyr::contains(c("CalVoutMin", "CalVoutMax", "CalMFMin", "CalMFMax", "MF4",
-                      "MF3", "MF2", "MF1", "MF0", "UTCOffset", "Runtime",
-                      "Volume", "FlowRate", "DutyCycle", "ShutdownMode")),
+    dplyr::across(dplyr::contains(c("CalVoutMin", "CalVoutMax", "CalMFMin",
+              "CalMFMax", "MF4","MF3", "MF2", "MF1", "MF0", "UTCOffset",
+              "Runtime", "Volume", "FlowRate", "DutyCycle", "ShutdownMode",
+              "Gain", "_WE", "_AE", "Sensitivity")),
            \(x) as.numeric(x)),
     dplyr::across(dplyr::contains(c("StartDateTimeUTC", "EndDateTimeUTC", "CalDate")),
                     \(x) as.POSIXct(x, format="%Y-%m-%dT%H:%M:%S", tz="UTC")))
@@ -109,7 +110,7 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
   # in the data frame (with the values appended from the header; all others NA),
   # filter the dataframe so that it contains zero rows.
   if(nrow(df) == 1){
-    df <- dplyr::filter(df, !is.na(.data$UnixTime))
+    df <- dplyr::filter(df, !is.na(.data$SampleTime))
   }
 
   return(df)
