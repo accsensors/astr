@@ -157,6 +157,25 @@ test_that("Binding rows when empty log files are included doesn't add any data t
   expect_identical(all_upas_logs, not_empty_logs)
 })
 
+test_that("Values of -9999 in GPS data columns are replaced with NA.",{
+  upasv2x_gpsoff_fname <- "PSP00024_LOG_2021-08-11T18_18_03UTC_test____________test______.txt"
+  upasv2x_gpsno_fname  <- "PSP00270_LOG_2024-06-14T18_54_44UTC_NoGPS___________----------.txt"
+  upasv2x_gps_fname    <- "PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt"
+  upasv2x_gpsoff_file  <- system.file("extdata", upasv2x_gpsoff_fname, package = "astr", mustWork = TRUE)
+  upasv2x_gpsno_file   <- system.file("extdata", upasv2x_gpsno_fname,  package = "astr", mustWork = TRUE)
+  upasv2x_gps_file     <- system.file("extdata", upasv2x_gps_fname,    package = "astr", mustWork = TRUE)
+  upasv2x_gpsoff_log   <- read_ast_log(upasv2x_gpsoff_file)
+  upasv2x_gpsno_log    <- read_ast_log(upasv2x_gpsno_file)
+  upasv2x_gps_log      <- read_ast_log(upasv2x_gps_file)
+  expect_equal(sum(upasv2x_gpsoff_log$GPSlat == -9999, na.rm = T), 0)
+  expect_equal(sum(upasv2x_gpsno_log$GPSlat  == -9999, na.rm = T), 0)
+  expect_equal(sum(upasv2x_gps_log$GPSlat    == -9999, na.rm = T), 0)
+  expect_equal(sum(is.na(upasv2x_gpsoff_log$GPSlat)), nrow(upasv2x_gpsoff_log))
+  expect_equal(sum(is.na(upasv2x_gpsno_log$GPSlat)),  nrow(upasv2x_gpsno_log))
+  expect_equal(sum(is.na(upasv2x_gps_log$GPSlat)), 3)
+  expect_equal(sum(!is.na(upasv2x_gps_log$GPSlat)), (nrow(upasv2x_gps_log) - 3))
+})
+
 
 ###################################
 # read_ast_log backwards compatibility

@@ -189,11 +189,6 @@ format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), co
                                                 "UserTZ","LocalTZ")))
 
    df <- dplyr::mutate(log,
-    GPSlat   = ifelse(.data$GPSlat   == -9999, as.numeric(NA), .data$GPSlat),
-    GPSlon   = ifelse(.data$GPSlon   == -9999, as.numeric(NA), .data$GPSlon),
-    GPSalt   = ifelse(.data$GPSalt   == -9999, as.numeric(NA), .data$GPSalt),
-    GPSspeed = ifelse(.data$GPSspeed == -9999, as.numeric(NA), .data$GPSspeed),
-    GPShDOP  = ifelse(.data$GPShDOP  == -9999, as.numeric(NA), .data$GPShDOP),
     SampleTime = ifelse(.data$SampleTime == "99:99:99", NA, .data$SampleTime),
     SampleTime = ifelse(!is.na(.data$SampleTime),strsplit(.data$SampleTime,":"),
                         .data$SampleTime),
@@ -203,6 +198,8 @@ format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), co
                              units="secs"),
     DateTimeUTC = as.POSIXct(.data$DateTimeUTC, format = "%Y-%m-%dT%H:%M:%S",
                              tz = "UTC"),
+    dplyr::across(dplyr::any_of(c("GPSlat","GPSlon","GPSalt","GPSspeed","GPShDOP")),
+                  \(x) ifelse(as.numeric(.data$x) == -9999, as.numeric(NA), .data$x)),
     dplyr::across(-dplyr::any_of(c("SampleTime","DateTimeUTC","DateTimeLocal")),
                   \(x) as.numeric(x)),
     dplyr::across(dplyr::any_of(c("PumpsON","Dead","BCS1","BCS2","BC_NPG")),
