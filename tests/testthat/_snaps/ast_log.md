@@ -5353,7 +5353,7 @@
       read_ast_log(hhb_file)
     Output
           SampleTime         DateTimeUTC       DateTimeLocal   LocalTZ AccelX AccelY
-          <difftime>              <POSc>              <POSc>    <char>  <int>  <int>
+          <difftime>              <POSc>              <POSc>    <char>  <num>  <num>
        1:     0 secs 2024-07-01 18:20:00 2024-07-01 12:20:00 Etc/GMT+6     11   2000
        2:    30 secs 2024-07-01 18:20:30 2024-07-01 12:20:30 Etc/GMT+6     11   1999
        3:    60 secs 2024-07-01 18:21:00 2024-07-01 12:21:00 Etc/GMT+6     12   2000
@@ -5417,7 +5417,7 @@
       61:  1800 secs 2024-07-01 18:50:00 2024-07-01 12:50:00 Etc/GMT+6     13   1999
           SampleTime         DateTimeUTC       DateTimeLocal   LocalTZ AccelX AccelY
           AccelZ  Vbus M.Vsupply M.5V0 M.3V3 Vbattery Battery_Temp M.BMP581_Press
-           <int> <num>     <num> <num> <num>    <num>        <num>          <num>
+           <num> <num>     <num> <num> <num>    <num>        <num>          <num>
        1:     87 0.009     3.547 5.032 3.357    3.644        19.01        84449.5
        2:     82 0.009     3.510 5.032 3.357    3.644        19.01        84445.2
        3:     84 0.009     3.510 5.032 3.355    3.644        19.01        84441.8
@@ -5545,7 +5545,7 @@
       61:         37.64         1.0         1.0         1.0        1.0    45.10
           M.BMP581_Temp SEN55_PM1.0 SEN55_PM2.5 SEN55_PM4.0 SEN55_PM10 SEN55_RH
           SEN55_Temp SEN55_RawVOC SEN55_RawNOx 1.Vsupply 1.3V3 1.BMP390_Press
-               <num>        <int>        <int>     <num> <num>          <num>
+               <num>        <num>        <num>     <num> <num>          <num>
        1:      28.93        30987        20772     3.547 3.357        83552.8
        2:      28.84        31451        20459     3.510 3.355        83546.1
        3:      28.03        31527        20275     3.506 3.353        83542.9
@@ -5609,7 +5609,7 @@
       61:      25.26        31328        18819     4.207 3.360        83487.7
           SEN55_Temp SEN55_RawVOC SEN55_RawNOx 1.Vsupply 1.3V3 1.BMP390_Press
           1.BMP390_Temp D.RDAC D.Vboost  D.Vflow D.BMP581_Press D.BMP581_Temp
-                  <num>  <int>    <num>    <num>          <num>         <num>
+                  <num>  <num>    <num>    <num>          <num>         <num>
        1:         27.12    729    5.079 0.451000        84446.9         26.80
        2:         27.21    706    5.224 0.571375        84362.4         26.99
        3:         27.39    736    5.134 0.551312        84372.3         27.19
@@ -5737,7 +5737,7 @@
       61:    0.00283   0.00292        0.27767           0.08792             0.08792
           D.MassFlow D.VolFlow D.TotalPumpVol D.TotalSorbentVol D.SampledSorbentVol
           C.RDAC C.Vboost  C.Vflow C.BMP581_Press C.BMP581_Temp C.MassFlow C.VolFlow
-           <int>    <num>    <num>          <num>         <num>      <num>     <num>
+           <num>    <num>    <num>          <num>         <num>      <num>     <num>
        1:    791    4.918 0.445062        84451.7         26.80    0.00000   0.00001
        2:    752    5.098 0.538187        84378.5         26.98    0.00296   0.00309
        3:    754    5.092 0.537687        84375.1         27.19    0.00295   0.00307
@@ -5865,7 +5865,7 @@
       61:        0.26149           0.09154             0.09154        0.9682
           C.TotalPumpVol C.TotalSorbentVol C.SampledSorbentVol 1.AtmoDensity
           A.Vsupply A.3V3 A.Pumps A.RDAC A.Vboost A.Vomron  A.Vflow A.BMP581Int_Press
-              <num> <num>   <int>  <int>    <num>    <num>    <num>             <num>
+              <num> <num>   <num>  <num>    <num>    <num>    <num>             <num>
        1:     3.510 3.347     123    189   11.240    3.337 1.416875           84235.3
        2:     3.473 3.343     123    167   12.643    3.334 1.522750           84168.2
        3:     3.471 3.343     123    179   12.198    3.334 1.490375           84185.7
@@ -6057,7 +6057,7 @@
       61:          73.68               59.96                 59.96        0.9793
           A.TotalPumpVol A.TotalCartridgeVol A.SampledCartridgeVol A.AtmoDensity
           B.Vsupply B.3V3 B.Pumps B.RDAC B.Vboost B.Vomron  B.Vflow B.BMP581Int_Press
-              <num> <num>   <int>  <int>    <num>    <num>    <num>             <num>
+              <num> <num>   <num>  <num>    <num>    <num>    <num>             <num>
        1:     3.517 3.342     123    196   11.236    3.343 1.518375           84308.1
        2:     3.486 3.340     123    194   11.697    3.342 1.561875           84296.2
        3:     3.482 3.340     123    202   11.446    3.341 1.540125           84296.6

@@ -88,7 +88,11 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
                           3600*as.numeric(sapply(.data$SampleTime, `[`, 1)) +
                             60*as.numeric(sapply(.data$SampleTime, `[`, 2)) +
                             as.numeric(sapply(.data$SampleTime, `[`, 3)),
-                          units="secs"))
+                          units="secs"),
+            dplyr::across(-dplyr::any_of(c("SampleTime","DateTimeUTC","SEN55_Status")),
+                          \(x) as.numeric(x)),
+            dplyr::across(dplyr::any_of(c("SEN55_I2C_Error")),
+                          \(x) as.logical(x)))
 
     df <- cbind(df, df_h)
 
