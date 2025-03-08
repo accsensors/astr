@@ -5347,6 +5347,298 @@
       38: 2024-06-13 16:24:47  FALSE
              StartDateTimeUTC UserTZ
 
+---
+
+    Code
+      read_ast_log(upasv2x_rev200_file, update_names = FALSE)
+    Output
+         ASTSampler UPASserial  SampleName CartridgeID SampleTime   UnixTime
+             <char>     <char>      <char>      <char> <difftime>      <num>
+      1:  UPAS_v2_x   PSP01066 standard30s        <NA>    30 secs 1741290210
+      2:  UPAS_v2_x   PSP01066 standard30s        <NA>    60 secs 1741290240
+      3:  UPAS_v2_x   PSP01066 standard30s        <NA>    90 secs 1741290270
+      4:  UPAS_v2_x   PSP01066 standard30s        <NA>   120 secs 1741290300
+      5:  UPAS_v2_x   PSP01066 standard30s        <NA>   150 secs 1741290330
+      6:  UPAS_v2_x   PSP01066 standard30s        <NA>   180 secs 1741290360
+                 DateTimeUTC       DateTimeLocal   LocalTZ PumpingFlowFactory
+                      <POSc>              <POSc>    <char>              <num>
+      1: 2025-03-06 19:43:30 2025-03-06 12:43:30 Etc/GMT+7              1.836
+      2: 2025-03-06 19:44:00 2025-03-06 12:44:00 Etc/GMT+7              1.838
+      3: 2025-03-06 19:44:30 2025-03-06 12:44:30 Etc/GMT+7              1.829
+      4: 2025-03-06 19:45:00 2025-03-06 12:45:00 Etc/GMT+7              1.832
+      5: 2025-03-06 19:45:30 2025-03-06 12:45:30 Etc/GMT+7              1.832
+      6: 2025-03-06 19:46:00 2025-03-06 12:46:00 Etc/GMT+7              1.835
+         OverallFlowFactory SampledVolumeFactory PumpingFlowOffset OverallFlowOffset
+                      <num>                <num>             <num>             <num>
+      1:              1.102                0.551             2.001             1.201
+      2:              1.103                1.102             2.004             1.202
+      3:              1.098                1.651             1.994             1.196
+      4:              1.099                2.201             1.997             1.198
+      5:              1.099                2.750             1.997             1.198
+      6:              1.101                3.301             2.000             1.200
+         SampledVolumeOffset FilterDP BatteryCharge AtmoT  AtmoP AtmoRH AtmoDensity
+                       <num>    <num>         <num> <num>  <num>  <num>       <num>
+      1:               0.600   342.45           100 24.70 788.49  23.43      0.9191
+      2:               1.201   345.80           100 24.80 788.49  23.01      0.9191
+      3:               1.800   341.80           100 24.95 788.48  22.93      0.9187
+      4:               2.399   342.05           100 25.11 788.49  22.62      0.9183
+      5:               2.998   340.70           100 25.21 788.49  22.58      0.9178
+      6:               3.598   341.05           100 25.27 788.49  22.10      0.9175
+         AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat GPSspeed GPShDOP AccelX
+           <num>   <num>  <num>  <num>  <num>  <num>    <num>   <num>  <num>
+      1:  2066.1       0     NA     NA     NA      0       NA      NA    4.7
+      2:  2066.0       0     NA     NA     NA      0       NA      NA    4.8
+      3:  2066.1       0     NA     NA     NA      0       NA      NA    4.9
+      4:  2066.1       0     NA     NA     NA      0       NA      NA    4.7
+      5:  2066.0       0     NA     NA     NA      0       NA      NA    4.7
+      6:  2066.0       0     NA     NA     NA      0       NA      NA    4.8
+         AccelXVar AccelXMin AccelXMax AccelY AccelYVar AccelYMin AccelYMax  AccelZ
+             <num>     <num>     <num>  <num>     <num>     <num>     <num>   <num>
+      1:       0.3         3         5  -11.9       0.6       -13       -10 -1001.2
+      2:       0.2         4         5  -11.7       0.8       -13       -10 -1001.5
+      3:       0.1         4         5  -11.6       0.6       -13       -10 -1001.5
+      4:       0.3         4         6  -11.7       0.5       -13       -10 -1001.7
+      5:       0.2         4         5  -11.8       0.9       -14       -10 -1001.6
+      6:       0.3         4         6  -12.0       0.5       -13       -11 -1001.7
+         AccelZVar AccelZMin AccelZMax AccelComplianceCnt AccelComplianceHrs   Xup
+             <num>     <num>     <num>              <num>              <num> <num>
+      1:       5.8     -1004      -998                  0                  0     0
+      2:       8.1     -1005      -998                  0                  0     0
+      3:       5.8     -1004      -998                  0                  0     0
+      4:       8.2     -1005      -998                  0                  0     0
+      5:       6.1     -1004      -998                  0                  0     0
+      6:       8.9     -1005      -998                  0                  0     0
+         XDown   Yup Ydown   Zup Zdown StepCount   LUX UVindex HighVisRaw LowVisRaw
+         <num> <num> <num> <num> <num>     <num> <num>   <num>      <num>     <num>
+      1:     0     0     0   100     0         0  44.7    0.16      251.6     260.4
+      2:     0     0     0   100     0         0  45.1    0.19      253.5     261.9
+      3:     0     0     0   100     0         0  44.4    0.19      249.7     258.9
+      4:     0     0     0   100     0         0  44.8    0.22      253.3     261.3
+      5:     0     0     0   100     0         0  44.7    0.14      253.4     260.8
+      6:     0     0     0   100     0         0  45.3    0.23      254.8     263.1
+         IRRaw UVRaw PMMeasCnt PM1MC PM1MCVar PM2_5MC PM2_5MCVar PM0_5NC PM1NC
+         <num> <num>     <num> <num>    <num>   <num>      <num>   <num> <num>
+      1: 177.7  -2.6         5  0.79        0    0.96          0    5.15  6.13
+      2: 176.2 -11.6        NA    NA       NA      NA         NA      NA    NA
+      3: 177.8  -6.1         5  0.79        0    0.83          0    5.48  6.28
+      4: 177.9 -15.4        NA    NA       NA      NA         NA      NA    NA
+      5: 178.2 -10.4         5  1.24        0    1.34          0    8.59  9.88
+      6: 175.8 -22.9        NA    NA       NA      NA         NA      NA    NA
+         PM2_5NC PMtypicalParticleSize PM2_5SampledMassFactory PM2_5SampledMassOffset
+           <num>                 <num>                   <num>                  <num>
+      1:    6.27                  0.63                  0.0003                 0.0003
+      2:      NA                    NA                      NA                     NA
+      3:    6.30                  0.38                  0.0013                 0.0014
+      4:      NA                    NA                      NA                     NA
+      5:    9.93                  0.45                  0.0024                 0.0027
+      6:      NA                    NA                      NA                     NA
+          U12T  U29T  FdpT AccelT  U29P PumpPow1  PumpV MassFlowFactory  MFSVout
+         <num> <num> <num>  <num> <num>    <num>  <num>           <num>    <num>
+      1: 23.64 24.82 26.32  23.39 788.6      237 13.635         1.68785 1.549250
+      2: 23.67 25.11 26.59  23.61 788.7      237 13.635         1.69299 1.551125
+      3: 23.73 25.33 26.75  23.80 788.7      239 13.576         1.68034 1.546500
+      4: 23.80 25.48 26.93  24.05 788.6      239 13.576         1.68477 1.548125
+      5: 23.87 25.66 27.08  24.00 788.7      239 13.577         1.68545 1.548375
+      6: 23.94 25.79 27.18  24.21 788.7      239 13.578         1.68545 1.548375
+         BattVolt  v3_3    v5 Charging ExtPow FLOWCTL GPSRT SD_DATAW SD_HEADW
+            <num> <num> <num>   <lgcl> <lgcl>   <num> <num>    <num>    <num>
+      1:     4.14  3.34  5.04    FALSE  FALSE    0.00  0.01     0.00     0.00
+      2:     4.12  3.34  5.03    FALSE  FALSE    0.58  0.02     0.01     0.04
+      3:     4.13  3.34  5.04    FALSE  FALSE    0.58  0.02     0.02     0.03
+      4:     4.12  3.34  5.03    FALSE  FALSE    0.59  0.02     0.02     0.04
+      5:     4.13  3.34  5.04    FALSE  FALSE    0.57  0.02     0.02     0.03
+      6:     4.11  3.34  5.03    FALSE  FALSE    0.58  0.02     0.01     0.04
+              CO2     SCDT    SCDRH   VOCRaw   NOXRaw
+            <num>    <num>    <num>    <num>    <num>
+      1: 1294.375 22.61500 29.90150 32529.47 17253.13
+      2: 1464.143 22.11029 30.66200 32553.47 16867.17
+      3: 1502.167 21.76833 31.31100 32542.60 16642.73
+      4: 1500.000 21.46167 31.77150 32533.37 16468.00
+      5: 1505.500 21.43383 31.87300 32514.73 16330.80
+      6: 1503.500 21.32300 32.00467 32506.20 16214.23
+                                                                          LogFilename
+                                                                               <char>
+      1: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      2: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      3: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      4: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      5: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      6: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+            StartDateTimeUTC UserTZ
+                      <POSc> <lgcl>
+      1: 2025-03-06 19:42:26  FALSE
+      2: 2025-03-06 19:42:26  FALSE
+      3: 2025-03-06 19:42:26  FALSE
+      4: 2025-03-06 19:42:26  FALSE
+      5: 2025-03-06 19:42:26  FALSE
+      6: 2025-03-06 19:42:26  FALSE
+
+---
+
+    Code
+      read_ast_log(upasv2x_rev200v_file, update_names = FALSE)
+    Output
+         ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
+             <char>     <char>     <char>      <char> <difftime>      <num>
+      1:  UPAS_v2_x   PSP01066 verbose30s        <NA>    30 secs 1741289940
+      2:  UPAS_v2_x   PSP01066 verbose30s        <NA>    60 secs 1741289970
+      3:  UPAS_v2_x   PSP01066 verbose30s        <NA>    90 secs 1741290000
+      4:  UPAS_v2_x   PSP01066 verbose30s        <NA>   120 secs 1741290030
+      5:  UPAS_v2_x   PSP01066 verbose30s        <NA>   150 secs 1741290060
+      6:  UPAS_v2_x   PSP01066 verbose30s        <NA>   180 secs 1741290090
+                 DateTimeUTC       DateTimeLocal   LocalTZ UnixTimeMCU
+                      <POSc>              <POSc>    <char>       <num>
+      1: 2025-03-06 19:39:00 2025-03-06 12:39:00 Etc/GMT+7  1741289940
+      2: 2025-03-06 19:39:30 2025-03-06 12:39:30 Etc/GMT+7  1741289970
+      3: 2025-03-06 19:40:00 2025-03-06 12:40:00 Etc/GMT+7  1741290000
+      4: 2025-03-06 19:40:30 2025-03-06 12:40:30 Etc/GMT+7  1741290030
+      5: 2025-03-06 19:41:00 2025-03-06 12:41:00 Etc/GMT+7  1741290060
+      6: 2025-03-06 19:41:30 2025-03-06 12:41:30 Etc/GMT+7  1741290090
+         PumpingFlowFactory OverallFlowFactory SampledVolumeFactory PumpingFlowOffset
+                      <num>              <num>                <num>             <num>
+      1:              1.831              1.098                0.549             1.995
+      2:              1.836              1.102                1.100             2.002
+      3:              1.833              1.100                1.650             1.998
+      4:              1.837              1.102                2.201             2.002
+      5:              1.836              1.102                2.752             2.001
+      6:              1.834              1.101                3.302             1.999
+         OverallFlowOffset SampledVolumeOffset FilterDP BatteryCharge AtmoT  AtmoP
+                     <num>               <num>    <num>         <num> <num>  <num>
+      1:             1.197               0.599    342.0           100 23.66 788.41
+      2:             1.201               1.199    345.0           100 23.88 788.42
+      3:             1.199               1.799    345.0           100 24.07 788.43
+      4:             1.201               2.399    345.2           100 24.29 788.43
+      5:             1.201               3.000    343.0           100 24.42 788.42
+      6:             1.200               3.600    344.4           100 24.58 788.43
+         AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat GPSspeed
+          <num>       <num>   <num>   <num>  <num>  <num>  <num>  <num>    <num>
+      1:  25.28      0.9234  2066.8       0     NA     NA     NA      0       NA
+      2:  24.70      0.9222  2066.8       0     NA     NA     NA      0       NA
+      3:  24.45      0.9215  2066.7       0     NA     NA     NA      0       NA
+      4:  23.89      0.9209  2066.6       0     NA     NA     NA      0       NA
+      5:  23.69      0.9202  2066.8       0     NA     NA     NA      0       NA
+      6:  23.46      0.9198  2066.6       0     NA     NA     NA      0       NA
+         GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar AccelYMin
+           <num>  <num>     <num>     <num>     <num>  <num>     <num>     <num>
+      1:      NA    4.4       0.3         3         5  -11.9       0.6       -14
+      2:      NA    4.3       0.2         4         5  -12.0       0.5       -13
+      3:      NA    4.3       0.6         2         6  -11.8       0.7       -13
+      4:      NA    4.3       0.3         3         5  -11.9       0.5       -13
+      5:      NA    4.1       0.2         3         5  -11.7       0.5       -13
+      6:      NA    4.2       0.4         3         6  -11.7       0.6       -13
+         AccelYMax  AccelZ AccelZVar AccelZMin AccelZMax  RotX RotXVar RotXMin
+             <num>   <num>     <num>     <num>     <num> <num>   <num>   <num>
+      1:       -11 -1000.3       4.7     -1003      -997 651.1 19332.2       8
+      2:       -11 -1000.8       5.2     -1003      -998 675.7 14945.8     350
+      3:       -10 -1000.7       3.6     -1003      -998 642.5  2049.5     490
+      4:       -11 -1000.9       5.4     -1004      -998 677.8  7617.4     516
+      5:       -11 -1000.8       3.8     -1003      -998 596.1  8383.2     148
+      6:       -10 -1000.9       5.4     -1004      -998 619.4 15031.1     376
+         RotXMax  RotY RotYVar RotYMin RotYMax  RotZ RotZVar RotZMin RotZMax
+           <num> <num>   <num>   <num>   <num> <num>   <num>   <num>   <num>
+      1:     770  47.9 17261.0     -70     612 328.3 19383.5     -17     551
+      2:    1067  23.4 15305.3    -393     288 338.9 26815.4     -26     568
+      3:     770  18.7  4698.9    -183     262 333.9 16820.5     148     542
+      4:     910 -25.4 10766.4    -253     227 331.6 22591.1      43     507
+      5:     743  30.7  9533.2    -131     498 354.9 15111.0     210     525
+      6:    1067   3.6 22544.2    -525     332 334.7 24387.3      35     516
+         AccelComplianceCnt AccelComplianceHrs   Xup XDown   Yup Ydown   Zup Zdown
+                      <num>              <num> <num> <num> <num> <num> <num> <num>
+      1:                  0                  0     0     0     0     0   100     0
+      2:                  0                  0     0     0     0     0   100     0
+      3:                  0                  0     0     0     0     0   100     0
+      4:                  0                  0     0     0     0     0   100     0
+      5:                  0                  0     0     0     0     0   100     0
+      6:                  0                  0     0     0     0     0   100     0
+         StepCount   LUX UVindex HighVisRaw LowVisRaw IRRaw UVRaw PMMeasCnt PM1MC
+             <num> <num>   <num>      <num>     <num> <num> <num>     <num> <num>
+      1:         0  41.9    0.21      236.5     244.3 169.3  16.1         5  0.70
+      2:         0  42.6    0.19      237.6     247.8 167.6   3.9        NA    NA
+      3:         0  44.4    0.19      239.5     249.0 170.3   8.3         5  1.20
+      4:         0  42.7    0.17      241.2     249.1 170.7 -12.0        NA    NA
+      5:         0  42.9    0.17      239.7     250.1 171.2  -6.3         5  0.58
+      6:         0  43.3    0.15      242.7     252.8 172.5  -5.3        NA    NA
+         PM1MCVar PM2_5MC PM2_5MCVar PM4MC PM4MCVar PM10MC PM10MCVar PM0_5NC PM1NC
+            <num>   <num>      <num> <num>    <num>  <num>     <num>   <num> <num>
+      1:        0    1.11       0.00  1.42     0.00   1.57      0.00    3.91  5.15
+      2:       NA      NA         NA    NA       NA     NA        NA      NA    NA
+      3:        0    1.34       0.01  1.40     0.01   1.43      0.02    8.17  9.49
+      4:       NA      NA         NA    NA       NA     NA        NA      NA    NA
+      5:        0    1.52       0.01  2.28     0.02   2.66      0.03    1.67  3.56
+      6:       NA      NA         NA    NA       NA     NA        NA      NA    NA
+         PM2_5NC PM4NC PM10NC PM0_5NCVar PM1NCVar PM2_5NCVar PM4NCVar PM10NCVar
+           <num> <num>  <num>      <num>    <num>      <num>    <num>     <num>
+      1:    5.54  5.62   5.62       0.12     0.13       0.11     0.11      0.11
+      2:      NA    NA     NA         NA       NA         NA       NA        NA
+      3:    9.59  9.61   9.61       0.14     0.22       0.25     0.25      0.25
+      4:      NA    NA     NA         NA       NA         NA       NA        NA
+      5:    4.49  4.67   4.67       0.07     0.02       0.00     0.00      0.00
+      6:      NA    NA     NA         NA       NA         NA       NA        NA
+         PMtypicalParticleSize PM2_5SampledMassFactory PM2_5SampledMassOffset
+                         <num>                   <num>                  <num>
+      1:                  0.95                  0.0003                 0.0003
+      2:                    NA                      NA                     NA
+      3:                  0.51                  0.0017                 0.0018
+      4:                    NA                      NA                     NA
+      5:                  1.23                  0.0032                 0.0035
+      6:                    NA                      NA                     NA
+         PMtypicalParticleSizeVar PMReadingErrorCnt PMFanErrorCnt PMLaserErrorCnt
+                            <num>             <num>         <num>           <num>
+      1:                        0                 0             0               0
+      2:                       NA                NA            NA              NA
+      3:                        0                 0             0               0
+      4:                       NA                NA            NA              NA
+      5:                        0                 0             0               0
+      6:                       NA                NA            NA              NA
+         PMFanSpeedWarn  U12T  U29T  FdpT AccelT  U29P PT100R PumpPow1  PumpV
+                  <num> <num> <num> <num>  <num> <num>  <num>    <num>  <num>
+      1:              0 23.94 23.49 24.97  22.75 788.5 109.22      234 13.707
+      2:             NA 23.73 23.89 25.35  23.14 788.5 109.30      234 13.706
+      3:              0 23.65 24.22 25.70  23.36 788.6 109.38      235 13.683
+      4:             NA 23.65 24.49 25.97  23.62 788.6 109.46      235 13.681
+      5:              0 23.71 24.74 26.17  23.60 788.6 109.51      236 13.659
+      6:             NA 23.77 24.95 26.40  24.00 788.7 109.57      237 13.636
+         MassFlowFactory  MFSVout PumpPow2 BFGenergy BattVolt  v3_3    v5 Charging
+                   <num>    <num>    <num>     <num>    <num> <num> <num>   <lgcl>
+      1:         1.69196 1.550750        0     52781     4.15  3.34  5.03    FALSE
+      2:         1.69781 1.552875        0     52769     4.13  3.34  5.03    FALSE
+      3:         1.69231 1.550875        0     52758     4.14  3.34  5.04    FALSE
+      4:         1.69540 1.552000        0     52745     4.13  3.34  5.03    FALSE
+      5:         1.69265 1.551000        0     52734     4.13  3.34  5.04    FALSE
+      6:         1.69162 1.550625        0     52721     4.11  3.34  5.03    FALSE
+         ExtPow PumpsON   Dead   BCS1   BCS2 BC_NPG FLOWCTL GPSRT SD_DATAW SD_HEADW
+         <lgcl>  <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>   <num> <num>    <num>    <num>
+      1:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.00  0.00     0.00     0.00
+      2:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.60  0.02     0.02     0.03
+      3:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.57  0.02     0.02     0.03
+      4:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.59  0.02     0.02     0.04
+      5:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.57  0.02     0.02     0.03
+      6:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.60  0.02     0.03     0.03
+         TPumpsOFF TPumpsON      CO2     SCDT    SCDRH   VOCRaw   NOXRaw
+             <num>    <num>    <num>    <num>    <num>    <num>    <num>
+      1:        12       25 1242.375 21.55313 31.81900 32297.97 17139.33
+      2:        12       18 1458.333 21.34100 32.06000 32374.20 16732.43
+      3:        12       18 1501.500 21.16600 32.46833 32384.13 16504.53
+      4:        12       18 1501.667 20.92400 32.77367 32393.43 16325.57
+      5:        12       18 1505.571 20.95572 32.79457 32386.93 16193.53
+      6:        12       18 1499.833 20.88434 32.84367 32389.60 16081.57
+                                                                          LogFilename
+                                                                               <char>
+      1: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      2: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      3: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      4: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      5: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      6: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+            StartDateTimeUTC UserTZ
+                      <POSc> <lgcl>
+      1: 2025-03-06 19:37:50  FALSE
+      2: 2025-03-06 19:37:50  FALSE
+      3: 2025-03-06 19:37:50  FALSE
+      4: 2025-03-06 19:37:50  FALSE
+      5: 2025-03-06 19:37:50  FALSE
+      6: 2025-03-06 19:37:50  FALSE
+
 # read_ast_log works with all HHBv2 firmwares
 
     Code

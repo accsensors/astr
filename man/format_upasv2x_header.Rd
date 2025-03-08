@@ -4,10 +4,15 @@
 \alias{format_upasv2x_header}
 \title{Format UPAS v2.1 PLUS header data that have already been transposed to a wide data frame}
 \usage{
-format_upasv2x_header(data, tz = NA)
+format_upasv2x_header(data, update_names = FALSE, tz = NA)
 }
 \arguments{
 \item{data}{A UPASv2.1 PLUS header data frame returned by the \code{\link[=transpose_ast_header]{transpose_ast_header()}} function}
+
+\item{update_names}{Option to update any deprecated variable names from log
+files written using older firmware versions to the variable names used in the
+current firmware version. Variable names cannot be updated for files
+written using UPAS v2 firmware versions preceding rev100.}
 
 \item{tz}{Optional: A character string specifying the tz database time zone
 that should be used to display local times. Example tz database time zones

@@ -111,15 +111,16 @@ format_upasv2_header <- function(data, update_names=FALSE, tz=NA){
   if(update_names){
 
     data <- dplyr::rename(data, dplyr::any_of(
-                        c(LifetimeSampleCount    = "PowerCycles", #for rev100
+                        c(LifetimeSampleCount    = "PowerCycles",
                           LifetimeSampleRuntime  = "CumulativeSamplingTime",
-                          StartDateTimeUTC       = "StartDateTime",
-                          PumpingFlowRateAverage = "AverageVolumetricFlow",
                           FlowRateSetpoint       = "VolumetricFlowRate",
                           FlowDutyCycle          = "DutyCycle",
-                          OverallDuration        = "LoggedRuntime",
+                          StartDateTimeUTC       = "StartDateTime",
+                          SampledVolumeOffset    = "SampledVolume",
                           PumpingDuration        = "SampledRuntime",
-                          PumpingFlowRateAverage = "AverageVolumetricFlowRate",
+                          OverallDuration        = "LoggedRuntime",
+                          PumpingFlowAvgOffset   = "AverageVolumetricFlow",
+                          PumpingFlowAvgOffset   = "AverageVolumetricFlowRate",
                           MFSCalVoutMin          = "MFSVoltMin",
                           MFSCalVoutMax          = "MFSVoltMax",
                           MFSCalMFMin            = "MFSMFMin",
@@ -211,27 +212,29 @@ format_upasv2_log = function(log, header, update_names=FALSE, cols_keep=c(), col
 
   if(update_names){
 
-    df <- dplyr::rename(df,
-                        dplyr::any_of(c(DateTimeUTC     = "UTCDateTime",
-                                        PumpingFlowRate = "VolFlow",
-                                        LogFilename     = "UPASLogFilename",
-                                        PumpingFlowRate = "VolumetricFlowRate",
-                                        AtmoDensity     = "AtmoRho",
-                                        FilterDP        = "FdPdP",
-                                        AtmoT           = "PumpT",
-                                        AtmoRH          = "PumpRH",
-                                        PCB1T           = "PCBT",
-                                        PCB2P           = "PumpP",
-                                        AtmoP           = "PCBP",
-                                        GPShDOP         = "GPShdop",
-                                        BattVolt        = "BFGvolt",
-                                        #DIAGNOSTIC FILES
-                                        GPSspeed        = "gpsspeed",
-                                        GPSQual         = "gpsquality",
-                                        GPSQual         = "GPSquality",
-                                        MFSVout         = "MFSVolt"
-                                        #TODO convert BGFvolt to a battery percentage for shiny app output
-                                        )))
+    df <- dplyr::rename(df, dplyr::any_of(
+                          c(LogFilename         = "UPASLogFilename",
+                            DateTimeUTC         = "UTCDateTime",
+                            PumpingFlowOffset   = "VolFlow",
+                            PumpingFlowOffset   = "VolumetricFlowRate",
+                            SampledVolumeOffset = "SampledVolume",
+                            AtmoT               = "PumpT",
+                            U12T                = "PCBT",
+                            U29P                = "PumpP",
+                            AtmoP               = "PCBP",
+                            FilterDP            = "FdPdP",
+                            AtmoRH              = "PumpRH",
+                            AtmoDensity         = "AtmoRho",
+                            MassFlowFactory     = "MassFlow",
+                            BattVolt            = "BFGvolt",
+                            GPShDOP             = "GPShdop",
+                            # DIAGNOSTIC FILES
+                            GPSspeed            = "gpsspeed",
+                            GPSQual             = "gpsquality",
+                            GPSQual             = "GPSquality",
+                            MFSVout             = "MFSVolt"
+                            #TODO convert BGFvolt to a battery percentage for shiny app output
+                            )))
   }
 
   df <- dplyr::relocate(df, dplyr::any_of(c("ASTSampler", "UPASserial",

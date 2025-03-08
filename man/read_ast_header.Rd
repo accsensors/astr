@@ -44,33 +44,26 @@ and combine those data into a single data frame that contains a unique row
 for each file.
 }
 \details{
-If \code{update_names = TRUE}, then, for samples collected using UPAS v2 firmware
-versions beyond rev100, the deprecated names shown on the left will be
-updated to the current names shown on the right:
+If \code{update_names = TRUE}, and deprecated parameter names in the log file
+will be updated to the current names:
 \tabular{ll}{
-\strong{Deprecated name}  \tab \strong{Current name}  \cr
-VolumetricFlowRate        \tab FlowRateSetpoint       \cr
-DutyCycle                 \tab FlowDutyCycle          \cr
-LoggedRuntime             \tab OverallDuration        \cr
-SampledRuntime            \tab PumpingDuration        \cr
-AverageVolumetricFlowRate \tab PumpingFlowRateAverage \cr
+\strong{Deprecated name}  \tab \strong{Current name} \cr
+PowerCycles               \tab LifetimeSampleCount   \cr
+CumulativeSamplingTime    \tab LifetimeSampleRuntime \cr
+VolumetricFlowRate        \tab FlowRateSetpoint      \cr
+DutyCycle                 \tab FlowDutyCycle         \cr
+StartDateTime             \tab StartDateTimeUTC      \cr
+SampledRuntime            \tab PumpingDuration       \cr
+LoggedRuntime             \tab OverallDuration       \cr
+OverallFlowRateAverage    \tab OverallFlowAvgOffset  \cr
+AverageVolumetricFlow     \tab PumpingFlowAvgOffset  \cr
+AverageVolumetricFlowRate \tab PumpingFlowAvgOffset  \cr
+PumpingFlowRateAverage    \tab PumpingFlowAvgOffset  \cr
+SampledVolume             \tab SampledVolumeOffset   \cr
 }
 
-If \code{update_names = TRUE}, then, for samples collected using UPAS v2 firmware
-rev100, the deprecated names shown on the left will be updated to the current
-names shown on the right:
-\tabular{ll}{
-\strong{Deprecated name} \tab \strong{Current name}  \cr
-CumulativeSamplingTime   \tab LifetimeSampleRuntime  \cr
-StartDateTime            \tab StartDateTimeUTC       \cr
-AverageVolumetricFlow    \tab PumpingFlowRateAverage \cr
-}
-
-If the GPSUTCOffset in the file header is a whole number of hours, this
-function will be able to convert local times to POSIXct format automatically,
-without the \code{tz} argument being specified. If the GPSUTCOffset is not a whole
-number of hours, it's better to specify the local time zone as a character
-string using the \code{tz} argument.
+For log files collected using UPAS v2.0, the parameter "UPASlogFilename" will
+be renamed to "LogFilename" regardless of whether \code{update_names = TRUE}.
 
 The data frame returned by this function will include all variables from the
 log file header. Additionally, for UPAS log files, the following columns will
