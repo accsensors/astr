@@ -50,6 +50,22 @@ test_that("fread_ast_log works with verbose rev200 UPASv2x file", {
   expect_gt(ncol(log_raw), 3)
 })
 
+test_that("fread_ast_log works with standard rev200 DIAGNOSTIC UPASv2x file", {
+  fname <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
+  file <- system.file("extdata", fname, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
+test_that("fread_ast_log works with verbose rev200 DIAGNOSTIC UPASv2x file", {
+  fname <- 'PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt'
+  file <- system.file("extdata", fname, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
 test_that("fread_ast_log works with SHEAR UPASv2x  file", {
   filename <- 'SH00009_LOG_2022-02-14T17_02_32UTC_---------------_5VX__.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
@@ -270,6 +286,14 @@ test_that("read_ast_log works with all UPASv2x firmwares", {
   upasv2x_rev200v_filename <- 'PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt'
   upasv2x_rev200v_file <- system.file("extdata", upasv2x_rev200v_filename, package = "astr", mustWork = TRUE)
   expect_snapshot(read_ast_log(upasv2x_rev200v_file, update_names = FALSE))
+
+  upasv2x_rev200_diag_filename <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
+  upasv2x_rev200_diag_file <- system.file("extdata", upasv2x_rev200_diag_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(upasv2x_rev200_diag_file, update_names = FALSE))
+
+  upasv2x_rev200v_diag_filename <- 'PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt'
+  upasv2x_rev200v_diag_file <- system.file("extdata", upasv2x_rev200v_diag_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(upasv2x_rev200v_diag_file, update_names = FALSE))
 })
 
 test_that("read_ast_log works with all HHBv2 firmwares", {

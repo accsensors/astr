@@ -42,6 +42,22 @@ test_that("fread_ast_header works with rev < 200 UPASv2x file", {
   expect_type(sapply(header_raw$header, class), "character")
 })
 
+test_that("fread_ast_header works with rev < 200 DIAGNOSTIC UPASv2x file", {
+  filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw <- fread_ast_header(file)
+  expect_identical(tail(header_raw$header, n=1)[[1]], "DIAGNOSTIC TEST")
+  expect_identical(tail(header_raw$diag, n=1)[[1]], "SAMPLE LOG")
+  expect_equal(ncol(header_raw$header), 3)
+  expect_equal(colnames(header_raw$header), c("V1","V2","V3"))
+  expect_equal(as.character(header_raw$header[1,]), c("PARAMETER", "VALUE", "UNITS/NOTES"))
+  expect_equal(ncol(header_raw$diag), 15)
+  expect_equal(colnames(header_raw$diag)[1], "V1")
+  expect_equal(as.character(header_raw$diag[1,1]), "(hPa)")
+  expect_type(sapply(header_raw$header, class), "character")
+  expect_type(sapply(header_raw$diag, class), "character")
+})
+
 test_that("fread_ast_header works with standard rev200 UPASv2x file", {
   filename <- 'PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
@@ -54,8 +70,8 @@ test_that("fread_ast_header works with standard rev200 UPASv2x file", {
   expect_type(sapply(header_raw$header, class), "character")
 })
 
-test_that("fread_ast_header works with DIAGNOSTIC UPASv2x  file", {
-  filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+test_that("fread_ast_header works with rev 200 standard DIAGNOSTIC UPASv2x file", {
+  filename <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
   header_raw <- fread_ast_header(file)
   expect_identical(tail(header_raw$header, n=1)[[1]], "DIAGNOSTIC TEST")
@@ -63,7 +79,7 @@ test_that("fread_ast_header works with DIAGNOSTIC UPASv2x  file", {
   expect_equal(ncol(header_raw$header), 3)
   expect_equal(colnames(header_raw$header), c("V1","V2","V3"))
   expect_equal(as.character(header_raw$header[1,]), c("PARAMETER", "VALUE", "UNITS/NOTES"))
-  expect_equal(ncol(header_raw$diag), 15)
+  expect_equal(ncol(header_raw$diag), 16)
   expect_equal(colnames(header_raw$diag)[1], "V1")
   expect_equal(as.character(header_raw$diag[1,1]), "(hPa)")
   expect_type(sapply(header_raw$header, class), "character")
@@ -158,6 +174,24 @@ test_that("transpose_ast_header works with standard rev 200 UPASv2x file", {
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
+})
+
+test_that("transpose_ast_header works with rev 200 standard DIAGNOSTIC UPASv2x file", {
+  filename <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
+  expect_equal(nrow(header_wide), 1)
+  expect_false(any(is.na(colnames(header_wide))))
+  expect_contains(colnames(header_wide), c("MFSDIAGVoutBlocked",
+                                           "MFSDIAGVoutMax",
+                                           "MFSDIAGVoutMin",
+                                           "MFSDIAGMFBlocked",
+                                           "MFSDIAGMFMax",
+                                           "MFSDIAGMFMin",
+                                           "MFSDIAGPumpVBoostMax",
+                                           "MFSDIAGPumpVBoostMin",
+                                           "MFSDIAGPDeadhead"))
 })
 
 test_that("transpose_ast_header works with SHEAR UPASv2x file", {
@@ -297,6 +331,14 @@ test_that("read_ast_header works with all UPASv2x firmwares", {
   upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
   upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
   expect_snapshot(read_ast_header(upasv2x_rev158_diag_file, update_names=FALSE))
+
+  upasv2x_rev200_filename <- 'PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt'
+  upasv2x_rev200_file <- system.file("extdata", upasv2x_rev200_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_header(upasv2x_rev200_file, update_names=FALSE))
+
+  upasv2x_rev200_diag_filename <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
+  upasv2x_rev200_diag_file <- system.file("extdata", upasv2x_rev200_diag_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_header(upasv2x_rev200_diag_file, update_names=FALSE))
 })
 
 test_that("read_ast_header works with all HHBv2 firmwares", {

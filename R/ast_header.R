@@ -258,13 +258,13 @@ transpose_ast_header = function(header, diag = NULL){
 
     colnames(diag) <- as.character(diag[6,])
 
-    if(grepl("UPAS_v2_0", df$Firmware)){
-      # Rename variable names to v2_x and SHEAR variable names
-      diag <- dplyr::rename(diag, PCB2P="PCBP", MFSVout="MFSVolt", FilterDP="FdPdP")
-    }
+    # Rename variables to v2x rev200 variable names
+    diag <- dplyr::rename(diag, dplyr::any_of(c(U29P     = "PCB2P",
+                                                U29P     = "PCBP",
+                                                MFSVout  = "MFSVolt",
+                                                FilterDP = "FdPdP")))
 
-
-    diag <- diag[-which(diag$PCB2P %in% c("","(hPa)","PCBP","PCB2P")),]
+    diag <- diag[-which(diag$FilterDP %in% c("","(Pa)","FilterDP","FdPdP")),]
 
     diag <- dplyr::mutate(diag, dplyr::across(dplyr::everything(),
                                               \(x) as.numeric(x)))
