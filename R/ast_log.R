@@ -25,35 +25,31 @@
 #' data will be appended to aid in identification of unique samples.
 #'
 #' @details
-#' If `update_names = TRUE`, then, for samples collected using UPAS v2.1 and
-#' UPAS v2.1 PLUS firmware revisions 128 through 149, the column name
-#' "AceelComplianceHrs" will be updated to "AccelComplianceHrs".
-#'
-#' If `update_names = TRUE`, then, for samples collected using the UPAS v2, the
-#' deprecated names shown on the left will be updated to the current names shown
-#' on the right:
+#' If `update_names = TRUE`, and deprecated parameter names in the log file
+#' will be updated to the current names:
 #' \tabular{ll}{
 #'    \strong{Deprecated name} \tab \strong{Current name} \cr
-#'    VolumetricFlowRate \tab PumpingFlowRate \cr
-#'    AtmoRho \tab AtmoDensity \cr
-#'    FdPdP   \tab FilterDP    \cr
-#'    PumpT   \tab AtmoT       \cr
-#'    PumpRH  \tab AtmoRH      \cr
-#'    PCBT    \tab PCB1T       \cr
-#'    PumpP   \tab PCB2P       \cr
-#'    PCBP    \tab AtmoP       \cr
-#'    GPShdop \tab GPShDOP     \cr
-#'    BFGvolt \tab BattVolt    \cr
-#' }
-#'
-#' If `update_names = TRUE`, then, for samples collected using UPAS v2 firmware
-#' rev100, the deprecated names shown on the left will be updated to the current
-#' names shown on the right:
-#' \tabular{ll}{
-#'    \strong{Deprecated name} \tab \strong{Current name} \cr
-#'    UTCDateTime     \tab DateTimeUTC \cr
-#'    VolFlow         \tab VolumetricFlowRate \cr
-#'    UPASLogFilename \tab LogFilename    \cr
+#'    UTCDateTime        \tab DateTimeUTC            \cr
+#'    VolFlow            \tab PumpingFlowOffset      \cr
+#'    VolumetricFlowRate \tab PumpingFlowOffset      \cr
+#'    PumpingFlowRate    \tab PumpingFlowOffset      \cr
+#'    OverallFlowRate    \tab OverallFlowOffset      \cr
+#'    SampledVolume      \tab SampledVolumeOffset    \cr
+#'    FdPdP              \tab FilterDP               \cr
+#'    PumpT              \tab AtmoT                  \cr
+#'    PCBP               \tab AtmoP                  \cr
+#'    PumpRH             \tab AtmoRH                 \cr
+#'    AtmoRho            \tab AtmoDensity            \cr
+#'    GPShdop            \tab GPShDOP                \cr
+#'    AceelComplianceHrs \tab AccelComplianceHrs     \cr
+#'    PM2_5SampledMass   \tab PM2_5SampledMassOffset \cr
+#'    PCBT               \tab U12T                   \cr
+#'    PCB1T              \tab U12T                   \cr
+#'    PCB2T              \tab U29T                   \cr
+#'    PumpP              \tab U29P                   \cr
+#'    PCB2P              \tab U29P                   \cr
+#'    MassFlow           \tab MassFlowFactory        \cr
+#'    BFGvolt            \tab BattVolt               \cr
 #' }
 #'
 #' If the GPSUTCOffset in the log file header is a whole number of hours, this

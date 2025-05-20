@@ -18,7 +18,7 @@ test_that("fread_ast_log works with DIAGNOSTIC UPASv2 file", {
   expect_gt(ncol(log_raw), 3)
 })
 
-test_that("fread_ast_log works with standard UPASv2x file", {
+test_that("fread_ast_log works with rev < 200 UPASv2x file", {
   filename <- 'PSP00270_LOG_2024-06-14T18_54_44UTC_NoGPS___________----------.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
   log_raw <- fread_ast_log(file)
@@ -26,9 +26,41 @@ test_that("fread_ast_log works with standard UPASv2x file", {
   expect_gt(ncol(log_raw), 3)
 })
 
-test_that("fread_ast_log works with DIAGNOSTIC UPASv2x  file", {
+test_that("fread_ast_log works with rev < 200 UPASv2x DIAGNOSTIC file", {
   filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
+test_that("fread_ast_log works with standard rev200 UPASv2x file", {
+  fname <- 'PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt'
+  file <- system.file("extdata", fname, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
+test_that("fread_ast_log works with verbose rev200 UPASv2x file", {
+  fname <- 'PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt'
+  file <- system.file("extdata", fname, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
+test_that("fread_ast_log works with standard rev200 DIAGNOSTIC UPASv2x file", {
+  fname <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
+  file <- system.file("extdata", fname, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
+test_that("fread_ast_log works with verbose rev200 DIAGNOSTIC UPASv2x file", {
+  fname <- 'PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt'
+  file <- system.file("extdata", fname, package = "astr", mustWork = TRUE)
   log_raw <- fread_ast_log(file)
   expect_identical(colnames(log_raw)[1], "SampleTime")
   expect_gt(ncol(log_raw), 3)
@@ -71,8 +103,8 @@ test_that("If using update names for UPASv2, all applicable column names are upd
   upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
   upasv2x_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
   upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  upasv2_log <- read_ast_log(upasv2_file, update_names = TRUE)
-  upasv2x_log <- read_ast_log(upasv2x_file)
+  upasv2_log  <- read_ast_log(upasv2_file,  update_names = TRUE)
+  upasv2x_log <- read_ast_log(upasv2x_file, update_names = TRUE)
   upasv2_colnames <- colnames(upasv2_log)
   expect_contains(colnames(upasv2x_log), upasv2_colnames[! upasv2_colnames %in%
                           c("MFlowDelta", "VFlowDelta", "MFSADS", "VInADS", "PumpADS", "LogFileMode")])
@@ -93,7 +125,8 @@ test_that("format_upasv2x_log and read_ast_log have the same output", {
   upasv2x_header <- read_ast_header(upasv2x_file)
   upasv2x_log_raw <- fread_ast_log(upasv2x_file)
   expect_identical(read_ast_log(upasv2x_file, update_names = TRUE),
-                   format_upasv2x_log(upasv2x_log_raw, upasv2x_header))
+                   format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
+                                      update_names = TRUE))
 })
 
 test_that("tz, cols_keep, and cols_drop arguments work as expected", {
@@ -174,6 +207,24 @@ test_that("Values of -9999 in GPS data columns are replaced with NA.",{
   expect_equal(sum(is.na(upasv2x_gpsno_log$GPSlat)),  nrow(upasv2x_gpsno_log))
   expect_equal(sum(is.na(upasv2x_gps_log$GPSlat)), 3)
   expect_equal(sum(!is.na(upasv2x_gps_log$GPSlat)), (nrow(upasv2x_gps_log) - 3))
+
+  test_that("UPASv2x log file headers written using firmware rev 200 and firmware rev < 200 can be combined when update_names = TRUE", {
+    fname_157  <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+    fname_200s <- 'PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt'
+    fname_200v <- 'PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt'
+    file_157  <- system.file("extdata", fname_157,  package = "astr", mustWork = T)
+    file_200s <- system.file("extdata", fname_200s, package = "astr", mustWork = T)
+    file_200v <- system.file("extdata", fname_200v, package = "astr", mustWork = T)
+    log_157  <- read_ast_header(file_157, update_names = T)
+    log_200s <- read_ast_header(file_200s)
+    log_200v <- read_ast_header(file_200v)
+    expect_no_error(dplyr::bind_rows(log_200v, log_200s, log_157))
+    expect_equal(ncol(log_200v),
+                 ncol(dplyr::bind_rows(log_200v, log_200s, log_157)))
+    expect_identical(colnames(log_157),
+                     colnames(dplyr::select(log_200v,
+                                            dplyr::any_of(colnames(log_157)))))
+  })
 })
 
 
@@ -227,6 +278,22 @@ test_that("read_ast_log works with all UPASv2x firmwares", {
   upasv2x_rev158_diag_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
   upasv2x_rev158_diag_file <- system.file("extdata", upasv2x_rev158_diag_filename, package = "astr", mustWork = TRUE)
   expect_snapshot(read_ast_log(upasv2x_rev158_diag_file, update_names=FALSE))
+
+  upasv2x_rev200_filename <- 'PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt'
+  upasv2x_rev200_file <- system.file("extdata", upasv2x_rev200_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(upasv2x_rev200_file, update_names = FALSE))
+
+  upasv2x_rev200v_filename <- 'PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt'
+  upasv2x_rev200v_file <- system.file("extdata", upasv2x_rev200v_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(upasv2x_rev200v_file, update_names = FALSE))
+
+  upasv2x_rev200_diag_filename <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
+  upasv2x_rev200_diag_file <- system.file("extdata", upasv2x_rev200_diag_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(upasv2x_rev200_diag_file, update_names = FALSE))
+
+  upasv2x_rev200v_diag_filename <- 'PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt'
+  upasv2x_rev200v_diag_file <- system.file("extdata", upasv2x_rev200v_diag_filename, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(upasv2x_rev200v_diag_file, update_names = FALSE))
 })
 
 test_that("read_ast_log works with all HHBv2 firmwares", {

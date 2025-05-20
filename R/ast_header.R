@@ -36,33 +36,26 @@
 #' @return A data frame with a single row of header data that are formatted and ready for analysis.
 #'
 #' @details
-#' If `update_names = TRUE`, then, for samples collected using UPAS v2 firmware
-#' versions beyond rev100, the deprecated names shown on the left will be
-#' updated to the current names shown on the right:
+#' If `update_names = TRUE`, and deprecated parameter names in the log file
+#' will be updated to the current names:
 #' \tabular{ll}{
-#'    \strong{Deprecated name}  \tab \strong{Current name}  \cr
-#'    VolumetricFlowRate        \tab FlowRateSetpoint       \cr
-#'    DutyCycle                 \tab FlowDutyCycle          \cr
-#'    LoggedRuntime             \tab OverallDuration        \cr
-#'    SampledRuntime            \tab PumpingDuration        \cr
-#'    AverageVolumetricFlowRate \tab PumpingFlowRateAverage \cr
+#'    \strong{Deprecated name}  \tab \strong{Current name} \cr
+#'    PowerCycles               \tab LifetimeSampleCount   \cr
+#'    CumulativeSamplingTime    \tab LifetimeSampleRuntime \cr
+#'    VolumetricFlowRate        \tab FlowRateSetpoint      \cr
+#'    DutyCycle                 \tab FlowDutyCycle         \cr
+#'    StartDateTime             \tab StartDateTimeUTC      \cr
+#'    SampledRuntime            \tab PumpingDuration       \cr
+#'    LoggedRuntime             \tab OverallDuration       \cr
+#'    OverallFlowRateAverage    \tab OverallFlowAvgOffset  \cr
+#'    AverageVolumetricFlow     \tab PumpingFlowAvgOffset  \cr
+#'    AverageVolumetricFlowRate \tab PumpingFlowAvgOffset  \cr
+#'    PumpingFlowRateAverage    \tab PumpingFlowAvgOffset  \cr
+#'    SampledVolume             \tab SampledVolumeOffset   \cr
 #' }
 #'
-#' If `update_names = TRUE`, then, for samples collected using UPAS v2 firmware
-#' rev100, the deprecated names shown on the left will be updated to the current
-#' names shown on the right:
-#' \tabular{ll}{
-#'    \strong{Deprecated name} \tab \strong{Current name}  \cr
-#'    CumulativeSamplingTime   \tab LifetimeSampleRuntime  \cr
-#'    StartDateTime            \tab StartDateTimeUTC       \cr
-#'    AverageVolumetricFlow    \tab PumpingFlowRateAverage \cr
-#' }
-#'
-#' If the GPSUTCOffset in the file header is a whole number of hours, this
-#' function will be able to convert local times to POSIXct format automatically,
-#' without the `tz` argument being specified. If the GPSUTCOffset is not a whole
-#' number of hours, it's better to specify the local time zone as a character
-#' string using the `tz` argument.
+#' For log files collected using UPAS v2.0, the parameter "UPASlogFilename" will
+#' be renamed to "LogFilename" regardless of whether `update_names = TRUE`.
 #'
 #' The data frame returned by this function will include all variables from the
 #' log file header. Additionally, for UPAS log files, the following columns will
@@ -265,13 +258,13 @@ transpose_ast_header = function(header, diag = NULL){
 
     colnames(diag) <- as.character(diag[6,])
 
-    if(grepl("UPAS_v2_0", df$Firmware)){
-      # Rename variable names to v2_x and SHEAR variable names
-      diag <- dplyr::rename(diag, PCB2P="PCBP", MFSVout="MFSVolt", FilterDP="FdPdP")
-    }
+    # Rename variables to v2x rev200 variable names
+    diag <- dplyr::rename(diag, dplyr::any_of(c(U29P     = "PCB2P",
+                                                U29P     = "PCBP",
+                                                MFSVout  = "MFSVolt",
+                                                FilterDP = "FdPdP")))
 
-
-    diag <- diag[-which(diag$PCB2P %in% c("","(hPa)","PCBP","PCB2P")),]
+    diag <- diag[-which(diag$FilterDP %in% c("","(Pa)","FilterDP","FdPdP")),]
 
     diag <- dplyr::mutate(diag, dplyr::across(dplyr::everything(),
                                               \(x) as.numeric(x)))
@@ -349,7 +342,7 @@ format_ast_header = function(data, update_names=FALSE, tz=NA) {
 
   if(grepl("UPAS_v2_x", firmware) | grepl("SHEARv2_7_2", firmware)){
 
-    df_h <- astr::format_upasv2x_header(data, tz=tz)
+    df_h <- astr::format_upasv2x_header(data, update_names=update_names, tz=tz)
 
   }else if(grepl("UPAS_v2_0", firmware)){
 

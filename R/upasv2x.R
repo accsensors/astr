@@ -28,13 +28,13 @@
 #'                                   upasv2x_diag_header_list$diag)
 #' upasv2x_diag_header <- format_upasv2x_header(upasv2x_diag_header_wide)
 
-format_upasv2x_header = function(data, tz=NA) {
+format_upasv2x_header = function(data, update_names=FALSE, tz=NA) {
 
   data <- dplyr::mutate(data,
     ASTSampler  = sub("-rev.*", "", .data$Firmware),
-    UPASserial = ifelse(.data$ASTSampler == "UPAS_v2_x", ## Change UPASserial based off standard vs. SHEAR UPAS
-      sub("(^.*)(PSP.*)_LOG.*", "\\2", .data$LogFilename),
-      sub("(^.*)(SH.*)_LOG.*", "\\2", .data$LogFilename)),
+    UPASserial  = ifelse(.data$ASTSampler == "UPAS_v2_x", ## Change UPASserial based off standard vs. SHEAR UPAS
+                          sub("(^.*)(PSP.*)_LOG.*", "\\2", .data$LogFilename),
+                          sub("(^.*)(SH.*)_LOG.*",  "\\2", .data$LogFilename)),
     FirmwareRev = sapply(strsplit(.data$Firmware,"-"), `[`, 2),
     FirmwareRev = as.numeric(gsub("rev_", "", .data$FirmwareRev)),
     ProgrammedRuntime = ifelse(.data$ProgrammedRuntime == "indefinite", NA,
@@ -45,22 +45,19 @@ format_upasv2x_header = function(data, tz=NA) {
                     .data$StartOnNextPowerUp == 2 ~ "system reset",
                     .data$StartOnNextPowerUp == 4 ~ "always"
     ),
-    dplyr::across(dplyr::any_of(c("UPASpcbRev", "GPSUTCOffset",
-                                  "DutyCycleWindow",
-                                  "GPSEnabled", "PMSensorInterval",
-                                  "LogInterval", "SamplerConfiguration",
-                                  "PowerSaveMode", "AppLock", "SampledVolume",
-                                  "PercentTimeWorn", "ShutdownMode",
-                                  "CO2CalTarget", "CO2CalOffset",
-                                  "MFSCalPDeadhead",
-                                  "MF4", "MF3", "MF2", "MF1", "MF0")),
-                  \(x) as.numeric(x)),
+    dplyr::across(dplyr::any_of(
+      c("UPASpcbRev", "DutyCycleWindow", "GPSEnabled","PMSensorInterval",
+        "LogInterval", "SamplerConfiguration", "PowerSaveMode", "AppLock",
+        "SampledVolume", "PercentTimeWorn", "ShutdownMode", "CO2CalTarget",
+        "MFSCalPDeadhead","MF4","MF3","MF2","MF1","MF0")), \(x) as.numeric(x)),
     dplyr::across(dplyr::starts_with("Lifetime"),      \(x) as.numeric(x)),
     dplyr::across(dplyr::starts_with("Programmed"),    \(x) as.numeric(x)),
     dplyr::across(dplyr::starts_with("Flow"),          \(x) as.numeric(x)),
     dplyr::across(dplyr::ends_with("SampleState"),     \(x) as.numeric(x)),
     dplyr::across(dplyr::ends_with("Duration"),        \(x) as.numeric(x)),
     dplyr::across(dplyr::ends_with("FlowRateAverage"), \(x) as.numeric(x)),
+    dplyr::across(dplyr::ends_with("Offset"),          \(x) as.numeric(x)),
+    dplyr::across(dplyr::ends_with("Factory"),         \(x) as.numeric(x)),
     dplyr::across(dplyr::contains("Battery"),          \(x) as.numeric(x)),
     dplyr::across(dplyr::starts_with("MFSCalVout"),    \(x) as.numeric(x)),
     dplyr::across(dplyr::starts_with("MFSCalMF"),      \(x) as.numeric(x)),
@@ -72,18 +69,18 @@ format_upasv2x_header = function(data, tz=NA) {
                   \(x) ifelse(x == "F0", T, F)),
     LogFilename = gsub("/sd/", "", .data$LogFilename),
     ShutdownReason = dplyr::case_when(
-                   .data$ShutdownMode == 0 ~ "unknown error",
-                   .data$ShutdownMode == 1 ~ "user pushbutton stop",
-                   .data$ShutdownMode == 2 ~ "depleted battery",
-                   .data$ShutdownMode == 3 ~ "completed preset sample duration",
-                   .data$ShutdownMode == 4 ~ "thermal protection",
-                   .data$ShutdownMode == 5 ~ "max power at initialization",
-                   .data$ShutdownMode == 6 ~ "max power during sample",
-                   .data$ShutdownMode == 7 ~ "blocked flow",
-                   #TODO may need to make bottom 2 only applicable below rev200
-                   .data$ShutdownMode == 8 ~ "SD card removed",
-                   dplyr::between(.data$ShutdownMode, 64, 79) ~ "code freeze",
-                   TRUE ~ "RTOS crash"),
+       .data$ShutdownMode == 0 ~ "unknown error",
+       .data$ShutdownMode == 1 ~ "user pushbutton stop",
+       .data$ShutdownMode == 2 ~ "depleted battery",
+       .data$ShutdownMode == 3 ~ "completed preset sample duration",
+       .data$ShutdownMode == 4 ~ "thermal protection",
+       .data$ShutdownMode == 5 ~ "max power at initialization",
+       .data$ShutdownMode == 6 ~ "max power during sample",
+       .data$ShutdownMode == 7 ~ "blocked flow",
+      (.data$ShutdownMode == 8) & (FirmwareRev <  200) ~ "SD card removed",
+      (.data$ShutdownMode == 8) & (FirmwareRev >= 200) ~ "I2C bus error",
+       dplyr::between(.data$ShutdownMode, 64, 79) & (FirmwareRev < 200) ~ "code freeze",
+       TRUE ~ "RTOS crash"),
     PMSensorOperation = dplyr::case_when(
        .data$PMSensorInterval == "0" ~ "Sensor Disabled",
        .data$PMSensorInterval == "1" ~ "Continuous Measurement",
@@ -134,6 +131,15 @@ format_upasv2x_header = function(data, tz=NA) {
   data <- dplyr::relocate(data, "ShutdownReason",    .after="ShutdownMode")
   data <- dplyr::relocate(data, "PMSensorOperation", .after="PMSensorInterval")
   data <- dplyr::relocate(data, "LocalTZ",           .after="StartDateTimeUTC")
+
+  if(update_names){
+    data <- dplyr::rename(data,
+              dplyr::any_of(
+                c(OverallFlowAvgOffset = "OverallFlowRateAverage",
+                  PumpingFlowAvgOffset = "AverageVolumetricFlowRate",
+                  PumpingFlowAvgOffset = "PumpingFlowRateAverage",
+                  SampledVolumeOffset  = "SampledVolume")))
+  }
 
   return(data)
 }
@@ -202,7 +208,8 @@ format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), co
                   \(x) ifelse(as.numeric(.data$x) == -9999, as.numeric(NA), .data$x)),
     dplyr::across(-dplyr::any_of(c("SampleTime","DateTimeUTC","DateTimeLocal")),
                   \(x) as.numeric(x)),
-    dplyr::across(dplyr::any_of(c("PumpsON","Dead","BCS1","BCS2","BC_NPG")),
+    dplyr::across(dplyr::any_of(c("Charging","ExtPow","PumpsON","Dead","BCS1",
+                                  "BCS2","BC_NPG")),
                   \(x) as.logical(x)))
 
    # Remove any unnamed columns from firmwares with extra commas in the log
@@ -218,8 +225,18 @@ format_upasv2x_log = function(log, header, update_names=FALSE, cols_keep=c(), co
   df <- dplyr::relocate(df, c("DateTimeLocal","LocalTZ"), .after="DateTimeUTC")
   df <- dplyr::relocate(df, dplyr::any_of(c("ASTSampler","UPASserial","SampleName","CartridgeID")))
 
+  # Update variable names to match those implemented in firmware version 200
   if(update_names){
-    df <- dplyr::rename(df, dplyr::any_of(c(AccelComplianceHrs="AceelComplianceHrs")))
+    df <- dplyr::rename(df,
+      dplyr::any_of(c(PumpingFlowOffset      = "PumpingFlowRate",
+                      OverallFlowOffset      = "OverallFlowRate",
+                      SampledVolumeOffset    = "SampledVolume",
+                      AccelComplianceHrs     = "AceelComplianceHrs",
+                      PM2_5SampledMassOffset = "PM2_5SampledMass",
+                      U12T                   = "PCB1T",
+                      U29T                   = "PCB2T",
+                      U29P                   = "PCB2P",
+                      MassFlowFactory        = "MassFlow")))
   }
 
   if(!is.null(cols_keep)){

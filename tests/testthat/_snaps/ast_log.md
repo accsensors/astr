@@ -5347,6 +5347,1985 @@
       38: 2024-06-13 16:24:47  FALSE
              StartDateTimeUTC UserTZ
 
+---
+
+    Code
+      read_ast_log(upasv2x_rev200_file, update_names = FALSE)
+    Output
+         ASTSampler UPASserial  SampleName CartridgeID SampleTime   UnixTime
+             <char>     <char>      <char>      <char> <difftime>      <num>
+      1:  UPAS_v2_x   PSP01066 standard30s        <NA>    30 secs 1741290210
+      2:  UPAS_v2_x   PSP01066 standard30s        <NA>    60 secs 1741290240
+      3:  UPAS_v2_x   PSP01066 standard30s        <NA>    90 secs 1741290270
+      4:  UPAS_v2_x   PSP01066 standard30s        <NA>   120 secs 1741290300
+      5:  UPAS_v2_x   PSP01066 standard30s        <NA>   150 secs 1741290330
+      6:  UPAS_v2_x   PSP01066 standard30s        <NA>   180 secs 1741290360
+                 DateTimeUTC       DateTimeLocal   LocalTZ PumpingFlowFactory
+                      <POSc>              <POSc>    <char>              <num>
+      1: 2025-03-06 19:43:30 2025-03-06 12:43:30 Etc/GMT+7              1.836
+      2: 2025-03-06 19:44:00 2025-03-06 12:44:00 Etc/GMT+7              1.838
+      3: 2025-03-06 19:44:30 2025-03-06 12:44:30 Etc/GMT+7              1.829
+      4: 2025-03-06 19:45:00 2025-03-06 12:45:00 Etc/GMT+7              1.832
+      5: 2025-03-06 19:45:30 2025-03-06 12:45:30 Etc/GMT+7              1.832
+      6: 2025-03-06 19:46:00 2025-03-06 12:46:00 Etc/GMT+7              1.835
+         OverallFlowFactory SampledVolumeFactory PumpingFlowOffset OverallFlowOffset
+                      <num>                <num>             <num>             <num>
+      1:              1.102                0.551             2.001             1.201
+      2:              1.103                1.102             2.004             1.202
+      3:              1.098                1.651             1.994             1.196
+      4:              1.099                2.201             1.997             1.198
+      5:              1.099                2.750             1.997             1.198
+      6:              1.101                3.301             2.000             1.200
+         SampledVolumeOffset FilterDP BatteryCharge AtmoT  AtmoP AtmoRH AtmoDensity
+                       <num>    <num>         <num> <num>  <num>  <num>       <num>
+      1:               0.600   342.45           100 24.70 788.49  23.43      0.9191
+      2:               1.201   345.80           100 24.80 788.49  23.01      0.9191
+      3:               1.800   341.80           100 24.95 788.48  22.93      0.9187
+      4:               2.399   342.05           100 25.11 788.49  22.62      0.9183
+      5:               2.998   340.70           100 25.21 788.49  22.58      0.9178
+      6:               3.598   341.05           100 25.27 788.49  22.10      0.9175
+         AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat GPSspeed GPShDOP AccelX
+           <num>   <num>  <num>  <num>  <num>  <num>    <num>   <num>  <num>
+      1:  2066.1       0     NA     NA     NA      0       NA      NA    4.7
+      2:  2066.0       0     NA     NA     NA      0       NA      NA    4.8
+      3:  2066.1       0     NA     NA     NA      0       NA      NA    4.9
+      4:  2066.1       0     NA     NA     NA      0       NA      NA    4.7
+      5:  2066.0       0     NA     NA     NA      0       NA      NA    4.7
+      6:  2066.0       0     NA     NA     NA      0       NA      NA    4.8
+         AccelXVar AccelXMin AccelXMax AccelY AccelYVar AccelYMin AccelYMax  AccelZ
+             <num>     <num>     <num>  <num>     <num>     <num>     <num>   <num>
+      1:       0.3         3         5  -11.9       0.6       -13       -10 -1001.2
+      2:       0.2         4         5  -11.7       0.8       -13       -10 -1001.5
+      3:       0.1         4         5  -11.6       0.6       -13       -10 -1001.5
+      4:       0.3         4         6  -11.7       0.5       -13       -10 -1001.7
+      5:       0.2         4         5  -11.8       0.9       -14       -10 -1001.6
+      6:       0.3         4         6  -12.0       0.5       -13       -11 -1001.7
+         AccelZVar AccelZMin AccelZMax AccelComplianceCnt AccelComplianceHrs   Xup
+             <num>     <num>     <num>              <num>              <num> <num>
+      1:       5.8     -1004      -998                  0                  0     0
+      2:       8.1     -1005      -998                  0                  0     0
+      3:       5.8     -1004      -998                  0                  0     0
+      4:       8.2     -1005      -998                  0                  0     0
+      5:       6.1     -1004      -998                  0                  0     0
+      6:       8.9     -1005      -998                  0                  0     0
+         XDown   Yup Ydown   Zup Zdown StepCount   LUX UVindex HighVisRaw LowVisRaw
+         <num> <num> <num> <num> <num>     <num> <num>   <num>      <num>     <num>
+      1:     0     0     0   100     0         0  44.7    0.16      251.6     260.4
+      2:     0     0     0   100     0         0  45.1    0.19      253.5     261.9
+      3:     0     0     0   100     0         0  44.4    0.19      249.7     258.9
+      4:     0     0     0   100     0         0  44.8    0.22      253.3     261.3
+      5:     0     0     0   100     0         0  44.7    0.14      253.4     260.8
+      6:     0     0     0   100     0         0  45.3    0.23      254.8     263.1
+         IRRaw UVRaw PMMeasCnt PM1MC PM1MCVar PM2_5MC PM2_5MCVar PM0_5NC PM1NC
+         <num> <num>     <num> <num>    <num>   <num>      <num>   <num> <num>
+      1: 177.7  -2.6         5  0.79        0    0.96          0    5.15  6.13
+      2: 176.2 -11.6        NA    NA       NA      NA         NA      NA    NA
+      3: 177.8  -6.1         5  0.79        0    0.83          0    5.48  6.28
+      4: 177.9 -15.4        NA    NA       NA      NA         NA      NA    NA
+      5: 178.2 -10.4         5  1.24        0    1.34          0    8.59  9.88
+      6: 175.8 -22.9        NA    NA       NA      NA         NA      NA    NA
+         PM2_5NC PMtypicalParticleSize PM2_5SampledMassFactory PM2_5SampledMassOffset
+           <num>                 <num>                   <num>                  <num>
+      1:    6.27                  0.63                  0.0003                 0.0003
+      2:      NA                    NA                      NA                     NA
+      3:    6.30                  0.38                  0.0013                 0.0014
+      4:      NA                    NA                      NA                     NA
+      5:    9.93                  0.45                  0.0024                 0.0027
+      6:      NA                    NA                      NA                     NA
+          U12T  U29T  FdpT AccelT  U29P PumpPow1  PumpV MassFlowFactory  MFSVout
+         <num> <num> <num>  <num> <num>    <num>  <num>           <num>    <num>
+      1: 23.64 24.82 26.32  23.39 788.6      237 13.635         1.68785 1.549250
+      2: 23.67 25.11 26.59  23.61 788.7      237 13.635         1.69299 1.551125
+      3: 23.73 25.33 26.75  23.80 788.7      239 13.576         1.68034 1.546500
+      4: 23.80 25.48 26.93  24.05 788.6      239 13.576         1.68477 1.548125
+      5: 23.87 25.66 27.08  24.00 788.7      239 13.577         1.68545 1.548375
+      6: 23.94 25.79 27.18  24.21 788.7      239 13.578         1.68545 1.548375
+         BattVolt  v3_3    v5 Charging ExtPow FLOWCTL GPSRT SD_DATAW SD_HEADW
+            <num> <num> <num>   <lgcl> <lgcl>   <num> <num>    <num>    <num>
+      1:     4.14  3.34  5.04    FALSE  FALSE    0.00  0.01     0.00     0.00
+      2:     4.12  3.34  5.03    FALSE  FALSE    0.58  0.02     0.01     0.04
+      3:     4.13  3.34  5.04    FALSE  FALSE    0.58  0.02     0.02     0.03
+      4:     4.12  3.34  5.03    FALSE  FALSE    0.59  0.02     0.02     0.04
+      5:     4.13  3.34  5.04    FALSE  FALSE    0.57  0.02     0.02     0.03
+      6:     4.11  3.34  5.03    FALSE  FALSE    0.58  0.02     0.01     0.04
+              CO2     SCDT    SCDRH   VOCRaw   NOXRaw
+            <num>    <num>    <num>    <num>    <num>
+      1: 1294.375 22.61500 29.90150 32529.47 17253.13
+      2: 1464.143 22.11029 30.66200 32553.47 16867.17
+      3: 1502.167 21.76833 31.31100 32542.60 16642.73
+      4: 1500.000 21.46167 31.77150 32533.37 16468.00
+      5: 1505.500 21.43383 31.87300 32514.73 16330.80
+      6: 1503.500 21.32300 32.00467 32506.20 16214.23
+                                                                          LogFilename
+                                                                               <char>
+      1: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      2: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      3: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      4: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      5: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+      6: /20250306/PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt
+            StartDateTimeUTC UserTZ
+                      <POSc> <lgcl>
+      1: 2025-03-06 19:42:26  FALSE
+      2: 2025-03-06 19:42:26  FALSE
+      3: 2025-03-06 19:42:26  FALSE
+      4: 2025-03-06 19:42:26  FALSE
+      5: 2025-03-06 19:42:26  FALSE
+      6: 2025-03-06 19:42:26  FALSE
+
+---
+
+    Code
+      read_ast_log(upasv2x_rev200v_file, update_names = FALSE)
+    Output
+         ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
+             <char>     <char>     <char>      <char> <difftime>      <num>
+      1:  UPAS_v2_x   PSP01066 verbose30s        <NA>    30 secs 1741289940
+      2:  UPAS_v2_x   PSP01066 verbose30s        <NA>    60 secs 1741289970
+      3:  UPAS_v2_x   PSP01066 verbose30s        <NA>    90 secs 1741290000
+      4:  UPAS_v2_x   PSP01066 verbose30s        <NA>   120 secs 1741290030
+      5:  UPAS_v2_x   PSP01066 verbose30s        <NA>   150 secs 1741290060
+      6:  UPAS_v2_x   PSP01066 verbose30s        <NA>   180 secs 1741290090
+                 DateTimeUTC       DateTimeLocal   LocalTZ UnixTimeMCU
+                      <POSc>              <POSc>    <char>       <num>
+      1: 2025-03-06 19:39:00 2025-03-06 12:39:00 Etc/GMT+7  1741289940
+      2: 2025-03-06 19:39:30 2025-03-06 12:39:30 Etc/GMT+7  1741289970
+      3: 2025-03-06 19:40:00 2025-03-06 12:40:00 Etc/GMT+7  1741290000
+      4: 2025-03-06 19:40:30 2025-03-06 12:40:30 Etc/GMT+7  1741290030
+      5: 2025-03-06 19:41:00 2025-03-06 12:41:00 Etc/GMT+7  1741290060
+      6: 2025-03-06 19:41:30 2025-03-06 12:41:30 Etc/GMT+7  1741290090
+         PumpingFlowFactory OverallFlowFactory SampledVolumeFactory PumpingFlowOffset
+                      <num>              <num>                <num>             <num>
+      1:              1.831              1.098                0.549             1.995
+      2:              1.836              1.102                1.100             2.002
+      3:              1.833              1.100                1.650             1.998
+      4:              1.837              1.102                2.201             2.002
+      5:              1.836              1.102                2.752             2.001
+      6:              1.834              1.101                3.302             1.999
+         OverallFlowOffset SampledVolumeOffset FilterDP BatteryCharge AtmoT  AtmoP
+                     <num>               <num>    <num>         <num> <num>  <num>
+      1:             1.197               0.599    342.0           100 23.66 788.41
+      2:             1.201               1.199    345.0           100 23.88 788.42
+      3:             1.199               1.799    345.0           100 24.07 788.43
+      4:             1.201               2.399    345.2           100 24.29 788.43
+      5:             1.201               3.000    343.0           100 24.42 788.42
+      6:             1.200               3.600    344.4           100 24.58 788.43
+         AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat GPSspeed
+          <num>       <num>   <num>   <num>  <num>  <num>  <num>  <num>    <num>
+      1:  25.28      0.9234  2066.8       0     NA     NA     NA      0       NA
+      2:  24.70      0.9222  2066.8       0     NA     NA     NA      0       NA
+      3:  24.45      0.9215  2066.7       0     NA     NA     NA      0       NA
+      4:  23.89      0.9209  2066.6       0     NA     NA     NA      0       NA
+      5:  23.69      0.9202  2066.8       0     NA     NA     NA      0       NA
+      6:  23.46      0.9198  2066.6       0     NA     NA     NA      0       NA
+         GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY AccelYVar AccelYMin
+           <num>  <num>     <num>     <num>     <num>  <num>     <num>     <num>
+      1:      NA    4.4       0.3         3         5  -11.9       0.6       -14
+      2:      NA    4.3       0.2         4         5  -12.0       0.5       -13
+      3:      NA    4.3       0.6         2         6  -11.8       0.7       -13
+      4:      NA    4.3       0.3         3         5  -11.9       0.5       -13
+      5:      NA    4.1       0.2         3         5  -11.7       0.5       -13
+      6:      NA    4.2       0.4         3         6  -11.7       0.6       -13
+         AccelYMax  AccelZ AccelZVar AccelZMin AccelZMax  RotX RotXVar RotXMin
+             <num>   <num>     <num>     <num>     <num> <num>   <num>   <num>
+      1:       -11 -1000.3       4.7     -1003      -997 651.1 19332.2       8
+      2:       -11 -1000.8       5.2     -1003      -998 675.7 14945.8     350
+      3:       -10 -1000.7       3.6     -1003      -998 642.5  2049.5     490
+      4:       -11 -1000.9       5.4     -1004      -998 677.8  7617.4     516
+      5:       -11 -1000.8       3.8     -1003      -998 596.1  8383.2     148
+      6:       -10 -1000.9       5.4     -1004      -998 619.4 15031.1     376
+         RotXMax  RotY RotYVar RotYMin RotYMax  RotZ RotZVar RotZMin RotZMax
+           <num> <num>   <num>   <num>   <num> <num>   <num>   <num>   <num>
+      1:     770  47.9 17261.0     -70     612 328.3 19383.5     -17     551
+      2:    1067  23.4 15305.3    -393     288 338.9 26815.4     -26     568
+      3:     770  18.7  4698.9    -183     262 333.9 16820.5     148     542
+      4:     910 -25.4 10766.4    -253     227 331.6 22591.1      43     507
+      5:     743  30.7  9533.2    -131     498 354.9 15111.0     210     525
+      6:    1067   3.6 22544.2    -525     332 334.7 24387.3      35     516
+         AccelComplianceCnt AccelComplianceHrs   Xup XDown   Yup Ydown   Zup Zdown
+                      <num>              <num> <num> <num> <num> <num> <num> <num>
+      1:                  0                  0     0     0     0     0   100     0
+      2:                  0                  0     0     0     0     0   100     0
+      3:                  0                  0     0     0     0     0   100     0
+      4:                  0                  0     0     0     0     0   100     0
+      5:                  0                  0     0     0     0     0   100     0
+      6:                  0                  0     0     0     0     0   100     0
+         StepCount   LUX UVindex HighVisRaw LowVisRaw IRRaw UVRaw PMMeasCnt PM1MC
+             <num> <num>   <num>      <num>     <num> <num> <num>     <num> <num>
+      1:         0  41.9    0.21      236.5     244.3 169.3  16.1         5  0.70
+      2:         0  42.6    0.19      237.6     247.8 167.6   3.9        NA    NA
+      3:         0  44.4    0.19      239.5     249.0 170.3   8.3         5  1.20
+      4:         0  42.7    0.17      241.2     249.1 170.7 -12.0        NA    NA
+      5:         0  42.9    0.17      239.7     250.1 171.2  -6.3         5  0.58
+      6:         0  43.3    0.15      242.7     252.8 172.5  -5.3        NA    NA
+         PM1MCVar PM2_5MC PM2_5MCVar PM4MC PM4MCVar PM10MC PM10MCVar PM0_5NC PM1NC
+            <num>   <num>      <num> <num>    <num>  <num>     <num>   <num> <num>
+      1:        0    1.11       0.00  1.42     0.00   1.57      0.00    3.91  5.15
+      2:       NA      NA         NA    NA       NA     NA        NA      NA    NA
+      3:        0    1.34       0.01  1.40     0.01   1.43      0.02    8.17  9.49
+      4:       NA      NA         NA    NA       NA     NA        NA      NA    NA
+      5:        0    1.52       0.01  2.28     0.02   2.66      0.03    1.67  3.56
+      6:       NA      NA         NA    NA       NA     NA        NA      NA    NA
+         PM2_5NC PM4NC PM10NC PM0_5NCVar PM1NCVar PM2_5NCVar PM4NCVar PM10NCVar
+           <num> <num>  <num>      <num>    <num>      <num>    <num>     <num>
+      1:    5.54  5.62   5.62       0.12     0.13       0.11     0.11      0.11
+      2:      NA    NA     NA         NA       NA         NA       NA        NA
+      3:    9.59  9.61   9.61       0.14     0.22       0.25     0.25      0.25
+      4:      NA    NA     NA         NA       NA         NA       NA        NA
+      5:    4.49  4.67   4.67       0.07     0.02       0.00     0.00      0.00
+      6:      NA    NA     NA         NA       NA         NA       NA        NA
+         PMtypicalParticleSize PM2_5SampledMassFactory PM2_5SampledMassOffset
+                         <num>                   <num>                  <num>
+      1:                  0.95                  0.0003                 0.0003
+      2:                    NA                      NA                     NA
+      3:                  0.51                  0.0017                 0.0018
+      4:                    NA                      NA                     NA
+      5:                  1.23                  0.0032                 0.0035
+      6:                    NA                      NA                     NA
+         PMtypicalParticleSizeVar PMReadingErrorCnt PMFanErrorCnt PMLaserErrorCnt
+                            <num>             <num>         <num>           <num>
+      1:                        0                 0             0               0
+      2:                       NA                NA            NA              NA
+      3:                        0                 0             0               0
+      4:                       NA                NA            NA              NA
+      5:                        0                 0             0               0
+      6:                       NA                NA            NA              NA
+         PMFanSpeedWarn  U12T  U29T  FdpT AccelT  U29P PT100R PumpPow1  PumpV
+                  <num> <num> <num> <num>  <num> <num>  <num>    <num>  <num>
+      1:              0 23.94 23.49 24.97  22.75 788.5 109.22      234 13.707
+      2:             NA 23.73 23.89 25.35  23.14 788.5 109.30      234 13.706
+      3:              0 23.65 24.22 25.70  23.36 788.6 109.38      235 13.683
+      4:             NA 23.65 24.49 25.97  23.62 788.6 109.46      235 13.681
+      5:              0 23.71 24.74 26.17  23.60 788.6 109.51      236 13.659
+      6:             NA 23.77 24.95 26.40  24.00 788.7 109.57      237 13.636
+         MassFlowFactory  MFSVout PumpPow2 BFGenergy BattVolt  v3_3    v5 Charging
+                   <num>    <num>    <num>     <num>    <num> <num> <num>   <lgcl>
+      1:         1.69196 1.550750        0     52781     4.15  3.34  5.03    FALSE
+      2:         1.69781 1.552875        0     52769     4.13  3.34  5.03    FALSE
+      3:         1.69231 1.550875        0     52758     4.14  3.34  5.04    FALSE
+      4:         1.69540 1.552000        0     52745     4.13  3.34  5.03    FALSE
+      5:         1.69265 1.551000        0     52734     4.13  3.34  5.04    FALSE
+      6:         1.69162 1.550625        0     52721     4.11  3.34  5.03    FALSE
+         ExtPow PumpsON   Dead   BCS1   BCS2 BC_NPG FLOWCTL GPSRT SD_DATAW SD_HEADW
+         <lgcl>  <lgcl> <lgcl> <lgcl> <lgcl> <lgcl>   <num> <num>    <num>    <num>
+      1:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.00  0.00     0.00     0.00
+      2:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.60  0.02     0.02     0.03
+      3:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.57  0.02     0.02     0.03
+      4:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.59  0.02     0.02     0.04
+      5:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.57  0.02     0.02     0.03
+      6:   TRUE    TRUE  FALSE   TRUE  FALSE  FALSE    0.60  0.02     0.03     0.03
+         TPumpsOFF TPumpsON      CO2     SCDT    SCDRH   VOCRaw   NOXRaw
+             <num>    <num>    <num>    <num>    <num>    <num>    <num>
+      1:        12       25 1242.375 21.55313 31.81900 32297.97 17139.33
+      2:        12       18 1458.333 21.34100 32.06000 32374.20 16732.43
+      3:        12       18 1501.500 21.16600 32.46833 32384.13 16504.53
+      4:        12       18 1501.667 20.92400 32.77367 32393.43 16325.57
+      5:        12       18 1505.571 20.95572 32.79457 32386.93 16193.53
+      6:        12       18 1499.833 20.88434 32.84367 32389.60 16081.57
+                                                                          LogFilename
+                                                                               <char>
+      1: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      2: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      3: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      4: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      5: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+      6: /20250306/PSP01066_LOG_2025-03-06T19_37_50UTC_verbose30s______----------.txt
+            StartDateTimeUTC UserTZ
+                      <POSc> <lgcl>
+      1: 2025-03-06 19:37:50  FALSE
+      2: 2025-03-06 19:37:50  FALSE
+      3: 2025-03-06 19:37:50  FALSE
+      4: 2025-03-06 19:37:50  FALSE
+      5: 2025-03-06 19:37:50  FALSE
+      6: 2025-03-06 19:37:50  FALSE
+
+---
+
+    Code
+      read_ast_log(upasv2x_rev200_diag_file, update_names = FALSE)
+    Output
+          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     1 secs 1741720861
+       2:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     2 secs 1741720862
+       3:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     3 secs 1741720863
+       4:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     4 secs 1741720864
+       5:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     5 secs 1741720865
+       6:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     6 secs 1741720866
+       7:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     7 secs 1741720867
+       8:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     8 secs 1741720868
+       9:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     9 secs 1741720869
+      10:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    10 secs 1741720870
+      11:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    11 secs 1741720871
+      12:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    12 secs 1741720872
+      13:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    13 secs 1741720873
+      14:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    14 secs 1741720874
+      15:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    15 secs 1741720875
+      16:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    16 secs 1741720876
+      17:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    31 secs 1741720891
+      18:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    33 secs 1741720893
+      19:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    34 secs 1741720894
+      20:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    35 secs 1741720895
+      21:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    36 secs 1741720896
+      22:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    37 secs 1741720897
+      23:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    38 secs 1741720898
+      24:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    39 secs 1741720899
+      25:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    40 secs 1741720900
+      26:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    41 secs 1741720901
+      27:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    42 secs 1741720902
+      28:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    43 secs 1741720903
+      29:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    44 secs 1741720904
+      30:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    45 secs 1741720905
+      31:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    46 secs 1741720906
+      32:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    47 secs 1741720907
+      33:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    48 secs 1741720908
+      34:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    49 secs 1741720909
+      35:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    50 secs 1741720910
+      36:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    51 secs 1741720911
+      37:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    52 secs 1741720912
+      38:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    53 secs 1741720913
+      39:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    54 secs 1741720914
+      40:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    55 secs 1741720915
+      41:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    56 secs 1741720916
+      42:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    57 secs 1741720917
+      43:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    58 secs 1741720918
+      44:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    59 secs 1741720919
+      45:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    60 secs 1741720920
+      46:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    61 secs 1741720921
+      47:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    62 secs 1741720922
+      48:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    63 secs 1741720923
+      49:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    64 secs 1741720924
+      50:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    65 secs 1741720925
+      51:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    66 secs 1741720926
+      52:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    67 secs 1741720927
+      53:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    68 secs 1741720928
+      54:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    69 secs 1741720929
+      55:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    70 secs 1741720930
+      56:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    71 secs 1741720931
+      57:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    72 secs 1741720932
+      58:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    73 secs 1741720933
+          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
+                  DateTimeUTC       DateTimeLocal   LocalTZ PumpingFlowFactory
+                       <POSc>              <POSc>    <char>              <num>
+       1: 2025-03-11 19:21:01 2025-03-11 13:21:01 Etc/GMT+6              0.918
+       2: 2025-03-11 19:21:02 2025-03-11 13:21:02 Etc/GMT+6              0.921
+       3: 2025-03-11 19:21:03 2025-03-11 13:21:03 Etc/GMT+6              0.918
+       4: 2025-03-11 19:21:04 2025-03-11 13:21:04 Etc/GMT+6              0.919
+       5: 2025-03-11 19:21:05 2025-03-11 13:21:05 Etc/GMT+6              0.919
+       6: 2025-03-11 19:21:06 2025-03-11 13:21:06 Etc/GMT+6              0.919
+       7: 2025-03-11 19:21:07 2025-03-11 13:21:07 Etc/GMT+6              0.919
+       8: 2025-03-11 19:21:08 2025-03-11 13:21:08 Etc/GMT+6              0.919
+       9: 2025-03-11 19:21:09 2025-03-11 13:21:09 Etc/GMT+6              0.919
+      10: 2025-03-11 19:21:10 2025-03-11 13:21:10 Etc/GMT+6              0.918
+      11: 2025-03-11 19:21:11 2025-03-11 13:21:11 Etc/GMT+6              0.918
+      12: 2025-03-11 19:21:12 2025-03-11 13:21:12 Etc/GMT+6              0.918
+      13: 2025-03-11 19:21:13 2025-03-11 13:21:13 Etc/GMT+6              0.919
+      14: 2025-03-11 19:21:14 2025-03-11 13:21:14 Etc/GMT+6              0.919
+      15: 2025-03-11 19:21:15 2025-03-11 13:21:15 Etc/GMT+6              0.919
+      16: 2025-03-11 19:21:16 2025-03-11 13:21:16 Etc/GMT+6              0.930
+      17: 2025-03-11 19:21:31 2025-03-11 13:21:31 Etc/GMT+6              1.830
+      18: 2025-03-11 19:21:33 2025-03-11 13:21:33 Etc/GMT+6              1.832
+      19: 2025-03-11 19:21:34 2025-03-11 13:21:34 Etc/GMT+6              1.832
+      20: 2025-03-11 19:21:35 2025-03-11 13:21:35 Etc/GMT+6              1.827
+      21: 2025-03-11 19:21:36 2025-03-11 13:21:36 Etc/GMT+6              1.832
+      22: 2025-03-11 19:21:37 2025-03-11 13:21:37 Etc/GMT+6              1.832
+      23: 2025-03-11 19:21:38 2025-03-11 13:21:38 Etc/GMT+6              1.833
+      24: 2025-03-11 19:21:39 2025-03-11 13:21:39 Etc/GMT+6              1.831
+      25: 2025-03-11 19:21:40 2025-03-11 13:21:40 Etc/GMT+6              1.831
+      26: 2025-03-11 19:21:41 2025-03-11 13:21:41 Etc/GMT+6              1.830
+      27: 2025-03-11 19:21:42 2025-03-11 13:21:42 Etc/GMT+6              1.830
+      28: 2025-03-11 19:21:43 2025-03-11 13:21:43 Etc/GMT+6              1.832
+      29: 2025-03-11 19:21:44 2025-03-11 13:21:44 Etc/GMT+6              1.832
+      30: 2025-03-11 19:21:45 2025-03-11 13:21:45 Etc/GMT+6              1.830
+      31: 2025-03-11 19:21:46 2025-03-11 13:21:46 Etc/GMT+6              1.832
+      32: 2025-03-11 19:21:47 2025-03-11 13:21:47 Etc/GMT+6              1.835
+      33: 2025-03-11 19:21:48 2025-03-11 13:21:48 Etc/GMT+6              1.833
+      34: 2025-03-11 19:21:49 2025-03-11 13:21:49 Etc/GMT+6              1.832
+      35: 2025-03-11 19:21:50 2025-03-11 13:21:50 Etc/GMT+6              1.829
+      36: 2025-03-11 19:21:51 2025-03-11 13:21:51 Etc/GMT+6              1.833
+      37: 2025-03-11 19:21:52 2025-03-11 13:21:52 Etc/GMT+6              1.834
+      38: 2025-03-11 19:21:53 2025-03-11 13:21:53 Etc/GMT+6              1.834
+      39: 2025-03-11 19:21:54 2025-03-11 13:21:54 Etc/GMT+6              1.832
+      40: 2025-03-11 19:21:55 2025-03-11 13:21:55 Etc/GMT+6              1.837
+      41: 2025-03-11 19:21:56 2025-03-11 13:21:56 Etc/GMT+6              1.833
+      42: 2025-03-11 19:21:57 2025-03-11 13:21:57 Etc/GMT+6              1.838
+      43: 2025-03-11 19:21:58 2025-03-11 13:21:58 Etc/GMT+6              1.836
+      44: 2025-03-11 19:21:59 2025-03-11 13:21:59 Etc/GMT+6              1.834
+      45: 2025-03-11 19:22:00 2025-03-11 13:22:00 Etc/GMT+6              1.836
+      46: 2025-03-11 19:22:01 2025-03-11 13:22:01 Etc/GMT+6              1.834
+      47: 2025-03-11 19:22:02 2025-03-11 13:22:02 Etc/GMT+6              1.836
+      48: 2025-03-11 19:22:03 2025-03-11 13:22:03 Etc/GMT+6              1.837
+      49: 2025-03-11 19:22:04 2025-03-11 13:22:04 Etc/GMT+6              1.836
+      50: 2025-03-11 19:22:05 2025-03-11 13:22:05 Etc/GMT+6              1.836
+      51: 2025-03-11 19:22:06 2025-03-11 13:22:06 Etc/GMT+6              1.829
+      52: 2025-03-11 19:22:07 2025-03-11 13:22:07 Etc/GMT+6              1.838
+      53: 2025-03-11 19:22:08 2025-03-11 13:22:08 Etc/GMT+6              1.837
+      54: 2025-03-11 19:22:09 2025-03-11 13:22:09 Etc/GMT+6              1.838
+      55: 2025-03-11 19:22:10 2025-03-11 13:22:10 Etc/GMT+6              1.835
+      56: 2025-03-11 19:22:11 2025-03-11 13:22:11 Etc/GMT+6              1.836
+      57: 2025-03-11 19:22:12 2025-03-11 13:22:12 Etc/GMT+6              1.837
+      58: 2025-03-11 19:22:13 2025-03-11 13:22:13 Etc/GMT+6              1.838
+                  DateTimeUTC       DateTimeLocal   LocalTZ PumpingFlowFactory
+          OverallFlowFactory SampledVolumeFactory PumpingFlowOffset OverallFlowOffset
+                       <num>                <num>             <num>             <num>
+       1:              0.918                0.015             1.000             1.000
+       2:              0.921                0.031             1.003             1.003
+       3:              0.918                0.046             1.000             1.000
+       4:              0.919                0.061             1.002             1.002
+       5:              0.919                0.077             1.002             1.002
+       6:              0.919                0.092             1.001             1.001
+       7:              0.919                0.107             1.001             1.001
+       8:              0.919                0.122             1.001             1.001
+       9:              0.919                0.138             1.002             1.002
+      10:              0.918                0.153             1.001             1.001
+      11:              0.918                0.168             1.001             1.001
+      12:              0.918                0.184             1.001             1.001
+      13:              0.919                0.199             1.002             1.002
+      14:              0.919                0.214             1.002             1.002
+      15:              0.919                0.230             1.002             1.002
+      16:              0.930                0.245             1.014             1.014
+      17:              1.830                0.276             1.995             1.995
+      18:              1.832                0.306             1.997             1.997
+      19:              1.832                0.337             1.996             1.996
+      20:              1.827                0.367             1.991             1.991
+      21:              1.832                0.398             1.997             1.997
+      22:              1.832                0.428             1.997             1.997
+      23:              1.833                0.459             1.998             1.998
+      24:              1.831                0.489             1.995             1.995
+      25:              1.831                0.520             1.996             1.996
+      26:              1.830                0.550             1.995             1.995
+      27:              1.830                0.581             1.995             1.995
+      28:              1.832                0.611             1.996             1.996
+      29:              1.832                0.642             1.996             1.996
+      30:              1.830                0.672             1.994             1.994
+      31:              1.832                0.703             1.996             1.996
+      32:              1.835                0.734             2.001             2.001
+      33:              1.833                0.764             1.998             1.998
+      34:              1.832                0.795             1.997             1.997
+      35:              1.829                0.825             1.994             1.994
+      36:              1.833                0.856             1.998             1.998
+      37:              1.834                0.886             1.999             1.999
+      38:              1.834                0.917             1.999             1.999
+      39:              1.832                0.947             1.997             1.997
+      40:              1.837                0.978             2.003             2.003
+      41:              1.833                1.009             1.998             1.998
+      42:              1.838                1.039             2.004             2.004
+      43:              1.836                1.070             2.001             2.001
+      44:              1.834                1.100             1.999             1.999
+      45:              1.836                1.131             2.001             2.001
+      46:              1.834                1.162             1.999             1.999
+      47:              1.836                1.192             2.001             2.001
+      48:              1.837                1.223             2.003             2.003
+      49:              1.836                1.253             2.001             2.001
+      50:              1.836                1.284             2.001             2.001
+      51:              1.829                1.314             1.994             1.994
+      52:              1.838                1.345             2.003             2.003
+      53:              1.837                1.376             2.002             2.002
+      54:              1.838                1.406             2.004             2.004
+      55:              1.835                1.437             2.000             2.000
+      56:              1.836                1.467             2.001             2.001
+      57:              1.837                1.498             2.002             2.002
+      58:              1.838                1.529             2.004             2.004
+          OverallFlowFactory SampledVolumeFactory PumpingFlowOffset OverallFlowOffset
+          SampledVolumeOffset FilterDP BatteryCharge AtmoT  AtmoP AtmoRH AtmoDensity
+                        <num>    <num>         <num> <num>  <num>  <num>       <num>
+       1:               0.017    62.95           100 24.17 795.86  23.00      0.9294
+       2:               0.033    63.10           100 24.17 795.86  22.67      0.9295
+       3:               0.050    63.00           100 24.17 795.86  23.23      0.9294
+       4:               0.067    63.05           100 24.17 795.85  22.60      0.9295
+       5:               0.083    62.95           100 24.17 795.85  22.63      0.9295
+       6:               0.100    63.05           100 24.17 795.85  22.89      0.9294
+       7:               0.117    62.90           100 24.17 795.85  22.43      0.9295
+       8:               0.134    62.70           100 24.17 795.85  22.98      0.9294
+       9:               0.150    62.90           100 24.17 795.85  23.47      0.9294
+      10:               0.167    63.05           100 24.17 795.85  23.59      0.9294
+      11:               0.184    63.00           100 24.17 795.85  23.73      0.9293
+      12:               0.200    63.15           100 24.17 795.85  23.33      0.9294
+      13:               0.217    63.10           100 24.17 795.85  23.61      0.9293
+      14:               0.234    63.35           100 24.17 795.85  23.44      0.9294
+      15:               0.250    63.05           100 24.17 795.85  23.36      0.9294
+      16:               0.267    64.15           100 24.01 795.82  22.75      0.9300
+      17:               0.301   175.10           100 23.95 795.82  22.64      0.9302
+      18:               0.334   176.25           100 23.95 795.82  22.55      0.9302
+      19:               0.367   176.35           100 23.95 795.82  22.55      0.9302
+      20:               0.400   178.70           100 23.95 795.82  22.56      0.9302
+      21:               0.434   180.15           100 23.95 795.82  22.66      0.9302
+      22:               0.467   176.45           100 23.95 795.82  22.43      0.9302
+      23:               0.500   178.90           100 23.95 795.82  22.61      0.9302
+      24:               0.533   179.40           100 23.95 795.82  22.16      0.9302
+      25:               0.567   178.65           100 23.95 795.83  21.82      0.9303
+      26:               0.600   178.45           100 23.95 795.83  22.16      0.9302
+      27:               0.633   178.05           100 23.95 795.83  22.44      0.9302
+      28:               0.666   178.40           100 23.95 795.82  22.52      0.9302
+      29:               0.700   178.35           100 23.95 795.82  22.61      0.9302
+      30:               0.733   176.00           100 23.95 795.82  22.62      0.9302
+      31:               0.766   178.75           100 23.95 795.82  22.62      0.9302
+      32:               0.800   179.40           100 23.95 795.82  21.95      0.9303
+      33:               0.833   180.40           100 23.95 795.82  22.78      0.9302
+      34:               0.866   178.80           100 23.95 795.82  22.36      0.9302
+      35:               0.899   180.15           100 23.95 795.82  22.12      0.9302
+      36:               0.933   177.50           100 23.95 795.82  21.99      0.9303
+      37:               0.966   178.15           100 23.95 795.82  22.42      0.9302
+      38:               0.999   180.55           100 23.95 795.82  22.01      0.9303
+      39:               1.033   180.35           100 23.95 795.82  21.85      0.9303
+      40:               1.066   179.45           100 23.95 795.82  22.12      0.9302
+      41:               1.099   180.35           100 23.95 795.82  22.10      0.9302
+      42:               1.133   179.80           100 23.95 795.82  22.04      0.9303
+      43:               1.166   180.15           100 23.95 795.82  22.33      0.9302
+      44:               1.199   179.70           100 23.95 795.82  21.60      0.9303
+      45:               1.233   180.50           100 23.95 795.82  21.94      0.9303
+      46:               1.266   179.25           100 23.95 795.82  21.91      0.9303
+      47:               1.299   179.50           100 23.95 795.82  21.82      0.9303
+      48:               1.333   179.15           100 23.95 795.82  21.82      0.9303
+      49:               1.366   179.35           100 23.95 795.82  21.80      0.9303
+      50:               1.399   179.75           100 23.95 795.82  21.78      0.9303
+      51:               1.433   178.75           100 23.95 795.82  21.76      0.9303
+      52:               1.466   180.60           100 23.95 795.82  21.76      0.9303
+      53:               1.499   180.80           100 23.95 795.82  21.70      0.9303
+      54:               1.533   179.80           100 23.95 795.82  21.74      0.9303
+      55:               1.566   180.55           100 23.95 795.82  22.38      0.9302
+      56:               1.600   180.55           100 23.95 795.82  21.70      0.9303
+      57:               1.633   180.55           100 23.95 795.82  22.12      0.9302
+      58:               1.666   180.40           100 23.95 795.82  22.00      0.9303
+          SampledVolumeOffset FilterDP BatteryCharge AtmoT  AtmoP AtmoRH AtmoDensity
+          AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat GPSspeed GPShDOP AccelX
+            <num>   <num>  <num>  <num>  <num>  <num>    <num>   <num>  <num>
+       1:  1991.2       0     NA     NA     NA      0       NA      NA      4
+       2:  1991.2       0     NA     NA     NA      0       NA      NA      3
+       3:  1991.2       0     NA     NA     NA      0       NA      NA      4
+       4:  1991.2       0     NA     NA     NA      0       NA      NA      3
+       5:  1991.2       0     NA     NA     NA      0       NA      NA      3
+       6:  1991.2       0     NA     NA     NA      0       NA      NA      3
+       7:  1991.2       0     NA     NA     NA      0       NA      NA      3
+       8:  1991.2       0     NA     NA     NA      0       NA      NA      3
+       9:  1991.2       0     NA     NA     NA      0       NA      NA      3
+      10:  1991.2       0     NA     NA     NA      0       NA      NA      3
+      11:  1991.2       0     NA     NA     NA      0       NA      NA      3
+      12:  1991.2       0     NA     NA     NA      0       NA      NA      3
+      13:  1991.3       0     NA     NA     NA      0       NA      NA      3
+      14:  1991.3       0     NA     NA     NA      0       NA      NA      3
+      15:  1991.3       0     NA     NA     NA      0       NA      NA      3
+      16:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      17:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      18:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      19:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      20:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      21:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      22:  1991.5       0     NA     NA     NA      0       NA      NA      2
+      23:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      24:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      25:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      26:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      27:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      28:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      29:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      30:  1991.5       0     NA     NA     NA      0       NA      NA     NA
+      31:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      32:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      33:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      34:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      35:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      36:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      37:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      38:  1991.6       0     NA     NA     NA      0       NA      NA      3
+      39:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      40:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      41:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      42:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      43:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      44:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      45:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      46:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      47:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      48:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      49:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      50:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      51:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      52:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      53:  1991.5       0     NA     NA     NA      0       NA      NA      3
+      54:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      55:  1991.5       0     NA     NA     NA      0       NA      NA      4
+      56:  1991.6       0     NA     NA     NA      0       NA      NA      3
+      57:  1991.6       0     NA     NA     NA      0       NA      NA      0
+      58:  1991.6       0     NA     NA     NA      0       NA      NA     -2
+          AtmoAlt GPSQual GPSlat GPSlon GPSalt GPSsat GPSspeed GPShDOP AccelX
+          AccelXVar AccelXMin AccelXMax AccelY AccelYVar AccelYMin AccelYMax AccelZ
+              <num>     <num>     <num>  <num>     <num>     <num>     <num>  <num>
+       1:        NA        NA        NA    -11        NA        NA        NA  -1000
+       2:        NA        NA        NA    -11        NA        NA        NA  -1000
+       3:        NA        NA        NA    -11        NA        NA        NA  -1000
+       4:        NA        NA        NA    -11        NA        NA        NA  -1000
+       5:        NA        NA        NA    -11        NA        NA        NA  -1000
+       6:        NA        NA        NA    -11        NA        NA        NA  -1000
+       7:        NA        NA        NA    -11        NA        NA        NA  -1000
+       8:        NA        NA        NA    -12        NA        NA        NA  -1001
+       9:        NA        NA        NA    -11        NA        NA        NA  -1000
+      10:        NA        NA        NA    -12        NA        NA        NA  -1001
+      11:        NA        NA        NA    -11        NA        NA        NA  -1000
+      12:        NA        NA        NA    -11        NA        NA        NA  -1000
+      13:        NA        NA        NA    -12        NA        NA        NA  -1001
+      14:        NA        NA        NA    -11        NA        NA        NA  -1000
+      15:        NA        NA        NA    -15        NA        NA        NA  -1000
+      16:        NA        NA        NA    -13        NA        NA        NA  -1000
+      17:        NA        NA        NA    -11        NA        NA        NA  -1002
+      18:        NA        NA        NA    -11        NA        NA        NA  -1002
+      19:        NA        NA        NA    -11        NA        NA        NA  -1002
+      20:        NA        NA        NA    -11        NA        NA        NA  -1003
+      21:        NA        NA        NA    -10        NA        NA        NA  -1003
+      22:        NA        NA        NA    -10        NA        NA        NA  -1002
+      23:        NA        NA        NA    -11        NA        NA        NA  -1002
+      24:        NA        NA        NA    -10        NA        NA        NA  -1002
+      25:        NA        NA        NA    -10        NA        NA        NA  -1002
+      26:        NA        NA        NA    -11        NA        NA        NA  -1002
+      27:        NA        NA        NA    -10        NA        NA        NA  -1002
+      28:        NA        NA        NA    -11        NA        NA        NA  -1002
+      29:        NA        NA        NA    -11        NA        NA        NA  -1002
+      30:       0.2         2         4     NA         1       -15       -10     NA
+      31:        NA        NA        NA    -11        NA        NA        NA  -1002
+      32:        NA        NA        NA    -11        NA        NA        NA  -1002
+      33:        NA        NA        NA    -11        NA        NA        NA  -1001
+      34:        NA        NA        NA    -11        NA        NA        NA  -1002
+      35:        NA        NA        NA    -11        NA        NA        NA  -1001
+      36:        NA        NA        NA    -11        NA        NA        NA  -1001
+      37:        NA        NA        NA    -11        NA        NA        NA  -1002
+      38:        NA        NA        NA    -11        NA        NA        NA  -1002
+      39:        NA        NA        NA    -10        NA        NA        NA  -1002
+      40:        NA        NA        NA    -10        NA        NA        NA  -1002
+      41:        NA        NA        NA    -10        NA        NA        NA  -1002
+      42:        NA        NA        NA    -11        NA        NA        NA  -1002
+      43:        NA        NA        NA    -10        NA        NA        NA  -1002
+      44:        NA        NA        NA    -11        NA        NA        NA  -1002
+      45:        NA        NA        NA    -11        NA        NA        NA  -1002
+      46:        NA        NA        NA    -11        NA        NA        NA  -1002
+      47:        NA        NA        NA    -11        NA        NA        NA  -1002
+      48:        NA        NA        NA    -11        NA        NA        NA  -1002
+      49:        NA        NA        NA    -12        NA        NA        NA  -1002
+      50:        NA        NA        NA    -10        NA        NA        NA  -1002
+      51:        NA        NA        NA    -10        NA        NA        NA  -1002
+      52:        NA        NA        NA    -12        NA        NA        NA  -1002
+      53:        NA        NA        NA    -11        NA        NA        NA  -1002
+      54:        NA        NA        NA    -11        NA        NA        NA  -1002
+      55:        NA        NA        NA    -10        NA        NA        NA  -1002
+      56:        NA        NA        NA     -8        NA        NA        NA  -1002
+      57:        NA        NA        NA    -11        NA        NA        NA  -1004
+      58:        NA        NA        NA     -8        NA        NA        NA  -1003
+          AccelXVar AccelXMin AccelXMax AccelY AccelYVar AccelYMin AccelYMax AccelZ
+          AccelZVar AccelZMin AccelZMax AccelComplianceCnt AccelComplianceHrs   Xup
+              <num>     <num>     <num>              <num>              <num> <num>
+       1:        NA        NA        NA                 NA                 NA     0
+       2:        NA        NA        NA                 NA                 NA     0
+       3:        NA        NA        NA                 NA                 NA     0
+       4:        NA        NA        NA                 NA                 NA     0
+       5:        NA        NA        NA                 NA                 NA     0
+       6:        NA        NA        NA                 NA                 NA     0
+       7:        NA        NA        NA                 NA                 NA     0
+       8:        NA        NA        NA                 NA                 NA     0
+       9:        NA        NA        NA                 NA                 NA     0
+      10:        NA        NA        NA                 NA                 NA     0
+      11:        NA        NA        NA                 NA                 NA     0
+      12:        NA        NA        NA                 NA                 NA     0
+      13:        NA        NA        NA                 NA                 NA     0
+      14:        NA        NA        NA                 NA                 NA     0
+      15:        NA        NA        NA                 NA                 NA     0
+      16:        NA        NA        NA                 NA                 NA     0
+      17:        NA        NA        NA                 NA                 NA     0
+      18:        NA        NA        NA                 NA                 NA     0
+      19:        NA        NA        NA                 NA                 NA     0
+      20:        NA        NA        NA                 NA                 NA     0
+      21:        NA        NA        NA                 NA                 NA     0
+      22:        NA        NA        NA                 NA                 NA     0
+      23:        NA        NA        NA                 NA                 NA     0
+      24:        NA        NA        NA                 NA                 NA     0
+      25:        NA        NA        NA                 NA                 NA     0
+      26:        NA        NA        NA                 NA                 NA     0
+      27:        NA        NA        NA                 NA                 NA     0
+      28:        NA        NA        NA                 NA                 NA     0
+      29:        NA        NA        NA                 NA                 NA     0
+      30:       1.1     -1003     -1000                  0                  0     0
+      31:        NA        NA        NA                 NA                 NA     0
+      32:        NA        NA        NA                 NA                 NA     0
+      33:        NA        NA        NA                 NA                 NA     0
+      34:        NA        NA        NA                 NA                 NA     0
+      35:        NA        NA        NA                 NA                 NA     0
+      36:        NA        NA        NA                 NA                 NA     0
+      37:        NA        NA        NA                 NA                 NA     0
+      38:        NA        NA        NA                 NA                 NA     0
+      39:        NA        NA        NA                 NA                 NA     0
+      40:        NA        NA        NA                 NA                 NA     0
+      41:        NA        NA        NA                 NA                 NA     0
+      42:        NA        NA        NA                 NA                 NA     0
+      43:        NA        NA        NA                 NA                 NA     0
+      44:        NA        NA        NA                 NA                 NA     0
+      45:        NA        NA        NA                 NA                 NA     0
+      46:        NA        NA        NA                 NA                 NA     0
+      47:        NA        NA        NA                 NA                 NA     0
+      48:        NA        NA        NA                 NA                 NA     0
+      49:        NA        NA        NA                 NA                 NA     0
+      50:        NA        NA        NA                 NA                 NA     0
+      51:        NA        NA        NA                 NA                 NA     0
+      52:        NA        NA        NA                 NA                 NA     0
+      53:        NA        NA        NA                 NA                 NA     0
+      54:        NA        NA        NA                 NA                 NA     0
+      55:        NA        NA        NA                 NA                 NA     0
+      56:        NA        NA        NA                 NA                 NA     0
+      57:        NA        NA        NA                 NA                 NA     0
+      58:        NA        NA        NA                 NA                 NA     0
+          AccelZVar AccelZMin AccelZMax AccelComplianceCnt AccelComplianceHrs   Xup
+          XDown   Yup Ydown   Zup Zdown StepCount   LUX UVindex HighVisRaw LowVisRaw
+          <num> <num> <num> <num> <num>     <num> <num>   <num>      <num>     <num>
+       1:     0     0     0   100     0         0  53.8    0.02        297       313
+       2:     0     0     0   100     0         0  53.2    0.19        297       312
+       3:     0     0     0   100     0         0  51.8    0.42        300       302
+       4:     0     0     0   100     0         0  51.8    0.00        289       302
+       5:     0     0     0   100     0         0  53.1    0.37        304       314
+       6:     0     0     0   100     0         0  54.3    0.12        301       315
+       7:     0     0     0   100     0         0  54.2    0.30        308       315
+       8:     0     0     0   100     0         0  53.7    0.28        293       312
+       9:     0     0     0   100     0         0  52.4    0.49        304       315
+      10:     0     0     0   100     0         0  52.4    0.29        300       313
+      11:     0     0     0   100     0         0  52.3    0.00        309       312
+      12:     0     0     0   100     0         0  52.8    0.36        290       307
+      13:     0     0     0   100     0         0  53.3    0.30        298       309
+      14:     0     0     0   100     0         0  18.4    0.15         93       109
+      15:     0     0     0   100     0         0  52.0    0.19        284       304
+      16:     0     0     0   100     0         0  53.0    0.17        300       315
+      17:     0     0     0   100     0         0  53.3    0.39        297       309
+      18:     0     0     0   100     0         0  54.0    0.19        295       314
+      19:     0     0     0   100     0         0  53.2    0.18        303       305
+      20:     0     0     0   100     0         0  52.6    0.05        309       312
+      21:     0     0     0   100     0         0  52.3    0.16        305       305
+      22:     0     0     0   100     0         0  53.1    0.02        297       315
+      23:     0     0     0   100     0         0  54.2    0.20        311       315
+      24:     0     0     0   100     0         0  54.3    0.44        299       315
+      25:     0     0     0   100     0         0  54.0    0.04        301       314
+      26:     0     0     0   100     0         0  54.5    0.18        296       316
+      27:     0     0     0   100     0         0  53.2    0.02        305       314
+      28:     0     0     0   100     0         0  53.6    0.09        311       312
+      29:     0     0     0   100     0         0  53.2    0.21        314       313
+      30:     0     0     0   100     0         0  54.1    0.05        295       313
+      31:     0     0     0   100     0         0  54.6    0.19        307       316
+      32:     0     0     0   100     0         0  53.4    0.02        303       311
+      33:     0     0     0   100     0         0  53.5    0.17        308       312
+      34:     0     0     0   100     0         0  53.9    0.21        307       313
+      35:     0     0     0   100     0         0  53.7    0.18        311       312
+      36:     0     0     0   100     0         0  53.6    0.03        293       312
+      37:     0     0     0   100     0         0  53.8    0.29        310       313
+      38:     0     0     0   100     0         0  54.5    0.13        307       316
+      39:     0     0     0   100     0         0  54.5    0.02        302       316
+      40:     0     0     0   100     0         0  53.2    0.05        292       312
+      41:     0     0     0   100     0         0  53.9    0.05        312       314
+      42:     0     0     0   100     0         0  53.6    0.24        297       316
+      43:     0     0     0   100     0         0  54.4    0.00        306       316
+      44:     0     0     0   100     0         0  54.2    0.23        304       315
+      45:     0     0     0   100     0         0  54.2    0.08        311       315
+      46:     0     0     0   100     0         0  53.8    0.26        300       313
+      47:     0     0     0   100     0         0  53.1    0.15        312       316
+      48:     0     0     0   100     0         0  53.6    0.33        307       311
+      49:     0     0     0   100     0         0  53.2    0.22        314       316
+      50:     0     0     0   100     0         0  53.5    0.02        310       315
+      51:     0     0     0   100     0         0  53.3    0.31        298       310
+      52:     0     0     0   100     0         0  54.6    0.06        294       317
+      53:     0     0     0   100     0         0  53.2    0.12        293       314
+      54:     0     0     0   100     0         0  52.9    0.24        315       318
+      55:     0     0     0   100     0         0  54.2    0.07        288       315
+      56:     0     0     0   100     0         0  45.2    0.15        212       260
+      57:     0     0     0   100     0         0  44.6    0.23        255       262
+      58:     0     0     0   100     0         0  41.9    0.02        230       247
+          XDown   Yup Ydown   Zup Zdown StepCount   LUX UVindex HighVisRaw LowVisRaw
+          IRRaw UVRaw PMMeasCnt PM1MC PM1MCVar PM2_5MC PM2_5MCVar PM0_5NC PM1NC
+          <num> <num>     <num> <num>    <num>   <num>      <num>   <num> <num>
+       1:   210     3         1  1.03        0    1.22          0    6.84  8.06
+       2:   208    23         1  1.04        0    1.23          0    6.91  8.15
+       3:   206    51         1  1.04        0    1.23          0    6.89  8.13
+       4:   207     0         1  1.04        0    1.22          0    6.85  8.09
+       5:   209    46         1  1.05        0    1.25          0    6.88  8.14
+       6:   207   -15         1  1.04        0    1.25          0    6.86  8.12
+       7:   210   -36         1  1.04        0    1.24          0    6.81  8.07
+       8:   204    34         1  1.02        0    1.22          0    6.71  7.95
+       9:   205    60         1  1.00        0    1.20          0    6.56  7.77
+      10:   201    36         1  0.97        0    1.16          0    6.37  7.55
+      11:   203     0         1  0.94        0    1.13          0    6.18  7.33
+      12:   204    45         1  0.92        0    1.11          0    6.00  7.13
+      13:   202   -36         1  0.89        0    1.07          0    5.81  6.90
+      14:    84    18         1  0.86        0    1.04          0    5.65  6.70
+      15:   211    23         1  0.84        0    1.00          0    5.51  6.52
+      16:   205    21         1  0.83        0    1.00          0    5.43  6.44
+      17:   203    49         1  1.01        0    1.23          0    6.61  7.86
+      18:   207    24         1  1.02        0    1.24          0    6.66  7.92
+      19:   210    22         1  1.04        0    1.25          0    6.79  8.07
+      20:   208     6         1  1.06        0    1.29          0    6.92  8.23
+      21:   206   -19         1  1.06        0    1.29          0    6.92  8.23
+      22:   208    -2         1  1.07        0    1.30          0    6.97  8.29
+      23:   208    25         1  1.08        0    1.31          0    7.06  8.40
+      24:   206   -52         1  1.09        0    1.33          0    7.15  8.50
+      25:   206    -5         1  1.12        0    1.36          0    7.36  8.74
+      26:   208    22         1  1.15        0    1.38          0    7.54  8.94
+      27:   208    -2         1  1.16        0    1.39          0    7.60  9.01
+      28:   208   -12         1  1.15        0    1.39          0    7.57  8.98
+      29:   209    26         1  1.14        0    1.37          0    7.51  8.91
+      30:   203    -6         1  1.14        0    1.37          0    7.47  8.86
+      31:   205    24         1  1.13        0    1.35          0    7.41  8.78
+      32:   210    -2         1  1.11        0    1.33          0    7.28  8.63
+      33:   210   -21         1  1.09        0    1.31          0    7.13  8.46
+      34:   208   -26         1  1.09        0    1.32          0    7.11  8.46
+      35:   204    22         1  1.08        0    1.31          0    7.05  8.39
+      36:   208     4         1  1.07        0    1.30          0    6.99  8.30
+      37:   210   -35         1  1.05        0    1.27          0    6.85  8.15
+      38:   207   -16         1  1.02        0    1.24          0    6.68  7.94
+      39:   207    -3         1  1.00        0    1.21          0    6.50  7.73
+      40:   210     6         1  0.97        0    1.18          0    6.35  7.54
+      41:   208     6         1  0.96        0    1.16          0    6.29  7.46
+      42:   209   -30         1  0.97        0    1.17          0    6.36  7.55
+      43:   210     0         1  0.98        0    1.19          0    6.44  7.65
+      44:   208    29         1  1.01        0    1.22          0    6.66  7.89
+      45:   210    10         1  1.03        0    1.24          0    6.75  8.01
+      46:   209    32         1  1.04        0    1.26          0    6.83  8.11
+      47:   210   -18         1  1.08        0    1.31          0    7.04  8.38
+      48:   209    40         1  1.11        0    1.35          0    7.25  8.63
+      49:   210    27         1  1.13        0    1.37          0    7.39  8.79
+      50:   209     3         1  1.15        0    1.39          0    7.51  8.93
+      51:   205    38         1  1.16        0    1.41          0    7.61  9.05
+      52:   209     8         1  1.18        0    1.42          0    7.71  9.16
+      53:   208    15         1  1.18        0    1.42          0    7.75  9.20
+      54:   208   -30         1  1.17        0    1.42          0    7.70  9.13
+      55:   209     9         1  1.17        0    1.41          0    7.64  9.08
+      56:   160    18         1  1.15        0    1.39          0    7.54  8.95
+      57:   176    28         1  1.14        0    1.38          0    7.51  8.91
+      58:   162     3         1  1.13        0    1.36          0    7.45  8.83
+          IRRaw UVRaw PMMeasCnt PM1MC PM1MCVar PM2_5MC PM2_5MCVar PM0_5NC PM1NC
+          PM2_5NC PMtypicalParticleSize PM2_5SampledMassFactory
+            <num>                 <num>                   <num>
+       1:    8.22                  0.63                  0.0000
+       2:    8.30                  0.64                  0.0000
+       3:    8.29                  0.64                  0.0000
+       4:    8.25                  0.64                  0.0001
+       5:    8.32                  0.66                  0.0001
+       6:    8.30                  0.66                  0.0001
+       7:    8.24                  0.66                  0.0001
+       8:    8.12                  0.66                  0.0001
+       9:    7.94                  0.66                  0.0002
+      10:    7.71                  0.66                  0.0002
+      11:    7.50                  0.66                  0.0002
+      12:    7.30                  0.67                  0.0002
+      13:    7.06                  0.67                  0.0002
+      14:    6.85                  0.66                  0.0002
+      15:    6.66                  0.65                  0.0003
+      16:    6.59                  0.66                  0.0003
+      17:    8.05                  0.66                  0.0003
+      18:    8.11                  0.66                  0.0003
+      19:    8.25                  0.66                  0.0004
+      20:    8.43                  0.66                  0.0004
+      21:    8.43                  0.66                  0.0005
+      22:    8.49                  0.66                  0.0005
+      23:    8.60                  0.67                  0.0005
+      24:    8.70                  0.67                  0.0006
+      25:    8.94                  0.66                  0.0006
+      26:    9.14                  0.65                  0.0007
+      27:    9.21                  0.65                  0.0007
+      28:    9.18                  0.65                  0.0008
+      29:    9.10                  0.65                  0.0008
+      30:    9.05                  0.66                  0.0008
+      31:    8.97                  0.65                  0.0009
+      32:    8.81                  0.65                  0.0009
+      33:    8.64                  0.65                  0.0010
+      34:    8.66                  0.66                  0.0010
+      35:    8.59                  0.66                  0.0010
+      36:    8.50                  0.66                  0.0011
+      37:    8.34                  0.66                  0.0011
+      38:    8.13                  0.66                  0.0012
+      39:    7.92                  0.66                  0.0012
+      40:    7.72                  0.65                  0.0012
+      41:    7.63                  0.65                  0.0013
+      42:    7.73                  0.65                  0.0013
+      43:    7.82                  0.64                  0.0013
+      44:    8.07                  0.64                  0.0014
+      45:    8.18                  0.64                  0.0014
+      46:    8.29                  0.64                  0.0015
+      47:    8.58                  0.65                  0.0015
+      48:    8.84                  0.65                  0.0015
+      49:    9.00                  0.65                  0.0016
+      50:    9.14                  0.64                  0.0016
+      51:    9.26                  0.64                  0.0017
+      52:    9.37                  0.64                  0.0017
+      53:    9.40                  0.63                  0.0017
+      54:    9.34                  0.63                  0.0018
+      55:    9.29                  0.64                  0.0018
+      56:    9.16                  0.64                  0.0019
+      57:    9.11                  0.63                  0.0019
+      58:    9.03                  0.63                  0.0020
+          PM2_5NC PMtypicalParticleSize PM2_5SampledMassFactory
+          PM2_5SampledMassOffset  U12T  U29T  FdpT AccelT  U29P PumpPow1  PumpV
+                           <num> <num> <num> <num>  <num> <num>    <num>  <num>
+       1:                 0.0000 24.28 23.87 25.28  23.10 796.0      781  8.113
+       2:                 0.0000 24.31 23.86 25.29  23.21 796.0      781  8.114
+       3:                 0.0001 24.33 23.87 25.32  22.95 796.0      781  8.114
+       4:                 0.0001 24.35 23.87 25.26  23.33 796.0      781  8.113
+       5:                 0.0001 24.37 23.87 25.26  23.36 796.0      781  8.114
+       6:                 0.0001 24.38 23.87 25.27  23.04 796.0      781  8.114
+       7:                 0.0001 24.40 23.87 25.31  23.12 796.0      781  8.114
+       8:                 0.0002 24.42 23.88 25.31  23.25 796.1      781  8.114
+       9:                 0.0002 24.44 23.87 25.29  23.05 796.0      781  8.115
+      10:                 0.0002 24.46 23.89 25.30  23.17 796.0      781  8.114
+      11:                 0.0002 24.47 23.87 25.32  23.21 796.1      781  8.114
+      12:                 0.0002 24.49 23.88 25.28  23.23 796.0      781  8.114
+      13:                 0.0003 24.51 23.90 25.32  23.32 796.0      781  8.115
+      14:                 0.0003 24.52 23.90 25.34  23.16 796.0      781  8.114
+      15:                 0.0003 24.54 23.90 25.31  23.23 796.0      771  8.114
+      16:                 0.0003 24.85 24.04 25.33  23.12 796.0      304 12.211
+      17:                 0.0003 24.89 24.08 25.46  23.57 796.0      302 12.247
+      18:                 0.0004 24.91 24.12 25.57  23.38 796.1      302 12.247
+      19:                 0.0004 24.91 24.12 25.52  23.56 796.1      302 12.249
+      20:                 0.0005 24.92 24.14 25.57  23.26 796.0      301 12.248
+      21:                 0.0005 24.93 24.15 25.58  23.43 796.0      301 12.274
+      22:                 0.0005 24.94 24.18 25.60  23.41 796.1      301 12.274
+      23:                 0.0006 24.95 24.18 25.61  23.33 796.0      301 12.274
+      24:                 0.0006 24.96 24.20 25.64  23.34 796.1      301 12.275
+      25:                 0.0007 24.97 24.22 25.66  23.41 796.0      301 12.274
+      26:                 0.0007 24.98 24.24 25.67  23.40 796.0      301 12.274
+      27:                 0.0008 24.99 24.26 25.67  23.58 796.0      301 12.276
+      28:                 0.0008 25.00 24.28 25.68  23.30 796.0      301 12.275
+      29:                 0.0009 25.01 24.30 25.75  23.32 796.0      301 12.275
+      30:                 0.0009 25.02 24.33 25.76  23.50 796.0      300 12.275
+      31:                 0.0010 25.03 24.33 25.78  23.38 796.0      300 12.293
+      32:                 0.0010 25.04 24.34 25.80  23.43 796.0      300 12.294
+      33:                 0.0010 25.05 24.36 25.81  23.49 796.0      300 12.293
+      34:                 0.0011 25.06 24.39 25.84  23.46 796.0      300 12.293
+      35:                 0.0011 25.07 24.40 25.84  23.54 796.0      299 12.293
+      36:                 0.0012 25.08 24.41 25.86  23.34 796.0      299 12.312
+      37:                 0.0012 25.09 24.44 25.86  23.72 796.0      299 12.310
+      38:                 0.0013 25.10 24.46 25.92  23.51 796.0      299 12.310
+      39:                 0.0013 25.11 24.47 25.91  23.53 796.0      299 12.312
+      40:                 0.0013 25.12 24.49 25.94  23.49 796.0      299 12.312
+      41:                 0.0014 25.12 24.50 25.96  23.71 796.0      299 12.314
+      42:                 0.0014 25.13 24.52 25.98  23.47 796.0      299 12.312
+      43:                 0.0015 25.14 24.54 25.99  23.59 796.1      299 12.312
+      44:                 0.0015 25.15 24.55 26.00  23.62 796.1      299 12.313
+      45:                 0.0015 25.16 24.57 26.05  23.56 796.1      299 12.313
+      46:                 0.0016 25.17 24.59 26.05  23.16 796.0      299 12.313
+      47:                 0.0016 25.18 24.60 26.02  23.67 796.0      299 12.312
+      48:                 0.0017 25.19 24.62 26.06  23.36 796.0      299 12.312
+      49:                 0.0017 25.20 24.64 26.05  23.71 796.0      299 12.313
+      50:                 0.0018 25.21 24.64 26.12  23.64 796.0      299 12.313
+      51:                 0.0018 25.22 24.66 26.10  23.57 796.0      298 12.313
+      52:                 0.0019 25.23 24.68 26.11  23.62 796.0      298 12.330
+      53:                 0.0019 25.24 24.69 26.14  23.64 796.0      298 12.331
+      54:                 0.0019 25.24 24.71 26.14  23.73 795.9      298 12.330
+      55:                 0.0020 25.25 24.72 26.14  23.68 796.0      298 12.330
+      56:                 0.0020 25.26 24.73 26.14  24.21 796.0      298 12.332
+      57:                 0.0021 25.27 24.75 26.20  23.51 796.0      298 12.330
+      58:                 0.0021 25.28 24.76 26.20  23.83 796.0      298 12.331
+          PM2_5SampledMassOffset  U12T  U29T  FdpT AccelT  U29P PumpPow1  PumpV
+          MassFlowFactory  MFSVout BattVolt  v3_3    v5 Charging ExtPow FLOWCTL GPSRT
+                    <num>    <num>    <num> <num> <num>   <lgcl> <lgcl>   <num> <num>
+       1:         0.85277 1.122250     4.21  3.34  5.05     TRUE   TRUE    0.00  0.00
+       2:         0.85564 1.124250     4.21  3.34  5.05     TRUE   TRUE    0.60  0.00
+       3:         0.85277 1.122250     4.21  3.34  5.05     TRUE   TRUE    0.60  0.00
+       4:         0.85421 1.123250     4.21  3.34  5.05     TRUE   TRUE    0.58  0.01
+       5:         0.85439 1.123375     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+       6:         0.85385 1.123000     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+       7:         0.85403 1.123125     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+       8:         0.85385 1.123000     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+       9:         0.85439 1.123375     4.21  3.34  5.05     TRUE   TRUE    0.59  0.02
+      10:         0.85349 1.122750     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      11:         0.85349 1.122750     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      12:         0.85331 1.122625     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      13:         0.85403 1.123125     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      14:         0.85439 1.123375     4.21  3.34  5.05     TRUE   TRUE    0.59  0.02
+      15:         0.85421 1.123250     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      16:         1.70472 1.555375     4.21  3.34  5.05     TRUE   TRUE    0.62  0.02
+      17:         1.70437 1.555250     4.21  3.34  5.05     TRUE   TRUE   15.37  0.02
+      18:         1.70299 1.554750     4.21  3.34  5.05     TRUE   TRUE    2.30  0.02
+      19:         1.70368 1.555000     4.21  3.34  5.05     TRUE   TRUE    1.16  0.02
+      20:         1.69919 1.553375     4.21  3.34  5.05     TRUE   TRUE    0.59  0.00
+      21:         1.70403 1.555125     4.21  3.34  5.05     TRUE   TRUE    0.58  0.02
+      22:         1.70437 1.555250     4.21  3.34  5.05     TRUE   TRUE    0.58  0.01
+      23:         1.70506 1.555500     4.21  3.34  5.05     TRUE   TRUE    0.59  0.04
+      24:         1.70299 1.554750     4.21  3.34  5.05     TRUE   TRUE    0.62  0.01
+      25:         1.70368 1.555000     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      26:         1.70264 1.554625     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      27:         1.70264 1.554625     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      28:         1.70368 1.555000     4.21  3.34  5.05     TRUE   TRUE    0.59  0.02
+      29:         1.70368 1.555000     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      30:         1.70195 1.554375     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      31:         1.70368 1.555000     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      32:         1.70749 1.556375     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      33:         1.70541 1.555625     4.21  3.34  5.05     TRUE   TRUE    0.59  0.02
+      34:         1.70403 1.555125     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      35:         1.70161 1.554250     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      36:         1.70541 1.555625     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      37:         1.70576 1.555750     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      38:         1.70645 1.556000     4.21  3.34  5.05     TRUE   TRUE    0.59  0.02
+      39:         1.70472 1.555375     4.21  3.34  5.05     TRUE   TRUE    0.61  0.01
+      40:         1.70923 1.557000     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      41:         1.70541 1.555625     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      42:         1.70992 1.557250     4.21  3.34  5.05     TRUE   TRUE    0.59  0.02
+      43:         1.70784 1.556500     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      44:         1.70645 1.556000     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      45:         1.70784 1.556500     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      46:         1.70645 1.556000     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      47:         1.70818 1.556625     4.21  3.34  5.05     TRUE   TRUE    0.60  0.02
+      48:         1.70923 1.557000     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      49:         1.70784 1.556500     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      50:         1.70784 1.556500     4.21  3.34  5.05     TRUE   TRUE    0.67  0.01
+      51:         1.70161 1.554250     4.21  3.34  5.05     TRUE   TRUE    0.66  0.01
+      52:         1.70992 1.557250     4.21  3.34  5.05     TRUE   TRUE    0.62  0.02
+      53:         1.70888 1.556875     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      54:         1.71027 1.557375     4.21  3.34  5.05     TRUE   TRUE    0.60  0.01
+      55:         1.70714 1.556250     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      56:         1.70784 1.556500     4.21  3.34  5.05     TRUE   TRUE    0.59  0.01
+      57:         1.70888 1.556875     4.21  3.34  5.05     TRUE   TRUE    0.59  0.02
+      58:         1.70992 1.557250     4.21  3.34  5.05     TRUE   TRUE    0.60  0.02
+          MassFlowFactory  MFSVout BattVolt  v3_3    v5 Charging ExtPow FLOWCTL GPSRT
+          SD_DATAW SD_HEADW    CO2    SCDT  SCDRH VOCRaw NOXRaw
+             <num>    <num>  <num>   <num>  <num>  <num>  <num>
+       1:     0.00     0.00  774.5 20.0825 31.917  32711  17229
+       2:     0.02     0.03     NA      NA     NA  32714  17680
+       3:     0.02     0.03     NA      NA     NA  32724  17597
+       4:     0.02     0.03 1070.0 21.6690 29.539  32731  17541
+       5:     0.01     0.03     NA      NA     NA  32737  17490
+       6:     0.02     0.03     NA      NA     NA  32737  17462
+       7:     0.02     0.03     NA      NA     NA  32706  17432
+       8:     0.03     0.03     NA      NA     NA  32707  17405
+       9:     0.02     0.03 1117.0 21.5940 29.634  32730  17375
+      10:     0.02     0.03     NA      NA     NA  32724  17352
+      11:     0.02     0.03     NA      NA     NA  32680  17327
+      12:     0.02     0.03     NA      NA     NA  32693  17312
+      13:     0.02     0.03     NA      NA     NA  32696  17312
+      14:     0.02     0.03 1192.0 21.5670 29.739  32690  17291
+      15:     0.02     0.03     NA      NA     NA  32681  17271
+      16:     0.03     0.03     NA      NA     NA  32659  17245
+      17:     0.02     0.03 1324.0 21.4100 30.198  32674  17071
+      18:     0.02     0.03 1328.0 21.3350 30.181  32674  17031
+      19:     0.02     0.02     NA      NA     NA  32676  17013
+      20:     0.02     0.03     NA      NA     NA  32686  17019
+      21:     0.02     0.03     NA      NA     NA  32694  17022
+      22:     0.01     0.03     NA      NA     NA  32659  16995
+      23:     0.02     0.03 1329.0 21.2920 30.166  32688  16986
+      24:     0.02     0.03     NA      NA     NA  32668  16982
+      25:     0.02     0.03     NA      NA     NA  32678  16973
+      26:     0.02     0.03     NA      NA     NA  32665  16969
+      27:     0.02     0.03     NA      NA     NA  32700  16960
+      28:     0.02     0.03 1329.0 21.2390 30.210  32683  16936
+      29:     0.02     0.03     NA      NA     NA  32687  16932
+      30:     0.02     0.03     NA      NA     NA  32680  16918
+      31:     0.02     0.03     NA      NA     NA  32685  16915
+      32:     0.02     0.04     NA      NA     NA  32680  16913
+      33:     0.02     0.03 1329.0 21.2120 30.169  32673  16893
+      34:     0.02     0.03     NA      NA     NA  32676  16886
+      35:     0.02     0.03     NA      NA     NA  32696  16878
+      36:     0.02     0.03     NA      NA     NA  32671  16868
+      37:     0.02     0.03     NA      NA     NA  32652  16875
+      38:     0.02     0.03 1329.0 21.1690 30.218  32689  16857
+      39:     0.02     0.03     NA      NA     NA  32674  16843
+      40:     0.02     0.03     NA      NA     NA  32674  16834
+      41:     0.02     0.03     NA      NA     NA  32702  16822
+      42:     0.02     0.03 1326.0 21.1530 30.191  32676  16816
+      43:     0.02     0.03     NA      NA     NA  32681  16820
+      44:     0.02     0.03     NA      NA     NA  32700  16810
+      45:     0.02     0.03     NA      NA     NA  32692  16798
+      46:     0.02     0.03     NA      NA     NA  32706  16792
+      47:     0.03     0.03 1326.0 21.1160 30.187  32685  16776
+      48:     0.02     0.03     NA      NA     NA  32700  16777
+      49:     0.02     0.03     NA      NA     NA  32687  16757
+      50:     0.08     0.05     NA      NA     NA  32701  16773
+      51:     0.06     0.06     NA      NA     NA  32665  16751
+      52:     0.02     0.05 1321.0 21.1350 30.189  32680  16759
+      53:     0.02     0.03     NA      NA     NA  32675  16735
+      54:     0.03     0.03     NA      NA     NA  32675  16734
+      55:     0.02     0.03     NA      NA     NA  32701  16743
+      56:     0.02     0.03     NA      NA     NA  32684  16724
+      57:     0.02     0.03 1315.0 21.1000 30.181  32679  16703
+      58:     0.02     0.03     NA      NA     NA  32689  16708
+          SD_DATAW SD_HEADW    CO2    SCDT  SCDRH VOCRaw NOXRaw
+                                                                           LogFilename
+                                                                                <char>
+       1: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       2: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       3: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       4: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       5: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       6: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       7: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       8: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+       9: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      10: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      11: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      12: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      13: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      14: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      15: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      16: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      17: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      18: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      19: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      20: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      21: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      22: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      23: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      24: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      25: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      26: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      27: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      28: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      29: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      30: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      31: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      32: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      33: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      34: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      35: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      36: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      37: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      38: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      39: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      40: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      41: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      42: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      43: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      44: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      45: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      46: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      47: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      48: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      49: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      50: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      51: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      52: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      53: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      54: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      55: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      56: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      57: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+      58: /20250311/PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt
+                                                                           LogFilename
+             StartDateTimeUTC UserTZ
+                       <POSc> <lgcl>
+       1: 2025-03-11 19:19:56  FALSE
+       2: 2025-03-11 19:19:56  FALSE
+       3: 2025-03-11 19:19:56  FALSE
+       4: 2025-03-11 19:19:56  FALSE
+       5: 2025-03-11 19:19:56  FALSE
+       6: 2025-03-11 19:19:56  FALSE
+       7: 2025-03-11 19:19:56  FALSE
+       8: 2025-03-11 19:19:56  FALSE
+       9: 2025-03-11 19:19:56  FALSE
+      10: 2025-03-11 19:19:56  FALSE
+      11: 2025-03-11 19:19:56  FALSE
+      12: 2025-03-11 19:19:56  FALSE
+      13: 2025-03-11 19:19:56  FALSE
+      14: 2025-03-11 19:19:56  FALSE
+      15: 2025-03-11 19:19:56  FALSE
+      16: 2025-03-11 19:19:56  FALSE
+      17: 2025-03-11 19:19:56  FALSE
+      18: 2025-03-11 19:19:56  FALSE
+      19: 2025-03-11 19:19:56  FALSE
+      20: 2025-03-11 19:19:56  FALSE
+      21: 2025-03-11 19:19:56  FALSE
+      22: 2025-03-11 19:19:56  FALSE
+      23: 2025-03-11 19:19:56  FALSE
+      24: 2025-03-11 19:19:56  FALSE
+      25: 2025-03-11 19:19:56  FALSE
+      26: 2025-03-11 19:19:56  FALSE
+      27: 2025-03-11 19:19:56  FALSE
+      28: 2025-03-11 19:19:56  FALSE
+      29: 2025-03-11 19:19:56  FALSE
+      30: 2025-03-11 19:19:56  FALSE
+      31: 2025-03-11 19:19:56  FALSE
+      32: 2025-03-11 19:19:56  FALSE
+      33: 2025-03-11 19:19:56  FALSE
+      34: 2025-03-11 19:19:56  FALSE
+      35: 2025-03-11 19:19:56  FALSE
+      36: 2025-03-11 19:19:56  FALSE
+      37: 2025-03-11 19:19:56  FALSE
+      38: 2025-03-11 19:19:56  FALSE
+      39: 2025-03-11 19:19:56  FALSE
+      40: 2025-03-11 19:19:56  FALSE
+      41: 2025-03-11 19:19:56  FALSE
+      42: 2025-03-11 19:19:56  FALSE
+      43: 2025-03-11 19:19:56  FALSE
+      44: 2025-03-11 19:19:56  FALSE
+      45: 2025-03-11 19:19:56  FALSE
+      46: 2025-03-11 19:19:56  FALSE
+      47: 2025-03-11 19:19:56  FALSE
+      48: 2025-03-11 19:19:56  FALSE
+      49: 2025-03-11 19:19:56  FALSE
+      50: 2025-03-11 19:19:56  FALSE
+      51: 2025-03-11 19:19:56  FALSE
+      52: 2025-03-11 19:19:56  FALSE
+      53: 2025-03-11 19:19:56  FALSE
+      54: 2025-03-11 19:19:56  FALSE
+      55: 2025-03-11 19:19:56  FALSE
+      56: 2025-03-11 19:19:56  FALSE
+      57: 2025-03-11 19:19:56  FALSE
+      58: 2025-03-11 19:19:56  FALSE
+             StartDateTimeUTC UserTZ
+
+---
+
+    Code
+      read_ast_log(upasv2x_rev200v_diag_file, update_names = FALSE)
+    Output
+          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
+              <char>     <char>     <char>      <char> <difftime>      <num>
+       1:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     1 secs 1741721191
+       2:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     2 secs 1741721192
+       3:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     3 secs 1741721193
+       4:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     4 secs 1741721194
+       5:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     5 secs 1741721195
+       6:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     6 secs 1741721196
+       7:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     7 secs 1741721197
+       8:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     8 secs 1741721198
+       9:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>     9 secs 1741721199
+      10:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    10 secs 1741721200
+      11:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    11 secs 1741721201
+      12:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    12 secs 1741721202
+      13:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    27 secs 1741721217
+      14:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    29 secs 1741721219
+      15:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    30 secs 1741721220
+      16:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    31 secs 1741721221
+      17:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    32 secs 1741721222
+      18:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    33 secs 1741721223
+      19:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    34 secs 1741721224
+      20:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    35 secs 1741721225
+      21:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    36 secs 1741721226
+      22:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    37 secs 1741721227
+      23:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    38 secs 1741721228
+      24:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    39 secs 1741721229
+      25:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    40 secs 1741721230
+      26:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    41 secs 1741721231
+      27:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    42 secs 1741721232
+      28:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    43 secs 1741721233
+      29:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    44 secs 1741721234
+      30:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    45 secs 1741721235
+      31:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    46 secs 1741721236
+      32:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    47 secs 1741721237
+      33:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    48 secs 1741721238
+      34:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    49 secs 1741721239
+      35:  UPAS_v2_x   PSP01066 DIAGNOSTIC        <NA>    50 secs 1741721240
+          ASTSampler UPASserial SampleName CartridgeID SampleTime   UnixTime
+                  DateTimeUTC       DateTimeLocal   LocalTZ UnixTimeMCU
+                       <POSc>              <POSc>    <char>       <num>
+       1: 2025-03-11 19:26:31 2025-03-11 13:26:31 Etc/GMT+6  1741721191
+       2: 2025-03-11 19:26:32 2025-03-11 13:26:32 Etc/GMT+6  1741721192
+       3: 2025-03-11 19:26:33 2025-03-11 13:26:33 Etc/GMT+6  1741721193
+       4: 2025-03-11 19:26:34 2025-03-11 13:26:34 Etc/GMT+6  1741721194
+       5: 2025-03-11 19:26:35 2025-03-11 13:26:35 Etc/GMT+6  1741721195
+       6: 2025-03-11 19:26:36 2025-03-11 13:26:36 Etc/GMT+6  1741721196
+       7: 2025-03-11 19:26:37 2025-03-11 13:26:37 Etc/GMT+6  1741721197
+       8: 2025-03-11 19:26:38 2025-03-11 13:26:38 Etc/GMT+6  1741721198
+       9: 2025-03-11 19:26:39 2025-03-11 13:26:39 Etc/GMT+6  1741721199
+      10: 2025-03-11 19:26:40 2025-03-11 13:26:40 Etc/GMT+6  1741721200
+      11: 2025-03-11 19:26:41 2025-03-11 13:26:41 Etc/GMT+6  1741721201
+      12: 2025-03-11 19:26:42 2025-03-11 13:26:42 Etc/GMT+6  1741721202
+      13: 2025-03-11 19:26:57 2025-03-11 13:26:57 Etc/GMT+6  1741721217
+      14: 2025-03-11 19:26:59 2025-03-11 13:26:59 Etc/GMT+6  1741721219
+      15: 2025-03-11 19:27:00 2025-03-11 13:27:00 Etc/GMT+6  1741721220
+      16: 2025-03-11 19:27:01 2025-03-11 13:27:01 Etc/GMT+6  1741721221
+      17: 2025-03-11 19:27:02 2025-03-11 13:27:02 Etc/GMT+6  1741721222
+      18: 2025-03-11 19:27:03 2025-03-11 13:27:03 Etc/GMT+6  1741721223
+      19: 2025-03-11 19:27:04 2025-03-11 13:27:04 Etc/GMT+6  1741721224
+      20: 2025-03-11 19:27:05 2025-03-11 13:27:05 Etc/GMT+6  1741721225
+      21: 2025-03-11 19:27:06 2025-03-11 13:27:06 Etc/GMT+6  1741721226
+      22: 2025-03-11 19:27:07 2025-03-11 13:27:07 Etc/GMT+6  1741721227
+      23: 2025-03-11 19:27:08 2025-03-11 13:27:08 Etc/GMT+6  1741721228
+      24: 2025-03-11 19:27:09 2025-03-11 13:27:09 Etc/GMT+6  1741721229
+      25: 2025-03-11 19:27:10 2025-03-11 13:27:10 Etc/GMT+6  1741721230
+      26: 2025-03-11 19:27:11 2025-03-11 13:27:11 Etc/GMT+6  1741721231
+      27: 2025-03-11 19:27:12 2025-03-11 13:27:12 Etc/GMT+6  1741721232
+      28: 2025-03-11 19:27:13 2025-03-11 13:27:13 Etc/GMT+6  1741721233
+      29: 2025-03-11 19:27:14 2025-03-11 13:27:14 Etc/GMT+6  1741721234
+      30: 2025-03-11 19:27:15 2025-03-11 13:27:15 Etc/GMT+6  1741721235
+      31: 2025-03-11 19:27:16 2025-03-11 13:27:16 Etc/GMT+6  1741721236
+      32: 2025-03-11 19:27:17 2025-03-11 13:27:17 Etc/GMT+6  1741721237
+      33: 2025-03-11 19:27:18 2025-03-11 13:27:18 Etc/GMT+6  1741721238
+      34: 2025-03-11 19:27:19 2025-03-11 13:27:19 Etc/GMT+6  1741721239
+      35: 2025-03-11 19:27:20 2025-03-11 13:27:20 Etc/GMT+6  1741721240
+                  DateTimeUTC       DateTimeLocal   LocalTZ UnixTimeMCU
+          PumpingFlowFactory OverallFlowFactory SampledVolumeFactory
+                       <num>              <num>                <num>
+       1:              0.923              0.923                0.015
+       2:              0.924              0.924                0.031
+       3:              0.921              0.921                0.046
+       4:              0.922              0.922                0.062
+       5:              0.922              0.922                0.077
+       6:              0.923              0.923                0.092
+       7:              0.920              0.920                0.108
+       8:              0.920              0.920                0.123
+       9:              0.920              0.920                0.138
+      10:              0.920              0.920                0.154
+      11:              0.920              0.920                0.169
+      12:              0.930              0.930                0.184
+      13:              1.831              1.831                0.215
+      14:              1.830              1.830                0.245
+      15:              1.836              1.836                0.276
+      16:              1.835              1.835                0.307
+      17:              1.836              1.836                0.337
+      18:              1.839              1.839                0.368
+      19:              1.835              1.835                0.398
+      20:              1.834              1.834                0.429
+      21:              1.834              1.834                0.460
+      22:              1.832              1.832                0.490
+      23:              1.834              1.834                0.521
+      24:              1.832              1.832                0.551
+      25:              1.832              1.832                0.582
+      26:              1.834              1.834                0.612
+      27:              1.831              1.831                0.643
+      28:              1.834              1.834                0.673
+      29:              1.833              1.833                0.704
+      30:              1.831              1.831                0.734
+      31:              1.834              1.834                0.765
+      32:              1.836              1.836                0.796
+      33:              1.831              1.831                0.826
+      34:              1.832              1.832                0.857
+      35:              1.834              1.834                0.887
+          PumpingFlowFactory OverallFlowFactory SampledVolumeFactory
+          PumpingFlowOffset OverallFlowOffset SampledVolumeOffset FilterDP
+                      <num>             <num>               <num>    <num>
+       1:             1.007             1.007               0.017    63.50
+       2:             1.007             1.007               0.034    63.20
+       3:             1.004             1.004               0.050    63.25
+       4:             1.005             1.005               0.067    63.10
+       5:             1.005             1.005               0.084    63.05
+       6:             1.006             1.006               0.101    63.20
+       7:             1.003             1.003               0.117    63.25
+       8:             1.002             1.002               0.134    62.95
+       9:             1.003             1.003               0.151    63.30
+      10:             1.003             1.003               0.167    62.85
+      11:             1.003             1.003               0.184    63.10
+      12:             1.014             1.014               0.201    64.00
+      13:             1.995             1.995               0.234   176.50
+      14:             1.994             1.994               0.268   177.65
+      15:             2.001             2.001               0.301   173.15
+      16:             2.000             2.000               0.334   179.50
+      17:             2.001             2.001               0.368   177.45
+      18:             2.004             2.004               0.401   177.30
+      19:             2.000             2.000               0.434   175.00
+      20:             1.999             1.999               0.468   178.35
+      21:             1.999             1.999               0.501   178.50
+      22:             1.997             1.997               0.534   175.30
+      23:             2.000             2.000               0.568   178.30
+      24:             1.997             1.997               0.601   177.30
+      25:             1.997             1.997               0.634   178.45
+      26:             1.999             1.999               0.667   177.45
+      27:             1.995             1.995               0.701   178.15
+      28:             1.999             1.999               0.734   177.15
+      29:             1.997             1.997               0.767   177.75
+      30:             1.996             1.996               0.801   177.30
+      31:             1.999             1.999               0.834   176.55
+      32:             2.001             2.001               0.867   178.75
+      33:             1.995             1.995               0.900   174.40
+      34:             1.997             1.997               0.934   176.95
+      35:             1.999             1.999               0.967   177.95
+          PumpingFlowOffset OverallFlowOffset SampledVolumeOffset FilterDP
+          BatteryCharge AtmoT  AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon
+                  <num> <num>  <num>  <num>       <num>   <num>   <num>  <num>  <num>
+       1:           100 24.67 795.85  22.88      0.9278  1991.2       0     NA     NA
+       2:           100 24.67 795.85  22.87      0.9278  1991.2       0     NA     NA
+       3:           100 24.67 795.85  22.84      0.9278  1991.2       0     NA     NA
+       4:           100 24.67 795.85  22.82      0.9278  1991.2       0     NA     NA
+       5:           100 24.67 795.85  22.82      0.9278  1991.2       0     NA     NA
+       6:           100 24.67 795.85  22.81      0.9278  1991.2       0     NA     NA
+       7:           100 24.67 795.85  22.79      0.9278  1991.2       0     NA     NA
+       8:           100 24.67 795.85  22.92      0.9278  1991.2       0     NA     NA
+       9:           100 24.67 795.85  23.43      0.9277  1991.2       0     NA     NA
+      10:           100 24.67 795.85  22.49      0.9278  1991.3       0     NA     NA
+      11:           100 24.67 795.85  23.15      0.9277  1991.3       0     NA     NA
+      12:           100 24.10 795.82  22.68      0.9297  1991.5       0     NA     NA
+      13:           100 24.10 795.82  22.58      0.9297  1991.5       0     NA     NA
+      14:           100 24.10 795.82  22.58      0.9297  1991.6       0     NA     NA
+      15:           100 24.10 795.82  22.58      0.9297  1991.6       0     NA     NA
+      16:           100 24.10 795.82  22.82      0.9296  1991.6       0     NA     NA
+      17:           100 24.10 795.82  22.53      0.9297  1991.6       0     NA     NA
+      18:           100 24.10 795.82  22.95      0.9296  1991.6       0     NA     NA
+      19:           100 24.10 795.82  22.50      0.9297  1991.6       0     NA     NA
+      20:           100 24.10 795.82  22.55      0.9297  1991.6       0     NA     NA
+      21:           100 24.10 795.82  22.53      0.9297  1991.6       0     NA     NA
+      22:           100 24.10 795.81  22.43      0.9297  1991.6       0     NA     NA
+      23:           100 24.10 795.81  22.43      0.9297  1991.6       0     NA     NA
+      24:           100 24.10 795.81  22.36      0.9297  1991.6       0     NA     NA
+      25:           100 24.10 795.81  22.33      0.9297  1991.6       0     NA     NA
+      26:           100 24.10 795.81  22.28      0.9297  1991.7       0     NA     NA
+      27:           100 24.10 795.81  22.25      0.9297  1991.7       0     NA     NA
+      28:           100 24.10 795.81  22.15      0.9297  1991.7       0     NA     NA
+      29:           100 24.10 795.81  22.18      0.9297  1991.7       0     NA     NA
+      30:           100 24.10 795.81  21.27      0.9298  1991.7       0     NA     NA
+      31:           100 24.10 795.81  22.83      0.9296  1991.7       0     NA     NA
+      32:           100 24.10 795.81  22.25      0.9297  1991.7       0     NA     NA
+      33:           100 24.10 795.81  21.74      0.9298  1991.7       0     NA     NA
+      34:           100 24.10 795.81  22.03      0.9297  1991.7       0     NA     NA
+      35:           100 24.10 795.81  22.12      0.9297  1991.7       0     NA     NA
+          BatteryCharge AtmoT  AtmoP AtmoRH AtmoDensity AtmoAlt GPSQual GPSlat GPSlon
+          GPSalt GPSsat GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY
+           <num>  <num>    <num>   <num>  <num>     <num>     <num>     <num>  <num>
+       1:     NA      0       NA      NA      2        NA        NA        NA    -10
+       2:     NA      0       NA      NA      2        NA        NA        NA    -11
+       3:     NA      0       NA      NA      2        NA        NA        NA    -10
+       4:     NA      0       NA      NA      1        NA        NA        NA    -10
+       5:     NA      0       NA      NA      2        NA        NA        NA    -11
+       6:     NA      0       NA      NA      2        NA        NA        NA    -11
+       7:     NA      0       NA      NA      2        NA        NA        NA    -11
+       8:     NA      0       NA      NA      2        NA        NA        NA    -10
+       9:     NA      0       NA      NA      2        NA        NA        NA    -10
+      10:     NA      0       NA      NA      1        NA        NA        NA    -10
+      11:     NA      0       NA      NA      1        NA        NA        NA    -14
+      12:     NA      0       NA      NA      1        NA        NA        NA     -9
+      13:     NA      0       NA      NA      1        NA        NA        NA    -10
+      14:     NA      0       NA      NA      2        NA        NA        NA    -10
+      15:     NA      0       NA      NA      2        NA        NA        NA    -10
+      16:     NA      0       NA      NA      1        NA        NA        NA    -10
+      17:     NA      0       NA      NA      2        NA        NA        NA    -10
+      18:     NA      0       NA      NA      2        NA        NA        NA    -10
+      19:     NA      0       NA      NA      2        NA        NA        NA    -11
+      20:     NA      0       NA      NA      1        NA        NA        NA    -10
+      21:     NA      0       NA      NA      1        NA        NA        NA    -11
+      22:     NA      0       NA      NA      2        NA        NA        NA     -9
+      23:     NA      0       NA      NA      2        NA        NA        NA    -11
+      24:     NA      0       NA      NA      1        NA        NA        NA    -10
+      25:     NA      0       NA      NA      2        NA        NA        NA    -10
+      26:     NA      0       NA      NA      2        NA        NA        NA    -10
+      27:     NA      0       NA      NA      1        NA        NA        NA    -10
+      28:     NA      0       NA      NA      1        NA        NA        NA    -10
+      29:     NA      0       NA      NA      2        NA        NA        NA     -9
+      30:     NA      0       NA      NA     NA       0.2         1         2     NA
+      31:     NA      0       NA      NA      1        NA        NA        NA    -10
+      32:     NA      0       NA      NA      2        NA        NA        NA    -11
+      33:     NA      0       NA      NA      2        NA        NA        NA     -9
+      34:     NA      0       NA      NA      0        NA        NA        NA    -11
+      35:     NA      0       NA      NA      0        NA        NA        NA    -11
+          GPSalt GPSsat GPSspeed GPShDOP AccelX AccelXVar AccelXMin AccelXMax AccelY
+          AccelYVar AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax  RotX
+              <num>     <num>     <num>  <num>     <num>     <num>     <num> <num>
+       1:        NA        NA        NA  -1001        NA        NA        NA   306
+       2:        NA        NA        NA  -1000        NA        NA        NA   420
+       3:        NA        NA        NA  -1000        NA        NA        NA   796
+       4:        NA        NA        NA  -1000        NA        NA        NA   848
+       5:        NA        NA        NA  -1000        NA        NA        NA   306
+       6:        NA        NA        NA  -1001        NA        NA        NA   700
+       7:        NA        NA        NA  -1000        NA        NA        NA   691
+       8:        NA        NA        NA  -1000        NA        NA        NA   647
+       9:        NA        NA        NA  -1000        NA        NA        NA   805
+      10:        NA        NA        NA  -1002        NA        NA        NA  1400
+      11:        NA        NA        NA  -1000        NA        NA        NA  1093
+      12:        NA        NA        NA  -1000        NA        NA        NA   262
+      13:        NA        NA        NA  -1003        NA        NA        NA   910
+      14:        NA        NA        NA  -1002        NA        NA        NA   857
+      15:        NA        NA        NA  -1003        NA        NA        NA   682
+      16:        NA        NA        NA  -1002        NA        NA        NA  1058
+      17:        NA        NA        NA  -1003        NA        NA        NA   778
+      18:        NA        NA        NA  -1002        NA        NA        NA   673
+      19:        NA        NA        NA  -1003        NA        NA        NA   936
+      20:        NA        NA        NA  -1002        NA        NA        NA   726
+      21:        NA        NA        NA  -1002        NA        NA        NA   743
+      22:        NA        NA        NA  -1002        NA        NA        NA   866
+      23:        NA        NA        NA  -1002        NA        NA        NA   752
+      24:        NA        NA        NA  -1001        NA        NA        NA   787
+      25:        NA        NA        NA  -1002        NA        NA        NA   726
+      26:        NA        NA        NA  -1003        NA        NA        NA   621
+      27:        NA        NA        NA  -1002        NA        NA        NA  1155
+      28:        NA        NA        NA  -1002        NA        NA        NA   743
+      29:        NA        NA        NA  -1002        NA        NA        NA  1076
+      30:       0.8       -14        -9     NA       1.1     -1003     -1000    NA
+      31:        NA        NA        NA  -1002        NA        NA        NA   988
+      32:        NA        NA        NA  -1002        NA        NA        NA   -61
+      33:        NA        NA        NA  -1002        NA        NA        NA   805
+      34:        NA        NA        NA  -1002        NA        NA        NA   402
+      35:        NA        NA        NA  -1003        NA        NA        NA   306
+          AccelYVar AccelYMin AccelYMax AccelZ AccelZVar AccelZMin AccelZMax  RotX
+          RotXVar RotXMin RotXMax  RotY RotYVar RotYMin RotYMax  RotZ RotZVar RotZMin
+            <num>   <num>   <num> <num>   <num>   <num>   <num> <num>   <num>   <num>
+       1:      NA      NA      NA   393      NA      NA      NA   183      NA      NA
+       2:      NA      NA      NA   306      NA      NA      NA   481      NA      NA
+       3:      NA      NA      NA   166      NA      NA      NA   717      NA      NA
+       4:      NA      NA      NA  -271      NA      NA      NA   463      NA      NA
+       5:      NA      NA      NA   341      NA      NA      NA   647      NA      NA
+       6:      NA      NA      NA   -26      NA      NA      NA   350      NA      NA
+       7:      NA      NA      NA  -140      NA      NA      NA   542      NA      NA
+       8:      NA      NA      NA     8      NA      NA      NA   446      NA      NA
+       9:      NA      NA      NA   -96      NA      NA      NA   507      NA      NA
+      10:      NA      NA      NA  -691      NA      NA      NA   411      NA      NA
+      11:      NA      NA      NA  -376      NA      NA      NA   420      NA      NA
+      12:      NA      NA      NA   420      NA      NA      NA   603      NA      NA
+      13:      NA      NA      NA  -271      NA      NA      NA   883      NA      NA
+      14:      NA      NA      NA  -157      NA      NA      NA   385      NA      NA
+      15:      NA      NA      NA   -26      NA      NA      NA   446      NA      NA
+      16:      NA      NA      NA  -393      NA      NA      NA   306      NA      NA
+      17:      NA      NA      NA  -148      NA      NA      NA   420      NA      NA
+      18:      NA      NA      NA    35      NA      NA      NA   428      NA      NA
+      19:      NA      NA      NA  -245      NA      NA      NA   122      NA      NA
+      20:      NA      NA      NA  -105      NA      NA      NA   682      NA      NA
+      21:      NA      NA      NA   -61      NA      NA      NA   551      NA      NA
+      22:      NA      NA      NA  -218      NA      NA      NA   656      NA      NA
+      23:      NA      NA      NA  -131      NA      NA      NA   420      NA      NA
+      24:      NA      NA      NA  -183      NA      NA      NA   481      NA      NA
+      25:      NA      NA      NA  -140      NA      NA      NA   113      NA      NA
+      26:      NA      NA      NA   -26      NA      NA      NA   498      NA      NA
+      27:      NA      NA      NA  -525      NA      NA      NA   227      NA      NA
+      28:      NA      NA      NA  -166      NA      NA      NA   420      NA      NA
+      29:      NA      NA      NA  -673      NA      NA      NA   551      NA      NA
+      30: 59357.1     262    1400    NA 70588.3    -691     420    NA 30572.3     113
+      31:      NA      NA      NA  -420      NA      NA      NA   315      NA      NA
+      32:      NA      NA      NA   682      NA      NA      NA   586      NA      NA
+      33:      NA      NA      NA   -78      NA      NA      NA   262      NA      NA
+      34:      NA      NA      NA   131      NA      NA      NA   761      NA      NA
+      35:      NA      NA      NA   350      NA      NA      NA   420      NA      NA
+          RotXVar RotXMin RotXMax  RotY RotYVar RotYMin RotYMax  RotZ RotZVar RotZMin
+          RotZMax AccelComplianceCnt AccelComplianceHrs   Xup XDown   Yup Ydown   Zup
+            <num>              <num>              <num> <num> <num> <num> <num> <num>
+       1:      NA                 NA                 NA     0     0     0     0   100
+       2:      NA                 NA                 NA     0     0     0     0   100
+       3:      NA                 NA                 NA     0     0     0     0   100
+       4:      NA                 NA                 NA     0     0     0     0   100
+       5:      NA                 NA                 NA     0     0     0     0   100
+       6:      NA                 NA                 NA     0     0     0     0   100
+       7:      NA                 NA                 NA     0     0     0     0   100
+       8:      NA                 NA                 NA     0     0     0     0   100
+       9:      NA                 NA                 NA     0     0     0     0   100
+      10:      NA                 NA                 NA     0     0     0     0   100
+      11:      NA                 NA                 NA     0     0     0     0   100
+      12:      NA                 NA                 NA     0     0     0     0   100
+      13:      NA                 NA                 NA     0     0     0     0   100
+      14:      NA                 NA                 NA     0     0     0     0   100
+      15:      NA                 NA                 NA     0     0     0     0   100
+      16:      NA                 NA                 NA     0     0     0     0   100
+      17:      NA                 NA                 NA     0     0     0     0   100
+      18:      NA                 NA                 NA     0     0     0     0   100
+      19:      NA                 NA                 NA     0     0     0     0   100
+      20:      NA                 NA                 NA     0     0     0     0   100
+      21:      NA                 NA                 NA     0     0     0     0   100
+      22:      NA                 NA                 NA     0     0     0     0   100
+      23:      NA                 NA                 NA     0     0     0     0   100
+      24:      NA                 NA                 NA     0     0     0     0   100
+      25:      NA                 NA                 NA     0     0     0     0   100
+      26:      NA                 NA                 NA     0     0     0     0   100
+      27:      NA                 NA                 NA     0     0     0     0   100
+      28:      NA                 NA                 NA     0     0     0     0   100
+      29:      NA                 NA                 NA     0     0     0     0   100
+      30:     883                  0                  0     0     0     0     0   100
+      31:      NA                 NA                 NA     0     0     0     0   100
+      32:      NA                 NA                 NA     0     0     0     0   100
+      33:      NA                 NA                 NA     0     0     0     0   100
+      34:      NA                 NA                 NA     0     0     0     0   100
+      35:      NA                 NA                 NA     0     0     0     0   100
+          RotZMax AccelComplianceCnt AccelComplianceHrs   Xup XDown   Yup Ydown   Zup
+          Zdown StepCount   LUX UVindex HighVisRaw LowVisRaw IRRaw UVRaw PMMeasCnt
+          <num>     <num> <num>   <num>      <num>     <num> <num> <num>     <num>
+       1:     0         0  61.2    0.03        354       357   240     4         1
+       2:     0         0  62.2    0.35        341       362   237    43         1
+       3:     0         0  61.4    0.04        352       356   230     5         1
+       4:     0         0  59.6    0.12        344       348   238    16         1
+       5:     0         0  62.2    0.29        348       361   238    35         1
+       6:     0         0  62.0    0.19        347       362   236   -23         1
+       7:     0         0  61.8    0.11        341       359   241    14         1
+       8:     0         0  61.8    0.19        355       358   241    23         1
+       9:     0         0  62.3    0.64        351       353   237    79         1
+      10:     0         0  28.7    0.55        156       170   130    67         1
+      11:     0         0  62.4    0.20        345       362   235   -24         1
+      12:     0         0  62.0    0.21        341       348   242   -25         1
+      13:     0         0  61.3    0.36        350       360   239    44         1
+      14:     0         0  62.2    0.25        348       360   240    31         1
+      15:     0         0  62.0    0.10        342       360   235    13         1
+      16:     0         0  62.2    0.08        336       361   237   -10         1
+      17:     0         0  62.2    0.06        359       362   239     8         1
+      18:     0         0  62.6    0.18        353       363   237    22         1
+      19:     0         0  62.5    0.21        355       363   239   -26         1
+      20:     0         0  61.6    0.24        352       361   239    30         1
+      21:     0         0  62.1    0.31        348       362   243    38         1
+      22:     0         0  61.5    0.32        356       358   239   -38         1
+      23:     0         0  60.8    0.25        348       355   241   -31         1
+      24:     0         0  60.9    0.03        344       355   239    -4         1
+      25:     0         0  59.8    0.10        343       350   242   -13         1
+      26:     0         0  60.0    0.33        349       351   244    41         1
+      27:     0         0  63.0    0.38        351       358   244    47         1
+      28:     0         0  62.7    0.05        351       356   247    -6         1
+      29:     0         0  61.1    0.09        351       357   244    12         1
+      30:     0         0  60.6    0.06        341       354   241    -8         1
+      31:     0         0  59.9    0.09        339       350   238    12         1
+      32:     0         0  61.6    0.57        340       349   241   -68         1
+      33:     0         0  28.4    0.24        176       168   126   -29         1
+      34:     0         0  28.5    0.15        170       168   125   -18         1
+      35:     0         0  26.1    0.06        137       153   111    -8         1
+          Zdown StepCount   LUX UVindex HighVisRaw LowVisRaw IRRaw UVRaw PMMeasCnt
+          PM1MC PM1MCVar PM2_5MC PM2_5MCVar PM4MC PM4MCVar PM10MC PM10MCVar PM0_5NC
+          <num>    <num>   <num>      <num> <num>    <num>  <num>     <num>   <num>
+       1:  0.91        0    1.49          0  1.93        0   2.15         0    4.91
+       2:  0.89        0    1.46          0  1.90        0   2.11         0    4.83
+       3:  0.88        0    1.46          0  1.91        0   2.13         0    4.74
+       4:  0.88        0    1.47          0  1.93        0   2.15         0    4.67
+       5:  0.89        0    1.48          0  1.93        0   2.15         0    4.78
+       6:  0.90        0    1.47          0  1.91        0   2.13         0    4.86
+       7:  0.91        0    1.52          0  1.98        0   2.22         0    4.83
+       8:  0.92        0    1.52          0  1.98        0   2.21         0    4.93
+       9:  0.93        0    1.55          0  2.03        0   2.26         0    4.95
+      10:  0.93        0    1.55          0  2.03        0   2.26         0    4.95
+      11:  0.92        0    1.56          0  2.04        0   2.29         0    4.89
+      12:  0.92        0    1.56          0  2.04        0   2.28         0    4.90
+      13:  0.90        0    1.49          0  1.94        0   2.17         0    4.82
+      14:  0.88        0    1.43          0  1.85        0   2.06         0    4.77
+      15:  0.88        0    1.43          0  1.85        0   2.06         0    4.77
+      16:  0.88        0    1.45          0  1.89        0   2.11         0    4.72
+      17:  0.88        0    1.45          0  1.89        0   2.10         0    4.71
+      18:  0.87        0    1.44          0  1.88        0   2.09         0    4.69
+      19:  0.87        0    1.45          0  1.90        0   2.12         0    4.66
+      20:  0.87        0    1.44          0  1.87        0   2.09         0    4.68
+      21:  0.86        0    1.42          0  1.85        0   2.06         0    4.62
+      22:  0.84        0    1.39          0  1.81        0   2.02         0    4.53
+      23:  0.82        0    1.36          0  1.76        0   1.96         0    4.47
+      24:  0.83        0    1.38          0  1.79        0   2.00         0    4.44
+      25:  0.83        0    1.38          0  1.79        0   2.00         0    4.50
+      26:  0.83        0    1.37          0  1.78        0   1.99         0    4.48
+      27:  0.82        0    1.35          0  1.76        0   1.96         0    4.42
+      28:  0.81        0    1.34          0  1.73        0   1.93         0    4.41
+      29:  0.81        0    1.34          0  1.74        0   1.94         0    4.39
+      30:  0.82        0    1.36          0  1.77        0   1.97         0    4.39
+      31:  0.82        0    1.37          0  1.78        0   1.99         0    4.43
+      32:  0.83        0    1.36          0  1.77        0   1.98         0    4.47
+      33:  0.83        0    1.36          0  1.77        0   1.97         0    4.48
+      34:  0.85        0    1.41          0  1.83        0   2.04         0    4.58
+      35:  0.87        0    1.44          0  1.86        0   2.08         0    4.72
+          PM1MC PM1MCVar PM2_5MC PM2_5MCVar PM4MC PM4MCVar PM10MC PM10MCVar PM0_5NC
+          PM1NC PM2_5NC PM4NC PM10NC PM0_5NCVar PM1NCVar PM2_5NCVar PM4NCVar
+          <num>   <num> <num>  <num>      <num>    <num>      <num>    <num>
+       1:  6.59    7.14  7.25   7.25          0        0          0        0
+       2:  6.48    7.03  7.13   7.13          0        0          0        0
+       3:  6.39    6.95  7.06   7.06          0        0          0        0
+       4:  6.34    6.91  7.02   7.02          0        0          0        0
+       5:  6.45    7.01  7.12   7.12          0        0          0        0
+       6:  6.52    7.08  7.18   7.18          0        0          0        0
+       7:  6.55    7.13  7.25   7.25          0        0          0        0
+       8:  6.64    7.22  7.33   7.33          0        0          0        0
+       9:  6.70    7.30  7.42   7.42          0        0          0        0
+      10:  6.70    7.30  7.42   7.42          0        0          0        0
+      11:  6.66    7.27  7.39   7.39          0        0          0        0
+      12:  6.66    7.27  7.39   7.39          0        0          0        0
+      13:  6.50    7.07  7.18   7.18          0        0          0        0
+      14:  6.38    6.91  7.01   7.01          0        0          0        0
+      15:  6.38    6.91  7.01   7.01          0        0          0        0
+      16:  6.36    6.91  7.02   7.02          0        0          0        0
+      17:  6.35    6.90  7.00   7.00          0        0          0        0
+      18:  6.32    6.87  6.97   6.97          0        0          0        0
+      19:  6.31    6.86  6.97   6.97          0        0          0        0
+      20:  6.30    6.85  6.95   6.95          0        0          0        0
+      21:  6.22    6.76  6.87   6.87          0        0          0        0
+      22:  6.10    6.63  6.73   6.73          0        0          0        0
+      23:  5.99    6.50  6.60   6.60          0        0          0        0
+      24:  5.99    6.52  6.62   6.62          0        0          0        0
+      25:  6.05    6.57  6.67   6.67          0        0          0        0
+      26:  6.02    6.54  6.64   6.64          0        0          0        0
+      27:  5.94    6.45  6.55   6.55          0        0          0        0
+      28:  5.92    6.42  6.51   6.51          0        0          0        0
+      29:  5.91    6.41  6.51   6.51          0        0          0        0
+      30:  5.92    6.44  6.54   6.54          0        0          0        0
+      31:  5.97    6.49  6.59   6.59          0        0          0        0
+      32:  6.01    6.53  6.62   6.62          0        0          0        0
+      33:  6.02    6.53  6.63   6.63          0        0          0        0
+      34:  6.17    6.70  6.81   6.81          0        0          0        0
+      35:  6.34    6.88  6.98   6.98          0        0          0        0
+          PM1NC PM2_5NC PM4NC PM10NC PM0_5NCVar PM1NCVar PM2_5NCVar PM4NCVar
+          PM10NCVar PMtypicalParticleSize PM2_5SampledMassFactory
+              <num>                 <num>                   <num>
+       1:         0                  0.87                  0.0000
+       2:         0                  0.87                  0.0000
+       3:         0                  0.88                  0.0001
+       4:         0                  0.89                  0.0001
+       5:         0                  0.89                  0.0001
+       6:         0                  0.88                  0.0001
+       7:         0                  0.89                  0.0001
+       8:         0                  0.88                  0.0002
+       9:         0                  0.89                  0.0002
+      10:         0                  0.89                  0.0002
+      11:         0                  0.90                  0.0002
+      12:         0                  0.89                  0.0003
+      13:         0                  0.87                  0.0003
+      14:         0                  0.85                  0.0004
+      15:         0                  0.85                  0.0004
+      16:         0                  0.86                  0.0004
+      17:         0                  0.86                  0.0005
+      18:         0                  0.86                  0.0005
+      19:         0                  0.87                  0.0006
+      20:         0                  0.86                  0.0006
+      21:         0                  0.86                  0.0007
+      22:         0                  0.86                  0.0007
+      23:         0                  0.85                  0.0008
+      24:         0                  0.86                  0.0008
+      25:         0                  0.86                  0.0008
+      26:         0                  0.86                  0.0009
+      27:         0                  0.86                  0.0009
+      28:         0                  0.85                  0.0010
+      29:         0                  0.86                  0.0010
+      30:         0                  0.86                  0.0010
+      31:         0                  0.86                  0.0011
+      32:         0                  0.85                  0.0011
+      33:         0                  0.85                  0.0012
+      34:         0                  0.86                  0.0012
+      35:         0                  0.85                  0.0013
+          PM10NCVar PMtypicalParticleSize PM2_5SampledMassFactory
+          PM2_5SampledMassOffset PMtypicalParticleSizeVar PMReadingErrorCnt
+                           <num>                    <num>             <num>
+       1:                 0.0000                        0                 0
+       2:                 0.0000                        0                 0
+       3:                 0.0001                        0                 0
+       4:                 0.0001                        0                 0
+       5:                 0.0001                        0                 0
+       6:                 0.0001                        0                 0
+       7:                 0.0002                        0                 0
+       8:                 0.0002                        0                 0
+       9:                 0.0002                        0                 0
+      10:                 0.0002                        0                 0
+      11:                 0.0003                        0                 0
+      12:                 0.0003                        0                 0
+      13:                 0.0003                        0                 0
+      14:                 0.0004                        0                 0
+      15:                 0.0004                        0                 0
+      16:                 0.0005                        0                 0
+      17:                 0.0005                        0                 0
+      18:                 0.0006                        0                 0
+      19:                 0.0006                        0                 0
+      20:                 0.0007                        0                 0
+      21:                 0.0007                        0                 0
+      22:                 0.0008                        0                 0
+      23:                 0.0008                        0                 0
+      24:                 0.0009                        0                 0
+      25:                 0.0009                        0                 0
+      26:                 0.0010                        0                 0
+      27:                 0.0010                        0                 0
+      28:                 0.0010                        0                 0
+      29:                 0.0011                        0                 0
+      30:                 0.0011                        0                 0
+      31:                 0.0012                        0                 0
+      32:                 0.0012                        0                 0
+      33:                 0.0013                        0                 0
+      34:                 0.0013                        0                 0
+      35:                 0.0014                        0                 0
+          PM2_5SampledMassOffset PMtypicalParticleSizeVar PMReadingErrorCnt
+          PMFanErrorCnt PMLaserErrorCnt PMFanSpeedWarn  U12T  U29T  FdpT AccelT  U29P
+                  <num>           <num>          <num> <num> <num> <num>  <num> <num>
+       1:             0               0              0 24.37 23.89 25.37  23.19 796.1
+       2:             0               0              0 24.39 23.89 25.35  23.29 796.0
+       3:             0               0              0 24.41 23.90 25.40  23.20 796.0
+       4:             0               0              0 24.44 23.89 25.39  23.12 796.0
+       5:             0               0              0 24.46 23.89 25.40  23.22 796.0
+       6:             0               0              0 24.48 23.90 25.33  23.22 796.0
+       7:             0               0              0 24.49 23.90 25.36  23.38 796.1
+       8:             0               0              0 24.51 23.90 25.36  23.34 796.0
+       9:             0               0              0 24.53 23.91 25.33  22.73 796.0
+      10:             0               0              0 24.55 23.90 25.33  23.46 796.0
+      11:             0               0              0 24.57 23.91 25.35  23.41 796.0
+      12:             0               0              0 24.89 24.02 25.38  23.33 796.0
+      13:             0               0              0 24.92 24.09 25.52  23.43 796.0
+      14:             0               0              0 24.93 24.11 25.57  23.63 796.0
+      15:             0               0              0 24.94 24.11 25.58  23.59 796.0
+      16:             0               0              0 24.95 24.12 25.63  23.60 796.0
+      17:             0               0              0 24.96 24.14 25.62  23.48 796.0
+      18:             0               0              0 24.97 24.16 25.64  23.48 796.0
+      19:             0               0              0 24.98 24.18 25.68  23.48 796.0
+      20:             0               0              0 24.98 24.20 25.68  23.71 795.9
+      21:             0               0              0 24.99 24.21 25.70  23.52 796.0
+      22:             0               0              0 25.00 24.23 25.74  23.71 796.0
+      23:             0               0              0 25.01 24.24 25.75  23.09 796.0
+      24:             0               0              0 25.02 24.27 25.78  23.73 795.9
+      25:             0               0              0 25.03 24.29 25.80  23.55 796.0
+      26:             0               0              0 25.04 24.31 25.80  23.55 796.0
+      27:             0               0              0 25.05 24.33 25.81  23.88 796.0
+      28:             0               0              0 25.06 24.34 25.82  23.36 796.0
+      29:             0               0              0 25.06 24.35 25.87  23.68 796.0
+      30:             0               0              0 25.07 24.38 25.89  23.65 796.0
+      31:             0               0              0 25.08 24.38 25.87  23.83 796.0
+      32:             0               0              0 25.09 24.41 25.91  23.91 796.0
+      33:             0               0              0 25.10 24.43 25.91  23.73 796.0
+      34:             0               0              0 25.11 24.44 25.95  23.82 796.0
+      35:             0               0              0 25.12 24.46 25.96  23.78 796.0
+          PMFanErrorCnt PMLaserErrorCnt PMFanSpeedWarn  U12T  U29T  FdpT AccelT  U29P
+          PT100R PumpPow1  PumpV MassFlowFactory  MFSVout PumpPow2 BFGenergy BattVolt
+           <num>    <num>  <num>           <num>    <num>    <num>     <num>    <num>
+       1: 109.61      782  8.115         0.85672 1.125000        0     52794     4.21
+       2: 109.61      783  8.112         0.85726 1.125375        0     52795     4.21
+       3: 109.61      783  8.108         0.85474 1.123625        0     52795     4.21
+       4: 109.61      783  8.109         0.85528 1.124000        0     52795     4.21
+       5: 109.61      783  8.108         0.85546 1.124125        0     52795     4.21
+       6: 109.61      784  8.106         0.85636 1.124750        0     52795     4.21
+       7: 109.61      784  8.104         0.85367 1.122875        0     52796     4.21
+       8: 109.61      784  8.103         0.85313 1.122500        0     52796     4.21
+       9: 109.61      784  8.104         0.85385 1.123000        0     52796     4.21
+      10: 109.61      784  8.103         0.85385 1.123000        0     52796     4.21
+      11: 109.61      774  8.103         0.85367 1.122875        0     52797     4.21
+      12: 109.39      304 12.212         1.70299 1.554750        0     52797     4.21
+      13: 109.39      302 12.248         1.70230 1.554500        0     52800     4.21
+      14: 109.39      301 12.247         1.70091 1.554000        0     52800     4.21
+      15: 109.39      301 12.274         1.70680 1.556125        0     52801     4.21
+      16: 109.39      301 12.273         1.70610 1.555875        0     52801     4.21
+      17: 109.39      301 12.274         1.70645 1.556000        0     52801     4.21
+      18: 109.39      301 12.275         1.70923 1.557000        0     52801     4.21
+      19: 109.39      301 12.274         1.70576 1.555750        0     52801     4.21
+      20: 109.39      301 12.274         1.70506 1.555500        0     52802     4.21
+      21: 109.39      301 12.275         1.70506 1.555500        0     52802     4.21
+      22: 109.39      301 12.274         1.70299 1.554750        0     52802     4.21
+      23: 109.39      301 12.276         1.70541 1.555625        0     52802     4.21
+      24: 109.39      301 12.274         1.70299 1.554750        0     52802     4.21
+      25: 109.39      301 12.275         1.70333 1.554875        0     52803     4.21
+      26: 109.39      301 12.275         1.70506 1.555500        0     52803     4.21
+      27: 109.39      301 12.276         1.70195 1.554375        0     52803     4.21
+      28: 109.39      301 12.275         1.70541 1.555625        0     52803     4.21
+      29: 109.39      301 12.275         1.70368 1.555000        0     52804     4.21
+      30: 109.39      301 12.276         1.70230 1.554500        0     52804     4.21
+      31: 109.39      301 12.276         1.70472 1.555375        0     52804     4.21
+      32: 109.39      301 12.275         1.70645 1.556000        0     52804     4.21
+      33: 109.39      301 12.275         1.70195 1.554375        0     52804     4.21
+      34: 109.39      301 12.276         1.70299 1.554750        0     52805     4.21
+      35: 109.39      301 12.275         1.70472 1.555375        0     52805     4.21
+          PT100R PumpPow1  PumpV MassFlowFactory  MFSVout PumpPow2 BFGenergy BattVolt
+           v3_3    v5 Charging ExtPow FLOWCTL GPSRT SD_DATAW SD_HEADW PumpsON
+          <num> <num>   <lgcl> <lgcl>   <num> <num>    <num>    <num>  <lgcl>
+       1:  3.34  5.05     TRUE   TRUE    0.00  0.00     0.00     0.00      NA
+       2:  3.34  5.05     TRUE   TRUE    0.61  0.00     0.02     0.03      NA
+       3:  3.34  5.05     TRUE   TRUE    0.61  0.00     0.02     0.03      NA
+       4:  3.34  5.05     TRUE   TRUE    0.58  0.00     0.02     0.03      NA
+       5:  3.34  5.05     TRUE   TRUE    0.59  0.01     0.02     0.04      NA
+       6:  3.34  5.05     TRUE   TRUE    0.61  0.01     0.02     0.03      NA
+       7:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+       8:  3.34  5.05     TRUE   TRUE    0.59  0.01     0.02     0.03      NA
+       9:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      10:  3.34  5.05     TRUE   TRUE    0.59  0.02     0.02     0.03      NA
+      11:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      12:  3.34  5.05     TRUE   TRUE    0.62  0.02     0.03     0.03      NA
+      13:  3.34  5.05     TRUE   TRUE   15.37  0.02     0.02     0.03      NA
+      14:  3.34  5.05     TRUE   TRUE    2.30  0.01     0.02     0.03      NA
+      15:  3.34  5.05     TRUE   TRUE    0.61  0.01     0.02     0.04      NA
+      16:  3.34  5.05     TRUE   TRUE    0.58  0.01     0.02     0.03      NA
+      17:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      18:  3.34  5.05     TRUE   TRUE    0.59  0.01     0.02     0.03      NA
+      19:  3.34  5.05     TRUE   TRUE    0.60  0.02     0.03     0.03      NA
+      20:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      21:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      22:  3.34  5.05     TRUE   TRUE    0.59  0.01     0.02     0.03      NA
+      23:  3.34  5.05     TRUE   TRUE    0.59  0.01     0.02     0.03      NA
+      24:  3.34  5.05     TRUE   TRUE    0.59  0.02     0.02     0.03      NA
+      25:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      26:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      27:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.03     0.03      NA
+      28:  3.34  5.05     TRUE   TRUE    0.59  0.03     0.02     0.03      NA
+      29:  3.34  5.05     TRUE   TRUE    0.61  0.02     0.02     0.03      NA
+      30:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03    TRUE
+      31:  3.34  5.05     TRUE   TRUE    0.60  0.01     0.02     0.03      NA
+      32:  3.34  5.05     TRUE   TRUE    0.59  0.01     0.02     0.03      NA
+      33:  3.34  5.05     TRUE   TRUE    0.59  0.01     0.02     0.03      NA
+      34:  3.34  5.05     TRUE   TRUE    0.60  0.02     0.02     0.03      NA
+      35:  3.34  5.05     TRUE   TRUE    0.61  0.01     0.02     0.04      NA
+           v3_3    v5 Charging ExtPow FLOWCTL GPSRT SD_DATAW SD_HEADW PumpsON
+          TPumpsOFF TPumpsON    CO2   SCDT  SCDRH VOCRaw NOXRaw
+              <num>    <num>  <num>  <num>  <num>  <num>  <num>
+       1:        NA       NA  788.5 20.675 30.993  32717  17280
+       2:        NA       NA     NA     NA     NA  32712  17717
+       3:        NA       NA     NA     NA     NA  32734  17615
+       4:        NA       NA     NA     NA     NA  32745  17577
+       5:        NA       NA 1086.0 22.368 28.468  32743  17523
+       6:        NA       NA     NA     NA     NA  32746  17488
+       7:        NA       NA     NA     NA     NA  32741  17451
+       8:        NA       NA     NA     NA     NA  32737  17431
+       9:        NA       NA     NA     NA     NA  32753  17412
+      10:        NA       NA 1123.0 22.264 28.564  32742  17372
+      11:        NA       NA     NA     NA     NA  32731  17357
+      12:        NA       NA     NA     NA     NA  32751  17344
+      13:        NA       NA 1223.0 21.978 28.990  32734  17110
+      14:        NA       NA 1235.0 21.885 29.107  32719  17085
+      15:        NA       NA     NA     NA     NA  32721  17077
+      16:        NA       NA     NA     NA     NA  32720  17064
+      17:        NA       NA     NA     NA     NA  32736  17059
+      18:        NA       NA     NA     NA     NA  32724  17053
+      19:        NA       NA 1240.0 21.821 29.183  32724  17033
+      20:        NA       NA     NA     NA     NA  32725  17028
+      21:        NA       NA     NA     NA     NA  32735  17016
+      22:        NA       NA     NA     NA     NA  32734  17012
+      23:        NA       NA     NA     NA     NA  32760  16988
+      24:        NA       NA 1239.0 21.743 29.290  32723  16984
+      25:        NA       NA     NA     NA     NA  32735  16965
+      26:        NA       NA     NA     NA     NA  32739  16980
+      27:        NA       NA     NA     NA     NA  32735  16956
+      28:        NA       NA     NA     NA     NA  32738  16945
+      29:        NA       NA 1240.0 21.682 29.415  32730  16943
+      30:         0       30     NA     NA     NA  32740  16941
+      31:        NA       NA     NA     NA     NA  32749  16939
+      32:        NA       NA     NA     NA     NA  32708  16925
+      33:        NA       NA     NA     NA     NA  32704  16911
+      34:        NA       NA  878.0 21.615 29.425  32734  16888
+      35:        NA       NA     NA     NA     NA  32709  16886
+          TPumpsOFF TPumpsON    CO2   SCDT  SCDRH VOCRaw NOXRaw
+                                                                           LogFilename
+                                                                                <char>
+       1: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       2: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       3: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       4: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       5: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       6: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       7: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       8: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+       9: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      10: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      11: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      12: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      13: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      14: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      15: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      16: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      17: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      18: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      19: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      20: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      21: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      22: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      23: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      24: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      25: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      26: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      27: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      28: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      29: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      30: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      31: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      32: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      33: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      34: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+      35: /20250311/PSP01066_LOG_2025-03-11T19_25_46UTC_DIAGNOSTIC-----___________.txt
+                                                                           LogFilename
+             StartDateTimeUTC UserTZ
+                       <POSc> <lgcl>
+       1: 2025-03-11 19:25:46  FALSE
+       2: 2025-03-11 19:25:46  FALSE
+       3: 2025-03-11 19:25:46  FALSE
+       4: 2025-03-11 19:25:46  FALSE
+       5: 2025-03-11 19:25:46  FALSE
+       6: 2025-03-11 19:25:46  FALSE
+       7: 2025-03-11 19:25:46  FALSE
+       8: 2025-03-11 19:25:46  FALSE
+       9: 2025-03-11 19:25:46  FALSE
+      10: 2025-03-11 19:25:46  FALSE
+      11: 2025-03-11 19:25:46  FALSE
+      12: 2025-03-11 19:25:46  FALSE
+      13: 2025-03-11 19:25:46  FALSE
+      14: 2025-03-11 19:25:46  FALSE
+      15: 2025-03-11 19:25:46  FALSE
+      16: 2025-03-11 19:25:46  FALSE
+      17: 2025-03-11 19:25:46  FALSE
+      18: 2025-03-11 19:25:46  FALSE
+      19: 2025-03-11 19:25:46  FALSE
+      20: 2025-03-11 19:25:46  FALSE
+      21: 2025-03-11 19:25:46  FALSE
+      22: 2025-03-11 19:25:46  FALSE
+      23: 2025-03-11 19:25:46  FALSE
+      24: 2025-03-11 19:25:46  FALSE
+      25: 2025-03-11 19:25:46  FALSE
+      26: 2025-03-11 19:25:46  FALSE
+      27: 2025-03-11 19:25:46  FALSE
+      28: 2025-03-11 19:25:46  FALSE
+      29: 2025-03-11 19:25:46  FALSE
+      30: 2025-03-11 19:25:46  FALSE
+      31: 2025-03-11 19:25:46  FALSE
+      32: 2025-03-11 19:25:46  FALSE
+      33: 2025-03-11 19:25:46  FALSE
+      34: 2025-03-11 19:25:46  FALSE
+      35: 2025-03-11 19:25:46  FALSE
+             StartDateTimeUTC UserTZ
+
 # read_ast_log works with all HHBv2 firmwares
 
     Code
