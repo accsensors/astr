@@ -17,7 +17,7 @@ A data frame with a single row of HHB v2 header data that are formatted and read
 the proper data type for each variable.
 }
 \examples{
-hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+hhb_filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
 hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 hhb_header_raw <- fread_ast_header(hhb_file)$header
 hhb_header_wide <- transpose_ast_header(hhb_header_raw)

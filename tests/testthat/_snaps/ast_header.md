@@ -489,7 +489,7 @@
 # read_ast_header works with all HHBv2 firmwares
 
     Code
-      read_ast_header(hhb_file)
+      read_ast_header(hhb_file_240111, update_names = FALSE)
     Output
         HHBserial     SEN55_Serial HHBslot1 HHBslot2 HHBslot3 HHBslot4 HHBslot5
       1  HHB00032 826B5FD0165CA542  SP00004  FP00003    Empty  FP00162    Empty
@@ -555,4 +555,98 @@
       1                             1.999                    1                  0.499
         B.FilterSampledVolume B.FilterAverageVolumetricFlowRate
       1                 59.94                             1.998
+
+---
+
+    Code
+      read_ast_header(hhb_file_250529, update_names = FALSE)
+    Output
+        HHBserial     SEN55_Serial HHBslot1 HHBslot2 HHBslot3 HHBslot4 HHBslot5
+      1  HHB00087 F72BD8A1A8CA0342  SP00076  FP00084    Empty  FP00049    Empty
+        HHBslot6 G.Alphasense1_ID G.Alphasense1_Type G.Alphasense1_ISB_Gain
+      1  GS00060       0202121326           NO2-B43F                  -0.73
+        G.Alphasense1_WEt G.Alphasense1_AEt G.Alphasense1_Sensitivity
+      1               235               237                    -297.3
+        G.Alphasense1_WEe G.Alphasense1_AEe           G.SCD30_Serial G.SGP41_Serial
+      1               236               237 554709-1556780-433234486   000003C91A35
+          G.SFA30_Serial                   Firmware
+      1 214466FF4F073BDD HHBv2_May_29_2025_11:18:51
+                                 LogFileName   SampleName D.SorbentCID C.SorbentCID
+      1 HHB00087_LOG_2025-06-03T20_55UTC.csv FirmwareTest         <NA>         <NA>
+        A.FilterCID B.FilterCID    D.SorbentCalDate D.SorbentCalVoutMin
+      1        <NA>        <NA> 2025-04-21 16:44:00            0.427687
+        D.SorbentCalVoutMax D.SorbentCalMFMin D.SorbentCalMFMax D.SorbentMF4
+      1             1.28256             0.007            35.097      4.30552
+        D.SorbentMF3 D.SorbentMF2 D.SorbentMF1 D.SorbentMF0    C.SorbentCalDate
+      1      2.62438     -7.73001       34.721     -13.8004 2025-04-21 16:53:00
+        C.SorbentCalVoutMin C.SorbentCalVoutMax C.SorbentCalMFMin C.SorbentCalMFMax
+      1            0.449687             1.61744                 0            53.135
+        C.SorbentMF4 C.SorbentMF3 C.SorbentMF2 C.SorbentMF1 C.SorbentMF0
+      1      0.00389      15.7533     -25.7701      42.9889     -15.5972
+            A.FilterCalDate A.FilterCalVoutMin A.FilterCalVoutMax A.FilterCalMFMin
+      1 2025-04-21 16:29:00             0.5935              1.916           0.2565
+        A.FilterCalMFMax A.FilterMF4 A.FilterMF3 A.FilterMF2 A.FilterMF1 A.FilterMF0
+      1           3.0394    0.357479   -0.729424     0.29447     1.50527   -0.633511
+            B.FilterCalDate B.FilterCalVoutMin B.FilterCalVoutMax B.FilterCalMFMin
+      1 2025-04-21 16:33:00           0.612375            1.96237           0.2921
+        B.FilterCalMFMax B.FilterMF4 B.FilterMF3 B.FilterMF2 B.FilterMF1 B.FilterMF0
+      1           3.2091    0.365424   -0.701659    0.054925     1.85298   -0.750883
+        UTCOffset StartOnNextPowerOn ProgrammedStartTime ProgrammedRuntime
+      1        -6                  1                <NA>               300
+        SEN55_Runtime SEN55_FanRuntime D.SorbentPumpStartingVolume
+      1      1261.772         1261.772                    68.47116
+        D.SorbentPumpStartingRuntime D.SorbentCartridgeStartingVolume
+      1                      366.037                         30.67436
+        D.SorbentCartridgeStartingRuntime D.SorbentVolumetricFlowRate
+      1                               168                       0.003
+        D.SorbentDutyCycle D.SorbentProgrammedStartDelay D.SorbentProgrammedStartTime
+      1                  0                            NA                         <NA>
+        D.SorbentProgrammedRuntime C.SorbentPumpStartingVolume
+      1                         NA                     96.4784
+        C.SorbentPumpStartingRuntime C.SorbentCartridgeStartingVolume
+      1                      516.256                         30.45342
+        C.SorbentCartridgeStartingRuntime C.SorbentVolumetricFlowRate
+      1                               168                       0.003
+        C.SorbentDutyCycle C.SorbentProgrammedStartDelay C.SorbentProgrammedStartTime
+      1                  0                            NA                         <NA>
+        C.SorbentProgrammedRuntime A.FilterPumpStartingVolume
+      1                         NA                    82312.8
+        A.FilterPumpStartingRuntime A.FilterCartridgeStartingVolume
+      1                      680.64                        20116.46
+        A.FilterCartridgeStartingRuntime A.FilterVolumetricFlowRate A.FilterDutyCycle
+      1                              168                          2                 0
+        A.FilterProgrammedStartDelay A.FilterProgrammedStartTime
+      1                           NA                        <NA>
+        A.FilterProgrammedRuntime B.FilterPumpStartingVolume
+      1                        NA                   43568.73
+        B.FilterPumpStartingRuntime B.FilterCartridgeStartingVolume
+      1                     364.351                        20113.09
+        B.FilterCartridgeStartingRuntime B.FilterVolumetricFlowRate B.FilterDutyCycle
+      1                              168                          2                 0
+        B.FilterProgrammedStartDelay B.FilterProgrammedStartTime
+      1                           NA                        <NA>
+        B.FilterProgrammedRuntime G.Alphasense1_Runtime G.FanRuntime G.SCD30_Runtime
+      1                        NA                 245.2     1300.414        1306.373
+        G.SFA30_Runtime    StartDateTimeUTC      EndDateTimeUTC HHBSampledRuntime
+      1        1306.373 2025-06-03 20:55:00 2025-06-03 21:00:00             0.083
+        D.SorbentStartDateTimeUTC D.SorbentEndDateTimeUTC D.SorbentShutdownMode
+      1       2025-06-03 20:55:00     2025-06-03 21:00:00                     1
+        D.SorbentSampledRunTime D.SorbentSampledVolume
+      1                   0.083                0.01518
+        D.SorbentAverageVolumetricFlowRate C.SorbentStartDateTimeUTC
+      1                            0.00306       2025-06-03 20:55:00
+        C.SorbentEndDateTimeUTC C.SorbentShutdownMode C.SorbentSampledRunTime
+      1     2025-06-03 21:00:00                     1                   0.083
+        C.SorbentSampledVolume C.SorbentAverageVolumetricFlowRate
+      1                0.01452                            0.00292
+        A.FilterStartDateTimeUTC A.FilterEndDateTimeUTC A.FilterShutdownMode
+      1      2025-06-03 20:55:00    2025-06-03 21:00:00                    1
+        A.FilterSampledRunTime A.FilterSampledVolume
+      1                  0.083                  9.93
+        A.FilterAverageVolumetricFlowRate B.FilterStartDateTimeUTC
+      1                             1.999      2025-06-03 20:55:00
+        B.FilterEndDateTimeUTC B.FilterShutdownMode B.FilterSampledRunTime
+      1    2025-06-03 21:00:00                    1                  0.083
+        B.FilterSampledVolume B.FilterAverageVolumetricFlowRate
+      1                   9.9                             1.993
 

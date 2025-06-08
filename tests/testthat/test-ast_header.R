@@ -98,6 +98,18 @@ test_that("fread_ast_header works with SHEAR UPASv2x file", {
   expect_type(sapply(header_raw$header, class), "character")
 })
 
+test_that("fread_ast_header works with HHB file", {
+  filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw <- fread_ast_header(file)
+  expect_identical(tail(header_raw$header, n=1)[[1]], "SAMPLE LOG")
+  expect_identical(header_raw$diag, NULL)
+  expect_equal(ncol(header_raw$header), 3)
+  expect_equal(colnames(header_raw$header), c("V1","V2","V3"))
+  expect_equal(as.character(header_raw$header[1,]), c("PARAMETER", "VALUE", "UNITS/NOTES"))
+  expect_type(sapply(header_raw$header, class), "character")
+})
+
 ###################################
 # transpose_ast_header
 ###################################
@@ -106,7 +118,7 @@ test_that("fread_ast_header works with SHEAR UPASv2x file", {
 test_that("transpose_ast_header works with UPASv2 rev100 file", {
   filename <- 'PS1422_LOG_2020-06-02T18_26_25UTC_rev100-norm________---.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-  header_raw <- fread_ast_header(file)
+  header_raw  <- fread_ast_header(file)
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
@@ -116,7 +128,7 @@ test_that("transpose_ast_header works with UPASv2 rev100 file", {
 test_that("transpose_ast_header works with standard UPASv2 file", {
   filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-  header_raw <- fread_ast_header(file)
+  header_raw  <- fread_ast_header(file)
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
@@ -125,7 +137,7 @@ test_that("transpose_ast_header works with standard UPASv2 file", {
 test_that("transpose_ast_header works with DIAGNOSTIC UPASv2 file", {
   filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-  header_raw <- fread_ast_header(file)
+  header_raw  <- fread_ast_header(file)
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
@@ -143,7 +155,7 @@ test_that("transpose_ast_header works with DIAGNOSTIC UPASv2 file", {
 test_that("transpose_ast_header works with rev < 200 UPASv2x file", {
   filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-  header_raw <- fread_ast_header(file)
+  header_raw  <- fread_ast_header(file)
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
@@ -152,7 +164,7 @@ test_that("transpose_ast_header works with rev < 200 UPASv2x file", {
 test_that("transpose_ast_header works with rev < 200 UPASv2x DIAGNOSTIC file", {
   filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-  header_raw <- fread_ast_header(file)
+  header_raw  <- fread_ast_header(file)
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
@@ -179,7 +191,7 @@ test_that("transpose_ast_header works with standard rev 200 UPASv2x file", {
 test_that("transpose_ast_header works with rev 200 standard DIAGNOSTIC UPASv2x file", {
   filename <- 'PSP01066_LOG_2025-03-11T19_19_56UTC_DIAGNOSTIC-----___________.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-  header_raw <- fread_ast_header(file)
+  header_raw  <- fread_ast_header(file)
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
@@ -197,7 +209,16 @@ test_that("transpose_ast_header works with rev 200 standard DIAGNOSTIC UPASv2x f
 test_that("transpose_ast_header works with SHEAR UPASv2x file", {
   filename <- 'SH00009_LOG_2022-02-14T17_02_32UTC_---------------_5VX__.txt'
   file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
-  header_raw <- fread_ast_header(file)
+  header_raw  <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
+  expect_equal(nrow(header_wide), 1)
+  expect_false(any(is.na(colnames(header_wide))))
+})
+
+test_that("transpose_ast_header works with HHB file", {
+  filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw  <- fread_ast_header(file)
   header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
   expect_equal(nrow(header_wide), 1)
   expect_false(any(is.na(colnames(header_wide))))
@@ -208,17 +229,23 @@ test_that("transpose_ast_header works with SHEAR UPASv2x file", {
 ###################################
 
 test_that("All wide header files have only one row", {
-  upasv2_filename <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-  upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-  upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  shear_filename <- 'SH00009_LOG_2022-02-14T17_02_32UTC_---------------_5VX__.txt'
-  shear_file <- system.file("extdata", shear_filename, package = "astr", mustWork = TRUE)
-  upasv2_header <- read_ast_header(upasv2_file)
-  upasv2x_header <- read_ast_header(upasv2x_file)
-  shear_header <- read_ast_header(shear_file)
-  expect_equal(c(nrow(upasv2_header), nrow(upasv2x_header), nrow(shear_header)),
-               c(1,1,1))
+  filename_upasv2  <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+  filename_upasv2x <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+  filename_shear   <- 'SH00009_LOG_2022-02-14T17_02_32UTC_---------------_5VX__.txt'
+  filename_hhb     <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+
+  file_upasv2  <- system.file("extdata", filename_upasv2,  package = "astr", mustWork = TRUE)
+  file_upasv2x <- system.file("extdata", filename_upasv2x, package = "astr", mustWork = TRUE)
+  file_shear   <- system.file("extdata", filename_shear,   package = "astr", mustWork = TRUE)
+  file_hhb     <- system.file("extdata", filename_hhb,     package = "astr", mustWork = TRUE)
+
+  header_upasv2  <- read_ast_header(file_upasv2)
+  header_upasv2x <- read_ast_header(file_upasv2x)
+  header_shear   <- read_ast_header(file_shear)
+  header_hhb     <- read_ast_header(file_hhb)
+
+  expect_equal(c(nrow(header_upasv2), nrow(header_upasv2x), nrow(header_shear),
+                 nrow(header_hhb)), c(1,1,1,1))
 })
 
 test_that("If using update names for UPASv2, all applicable column names are updated to match UPASv2x", {
@@ -233,24 +260,33 @@ test_that("If using update names for UPASv2, all applicable column names are upd
 })
 
 test_that("format_upasv2_header and read_ast_header have the same output", {
-  upasv2_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
-  upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-  upasv2_header_raw <- fread_ast_header(upasv2_file)
-  upasv2_header_wide <- transpose_ast_header(upasv2_header_raw$header, diag = upasv2_header_raw$diag)
-  expect_identical(read_ast_header(upasv2_file, update_names = TRUE), format_upasv2_header(upasv2_header_wide, update_names = TRUE))
+  filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw  <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
+  expect_identical(read_ast_header(file, update_names = TRUE),
+                   format_upasv2_header(header_wide, update_names = TRUE))
 })
 
 test_that("format_upasv2x_header and read_ast_header have the same output", {
-  upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  upasv2x_header_raw <- fread_ast_header(upasv2x_file)
-  upasv2x_header_wide <- transpose_ast_header(upasv2x_header_raw$header, diag = upasv2x_header_raw$diag)
-  expect_identical(read_ast_header(upasv2x_file), format_upasv2x_header(upasv2x_header_wide))
+  filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw  <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
+  expect_identical(read_ast_header(file), format_upasv2x_header(header_wide))
+})
+
+test_that("format_hhb_header and read_ast_header have the same output", {
+  filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header_raw  <- fread_ast_header(file)
+  header_wide <- transpose_ast_header(header_raw$header, diag = header_raw$diag)
+  expect_identical(read_ast_header(file), format_hhb_header(header_wide))
 })
 
 test_that("Varaibles in UPASv2x log file headers are being formatted as the correct type", {
   filename <- 'PSP01066_LOG_2025-03-06T19_42_26UTC_standard30s_____----------.txt'
-  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  file   <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
   header <- read_ast_header(file)
   expect_type(header$OverallFlowAvgFactory, "double")
   expect_type(header$PumpingFlowAvgFactory, "double")
@@ -275,14 +311,33 @@ test_that("UPASv2x log file headers written using firmware rev 200 and firmware 
 })
 
 test_that("Local time is not altered for files with fractional time zone offsets", {
-  upasv2x_filename <- 'PSP01002_LOG_2024-02-28T11_37_58UTC_OnlyRT_3________NA________.txt'
-  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  upasv2x_header <- read_ast_header(upasv2x_file)
-  upasv2x_header_tz <- read_ast_header(upasv2x_file, tz = "Asia/Kolkata")
-  expect_identical(upasv2x_header$StartDateTimeLocal[1], as.POSIXct("2024-02-28 17:07:58", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
-  expect_identical(upasv2x_header$StartDateTimeLocal[1], upasv2x_header_tz$StartDateTimeLocal[1])
-  expect_identical(upasv2x_header$EndDateTimeLocal[1], as.POSIXct("2024-02-28 19:57:25", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
-  expect_identical(upasv2x_header$EndDateTimeLocal[1], upasv2x_header_tz$EndDateTimeLocal[1])
+  filename <- 'PSP01002_LOG_2024-02-28T11_37_58UTC_OnlyRT_3________NA________.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header <- read_ast_header(file)
+  header_tz <- read_ast_header(file, tz = "Asia/Kolkata")
+  expect_identical(header$StartDateTimeLocal[1], as.POSIXct("2024-02-28 17:07:58", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
+  expect_identical(header$StartDateTimeLocal[1], header_tz$StartDateTimeLocal[1])
+  expect_identical(header$EndDateTimeLocal[1], as.POSIXct("2024-02-28 19:57:25", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
+  expect_identical(header$EndDateTimeLocal[1], header_tz$EndDateTimeLocal[1])
+})
+
+test_that("Varaibles in HHB log file headers are being formatted as the correct type", {
+  filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  file   <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header <- read_ast_header(file)
+  expect_type(header$HHBSampledRuntime, "double")
+  expect_type(header$D.SorbentSampledRunTime, "double")
+  expect_type(header$D.SorbentSampledVolume,  "double")
+  expect_type(header$D.SorbentAverageVolumetricFlowRate, "double")
+  expect_type(header$C.SorbentSampledRunTime, "double")
+  expect_type(header$C.SorbentSampledVolume,  "double")
+  expect_type(header$C.SorbentAverageVolumetricFlowRate, "double")
+  expect_type(header$A.FilterSampledRunTime, "double")
+  expect_type(header$A.FilterSampledVolume,  "double")
+  expect_type(header$A.FilterAverageVolumetricFlowRate, "double")
+  expect_type(header$B.FilterSampledRunTime, "double")
+  expect_type(header$B.FilterSampledVolume,  "double")
+  expect_type(header$B.FilterAverageVolumetricFlowRate, "double")
 })
 
 ###################################
@@ -342,7 +397,11 @@ test_that("read_ast_header works with all UPASv2x firmwares", {
 })
 
 test_that("read_ast_header works with all HHBv2 firmwares", {
-  hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
-  hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
-  expect_snapshot(read_ast_header(hhb_file))
+  hhb_filename_240111 <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+  hhb_file_240111 <- system.file("extdata", hhb_filename_240111, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_header(hhb_file_240111, update_names = FALSE))
+
+  hhb_filename_250529 <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  hhb_file_250529 <- system.file("extdata", hhb_filename_250529, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_header(hhb_file_250529, update_names = FALSE))
 })

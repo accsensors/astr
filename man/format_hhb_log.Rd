@@ -27,7 +27,7 @@ This data frame will contain one row for each timestamp in the sample log.
 Format the sample log data from an Access Sensor Technologies Home Health Box log file
 }
 \examples{
-hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+hhb_filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
 hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 hhb_log_raw <- fread_ast_log(hhb_file)
 hhb_header <- read_ast_header(hhb_file)
@@ -38,6 +38,6 @@ hhb_log_colsdrop <- format_hhb_log(hhb_log_raw, hhb_header,
                 cols_drop = c("AccelX", "AccelY", "AccelZ"))
 hhb_log_colskeep <- format_hhb_log(hhb_log_raw, hhb_header, tz="America/New_York",
                 cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
-                               "LocalTZ",  "UserTZ",
-                               grep("^SEN55", colnames(hhb_log), value=TRUE)))
+                              "LocalTZ",  "UserTZ",
+                              grep("^SEN55", colnames(hhb_log), value=TRUE)))
 }

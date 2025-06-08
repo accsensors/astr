@@ -1,0 +1,184 @@
+PARAMETER,VALUE,UNITS/NOTES
+
+HHBserial,HHB00087,(HHB box serial identification)
+SEN55_Serial,F72BD8A1A8CA0342,(SEN55 serial identification)
+HHBslot1,SP00076,(C/D Sorbent pumping expansion board)
+HHBslot2,FP00084,(A Filter pumping expansion board)
+HHBslot3,Empty,(No expansion board)
+HHBslot4,FP00049,(B Filter pumping expansion board)
+HHBslot5,Empty,(No expansion board)
+HHBslot6,GS00060,(Gas sensor expansion board)
+G.Alphasense1_ID,0202121326,(ID of Alphasense #1 on gas expansion board)
+G.Alphasense1_Type,NO2-B43F,(Alphasense #1 gas type on gas expansion board)
+G.Alphasense1_ISB_Gain,-0.73,(Alphasense #1 ISB electrical gain on gas expansion board [mV/nA])
+G.Alphasense1_WEt,235,(Alphasense #1 WE total zero on gas expansion board [mV])
+G.Alphasense1_AEt,237,(Alphasense #1 Aux total zero on gas expansion board [mV])
+G.Alphasense1_Sensitivity,-297.30,(Alphasense #1 WE sensitivity on gas expansion board [nA/ppm])
+G.Alphasense1_WEe,236,(Alphasense #1 WE electronic zero on gas expansion board [mV])
+G.Alphasense1_AEe,237,(Alphasense #1 Aux electronic zero on gas expansion board [mV])
+G.SCD30_Serial,554709-1556780-433234486,(SCD30 on gas expansion board)
+G.SGP41_Serial,000003C91A35,(SGP41 on gas expansion board)
+G.SFA30_Serial,214466FF4F073BDD,(SFA30 on gas expansion board)
+Firmware,HHBv2 May 29 2025 11:18:51,(installed firmware version)
+
+
+
+
+SAMPLE IDENTIFICATION
+
+LogFileName,HHB00087_LOG_2025-06-03T20_55UTC.csv,(log file filename-automatically defined)
+SampleName,FirmwareTest,(sample name)
+D.SorbentCID, ,(D Sorbent tube ID)
+C.SorbentCID, ,(C Sorbent tube ID)
+A.FilterCID, ,(A Filter cartridge ID)
+B.FilterCID, ,(B Filter cartridge ID)
+
+
+
+
+MASS FLOW SENSOR CALIBRATION
+
+D.SorbentCalDate,2025-04-21T16:44:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+D.SorbentCalVoutMin,0.427687,(V)
+D.SorbentCalVoutMax,1.282560,(V)
+D.SorbentCalMFMin,0.007000,(mg*min^-1)
+D.SorbentCalMFMax,35.097000,(mg*min^-1)
+D.SorbentMF4,4.305520,(coefficient)
+D.SorbentMF3,2.624380,(coefficient)
+D.SorbentMF2,-7.730010,(coefficient)
+D.SorbentMF1,34.721001,(coefficient)
+D.SorbentMF0,-13.800400,(coefficient)
+C.SorbentCalDate,2025-04-21T16:53:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+C.SorbentCalVoutMin,0.449687,(V)
+C.SorbentCalVoutMax,1.617440,(V)
+C.SorbentCalMFMin,0.000000,(mg*min^-1)
+C.SorbentCalMFMax,53.134998,(mg*min^-1)
+C.SorbentMF4,0.003890,(coefficient)
+C.SorbentMF3,15.753300,(coefficient)
+C.SorbentMF2,-25.770100,(coefficient)
+C.SorbentMF1,42.988899,(coefficient)
+C.SorbentMF0,-15.597200,(coefficient)
+A.FilterCalDate,2025-04-21T16:29:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+A.FilterCalVoutMin,0.593500,(V)
+A.FilterCalVoutMax,1.916000,(V)
+A.FilterCalMFMin,0.256500,(g*min^-1)
+A.FilterCalMFMax,3.039400,(g*min^-1)
+A.FilterMF4,0.357479,(coefficient)
+A.FilterMF3,-0.729424,(coefficient)
+A.FilterMF2,0.294470,(coefficient)
+A.FilterMF1,1.505270,(coefficient)
+A.FilterMF0,-0.633511,(coefficient)
+B.FilterCalDate,2025-04-21T16:33:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+B.FilterCalVoutMin,0.612375,(V)
+B.FilterCalVoutMax,1.962370,(V)
+B.FilterCalMFMin,0.292100,(g*min^-1)
+B.FilterCalMFMax,3.209100,(g*min^-1)
+B.FilterMF4,0.365424,(coefficient)
+B.FilterMF3,-0.701659,(coefficient)
+B.FilterMF2,0.054925,(coefficient)
+B.FilterMF1,1.852980,(coefficient)
+B.FilterMF0,-0.750883,(coefficient)
+
+
+
+
+SETUP SUMMARY
+
+UTCOffset,-6.00,(hours offset from UTC date time)
+StartOnNextPowerOn,1,(0=no 1=yes 4=always start on next power-on)
+ProgrammedStartTime,,(YYYY-MM-DDTHH:MM:SS) (UTC date/time to start sampling blank if not set)
+ProgrammedRuntime,300.000000,(s)
+SEN55_Runtime,1261.772,(Hr)
+SEN55_FanRuntime,1261.772,(Hr)
+D.SorbentPumpStartingVolume,68.47116,(L)
+D.SorbentPumpStartingRuntime,366.037,(Hr)
+D.SorbentCartridgeStartingVolume,30.67436,(L)
+D.SorbentCartridgeStartingRuntime,168.000,(Hr)
+D.SorbentVolumetricFlowRate,0.00300,(L*min^-1)
+D.SorbentDutyCycle,0.0,(%)
+D.SorbentProgrammedStartDelay,,(Hr) (Blank if not set)
+D.SorbentProgrammedStartTime,,(YYYY-MM-DDTHH:MM:SS) (UTC date/time to start pumping blank if not set)
+D.SorbentProgrammedRuntime,,(Hr) (Blank if not set)
+C.SorbentPumpStartingVolume,96.47840,(L)
+C.SorbentPumpStartingRuntime,516.256,(Hr)
+C.SorbentCartridgeStartingVolume,30.45342,(L)
+C.SorbentCartridgeStartingRuntime,168.000,(Hr)
+C.SorbentVolumetricFlowRate,0.00300,(L*min^-1)
+C.SorbentDutyCycle,0.0,(%)
+C.SorbentProgrammedStartDelay,,(Hr) (Blank if not set)
+C.SorbentProgrammedStartTime,,(YYYY-MM-DDTHH:MM:SS) (UTC date/time to start pumping blank if not set)
+C.SorbentProgrammedRuntime,,(Hr) (Blank if not set)
+A.FilterPumpStartingVolume,82312.80,(L)
+A.FilterPumpStartingRuntime,680.640,(Hr)
+A.FilterCartridgeStartingVolume,20116.46,(L)
+A.FilterCartridgeStartingRuntime,168.000,(Hr)
+A.FilterVolumetricFlowRate,2.00,(L*min^-1)
+A.FilterDutyCycle,0.0,(%)
+A.FilterProgrammedStartDelay,,(Hr) (Blank if not set)
+A.FilterProgrammedStartTime,,(YYYY-MM-DDTHH:MM:SS) (UTC date/time to start pumping blank if not set)
+A.FilterProgrammedRuntime,,(Hr) (Blank if not set)
+B.FilterPumpStartingVolume,43568.73,(L)
+B.FilterPumpStartingRuntime,364.351,(Hr)
+B.FilterCartridgeStartingVolume,20113.09,(L)
+B.FilterCartridgeStartingRuntime,168.000,(Hr)
+B.FilterVolumetricFlowRate,2.00,(L*min^-1)
+B.FilterDutyCycle,0.0,(%)
+B.FilterProgrammedStartDelay,,(Hr) (Blank if not set)
+B.FilterProgrammedStartTime,,(YYYY-MM-DDTHH:MM:SS) (UTC date/time to start pumping blank if not set)
+B.FilterProgrammedRuntime,,(Hr) (Blank if not set)
+G.Alphasense1_Runtime,245.200,(Hr)
+G.FanRuntime,1300.414,(Hr)
+G.SCD30_Runtime,1306.373,(Hr)
+G.SFA30_Runtime,1306.373,(Hr)
+
+
+
+
+SAMPLE SUMMARY
+
+StartDateTimeUTC,2025-06-03T20:55:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+EndDateTimeUTC,2025-06-03T21:00:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+HHBSampledRuntime,          0.083,(Hr)
+D.SorbentStartDateTimeUTC,2025-06-03T20:55:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+D.SorbentEndDateTimeUTC,2025-06-03T21:00:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+D.SorbentShutdownMode,1,(0=uncontrolled 1=test finished 2=high power)
+D.SorbentSampledRunTime,          0.083,(Hr)
+D.SorbentSampledVolume,        0.01518,(L)
+D.SorbentAverageVolumetricFlowRate,        0.00306,(L*min^-1)
+C.SorbentStartDateTimeUTC,2025-06-03T20:55:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+C.SorbentEndDateTimeUTC,2025-06-03T21:00:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+C.SorbentShutdownMode,1,(0=uncontrolled 1=test finished 2=high power)
+C.SorbentSampledRunTime,          0.083,(Hr)
+C.SorbentSampledVolume,        0.01452,(L)
+C.SorbentAverageVolumetricFlowRate,        0.00292,(L*min^-1)
+A.FilterStartDateTimeUTC,2025-06-03T20:55:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+A.FilterEndDateTimeUTC,2025-06-03T21:00:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+A.FilterShutdownMode,1,(0=uncontrolled 1=test finished 2=high power)
+A.FilterSampledRunTime,          0.083,(Hr)
+A.FilterSampledVolume,           9.93,(L)
+A.FilterAverageVolumetricFlowRate,          1.999,(L*min^-1)
+B.FilterStartDateTimeUTC,2025-06-03T20:55:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+B.FilterEndDateTimeUTC,2025-06-03T21:00:00,(YYYY-MM-DDTHH:MM:SS) (UTC date time format)
+B.FilterShutdownMode,1,(0=uncontrolled 1=test finished 2=high power)
+B.FilterSampledRunTime,          0.083,(Hr)
+B.FilterSampledVolume,           9.90,(L)
+B.FilterAverageVolumetricFlowRate,          1.993,(L*min^-1)
+
+
+
+
+SAMPLE LOG
+
+(HH:MM:SS),(YYYY-MM-DDTHH:MM:SS) (UTC date time format),(integer),(integer),(integer),(V),(V),(V),(V),(V),(C),(PaA),(C),(ug*m^-3),(ug*m^-3),(ug*m^-3),(ug*m^-3),(%),(C),(integer),(integer),(V),(V),(PaA),(C),(integer),(V),(V),(V),(PaA),(C),(g*min^-1),(L*min^-1),(L),(L),(L),(integer),(V),(V),(V),(PaA),(C),(g*min^-1),(L*min^-1),(L),(L),(L),(gL^-1),(V),(V),(integer),(integer),(V),(V),(V),(PaA),(C),(PaA),(C),(g*min^-1),(L*min^-1),(L),(L),(L),(gL^-1),(V),(V),(integer),(integer),(V),(V),(V),(PaA),(C),(PaA),(C),(g*min^-1),(L*min^-1),(L),(L),(L),(gL^-1),(V),(V),(PaA),(C),(ppm),(C),(%),(integer),(integer),(ppb),(%),(C),(V),(V),(ppb),(ppb),(ppb)
+SampleTime,DateTimeUTC,AccelX,AccelY,AccelZ,Vbus,M.Vsupply,M.5V0,M.3V3,Vbattery,Battery_Temp,M.BMP581_Press,M.BMP581_Temp,SEN55_PM1.0,SEN55_PM2.5,SEN55_PM4.0,SEN55_PM10,SEN55_RH,SEN55_Temp,SEN55_RawVOC,SEN55_RawNOx,1.Vsupply,1.3V3,1.BMP390_Press,1.BMP390_Temp,D.RDAC,D.Vboost,D.Vomron,D.Vflow,D.BMP581_Press,D.BMP581_Temp,D.MassFlow,D.VolFlow,D.TotalPumpVol,D.TotalSorbentVol,D.SampledSorbentVol,C.RDAC,C.Vboost,C.Vomron,C.Vflow,C.BMP581_Press,C.BMP581_Temp,C.MassFlow,C.VolFlow,C.TotalPumpVol,C.TotalSorbentVol,C.SampledSorbentVol,1.AtmoDensity,A.Vsupply,A.3V3,A.Pumps,A.RDAC,A.Vboost,A.Vomron,A.Vflow,A.BMP581Int_Press,A.BMP581Int_Temp,A.BMP581Ext_Press,A.BMP581Ext_Temp,A.MassFlow,A.VolFlow,A.TotalPumpVol,A.TotalCartridgeVol,A.SampledCartridgeVol,A.AtmoDensity,B.Vsupply,B.3V3,B.Pumps,B.RDAC,B.Vboost,B.Vomron,B.Vflow,B.BMP581Int_Press,B.BMP581Int_Temp,B.BMP581Ext_Press,B.BMP581Ext_Temp,B.MassFlow,B.VolFlow,B.TotalPumpVol,B.TotalCartridgeVol,B.SampledCartridgeVol,B.AtmoDensity,G.5V0,G.3V3,G.BMP581_Press,G.BMP581_Temp,G.SCD30_CO2,G.SCD30_Temp,G.SCD30_RH,G.SGP41_RawVOC,G.SGP41_RawNOx,G.SFA30_Formaldehyde,G.SFA30_RH,G.SFA30_Temp,G.WE1,G.AUX1,G.Alphasense1_Algorithm1,G.Alphasense1_Algorithm3,G.Alphasense1_Algorithm4
+0:00:00,2025-06-03T20:55:00,4,-13,-1990,0.009,4.036,5.030,3.382,4.101,23.92,84855.4,24.32,0.80,0.90,0.90,0.90,31.27,27.28,31082,17335,4.017,3.387,84035.5,23.64,724,5.106,3.384,0.427562,84880.0,23.82,0.00001,0.00001,68.47116,30.67436,0.00000,816,4.845,3.354,0.449312,84871.9,23.84,0.00000,0.00000,96.47840,30.45342,0.00000,0.9790,3.995,3.368,123,181,11.370,3.379,1.525750,84654.0,23.94,84888.0,23.81,1.70,1.73,82312.83,20116.49,0.03,0.9790,4.004,3.377,123,189,11.114,3.369,1.497250,84638.1,23.72,84846.3,23.68,1.63,1.66,43568.75,20113.12,0.03,0.9790,5.040,3.378,84849.3,23.67,486.663,24.23,34.22,65529,0,45.60,34.07,23.40,4.860,4.901,10072.521,5191.582,20983.336
+0:00:30,2025-06-03T20:55:30,4,-12,-1992,0.004,3.986,5.030,3.383,4.101,23.92,84856.8,24.32,0.70,0.70,0.70,0.70,32.12,26.50,31153,17282,3.969,3.383,84037.9,23.83,723,5.188,3.380,0.567875,84840.8,24.02,0.00435,0.00443,68.47264,30.67584,0.00149,777,5.018,3.350,0.562500,84820.7,24.06,0.00323,0.00329,96.47922,30.45425,0.00083,0.9816,3.947,3.365,123,159,12.945,3.375,1.651375,84600.9,24.42,84889.8,24.28,2.03,2.07,82313.77,20117.41,0.95,0.9816,3.960,3.373,123,159,13.022,3.365,1.638250,84558.1,24.22,84848.0,24.15,1.98,2.02,43569.66,20114.01,0.91,0.9816,5.040,3.377,84850.2,23.69,623.259,24.24,34.13,30023,0,40.20,33.70,23.42,4.861,4.902,10079.713,5209.347,20986.498
+0:01:00,2025-06-03T20:56:00,4,-12,-1992,0.004,3.977,5.030,3.382,4.101,23.92,84858.2,24.40,0.60,0.60,0.60,0.60,35.58,24.50,31211,17239,3.964,3.383,84036.0,24.10,769,5.055,3.381,0.535312,84851.7,24.25,0.00333,0.00337,68.47453,30.67773,0.00337,783,5.002,3.351,0.558812,84823.7,24.34,0.00313,0.00316,96.48090,30.45592,0.00249,0.9884,3.945,3.367,123,171,12.473,3.376,1.619750,84618.6,24.89,84891.0,24.75,1.94,1.96,82314.76,20118.42,1.96,0.9884,3.956,3.373,123,159,13.022,3.365,1.635500,84560.6,24.70,84849.3,24.61,1.97,1.99,43570.67,20115.02,1.93,0.9884,5.040,3.377,84851.5,23.71,603.983,24.27,34.06,30381,0,33.00,33.64,23.44,4.864,4.905,10097.302,5249.388,20997.080
+0:01:30,2025-06-03T20:56:30,4,-13,-1992,0.004,3.971,5.030,3.382,4.002,23.92,84859.1,24.49,0.80,0.90,0.90,0.90,38.10,23.72,31223,17200,3.960,3.383,84036.3,24.34,798,4.974,3.381,0.516125,84858.3,24.46,0.00273,0.00275,68.47601,30.67921,0.00486,792,4.978,3.351,0.550937,84828.3,24.58,0.00290,0.00293,96.48233,30.45739,0.00397,0.9908,3.938,3.367,123,163,12.783,3.376,1.642125,84608.8,25.26,84892.0,25.13,2.00,2.02,82315.76,20119.41,2.95,0.9908,3.949,3.373,123,158,13.064,3.365,1.640375,84559.8,25.05,84850.1,24.97,1.99,2.00,43571.66,20116.02,2.93,0.9908,5.040,3.377,84853.2,23.73,599.056,24.28,34.07,30501,0,23.60,33.60,23.47,4.875,4.042,12165.459,8224.121,21045.598
+0:02:00,2025-06-03T20:57:00,4,-12,-1992,0.004,3.969,5.030,3.382,4.002,23.92,84859.5,24.60,0.80,0.80,0.80,0.80,38.88,23.52,31227,17155,3.958,3.383,84034.0,24.56,795,4.982,3.380,0.517750,84858.2,24.64,0.00278,0.00280,68.47738,30.68058,0.00622,792,4.978,3.350,0.551750,84828.5,24.81,0.00292,0.00295,96.48383,30.45886,0.00543,0.9915,3.938,3.365,123,166,12.665,3.376,1.633750,84613.2,25.58,84892.5,25.45,1.98,1.99,82316.81,20120.41,3.95,0.9915,3.947,3.372,123,158,13.063,3.364,1.638500,84559.2,25.34,84850.5,25.27,1.98,2.00,43572.66,20117.01,3.92,0.9915,5.040,3.377,84854.2,23.75,594.203,24.31,33.97,30526,17629,12.00,33.60,23.50,4.656,2.102,15700.581,13781.282,20049.348
+0:02:30,2025-06-03T20:57:30,5,-12,-1991,0.004,3.964,5.027,3.382,4.003,24.51,84862.2,24.71,0.60,0.60,0.60,0.60,39.15,23.49,31236,17115,3.953,3.385,84037.3,24.77,787,5.005,3.381,0.523000,84859.4,24.82,0.00294,0.00297,68.47889,30.68206,0.00771,792,4.978,3.351,0.552625,84830.4,25.01,0.00295,0.00297,96.48535,30.46034,0.00692,0.9916,3.934,3.367,123,166,12.665,3.376,1.633375,84615.0,25.86,84894.8,25.73,1.98,1.99,82317.87,20121.41,4.95,0.9916,3.942,3.373,123,158,13.064,3.365,1.639250,84562.0,25.60,84853.0,25.51,1.98,2.00,43573.66,20118.01,4.92,0.9916,5.040,3.377,84855.7,23.77,590.623,24.36,33.99,30563,16976,2.80,33.56,23.52,1.507,1.475,2884.112,1621.453,5766.641
+0:03:00,2025-06-03T20:58:00,4,-12,-1992,0.004,3.966,5.030,3.383,4.003,24.51,84863.6,24.82,0.70,0.80,0.80,0.80,39.33,23.49,31180,17070,3.953,3.383,84037.0,24.95,787,5.005,3.380,0.523312,84861.0,24.99,0.00295,0.00298,68.48041,30.68355,0.00920,792,4.978,3.351,0.553750,84831.6,25.21,0.00298,0.00301,96.48687,30.46184,0.00841,0.9916,3.931,3.367,123,166,12.665,3.376,1.635250,84616.7,26.10,84896.6,25.98,1.98,2.00,82318.92,20122.40,5.94,0.9916,3.942,3.373,123,158,13.063,3.365,1.640750,84561.6,25.81,84854.4,25.73,1.99,2.00,43574.65,20119.01,5.91,0.9916,5.040,3.377,84857.3,23.79,591.202,24.36,34.17,30536,16538,1.20,33.77,23.55,1.174,1.188,2041.612,1072.721,4256.719
+0:03:30,2025-06-03T20:58:30,4,-11,-1992,0.004,3.951,5.030,3.382,4.000,24.51,84891.5,24.92,0.60,0.60,0.60,0.60,39.33,23.49,31240,17043,3.938,3.385,84066.7,25.13,787,5.005,3.381,0.523062,84888.5,25.15,0.00294,0.00297,68.48194,30.68505,0.01069,792,4.978,3.352,0.554312,84858.3,25.40,0.00300,0.00302,96.48840,30.46334,0.00992,0.9919,3.916,3.367,123,166,12.664,3.377,1.634750,84643.1,26.31,84923.1,26.20,1.98,2.00,82319.98,20123.40,6.94,0.9919,3.927,3.373,123,158,13.063,3.365,1.637750,84588.6,26.01,84881.3,25.93,1.98,1.99,43575.65,20120.00,6.91,0.9919,5.037,3.372,84860.3,23.80,592.475,24.38,33.99,30660,16225,0.80,33.60,23.56,0.998,1.012,1654.526,869.641,3458.224
+0:04:00,2025-06-03T20:59:00,4,-12,-1992,0.004,3.962,5.030,3.382,4.000,24.51,84867.2,25.03,0.50,0.50,0.50,0.50,39.32,23.49,31242,17008,3.949,3.383,84037.9,25.29,787,5.005,3.381,0.523187,84864.5,25.31,0.00295,0.00297,68.48346,30.68654,0.01219,792,4.977,3.351,0.555187,84834.3,25.58,0.00302,0.00305,96.48992,30.46487,0.01144,0.9916,3.929,3.367,123,166,12.664,3.376,1.636125,84618.3,26.51,84900.0,26.39,1.98,2.00,82321.03,20124.40,7.94,0.9916,3.938,3.373,123,158,13.063,3.364,1.637125,84565.0,26.19,84857.9,26.11,1.98,1.99,43576.64,20121.00,7.91,0.9916,5.040,3.377,84861.5,23.82,594.319,24.38,33.97,30646,16009,0.80,33.55,23.57,0.882,0.890,1411.996,751.380,2932.314
+0:04:30,2025-06-03T20:59:30,5,-12,-1991,0.004,3.958,5.030,3.382,3.996,25.09,84869.5,25.13,0.40,0.40,0.40,0.40,39.41,23.50,31209,16986,3.947,3.383,84040.1,25.46,787,5.005,3.381,0.523312,84866.6,25.46,0.00295,0.00298,68.48498,30.68804,0.01368,792,4.977,3.351,0.555875,84836.0,25.74,0.00304,0.00307,96.49145,30.46639,0.01297,0.9916,3.921,3.367,123,166,12.665,3.376,1.635000,84620.9,26.69,84902.2,26.58,1.98,2.00,82322.09,20125.39,8.93,0.9916,3.927,3.373,123,158,13.063,3.365,1.639375,84567.7,26.36,84860.1,26.27,1.98,2.00,43577.64,20121.99,8.90,0.9916,5.040,3.377,84863.1,23.83,593.135,24.40,34.06,30669,15859,0.80,33.60,23.59,0.802,0.800,1259.069,691.808,2569.413
+0:05:00,2025-06-03T21:00:00,4,-12,-1992,0.004,3.958,5.030,3.383,3.996,25.09,84870.0,25.23,0.80,0.80,0.80,0.80,39.46,23.50,31224,16962,3.947,3.385,84038.8,25.61,787,5.005,3.381,0.523375,84867.1,25.61,0.00295,0.00298,68.48651,30.68953,0.01518,792,4.978,3.351,0.556750,84836.5,25.90,0.00307,0.00309,96.49297,30.46794,0.01452,0.9916,3.925,3.367,123,166,12.665,3.376,1.637125,84620.5,26.86,84902.7,26.75,1.99,2.00,82323.14,20126.39,9.93,0.9916,3.936,3.372,123,158,13.064,3.365,1.641375,84568.0,26.51,84860.5,26.42,1.99,2.00,43578.64,20122.99,9.90,0.9916,5.040,3.377,84864.0,23.84,594.484,24.41,34.06,30652,15769,0.80,33.64,23.59,0.738,0.729,1134.258,640.330,2279.127

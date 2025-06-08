@@ -94,6 +94,14 @@ test_that("fread_ast_log works with UPASv2x file with any empty sample log", {
     expect_gt(ncol(log_raw), 3)
 })
 
+test_that("fread_ast_log works with HHB file", {
+  filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  log_raw <- fread_ast_log(file)
+  expect_identical(colnames(log_raw)[1], "SampleTime")
+  expect_gt(ncol(log_raw), 3)
+})
+
 ###################################
 # read_ast_log
 ###################################
@@ -111,71 +119,89 @@ test_that("If using update names for UPASv2, all applicable column names are upd
 })
 
 test_that("format_upasv2_log and read_ast_log have the same output", {
-  upasv2_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
-  upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-  upasv2_header <- read_ast_header(upasv2_file)
-  upasv2_log_raw <- fread_ast_log(upasv2_file)
-  expect_identical(read_ast_log(upasv2_file, update_names = TRUE),
-                   format_upasv2_log(upasv2_log_raw, upasv2_header, update_names = TRUE))
+  filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header  <- read_ast_header(file)
+  log_raw <- fread_ast_log(file)
+  expect_identical(read_ast_log(file, update_names = TRUE),
+                   format_upasv2_log(log_raw, header, update_names = TRUE))
 })
 
 test_that("format_upasv2x_log and read_ast_log have the same output", {
-  upasv2x_filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  upasv2x_header <- read_ast_header(upasv2x_file)
-  upasv2x_log_raw <- fread_ast_log(upasv2x_file)
-  expect_identical(read_ast_log(upasv2x_file, update_names = TRUE),
-                   format_upasv2x_log(upasv2x_log_raw, upasv2x_header,
-                                      update_names = TRUE))
+  filename <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header  <- read_ast_header(file)
+  log_raw <- fread_ast_log(file)
+  expect_identical(read_ast_log(file, update_names = TRUE),
+                   format_upasv2x_log(log_raw, header, update_names = TRUE))
+})
+
+test_that("format_hhb_log and read_ast_log have the same output", {
+  filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  file <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  header  <- read_ast_header(file)
+  log_raw <- fread_ast_log(file)
+  expect_identical(read_ast_log(file, update_names = TRUE),
+                   format_hhb_log(log_raw, header))
 })
 
 test_that("tz, cols_keep, and cols_drop arguments work as expected", {
-  upasv2_filename <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
-  upasv2_file <- system.file("extdata", upasv2_filename, package = "astr", mustWork = TRUE)
-  upasv2x_filename <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
-  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  upasv2_log <- read_ast_log(upasv2_file, tz="America/New_York",
-                             cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal", "LocalTZ",  "UserTZ"))
-  upasv2x_log <- read_ast_log(upasv2x_file, tz="America/New_York", cols_drop = c("AtmoT", "AtmoP", "AtmoRH"))
-  expect_identical(unique(c(upasv2_log$LocalTZ, upasv2x_log$LocalTZ)), "America/New_York")
-  expect_true(unique(c(upasv2_log$UserTZ, upasv2x_log$UserTZ)))
-  expect_identical(colnames(upasv2_log), c("SampleTime", "DateTimeUTC", "DateTimeLocal", "LocalTZ",  "UserTZ"))
-  expect_false(grepl(paste(c("AtmoT", "AtmoP", "AtmoRH"), collapse=";"), paste(colnames(upasv2x_log), collapse=";")))
+  filename_upasv2  <- 'PS1771_LOG_2024-06-13T21_31_26UTC_DIAGNOSTIC____________.txt'
+  filename_upasv2x <- 'PSP00270_LOG_2024-06-13T16_24_47UTC_DIAGNOSTIC________________.txt'
+  filename_hhb     <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+
+  file_upasv2  <- system.file("extdata", filename_upasv2,  package = "astr", mustWork = TRUE)
+  file_upasv2x <- system.file("extdata", filename_upasv2x, package = "astr", mustWork = TRUE)
+  file_hhb     <- system.file("extdata", filename_hhb,     package = "astr", mustWork = TRUE)
+
+  log_upasv2  <- read_ast_log(file_upasv2, tz = "America/New_York",
+                              cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal", "LocalTZ",  "UserTZ"))
+  log_upasv2x <- read_ast_log(file_upasv2x, tz = "America/New_York",
+                              cols_drop = c("AtmoT", "AtmoP", "AtmoRH"))
+  log_hhb     <- read_ast_log(file_hhb, tz = "America/New_York",
+                              cols_drop = c("SEN55_PM4.0", "SEN55_PM10"))
+
+  expect_identical(unique(c(log_upasv2$LocalTZ, log_upasv2x$LocalTZ, log_hhb$LocalTZ)),
+                   "America/New_York")
+  expect_true(unique(c(log_upasv2$UserTZ, log_upasv2x$UserTZ, log_hhb$UserTZ)))
+  expect_identical(colnames(log_upasv2), c("SampleTime", "DateTimeUTC", "DateTimeLocal", "LocalTZ",  "UserTZ"))
+  expect_false(grepl(paste(c("AtmoT", "AtmoP", "AtmoRH"), collapse=";"), paste(colnames(log_upasv2x), collapse=";")))
+  expect_false(grepl(paste(c("SEN55_PM4.0", "SEN55_PM10"), collapse=";"), paste(colnames(log_hhb), collapse=";")))
 })
 
 test_that("DateTimeLocal is not altered for files with fractional time zone offsets", {
-  upasv2x_filename <- 'PSP01002_LOG_2024-02-28T11_37_58UTC_OnlyRT_3________NA________.txt'
-  upasv2x_file <- system.file("extdata", upasv2x_filename, package = "astr", mustWork = TRUE)
-  upasv2x_log <- read_ast_log(upasv2x_file)
-  upasv2x_log_tz <- read_ast_log(upasv2x_file, tz = "Asia/Kolkata")
-  expect_identical(upasv2x_log$DateTimeLocal[1], as.POSIXct("2024-02-28 17:09:00", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
-  expect_identical(upasv2x_log$DateTimeLocal[1], upasv2x_log_tz$DateTimeLocal[1])
+  filename <- 'PSP01002_LOG_2024-02-28T11_37_58UTC_OnlyRT_3________NA________.txt'
+  file     <- system.file("extdata", filename, package = "astr", mustWork = TRUE)
+  log    <- read_ast_log(file)
+  log_tz <- read_ast_log(file, tz = "Asia/Kolkata")
+  expect_identical(log$DateTimeLocal[1], as.POSIXct("2024-02-28 17:09:00", "%Y-%m-%d %H:%M:%S", tz="Asia/Kolkata"))
+  expect_identical(log$DateTimeLocal[1], log_tz$DateTimeLocal[1])
 })
 
 test_that("An empty UPASv2 sample log returns a dataframe with the same columns and types as a UPASv2 sample log that contains data", {
-  upasv2_filename    <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
-  upasv2_fname_empty <- 'PS2061_LOG_2024-11-21T21_40_53UTC_no-log________________.txt'
-  upasv2_file    <- system.file("extdata", upasv2_filename,    package = "astr", mustWork = TRUE)
-  upasv2_f_empty <- system.file("extdata", upasv2_fname_empty, package = "astr", mustWork = TRUE)
-  upasv2_log       <- read_ast_log(upasv2_file)
-  upasv2_log_empty <- read_ast_log(upasv2_f_empty)
-  expect_s3_class(upasv2_log_empty, "data.frame")
-  expect_true(nrow(upasv2_log_empty) == 0)
-  expect_true(ncol(upasv2_log) == ncol(upasv2_log_empty))
-  expect_true(unique(sapply(upasv2_log, typeof) == sapply(upasv2_log_empty, typeof)))
+  fname       <- 'PS1771_LOG_2024-06-13T21_20_17UTC_GPSoutside_________Eng.txt'
+  fname_empty <- 'PS2061_LOG_2024-11-21T21_40_53UTC_no-log________________.txt'
+  file        <- system.file("extdata", fname,       package = "astr", mustWork = TRUE)
+  file_empty  <- system.file("extdata", fname_empty, package = "astr", mustWork = TRUE)
+  log       <- read_ast_log(file)
+  log_empty <- read_ast_log(file_empty)
+  expect_s3_class(log_empty, "data.frame")
+  expect_true(nrow(log_empty) == 0)
+  expect_true(ncol(log) == ncol(log_empty))
+  expect_true(unique(sapply(log, typeof) == sapply(log_empty, typeof)))
 })
 
 test_that("An empty UPASv2x sample log returns a dataframe with the same columns and types as a UPASv2x sample log that contains data", {
-    upasv2x_filename    <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
-    upasv2x_fname_empty <- 'PSP00069_LOG_2024-11-21T21_42_29UTC_no-log__________----------.txt'
-    upasv2x_file    <- system.file("extdata", upasv2x_filename,    package = "astr", mustWork = TRUE)
-    upasv2x_f_empty <- system.file("extdata", upasv2x_fname_empty, package = "astr", mustWork = TRUE)
-    upasv2x_log       <- read_ast_log(upasv2x_file)
-    upasv2x_log_empty <- read_ast_log(upasv2x_f_empty)
-    expect_s3_class(upasv2x_log_empty, "data.frame")
-    expect_true(nrow(upasv2x_log_empty) == 0)
-    expect_true(ncol(upasv2x_log) == ncol(upasv2x_log_empty))
-    expect_true(unique(sapply(upasv2x_log, typeof) == sapply(upasv2x_log_empty, typeof)))
+    fname       <- 'PSP00270_LOG_2024-06-25T21_37_48UTC_GPS-in-out______----------.txt'
+    fname_empty <- 'PSP00069_LOG_2024-11-21T21_42_29UTC_no-log__________----------.txt'
+    file        <- system.file("extdata", fname,       package = "astr", mustWork = TRUE)
+    file_empty  <- system.file("extdata", fname_empty, package = "astr", mustWork = TRUE)
+    log       <- read_ast_log(file)
+    log_empty <- read_ast_log(file_empty)
+    expect_s3_class(log_empty, "data.frame")
+    expect_true(nrow(log_empty) == 0)
+    expect_true(ncol(log) == ncol(log_empty))
+    expect_true(unique(sapply(log, typeof) == sapply(log_empty, typeof)))
 })
 
 test_that("Binding rows when empty log files are included doesn't add any data to the data frame.", {
@@ -297,7 +323,11 @@ test_that("read_ast_log works with all UPASv2x firmwares", {
 })
 
 test_that("read_ast_log works with all HHBv2 firmwares", {
-  hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
-  hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
-  expect_snapshot(read_ast_log(hhb_file))
+  hhb_filename_240111 <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+  hhb_file_240111 <- system.file("extdata", hhb_filename_240111, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(hhb_file_240111))
+
+  hhb_filename_250529 <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  hhb_file_250529 <- system.file("extdata", hhb_filename_250529, package = "astr", mustWork = TRUE)
+  expect_snapshot(read_ast_log(hhb_file_250529))
 })

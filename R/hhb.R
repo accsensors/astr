@@ -11,7 +11,7 @@
 #' @importFrom rlang .data
 #'
 #' @examples
-#' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+#' hhb_filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
 #' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 #' hhb_header_raw <- fread_ast_header(hhb_file)$header
 #' hhb_header_wide <- transpose_ast_header(hhb_header_raw)
@@ -19,19 +19,15 @@
 
 format_hhb_header = function(df) {
 
-  df$Firmware <- as.character(gsub(" ", "_", df$Firmware))
-
-  df$ProgrammedRuntime <- ifelse(df$ProgrammedRuntime == "indefinite",
-                                 as.numeric(NA),
-                                 as.numeric(df$ProgrammedRuntime))
-
   df <- dplyr::mutate(df,
+    Firmware = as.character(gsub(" ", "_", .data$Firmware)),
     dplyr::across(dplyr::contains(c("CalVoutMin", "CalVoutMax", "CalMFMin",
               "CalMFMax", "MF4","MF3", "MF2", "MF1", "MF0", "UTCOffset",
               "Runtime", "Volume", "FlowRate", "DutyCycle", "ShutdownMode",
-              "Gain", "_WE", "_AE", "Sensitivity")),
+              "Gain", "_WE", "_AE", "Sensitivity", "StartDelay")),
            \(x) as.numeric(x)),
-    dplyr::across(dplyr::contains(c("StartDateTimeUTC", "EndDateTimeUTC", "CalDate")),
+    dplyr::across(dplyr::contains(c("StartDateTimeUTC", "EndDateTimeUTC",
+                                    "CalDate", "StartTime")),
                     \(x) as.POSIXct(x, format="%Y-%m-%dT%H:%M:%S", tz="UTC")))
 
   return(df)
@@ -56,7 +52,7 @@ format_hhb_header = function(df) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' hhb_filename <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+#' hhb_filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
 #' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
 #' hhb_log_raw <- fread_ast_log(hhb_file)
 #' hhb_header <- read_ast_header(hhb_file)
@@ -67,8 +63,8 @@ format_hhb_header = function(df) {
 #'                 cols_drop = c("AccelX", "AccelY", "AccelZ"))
 #' hhb_log_colskeep <- format_hhb_log(hhb_log_raw, hhb_header, tz="America/New_York",
 #'                 cols_keep = c("SampleTime", "DateTimeUTC", "DateTimeLocal",
-#'                                "LocalTZ",  "UserTZ",
-#'                                grep("^SEN55", colnames(hhb_log), value=TRUE)))
+#'                               "LocalTZ",  "UserTZ",
+#'                               grep("^SEN55", colnames(hhb_log), value=TRUE)))
 
 format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
 
