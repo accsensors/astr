@@ -122,6 +122,41 @@ data_upas_examples <- system.file("extdata", package = "astr", mustWork = T) |>
     dplyr::bind_rows()
 ```
 
+## Format HHB data
+
+The `astr` package includes two functions for converting specific
+subsets of data from Home Health Box log file headers and sample logs
+into “long” formats that are useful for common data analysis
+applications.
+
+Use the `format_hhb_samples()` function to convert header data related
+to particulate matter (filter) and gas (sorbent) sample start times, end
+times, durations, flow rates, and volumes to a long format that will
+facilitate matching such data with sample mass and composition data.
+
+Use the `format_hhb_sensors()` function to convert header and sample log
+data associated with Alphasense B-series electrochemical gas sensors to
+a long format that is helpful for: (a) comparing pollutant mixing ratios
+estimated using different Alphasense algorithms or (b) calculating
+additional estimates of pollutant mixing ratios using your own
+calibration data and/or calibration models.
+
+``` r
+data_hhb_h <- system.file("extdata", package = "astr", mustWork = T) |>
+              list.files(pattern = "^HHB.*.csv$", full.names = T) %>%
+              lapply(read_ast_header) %>%
+              dplyr::bind_rows()
+
+data_hhb   <- system.file("extdata", package = "astr", mustWork = T) |>
+              list.files(pattern = "^HHB.*.csv$", full.names = T) %>%
+              lapply(read_ast_log) %>%
+              dplyr::bind_rows()
+
+df_hhb_samples <- format_hhb_samples(data_hhb_h)
+
+df_hhb_ec <- format_hhb_sensors(data_hhb, data_hhb_h, temp = "G.SCD30_Temp")
+```
+
 ## Make a GPS Map of UPAS Data
 
 The `astr` package includes the experimental function `gps_map()` for

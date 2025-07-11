@@ -106,6 +106,30 @@ data_upas_examples <- system.file("extdata", package = "astr", mustWork = T) |>
     dplyr::bind_rows()
 ```
 
+## Format HHB data
+
+The `astr` package includes two functions for converting specific subsets of data from Home Health Box log file headers and sample logs into "long" formats that are useful for common data analysis applications.  
+
+Use the `format_hhb_samples()` function to convert header data related to particulate matter (filter) and gas (sorbent) sample start times, end times, durations, flow rates, and volumes to a long format that will facilitate matching such data with sample mass and composition data.  
+
+Use the `format_hhb_sensors()` function to convert header and sample log data associated with Alphasense B-series electrochemical gas sensors to a long format that is helpful for: (a) comparing pollutant mixing ratios estimated using different Alphasense algorithms or (b) calculating additional estimates of pollutant mixing ratios using your own calibration data and/or calibration models.  
+
+```{r hhb_sensors}
+data_hhb_h <- system.file("extdata", package = "astr", mustWork = T) |>
+              list.files(pattern = "^HHB.*.csv$", full.names = T) %>%
+              lapply(read_ast_header) %>%
+              dplyr::bind_rows()
+
+data_hhb   <- system.file("extdata", package = "astr", mustWork = T) |>
+              list.files(pattern = "^HHB.*.csv$", full.names = T) %>%
+              lapply(read_ast_log) %>%
+              dplyr::bind_rows()
+
+df_hhb_samples <- format_hhb_samples(data_hhb_h)
+
+df_hhb_ec <- format_hhb_sensors(data_hhb, data_hhb_h, temp = "G.SCD30_Temp")
+```
+
 ## Make a GPS Map of UPAS Data
 
 The `astr` package includes the experimental function `gps_map()` for making a GPS map of PM~2.5~ or CO~2~ data. This function is mainly for use with our online [Shiny App](https://accsensors.shinyapps.io/shinyAST/), but can be used in general scripts. Since `gps_map()` is experimental, the appearance and functionality of the map may change during future development. 
@@ -122,6 +146,5 @@ upasv2x_CO2_map  <- gps_map(multiple_upas_logs, variable = "CO2")
 
 ## Other Helper Functions
 
-The `astr` package contains helper functions called by the `read_ast_header()`, and
-`read_ast_log()` functions to process files. If you would like to use any of these helper functions independently in your script, you can find documentation and examples by typing a '?' before the function name.
+The `astr` package contains helper functions called by the `read_ast_header()`, and `read_ast_log()` functions to process files. If you would like to use any of these helper functions independently in your script, you can find documentation and examples by typing a '?' before the function name.
 These helper functions are: `count_header_rows()`, `format_ast_header()`, `format_ast_log()`, `format_hhb_header()`, `format_hhb_log()`, `format_upasv2_header()`, `format_upasv2_log()`, `format_upasv2x_header()`, `format_upasv2x_log()`, `fread_ast_header()`, `fread_ast_log()`, `get_tz_string()` and `transpose_ast_header()`. 

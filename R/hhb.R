@@ -24,8 +24,9 @@ format_hhb_header = function(df) {
     dplyr::across(dplyr::contains(c("CalVoutMin", "CalVoutMax", "CalMFMin",
               "CalMFMax", "MF4","MF3", "MF2", "MF1", "MF0", "UTCOffset",
               "Runtime", "Volume", "FlowRate", "DutyCycle", "ShutdownMode",
-              "Gain", "_WE", "_AE", "Sensitivity", "StartDelay")),
+              "_ID", "Gain", "_WE", "_AE", "Sensitivity", "StartDelay")),
            \(x) as.numeric(x)),
+    dplyr::across(dplyr::contains(c("_ID")), \(x) as.character(x)),
     dplyr::across(dplyr::contains(c("StartDateTimeUTC", "EndDateTimeUTC",
                                     "CalDate", "StartTime")),
                     \(x) as.POSIXct(x, format="%Y-%m-%dT%H:%M:%S", tz="UTC")))
@@ -69,10 +70,7 @@ format_hhb_header = function(df) {
 format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
 
   df_h <- dplyr::select(header,
-                        dplyr::any_of(c("HHBserial","LogFileName","SampleName",
-                                        "StartDateTimeUTC")),
-                        dplyr::contains(c("ID","VolumetricFlowRate"),
-                                        ignore.case=F))
+                        dplyr::any_of(c("HHBserial","LogFileName","SampleName")))
   df_h <- dplyr::mutate(df_h,
                         UserTZ  = ifelse(!is.na(tz), T, F),
                         LocalTZ = astr::get_tz_string(header$UTCOffset, tz=tz))
@@ -112,6 +110,294 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
   if(nrow(df) == 1){
     df <- dplyr::filter(df, !is.na(.data$SampleTime))
   }
+
+  return(df)
+}
+
+#'Convert sample data from a Home Health Box log file header to long format.
+#'
+#' @description
+#' `format_hhb_samples()` Selects the filter (particulate matter) and sorbent
+#' (gas) sample data from a HHB v2 log file header and converts it to a long
+#' format to facilitate matching of sample times, durations, and volumes with
+#' sample mass or composition data from another data file.
+#'
+#' @param header A HHB v2 header data frame returned by [astr::read_ast_header()] or [astr::format_hhb_header()]
+#'
+#' @return A data frame with a four rows of HHB v2 sample data for each row in `header`.
+#'
+#' @details
+#' The "HHBslot#" variables from the header data frame will be renamed "PumpPCB"
+#' associated with the appropriate sample channel in the data frame retuned by
+#' this function.
+#'
+#' Additionally, the ProgrammedStartTime, ProgrammedRuntime, StartDateTimeUTC,
+#' and EndDateTimeUTC variables associated with each sample channel (A-D) in the
+#' SETUP SUMMARY and SAMPLE SUMMARY sections of the log file header will be
+#' renamed to SampleProgrammedStartTime, SampleProgrammedRuntime,
+#' SampleStartDateTimeUTC, and SampleEndDateTimeUTC in the data frame returned
+#' by this function to distinguish them from the ProgrammedStartTime,
+#' ProgrammedRuntime, StartDateTimeUTC, and EndDateTimeUTC variables associated
+#' with the overall HHB sample.
+#'
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' hhb_filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_header <- read_ast_header(hhb_file)
+#' hhb_samples <- format_hhb_samples(hhb_header)
+
+format_hhb_samples = function(header) {
+
+  # Sample metadata variables to retain
+  meta_vars <- c("HHBserial","HHBslot1","HHBslot2","HHBslot4","LogFileName",
+                 "SampleName")
+
+  # Select sample data (but do not include calibration data)
+  df <- dplyr::select(header,
+                      dplyr::any_of(meta_vars), dplyr::ends_with("CID"),
+                      dplyr::starts_with("A."), dplyr::starts_with("B."),
+                      dplyr::starts_with("C."), dplyr::starts_with("D."))
+  df <- dplyr::select(df, -dplyr::contains("Cal"), -dplyr::contains("MF"))
+  df <- dplyr::rename(df, A.FilterPumpPCB  = "HHBslot2",
+                          B.FilterPumpPCB  = "HHBslot4",
+                          C.SorbentPumpPCB = "HHBslot1")
+  df <- dplyr::mutate(df, D.SorbentPumpPCB = .data$C.SorbentPumpPCB)
+
+  # Identify calibrating sampling channels included in HHB
+  channels <- colnames(dplyr::select(header, dplyr::contains("Cal")))
+  channels <- sapply(X = channels, FUN = strsplit, "\\.")
+  channels <- lapply(channels, "[[", 1)
+  channels <- unlist(channels, use.names = F)
+  channels <- unique(channels)
+
+  # Separate sample data associated with each pumping channel
+  df_a <- dplyr::select(df, dplyr::any_of(meta_vars), dplyr::starts_with("A."))
+  df_a <- dplyr::mutate(df_a, Channel = "A", ChannelType = "Filter")
+
+  df_b <- dplyr::select(df, dplyr::any_of(meta_vars), dplyr::starts_with("B."))
+  df_b <- dplyr::mutate(df_b, Channel = "B", ChannelType = "Filter")
+
+  df_c <- dplyr::select(df, dplyr::any_of(meta_vars), dplyr::starts_with("C."))
+  df_c <- dplyr::mutate(df_c, Channel = "C", ChannelType = "Sorbent")
+
+  df_d <- dplyr::select(df, dplyr::any_of(meta_vars), dplyr::starts_with("D."))
+  df_d <- dplyr::mutate(df_d, Channel = "D", ChannelType = "Sorbent")
+
+  # Harmonize column names
+  colnames(df_a) <- gsub("^A.Filter",  "", colnames(df_a))
+  colnames(df_b) <- gsub("^B.Filter",  "", colnames(df_b))
+  colnames(df_c) <- gsub("^C.Sorbent", "", colnames(df_c))
+  colnames(df_d) <- gsub("^D.Sorbent", "", colnames(df_d))
+
+  # Recombine data from each channel
+  # Rename variables that also apply to full HHB sample
+  df <- dplyr::bind_rows(df_a, df_b, df_c, df_d)
+  df <- dplyr::rename(df, dplyr::any_of(c(
+                            SampleProgrammedStartTime = "ProgrammedStartTime",
+                            SampleProgrammedRuntime   = "ProgrammedRuntime",
+                            SampleStartDateTimeUTC    = "StartDateTimeUTC",
+                            SampleEndDateTimeUTC      = "EndDateTimeUTC")))
+  df <- dplyr::relocate(df, c("Channel","ChannelType"), .after = "SampleName")
+  df <- dplyr::filter(df, .data$Channel %in% channels)
+
+  return(df)
+}
+
+#'Convert Alphasense electrochemical sensor data from a Home Health Box sample log to long format.
+#'
+#' @description
+#' `format_hhb_sensors()` Selects the Alphasense electrochemical gas sensor data
+#' from a HHB v2 sample log and converts it to a long format.
+#'
+#' @param log A HHB v2 log data frame returned by [astr::read_ast_log()] or [astr::format_hhb_log()]
+#' @param header A HHB v2 header data frame returned by [astr::read_ast_header()] or [astr::format_hhb_header()]. Each sample log present in `log` must also be present in `header`.
+#' @param temp A character string containing the name of the temperature variable to be used to apply any temperature corrections to the Alphasense electrochemical sensor data.
+#' The default is "G.SCD30_Temp".
+#'
+#' @return A data frame of with one row for each timestamp, Alphasense electrochemical sensor, and algorithm in `log`.
+#'
+#' @details
+#' The data frame returned by this function will include the following columns:
+#' \tabular{llll}{
+#'    \strong{Column name} \tab \strong{Class}  \tab \strong{Units} \tab \strong{Description} \cr
+#'    HHBserial     \tab character \tab -      \tab Serial identifier for the Home Health Box \cr
+#'    LogFileName   \tab character \tab -      \tab Log filename \cr
+#'    Position      \tab numeric   \tab -      \tab Position in which the sensor was installed in the gas sensor housing (1, 2, 3, or 4) \cr
+#'    ID            \tab character \tab -      \tab Serial identifier for the electrochemical (EC) sensor \cr
+#'    Type          \tab character \tab -      \tab Model of the EC sensor \cr
+#'    ISB_Gain      \tab numeric   \tab mV/nA  \tab Gain on the Individual Sensor Board (ISB) to which the EC sensor was mounted \cr
+#'    Sensitivity   \tab numeric   \tab nA/ppm \tab Working electrode (WE) sensitivity to the pollutant of interest (a calibration constant for the EC sensor) \cr
+#'    WEt           \tab numeric   \tab mV     \tab Total WE zero offset (a calibration constant for the EC sensor) \cr
+#'    AEt           \tab numeric   \tab mV     \tab Total auxiliary electrode (AE) zero offset (a calibration constant for the EC sensor)  \cr
+#'    WEe           \tab numeric   \tab mV     \tab WE electronic offset on the ISB (a calibration constant for the EC sensor) \cr
+#'    AEe           \tab numeric   \tab mV     \tab AE electronic offset on the ISB (a calibration constant for the EC sensor) \cr
+#'    SampleTime    \tab difftime  \tab s      \tab Time elapsed since the sample started \cr
+#'    DateTimeUTC   \tab POSIXct   \tab -      \tab Timestamp in Coordinated Universal Time \cr
+#'    G.SCD30_Temp  \tab numeric   \tab C      \tab Temperature measured inside the gas sensor housing by the Sensirion SCD30 sensor \cr
+#'    WE            \tab numeric   \tab V      \tab Working electrode voltage \cr
+#'    AUX           \tab numeric   \tab V      \tab Auxiliary electrode voltage \cr
+#'    Alg           \tab numeric   \tab -      \tab Algorithm used to calculate ppb estimate \cr
+#'    ppb           \tab numeric   \tab ppb    \tab Estimated mixing ratio of pollutant estimated using the specified algorithm \cr
+#' }
+#'
+#' If the `temp` argument was `NA` or was specified as either: (a) a column that
+#' did not contain temperature data or (b) a column was not present in `log`,
+#' the returned data frame will not contain the "G.SCD30_Temp" column nor any
+#' other column of temperature data.
+#'
+#' If the `temp` argument was specified as something other than "G.SCD30_Temp,"
+#' that column of temperature data will appear in the data frame in the place
+#' of the "G.SCD30_Temp" column listed in the table above.
+#'
+#' It is recommended that you specify `temp` as a temperature that was measured
+#' inside the gas sensor housing, for example: "G.SCD30_Temp", "G.BMP581_Temp",
+#' or "G.SFA30_Temp".
+#'
+#' The temperature variable "SEN55_Temp" is measured inside then Sensirion SEN55
+#' optical particulate matter sensor and, if this sensor was operated in
+#' RH/T/Gas/PMS mode, in which the fan inside the SEN55 draws ambient air
+#' through the SEN55 sensor continuously, the "SEN55_Temp" variable might be the
+#' temperature in `log` that most closely reflects the ambient temperature.
+#'
+#' The temperature variable "M.BMP581_Temp" is measured on the surface of the
+#' main Home Health Box PCB by a sensor that is vented to the inside of the
+#' sorbent media compartment.
+#'
+#' The following temperature variables are measured by sensors that outside the
+#' gas sensor housing and mounted on circuit boards that are enclosed in the
+#' main Home Health Box housing. We recommend using these temperatures for
+#' interpretation of the electrochemical gas sensor data only as a last resort
+#' if none of the other temperature measurements described above are available:
+#' Battery_Temp","M.BMP581_Temp","SEN55_Temp","1.BMP390_Temp","D.BMP581_Temp",
+#' "C.BMP581_Temp","A.BMP581Int_Temp","A.BMP581Ext_Temp","B.BMP581Int_Temp",
+#' "B.BMP581Ext_Temp".
+#'
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' hhb_filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_log <- read_ast_log(hhb_file)
+#' hhb_header <- read_ast_header(hhb_file)
+#' hhb_ec <- format_hhb_sensors(hhb_log, hhb_header)
+
+format_hhb_sensors = function(log, header, temp="G.SCD30_Temp") {
+
+  # Check that the specified 'temp' variable is the name of a HHB log variable
+  if (!(temp %in% c("Battery_Temp","M.BMP581_Temp","SEN55_Temp","1.BMP390_Temp",
+                    "D.BMP581_Temp","C.BMP581_Temp","A.BMP581Int_Temp",
+                    "A.BMP581Ext_Temp","B.BMP581Int_Temp","B.BMP581Ext_Temp",
+                    "G.BMP581_Temp","G.SCD30_Temp","G.SFA30_Temp"))){
+    warning("Invalid variable name specified for temp argument. No temperature data will be included in the returned data frame.")
+  }else{
+    # Check that the specified 'temp' variable is present in the log
+    if (!(temp %in% colnames(log))){
+      warning("The column name specified as the temp argument is not present in the supplied log. No temperature data will be included in the returned data frame.")
+    }
+  }
+
+  # Check whether the specified temperature variable was measured inside the
+  # gas sensor housing or by the SEN55.
+  if (temp %in% c("Battery_Temp","M.BMP581_Temp","SEN55_Temp","1.BMP390_Temp",
+                  "D.BMP581_Temp","C.BMP581_Temp","A.BMP581Int_Temp",
+                  "A.BMP581Ext_Temp","B.BMP581Int_Temp","B.BMP581Ext_Temp")){
+    warning("The specified temperature was not measured inside the gas sensor housing. It is recommended that you specify a temperature measured inside the gas sensor housing: 'G.SCD30_Temp', 'G.BMP581_Temp', or 'G.SFA30_Temp'.")
+  }
+
+  # Select header data
+  df_h <- dplyr::select(header, "LogFileName", dplyr::starts_with("G.Alphasense"))
+  df_h <- dplyr::select(df_h, -dplyr::ends_with("Runtime"))
+
+  # Separate header data associated with each sensor
+  df1 <- dplyr::select(df_h, "LogFileName", dplyr::contains("1_"))
+  df1 <- dplyr::mutate(df1, Position = 1)
+
+  df2 <- dplyr::select(df_h, "LogFileName", dplyr::contains("2_"))
+  df2 <- dplyr::mutate(df2, Position = 2)
+
+  df3 <- dplyr::select(df_h, "LogFileName", dplyr::contains("3_"))
+  df3 <- dplyr::mutate(df3, Position = 3)
+
+  df4 <- dplyr::select(df_h, "LogFileName", dplyr::contains("4_"))
+  df4 <- dplyr::mutate(df4, Position = 4)
+
+  # Harmonize column names
+  colnames(df1) <- gsub("^G.Alphasense[1-4]_",  "", colnames(df1))
+  colnames(df2) <- gsub("^G.Alphasense[1-4]_",  "", colnames(df2))
+  colnames(df3) <- gsub("^G.Alphasense[1-4]_",  "", colnames(df3))
+  colnames(df4) <- gsub("^G.Alphasense[1-4]_",  "", colnames(df4))
+
+  # Recombine data from each channel
+  df_h <- dplyr::bind_rows(df1, df2, df3, df4)
+  df_h <- dplyr::relocate(df_h, "Position", .before = "ID")
+
+  # Sample log variables to retain in addition to electrochemical sensor vars
+  meta_vars <- c("HHBserial", "LogFileName", "SampleTime", "DateTimeUTC", temp)
+
+  names_we <- dplyr::cross_join(data.frame(elec = c("WE","AUX")),
+                                data.frame(Position = c(1,2,3,4)))
+  names_we <- dplyr::mutate(names_we,
+                            name = paste0("G.", .data$elec, .data$Position))
+
+  # Select working and auxiliary electrode data
+  df_we <- dplyr::select(log, dplyr::any_of(meta_vars),
+                              dplyr::starts_with("G.WE"),
+                              dplyr::starts_with("G.AUX"))
+  df_we <- tidyr::pivot_longer(df_we, cols = -dplyr::any_of(meta_vars))
+  df_we <- dplyr::left_join(df_we, names_we, by=c("name"))
+  df_we <- dplyr::select(df_we, -"name")
+  df_we <- tidyr::pivot_wider(df_we, names_from = "elec", values_from = "value")
+
+  # Select pollutant mixing ratios
+  df <- dplyr::select(log, dplyr::any_of(meta_vars),
+                           dplyr::contains("Algorithm"))
+
+  if(ncol(df) > length(meta_vars)){
+    df <- tidyr::pivot_longer(df, cols = -dplyr::any_of(meta_vars),
+                                  values_to = "ppb")
+    df <- dplyr::mutate(df,
+                        name = gsub("^G.Alphasense", "", .data$name),
+                        name  = strsplit(.data$name, "_"),
+                        Position = sapply(.data$name, "[[", 1),
+                        Position = as.numeric(.data$Position),
+                        Alg = sapply(.data$name, "[[", 2),
+                        Alg = gsub("^Algorithm", "", .data$Alg),
+                        Alg = as.numeric(.data$Alg))
+    df <- dplyr::select(df, -"name")
+    df <- dplyr::relocate(df, "ppb", .after = "Alg")
+    df <- dplyr::group_by(df, .data$LogFileName, .data$Position, .data$Alg)
+    df <- dplyr::filter(df, !all(is.na(.data$ppb)))
+    df <- dplyr::ungroup(df)
+  }
+
+  df <- dplyr::left_join(df_we, df,
+                         by=c(meta_vars[meta_vars %in% colnames(df_we)],
+                              c("Position")[c("Position") %in% colnames(df)]))
+  df <- dplyr::left_join(df, df_h, by=c("LogFileName","Position"))
+  df <- dplyr::relocate(df, "Position", .after = "LogFileName")
+  df <- dplyr::relocate(df,
+                        dplyr::any_of(c("ID","Type","ISB_Gain","Sensitivity",
+                                        "WEt","WEe","AEt","AEe")),
+                        .after = "Position")
+
+  missing <- unique(log$LogFileName)[!(unique(log$LogFileName) %in%
+                                                          header$LogFileName)]
+
+  # Check whether there are any files in log that are not in header
+  if (length(missing) > 0){
+
+    warn_text <- paste(c("The following log files in the log data frame are missing from the header data frame:",
+                         missing,
+                         "Sensor IDs and calibration constants for these samples will not appear in the data frame returned by the function."), collapse = "\n")
+
+    warning(warn_text)
+  }
+
+  rm(df_h, df_we)
 
   return(df)
 }

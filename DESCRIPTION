@@ -21,6 +21,7 @@ Depends:
 Imports: 
     config,
     data.table,
+    tidyr,
     dplyr,
     lifecycle,
     lubridate,

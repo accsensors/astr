@@ -494,7 +494,7 @@
         HHBserial     SEN55_Serial HHBslot1 HHBslot2 HHBslot3 HHBslot4 HHBslot5
       1  HHB00032 826B5FD0165CA542  SP00004  FP00003    Empty  FP00162    Empty
         HHBslot6 G.Alphasense1_ID           G.SCD30_Serial   G.SFA30_Serial
-      1  GS00008       0202121325 557739-9558747-133234424 214551794F073BB7
+      1  GS00008        202121325 557739-9558747-133234424 214551794F073BB7
                           Firmware                          LogFileName SampleName
       1 HHBv2_Jan_11_2024_08:35:16 HHB00032_LOG_2024-07-01T18_20UTC.csv   20240701
         D.SorbentCID C.SorbentCID A.FilterCID B.FilterCID    D.SorbentCalDate
@@ -564,7 +564,7 @@
         HHBserial     SEN55_Serial HHBslot1 HHBslot2 HHBslot3 HHBslot4 HHBslot5
       1  HHB00087 F72BD8A1A8CA0342  SP00076  FP00084    Empty  FP00049    Empty
         HHBslot6 G.Alphasense1_ID G.Alphasense1_Type G.Alphasense1_ISB_Gain
-      1  GS00060       0202121326           NO2-B43F                  -0.73
+      1  GS00060        202121326           NO2-B43F                  -0.73
         G.Alphasense1_WEt G.Alphasense1_AEt G.Alphasense1_Sensitivity
       1               235               237                    -297.3
         G.Alphasense1_WEe G.Alphasense1_AEe           G.SCD30_Serial G.SGP41_Serial
