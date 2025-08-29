@@ -60,6 +60,20 @@
       3       0.01452                   0.00292
       4       0.01518                   0.00306
 
+# format_hhb_sample_log works with all HHBv2 firmwares
+
+    Code
+      format_hhb_sample_log(hhb_log_240111)
+    Output
+      Empty data.table (0 rows and 25 cols): HHBserial,LogFileName,SampleName,Channel,ChannelType,SampleTime...
+
+---
+
+    Code
+      format_hhb_sample_log(hhb_log_250529)
+    Output
+      Empty data.table (0 rows and 25 cols): HHBserial,LogFileName,SampleName,Channel,ChannelType,SampleTime...
+
 # format_hhb_sensors works with all HHBv2 firmwares
 
     Code

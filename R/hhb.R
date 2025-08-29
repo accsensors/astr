@@ -128,7 +128,7 @@ format_hhb_log = function(log, header, tz=NA, cols_keep=c(), cols_drop=c()) {
 #'
 #' @details
 #' The "HHBslot#" variables from the header data frame will be renamed "PumpPCB"
-#' associated with the appropriate sample channel in the data frame retuned by
+#' associated with the appropriate sample channel in the data frame returned by
 #' this function.
 #'
 #' Additionally, the ProgrammedStartTime, ProgrammedRuntime, StartDateTimeUTC,
@@ -202,6 +202,134 @@ format_hhb_samples = function(header) {
                             SampleEndDateTimeUTC      = "EndDateTimeUTC")))
   df <- dplyr::relocate(df, c("Channel","ChannelType"), .after = "SampleName")
   df <- dplyr::filter(df, .data$Channel %in% channels)
+
+  return(df)
+}
+
+#'Convert sample data from a Home Health Box log file header to long format.
+#'
+#' @description
+#' `format_hhb_sample_log()` Selects the filter and sorbent sample data from a
+#' HHB v2 sample log and converts it to a long format to facilitate evaluation
+#' of sample flow rates over time.
+#'
+#' @param log A HHB v2 sample log data frame returned by [astr::read_ast_log()] or [astr::format_hhb_log()]
+#'
+#' @return A data frame with a four rows of HHB v2 sample log data for each row in `log`.
+#'
+#' @details
+#' The returned data frame will start with the following columns:
+#'
+#' \itemize{
+#'    \item HHBserial: A string indicating the serial number of the Home Health Box
+#'    \item LogFileName: A string indicating log filename as saved on the microSD card in the HHB
+#'    \item SampleName: A string indicating the user-supplied sample name
+#'    \item Channel: A string indicating the pump channel ("A", "B", "C", or "D")
+#'    \item ChannelType: A string indicating the sample type ("Filter" or "Sorbent")
+#'    \item SampleTime: A difftime object indicating the time elapsed since the sample started
+#'    \item DateTimeUTC: A POSIXct object indicating the timestamp in Coordinated Universal Time
+#'    \item DateTimeLocal: A POSIXct object indicating the timestamp in the user-specified local time zone (if present in `log`)
+#' }
+#'
+#' After the columns listed above, data from all columns in the sample log
+#' that start with "1.", "A.", "B.", "C.", or "D." will appear.  In the returned
+#' data frame, the "1.", "A.", "B.", "C.", or "D." prefix will be removed from
+#' each parameter name. Additionally, some names will be updated as shown in the
+#' table below.
+#'
+#' \tabular{ll}{
+#'    \strong{Name in sample log}  \tab \strong{Name in returned data frame} \cr
+#'    1.BMP390_Press      \tab ExtPress \cr
+#'    1.BMP390_Temp       \tab ExtTemp  \cr
+#'    D.BMP581_Press      \tab IntPress \cr
+#'    D.BMP581_Temp       \tab IntTemp  \cr
+#'    D.TotalSorbentVol   \tab TotalCartridgeVol \cr
+#'    D.SampledSorbentVol \tab SampledCartridgeVol \cr
+#'    C.BMP581_Press      \tab IntPress \cr
+#'    C.BMP581_Temp       \tab IntTemp  \cr
+#'    C.TotalSorbentVol   \tab TotalCartridgeVol \cr
+#'    C.SampledSorbentVol \tab SampledCartridgeVol \cr
+#'    A.BMP581Int_Press   \tab IntPress \cr
+#'    A.BMP581Int_Temp    \tab IntTemp  \cr
+#'    A.BMP581Ext_Press   \tab ExtPress \cr
+#'    A.BMP581Ext_Temp    \tab ExtTemp  \cr
+#'    B.BMP581Int_Press   \tab IntPress \cr
+#'    B.BMP581Int_Temp    \tab IntTemp  \cr
+#'    B.BMP581Ext_Press   \tab ExtPress \cr
+#'    B.BMP581Ext_Temp    \tab ExtTemp  \cr
+#'  }
+#'
+#'  In the returned data frame, "ExtPress" and "ExtTemp" refer to pressures and
+#'  temperatures measured outside of each pump manifold, respectively.
+#'  "IntPress" and "IntTemp" refer to pressures and temperatures measured inside
+#'  of each pump manifold. All pressures are in units of Pascals and all
+#'  temperatures are in units of degrees Celsius.
+#'
+#' @export
+#' @importFrom rlang .data
+#'
+#' @examples
+#' hhb_filename <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+#' hhb_file <- system.file("extdata", hhb_filename, package = "astr", mustWork = TRUE)
+#' hhb_log <- read_ast_log(hhb_file)
+#' hhb_sample_logs <- format_hhb_sample_log(hhb_log)
+
+format_hhb_sample_log = function(log) {
+
+  # Sample metadata variables to retain
+  meta_vars <- c("HHBserial","LogFileName","SampleName","SampleTime",
+                 "DateTimeUTC","DateTimeLocal")
+
+  # Separate sample data associated with each pumping channel
+  df_a <- dplyr::select(log, dplyr::any_of(meta_vars), dplyr::starts_with("A."))
+  df_a <- dplyr::mutate(df_a, Channel = "A", ChannelType = "Filter")
+
+  df_b <- dplyr::select(log, dplyr::any_of(meta_vars), dplyr::starts_with("B."))
+  df_b <- dplyr::mutate(df_b, Channel = "B", ChannelType = "Filter")
+
+  df_c <- dplyr::select(log, dplyr::any_of(meta_vars), dplyr::starts_with("C."),
+                        dplyr::starts_with("1."))
+  df_c <- dplyr::mutate(df_c, Channel = "C", ChannelType = "Sorbent")
+
+  df_d <- dplyr::select(log, dplyr::any_of(meta_vars), dplyr::starts_with("D."),
+                        dplyr::starts_with("1."))
+  df_d <- dplyr::mutate(df_d, Channel = "D", ChannelType = "Sorbent")
+
+  # Harmonize column names
+  colnames(df_a) <- gsub("^A\\.",  "", colnames(df_a))
+  colnames(df_a) <- gsub("BMP581", "", colnames(df_a))
+  colnames(df_a) <- gsub("_",      "", colnames(df_a))
+
+  colnames(df_b) <- gsub("^B\\.",  "", colnames(df_b))
+  colnames(df_b) <- gsub("BMP581", "", colnames(df_b))
+  colnames(df_b) <- gsub("_",      "", colnames(df_b))
+
+  colnames(df_c) <- gsub("^C\\.",   "", colnames(df_c))
+  colnames(df_c) <- gsub("^1\\.",   "", colnames(df_c))
+  colnames(df_c) <- gsub("Sorbent", "Cartridge", colnames(df_c))
+  colnames(df_c) <- gsub("BMP390_", "Ext", colnames(df_c))
+  colnames(df_c) <- gsub("BMP581_", "Int", colnames(df_c))
+
+  colnames(df_d) <- gsub("^D\\.",   "", colnames(df_d))
+  colnames(df_d) <- gsub("^1\\.",   "", colnames(df_d))
+  colnames(df_d) <- gsub("Sorbent", "Cartridge", colnames(df_d))
+  colnames(df_d) <- gsub("BMP390_", "Ext", colnames(df_d))
+  colnames(df_d) <- gsub("BMP581_", "Int", colnames(df_d))
+
+  meta_vars <- c(meta_vars, "Channel", "ChannelType")
+
+  # Get the number of non-metadata columns in each data frame to determine
+  # which pumps channels were actually active during the sample
+  n_cols <- c(ncol(dplyr::select(df_a, -dplyr::any_of(meta_vars))),
+              ncol(dplyr::select(df_b, -dplyr::any_of(meta_vars))),
+              ncol(dplyr::select(df_c, -dplyr::any_of(meta_vars))),
+              ncol(dplyr::select(df_d, -dplyr::any_of(meta_vars))))
+
+  # Recombine data from each channel
+  # Remove channels that were not active during the sample
+  df <- dplyr::bind_rows(df_a, df_b, df_c, df_d)
+  df <- dplyr::relocate(df, c("Channel","ChannelType"), .after="SampleName")
+  df <- dplyr::filter(df, .data$Channel %in% names(n_cols[n_cols > 0]))
 
   return(df)
 }

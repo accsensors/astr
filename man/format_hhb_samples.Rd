@@ -20,7 +20,7 @@ sample mass or composition data from another data file.
 }
 \details{
 The "HHBslot#" variables from the header data frame will be renamed "PumpPCB"
-associated with the appropriate sample channel in the data frame retuned by
+associated with the appropriate sample channel in the data frame returned by
 this function.
 
 Additionally, the ProgrammedStartTime, ProgrammedRuntime, StartDateTimeUTC,

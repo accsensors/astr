@@ -27,6 +27,22 @@ test_that("format_hhb_samples works with all HHBv2 firmwares", {
 })
 
 ###################################
+# format_hhb_sample_log
+###################################
+
+test_that("format_hhb_sample_log works with all HHBv2 firmwares", {
+  hhb_filename_240111 <- 'HHB00032_LOG_2024-07-01T18_20UTC.csv'
+  hhb_file_240111 <- system.file("extdata", hhb_filename_240111, package = "astr", mustWork = TRUE)
+  hhb_log_240111 <- read_ast_log(hhb_file_240111)
+  expect_snapshot(format_hhb_sample_log(hhb_log_240111))
+
+  hhb_filename_250529 <- 'HHB00087_LOG_2025-06-03T20_55UTC.csv'
+  hhb_file_250529 <- system.file("extdata", hhb_filename_250529, package = "astr", mustWork = TRUE)
+  hhb_log_250529 <- read_ast_log(hhb_file_250529)
+  expect_snapshot(format_hhb_sample_log(hhb_log_250529))
+})
+
+###################################
 # format_hhb_sensors
 ###################################
 
