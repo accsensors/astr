@@ -320,10 +320,10 @@ format_hhb_sample_log = function(log) {
 
   # Get the number of non-metadata columns in each data frame to determine
   # which pumps channels were actually active during the sample
-  n_cols <- c(ncol(dplyr::select(df_a, -dplyr::any_of(meta_vars))),
-              ncol(dplyr::select(df_b, -dplyr::any_of(meta_vars))),
-              ncol(dplyr::select(df_c, -dplyr::any_of(meta_vars))),
-              ncol(dplyr::select(df_d, -dplyr::any_of(meta_vars))))
+  n_cols <- c("A" = ncol(dplyr::select(df_a, -dplyr::any_of(meta_vars))),
+              "B" = ncol(dplyr::select(df_b, -dplyr::any_of(meta_vars))),
+              "C" = ncol(dplyr::select(df_c, -dplyr::any_of(meta_vars))),
+              "D" = ncol(dplyr::select(df_d, -dplyr::any_of(meta_vars))))
 
   # Recombine data from each channel
   # Remove channels that were not active during the sample
