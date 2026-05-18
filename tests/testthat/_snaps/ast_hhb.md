@@ -183,6 +183,7 @@
       43:  HHB00087 HHB00087_LOG_2025-06-03T20_55UTC.csv FirmwareTest       D
       44:  HHB00087 HHB00087_LOG_2025-06-03T20_55UTC.csv FirmwareTest       D
           HHBserial                          LogFileName   SampleName Channel
+             <char>                               <char>       <char>  <char>
           ChannelType SampleTime         DateTimeUTC       DateTimeLocal Vsupply
                <char> <difftime>              <POSc>              <POSc>   <num>
        1:      Filter     0 secs 2025-06-03 20:55:00 2025-06-03 14:55:00   3.995
@@ -230,6 +231,7 @@
       43:     Sorbent   270 secs 2025-06-03 20:59:30 2025-06-03 14:59:30   3.947
       44:     Sorbent   300 secs 2025-06-03 21:00:00 2025-06-03 15:00:00   3.947
           ChannelType SampleTime         DateTimeUTC       DateTimeLocal Vsupply
+               <char> <difftime>              <POSc>              <POSc>   <num>
             3V3 Pumps  RDAC Vboost Vomron    Vflow IntPress IntTemp ExtPress ExtTemp
           <num> <num> <num>  <num>  <num>    <num>    <num>   <num>    <num>   <num>
        1: 3.368   123   181 11.370  3.379 1.525750  84654.0   23.94  84888.0   23.81
@@ -277,6 +279,7 @@
       43: 3.383    NA   787  5.005  3.381 0.523312  84866.6   25.46  84040.1   25.46
       44: 3.385    NA   787  5.005  3.381 0.523375  84867.1   25.61  84038.8   25.61
             3V3 Pumps  RDAC Vboost Vomron    Vflow IntPress IntTemp ExtPress ExtTemp
+          <num> <num> <num>  <num>  <num>    <num>    <num>   <num>    <num>   <num>
           MassFlow VolFlow TotalPumpVol TotalCartridgeVol SampledCartridgeVol
              <num>   <num>        <num>             <num>               <num>
        1:  1.70000 1.73000  82312.83000       20116.49000             0.03000
@@ -324,6 +327,7 @@
       43:  0.00295 0.00298     68.48498          30.68804             0.01368
       44:  0.00295 0.00298     68.48651          30.68953             0.01518
           MassFlow VolFlow TotalPumpVol TotalCartridgeVol SampledCartridgeVol
+             <num>   <num>        <num>             <num>               <num>
           AtmoDensity
                 <num>
        1:      0.9790
@@ -371,6 +375,7 @@
       43:      0.9916
       44:      0.9916
           AtmoDensity
+                <num>
 
 # format_hhb_sensors works with all HHBv2 firmwares
 
