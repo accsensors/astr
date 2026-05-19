@@ -486,6 +486,114 @@
         MFSDIAGPDeadhead UserTZ
       1            669.8  FALSE
 
+---
+
+    Code
+      read_ast_header(upasv2x_rev210_file, update_names = FALSE)
+    Output
+        ASTSampler UPASserial UPASpcbRev UPASexpRev MotionID
+      1  UPAS_v2_x   PSP01066          1       0BR2     0x6C
+                          PMserial      CO2serial      Gasserial
+      1 1515B4A279410B37_2.3_7_2.0 0x4173076fd23b 0x000004c8a91d
+                                                                               Firmware
+      1 UPAS_v2_x-rev_00210-L476RG-RELEASE.bin compiled ( May  4 2026 )_( 10:25:16 )UTC
+        FirmwareRev LifetimeSampleCount LifetimeSampleRuntime LifetimeBatteryRuntime
+      1         210                 550               1099.32                1099.32
+        LifetimeSamplePumptime LifetimePMSensorFanStartCount LifetimePMSensorFanHours
+      1                 838.61                         23921                   699.31
+        LifetimePMSensorPMMC LifetimeCO2SensorHours LifetimeVOCSensorHours
+      1              3.5e-05                 941.09                 892.62
+                                                                         LogFilename
+      1 /20260519/PSP01066_LOG_2026-05-19T16_22_25UTC_standard30s-210_----------.txt
+             SampleName CartridgeID GPSUTCOffset StartOnNextPowerUp
+      1 standard30s-210        <NA>           -6              FALSE
+        ProgrammedStartTime ProgrammedRuntime SizeSelectiveInlet FlowRateSetpoint
+      1                   0              0.05              PM2.5                1
+        FlowOffset FlowDutyCycle DutyCycleWindow GPSEnabled PMSensorInterval
+      1          0            60              30       TRUE               16
+                          PMSensorOperation RTGasSampleState CO2SampleState
+      1 15s Warmup 5s Measurement 10s Sleep             TRUE           TRUE
+        LogInterval SamplerConfiguration ExternalPowerMode PowerSaveMode AppLock
+      1          30                    0              TRUE         FALSE   FALSE
+        AppVersion    StartDateTimeUTC   LocalTZ  StartDateTimeLocal
+      1     i1.1.2 2026-05-19 16:22:25 Etc/GMT+6 2026-05-19 10:22:25
+             EndDateTimeUTC    EndDateTimeLocal FlowCheckMeterReadingPreSample
+      1 2026-05-19 16:26:30 2026-05-19 10:26:30                             NA
+        FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
+      1                              NA            0.05            0.03
+        OverallFlowAvgFactory PumpingFlowAvgFactory SampledVolumeFactory
+      1                 0.602                 1.004                 1.81
+        OverallFlowAvgOffset PumpingFlowAvgOffset SampledVolumeOffset
+      1                0.602                1.004                1.81
+        StartBatteryCharge EndBatteryCharge StartBatteryVoltage EndBatteryVoltage
+      1                100              100                4.14               4.1
+        ShutdownMode                   ShutdownReason          CO2CalDate
+      1            3 completed preset sample duration 2026-05-04 19:36:22
+        CO2CalTarget CO2CalOffset          MFSCalDate MFSCalPerson MFSCalVoutBlocked
+      1          417           13 2025-10-20 21:56:16         <NA>                NA
+        MFSCalVoutMin MFSCalVoutMax MFSCalMFBlocked MFSCalMFMin MFSCalMFMax
+      1          0.46      1.868875              NA     0.00439      2.8881
+        MFSCalPumpVBoostMin MFSCalPumpVBoostMax MFSCalPDeadhead      MF4       MF3
+      1                  NA                  NA              NA 0.427606 -0.885307
+            MF2      MF1       MF0 UserTZ
+      1 0.48626 1.276662 -0.618741  FALSE
+
+---
+
+    Code
+      read_ast_header(upasv2x_rev210_diag_file, update_names = FALSE)
+    Output
+        ASTSampler UPASserial UPASpcbRev UPASexpRev MotionID
+      1  UPAS_v2_x   PSP01066          1       0BR2     0x6C
+                          PMserial      CO2serial      Gasserial
+      1 1515B4A279410B37_2.3_7_2.0 0x4173076fd23b 0x000004c8a91d
+                                                                               Firmware
+      1 UPAS_v2_x-rev_00210-L476RG-RELEASE.bin compiled ( May  4 2026 )_( 10:25:16 )UTC
+        FirmwareRev LifetimeSampleCount LifetimeSampleRuntime LifetimeBatteryRuntime
+      1         210                 551               1099.34                1099.34
+        LifetimeSamplePumptime LifetimePMSensorFanStartCount LifetimePMSensorFanHours
+      1                 838.63                         23922                   699.34
+        LifetimePMSensorPMMC LifetimeCO2SensorHours LifetimeVOCSensorHours
+      1              3.5e-05                 941.12                 892.64
+                                                                         LogFilename
+      1 /20260519/PSP01066_LOG_2026-05-19T16_35_06UTC_DIAGNOSTIC-----___________.txt
+        SampleName CartridgeID GPSUTCOffset StartOnNextPowerUp ProgrammedStartTime
+      1 DIAGNOSTIC        <NA>           -6              FALSE                   0
+        ProgrammedRuntime SizeSelectiveInlet FlowRateSetpoint FlowOffset
+      1                NA              PM2.5                1          0
+        FlowDutyCycle DutyCycleWindow GPSEnabled PMSensorInterval
+      1           100              30       TRUE                1
+             PMSensorOperation RTGasSampleState CO2SampleState LogInterval
+      1 Continuous Measurement             TRUE           TRUE           1
+        SamplerConfiguration ExternalPowerMode PowerSaveMode AppLock AppVersion
+      1                    0              TRUE         FALSE   FALSE     i1.1.2
+           StartDateTimeUTC   LocalTZ  StartDateTimeLocal      EndDateTimeUTC
+      1 2026-05-19 16:35:06 Etc/GMT+6 2026-05-19 10:35:06 2026-05-19 16:37:35
+           EndDateTimeLocal FlowCheckMeterReadingPreSample
+      1 2026-05-19 10:37:35                             NA
+        FlowCheckMeterReadingPostSample OverallDuration PumpingDuration
+      1                              NA           0.026           0.026
+        OverallFlowAvgFactory PumpingFlowAvgFactory SampledVolumeFactory
+      1                 1.607                 1.607                 2.55
+        OverallFlowAvgOffset PumpingFlowAvgOffset SampledVolumeOffset
+      1                1.607                1.607                2.55
+        StartBatteryCharge EndBatteryCharge StartBatteryVoltage EndBatteryVoltage
+      1                100               98                4.13              4.09
+        ShutdownMode       ShutdownReason          CO2CalDate CO2CalTarget
+      1            1 user pushbutton stop 2026-05-04 19:36:22          417
+        CO2CalOffset          MFSCalDate MFSCalPerson MFSCalVoutBlocked MFSCalVoutMin
+      1           13 2025-10-20 21:56:16         <NA>                NA          0.46
+        MFSCalVoutMax MFSCalMFBlocked MFSCalMFMin MFSCalMFMax MFSCalPumpVBoostMin
+      1      1.868875              NA     0.00439      2.8881                  NA
+        MFSCalPumpVBoostMax MFSCalPDeadhead      MF4       MF3     MF2      MF1
+      1                  NA              NA 0.427606 -0.885307 0.48626 1.276662
+              MF0 MFSDIAGVoutBlocked MFSDIAGVoutMax MFSDIAGVoutMin MFSDIAGMFBlocked
+      1 -0.618741           1.944875       1.942125         0.9865           2.8881
+        MFSDIAGMFMax MFSDIAGMFMin MFSDIAGPumpVBoostMax MFSDIAGPumpVBoostMin
+      1       2.8881     0.668952               27.975             7.188654
+        MFSDIAGPDeadhead UserTZ
+      1            678.7  FALSE
+
 # read_ast_header works with all HHBv2 firmwares
 
     Code
